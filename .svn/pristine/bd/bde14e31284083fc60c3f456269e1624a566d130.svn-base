@@ -1,0 +1,132 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"   
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+      <ice:panelGroup  id="viewdocumentoshpHomePanelGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="viewTextdocumentoshpHomeId" value="Documentoshp"/>
+                  </td>
+              </tr>
+          </table>
+      
+
+
+        <s:decorate id="iden" template="../layout/display.xhtml">
+            <ui:define name="label">Iden</ui:define>
+            #{documentoshpHome.instance.iden}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="geom" template="../layout/display.xhtml">
+            <ui:define name="label">Geom</ui:define>
+            #{documentoshpHome.instance.geom}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="hoja" template="../layout/display.xhtml">
+            <ui:define name="label">Hoja</ui:define>
+            #{documentoshpHome.instance.hoja}&#160;
+        </s:decorate>
+
+          <div style="clear:both"/>
+ 
+
+    <div id="viewDocumentoshpEditsearchButtons" class="actionButtons">      
+
+        <s:button view="/seam/DocumentoshpEdit.xhtml" 
+                    id="edit" styleClass="iceCmdBtn"
+                 value="Edit"/>
+
+        <s:button view="/seam/#{empty documentoshpFrom ? 'DocumentoshpList' : documentoshpFrom}.xhtml"
+                    id="done" styleClass="iceCmdBtn"
+                 value="Done"/>
+
+    </div>
+  </ice:panelGroup>
+
+
+    <ice:form id="view2documentoshpHomeFormId">
+       <ice:panelTabSet id="viewdocumentoshpHomeTabSetId" 
+                styleClass="componentPanelTabSetLayout" 
+		style="margin-bottom:5px;margin-top:10px;">
+
+	<ice:panelTab id="viewdocumentopanelTab" label="Documento">
+   		<div class="association" id="documentoParent">
+        
+       		 <h:outputText value="There is no documento associated with this documentoshp." 
+		                  id="viewdocumentoTextId"
+                   rendered="#{documentoshpHome.instance.documento == null}"/>
+   
+        	<ice:dataTable  var="documento" 
+                   value="#{documentoshpHome.instance.documento}" 
+                rendered="#{documentoshpHome.instance.documento != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+	        columnClasses="allCols"
+                      id="viewdocumentoTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{documento.iden}
+            </ice:column>
+            <ice:column id="viewarchivoId">
+                <f:facet name="header">Archivo</f:facet>
+                #{documento.archivo}
+            </ice:column>
+            <ice:column id="viewcomentarioId">
+                <f:facet name="header">Comentario</f:facet>
+                #{documento.comentario}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Documento iden</f:facet>
+		    	#{documento.documento.iden}
+            </ice:column>
+            <ice:column id="viewescalaId">
+                <f:facet name="header">Escala</f:facet>
+                #{documento.escala}
+            </ice:column>
+            <ice:column id="viewidgrupodocumentoId">
+                <f:facet name="header">Idgrupodocumento</f:facet>
+                #{documento.idgrupodocumento}
+            </ice:column>
+            <ice:column id="viewidtipodocumentoId">
+                <f:facet name="header">Idtipodocumento</f:facet>
+                #{documento.idtipodocumento}
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{documento.nombre}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Tramite iden</f:facet>
+		    	#{documento.tramite.iden}
+            </ice:column>
+            <ice:column id="viewdocumentoColumnId">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewdocumentoLinkId" 
+                     value="View" 
+                      view="/seam/Documento.xhtml">
+                    <f:param name="documentoIden" 
+                           value="#{documento.iden}"/>
+                </s:link>
+            </ice:column>
+       </ice:dataTable>
+       
+    </div>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+

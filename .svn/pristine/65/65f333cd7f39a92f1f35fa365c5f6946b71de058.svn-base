@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-name="validacion"></table-filter>
+	<table-filter match-name="elemento"></table-filter>
+	<table-filter match-name="proceso"></table-filter>
+	<table-filter match-name="resultado"></table-filter>
+	<table-filter match-name="unidad"></table-filter>
+</hibernate-reverse-engineering>

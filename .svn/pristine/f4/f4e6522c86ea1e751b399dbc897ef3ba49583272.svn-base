@@ -1,0 +1,14 @@
+#################################
+#####Configuracion de correo#####
+#################################
+
+#smtp=smtp.gmail.com
+smtp=smtp.gmail.com
+#sender=user1@domain.com
+sender=usuario.refundido@gmail.com
+#user=user1
+user=usuario.refundido
+#password=12345678
+password=urbanismoenred
+
+destinatario=tatiana.garcia@arnaizconsultores.es

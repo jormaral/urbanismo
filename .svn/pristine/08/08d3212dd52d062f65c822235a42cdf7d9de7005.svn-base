@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jul-2009 12:36:17 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Naturaleza"
+  schema="diccionario" table="naturaleza">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">diccionario.diccionario_naturaleza_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one cascade="delete"
+   class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Literal"
+   fetch="select" name="literal">
+   <column name="idliteral" not-null="true"/>
+  </many-to-one>
+  <set inverse="true" name="instrumentoplans" sort="unsorted">
+   <key>
+    <column name="idnaturaleza"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentoplan"/>
+  </set>
+ </class>
+ <query name="Naturaleza.obtenerTodos">SELECT nat FROM es.mitc.redes.urbanismoenred.data.rpm.diccionario.Naturaleza nat</query>
+</hibernate-mapping>

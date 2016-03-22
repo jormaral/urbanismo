@@ -1,0 +1,79 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaArbolDeterminacionesVigente"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+<ice:form id="formulario">
+
+	<!-- TRee values -->
+	<ice:panelTabSet id="panelTabArbol">
+			
+			<ice:panelGroup styleClass="arbol" scrollHeight="400px" scrollWidth="40em">
+				<ice:tree id="arbolDeterminacion" value="#{servicioCopiarDeterminaciones.model}"
+					var="node" binding="#{servicioCopiarDeterminaciones.treeComponent}"
+					imageDir="/fipeditor/img/editorfip/es/arboles/"
+					hideRootNode="false" hideNavigation="false"
+					actionListener="#{servicioCopiarDeterminaciones.menuEvent}">
+					<ice:treeNode>
+		
+		
+						<f:facet name="icon">
+							<ice:panelGroup style="display:inline;">
+								<h:graphicImage
+									value="/img/editorfip/es/arboles/#{node.userObject.icon}" />
+		
+							</ice:panelGroup>
+						</f:facet>
+						<f:facet name="content">
+							<ice:panelGroup style="display:inline;">
+								<ice:panelGroup
+									styleClass="selectedNode#{node.userObject eq servicioCopiarDeterminaciones.selectedUserObject}"
+									style="display:inline;">
+		
+									<ice:selectBooleanCheckbox 
+							 			id="checkTram" partialSubmit="true" 
+							 			value="#{node.userObject.seleccionado}"
+							 			valueChangeListener="#{servicioCopiarDeterminaciones.processValueChange}">										 			
+							        </ice:selectBooleanCheckbox>
+									
+									<!-- FGA: Lo quito de momento para no meternos en un lio 
+									<ice:commandLink
+							        	rendered="#{not node.userObject.seleccionado}"
+										actionListener="#{servicioCopiarDeterminaciones.processMultiValueChange}">
+										<f:param name="nodoId"
+											value="#{node.userObject.datosIdTextoArbolGenerico.idBaseDatos}" />
+										<ice:graphicImage width="14" height="14"
+											alt="#{messages.seleccionar_todos}"
+											style="margin-left:2px;margin-right:2px;"
+										value="/img/mas_verde.png" />
+									</ice:commandLink>
+									<ice:commandLink
+							        	rendered="#{node.userObject.seleccionado}"
+										actionListener="#{servicioCopiarDeterminaciones.processMultiValueChange}">
+										<f:param name="nodoId"
+											value="#{node.userObject.datosIdTextoArbolGenerico.idBaseDatos}" />
+										<ice:graphicImage width="14" height="14"
+										   	alt="#{messages.anular_seleccion}"
+											style="margin-left:2px;margin-right:2px;"
+										value="/img/menos_rojo.png" />
+									</ice:commandLink>
+									-->
+									<ice:outputText id="TreeNode"
+										value="#{node.userObject.text}" />
+									
+									
+								</ice:panelGroup>
+							</ice:panelGroup>
+						</f:facet>
+		
+					</ice:treeNode>
+				</ice:tree>
+							
+			</ice:panelGroup>
+			
+	</ice:panelTabSet>
+
+</ice:form>
+</f:view>

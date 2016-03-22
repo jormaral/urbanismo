@@ -1,0 +1,114 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+	
+	<ui:define name="body">
+	
+	<ice:form>
+		
+		<ice:panelPopup id="panelHoja" autoCentre="true" modal="true" styleClass="panelPopup"
+		visible="true" style="width: 60%;">
+
+	
+		<f:facet name="header">
+			<ice:panelGroup>
+				<ice:outputText value="#{messages.archivos_hoja} " />
+			</ice:panelGroup>
+		</f:facet>
+
+		<f:facet name="body">
+		
+			<ice:panelGrid styleClass="popUpHoja">
+			
+			<ice:outputText value="#{messages.adjuntar_hoja_info}"/>
+					
+			<ice:panelGrid columns="3" styleClass="popUpHoja">			
+				<h:inputText styleClass="etiqueta-Usuario" id="inputTitulo" value="#{messages.nombre_base}" disabled="true"/>
+				<h:inputText styleClass="input-Detalle" value="#{servicioGestionDocumentalCarpeta.documentoshp.hoja}" 
+				disabled="#{servicioGestionDocumentalCarpeta.documentoshp.iden>0}" required="true"/>
+				<ice:message for="inputTitulo"/>
+				
+				<h:inputText styleClass="etiqueta-Usuario" value="#{messages.extension}" disabled="true"/>
+				<ice:selectOneListbox size="1" disabled="#{servicioGestionDocumentalCarpeta.documentoshp.iden>0}"
+					value="#{servicioGestionDocumentalCarpeta.extensionArchivo}" partialSubmit="false">
+					<f:selectItems value="#{servicioGestionDocumentalCarpeta.listaExtension}" />
+				</ice:selectOneListbox>
+				<ice:outputLabel/>
+				 
+				
+				<ice:commandButton value="Guardar Nombre Base"  styleClass="boton4" alt="#{messages.guardar_adjuntar}"
+				action="#{servicioGestionDocumentalCarpeta.guardarHoja}" title = "#{messages.boton_title_adjuntar_hoja_adjuntar}"/>	
+				<ice:commandButton value="#{messages.cancelar_borrar}" 
+					
+					styleClass="boton2" immediate="true" alt="#{messages.cancelar_borrar}"
+						action="#{servicioGestionDocumentalCarpeta.borrarShpCargarDocumento}" 
+						title="#{messages.boton_title_adjuntar_hoja_cancelar_y_borrar}"/>
+				<ice:outputLabel/> 					
+				
+				<ice:outputLabel value="Adjuntar" rendered="#{servicioGestionDocumentalCarpeta.hojaCargada}"/>
+				<ice:inputFile id="inputFileComponent" rendered="#{servicioGestionDocumentalCarpeta.hojaCargada}"
+							   actionListener="#{servicioGestionDocumentalCarpeta.uploadFilehoja}" 
+							   progressListener="#{servicioGestionDocumentalCarpeta.progressListener}" label="#{messages.genericos_cargar}"/>
+				<ice:outputLabel rendered="#{servicioGestionDocumentalCarpeta.hojaCargada}"/>
+							   
+				
+				
+					<ice:outputLabel value="Cargados:" rendered="#{not empty servicioGestionDocumentalCarpeta.archivosTemporalesHoja}"/>   
+					
+						<!-- LISTA DE ARCHIVOS -->
+						<ice:dataTable id="listaDeterminacionDocumento"
+						value="#{servicioGestionDocumentalCarpeta.archivosTemporalesHoja}"
+						rendered="#{not empty servicioGestionDocumentalCarpeta.archivosTemporalesHoja}"
+						var="item">
+			
+						<ice:column>
+							<f:facet name="header">
+									<ice:outputText
+										value="#{messages.archivo} " />
+							</f:facet>
+							<ice:outputText value="#{item.archivo}" />
+						</ice:column>
+						<!--
+						<ice:column style="text-align:center">
+						    <f:facet name="header">
+						
+						        <ice:outputText escape="false" value="#{messages.borrar}"/>
+						
+						    </f:facet>
+					        
+						    <ice:commandLink value="X" style="color: #000000;font-family: Arial;font-size: 12px;font-weight:bold;" action="#{servicioGestionDocumentalCarpeta.borrarHoja(item.iden)}">					       
+						    </ice:commandLink>
+						    
+						</ice:column>
+						 -->
+					</ice:dataTable>
+					<ice:outputLabel/>
+					
+					<ice:commandButton value="#{messages.botongenerico_aceptar}" 
+					rendered="#{not empty servicioGestionDocumentalCarpeta.archivosTemporalesHoja}"
+					styleClass="boton2" disabled="#{!servicioGestionDocumentalCarpeta.hojaValida()}"
+						action="#{servicioGestionDocumentalCarpeta.aceptarHoja}" 
+						alt="#{messages.botongenerico_aceptar}" 
+						title = "#{messages.boton_title_adjuntar_hoja_aceptar}"/>
+					
+					
+
+					
+			</ice:panelGrid>
+			</ice:panelGrid>
+			
+			
+		</f:facet>
+	</ice:panelPopup>
+
+	</ice:form>
+
+</ui:define>
+
+</ui:composition>

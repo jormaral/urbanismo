@@ -1,0 +1,149 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"   
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+      <ice:panelGroup  id="viewoperacionrelacionHomePanelGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="viewTextoperacionrelacionHomeId" value="Operacionrelacion"/>
+                  </td>
+              </tr>
+          </table>
+      
+
+
+        <s:decorate id="iden" template="../layout/display.xhtml">
+            <ui:define name="label">Iden</ui:define>
+            #{operacionrelacionHome.instance.iden}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="idtipooperacionrel" template="../layout/display.xhtml">
+            <ui:define name="label">Idtipooperacionrel</ui:define>
+            #{operacionrelacionHome.instance.idtipooperacionrel}&#160;
+        </s:decorate>
+
+          <div style="clear:both"/>
+ 
+
+    <div id="viewOperacionrelacionEditsearchButtons" class="actionButtons">      
+
+        <s:button view="/seam/OperacionrelacionEdit.xhtml" 
+                    id="edit" styleClass="iceCmdBtn"
+                 value="Edit"/>
+
+        <s:button view="/seam/#{empty operacionrelacionFrom ? 'OperacionrelacionList' : operacionrelacionFrom}.xhtml"
+                    id="done" styleClass="iceCmdBtn"
+                 value="Done"/>
+
+    </div>
+  </ice:panelGroup>
+
+
+    <ice:form id="view2operacionrelacionHomeFormId">
+       <ice:panelTabSet id="viewoperacionrelacionHomeTabSetId" 
+                styleClass="componentPanelTabSetLayout" 
+		style="margin-bottom:5px;margin-top:10px;">
+
+	<ice:panelTab id="viewoperacionpanelTab" label="Operacion">
+   		<div class="association" id="operacionParent">
+        
+       		 <h:outputText value="There is no operacion associated with this operacionrelacion." 
+		                  id="viewoperacionTextId"
+                   rendered="#{operacionrelacionHome.instance.operacion == null}"/>
+   
+        	<ice:dataTable  var="operacion" 
+                   value="#{operacionrelacionHome.instance.operacion}" 
+                rendered="#{operacionrelacionHome.instance.operacion != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+	        columnClasses="allCols"
+                      id="viewoperacionTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{operacion.iden}
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{operacion.orden}
+            </ice:column>
+            <ice:column id="viewtextoId">
+                <f:facet name="header">Texto</f:facet>
+                #{operacion.texto}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Tramite iden</f:facet>
+		    	#{operacion.tramite.iden}
+            </ice:column>
+            <ice:column id="viewoperacionColumnId">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewoperacionLinkId" 
+                     value="View" 
+                      view="/seam/Operacion.xhtml">
+                    <f:param name="operacionIden" 
+                           value="#{operacion.iden}"/>
+                </s:link>
+            </ice:column>
+       </ice:dataTable>
+       
+    </div>
+    </ice:panelTab>
+
+	<ice:panelTab id="viewrelacionpanelTab" label="Relacion">
+   		<div class="association" id="relacionParent">
+        
+       		 <h:outputText value="There is no relacion associated with this operacionrelacion." 
+		                  id="viewrelacionTextId"
+                   rendered="#{operacionrelacionHome.instance.relacion == null}"/>
+   
+        	<ice:dataTable  var="relacion" 
+                   value="#{operacionrelacionHome.instance.relacion}" 
+                rendered="#{operacionrelacionHome.instance.relacion != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+	        columnClasses="allCols"
+                      id="viewrelacionTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{relacion.iden}
+            </ice:column>
+            <ice:column id="viewiddefrelacionId">
+                <f:facet name="header">Iddefrelacion</f:facet>
+                #{relacion.iddefrelacion}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Tramite by idtramiteborrador iden</f:facet>
+		    	#{relacion.tramiteByIdtramiteborrador.iden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Tramite by idtramitecreador iden</f:facet>
+		    	#{relacion.tramiteByIdtramitecreador.iden}
+            </ice:column>
+            <ice:column id="viewrelacionColumnId">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewrelacionLinkId" 
+                     value="View" 
+                      view="/seam/Relacion.xhtml">
+                    <f:param name="relacionIden" 
+                           value="#{relacion.iden}"/>
+                </s:link>
+            </ice:column>
+       </ice:dataTable>
+       
+    </div>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+

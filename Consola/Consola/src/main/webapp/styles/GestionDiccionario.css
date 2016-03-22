@@ -1,0 +1,18 @@
+/*
+    Document   : cssAdmin
+    Created on : 22-oct-2011, 16:15:24
+    Author     : Alvaro Montero
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#panelIzdoDic {
+	margin-right: auto;
+    margin-left: auto;
+}
+
+/*** Panel Derecho (grid y formulario) ***/
+#panelDchoDic {
+	margin-right: auto;
+    margin-left: auto;	
+}

@@ -1,0 +1,146 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../layout/template.xhtml">
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_seleccionplanencargado}"
+				view="/seleccion/seleccionArbolPlanEncargado.xhtml"
+				id="selecArbolPlanEncargadoMenu" propagation="none">
+
+
+			</s:link>
+
+		</ice:panelGroup>
+
+
+
+
+	</ui:define>
+
+
+	<ui:define name="body">
+
+		<ice:form id="selecPlanEncargado">
+
+			<ice:panelGroup styleClass="infoseleccion">
+				<ice:graphicImage styleClass="tooltip_imagen"
+					alt="#{messages.genericos_info}"
+					url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				<ice:outputLabel value="#{messages.seleccion_info_general}"
+					styleClass="labelseleccioninfo" />
+
+			</ice:panelGroup>
+
+			<ice:panelGrid columns="2" columnClasses="testCol1,testCol2">
+
+				<ice:panelGroup styleClass="arbol" scrollHeight="500px"
+					scrollWidth="600px">
+					<ice:tree id="treePlanEncargadoSelect"
+						value="#{seleccionArbolPlanEncargado.model}" var="node"
+						binding="#{seleccionArbolPlanEncargado.treeComponent}"
+						imageDir="/fipeditor/img/editorfip/es/arboles/"
+						hideRootNode="false" hideNavigation="false"
+						actionListener="#{seleccionArbolPlanEncargado.menuEvent}">
+						<!--imageDir= /fipeditor/xmlhttp/css/rime/css-images/  
+									-->
+						<ice:treeNode>
+
+
+							<f:facet name="icon">
+								<ice:panelGroup style="display: inline">
+									<h:graphicImage
+										value="/img/editorfip/es/arboles/#{node.userObject.icon}" />
+									<!--  -->
+								</ice:panelGroup>
+							</f:facet>
+							<f:facet name="content">
+								<ice:panelGroup style="display: inline">
+									<ice:panelGroup
+										styleClass="selectedNode#{node.userObject eq seleccionArbolPlanEncargado.selectedUserObject}"
+										style="display: inline">
+
+										<ice:commandLink
+											actionListener="#{seleccionArbolPlanEncargado.nodeSelected}">
+											<f:param name="nodoId"
+												value="#{node.userObject.datosIdTextoArbolGenerico.idBaseDatos}" />
+											<ice:outputText id="TreeNode" value="#{node.userObject.text}" />
+										</ice:commandLink>
+									</ice:panelGroup>
+								</ice:panelGroup>
+							</f:facet>
+
+						</ice:treeNode>
+					</ice:tree>
+
+
+				</ice:panelGroup>
+
+				<ice:panelGroup
+					styleClass="cajaSeleccion firstChildTitle backBeanChangeContainer">
+
+					<!-- backing bean title box -->
+					<ice:panelGroup styleClass="backBeanChangeTitle">
+						<ice:outputText value="#{messages.valores}" />
+					</ice:panelGroup>
+
+					<!-- actual backing bean values. -->
+					<ice:panelGroup styleClass="backBeanChangeBody"
+						effect="#{seleccionArbolPlanEncargado.valueChangeEffect}">
+						<ice:panelGroup style="margin: 0; padding: 0;width:100%;">
+
+
+
+							<ice:panelSeries id="icePnlSrs"
+								value="#{seleccionArbolPlanEncargado.selectedTreePath}"
+								var="treePath">
+								<ice:outputLabel styleClass="simboloMayorBold" value=" > " />
+								<ice:outputText id="treePath" value="#{treePath}" />
+							</ice:panelSeries>
+							<ice:panelGrid cellpadding="0" cellspacing="3" columns="2"
+								columnClasses="colLabelDatoGenerica,colDatoLabelGenerica">
+								<ice:outputLabel value="#{messages.arbol_nombre}"
+									styleClass="labels" />
+
+								<ice:outputText id="nombreParIdentificador"
+									styleClass="output-Detalle"
+									value="#{seleccionArbolPlanEncargado.selectedUserObject.datosIdTextoArbolGenerico.texto}" />
+
+								<h:commandButton id="cancelAddambitoaplicacionambitoHome"
+									alt="#{messages.botongenerico_seleccionar}" styleClass="boton2"
+									title="#{messages.boton_title_seleccionArbolPlanEncargado_seleccionar}"
+									value="#{messages.botongenerico_seleccionar}"
+									action="#{variablesSesionUsuario.seleccionarTramite(seleccionArbolPlanEncargado.selectedUserObject.datosIdTextoArbolGenerico.idBaseDatos, paginaOrigenFrom)}"
+									rendered="#{seleccionArbolPlanEncargado.selectedUserObject.datosIdTextoArbolGenerico.tipo == 'tramite'}" />
+
+								<s:button id="cancelAnadirdambitoaplicacionambitoHome"
+									alt="#{messages.botongenerico_cancelar}" styleClass="boton1"
+									title="#{messages.boton_title_seleccionArbolPlanEncargado_cancelar}"
+									value="#{messages.botongenerico_cancelar}" view="/home.xhtml"
+									rendered="#{seleccionArbolPlanEncargado.selectedUserObject.datosIdTextoArbolGenerico.tipo == 'tramite'}" />
+							</ice:panelGrid>
+						</ice:panelGroup>
+					</ice:panelGroup>
+				</ice:panelGroup>
+			</ice:panelGrid>
+
+
+		</ice:form>
+	</ui:define>
+
+</ui:composition>

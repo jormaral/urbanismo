@@ -1,0 +1,100 @@
+/* 
+    Document   : Cabecera
+    Created on : 25-nov-2009, 11:42:06
+    Author     : jorge.bodas
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.bgContenedor
+{
+    position:absolute;
+    right:5px;
+    top:5px;
+    height:40px;
+    width:302px;
+    z-index:5000;
+}
+
+        #bgContenedor_zonaIzquierda
+        {
+            position:absolute;
+            left:0px;
+            top:0px;
+            height:100%;
+            width:3%;
+            background-image:url(images/BotoneraTransparente.png);
+
+        }
+        #bgContenedor_zonaCentral
+        {
+            position:absolute;
+            left:3%;
+            top:0px;
+            height:100%;
+            width:92%;
+            background-image:url(images/BotoneraTransparente_center.png);
+            background-repeat:repeat-x;
+
+        }
+            .bgOpcion {
+                    background-color:transparent;
+                    cursor:pointer;
+                    float:right;
+                    height:32px;
+                    right:0px;
+                    line-height:31px;
+                    margin-left:1px;
+                    overflow:hidden;
+                    position:relative;
+                    text-align:center;
+                    top:0px;
+                    width:21%;
+                    padding-left:4px;
+                    padding-right:4px;
+            }
+                    .bgOpcion:hover {
+                            background-color:transparent;
+                            color:#0000dd;
+                            cursor:pointer;
+                            float:right;
+                            height:32px;
+                            right:0px;
+                            line-height:31px;
+                            margin-left:1px;
+                            overflow:hidden;
+                            position:relative;
+                            text-align:center;
+                            top:0px;
+                            width:21%;
+                            padding-left:4px;
+                            padding-right:4px;
+                            border-bottom:4px solid #004A85;
+                    }
+                    .bgOpcion_click {
+                            background-image:url(images/BotoneraTransparente_click.png);
+                            color:#eeeeee;
+                            cursor:pointer;
+                            float:right;
+                            height:32px;
+                            right:0px;
+                            line-height:31px;
+                            margin-left:1px;
+                            overflow:hidden;
+                            position:relative;
+                            text-align:center;
+                            top:0px;
+                            width:21%;
+                            padding-left:4px;
+                            padding-right:4px;
+                    }
+        #bgContenedor_zonaDerecha
+        {
+            position:absolute;
+            right:0px;
+            top:0px;
+            height:100%;
+            width:5%;
+            background-image:url(images/BotoneraTransparente.png);
+            background-position:top right;
+
+        }

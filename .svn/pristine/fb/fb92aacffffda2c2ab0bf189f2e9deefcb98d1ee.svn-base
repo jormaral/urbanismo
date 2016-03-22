@@ -1,0 +1,51 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaArbolDeterminaciones"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+<ice:form id="arbolDeterminaciones">
+
+	<!-- TRee values -->
+	<ice:panelGroup styleClass="arbol" scrollHeight="400px" scrollWidth="40em">
+		<ice:tree id="tree" value="#{gestionArbolDeterminacionesCopiar.model}"
+			var="node" binding="#{gestionArbolDeterminacionesCopiar.treeComponent}"
+			imageDir="/fipeditor/img/editorfip/es/arboles/"
+			hideRootNode="false" hideNavigation="false"
+			actionListener="#{gestionArbolDeterminacionesCopiar.menuEvent}">
+			<ice:treeNode>
+
+
+				<f:facet name="icon">
+					<ice:panelGroup style="display:inline;">
+						<h:graphicImage
+							value="/img/editorfip/es/arboles/#{node.userObject.icon}" />
+
+					</ice:panelGroup>
+				</f:facet>
+				<f:facet name="content">
+					<ice:panelGroup style="display:inline;">
+						<ice:panelGroup
+							styleClass="selectedNode#{node.userObject eq gestionArbolDeterminacionesCopiar.selectedUserObject}"
+							style="display:inline;">
+
+							<ice:commandLink
+								actionListener="#{gestionArbolDeterminacionesCopiar.nodeSelected}">
+								<f:param name="nodoId"
+									value="#{node.userObject.datosIdTextoArbolGenerico.idBaseDatos}" />
+									<f:param name="entidadIden" 
+                        				value="#{gestionDeterminaciones.idDeterminacion}"/>
+								<ice:outputText id="TreeNode" value="#{node.userObject.text}" />
+							</ice:commandLink>
+						</ice:panelGroup>
+					</ice:panelGroup>
+				</f:facet>
+
+			</ice:treeNode>
+		</ice:tree>
+	
+	</ice:panelGroup>
+	
+</ice:form>
+</f:view>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-abr-2012 12:30:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.refundido.Opciondeterminacion"
+  schema="refundido" table="opciondeterminacion">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">refundido.refundido_opciondeterminacion_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion"
+   fetch="select" name="determinacionByIddeterminacion">
+   <column name="iddeterminacion" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion"
+   fetch="select" name="determinacionByIddeterminacionvalorref">
+   <column name="iddeterminacionvalorref" not-null="true"/>
+  </many-to-one>
+  <set fetch="select" inverse="true" lazy="true"
+   name="entidaddeterminacionregimens" sort="unsorted" table="entidaddeterminacionregimen">
+   <key>
+    <column name="idopciondeterminacion"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacionregimen"/>
+  </set>
+ </class>
+ <query name="refundido.Opciondeterminacion.buscarPorDetYValorRef">SELECT od FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Opciondeterminacion od 
+	WHERE od.determinacionByIddeterminacion.iden = :idDeterminacion AND
+		od.determinacionByIddeterminacionvalorref.iden = :idValorRef</query>
+ <query name="refundido.Opciondeterminacion.buscarPorDetOValorRef">SELECT od FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Opciondeterminacion od 
+	WHERE od.determinacionByIddeterminacion.iden = :idDeterminacion OR
+		od.determinacionByIddeterminacionvalorref.iden = :idValorRef</query>
+</hibernate-mapping>

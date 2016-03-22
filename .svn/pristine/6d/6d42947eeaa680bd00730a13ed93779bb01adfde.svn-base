@@ -1,0 +1,145 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_ayuda}"
+				view="/ayuda/AyudaNavegacion.xhtml" id="AyudaRutaMenu"
+				propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_manuales}"
+				view="/ayuda/manuales/Manuales.xhtml" id="ManualesRutaMenu"
+				propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+
+
+	</ui:define>
+	<ui:define name="buscar">
+
+
+
+	</ui:define>
+	<ui:define name="body">
+
+		<ice:form styleClass="formIzquierda">
+
+			<ice:panelGroup>
+
+				<ice:panelGrid columns="3">
+
+					<ice:outputLabel value="#{messages.titulo}" />
+					<ice:inputText id="inputTitulo" required="true"
+						value="#{gestionManuales.manualNuevo.titulo}" />
+					<ice:message for="inputTitulo" />
+
+					<ice:outputLabel value="#{messages.descripcion}" />
+					<ice:inputTextarea id="inputDesc" rows="5"
+						value="#{gestionManuales.manualNuevo.descripcion}" />
+					<ice:outputLabel />
+
+					<ice:outputLabel value="#{messages.fichero}" />
+					<ice:inputText value="#{gestionManuales.manualNuevo.archivo}"
+						binding="#{gestionManuales.nombreFicheroBinding}" disabled="true" />
+					<ice:outputLabel />
+
+					<ice:outputLabel />
+					<ice:panelGroup>
+						<ice:commandButton value="#{messages.botongenerico_guardar}"
+							action="#{gestionManuales.guardarDocumento}"
+							alt="#{messages.botongenerico_guardar}"
+							title="#{messages.boton_title_ayudaManuales_guardar}"
+							styleClass="boton1" />
+						<ice:commandButton value="#{messages.botongenerico_cancelar}"
+							action="#{gestionManuales.cancelarSubida}"
+							alt="#{messages.botongenerico_cancelar}"
+							title="#{messages.boton_title_ayudaManuales_cancelar}"
+							styleClass="boton1" />
+					</ice:panelGroup>
+					<ice:outputLabel />
+
+
+				</ice:panelGrid>
+
+				<ice:panelGrid columns="2">
+
+
+				</ice:panelGrid>
+			</ice:panelGroup>
+		</ice:form>
+
+
+		<br></br>
+		<br></br>
+		<br></br>
+		<br></br>
+		<br></br>
+		<br></br>
+		<br></br>
+		<br></br>
+		<br></br>
+		<ice:form styleClass="formIzquierda">
+
+
+			<ice:commandButton value="#{messages.adjuntarfichero}"
+				action="#{gestionFicheroManual.setAdjuntarFicheroPopUp(true)}"
+				alt="#{messages.adjuntarfichero}"
+				title="#{messages.boton_title_ayudaManuales_adjuntar}"
+				styleClass="boton2" style=" margin-top:3%;" />
+
+			<ice:panelPopup id="adjuntarPnlPop" draggable="false" modal="true"
+				visible="#{gestionFicheroManual.adjuntarFicheroPopUp}"
+				autoCentre="true">
+				<f:facet name="header">
+					<ice:panelGroup>
+						<ice:outputText value="#{messages.adjuntar_fichero}" />
+						<ice:commandButton id="modalPnlCloseBtn"
+							image="/img/editorfip/es/comun/cerrar_popup.png"
+							action="#{gestionFicheroManual.setAdjuntarFicheroPopUp(false)}"
+							styleClass="popupHeaderImage"
+							title="#{messages.botongenerico_cerrar}"
+							alt="#{messages.botongenerico_cerrar}" />
+					</ice:panelGroup>
+				</f:facet>
+				<f:facet name="body">
+					<ice:panelGroup>
+						<ice:inputFile label="#{messages.adjuntar}" buttonClass="boton1"
+							actionListener="#{gestionFicheroManual.adjuntarArchivo}" />
+					</ice:panelGroup>
+				</f:facet>
+			</ice:panelPopup>
+		</ice:form>
+
+	</ui:define>
+
+</ui:composition>

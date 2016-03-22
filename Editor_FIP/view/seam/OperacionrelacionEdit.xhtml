@@ -1,0 +1,197 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component" 
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="operacionrelacion" styleClass="edit">
+     <ice:panelGroup  id="editoperacionrelacionGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="editTextBoxId" value="#{operacionrelacionHome.managed ? 'Edit' : 'Add'} operacionrelacion"/>
+                  </td>
+              </tr>
+          </table>
+
+        <ice:panelGroup id="editPanelGroupId" styleClass="edit">		 
+
+
+            <s:decorate id="idenField" template="../layout/edit.xhtml">
+                <ui:define name="label">Iden</ui:define>
+                        <ice:inputText id="iden"
+			                partialSubmit="true"
+                       required="true"
+                       disabled="#{operacionrelacionHome.managed}"
+                                    value="#{operacionrelacionHome.instance.iden}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="idtipooperacionrelField" template="../layout/edit.xhtml">
+                <ui:define name="label">Idtipooperacionrel</ui:define>
+                        <ice:inputText id="idtipooperacionrel"
+			                partialSubmit="true"
+                       required="true"
+                                    value="#{operacionrelacionHome.instance.idtipooperacionrel}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+          </ice:panelGroup>
+       </ice:panelGroup>
+                  
+       <div class="actionButtons">
+        
+            <ice:commandButton id="save" 
+                          value="Save" 
+                         action="#{operacionrelacionHome.persist}"
+                       disabled="#{!operacionrelacionHome.wired}"
+                       rendered="#{!operacionrelacionHome.managed}"/>  
+                          			  
+            <ice:commandButton id="update" 
+                          value="Save" 
+                         action="#{operacionrelacionHome.update}"
+                       rendered="#{operacionrelacionHome.managed}"/>
+                        			  
+            <ice:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{operacionrelacionHome.remove}"
+                      immediate="true"
+                       rendered="#{operacionrelacionHome.managed}"/>
+                    
+            <s:button id="cancelEdit" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/Operacionrelacion.xhtml"
+                rendered="#{operacionrelacionHome.managed}"/>
+                
+            <s:button id="cancelAddoperacionrelacionHome" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/#{empty operacionrelacionFrom ? 'OperacionrelacionList' : operacionrelacionFrom}.xhtml"
+                rendered="#{!operacionrelacionHome.managed}"/>
+                
+        </div>
+        
+    </ice:form>
+
+ <ice:form id="form2operacionrelacionHome">  
+        <ice:panelTabSet id="editPanelTaboperacionrelacionHomeId" styleClass="componentPanelTabSetLayout" style="margin-bottom:5px;margin-top:10px;">
+   
+ 	<ice:panelTab id="editTaboperacionId" label="Operacion *" >
+		<div class="association" id="operacionParent">
+    
+        	<h:outputText id="editoperacionTextId" value="There is no operacion associated with this operacionrelacion." 
+                   rendered="#{operacionrelacionHome.instance.operacion == null}"/>
+       	<ice:dataTable var="operacion" 
+                   value="#{operacionrelacionHome.instance.operacion}" 
+                rendered="#{operacionrelacionHome.instance.operacion != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+		  columnClasses="allCols"
+                      id="editoperacionTableId">
+            <ice:column id="$editColumnidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{operacion.iden}
+            </ice:column>
+            <ice:column id="$editColumnordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{operacion.orden}
+            </ice:column>
+            <ice:column id="$editColumntextoId">
+                <f:facet name="header">Texto</f:facet>
+                #{operacion.texto}
+            </ice:column>
+            <ice:column id="$editColumntramiteId">
+	    	    <f:facet name="header">Tramite iden</f:facet>
+		    	#{operacion.tramite.iden}
+            </ice:column>
+            <ice:column id="editColumnoperacionLinkId">
+                <f:facet name="header">Action</f:facet>
+                <s:link view="/seam/Operacion.xhtml" 
+                         id="viewoperacion" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="operacionIden" 
+                           value="#{operacion.iden}"/>
+                </s:link>
+            </ice:column>
+      </ice:dataTable>
+        <div class="actionButtons">
+            <s:button value="Select operacion"
+	              id="selectParent"
+                      view="/seam/OperacionList.xhtml">
+                <f:param name="from" value="OperacionrelacionEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </ice:panelTab>
+   
+ 	<ice:panelTab id="editTabrelacionId" label="Relacion *" >
+		<div class="association" id="relacionParent">
+    
+        	<h:outputText id="editrelacionTextId" value="There is no relacion associated with this operacionrelacion." 
+                   rendered="#{operacionrelacionHome.instance.relacion == null}"/>
+       	<ice:dataTable var="relacion" 
+                   value="#{operacionrelacionHome.instance.relacion}" 
+                rendered="#{operacionrelacionHome.instance.relacion != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+		  columnClasses="allCols"
+                      id="editrelacionTableId">
+            <ice:column id="$editColumnidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{relacion.iden}
+            </ice:column>
+            <ice:column id="$editColumniddefrelacionId">
+                <f:facet name="header">Iddefrelacion</f:facet>
+                #{relacion.iddefrelacion}
+            </ice:column>
+            <ice:column id="$editColumntramiteByIdtramiteborradorId">
+	    	    <f:facet name="header">Tramite by idtramiteborrador iden</f:facet>
+		    	#{relacion.tramiteByIdtramiteborrador.iden}
+            </ice:column>
+            <ice:column id="$editColumntramiteByIdtramitecreadorId">
+	    	    <f:facet name="header">Tramite by idtramitecreador iden</f:facet>
+		    	#{relacion.tramiteByIdtramitecreador.iden}
+            </ice:column>
+            <ice:column id="editColumnrelacionLinkId">
+                <f:facet name="header">Action</f:facet>
+                <s:link view="/seam/Relacion.xhtml" 
+                         id="viewrelacion" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="relacionIden" 
+                           value="#{relacion.iden}"/>
+                </s:link>
+            </ice:column>
+      </ice:dataTable>
+        <div class="actionButtons">
+            <s:button value="Select relacion"
+	              id="selectParent"
+                      view="/seam/RelacionList.xhtml">
+                <f:param name="from" value="OperacionrelacionEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+
+
+

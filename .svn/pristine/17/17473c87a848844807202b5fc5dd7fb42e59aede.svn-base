@@ -1,0 +1,186 @@
+	<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+	
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+		
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			
+			</s:link>
+			
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link style="color:blue;" value="#{messages.menu_administracion}"
+				view="/administracion/AdministracionNavegacion.xhtml" id="AdministracionRutaMenu"
+				propagation="none">
+				
+			</s:link>
+			
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link style="color:blue;" value="#{messages.administracion_usuario}"
+				view="/administracion/gestionusuario/GestionUsuarioList.xhtml" id="GestionUsuarioListRutaMenu"
+				propagation="none">
+				
+				</s:link>
+				
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link style="color:blue;" value="#{messages.genericos_listado}" 
+				view="/administracion/gestionusuario/GestionUsuarioList.xhtml" id="GestionUsuarioListRutaMenu" propagation="none">
+				
+				</s:link>	
+			
+					
+		</ice:panelGroup>
+		
+		
+		
+	</ui:define>
+	
+	<ui:define name="buscar">
+		<!--  Se define el buscar	
+		 <h:graphicImage value="/img/editorfip/#{localeSelector.language}/comun/buscar.png"/>-->
+		 
+		 <ice:form>
+			<ice:panelGrid columns="3">
+			
+			<ice:selectInputText style="align:left" rows="10" width="250"
+                        listVar="listado"
+                        valueChangeListener="#{servicioUsuarioLista.actualizarListaUsuarios}"
+                        listValue="#{servicioUsuarioLista.resultadosBusqueda}">
+              <f:facet name="selectInputText">
+                   <ice:panelGrid columns="1">
+                         <ice:outputText style="text-align:left;width:10px" value="#{listado.idenUsuario}"/>
+                   </ice:panelGrid>
+              </f:facet>
+          </ice:selectInputText>
+			
+			<!-- <ice:commandButton value="      "
+				
+				action="#{servicioPlanEncargadoLista.verDetalle}" 
+				styleClass="botonLupa" alt="Cargar Elemento"/> -->
+			<ice:commandButton value="      " id="VerDetalle" styleClass="sbotonLupa" title="#{messages.boton_title_usuarioLista_lupa}"
+			action="#{servicioUsuarioLista.verDetalleBuscar}" alt="Ver Detalle"/>
+			</ice:panelGrid>
+			
+			
+		</ice:form>
+		 
+		 
+		
+	</ui:define>
+	
+	<ui:define name="body">
+		<ice:panelGroup styleClass="dr-pnl-sinmargen" renderedOnUserRole="ADM,SUP">
+		<ice:form id="formUsrList">
+			<h:panelGrid columns="1" styleClass="panelBotones">
+				
+				<ice:panelGroup style="text-align:left;">
+					<s:button value="#{messages.botongenerico_crear}" view="/administracion/gestionusuario/GestionUsuarioDetalle.seam" 
+					propagation="nest" styleClass="boton1 botonCrear" alt="#{messages.botongenerico_crear}" title="#{messages.boton_title_usuarioLista_crear}">
+					<f:param name="usuarioUsername" />
+					</s:button>
+				
+					<ice:commandButton value="Ver Detalle" action="#{servicioUsuarioLista.verDetalle}" styleClass="boton2"/>
+					
+				
+					<ice:commandButton value="Dar Baja" action="#{servicioUsuarioLista.darDebaja}"  styleClass="boton2"/>
+					
+				
+					<ice:commandButton value="Dar Alta" action="#{servicioUsuarioLista.darDealta}"  styleClass="boton2"/>
+					
+				</ice:panelGroup>
+				
+								
+				
+			</h:panelGrid>
+			
+			<script type="text/javascript">
+				function pintarFilaSeleccionada(checkbox) {
+					
+					var seleccionada = checkbox.checked;
+					var fila = checkbox.parentNode.parentNode.parentNode;
+					if(seleccionada) {
+						fila.style.backgroundColor='#FFFF99';
+					} else {
+						fila.style.backgroundColor='#FFFFFF';
+					}
+				}	
+			</script>
+			<ice:dataTable value="#{servicioUsuarioLista.listaUsuarios}" var="usr"
+							id="listaDeUsuarios" enableContextMenu="false" selectionMode="none" 
+							style="position:static;z-index:-1;">
+				
+				<ice:column>
+					<center>
+						<h:selectBooleanCheckbox value="#{servicioUsuarioLista.seleccionUsuarios[usr.getUsername()]}" 
+							onchange="javascript: pintarFilaSeleccionada(this)" id="checkbox" />
+					</center>
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<ice:commandLink value="#{messages.gestionusuario_usuario_username} #{servicioUsuarioLista.orderColumn == 'username' ? (servicioUsuarioLista.orderDirection == 'desc' ? messages.down : messages.up) : ''}" 
+							 action="#{servicioUsuarioLista.ordenarLista('username', (servicioUsuarioLista.orderDirection == 'asc' ? 'desc' : 'asc'))}" style="color:#000000;font-family:tahoma;font-weight:bold;font-size:11px;"/>
+					</f:facet>
+					<h:outputText value="#{usr.username}"/>
+				</ice:column>
+				
+				
+				<ice:column>
+					<f:facet name="header">
+						<ice:commandLink value="#{messages.gestionusuario_usuario_nombre} #{servicioUsuarioLista.orderColumn == 'detalle.nombre' ? (servicioUsuarioLista.orderDirection == 'desc' ? messages.down : messages.up) : ''}" 
+							 action="#{servicioUsuarioLista.ordenarLista('detalle.nombre', (servicioUsuarioLista.orderDirection == 'asc' ? 'desc' : 'asc'))}" style="color:#000000;font-family:tahoma;font-weight:bold;font-size:11px;" />
+					</f:facet>
+					<h:outputText value="#{usr.detalle.nombre} #{usr.detalle.primerApellido} #{usr.detalle.segundoApellido}" />
+				</ice:column>
+				
+				<ice:column>
+					<f:facet name="header">
+							<h:outputText value="#{messages.gestionusuario_usuario_rol}"/>
+					</f:facet>
+					<h:outputText value="#{usr.roles}" />
+				</ice:column>
+				
+				<ice:column>
+					<f:facet name="header">
+							<ice:commandLink value="#{messages.gestionusuario_usuario_dadobaja} #{servicioUsuarioLista.orderColumn == 'dadoBaja' ? (servicioUsuarioLista.orderDirection == 'desc' ? messages.down : messages.up) : ''}" 
+								 action="#{servicioUsuarioLista.ordenarLista('dadoBaja', (servicioUsuarioLista.orderDirection == 'asc' ? 'desc' : 'asc'))}" style="color:#000000;font-family:tahoma;font-weight:bold;font-size:11px;"/>
+					</f:facet>
+					<center>
+					<h:graphicImage value="/img/editorfip/es/comun/checked.png" rendered="#{usr.dadoBaja}"/>
+					</center>
+				</ice:column>
+				
+				<!-- 
+				<ice:column>
+					<f:facet name="header">
+							<h:outputText value="Acciones"/>
+					</f:facet>
+					<ice:commandButton value="Ver Detalle" action="#{servicioUsuarioLista.verDetalle}"/>
+					<ice:commandButton value="Dar Baja" action="#{servicioUsuarioLista.darDebaja}" rendered="#{!usr.dadoBaja}"/>
+					<ice:commandButton value="Dar Alta" action="#{servicioUsuarioLista.darDealta}" rendered="#{usr.dadoBaja}"/>
+				
+				</ice:column>
+				 -->
+												
+			</ice:dataTable>
+			</ice:form>
+		</ice:panelGroup>
+	</ui:define>
+	
+	
+
+</ui:composition>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan"
+  schema="planeamiento" table="operacionplan">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">planeamiento.planeamiento_operacionplan_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan"
+   fetch="select" name="planByIdplanoperador">
+   <column name="idplanoperador" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan"
+   fetch="select" name="planByIdplanoperado">
+   <column name="idplanoperado"/>
+  </many-to-one>
+  <property generated="never" lazy="false"
+   name="idinstrumentotipooperacion" type="int">
+   <column name="idinstrumentotipooperacion" not-null="true"/>
+  </property>
+ </class>
+ <query name="Operacionplan.buscarOperacion">SELECT op FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan op, 
+                    es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan itop 
+                    WHERE op.planByIdplanoperado.iden = :idPlanOperado
+                    AND op.planByIdplanoperador.iden = :idPlanOperador
+                    AND op.idinstrumentotipooperacion = itop.iden 
+                    AND itop.tipooperacionplan.iden= :idTipoOperacion</query>
+</hibernate-mapping>

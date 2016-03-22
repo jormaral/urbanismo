@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18-jul-2011 17:35:19 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class name="es.mitc.redes.urbanismoenred.data.validacion.Validacion"
+  schema="validacion" table="validacion">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="assigned"/>
+  </id>
+  <property generated="never" lazy="false" name="tipovalidacion" type="int">
+   <column name="tipovalidacion" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="tipoerror" type="java.lang.Integer">
+   <column name="tipoerror"/>
+  </property>
+  <property generated="never" lazy="false" name="activado" type="boolean">
+   <column name="activado" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="nemo" type="string">
+   <column length="10" name="nemo"/>
+  </property>
+  <property generated="never" lazy="false" name="descripcion" type="string">
+   <column length="3000" name="descripcion" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="sentencia" type="string">
+   <column length="3000" name="sentencia" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="resultadoesperado" type="string">
+   <column length="1000" name="resultadoesperado" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="columnas" type="string">
+   <column length="3000" name="columnas"/>
+  </property>
+  <property generated="never" lazy="false" name="mensaje" type="string">
+   <column length="3000" name="mensaje"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true" name="resultados"
+   sort="unsorted" table="resultado">
+   <key>
+    <column name="idvalidacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.validacion.Resultado"/>
+  </set>
+ </class>
+ <query name="Validacion.obtenerPorTipo">SELECT val FROM es.mitc.redes.urbanismoenred.data.validacion.Validacion val
+	WHERE val.tipovalidacion = :tipoValidacion AND val.activado = true</query>
+ <query name="Validacion.buscarPorId">SELECT val FROM es.mitc.redes.urbanismoenred.data.validacion.Validacion val
+	WHERE val.iden = :id</query>
+ <query name="Validacion.obtenerTodas">SELECT val FROM es.mitc.redes.urbanismoenred.data.validacion.Validacion val
+	WHERE val.activado = true ORDER BY val.nemo</query>
+</hibernate-mapping>

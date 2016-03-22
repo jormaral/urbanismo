@@ -1,0 +1,88 @@
+/* 
+    Document   : JobTabs
+    Created on : 16-mar-2010, 17:23:13
+    Author     : jorge.bodas
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+
+/*ACCORDION MODE*/
+    .etiquetaAcc
+    {
+        position:relative;
+        float:left;
+        left:0px;
+        top:0px;
+        padding-left:4px;
+        padding-right:4px;
+        background:#DDDDDD;
+        height:17px;
+        line-height:5px;
+        width:98%;
+        margin-bottom:1px;
+        cursor:pointer;
+    }
+        .titleAcc
+        {
+            position:absolute;
+            left:0px;
+            top:0px;
+            height:17px;
+            width:100%;
+            background:#EEEEEE;
+            color:#787878;
+            text-align:left;
+            font-size:9pt;
+            z-index:95;
+            padding-left:9px;
+        }
+        .titleAcc:hover
+        {
+            position:absolute;
+            left:0px;
+            top:0px;
+            height:17px;
+            width:100%;
+            background:#dd0000;
+            color:#eeeeee;
+            text-align:left;
+            font-size:9pt;
+            z-index:95;
+            padding-left:9px;
+        }
+        .contentAcc
+        {
+            position:absolute;
+            left:0px;
+            top:18px;
+            height:1px;
+            width:100%;
+            overflow:hidden;
+            visibility:hidden;
+            z-index:100;
+            line-height:15px;
+        }
+/*END ACCORDION MODE*/
+
+/*TABS MODE*/
+    .etiquetaTab
+    {
+        position:relative;
+        float:left;
+        left:0px;
+        top:0px;
+        padding-left:4px;
+        padding-right:4px;
+        background:red;
+        height:25px;
+        text-align:center;
+        line-height:24px;
+    }
+/*END TABS MODE*/
+

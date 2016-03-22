@@ -1,0 +1,223 @@
+<div class="menuButtons" 
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"  
+		xmlns:s="http://jboss.com/products/seam/taglib"
+		template="layout/template.xhtml">
+		  	
+<ice:form id="formMenu">		  	
+  <ice:panelGroup id="menuPanelGroup" styleClass="formBorderHighlight">
+	     
+						
+						<ice:menuBar orientation="horizontal" noIcons="true" >
+						
+						
+							
+							<ice:menuItem value="#{messages.menu_administracion}" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/01_ADMINISTRACION.png" renderedOnUserRole="ADM,SUP">
+							
+								<ice:menuItem value="#{messages.administracion_usuario}" link="/fipeditor/administracion/gestionusuario/GestionUsuarioList.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/01_01_GESTION_USUARIO.png" renderedOnUserRole="ADM,SUP">
+								</ice:menuItem>
+								
+								<ice:menuItem value="#{messages.configuracion_visor}" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/01_01_GESTION_USUARIO.png" renderedOnUserRole="ADM,SUP">
+									
+									
+									<ice:menuItem value="#{messages.geometrias_ambitos}" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/01_01_GESTION_USUARIO.png" renderedOnUserRole="ADM,SUP" link="/fipeditor/administracion/configuracionvisor/GeometriasAmbitosList.seam">
+									</ice:menuItem>
+									
+								</ice:menuItem>
+								<!-- <ice:menuItem value="#{messages.gestionsistema}" link="/fipeditor/administracion/gestionsistema/GestionSistemaNavegacion.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/01_02_GESTION_SISTEMA.png" renderedOnUserRole="ADM">
+								</ice:menuItem> -->
+							</ice:menuItem>
+							
+							<ice:menuItem value="#{messages.menu_gestionfip}" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/02_GESTION_FIP.png" renderedOnUserRole="ADM,SUP">
+							
+								
+								
+										<ice:menuItem value="#{messages.obtencionfip1}" link="/fipeditor/gestionfip/obtencionfip1/ObtencionFip.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/02_01_01_OBTENCION_FIP1.png">
+												<!--  
+												<ice:menuItem value="#{messages.descargafip1}" link="/fipeditor/gestionfip/obtencionfip1/ObtencionFip.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/02_01_01_OBTENCION_FIP1.png">
+												</ice:menuItem>
+												<ice:menuItem value="#{messages.cargafip1}" link="/fipeditor/gestionfip/obtencionfip1/CargarFip.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/02_01_01_OBTENCION_FIP1.png">
+												</ice:menuItem>
+												-->
+										</ice:menuItem>
+										
+										<ice:menuItem value="#{messages.plan_sistematizado}" link="/fipeditor/gestionfip/nuevoplaneamientosistematizado/CrearPlaneamientoSistematizado.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/02_01_01_OBTENCION_FIP1.png">
+										</ice:menuItem>
+										
+										<ice:menuItem value="#{messages.gestionplanencargado}" link="/fipeditor/gestionfip/gestionplaneamientoencargado/PlaneamientoEncargadoList.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/02_02_GESTION_PLAN_ENCARGADO.png">
+										</ice:menuItem>
+										
+										<ice:menuItem value="#{messages.gestionvalidaciones}" link="/fipeditor/gestionfip/validaciones/ProcesoValidacionList.seam" styleClass="pic"></ice:menuItem>
+								
+										<ice:menuItem value="#{messages.procesoprerefundido}" link="/fipeditor/gestionfip/gestionprerefundido/GestionPrerefundido.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/02_01_03_GESTION_PREREFUNDIDO.png">
+										</ice:menuItem>
+										
+										<ice:menuItem value="#{messages.fichero_intercambio}" link="/fipeditor/gestionfip/generacionfip2/Fip2GeneradosList.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/02_02_GESTION_PLAN_ENCARGADO.png">
+										</ice:menuItem>
+																				
+										
+										
+										<ice:menuItem value="#{messages.importadores}" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/02_01_04_IMPORTADORES.png">
+												
+											<ice:menuItem value="#{messages.entidades}" link="/fipeditor/gestionfip/importadores/modeloc/Entidades.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/02_01_04_01_ENTIDADES.png">
+											</ice:menuItem>
+											
+											<ice:menuItem value="#{messages.determinaciones}" link="/fipeditor/gestionfip/importadores/modeloc/Determinaciones.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/02_01_04_02_DETERMINACIONES.png">
+											</ice:menuItem>
+											
+											<ice:menuItem value="#{messages.condicionesurbanisticas}" link="/fipeditor/gestionfip/importadores/modeloc/CondicionesUrbanisticas.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/02_01_04_03_CONDICIONES_URBANISTICAS.png">
+											</ice:menuItem>
+											
+											<ice:menuItem value="#{messages.geometriasentidades}" link="/fipeditor/gestionfip/importadores/GeometriasEntidades.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/02_01_04_04_GEOMETRIAS_ENTIDADES.png">
+											</ice:menuItem>
+										</ice:menuItem>	
+										
+										
+							
+									
+							</ice:menuItem>
+							
+							<ice:menuItem value="#{messages.menu_edicionfip}" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_PRODUCCION_FIP.png">
+							
+								<ice:menuItem value="#{messages.menu_edicion_diccionario}" link="/fipeditor/produccionfip/gestiondiccionariodeterminaciones/VerDeterminacionPlanEncargado.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_01_GESTION_DICCIONARIO_DETERMINACIONES.png">
+								</ice:menuItem>
+								
+								<ice:menuItem value="#{messages.menu_edicion_entidades}" styleClass="pic" link="/fipeditor/produccionfip/gestionentidades/VerEntidadPlanEncargado.seam" icon="/img/editorfip/#{localeSelector.language}/menu/03_02_GESTION_ENTIDADES.png">
+								</ice:menuItem>
+								
+								<ice:menuItem value="#{messages.menu_edicion_documentos}" link="/fipeditor/produccionfip/gestiondocumental/VerListaDocumentos.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_03_GESTION_DOCUMENTAL.png">
+								</ice:menuItem>
+								
+								<ice:menuItem value="#{messages.menu_edicion_operaciones}" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_04_GESTION_OPERACIONES.png">
+								
+									<ice:menuItem value="#{messages.menu_edicion_operaciones_entidad}" link="/fipeditor/produccionfip/gestionoperaciones/listaOperacionesEntidad.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_04_GESTION_OPERACIONES.png">
+									</ice:menuItem>
+									
+									<ice:menuItem value="#{messages.menu_edicion_operaciones_determinacion}" link="/fipeditor/produccionfip/gestionoperaciones/listaOperacionesDeterminacion.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_04_GESTION_OPERACIONES.png">
+									</ice:menuItem>
+									
+								</ice:menuItem>
+								
+								<ice:menuItem value="#{messages.menu_edicion_unidades}" link="/fipeditor/produccionfip/gestionunidades/listaUnidades.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_03_GESTION_DOCUMENTAL.png">
+								</ice:menuItem>
+								
+								<ice:menuItem value="#{messages.menu_edicion_adscripciones}" link="/fipeditor/produccionfip/gestionadscripciones/ListaAdscripciones.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_03_GESTION_DOCUMENTAL.png">
+								</ice:menuItem>
+								
+							</ice:menuItem>
+							
+							<ice:menuItem value="#{messages.menu_informacionfip}"  styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/04_INFORMACION_FIP.png">
+								
+								<ice:menuItem value="#{messages.menu_verplanbase}" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_01_01_PLAN_BASE.png">
+									
+									<ice:menuItem value="#{messages.menu_consulta_entidades}" link="/fipeditor/informacionfip/planbase/entidades/VerEntidadPlanBase.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_02_01_PLAN_BASE.png">
+									</ice:menuItem>
+									
+									<ice:menuItem value="#{messages.menu_consulta_determinaciones}" link="/fipeditor/informacionfip/planbase/determinaciones/VerPlanBase.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_01_01_PLAN_BASE.png">
+									</ice:menuItem>
+									
+									<ice:menuItem value="#{messages.menu_consulta_unidades}" link="/fipeditor/informacionfip/planbase/unidades/VerUnidad.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_01_01_PLAN_BASE.png">
+									</ice:menuItem>
+									
+								</ice:menuItem>
+								
+								<ice:menuItem value="#{messages.menu_verdeterminacionplanvigente}" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_01_02_PLAN_VIGENTE.png">
+									
+									<ice:menuItem value="#{messages.menu_consulta_entidades}" link="/fipeditor/informacionfip/planvigente/entidades/VerEntidadPlanVigente.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_02_02_PLAN_VIGENTE.png">
+									</ice:menuItem>
+									
+									<ice:menuItem value="#{messages.menu_consulta_determinaciones}" link="/fipeditor/informacionfip/planvigente/determinaciones/VerDeterminacionPlanVigente.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_01_02_PLAN_VIGENTE.png">
+									</ice:menuItem>
+								
+									 <ice:menuItem value="#{messages.menu_consulta_documentos}" link="/fipeditor/informacionfip/planvigente/documento/VerListaDocumentos.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/04_02_03_CONSULTA_DOCUMENTOS.png">
+									</ice:menuItem> 
+									
+									<ice:menuItem value="#{messages.menu_consulta_unidades}" link="/fipeditor/informacionfip/planvigente/unidades/VerUnidades.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/04_02_03_CONSULTA_DOCUMENTOS.png">
+									</ice:menuItem>
+									
+									<ice:menuItem value="#{messages.menu_consulta_adscripciones}" link="/fipeditor/informacionfip/planvigente/adscripciones/VerAdscripciones.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/04_02_03_CONSULTA_DOCUMENTOS.png">
+									</ice:menuItem>
+								
+								</ice:menuItem>
+								
+								<ice:menuItem value="#{messages.menu_planprerefundido}" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_01_02_PLAN_VIGENTE.png">
+									
+									<ice:menuItem value="#{messages.menu_listado_pre}" link="/fipeditor/informacionfip/planprerefundido/Listado.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_02_02_PLAN_VIGENTE.png">
+									</ice:menuItem>
+									
+									<ice:menuItem value="#{messages.menu_consulta_entidades}" link="/fipeditor/informacionfip/planprerefundido/entidades/Entidades.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_02_02_PLAN_VIGENTE.png">
+									</ice:menuItem>
+									
+									<ice:menuItem value="#{messages.menu_consulta_determinaciones}" link="/fipeditor/informacionfip/planprerefundido/determinaciones/Determinaciones.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_02_02_PLAN_VIGENTE.png">
+									</ice:menuItem>
+																		
+									<ice:menuItem value="#{messages.menu_consulta_unidades}" link="/fipeditor/informacionfip/planprerefundido/unidades/Unidades.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_02_02_PLAN_VIGENTE.png">
+									</ice:menuItem>
+									
+									<ice:menuItem value="#{messages.menu_consulta_adscripciones}" link="/fipeditor/informacionfip/planprerefundido/adscripciones/Adscripciones.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/03_02_02_PLAN_VIGENTE.png">
+									</ice:menuItem>
+								
+								
+								</ice:menuItem>
+								
+								
+								<ice:menuItem value="#{messages.menu_visor_geografico}" link="/fipeditor/informacionfip/consultamapas/VerMapas.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/04_02_CONSULTA_MAPAS.png">
+								</ice:menuItem>
+								
+								<ice:menuItem value="#{messages.menu_fichacu}" link="/fipeditor/informacionfip/consultafichaurbanistica/FichaCUNavegacion.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/04_01_02_FICHA_CU.png">
+									
+									<ice:menuItem value="#{messages.menu_fichacu_planencargado}" link="/fipeditor/informacionfip/consultafichaurbanistica/FichaCUPlanEncargado.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/04_01_02_FICHA_CU.png">
+									</ice:menuItem>
+									
+									<ice:menuItem value="#{messages.menu_fichacu_planvigente}" link="/fipeditor/informacionfip/consultafichaurbanistica/FichaCUPlanVigente.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/04_01_02_FICHA_CU.png">
+									</ice:menuItem>
+									
+									<ice:menuItem value="#{messages.menu_fichacu_planprerrefundido}" link="/fipeditor/informacionfip/consultafichaurbanistica/FichaCUPlanPrerrefundido.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/04_01_02_FICHA_CU.png">
+									</ice:menuItem>
+									
+								</ice:menuItem>
+								
+								<ice:menuItem value="#{messages.menu_vercontenidoplaneamiento}" link="/fipeditor/informacionfip/consultacontenidoplaneamiento/VerContenidoPlaneamiento.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/04_03_CONSULTA_CONTENIDO_PLANEAMIENTO.png">
+								</ice:menuItem>
+								
+								<ice:menuItem value="#{messages.menu_busqueda}" link="/fipeditor/informacionfip/busqueda/BusquedaAvanzada.seam" styleClass="pic">
+								</ice:menuItem>
+							
+							</ice:menuItem>
+							
+							<ice:menuItem value="#{messages.menu_ayuda}" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/05_AYUDA.png">
+							
+								<ice:menuItem value="#{messages.menu_manuales}" link="/fipeditor/ayuda/manuales/Manuales.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/05_01_MANUALES.png">
+								</ice:menuItem>
+								
+								<ice:menuItem value="#{messages.menu_faq}" link="/fipeditor/ayuda/faq/Faq.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/05_02_FAQ.png">
+								</ice:menuItem>
+								
+								<ice:menuItem value="#{messages.menu_mapaweb}" link="/fipeditor/ayuda/mapaweb/MapaWeb.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/05_03_MAPA_WEB.png">
+								</ice:menuItem>
+								
+								<ice:menuItem value="#{messages.menu_acercade}" link="/fipeditor/ayuda/acercade/AcercaDe.seam" styleClass="pic" icon="/img/editorfip/#{localeSelector.language}/menu/05_04_ACERCA_DE.png">
+								</ice:menuItem>
+							
+							</ice:menuItem>
+							
+							
+					</ice:menuBar>
+					
+				                   
+               <!--	Login
+                  
+                  <ice:panelGroup id="rightMenuId" styleClass="iceMnuBarItem">
+                                <h:outputText id="menuWelcomeId" value="signed in as: #{credentials.username}" rendered="#{identity.loggedIn}" styleClass="etiqueta"/>
+                                <s:link view="/login.xhtml" id="menuLoginId" value="Login" rendered="#{not identity.loggedIn}" propagation="none"/>
+                                <s:link view="/home.xhtml" id="menuLogoutId" action="#{identity.logout}" value="Logout" rendered="#{identity.loggedIn}" propagation="none"/>
+                </ice:panelGroup>   --> 
+           
+         
+  </ice:panelGroup>
+  </ice:form>
+</div>
+

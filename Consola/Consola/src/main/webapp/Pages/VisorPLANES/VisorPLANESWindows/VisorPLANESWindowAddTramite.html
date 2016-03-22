@@ -1,0 +1,104 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alvaro.Montero    
+-->
+
+<script language="JavaScript">
+function maximaLongitud(texto,maxlong)
+{
+	var tecla, int_value, out_value;
+	
+	if (texto.value.length > maxlong)
+	{
+		/*con estas 3 sentencias se consigue que el texto se reduzca
+		al tamaño maximo permitido, sustituyendo lo que se haya
+		introducido, por los primeros caracteres hasta dicho limite*/
+		in_value = texto.value;
+		out_value = in_value.substring(0,maxlong);
+		texto.value = out_value;
+		alert("La longitud máxima es de " + maxlong + " caractéres");
+		return false;
+	}
+	return true;
+}
+</script>
+
+<div class="form">
+<form id="VisorPLANESAddTramite" action="#" method="get">
+
+	<input type="hidden" id="idPlan" name="idPlan" value=""/>
+	
+	<div class="formRow">
+	<div class="formLabel">Nombre*:</div>
+	<div class="formField"><input type="text" class="input" id="txtNombre" value="" maxlength="100" style="width: 100%"/></div>
+	<div class="clear"></div>
+	</div>
+	
+	<div class="formRow">
+	<div class="formLabel">Tipo de tr&aacute;mite*:</div>
+	<div class="formField">
+	    <select name="idTipoTramite" id="idTipoTramite" style="width: 100%">
+        </select>
+    </div>
+	<div class="clear"></div>
+	</div>
+	
+	<div class="formRow">
+	<div class="formLabel">Organo*:</div>
+	<div class="formField">
+		<select name="idOrgano" id="idOrgano" style="width: 100%">
+        </select>
+    </div>
+	<div class="clear"></div>
+	</div>
+	
+	<div class="formRow">
+	<div class="formLabel">Sentido*:</div>
+	<div class="formField">
+		<select name="idSentido" id="idSentido" style="width: 100%">
+        </select>
+    </div>
+	<div class="clear"></div>
+	</div>
+	
+	<div class="formRow">
+	<div class="formLabel">Fecha:</div>
+	<div id="dateImputWrapper" class="formField">
+		<input id="txtFechaVisible" class="input" name="txtFechaVisible" type="text" data-meiomask="fixed.date"/>
+		<input id="txtFecha" class="input" name="txtFecha" type="hidden"/>
+	</div>	
+	<div class="clear"></div>
+	</div>
+	
+	<div class="formRow">
+	<div class="formLabel">Centro de producci&oacute;n*:</div>
+	<div class="formField">
+	    <select name="idCentroProduccion" id="idCentroProduccion" style="width: 100%">
+        </select>
+    </div>
+	<div class="clear"></div>
+	</div>
+
+	<div class="formRow">
+	<div class="formLabel">Texto:</div>
+	<div class="formField"><textarea class="imput" id="txtTexto" cols="45" rows="5" style="width: 100%" onkeyup="return maximaLongitud(this,200)"></textarea></div>
+	<div class="clear"></div>
+	</div>	
+	
+	<div class="formRow">
+	<div class="formLabel">Comentario:</div>
+	<div class="formField"><textarea class="imput" id="txtComentario" cols="45" rows="5" style="width: 100%" onkeyup="return maximaLongitud(this,200)"></textarea></div>
+	<div class="clear"></div>
+	</div>	
+	
+	<div class="buttonRow">	
+	<div class="formField" style="width:100%;">
+		<input type="submit" id="BtnVisorPlanesCancelarNuevoTramite" class="button" value="Cancelar" style="float:left;"/>
+		<input type="submit" id="BtnVisorPlanesGuardarNuevoTramite" class="button" value="Aceptar" style="float:right;"/>
+	</div>
+	<div class="clear"></div>
+	</div>
+		
+</form>
+</div>

@@ -1,0 +1,101 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+		
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+			
+					
+		</ice:panelGroup>
+			
+	
+		
+	</ui:define>
+	<ui:define name="body">
+
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+			<!--  Se define el cuerpo de la pagina -->
+
+			<ice:panelGroup columns="8" styleClass="centerHome">
+			
+				<s:link view="/informacionfip/PlanBaseNavegacion.xhtml" id="PlanBaseNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/04_01_PLAN_BASE.png"
+						alt="#{messages.menu_verplanbase}" title="#{messages.menu_verplanbase}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/informacionfip/PlanVigenteNavegacion.xhtml" id="PlanVigenteNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/04_02_PLAN_VIGENTE.png"
+						alt="#{messages.menu_verdeterminacionplanvigente}" title="#{messages.menu_verdeterminacionplanvigente}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/informacionfip/planprerefundido/PlanesPrerefundidoNavegacion.xhtml" id="PlanesPrerefundidoNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/04_03_PLANES_PREREFUNDIDO.png"
+						alt="#{messages.menu_planprerefundido}" title="#{messages.menu_planprerefundido}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/informacionfip/consultamapas/VerMapas.xhtml" id="VerMapasNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/04_04_CONSULTA_MAPAS.png"
+						alt="#{messages.consultamapas}" title="#{messages.consultamapas}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/informacionfip/consultafichaurbanistica/FichaCUNavegacion.xhtml" id="FichaUrbanisticaNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/04_05_FICHA_CU.png"
+						alt="#{messages.gestionusuario}" title="#{messages.menu_fichacu}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/informacionfip/consultacontenidoplaneamiento/VerContenidoPlaneamiento.xhtml" id="VerContenidoPlaneamientoNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/04_06_CONSULTA_CONTENIDO_PLANEAMIENTO.png"
+						alt="#{messages.consultacontenidoplaneamiento}" title="#{messages.consultacontenidoplaneamiento}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/informacionfip/busqueda/BusquedaAvanzada.xhtml" id="BusquedaAvanzadaNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/04_07_BUSQUEDA_AVANZADA.png"
+						alt="#{messages.menu_busqueda}" title="#{messages.menu_busqueda}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/home.xhtml" id="VolverNavegacionMenu"
+					propagation="none">
+					<h:graphicImage
+						value="/img/editorfip/#{localeSelector.language}/navegacion/00_VOLVER.png"
+						alt="#{messages.menu_volver}"
+						title="#{messages.menu_volver}" styleClass="iconoNav"/>
+				</s:link>
+					
+			</ice:panelGroup>
+
+		</ice:panelGroup>
+
+
+	</ui:define>
+
+</ui:composition>

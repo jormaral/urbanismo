@@ -1,0 +1,99 @@
+/* Window Builder Form Elements */
+
+#newWindowForm .form {
+	padding: 0 0 10px 10px;	
+}		
+
+#newWindowForm {
+	width: 320px;
+}
+
+#desktop textarea {
+	width: 99%;
+	height: 99%; //height: 100px;
+}
+
+#desktop .formLabel {
+	float: left;	
+	text-align: right;
+	width: 150px;
+	margin: 0 8px 2px 0; /* top right bottom left */
+	//font-weight: bold;
+}
+
+#desktop .radioLabel {
+	float: left;	
+	text-align: right;
+	width: 30px;
+	margin: 0 8px 2px 0; /* top right bottom left */
+	//font-weight: bold;
+}
+
+#desktop .imputLabel {
+	padding: 2px 0px 2px 3px; /* top right bottom left */
+	font-weight: bold;
+}
+
+#desktop .inputRadio {
+	float: left;
+	padding: 2px 3px 2px 3px; /* top right bottom left */
+}
+
+#desktop .label {
+	font-size: 11px;
+	font-weight: bold;
+	padding-bottom: 2px;	
+}
+	
+#desktop .formField {
+	float: left;
+	padding: 0 0 0 0;
+	width: 70%;
+}
+
+#newWindowForm form .number {
+	width: 40px;
+}
+
+#desktop .add {
+	float:right; 
+	margin: 5px; 
+	margin-top: 5px;  
+	font-size: 1.2em; 
+	line-height: 1.8em;
+	font-weight: bold; 
+	padding: 4px; 
+	padding-left: 35px; 
+	height: 26px; 
+	cursor: pointer;
+	background: transparent url(images/ok_24.png) no-repeat 4px 5px;
+}
+
+#desktop .delete {
+	float:right; 
+	margin: 5px; 
+	margin-top: 5px;  
+	font-size: 1.2em; 
+	line-height: 1.8em;
+	font-weight: bold; 
+	padding: 4px; 
+	padding-left: 35px; 
+	height: 26px; 
+	cursor: pointer;
+	background: transparent url(images/close_24.png) no-repeat 4px center;
+}
+
+#desktop .update {
+	float:right; 
+	margin: 5px; 
+	margin-top: 5px;  
+	font-size: 1.2em; 
+	line-height: 1.8em;
+	font-weight: bold; 
+	padding: 4px; 
+	padding-left: 35px; 
+	height: 26px; 
+	cursor: pointer;
+	background : transparent url(images/update_24.png) no-repeat 4px center;
+}
+

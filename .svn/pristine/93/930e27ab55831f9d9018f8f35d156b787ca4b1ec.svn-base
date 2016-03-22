@@ -1,0 +1,15 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alvaro.Montero
+-->
+
+ <div id="formLogin">
+     <div id="lblLogin"></div>
+     <div id="lblLoginUsuario">USUARIO</div>
+     <input id="loginTxtUsuario" type="text" value=""/>
+     <div id="lblLoginPasswd">CONTRASE&Ntilde;A</div>
+     <input id="loginTxtPasswd" type="password" value=""/>      
+     <span class="iconWrapper"><img id="loginBtnBack" class="buttonImage loginBtnBack" src="styles/images/regresar.png" alt="Volver" title="Volver a la pantalla anterior"/></span>
+     <span class="iconWrapper"><img id="loginBtnSubmit" class="buttonImage loginBtnSubmit" src="styles/images/validar.png" alt="Acceder" title="Acceder a la aplicaci&oacute;n"/></span> 
+ </div>

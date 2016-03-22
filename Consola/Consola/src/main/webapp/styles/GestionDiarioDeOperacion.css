@@ -1,0 +1,19 @@
+/*
+    Document   : cssDiarioDeOperacion
+    Created on : 22-ene-2010, 9:08:39
+    Author     : josecarlos.diaz
+    Description:
+        Estilo de DiarioDeOperacion
+*/
+
+/*
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#panelResultadosDiaOp { margin:auto; width: 100%; height: 100%}
+#dateImputWrapper{display:inline;}
+#searchButtonDiaOp {margin: 5px; margin-top: 10px; font-size: 1.2em; line-height: 1.8em; font-weight: bold; padding: 4px; padding-left: 35px; height: 26px; cursor: pointer; color: #2F0909; background: transparent url(images/search_icon.png) no-repeat 4px center; display:inline;}
+
+
+

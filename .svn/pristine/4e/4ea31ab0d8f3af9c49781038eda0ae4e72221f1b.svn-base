@@ -1,0 +1,120 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+	
+	<ui:define name="body">
+	
+
+	
+		<ice:panelPopup id="panelGrupAp" autoCentre="true" modal="true" styleClass="panelPopup"
+		visible="true">
+
+
+		<f:facet name="header">
+			<ice:panelGroup>
+				<ice:outputText value="#{messages.determinacion_grupoaplicacion}" />
+				<s:button id="modalPnlCloseBtnGrupA" 
+					view="/produccionfip/gestionentidades/VerEntidadPlanEncargado.xhtml" propagation="none"
+					image="/fipeditor/img/editorfip/es/comun/cerrar_popup.png"
+					styleClass="popupHeaderImage" 
+					title="#{messages.botongenerico_cerrar}"
+					alt="#{messages.botongenerico_cerrar}" />
+			</ice:panelGroup>
+		</f:facet>
+
+		<f:facet name="body">
+		
+		<ice:form>
+		
+		<ice:panelGrid columns="1">
+		
+			<ice:panelGrid columns="1">	
+			
+			<ice:panelGroup>
+						<ice:selectOneMenu partialSubmit="true" value="#{listaGruposAplicacionTramite.idTipoTramiteTrabajo}">
+							<f:selectItem itemLabel="#{messages.menuestado_planbase}" itemValue="1"/>
+							<f:selectItem itemLabel="#{messages.menuestado_planvigente}" itemValue="2"/>
+							<f:selectItem itemLabel="#{messages.menuestado_planencargado}" itemValue="3"/>
+						</ice:selectOneMenu>
+					</ice:panelGroup>		
+			
+			<ice:panelGroup scrollHeight="450px">
+
+				<ice:dataTable id="listaGATramiteBase" 
+					value="#{listaGruposAplicacionTramite.gruposAplicacion}"				
+					var="item"		
+					rendered="#{not empty listaGruposAplicacionTramite.gruposAplicacion}">
+					
+				<!--  
+					<ice:column>
+						<ice:rowSelector value="#{item.seleccionada}" selectionListener="#{listaGruposAplicacionTramite.rowSelectionListener}"/>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.iden}" />
+						</f:facet>
+						<ice:outputText value="#{item.idDeterminacion}" />
+					</ice:column>
+					-->
+
+					<ice:column>
+					<ice:rowSelector value="#{item.seleccionada}" selectionListener="#{listaGruposAplicacionTramite.rowSelectionListener}"/>
+						
+						<f:facet name="header">
+							<ice:outputText value="#{messages.orden}" />
+
+						</f:facet>
+						<ice:outputText value="#{item.ordenArbol}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.nombre_determinacion}" />
+						</f:facet>
+						<ice:outputText value="#{item.nombreDeterminacion}" />
+					</ice:column>
+
+
+
+
+
+				</ice:dataTable>
+
+				<ice:outputLabel rendered="#{empty listaGruposAplicacionTramite.gruposAplicacion}" value="#{messages.no_hay_datos}" styleClass="dataResult"/>		
+				<ice:outputLabel rendered="#{not empty listaGruposAplicacionTramite.gruposAplicacion}" value="#{listaGruposAplicacionTramite.gruposAplicacion.size()} #{messages.mensaje_elementos}" styleClass="dataResult"/>
+				
+			</ice:panelGroup>
+			
+			</ice:panelGrid>
+			<ice:panelGrid columns="2" columnClasses="testColDetLabel,testColDetermDetalles">
+				<ice:outputLabel value="#{messages.seleccionado}" styleClass="dataResult"/>		
+				<ice:outputText value="#{seleccionarListaGruposAplicacionTramite.seleccionado.nombre}" />
+			</ice:panelGrid>
+			
+			<ice:panelGroup styleClass="botonPopUpUnidades">
+			
+			<s:button  rendered="#{seleccionarListaGruposAplicacionTramite.mostrar}"  value="#{messages.seleccionar}" action="#{gestionCondicionesUrbanisticas.crearGrupoAplicacionEntidadSeleccionada(seleccionarListaGruposAplicacionTramite.idGASel)}" 
+						styleClass="boton1" propagation="none" alt="#{messages.botongenerico_seleccionar}" title="#{messages.boton_title_entidadAnadirGA_seleccionar}"/>
+			
+			
+				<s:button value="#{messages.botongenerico_cancelar}"  view="/produccionfip/gestionentidades/VerEntidadPlanEncargado.xhtml" 
+						styleClass="boton1" propagation="none" alt="#{messages.botongenerico_cancelar}" title="#{messages.boton_title_entidadAnadirGA_cancelar}"/>
+			
+			</ice:panelGroup>
+			
+			</ice:panelGrid>
+			</ice:form>
+		</f:facet>
+		
+	</ice:panelPopup>
+			
+	
+
+
+</ui:define>
+
+</ui:composition>

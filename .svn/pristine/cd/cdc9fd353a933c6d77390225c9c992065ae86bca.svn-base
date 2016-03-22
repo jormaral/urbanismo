@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18-jul-2011 17:35:19 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="es.mitc.redes.urbanismoenred.data.validacion.Resultado" schema="validacion" table="resultado">
+        <composite-id name="id" class="es.mitc.redes.urbanismoenred.data.validacion.ResultadoId">
+            <key-property name="idproceso" type="int">
+                <column name="idproceso" />
+            </key-property>
+            <key-property name="idvalidacion" type="int">
+                <column name="idvalidacion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="validacion" class="es.mitc.redes.urbanismoenred.data.validacion.Validacion" update="false" insert="false" fetch="select">
+            <column name="idvalidacion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="proceso" class="es.mitc.redes.urbanismoenred.data.validacion.Proceso" update="false" insert="false" fetch="select">
+            <column name="idproceso" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="exito" type="boolean">
+            <column name="exito" not-null="true" />
+        </property>
+        <set name="errors" table="error" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproceso" not-null="true" />
+                <column name="idvalidacion" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.validacion.Error" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,78 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alvaro.Montero
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div id="panelTramitesEntidadesDatosGenerales" class="centerElement"></div>
+
+<div id="panelTramitesEntidadesRegimenDirecto">
+	<div id="panelEntidadesRegimenDirectoheader" class="panel-header" style="display: block;">
+		<div id="panelEntidadesRegimenDirectoheaderToolbox" class="panel-header-toolbox">
+			<div class="toolbox divider">
+				<span class="iconWrapper"><img id="BtnVisorPlanesEntidadesRegimenDirectoExpandir" class="toolBoxAction" src="styles/images/expandir.png" alt="Expandir" title="Expandir el nodo seleccionado"/></span>
+				<span class="iconWrapper"><img id="BtnVisorPlanesEntidadesRegimenDirectoContraer" class="toolBoxAction" src="styles/images/Contraer.png" alt="Contraer" title="Contraer todo" /></span>	
+			</div>
+			<div class="toolbox divider">
+				<span class="iconWrapper iconWrapperPushed"><img id="BtnVisorPlanesEntidadesRegimenDirectoCambiarVista" class="toolBoxAction" title="Cambiar estilo de presentaci&oacute;n" alt="Cambiar" src="styles/images/treeview.png"/></span>
+			</div>
+			<div class="toolbox divider">
+				<span class="iconWrapper"><img id="BtnVisorPlanesEntidadesRegimenDirectoDescargar" class="toolBoxAction" title="Descargar el elemento seleccionado" alt="Descargar" src="styles/images/descargar.png"/></span>
+			</div>
+		</div>
+	</div>
+	<div id="panelTramitesEntidadesRegimenDirectoData"></div>
+</div>
+ 
+<div id="panelTramitesEntidadesUsos">
+	<div id="panelTramitesEntidadesUsosheader" class="panel-header" style="display: block;">
+		<div id="panelTramitesEntidadesUsosheaderToolbox" class="panel-header-toolbox">
+			<div class="toolbox divider">
+				<span class="iconWrapper"><img id="BtnVisorPlanesEntidadesUsosExpandir" class="toolBoxAction" src="styles/images/expandir.png" alt="Expandir" title="Expandir el nodo seleccionado"/></span>
+				<span class="iconWrapper"><img id="BtnVisorPlanesEntidadesUsosContraer" class="toolBoxAction" src="styles/images/Contraer.png" alt="Contraer" title="Contraer todo" /></span>	
+			</div>
+			<div class="toolbox divider">
+				<span class="iconWrapper iconWrapperPushed"><img id="BtnVisorPlanesEntidadesUsosCambiarVista" class="toolBoxAction" title="Cambiar estilo de presentaci&oacute;n" alt="Cambiar" src="styles/images/treeview.png"/></span>
+			</div>
+			<div class="toolbox divider">
+				<span class="iconWrapper"><img id="BtnVisorPlanesEntidadesUsosDescargar" class="toolBoxAction" title="Descargar el elemento seleccionado" alt="Descargar" src="styles/images/descargar.png"/></span>
+			</div>
+		</div>
+	</div>
+	<div id="panelTramitesEntidadesUsosData"></div>
+</div>
+
+<div id="panelTramitesEntidadesActos">
+	<div id="panelTramitesEntidadesActosheader" class="panel-header" style="display: block;">
+		<div id="panelTramitesEntidadesActosheaderToolbox" class="panel-header-toolbox">
+			<div class="toolbox divider">
+				<span class="iconWrapper"><img id="BtnVisorPlanesEntidadesActosExpandir" class="toolBoxAction" src="styles/images/expandir.png" alt="Expandir" title="Expandir el nodo seleccionado"/></span>
+				<span class="iconWrapper"><img id="BtnVisorPlanesEntidadesActosContraer" class="toolBoxAction" src="styles/images/Contraer.png" alt="Contraer" title="Contraer todo" /></span>	
+			</div>
+			<div class="toolbox divider">
+				<span class="iconWrapper iconWrapperPushed"><img id="BtnVisorPlanesEntidadesActosCambiarVista" class="toolBoxAction" title="Cambiar estilo de presentaci&oacute;n" alt="Cambiar" src="styles/images/treeview.png"/></span>
+			</div>
+			<div class="toolbox divider">
+				<span class="iconWrapper"><img id="BtnVisorPlanesEntidadesActosDescargar" class="toolBoxAction" title="Descargar el elemento seleccionado" alt="Descargar" src="styles/images/descargar.png"/></span>
+			</div>
+		</div>
+	</div>
+	<div id="panelTramitesEntidadesActosData"></div>
+</div>
+
+<div id="panelTramitesEntidadesEsOperadorPor"></div>
+
+<div id="panelTramitesEntidadesOperaA"></div>
+
+<div id="panelTramitesEntidadesAdscripcionOrigen"></div>
+
+<div id="panelTramitesEntidadesAdscripcionDestino"></div>
+
+<div id="panelTramitesEntidadesDocumentos"></div>
+
+<div id="panelTramitesEntidadesGeometria" style="width: 100%;height: 100%;">
+	<div id="mapTramitesEntidadesGeometria" style="width: 100%;height: 100%;z-index:0;" class="centerElement"></div>
+
+</div>

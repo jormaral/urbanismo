@@ -1,0 +1,115 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+
+
+			<s:link style="color:blue;" value="#{messages.obtencionfip1}"
+				view="/gestionfip/obtencionfip1/ObtencionFip.xhtml"
+				id="ObtencionFip1Menu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_listado_pre}"
+				view="/gestionfip/obtencionfip1/Fip1IntroducidosLista.xhtml"
+				id="ObtencionFip1RutaListaMenu" propagation="none">
+
+			</s:link>
+
+		</ice:panelGroup>
+	</ui:define>
+
+
+
+
+	<ui:define name="body">
+
+
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+			<ice:form id="fmImportarFIP1">
+
+
+
+				<ice:panelGroup>
+
+					<ice:panelGrid columns="1" columnClasses="colLabel">
+
+						<ice:panelGroup>
+
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+							<ice:outputLabel style="color:blue;"
+								value="Despues de la importacion, no olvide revisar si el ambito tiene geometria"></ice:outputLabel>
+						</ice:panelGroup>
+
+						<br></br>
+
+						<ice:outputLabel
+							value="Para importar el FIP1 pulse sobre el boton de 'Importar'. Este proceso puede tardar mucho tiempo. Por favor tenga paciencia" />
+
+						<ice:commandButton styleClass="boton2"
+							panelConfirmation="panelconfconplanencargado"
+							action="#{gestionImportacionFIP1Sincrona.importacionFIPSincrono(idFipCargado)}"
+							value="#{messages.importar}"
+							alt="#{messages.botongenerico_importarfip1}"
+							title="#{messages.boton_title_importarfip1}" />
+
+						<ice:panelConfirmation id="panelconfconplanencargado"
+							title="#{messages.botongenerico_importarfip1}"
+							message="#{messages.panelconfconplanencargado_confirmacion}"
+							acceptLabel="#{messages.botongenerico_aceptar}"
+							cancelLabel="#{messages.botongenerico_cancelar}"
+							styleClass="boton1" />
+
+					</ice:panelGrid>
+					
+					<s:link style="color:blue;" value="Ir al Listado"
+					view="/gestionfip/obtencionfip1/Fip1IntroducidosLista.xhtml"
+					id="ObtencionFip1RutaListaMenu" propagation="none">
+
+					</s:link>
+
+				</ice:panelGroup>
+
+			</ice:form>
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+
+</ui:composition>

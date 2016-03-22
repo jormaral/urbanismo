@@ -1,0 +1,78 @@
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	id="vistaListaValoresReferenciaDeterminacion"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+	<ice:panelGroup scrollHeight="250px">
+
+				<ice:dataTable id="listaValoresReferenciaDeterminacion"
+					value="#{listaValoresReferencia.valoresReferencia}" var="item"
+					sortColumn="#{listaValoresReferencia.sortColumnName}"
+					sortAscending="#{listaValoresReferencia.ascending}"
+					columnWidths="70px,350px,50px,20px"
+					
+					rendered="#{not empty listaValoresReferencia.valoresReferencia}">
+
+					<ice:column>
+						<f:facet name="header">
+						<ice:commandSortHeader
+								columnName="#{listaValoresReferencia.ordenColumnName}"
+								arrow="true">
+								<ice:outputText value="#{messages.orden}" />
+							</ice:commandSortHeader>
+							
+						</f:facet>
+						<ice:outputText value="#{item.ordenArbol}" />
+					</ice:column>
+					
+					<ice:column>
+						<f:facet name="header">
+						<ice:commandSortHeader
+								columnName="#{listaValoresReferencia.nombreColumnName}"
+								arrow="true">
+								<ice:outputText value="#{messages.nombre_determinacion}" />
+							</ice:commandSortHeader>
+							
+						</f:facet>
+						<ice:outputText value="#{item.nombreDeterminacion}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText id="col2" value="#{messages.nombre_plan}" />
+						</f:facet>
+						<ice:outputText
+							value="#{servicioBasicoTramites.idTramiteDeDeterminacion(item.idDeterminacion)==variablesSesionUsuario.idTramiteTrabajoActual?'Mismo Plan':servicioBasicoTramites.idTramiteDeDeterminacion(item.idDeterminacion)}" />
+					</ice:column>
+
+					<ice:column 
+						rendered="#{variablesSesionUsuario.getIdTipoTramiteTrabajo()==3}">
+						<f:facet name="header">
+
+							<ice:outputText id="col3"  value="El" />
+
+						</f:facet>
+
+						<ice:commandLink value="X"
+							style="color: #000000;font-family: Arial;font-size: 12px;font-weight:bold;"
+							action="#{listaValoresReferencia.borrarValorReferenciaDeterminacion(item.idDeterminacion)}">
+						</ice:commandLink>
+
+
+					</ice:column>
+
+				</ice:dataTable>
+
+				<ice:outputLabel
+					rendered="#{not empty listaValoresReferencia.valoresReferencia}"
+					value="#{listaValoresReferencia.tamanoValoresReferencia()} #{messages.mensaje_elementos}" styleClass="dataResult" />
+				<ice:outputLabel
+					rendered="#{empty listaValoresReferencia.valoresReferencia}"
+					value="#{messages.no_hay_datos}" styleClass="dataResult" />
+
+			</ice:panelGroup>
+
+</f:subview>

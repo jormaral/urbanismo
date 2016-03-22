@@ -1,0 +1,472 @@
+#===========================================================================
+# allowed DPIs
+#===========================================================================
+dpis: [254, 190, 127, 56]
+
+#===========================================================================
+# allowed Formats
+#===========================================================================
+formats: [*]
+
+
+#===========================================================================
+# the allowed scales
+#===========================================================================
+scales:
+  - 500
+  - 1000
+  - 5000
+  - 10000
+  - 20000
+  - 25000
+  - 50000
+  - 100000
+  - 200000
+
+#===========================================================================
+# the list of allowed hosts
+#===========================================================================
+hosts:
+  - !ipMatch
+    ip: 0.0.0.0
+    mask: 0.0.0.0
+
+#===========================================================================
+# optional parameters
+#===========================================================================
+tilecacheMerging: true
+#connectionTimeout: 30000
+#socketTimeout: 180000
+outputFilename: 'UrbanismoEnRed'
+
+layouts:
+  #===========================================================================
+  A4 portrait:
+  #===========================================================================
+    metaData:
+      title: '${title}'
+      author: 'Arnaiz consultores'
+      subject: 'Salida impresa desde el visor'
+      keywords: 'map,print'
+      creator: 'Urbanismo en red'
+
+#    titlePage:
+#      pageSize: A4
+#      items:
+#        - !text
+#          spacingAfter: 150
+#        - !text
+#          font: Helvetica
+#          fontSize: 40
+#          spacingAfter: 100
+#          align: center
+#          text: '${title}'
+#        - !image
+#          maxWidth: 160
+#          maxHeight: 160
+#          spacingAfter: 100
+#          align: center
+#          url: http://trac.mapfish.org/trac/mapfish/attachment/ticket/3/logo_v8_sphere.svg?format=raw
+#        - !image
+#          maxWidth: 160
+#          maxHeight: 160
+#          spacingAfter: 100
+#          align: center
+#          url: 'file://${configDir}/logo-camptocamp-transparent.png'
+#        - !text
+#          font: Helvetica
+#          fontSize: 14
+#          align: left
+#          text: |
+#            Two layers are asked by the client:
+#            - a base layer from Metacarta
+#            - a transparent layer from Camptocamp.org (routes)
+#            .
+#            Some text is added over the map, just to demonstrate the absolute positionning.
+#      footer: &commonFooter
+#        height: 30
+#        items:
+#          - !columns
+#            config:
+#              cells:
+#                - paddingBottom: 5   
+#            items:
+#              - !image
+#                maxWidth: 40
+#                backgroundColor: #FF0000
+#                align: left
+#                url: '${configDir}/small-logo-camptocamp.png'
+#              - !text
+#                backgroundColor: #FF0000
+#                text: �Camptocamp SA
+#              - !text
+#                align: right
+#                text: 'Page ${pageNum}'
+
+    #-------------------------------------------------------------------------
+    mainPage:
+      pageSize: A4
+      rotation: true
+      landscape: false
+#      marginLeft: 20
+#      marginRight: 20
+#      marginTop: 20
+#      marginBottom: 20
+      header:
+        height: 50
+        items:
+          - !text
+            font: Helvetica
+            fontSize: 30
+            align: center
+            text: '${mapTitle}'
+          - !image
+            maxWidth: 402
+            maxHeight: 200
+            align: left
+            url: 'File:////../../../../${configDir}/../var/images/derecha.png'
+          - !image
+            maxWidth: 402
+            maxHeight: 200
+            align: right
+            url: 'File:////${configDir}/small-logo-camptocamp2.png'
+      items:
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 25
+          absoluteY: 780
+          width: 545
+          items:
+            - !map
+              align: center
+              width: 545
+              height: 600
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 370
+          absoluteY: 170
+          width: 200
+          items:
+            - !text
+                font: Helvetica
+                fontSize: 9
+                align: center
+                text: '1 : ${scale}'
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 370
+          absoluteY: 155
+          width: 200
+          items:
+            - !scalebar
+              type: bar_sub
+              maxSize: 200
+              barBgColor: white
+              fontSize: 8
+              align: right
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 25
+          absoluteY: 170
+          width: 340
+          items:
+            - !text
+              text: '${comment}'
+              
+        
+#        - !attributes
+#          source: data
+##          spacingAfter: 30
+#          columnDefs:
+#            id:
+#              columnWeight: 2
+#              header: !text
+#                text: ID
+#                backgroundColor: #A0A0A0
+#              cell: !text
+#                text: '${id}'
+#            name:
+#              columnWeight: 5
+#              header: !text
+#                text: Name
+#                backgroundColor: #A0A0A0
+#              cell: !columns
+#                config:
+#                  cells:
+#                    - backgroundColor: '${nameBackgroundColor}'
+#                      borderWidth: 1
+#                      borderColor: '${nameBorderColor}'
+#                items:
+#                  - !text
+#                    text: '${name}'
+#            icon:
+#              columnWeight: 2
+#              header: !text
+#                text: Symbol
+#                backgroundColor: #A0A0A0
+#              cell: !image
+#                align: center
+#                maxWidth: 15
+#                maxHeight: 15
+#                url: 'http://www.mapfish.org/svn/mapfish/framework/client/trunk/mfbase/mapfish/img/${icon}.png'
+      footer: 
+        height: 25
+        items:
+          - !columns
+            items:
+              - !text
+                font: Helvetica
+                fontSize: 9
+                align: left
+                text: 'pag. ${pageNum} / ${pageTot}'
+              - !text
+                font: Helvetica
+                fontSize: 9
+                align: right
+                text: '${now dd/MM/yyyy}'
+
+  #===========================================================================
+  A4 landscape:
+  #===========================================================================
+    metaData:
+      title: '${title}'
+      author: 'Arnaiz consultores'
+      subject: 'Salida impresa desde el visor'
+      keywords: 'map,print'
+      creator: 'Urbanismo en red'
+
+    #-------------------------------------------------------------------------
+    mainPage:
+      pageSize: A4
+      rotation: false
+      landscape: true
+      header:
+        height: 50
+        items:
+          - !text
+            font: Helvetica
+            fontSize: 30
+            align: center
+            text: '${mapTitle}'
+      items:
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 25
+          absoluteY: 533
+          width: 792
+          items:
+            - !map
+              align: center
+              width: 792
+              height: 400
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 617
+          absoluteY: 130
+          width: 200
+          items:
+            - !text
+                font: Helvetica
+                fontSize: 9
+                align: center
+                text: '1 : ${scale}'
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 617
+          absoluteY: 115
+          width: 200
+          items:
+            - !scalebar
+              type: bar_sub
+              maxSize: 200
+              barBgColor: white
+              fontSize: 8
+              align: right
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 25
+          absoluteY: 130
+          width: 570
+          items:
+            - !text
+              text: '${comment}'
+      footer: 
+        height: 25
+        items:
+          - !columns
+            items:
+              - !text
+                font: Helvetica
+                fontSize: 9
+                align: left
+                text: 'pag. ${pageNum} / ${pageTot}'
+              - !text
+                font: Helvetica
+                fontSize: 9
+                align: right
+                text: '${now dd/MM/yyyy}'
+  
+  #===========================================================================
+  A3 portrait:
+  #===========================================================================
+    metaData:
+      title: '${title}'
+      author: 'Arnaiz consultores'
+      subject: 'Salida impresa desde el visor'
+      keywords: 'map,print'
+      creator: 'Urbanismo en red'
+
+    mainPage:
+      pageSize: A3
+      rotation: false
+      landscape: false
+      header:
+        height: 50
+        items:
+          - !text
+            font: Helvetica
+            fontSize: 30
+            align: center
+            text: '${mapTitle}'
+      items:
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 25
+          absoluteY: 1129
+          width: 792
+          items:
+            - !map
+              align: center
+              width: 792
+              height: 949
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 617
+          absoluteY: 170
+          width: 200
+          items:
+            - !text
+                font: Helvetica
+                fontSize: 9
+                align: center
+                text: '1 : ${scale}'
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 617
+          absoluteY: 155
+          width: 200
+          items:
+            - !scalebar
+              type: bar_sub
+              maxSize: 200
+              barBgColor: white
+              fontSize: 8
+              align: right
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 25
+          absoluteY: 170
+          width: 580
+          items:
+            - !text
+              text: '${comment}'
+      footer: 
+        height: 25
+        items:
+          - !columns
+            items:
+              - !text
+                font: Helvetica
+                fontSize: 9
+                align: left
+                text: 'pag. ${pageNum} / ${pageTot}'
+              - !text
+                font: Helvetica
+                fontSize: 9
+                align: right
+                text: '${now dd/MM/yyyy}'
+
+  #===========================================================================
+  A3 landscape:
+  #===========================================================================
+    metaData:
+      title: '${title}'
+      author: 'Arnaiz consultores'
+      subject: 'Salida impresa desde el visor'
+      keywords: 'map,print'
+      creator: 'Urbanismo en red'
+
+    #-------------------------------------------------------------------------
+    mainPage:
+      pageSize: A3
+      rotation: false
+      landscape: true
+      header:
+        height: 50
+        items:
+          - !text
+            font: Helvetica
+            fontSize: 30
+            align: center
+            text: '${mapTitle}'
+      items:
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 25
+          absoluteY: 780
+          width: 1141
+          items:
+            - !map
+              align: center
+              width: 1141
+              height: 647
+#            - !map
+#              align: center
+#              width: 1141
+#              height: 647
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 966
+          absoluteY: 130
+          width: 200
+          items:
+            - !text
+                font: Helvetica
+                fontSize: 9
+                align: center
+                text: '1 : ${scale}'
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 966
+          absoluteY: 115
+          width: 200
+          items:
+            - !scalebar
+              type: bar_sub
+              maxSize: 200
+              barBgColor: white
+              fontSize: 8
+              align: right
+        - !columns
+          # columns can have an absolute position. In that case, they need the 3 following fields:
+          absoluteX: 25
+          absoluteY: 130
+          width: 900
+          items:
+            - !text
+              text: '${comment}'
+      footer: 
+        height: 25
+        items:
+          - !columns
+            items:
+              - !text
+                font: Helvetica
+                fontSize: 9
+                align: left
+                text: 'pag. ${pageNum} / ${pageTot}'
+              - !text
+                font: Helvetica
+                fontSize: 9
+                align: right
+                text: '${now dd/MM/yyyy}'

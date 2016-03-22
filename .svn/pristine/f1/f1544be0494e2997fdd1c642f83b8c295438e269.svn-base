@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-jul-2009 13:26:32 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.explotacion.Capagrupo" table="capagrupo" schema="explotacion">
+        <id name="iden" type="int">
+            <column name="iden" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="capa" class="es.mitc.redes.urbanismoenred.data.rpm.explotacion.Capa" fetch="select">
+            <column name="idcapa" not-null="true" />
+        </many-to-one>
+        <property name="orden" type="int">
+            <column name="orden" not-null="true" />
+        </property>
+        <property name="codigodeterminaciongrupo" type="string">
+            <column name="codigodeterminaciongrupo" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,113 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_edicionfip}"
+				view="/produccionfip/ProduccionFipNavegacion.xhtml"
+				id="ProduccionFipRutaMenu" propagation="none">
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+
+	</ui:define>
+	<ui:define name="body">
+
+
+
+		<!--  Se define el cuerpo de la pagina -->
+
+		<ice:panelGroup columns="7" styleClass="centerHome">
+			<s:link
+				view="/produccionfip/gestiondiccionariodeterminaciones/VerDeterminacionPlanEncargado.xhtml"
+				id="GestionDiccionarioDeterminacionesNavegacionMenu"
+				propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/03_01_EDICION_DETERMINACIONES.png"
+					alt="#{messages.menu_edicion_diccionario}"
+					title="#{messages.menu_edicion_diccionario}" styleClass="iconoNav" />
+			</s:link>
+
+			<s:link
+				view="/produccionfip/gestionentidades/VerEntidadPlanEncargado.xhtml"
+				id="GestionEntidadNavegacionMenu" propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/03_02_EDICION_ENTIDADES.png"
+					alt="#{messages.menu_edicion_entidades}"
+					title="#{messages.menu_edicion_entidades}" styleClass="iconoNav" />
+			</s:link>
+
+			<s:link
+				view="/produccionfip/gestiondocumental/VerListaDocumentos.xhtml"
+				id="VerListaDocumentosNavegacionMenu" propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/03_03_EDICION_DOCUMENTOS.png"
+					alt="#{messages.menu_edicion_documentos}"
+					title="#{messages.menu_edicion_documentos}" styleClass="iconoNav" />
+			</s:link>
+
+			<s:link
+				view="/produccionfip/gestionoperaciones/VerListaOperaciones.xhtml"
+				id="VerListaOperacionesNavegacionMenu" propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/03_04_EDICION_OPERACIONES.png"
+					alt="#{messages.menu_edicion_operaciones}"
+					title="#{messages.menu_edicion_operaciones}" styleClass="iconoNav" />
+			</s:link>
+
+			<s:link view="/produccionfip/gestionunidades/listaUnidades.xhtml"
+				id="VerListaUnidadesNavegacionMenu" propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/03_05_EDICION_UNIDADES.png"
+					alt="#{messages.menu_edicion_unidades}"
+					title="#{messages.menu_edicion_unidades}" styleClass="iconoNav" />
+			</s:link>
+
+			<s:link
+				view="/produccionfip/gestionadscripciones/ListaAdscripciones.xhtml"
+				id="VerListaAdscripcionesNavegacionMenu" propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/03_06_EDICION_ADSCRIPCIONES.png"
+					alt="#{messages.menu_edicion_adscripciones}"
+					title="#{messages.menu_edicion_adscripciones}"
+					styleClass="iconoNav" />
+			</s:link>
+
+			<s:link view="/home.xhtml" id="HomeNavegacionMenu" propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/00_VOLVER.png"
+					alt="#{messages.menu_volver}" title="#{messages.menu_volver}"
+					styleClass="iconoNav" />
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+
+	</ui:define>
+
+</ui:composition>

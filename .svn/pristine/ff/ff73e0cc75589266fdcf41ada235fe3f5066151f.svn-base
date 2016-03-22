@@ -1,0 +1,236 @@
+
+#formLogin
+{
+    position:absolute;
+    left:50%;
+    top:0px;
+    height:336px;
+    width:646px;
+    margin-left:-336px;
+    background-image:url(images/loginAcceso.gif);
+    background-repeat:no-repeat;
+    z-index:-1;
+}
+#formLoginCert
+{
+    position:absolute;
+    left:50%;
+    top:0px;
+    height:450px;
+    width:646px;
+    margin-left:-336px;
+    background-image:url(images/loginAccesoCertificado.gif);
+    background-repeat:no-repeat;
+    z-index:-1;
+}
+#lblLogin
+{
+    position:absolute;
+    left:502px;
+    top:128px;
+    height:21px;
+    width:116px;
+    background:transparent;
+    border:0px;
+    padding-top:2px;
+    font-size:20pt;
+    color:#777777;
+}
+
+#lblLoginUsuario
+{
+    position:absolute;
+    left:232px;
+    top:134px;
+    height:21px;
+    width:213px;
+    background:transparent;
+    border:0px;
+    padding-top:2px;
+}
+#loginTxtUsuario
+{
+    position:absolute;
+    left:232px;
+    top:156px;
+    height:21px;
+    width:213px;
+    background:transparent;
+    border:0px;
+    padding-top:2px;
+}
+
+#lblLoginPasswd
+{
+    position:absolute;
+    left:232px;
+    top:185px;
+    height:21px;
+    width:213px;
+    background:transparent;
+    border:0px;
+    padding-top:2px;
+}
+#loginTxtPasswd
+{
+    position:absolute;
+    left:232px;
+    top:206px;
+    height:21px;
+    width:213px;
+    background:transparent;
+    border:0px;
+    padding-top:2px;
+}
+
+.loginBtnSubmit
+{
+    position:absolute;
+    left:375px;
+    top:260px;
+    height:50px;
+    width:57px;
+    border:0px;
+    cursor:pointer;
+}
+.loginBtnBack
+{
+    position:absolute;
+    left:250px;
+    top:260px;
+    height:50px;
+    width:50px;
+    border:0px;
+    cursor:pointer;
+}
+
+.loginBtnSubmitCert
+{
+    position:absolute;
+    left:375px;
+    top:330px;
+    height:50px;
+    width:57px;
+    border:0px;
+    cursor:pointer;
+}
+.loginBtnBackCert
+{
+    position:absolute;
+    left:250px;
+    top:330px;
+    height:50px;
+    width:50px;
+    border:0px;
+    cursor:pointer;
+}
+
+#lblLoginPin
+{
+    position:absolute;
+    left:232px;
+    top:134px;
+    height:21px;
+    width:213px;
+    background:transparent;
+    border:0px;
+    padding-top:2px;
+    z-index:1;
+}
+#loginTxtPin
+{
+    position:absolute;
+    left:232px;
+    top:154px;
+    height:21px;
+    width:213px;
+    background:transparent;
+    border:0px;
+    padding-top:2px;
+    z-index:1;
+}
+
+#loginBtnAccessToDNIe
+{
+	position:absolute;
+    left:232px;
+    top:180px;
+    height:21px;
+    width:213px;
+    border:0px;
+    cursor:pointer;
+    z-index:1;
+}
+
+#lblLoginName
+{
+    position:absolute;
+    left:232px;
+    top:210px;
+    height:21px;
+    width:213px;
+    background:transparent;
+    border:0px;
+    padding-top:2px;
+    z-index:1;
+}
+#loginTxtName
+{
+    position:absolute;
+    left:232px;
+    top:199px;
+    height:21px;
+    width:230px;
+    background:transparent;
+    border:0px;
+    padding-top:2px;
+    z-index:1;
+}
+
+#lblLoginDNI
+{
+    position:absolute;
+    left:232px;
+    top:255px;
+    height:21px;
+    width:213px;
+    background:transparent;
+    border:0px;
+    padding-top:2px;
+    z-index:1;
+}
+#loginTxtDNI
+{
+    position:absolute;
+    left:232px;
+    top:255px;
+    height:21px;
+    width:213px;
+    background:transparent;
+    border:0px;
+    padding-top:2px;
+    z-index:1;
+}
+
+#panelDisconnectResult{
+    width: 450px;
+    height: 100px;
+    margin-left: auto;
+    margin-right:auto;
+    font-size: +2em;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    padding-left: 50px;
+    text-align: center;
+    background-image: url(images/disconnect.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+    color: #4C4C4C;
+}
+
+#formLoginDNI{
+    text-align: center;
+    top: 155px;
+    position: absolute;
+    left: 190px;
+}

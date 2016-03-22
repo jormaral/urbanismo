@@ -1,0 +1,180 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"  
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="versionSearch" styleClass="edit">
+      <ice:panelGroup  id="searchGroup" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+                    <ice:outputText id="listVersionId" value="Version search filter"/>
+                 </td>
+              </tr>
+         </table>	
+         <ice:panelGroup id="listPanelGroupVersionId" styleClass="edit">
+		
+            <s:decorate id="comentariodecId" template="../layout/display.xhtml">
+                <ui:define name="label">Comentario</ui:define>
+                  <ice:inputText id="comentario" 
+                          value="#{versionList.version.id.comentario}"
+				  partialSubmit="true"/>
+            </s:decorate>
+
+            <s:decorate id="versiondecId" template="../layout/display.xhtml">
+                <ui:define name="label">Version</ui:define>
+                  <ice:inputText id="version" 
+                          value="#{versionList.version.id.version}"
+				  partialSubmit="true"/>
+            </s:decorate>
+
+            <s:decorate template="../layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <ice:selectOneRadio id="logic" value="#{versionList.restrictionLogicOperator}" partialSubmit="true">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </ice:selectOneRadio>
+            </s:decorate>
+          
+   
+	  </ice:panelGroup>
+  
+        
+        <div class="actionButtons">
+            <ice:commandButton id="search" value="Search" action="/VersionList.xhtml"/>
+        </div>
+      </ice:panelGroup> 
+    </ice:form>
+    
+    <ice:panelGroup styleClass="formBorderHighlight">
+
+    <h3>version  search results</h3>
+
+    <div class="searchResults" id="listversionResults">
+    <ice:outputText value="The version search returned no results." 
+               rendered="#{empty versionList.resultList}"/>
+               
+    <ice:dataTable id="versionList" 
+                  var="version"
+                value="#{versionList.resultList}" 
+            resizable="true"
+	columnClasses="allCols"
+             rendered="#{not empty versionList.resultList}">
+        <ice:column id="listcomentarioId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{versionList}"/>
+                    <ui:param name="propertyLabel" value="Comentario"/>
+                    <ui:param name="propertyPath" value="version.id.comentario"/>
+                </ui:include>
+            </f:facet>
+            #{version.id.comentario}
+        </ice:column>
+        <ice:column id="listidenId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{versionList}"/>
+                    <ui:param name="propertyLabel" value="Iden"/>
+                    <ui:param name="propertyPath" value="version.id.iden"/>
+                </ui:include>
+            </f:facet>
+            #{version.id.iden}
+        </ice:column>
+        <ice:column id="listversionId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{versionList}"/>
+                    <ui:param name="propertyLabel" value="Version"/>
+                    <ui:param name="propertyPath" value="version.id.version"/>
+                </ui:include>
+            </f:facet>
+            #{version.id.version}
+        </ice:column>
+        <ice:column id="listColumnVersionId">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/seam/#{empty from ? 'Version' : from}.xhtml" 
+                   value="#{empty from ? 'View' : 'Select'}" 
+                      id="version">
+                <f:param name="versionComentario" 
+                        value="#{version.id.comentario}"/>
+                <f:param name="versionIden" 
+                        value="#{version.id.iden}"/>
+                <f:param name="versionVersion" 
+                        value="#{version.id.version}"/>
+            </s:link>
+			#{' '}
+            <s:link view="/seam/VersionEdit.xhtml"
+                   value="Edit" 
+                      id="versionEdit"
+                      rendered="#{empty from}">
+                <f:param name="versionComentario" 
+                        value="#{version.id.comentario}"/>
+                <f:param name="versionIden" 
+                        value="#{version.id.iden}"/>
+                <f:param name="versionVersion" 
+                        value="#{version.id.version}"/>
+            </s:link>
+        </ice:column>
+    </ice:dataTable>
+
+    </div>
+</ice:panelGroup>
+
+    <div class="tableControl">
+      
+        <s:link view="/seam/VersionList.xhtml" 
+            rendered="#{versionList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPageversionListId">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+        
+        <s:link view="/seam/VersionList.xhtml" 
+            rendered="#{versionList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPageversionListId">
+            <f:param name="firstResult" 
+                    value="#{versionList.previousFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/VersionList.xhtml" 
+            rendered="#{versionList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPageversionListId">
+            <f:param name="firstResult" 
+                    value="#{versionList.nextFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/VersionList.xhtml" 
+            rendered="#{versionList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPageversionListId">
+            <f:param name="firstResult" 
+                    value="#{versionList.lastFirstResult}"/>
+        </s:link>
+        
+    </div>
+    
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/seam/VersionEdit.xhtml"
+                    id="create" 
+                 value="Create version">
+            <f:param name="versionComentario"/>
+            <f:param name="versionIden"/>
+            <f:param name="versionVersion"/>
+        </s:button>
+    </s:div>
+    
+</ui:define>
+
+</ui:composition>
+

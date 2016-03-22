@@ -1,0 +1,156 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"  
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="vinculocasoSearch" styleClass="edit">
+      <ice:panelGroup  id="searchGroup" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+                    <ice:outputText id="listVinculocasoId" value="Vinculocaso search filter"/>
+                 </td>
+              </tr>
+         </table>	
+         <ice:panelGroup id="listPanelGroupVinculocasoId" styleClass="edit">
+		
+            <s:decorate template="../layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <ice:selectOneRadio id="logic" value="#{vinculocasoList.restrictionLogicOperator}" partialSubmit="true">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </ice:selectOneRadio>
+            </s:decorate>
+          
+   
+	  </ice:panelGroup>
+  
+        
+        <div class="actionButtons">
+            <ice:commandButton id="search" value="Search" action="/VinculocasoList.xhtml"/>
+        </div>
+      </ice:panelGroup> 
+    </ice:form>
+    
+    <ice:panelGroup styleClass="formBorderHighlight">
+
+    <h3>vinculocaso  search results</h3>
+
+    <div class="searchResults" id="listvinculocasoResults">
+    <ice:outputText value="The vinculocaso search returned no results." 
+               rendered="#{empty vinculocasoList.resultList}"/>
+               
+    <ice:dataTable id="vinculocasoList" 
+                  var="vinculocaso"
+                value="#{vinculocasoList.resultList}" 
+            resizable="true"
+	columnClasses="allCols"
+             rendered="#{not empty vinculocasoList.resultList}">
+        <ice:column id="listidenId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{vinculocasoList}"/>
+                    <ui:param name="propertyLabel" value="Iden"/>
+                    <ui:param name="propertyPath" value="vinculocaso.iden"/>
+                </ui:include>
+            </f:facet>
+            #{vinculocaso.iden}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listColumncasoentidaddeterminacionByIdcasoId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{vinculocasoList}"/>
+                    <ui:param name="propertyLabel" value="Casoentidaddeterminacion by idcaso iden"/>
+                    <ui:param name="propertyPath" value="vinculocaso.casoentidaddeterminacionByIdcaso.iden"/>
+                </ui:include>
+            </f:facet>
+            #{vinculocaso.casoentidaddeterminacionByIdcaso.iden}
+        </ice:column>
+        <ice:column id="listColumncasoentidaddeterminacionByIdcasovinculadoId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{vinculocasoList}"/>
+                    <ui:param name="propertyLabel" value="Casoentidaddeterminacion by idcasovinculado iden"/>
+                    <ui:param name="propertyPath" value="vinculocaso.casoentidaddeterminacionByIdcasovinculado.iden"/>
+                </ui:include>
+            </f:facet>
+            #{vinculocaso.casoentidaddeterminacionByIdcasovinculado.iden}
+        </ice:column>
+        <ice:column id="listColumnVinculocasoId">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/seam/#{empty from ? 'Vinculocaso' : from}.xhtml" 
+                   value="#{empty from ? 'View' : 'Select'}" 
+                      id="vinculocaso">
+                <f:param name="vinculocasoIden" 
+                        value="#{vinculocaso.iden}"/>
+            </s:link>
+			#{' '}
+            <s:link view="/seam/VinculocasoEdit.xhtml"
+                   value="Edit" 
+                      id="vinculocasoEdit"
+                      rendered="#{empty from}">
+                <f:param name="vinculocasoIden" 
+                        value="#{vinculocaso.iden}"/>
+            </s:link>
+        </ice:column>
+    </ice:dataTable>
+
+    </div>
+</ice:panelGroup>
+
+    <div class="tableControl">
+      
+        <s:link view="/seam/VinculocasoList.xhtml" 
+            rendered="#{vinculocasoList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPagevinculocasoListId">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+        
+        <s:link view="/seam/VinculocasoList.xhtml" 
+            rendered="#{vinculocasoList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPagevinculocasoListId">
+            <f:param name="firstResult" 
+                    value="#{vinculocasoList.previousFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/VinculocasoList.xhtml" 
+            rendered="#{vinculocasoList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPagevinculocasoListId">
+            <f:param name="firstResult" 
+                    value="#{vinculocasoList.nextFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/VinculocasoList.xhtml" 
+            rendered="#{vinculocasoList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPagevinculocasoListId">
+            <f:param name="firstResult" 
+                    value="#{vinculocasoList.lastFirstResult}"/>
+        </s:link>
+        
+    </div>
+    
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/seam/VinculocasoEdit.xhtml"
+                    id="create" 
+                 value="Create vinculocaso">
+            <f:param name="vinculocasoIden"/>
+        </s:button>
+    </s:div>
+    
+</ui:define>
+
+</ui:composition>
+

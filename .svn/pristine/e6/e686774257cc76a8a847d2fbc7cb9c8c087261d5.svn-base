@@ -1,0 +1,229 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../layout/template.xhtml">
+
+
+
+	<ui:define name="body">
+
+		<ice:form>
+			<ice:panelGrid columns="2" columnClasses="testCol1,testCol2">
+				<ice:panelGroup>
+
+
+					<ice:panelTabSet id="panelTabArbolEnt" styleClass="arbol">
+						<ice:panelTab id="tabArbolEnt" label="#{messages.arbol_entidades}">
+							<!-- TRee values -->
+							<ice:panelGroup styleClass="arbol" scrollHeight="800px"
+								scrollWidth="40em">
+								<ice:tree id="tree" value="#{gestionArbolEntidades.model}"
+									var="node" binding="#{gestionArbolEntidades.treeComponent}"
+									imageDir="/fipeditor/xmlhttp/css/rime/css-images/"
+									hideRootNode="false" hideNavigation="false"
+									actionListener="#{gestionArbolEntidades.menuEvent}">
+									<ice:treeNode>
+
+
+										<f:facet name="icon">
+											<ice:panelGroup style="display: inline">
+												<h:graphicImage
+													value="/xmlhttp/css/rime/css-images/#{node.userObject.icon}" />
+
+											</ice:panelGroup>
+										</f:facet>
+										<f:facet name="content">
+											<ice:panelGroup
+												styleClass="condUrb#{node.userObject.datosIdTextoArbolGenerico.tipo == 'sicu'}"
+												style="display: inline">
+												<ice:panelGroup
+													styleClass="selectedNode#{node.userObject eq gestionArbolEntidades.selectedUserObject}"
+													style="display: inline">
+
+													<ice:commandLink
+														actionListener="#{gestionArbolEntidades.nodeSelected}"
+														disabled="#{node.userObject.datosIdTextoArbolGenerico.tipo == 'nocu'}">
+														<f:param name="nodoId"
+															value="#{node.userObject.datosIdTextoArbolGenerico.idBaseDatos}" />
+														<ice:outputText id="TreeNode"
+															value="#{node.userObject.text}" />
+													</ice:commandLink>
+												</ice:panelGroup>
+											</ice:panelGroup>
+										</f:facet>
+
+									</ice:treeNode>
+								</ice:tree>
+
+
+							</ice:panelGroup>
+						</ice:panelTab>
+					</ice:panelTabSet>
+
+
+
+				</ice:panelGroup>
+
+				<ice:panelGroup>
+
+					<ice:panelGroup
+						styleClass="exampleBox firstChildTitle backBeanChangeContainer">
+
+						<!-- backing bean title box -->
+						<ice:panelGroup styleClass="backBeanChangeTitle"
+							style="width:600px;">
+							<ice:outputText value="#{messages.valores}" />
+						</ice:panelGroup>
+
+						<!-- actual backing bean values. -->
+						<ice:panelGroup styleClass="backBeanChangeBody"
+							effect="#{gestionArbolEntidades.valueChangeEffect}">
+							<ice:panelGroup style="margin: 0; padding: 0;width:600px;">
+								<ice:panelGrid cellpadding="0" cellspacing="3" columns="2">
+
+
+									<ice:panelGroup
+										styleClass="exampleBox firstChildTitle backBeanChangeContainer">
+										<ice:panelSeries id="icePnlSrs"
+											value="#{gestionArbolEntidades.selectedTreePath}"
+											var="treePath">
+											<ice:graphicImage width="11" height="8"
+												style="margin-left:3px;margin-right:3px;"
+												value="/xmlhttp/css/rime/css-images/bullet.gif" />
+											<ice:outputText id="treePath" value="#{treePath}" />
+										</ice:panelSeries>
+									</ice:panelGroup>
+
+
+									<!--  -->
+									<ice:panelGroup styleClass="labels">
+										<ice:outputLabel value=" " />
+									</ice:panelGroup>
+									<ice:panelGroup styleClass="exampleBoxLabelName">
+										<ice:outputText id="employeeName" styleClass="nameFont"
+											value="#{gestionArbolEntidades.selectedUserObject.datosIdTextoArbolGenerico.texto}" />
+									</ice:panelGroup>
+
+								</ice:panelGrid>
+							</ice:panelGroup>
+
+							<ice:panelGrid columns="2"
+								columnClasses="testColLabel,testColGeom" width="300px">
+
+								<ice:panelGroup style="margin: 0; padding: 0; ">
+									<ice:panelGrid cellpadding="0" cellspacing="3" columns="2"
+										columnClasses="colLabel,colInput">
+
+										<ice:panelGroup styleClass="labels">
+											<ice:outputLabel value="#{messages.entidad_base}" />
+										</ice:panelGroup>
+										<ice:panelGroup styleClass="exampleBoxLabel">
+											<ice:outputText id="employeeBaseEntity"
+												value="#{entidadHome.instance.entidadByIdentidadbase.nombre}" />
+										</ice:panelGroup>
+
+										<ice:panelGroup styleClass="labels">
+											<ice:outputLabel value="#{messages.entidad_clave}" />
+										</ice:panelGroup>
+										<ice:panelGroup styleClass="exampleBoxLabel">
+											<ice:outputText id="employeeKey"
+												value="#{entidadHome.instance.clave}" />
+										</ice:panelGroup>
+
+										<ice:panelGroup styleClass="labels">
+											<ice:outputLabel value="#{messages.entidad_etiqueta}" />
+										</ice:panelGroup>
+										<ice:panelGroup styleClass="exampleBoxLabel">
+											<ice:outputText id="employeeTag"
+												value="#{entidadHome.instance.etiqueta}" />
+										</ice:panelGroup>
+
+
+									</ice:panelGrid>
+								</ice:panelGroup>
+
+								<ice:panelGroup>
+									<ice:outputLabel value="#{messages.entidad_geometria}" styleclass="geom" />
+									<h:graphicImage value="" height="250px" width="250px" />
+								</ice:panelGroup>
+							</ice:panelGrid>
+						</ice:panelGroup>
+					</ice:panelGroup>
+
+					<ice:panelGroup
+						styleClass="exampleBox firstChildTitle backBeanChangeContainer">
+						<!-- backing bean title box -->
+						<ice:panelGroup styleClass="backBeanChangeTitle"
+							style="width:600px;">
+							<ice:outputText value="#{messages.entidad_determinaciones}" />
+						</ice:panelGroup>
+
+						<!-- actual backing bean values. -->
+						<ice:panelGroup styleClass="backBeanChangeBody"
+							effect="#{gestionArbolEntidades.valueChangeEffect}">
+							<ice:panelGroup style="margin: 0; padding: 0;width:600px;">
+								<ice:panelGrid cellpadding="0" cellspacing="3" columns="2">
+
+									<!--  <h3>Lista Entidades</h3> -->
+
+									<div class="searchResults" id="listentidaddeterminacionResults">
+									<ice:outputText
+										value="The entidaddeterminacion search returned no results."
+										rendered="#{empty entidaddeterminacionList.resultList}" /> <ice:dataTable
+										id="entidaddeterminacionList" var="entidaddeterminacion"
+										value="#{entidadHome.instance.entidaddeterminacions}"
+										resizable="true" columnClasses="allCols"
+										rendered="#{not empty entidadHome.instance.entidaddeterminacions}">
+
+
+										<ice:column id="listColumndeterminacionId">
+											<f:facet name="header">
+												<ui:include src="../layout/sort.xhtml">
+													<ui:param name="entityList"
+														value="#{entidaddeterminacionList}" />
+													<ui:param name="propertyLabel" value="#{messages.entidad_determinaciones_id}" />
+													<ui:param name="propertyPath"
+														value="entidaddeterminacion.determinacion.iden" />
+												</ui:include>
+											</f:facet>
+						            #{entidaddeterminacion.determinacion.iden}
+						        </ice:column>
+
+										<ice:column id="listColumnentidadId">
+											<f:facet name="header">
+												<ui:include src="../layout/sort.xhtml">
+													<ui:param name="entityList"
+														value="#{entidaddeterminacionList}" />
+													<ui:param name="propertyLabel" value="#{messages.entidad_determinaciones_nombre}" />
+													<ui:param name="propertyPath"
+														value="#{entidaddeterminacion.nombre}" />
+												</ui:include>
+											</f:facet>
+						      	   #{entidaddeterminacion.determinacion.nombre}
+						        </ice:column>
+
+									</ice:dataTable></div>
+
+
+
+								</ice:panelGrid>
+							</ice:panelGroup>
+
+						</ice:panelGroup>
+					</ice:panelGroup>
+				</ice:panelGroup>
+			</ice:panelGrid>
+		</ice:form>
+	</ui:define>
+</ui:composition>
+</html>

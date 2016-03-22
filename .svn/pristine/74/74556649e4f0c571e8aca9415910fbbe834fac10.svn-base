@@ -1,0 +1,244 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="body">
+
+		<ice:form>
+
+			<ice:outputLabel
+							rendered="#{gestionCondicionesUrbanisticas.cuSeleccionada.idDeterminacion==0}"
+							value="#{messages.no_hay_datos}" styleClass="dataResult" />
+							
+			<h:panelGrid id="panelCU" rendered="#{gestionCondicionesUrbanisticas.cuSeleccionada.idDeterminacion!=0}">
+
+				
+
+				<ice:panelGroup id="tabEntidad" style="background: #FEF3EB; width: 80%;">
+
+
+
+					<ice:panelGrid id="mensaje" columns="1" style="background: white;">
+						<ice:messages errorClass="mensajeError" infoClass="mensajeInfo"/>
+					</ice:panelGrid>
+
+
+					<ice:panelGrid id="gestionEntidades0" columns="3"
+						styleClass="cuContenido" style="vertical-align: top; background: white;"
+						columnClasses="colCUContenido1,colCUContenido2,colCUContenido3">
+
+						<ice:outputLabel value="#{messages.cu_entidad}"></ice:outputLabel>
+						<ice:outputText
+							value="#{gestionCondicionesUrbanisticas.cuSeleccionada.nombreEntidad}"
+							style="width:200px"></ice:outputText>
+						<ice:outputLabel></ice:outputLabel>
+
+
+
+
+						<ice:outputLabel value="#{messages.cu_determinacion}"></ice:outputLabel>
+						<ice:outputText
+							value="#{gestionCondicionesUrbanisticas.cuSeleccionada.nombreDeterminacion}"
+							style="width:200px"></ice:outputText>
+						<ice:outputLabel></ice:outputLabel>
+					<br />
+					</ice:panelGrid>
+
+					
+
+					<ice:panelGrid id="gestionEntidades1" columns="3" rendered="#{gestionCondicionesUrbanisticas.caracterCUSeleccionada()==9 || gestionCondicionesUrbanisticas.caracterCUSeleccionada()==10 || gestionCondicionesUrbanisticas.caracterCUSeleccionada()==14 || gestionCondicionesUrbanisticas.caracterCUSeleccionada()==15}"
+						styleClass="cuContenido  panelGridDeter"
+						style="vertical-align: top;"
+						columnClasses="colCUContenido1,colCUContenido2,colCUContenido3">
+
+
+						<ice:outputLabel value="#{messages.cu_determinacionRegimen}"></ice:outputLabel>
+
+						<ice:outputText
+							value="#{gestionCondicionesUrbanisticas.cuSeleccionada.nombreDetRegimen}"
+							style="width:200px"></ice:outputText>
+						<ice:commandButton value="#{messages.sel_detreg}"
+							styleClass="boton4" alt="#{messages.botongenerico_seleccionar}"
+							action="#{gestionCondicionesUrbanisticas.setMostrarPanelDetReg(true)}"
+							title="#{messages.boton_title_CUsimplificadaContenido_determinacionRegimen_seleccionar}" />
+
+					</ice:panelGrid>
+
+					<br />
+
+					<ice:panelGrid id="gestionEntidades2" columns="3" rendered="#{gestionCondicionesUrbanisticas.cuSeleccionada.valor==null}"
+						styleClass="cuContenido  panelGridDeter"
+						style="vertical-align: top;"
+						columnClasses="colCUContenido1,colCUContenido2,colCUContenido3">
+
+						<ice:outputLabel value="#{messages.cu_valorRereferencia}"></ice:outputLabel>
+						<ice:outputText 
+							value="#{gestionCondicionesUrbanisticas.cuSeleccionada.nombreDetValorRef}"
+							style="width:200px"></ice:outputText>
+						<ice:commandButton value="#{messages.sel_valref}"
+							styleClass="boton4" alt="#{messages.botongenerico_seleccionar}"
+							action="#{gestionCondicionesUrbanisticas.setMostrarPanelValRef(true)}"
+							title="#{messages.boton_title_CUsimplificadaContenido_valorReferencia_seleccionar}" />
+
+					</ice:panelGrid>
+
+					<br />
+
+					<ice:panelGrid id="gestionEntidades3" columns="3" rendered="#{gestionCondicionesUrbanisticas.cuSeleccionada.nombreDetValorRef==null}"
+						styleClass="cuContenido  panelGridDeter"
+						style="vertical-align: top;"
+						columnClasses="colCUContenido1,colCUContenido2,colCUContenido3">
+
+						<ice:outputLabel value="#{messages.cu_valor_numerico}"></ice:outputLabel>
+						<ice:outputText
+							value="#{gestionCondicionesUrbanisticas.cuSeleccionada.valor}"
+							style="width:200px"></ice:outputText>
+						<ice:panelGroup style="margin: 0; padding: 2; background: #FEF3EB;">
+							<ice:panelBorder id="pageValor" styleClass="panelBorderDemoLayoutMain" North="false"
+								renderSouth="false" renderCenter="true" renderWest="false"
+								renderEast="false">
+								<f:facet name="center">
+									<ice:panelGroup style="background: #FEF3EB;">
+										<ice:outputLabel
+											value="#{messages.cu_valorRereferencia_cambiar}"/>
+										<ice:panelGrid cellpadding="0" cellspacing="3" columns="2">
+											<ice:outputLabel value="#{messages.cu_nuevoValor}" />
+											<ice:inputText
+												value="#{gestionCondicionesUrbanisticas.nuevoValor}"
+												style="width:200px"></ice:inputText>
+										</ice:panelGrid>
+											<ice:commandButton value="#{messages.cu_guardarValor}"
+												styleClass="boton2" alt="#{messages.cu_guardarValor}"
+												action="#{gestionCondicionesUrbanisticas.cargarNuevoValor}"
+												title="#{messages.cu_guardarValor}" />
+														
+										
+										
+									</ice:panelGroup>
+								</f:facet>
+							</ice:panelBorder>
+						</ice:panelGroup>
+
+					</ice:panelGrid>
+
+					<br />
+
+					<ice:panelGrid id="gestionEntidades4" columns="3"
+						styleClass="cuContenido  panelGridDeter"
+						style="vertical-align: top;"
+						columnClasses="colCUContenido1,colCUContenido2,colCUContenido3">
+
+						<ice:outputLabel value="#{messages.cu_regimenesEspecificos}"></ice:outputLabel>
+						<ice:dataTable id="regespList"
+							value="#{gestionCondicionesUrbanisticas.cuSeleccionada.regimenesEspecificos}"
+							var="regesp">
+							<ice:column>
+								<f:facet name="header">
+									<ice:outputText value="#{msg.nombre}">
+									</ice:outputText>
+								</f:facet>
+								<ice:outputText value=" #{regesp.nombreRegimenEspecifico}" />
+							</ice:column>
+							<ice:column>
+								<f:facet name="header">
+									<ice:outputText value="#{msg.textoregimenesespecifico}">
+									</ice:outputText>
+								</f:facet>
+								<ice:inputTextarea rows="10" readonly="true"
+									value="#{regesp.textoRegimenEspecifico}" style="width:300px">
+								</ice:inputTextarea>
+
+							</ice:column>
+							<ice:column>
+								<f:facet name="header">
+									<ice:outputText value="#{messages.cu_accion}">
+									</ice:outputText>
+								</f:facet>
+								<ice:commandLink value="#{messages.cu_borrar}" styleClass="enlaceAzul"
+									action="#{gestionCondicionesUrbanisticas.borrarRegimenEspecifico}">
+									<f:param name="idRE" value="#{regesp.idRegimenEspecifico}" />
+								</ice:commandLink>
+							</ice:column>
+						</ice:dataTable>
+						<ice:panelGroup style="margin: 0; padding: 2; background: #FEF3EB;">
+							<ice:panelBorder id="page" styleClass="panelBorderDemoLayoutMain"
+								renderNorth="false" renderSouth="false" renderCenter="true"
+								renderWest="false" renderEast="false">
+								<f:facet name="center" >
+									<ice:panelGroup style="background: #FEF3EB;">
+										<ice:outputLabel value="Crear Nuevo Regimen Especifico"/>
+										<ice:panelGrid cellpadding="0" cellspacing="3" columns="2">
+											<ice:outputLabel value="Nombre Regimen Especifico:" />
+											<ice:inputText id="nombreRegimenEspecifico" size="60"
+												value="#{gestionCondicionesUrbanisticas.nuevoNombreRegimenEspecifico}" />
+											<ice:outputLabel value="Texto Regimen Especifico:" />
+											<ice:inputTextarea id="textoRegimenEspecifico" cols="60"
+												value="#{gestionCondicionesUrbanisticas.nuevoTextoRegimenEspecifico}" />
+										</ice:panelGrid>
+										<ice:commandButton value="#{messages.boton_title_guardar_regesp}"
+												styleClass="boton2" alt="#{messages.boton_title_guardar_regesp}"
+												action="#{gestionCondicionesUrbanisticas.cargarRegimenEspecifico}"
+												title="#{messages.boton_title_guardar_regesp}" />
+									</ice:panelGroup>
+								</f:facet>
+							</ice:panelBorder>
+						</ice:panelGroup>
+
+
+					</ice:panelGrid>
+
+					<br />
+					<ice:panelGrid id="botonera" styleClass="panelGridDeter"
+						columns="2" style="background: white">
+
+
+						<ice:commandButton styleClass="boton2"
+							action="#{gestionCondicionesUrbanisticas.guardarCU}"
+							value="#{messages.cu_boton_guardarCU}"
+							alt="#{messages.cu_boton_guardarCU}"
+							title="#{messages.boton_title_CUsimplificadaContenido_guardarCU}"
+							panelConfirmation="guardarCUConfirm" />
+
+
+
+
+						<ice:commandButton styleClass="boton2"
+							action="#{gestionCondicionesUrbanisticas.cancelarCambiosCU}"
+							alt="#{messages.cu_boton_cancelarCU}"
+							value="#{messages.cu_boton_cancelarCU}"
+							panelConfirmation="cancelarCUConfirm"
+							title="#{messages.boton_title_CUsimplificadaContenido_cancelarCU}" />
+
+					</ice:panelGrid>
+
+				</ice:panelGroup>
+			</h:panelGrid>
+
+			<ice:panelConfirmation id="guardarCUConfirm"
+				title="#{messages.CUsimplificadaContenido_guardarCU_title}"
+				message="#{messages.CUsimplificadaContenido_guardarCU_message}"
+				acceptLabel="Si" cancelLabel="No, volver" />
+
+			<ice:panelConfirmation id="cancelarCUConfirm"
+				title="#{messages.CUsimplificadaContenido_cancelarCU_title}"
+				message="#{messages.CUsimplificadaContenido_cancelarCU_message}"
+				acceptLabel="#{messages.genericos_si}"
+				cancelLabel="#{messages.genericos_no_volver}" />
+
+
+
+			<ui:include src="./SeleccionarDetReg.xhtml" />
+			<ui:include src="./SeleccionarValRef.xhtml" />
+
+		</ice:form>
+	</ui:define>
+
+</ui:composition>
+
+

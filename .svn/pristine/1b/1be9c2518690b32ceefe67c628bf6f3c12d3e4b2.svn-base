@@ -1,0 +1,570 @@
+<html>
+<head>
+<title>Mapawebsin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+</head>
+<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<!-- ImageReady Slices (Mapawebsin.psd) -->
+<table id="Tabla_01" width="1001" height="712" border="0" cellpadding="0" cellspacing="0" style="width: 1000px !important;margin-left:10%;">
+	<tr>
+		<td colspan="42">
+			<img src="../../mapaweb/Images/Mapaweb_01.png" width="1000" height="5" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="5" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="19" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_02.png" width="414" height="87" alt=""/></td>
+		<td colspan="4">
+			<a href="../../home.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_03.png" width="66" height="58" border="0" alt="#{messages.menu_inicio}" title="#{messages.menu_inicio}"/></a></td>
+		<td colspan="19" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_04.png" width="520" height="87" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="58" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="4" rowspan="4">
+			<img src="../../mapaweb/Images/Mapaweb_05.png" width="66" height="109" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="29" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3" rowspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_06.png" width="37" height="80" alt=""/></td>
+		<td colspan="3">
+			<a href="../../administracion/AdministracionNavegacion.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_07.png" width="63" height="66" border="0" alt="#{messages.menu_administracion}" title="#{messages.menu_administracion}"/></a></td>
+		<td colspan="3" rowspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_08.png" width="40" height="80" alt=""/></td>
+		<td colspan="2">
+			<a href="../gestionfip/GestionFipNavegacion.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_09.png" width="64" height="66" border="0" alt="#{messages.menu_gestionfip}" title="#{messages.menu_gestionfip}"/></a></td>
+		<td colspan="3" rowspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_10.png" width="115" height="80" alt=""/></td>
+		<td colspan="3">
+			<a href=" ../produccionfip/ProduccionFipNavegacion.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_11.png" width="68" height="66" border="0" alt="#{messages.menu_produccionfip}" title="#{messages.menu_produccionfip}"/></a></td>
+		<td colspan="2" rowspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_12.png" width="27" height="80" alt=""/></td>
+		<td colspan="6" rowspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_13.png" width="136" height="80" alt=""/></td>
+		<td colspan="2">
+			<a href="../../informacionfip/InformacionFipNavegacion.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_14.png" width="63" height="66" border="0" alt="#{messages.menu_informacionfip}" title="#{messages.menu_informacionfip}"/></a></td>
+		<td colspan="7" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_15.png" width="220" height="76" alt=""/></td>
+		<td colspan="2">
+			<a href="../../ayuda/AyudaNavegacion.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_16.png" width="65" height="66" border="0" alt="#{messages.menu_ayuda}" title="#{messages.menu_ayuda}"/></a></td>
+		<td colspan="2" rowspan="6">
+			<img src="../../mapaweb/Images/Mapaweb_17.png" width="36" height="158" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="66" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_18.png" width="63" height="14" alt=""/></td>
+		<td colspan="2" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_19.png" width="64" height="14" alt=""/></td>
+		<td colspan="3" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_20.png" width="68" height="14" alt=""/></td>
+		<td colspan="2" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_21.png" width="63" height="14" alt=""/></td>
+		<td colspan="2" rowspan="5">
+			<img src="../../mapaweb/Images/Mapaweb_22.png" width="65" height="92" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="10" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="4">
+			<img src="../../mapaweb/Images/Mapaweb_23.png" width="81" height="4" alt=""/></td>
+		<td rowspan="2">
+			<a href="../../informacionfip/consultacontenidoplaneamiento/VerContenidoPlaneamiento.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_21.png" width="66" height="67" border="0" alt="#{messages.consultacontenidoplaneamiento}" title="#{messages.consultacontenidoplaneamiento}"/></a></td>
+		<td colspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_25.png" width="73" height="4" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="4" alt=""/></td>
+	</tr>
+	<tr>
+		<td rowspan="32">
+			<img src="../../mapaweb/Images/Mapaweb_26.png" width="1" height="539" alt=""/></td>
+		<td colspan="3">
+			<a href="../../administracion/gestionusuario/GestionUsuarioList.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_11-28.png" width="66" height="63" border="0" alt="#{messages.gestionusuario}" title="#{messages.gestionusuario}"/></a></td>
+		<td colspan="4" rowspan="5">
+			<img src="../../mapaweb/Images/Mapaweb_28.png" width="48" height="145" alt=""/></td>
+		<td colspan="2">
+			<a href="../../gestionfip/obtencionfip1/ObtencionFip.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_16-30.png" width="62" height="63" border="0" alt="#{messages.obtencionfip1}" title="#{messages.obtencionfip1}"/></a></td>
+		<td colspan="3" rowspan="7">
+			<img src="../../mapaweb/Images/Mapaweb_30.png" width="118" height="176" alt=""/></td>
+		<td colspan="3">
+			<a href="../../produccionfip/gestiondiccionariodeterminaciones/VerDeterminacionPlanEncargado.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_21-32.png" width="67" height="63" border="0" alt="#{messages.menu_edicion_diccionario}" title="#{messages.menu_edicion_diccionario}"/></a></td>
+		<td colspan="2" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_32.png" width="38" height="71" alt=""/></td>
+		<td colspan="3">
+			<a href="../../informacionfip/PlanBaseNavegacion.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_27.png" width="65" height="63" border="0" alt="#{messages.menu_verplanbase}" title="#{messages.menu_verplanbase}"/></a></td>
+		<td rowspan="32">
+			<img src="../../mapaweb/Images/Mapaweb_34.png" width="7" height="539" alt=""/></td>
+		<td colspan="3">
+			<a href="../../informacionfip/PlanVigenteNavegacion.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_29.png" width="65" height="63" border="0" alt="#{messages.menu_verplanvigente}" title="#{messages.menu_verplanvigente}"/></a></td>
+		<td rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_36.png" width="12" height="71" alt=""/></td>
+		<td colspan="2">
+			<a href="../../informacionfip/planprerefundido/PlanesPrerefundidoNavegacion.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_31.png" width="61" height="63" border="0" alt="#{messages.menu_planes_prerefundidos}" title="#{messages.menu_planes_prerefundidos}"/></a></td>
+		<td rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_38.png" width="6" height="71" alt=""/></td>
+		<td colspan="3">
+			<a href="../../informacionfip/consultamapas/VerMapas.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_33.png" width="68" height="63" border="0" alt="#{messages.consultamapas}" title="#{messages.consultamapas}"/></a></td>
+		<td rowspan="32">
+			<img src="../../mapaweb/Images/Mapaweb_40.png" width="8" height="539" alt=""/></td>
+		<td>
+			<a href="../../informacionfip/consultafichaurbanistica/FichaCU.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_35.png" width="62" height="63" border="0" alt="#{messages.menu_fichacu}" title="#{messages.menu_fichacu}"/></a></td>
+		<td rowspan="32">
+			<img src="../../mapaweb/Images/Mapaweb_42.png" width="6" height="539" alt=""/></td>
+		<td rowspan="32">
+			<img src="../../mapaweb/Images/Mapaweb_43.png" width="9" height="539" alt=""/></td>
+		<td>
+			<a href="../../informacionfip/busqueda/BusquedaAvanzada.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_41.png" width="64" height="63" border="0" alt="#{messages.menu_busqueda}" title="#{messages.menu_busqueda}"/></a></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="63" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3" rowspan="12">
+			<img src="../../mapaweb/Images/Mapaweb_45.png" width="66" height="195" alt=""/></td>
+		<td colspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_46.png" width="62" height="8" alt=""/></td>
+		<td colspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_47.png" width="67" height="8" alt=""/></td>
+		<td colspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_48.png" width="65" height="8" alt=""/></td>
+		<td colspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_49.png" width="65" height="8" alt=""/></td>
+		<td colspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_50.png" width="61" height="8" alt=""/></td>
+		<td colspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_51.png" width="68" height="8" alt=""/></td>
+		<td rowspan="31">
+			<img src="../../mapaweb/Images/Mapaweb_52.png" width="62" height="476" alt=""/></td>
+		<td rowspan="31">
+			<img src="../../mapaweb/Images/Mapaweb_53.png" width="66" height="476" alt=""/></td>
+		<td rowspan="31">
+			<img src="../../mapaweb/Images/Mapaweb_54.png" width="64" height="476" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="8" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="2" rowspan="2">
+			<a href="../../gestionfip/nuevoplaneamientosistematizado/CrearPlaneamientoSistematizado.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_20.png" width="62" height="66" border="0" alt="#{messages.plan_sistematizado}" title="#{messages.plan_sistematizado}"/></a></td>
+		<td colspan="3" rowspan="2">
+			<a href="../../produccionfip/gestionentidades/VerEntidadPlanEncargado.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_27-57.png" width="67" height="66" border="0" alt="#{messages.menu_edicion_entidades}" title="#{messages.menu_edicion_entidades}"/></a></td>
+		<td rowspan="30">
+			<img src="../../mapaweb/Images/Mapaweb_57.png" width="25" height="468" alt=""/></td>
+		<td colspan="3" rowspan="2">
+			<a href="../../informacionfip/planbase/entidades/VerEntidadPlanBase.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_36.png" width="67" height="66" border="0" alt="#{messages.menu_consulta_entidades}" title="#{messages.menu_consulta_entidades}"/></a></td>
+		<td rowspan="30">
+			<img src="../../mapaweb/Images/Mapaweb_59.png" width="11" height="468" alt=""/></td>
+		<td colspan="2" rowspan="30">
+			<img src="../../mapaweb/Images/Mapaweb_60.png" width="29" height="468" alt=""/></td>
+		<td colspan="3" rowspan="2">
+			<a href="../../informacionfip/planvigente/entidades/VerEntidadPlanVigente.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_42.png" width="64" height="66" border="0" alt="#{messages.menu_consulta_entidades}" title="#{messages.menu_consulta_entidades}"/></a></td>
+		<td rowspan="30">
+			<img src="../../mapaweb/Images/Mapaweb_62.png" width="45" height="468" alt=""/></td>
+		<td colspan="2" rowspan="2">
+			<a href="../../informacionfip/planprerefundido/Listado.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_47.png" width="63" height="66" border="0" alt="#{messages.menu_listado_pre}" title="#{messages.menu_listado_pre}"/></a></td>
+		<td colspan="2" rowspan="30">
+			<img src="../../mapaweb/Images/Mapaweb_64.png" width="11" height="468" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="7" alt=""/></td>
+	</tr>
+	<tr>
+		<td rowspan="29">
+			<img src="../../mapaweb/Images/Mapaweb_65.png" width="36" height="461" alt=""/></td>
+		<td colspan="2" rowspan="2">
+			<a href="../../ayuda/manuales/Manuales.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_66.png" width="61" height="67" border="0" alt="#{messages.menu_manuales}" title="#{messages.menu_manuales}"/></a></td>
+		<td rowspan="29">
+			<img src="../../mapaweb/Images/Mapaweb_67.png" width="4" height="461" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="59" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_68.png" width="62" height="8" alt=""/></td>
+		<td colspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_69.png" width="67" height="8" alt=""/></td>
+		<td colspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_70.png" width="67" height="8" alt=""/></td>
+		<td colspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_71.png" width="64" height="8" alt=""/></td>
+		<td colspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_72.png" width="63" height="8" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="8" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3" rowspan="8">
+			<img src="../../mapaweb/Images/Mapaweb_73.png" width="44" height="113" alt=""/></td>
+		<td colspan="3" rowspan="3">
+			<a href="../../gestionfip/gestionplaneamientoencargado/PlaneamientoEncargadoList.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_23.png" width="66" height="62" border="0" alt="#{messages.gestionplaneamientoencargado}" title="#{messages.gestionplaneamientoencargado}"/></a></td>
+		<td colspan="3" rowspan="3">
+			<a href="../../produccionfip/gestiondocumental/VerListaDocumentos.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_32.png" width="67" height="62" border="0" alt="#{messages.gestion_documentos}" title="#{messages.gestion_documentos}"/></a></td>
+		<td colspan="3" rowspan="4">
+			<a href="../../informacionfip/planbase/determinaciones/VerPlanBase.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_44.png" width="67" height="67" border="0" alt="#{messages.menu_consulta_determinaciones}" title="#{messages.menu_consulta_determinaciones}"/></a></td>
+		<td colspan="3" rowspan="3">
+			<a href="../../informacionfip/planvigente/determinaciones/VerDeterminacionPlanVigente.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_52.png" width="64" height="62" border="0" alt="#{messages.menu_consulta_determinaciones}" title="#{messages.menu_consulta_determinaciones}"/></a></td>
+		<td colspan="2" rowspan="3">
+			<a href="../../informacionfip/planprerefundido/entidades/Entidades.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_59.png" width="63" height="62" border="0" alt="#{messages.menu_consulta_entidades}" title="#{messages.menu_consulta_entidades}"/></a></td>
+		<td colspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_79.png" width="61" height="4" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="4" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="2" rowspan="3">
+			<a href="../../ayuda/faq/Faq.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_80.png" width="61" height="63" border="0" alt="#{messages.menu_faq}" title="#{messages.menu_faq}"/></a></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="27" alt=""/></td>
+	</tr>
+	<tr>
+		<td rowspan="25">
+			<img src="../../mapaweb/Images/Mapaweb_81.png" width="27" height="363" alt=""/></td>
+		<td rowspan="4">
+			<a href="../../produccionfip/gestionoperaciones/listaOperacionesDeterminacion.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_34.png" width="65" height="63" border="0" alt="#{messages.menu_edicion_operaciones_determinacion}" title="#{messages.menu_edicion_operaciones_determinacion}"/></a></td>
+		<td rowspan="25">
+			<img src="../../mapaweb/Images/Mapaweb_83.png" width="26" height="363" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="31" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_84.png" width="66" height="10" alt=""/></td>
+		<td colspan="3" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_85.png" width="67" height="10" alt=""/></td>
+		<td colspan="3" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_86.png" width="64" height="10" alt=""/></td>
+		<td colspan="2" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_87.png" width="63" height="10" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="5" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_88.png" width="67" height="5" alt=""/></td>
+		<td colspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_89.png" width="61" height="5" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="5" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3" rowspan="4">
+			<a href="../../gestionfip/validaciones/ProcesoValidacionList.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_25.png" width="66" height="60" border="0" alt="#{messages.gestionvalidaciones}" title="#{messages.gestionvalidaciones}"/></a></td>
+		<td colspan="2" rowspan="4">
+			<a href="../../produccionfip/gestionoperaciones/VerListaOperaciones.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_36-92.png" width="63" height="60" border="0" alt="#{messages.menu_edicion_operaciones}" title="#{messages.menu_edicion_operaciones}"/></a></td>
+		<td rowspan="22">
+			<img src="../../mapaweb/Images/Mapaweb_92.png" width="4" height="322" alt=""/></td>
+		<td colspan="3" rowspan="5">
+			<a href="../../informacionfip/planbase/unidades/VerUnidad.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_54.png" width="67" height="65" border="0" alt="#{messages.menu_consulta_unidades}" title="#{messages.menu_consulta_unidades}"/></a></td>
+		<td colspan="3" rowspan="5">
+			<a href="../../informacionfip/planvigente/unidades/VerUnidades.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_64.png" width="64" height="65" border="0" alt="#{messages.menu_consulta_unidades}" title="#{messages.menu_consulta_unidades}"/></a></td>
+		<td colspan="2" rowspan="5">
+			<a href="../../informacionfip/planprerefundido/determinaciones/Determinaciones.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_73.png" width="63" height="65" border="0" alt="#{messages.menu_consulta_determinaciones}" title="#{messages.menu_consulta_determinaciones}"/></a></td>
+		<td colspan="2" rowspan="6">
+			<a href="../../ayuda/mapaweb/MapaWeb.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_96.png" width="61" height="70" border="0" alt="#{messages.menu_mapaweb}" title="#{messages.menu_mapaweb}"/></a></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="22" alt=""/></td>
+	</tr>
+	<tr>
+		<td>
+			<img src="../../mapaweb/Images/Mapaweb_97.png" width="65" height="10" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="10" alt=""/></td>
+	</tr>
+	<tr>
+		<td rowspan="6">
+			<a href="../../produccionfip/gestionoperaciones/listaOperacionesEntidad.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_42-99.png" width="65" height="63" border="0" alt="#{messages.menu_edicion_operaciones_entidad}" title="#{messages.menu_edicion_operaciones_entidad}"/></a></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="9" alt=""/></td>
+	</tr>
+	<tr>
+		<td rowspan="19">
+			<img src="../../mapaweb/Images/Mapaweb_99.png" width="21" height="281" alt=""/></td>
+		<td colspan="3" rowspan="6">
+			<a href="../../gestionfip/importadores/Entidades.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_27-101.png" width="65" height="62" border="0" alt="#{messages.entidades}" title="#{messages.entidades}"/></a></td>
+		<td colspan="2" rowspan="19">
+			<img src="../../mapaweb/Images/Mapaweb_101.png" width="24" height="281" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="19" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_102.png" width="66" height="10" alt=""/></td>
+		<td colspan="2" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_103.png" width="63" height="10" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="5" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3" rowspan="17">
+			<img src="../../mapaweb/Images/Mapaweb_104.png" width="67" height="257" alt=""/></td>
+		<td colspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_105.png" width="64" height="5" alt=""/></td>
+		<td colspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_106.png" width="63" height="5" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="5" alt=""/></td>
+	</tr>
+	<tr>
+		<td rowspan="6">
+			<img src="../../mapaweb/Images/Mapaweb_107.png" width="4" height="71" alt=""/></td>
+		<td colspan="2" rowspan="5">
+			<a href="../../gestionfip/gestionprerefundido/GestionPrerefundido.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_28.png" width="62" height="64" border="0" alt="#{messages.gestionprerefundidos}" title="#{messages.gestionprerefundidos}"/></a></td>
+		<td colspan="2" rowspan="5">
+			<a href="../../produccionfip/gestionunidades/listaUnidades.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_45.png" width="63" height="64" border="0" alt="#{messages.menu_edicion_unidades}" title="#{messages.menu_edicion_unidades}"/></a></td>
+		<td colspan="3" rowspan="5">
+			<a href="../../informacionfip/planvigente/adscripciones/VerAdscripciones.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_77.png" width="64" height="64" border="0" alt="#{messages.consulta_adscripciones}" title="#{messages.menu_consulta_adscripciones}"/></a></td>
+		<td colspan="2" rowspan="5">
+			<a href="../../informacionfip/planprerefundido/entidades/Entidades.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_88.png" width="63" height="64" border="0" alt="#{messages.menu_consulta_unidades}" title="#{messages.menu_consulta_unidades}"/></a></td>
+		<td colspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_112.png" width="61" height="9" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="9" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="2" rowspan="5">
+			<a href="../../ayuda/acercade/AcercaDe.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_113.png" width="61" height="62" border="0" alt="#{messages.menu_acercade}" title="#{messages.menu_acercade}"/></a></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="16" alt=""/></td>
+	</tr>
+	<tr>
+		<td rowspan="14">
+			<img src="../../mapaweb/Images/Mapaweb_114.png" width="65" height="227" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="8" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_115.png" width="65" height="7" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="7" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3" rowspan="3">
+			<a href="../../gestionfip/importadores/Determinaciones.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_33-117.png" width="65" height="65" border="0" alt="#{messages.determinaciones}" title="#{messages.determinaciones}"/></a></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="24" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_117.png" width="62" height="7" alt=""/></td>
+		<td colspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_118.png" width="63" height="7" alt=""/></td>
+		<td colspan="3" rowspan="11">
+			<img src="../../mapaweb/Images/Mapaweb_119.png" width="64" height="188" alt=""/></td>
+		<td colspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_120.png" width="63" height="7" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="7" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3" rowspan="3">
+			<a href="../../gestionfip/generacionfip2/Fip2GeneradosList.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_30.png" width="66" height="60" border="0" alt="#{messages.fichero_intercambio}" title="#{messages.fichero_intercambio}"/></a></td>
+		<td colspan="2" rowspan="4">
+			<a href="../../produccionfip/gestionadscripciones/ListaAdscripciones.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_51.png" width="63" height="65" border="0" alt="#{messages.menu_edicion_adscripciones}" title="#{messages.menu_edicion_adscripciones}"/></a></td>
+		<td colspan="2" rowspan="4">
+			<a href="../../informacionfip/planprerefundido/adscripciones/Adscripciones.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_98.png" width="63" height="65" border="0" alt="#{messages.menu_consulta_adscripciones}" title="#{messages.menu_consulta_adscripciones}"/></a></td>
+		<td colspan="2" rowspan="10">
+			<img src="../../mapaweb/Images/Mapaweb_124.png" width="61" height="181" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="34" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_125.png" width="65" height="9" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="9" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3" rowspan="4">
+			<a href="../../gestionfip/importadores/CondicionesUrbanisticas.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_37.png" width="65" height="63" border="0" alt="#{messages.condicionesurbanisticas}" title="#{messages.condicionesurbanisticas}"/></a></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="17" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_127.png" width="66" height="11" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="5" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="2" rowspan="6">
+			<img src="../../mapaweb/Images/Mapaweb_128.png" width="63" height="116" alt=""/></td>
+		<td colspan="2" rowspan="6">
+			<img src="../../mapaweb/Images/Mapaweb_129.png" width="63" height="116" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="6" alt=""/></td>
+	</tr>
+	<tr>
+		<td rowspan="5">
+			<img src="../../mapaweb/Images/Mapaweb_130.png" width="4" height="110" alt=""/></td>
+		<td colspan="2" rowspan="3">
+			<a href="../../gestionfip/importadores/ImportadoresFipNavegacion.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_33-132.png" width="62" height="63" border="0" alt="#{messages.importadores}" title="#{messages.importadores}"/></a></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="35" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_132.png" width="65" height="6" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="6" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3" rowspan="2">
+			<a href="../../gestionfip/importadores/GeometriasEntidades.seam">
+				<img src="../../mapaweb/Images/Mapawebsin_42-134.png" width="65" height="65" border="0" alt="#{messages.geometriasentidades}" title="#{messages.geometriasentidades}"/></a></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="22" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="2" rowspan="2">
+			<img src="../../mapaweb/Images/Mapaweb_134.png" width="62" height="47" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="43" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<img src="../../mapaweb/Images/Mapaweb_135.png" width="65" height="4" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="4" alt=""/></td>
+	</tr>
+	<tr>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="1" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="21" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="15" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="30" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="20" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="13" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="11" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="4" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="25" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="37" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="27" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="65" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="26" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="24" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="39" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="4" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="25" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="13" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="14" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="40" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="11" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="7" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="8" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="21" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="36" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="12" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="16" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="45" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="6" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="57" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="6" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="5" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="8" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="62" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="6" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="66" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="9" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="64" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="36" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="29" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="32" height="1" alt=""/></td>
+		<td>
+			<img src="../../mapaweb/Images/espacio.gif" width="4" height="1" alt=""/></td>
+		<td></td>
+	</tr>
+</table>
+<!-- End ImageReady Slices -->
+</body>
+</html>

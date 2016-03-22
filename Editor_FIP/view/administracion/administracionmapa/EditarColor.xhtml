@@ -1,0 +1,56 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+	
+	<ui:define name="body">
+	
+	<ice:form>
+	
+		<ice:panelPopup id="panelCU" autoCentre="true" modal="true" styleClass="panelPopup"
+		visible="true">
+		
+		<f:facet name="header">
+			<ice:panelGroup>
+				<ice:outputText value="#{messages.admmapa_editarcolor}" />
+				<s:button id="modalPnlCloseBtnCU" 
+					view="/administracion/administracionmapa/AdministracionMapa.xhtml"
+					image="/fipeditor/img/editorfip/es/comun/cerrar_popup.png"
+					styleClass="popupHeaderImage" 
+					title="#{messages.botongenerico_cerrar}"
+					alt="#{messages.botongenerico_cerrar}" />
+			</ice:panelGroup>
+		</f:facet>
+		
+		<f:facet name="body">
+		
+			<ice:panelGrid columns="2" id="panelColor">
+			
+				<ice:panelGroup>
+					<ice:outputLabel id="colorLabel" title="#{messages.admmapa_color}"></ice:outputLabel>
+				</ice:panelGroup>
+				
+				<ice:panelGroup>
+					<ice:inputText id="colorValue" value="#{listaEntidadMapa.entidadMapaSeleccionada.color}"></ice:inputText>
+				</ice:panelGroup>
+			
+			</ice:panelGrid>
+			
+			<ice:commandButton id="savebutton" title="#{messages.admmapa_guardar_color}" action="#{servicioEntidadMapa.guardarColor}"></ice:commandButton>
+			
+		</f:facet>
+
+		
+		</ice:panelPopup>
+		
+			</ice:form>
+
+
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite EditorFip" parallel="false">
+	<test name="Test Servicio Basico Ambitos">
+    	<classes>
+  	    	<class name="com.mitc.redes.editorfip.servicios.basicos.diccionario.ServicioBasicoAmbitosTest"/>
+    	</classes>
+  	</test>
+  	<test name="Test Servicio Basico Planes">
+   	 	<classes>
+	  	    <class name="com.mitc.redes.editorfip.servicios.basicos.diccionario.ServicioBasicoPlanesTest"/>
+	    </classes>
+	  </test>
+	  <test name="Test Servicio Basico Determinaciones">
+   	 	<classes>
+	  	    <class name="com.mitc.redes.editorfip.servicios.basicos.fip.determinaciones.ServicioBasicoDeterminacionesTest"/>
+	    </classes>
+	  </test>
+	  <test name="Test Servicio Basico Creación Unidades">
+   	 	<classes>
+	  	    <class name="com.mitc.redes.editorfip.servicios.basicos.fip.unidades.ServicioBasicoCrearUnidadesTest"/>
+	    </classes>
+	  </test>
+	  <test name="Test Servicio Basico Unidades">
+   	 	<classes>
+	  	    <class name="com.mitc.redes.editorfip.servicios.basicos.fip.unidades.ServicioBasicoUnidadesTest"/>
+	    </classes>
+	  </test>
+	  <test name="Test Servicio Basico Documentos">
+   	 	<classes>
+	  	    <class name="com.mitc.redes.editorfip.servicios.basicos.fip.documentos.ServicioBasicoDocumentosTest"/>
+	    </classes>
+	  </test>
+	  <test name="Test Servicio Basico Opcion Determinacion">
+   	 	<classes>
+	  	    <class name="com.mitc.redes.editorfip.servicios.basicos.fip.documentos.ServicioBasicoOpcionDeterminacionTest"/>
+	    </classes>
+	  </test>
+	  <test name="Test Servicio Basico Condiciones Urbanísticas">
+   	 	<classes>
+	  	    <class name="com.mitc.redes.editorfip.servicios.basicos.fip.entidades.ServicioBasicoCondicionesUrbanisticasTest"/>
+	    </classes>
+	  </test>
+	  <test name="Test Servicio Basico Entidades">
+   	 	<classes>
+	  	    <class name="com.mitc.redes.editorfip.servicios.basicos.fip.entidades.ServicioBasicoEntidadesTest"/>
+	    </classes>
+	  </test>
+	  
+</suite>

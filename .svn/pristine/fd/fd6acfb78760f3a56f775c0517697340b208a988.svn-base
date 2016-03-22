@@ -1,0 +1,14 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alvaro.Montero
+-->
+
+<div class="toolbox divider">
+	<span class="iconWrapper"><img id="BtnVisorPlanesExpandir" class="toolBoxAction" src="styles/images/expandir.png" alt="Expandir" title="Expandir el nodo seleccionado"/></span>
+	<span class="iconWrapper"><img id="BtnVisorPlanesContraer" class="toolBoxAction" src="styles/images/Contraer.png" alt="Contraer" title="Contraer todo" /></span>	
+</div>
+
+<div class="toolbox divider">
+	<span class="iconWrapper"><img id="BtnVisorPlanesBuscar" class="toolBoxAction" src="styles/images/search_icon.png" alt="Buscar" title="Buscar"/></span>	
+</div>

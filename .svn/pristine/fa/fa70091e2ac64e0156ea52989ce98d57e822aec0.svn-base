@@ -1,0 +1,43 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alvaro.Montero
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div id="menuBusquedaDiaOp">
+	 <fieldset>
+    <legend>Criterios de búsqueda</legend>
+    	<br/>
+    	<div class="formRow">
+			<div class="formLabel">Seleccione una opción:</div>			
+			<div class="formField">
+				<select id="campo" class="select">
+		            <option> </option>
+		            <option>Usuario</option>
+		            <option>Fecha</option>
+		            <option>Subsistema</option>
+	        	</select>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="formLabel"></div>			
+			<div class="formField">        	
+				<select id="txtImput" class="select"></select>
+				<div id="dateImputWrapper" class="divInputDiaOp">
+					<input id="dateImputVisible" class="input" name="dateImputVisible" type="text" data-meiomask="fixed.date"/>
+					<input id="dateImput" class="input" name="dateImput" type="hidden"/>					
+				</div>				
+				<div id="searchButtonDiaOp" class="searchButtonDiaOp">Buscar</div>
+			</div>
+			<div class="clear"></div>
+		</div>	    
+	    <br/>
+    </fieldset>
+</div>
+<br/>
+<div id="panelResultadosDiaOp">    
+</div>
+<div id="dummyDivDiarioOperaciones"></div>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jul-2009 12:36:17 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tabla" table="tabla" schema="diccionario">
+        <id name="iden" type="int">
+            <column name="iden" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="32" not-null="true" />
+        </property>
+        <property name="clausulawhere" type="string">
+            <column name="clausulawhere" length="2048" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" not-null="true" />
+        </property>
+        <property name="esquema" type="string">
+            <column name="esquema" length="32" />
+        </property>
+        <set name="defvectors" inverse="true">
+            <key>
+                <column name="idtabla" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Defvector" />
+        </set>
+    </class>
+</hibernate-mapping>

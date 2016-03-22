@@ -1,0 +1,123 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+	<ui:define name="body">
+
+
+
+		<!--  Se define el cuerpo de la pagina -->
+
+		<ice:panelGroup columns="8" styleClass="centerHome">
+
+			<s:link view="/gestionfip/obtencionfip1/ObtencionFip.xhtml"
+				id="ObtencionFipNavegacionMenu" propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/02_01_OBTENCION_FIP1.png"
+					alt="#{messages.obtencionfip1}" title="#{messages.obtencionfip1}"
+					styleClass="iconoNav" />
+			</s:link>
+
+			<s:link
+				view="/gestionfip/nuevoplaneamientosistematizado/CrearPlaneamientoSistematizado.xhtml"
+				id="CrearPlaneamientoSistematizadoNavegacionMenu" propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/02_02_NUEVO_PLANEAMIENTO_SISTEMATIZADO.png"
+					alt="#{messages.plan_sistematizado}"
+					title="#{messages.plan_sistematizado}" styleClass="iconoNav" />
+			</s:link>
+
+			<s:link
+				view="/gestionfip/gestionplaneamientoencargado/PlaneamientoEncargadoList.xhtml"
+				id="PlaneamientoEncargadoListNavegacionMenu" propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/02_03_GESTION_PLAN_ENCARGADO.png"
+					alt="#{messages.gestionplanencargado}"
+					title="#{messages.gestionplanencargado}" styleClass="iconoNav" />
+			</s:link>
+
+			<s:link view="/gestionfip/validaciones/ProcesoList.xhtml"
+				id="GestionValidacionesFipRutaMenu" propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/02_04_GESTION_VALIDACIONES.png"
+					alt="#{messages.gestionvalidaciones}"
+					title="#{messages.gestionvalidaciones}" styleClass="iconoNav" />
+			</s:link>
+
+			<s:link
+				view="/gestionfip/gestionprerefundido/GestionPrerefundido.xhtml"
+				id="GestionPrerefundidoRutaMenu" propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/02_05_GESTION_PREREFUNDIDO.png"
+					alt="#{messages.gestionprerefundido}"
+					title="#{messages.gestionprerefundido}" styleClass="iconoNav" />
+			</s:link>
+
+			<s:link view="/gestionfip/generacionfip2/Fip2GeneradosList.xhtml"
+				id="Fip2FicheroIntercambioNavegacionMenu" propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/02_06_FICHERO_INTERCAMBIO.png"
+					alt="#{messages.fichero_intercambio}"
+					title="#{messages.fichero_intercambio}" styleClass="iconoNav" />
+			</s:link>
+
+
+
+			<s:link
+				view="/gestionfip/importadores/ImportadoresFipNavegacion.xhtml"
+				id="ImportadoresFipRutaMenu" propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/02_07_IMPORTADORES.png"
+					alt="#{messages.importadores}" title="#{messages.importadores}"
+					styleClass="iconoNav" />
+			</s:link>
+
+
+
+			<s:link view="/home.xhtml" id="HomeNavegacionMenu" propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/00_VOLVER.png"
+					alt="#{messages.menu_volver}" title="#{messages.menu_volver}"
+					styleClass="iconoNav" />
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+	</ui:define>
+
+</ui:composition>

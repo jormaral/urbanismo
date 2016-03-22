@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+<head>
+<ice:outputDeclaration doctypeRoot="HTML"
+	doctypePublic="-//W3C//DTD XHTML 1.0 Transitional//EN"
+	doctypeSystem="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>fipeditor</title>
+<link rel="shortcut icon" href="#{request.contextPath}/favicon.ico" />
+<link rel="stylesheet" type="text/css"
+	href="#{request.contextPath}/xmlhttp/css/rime/rime.css" />
+<link rel="stylesheet" type="text/css"
+	href="#{request.contextPath}/stylesheet/theme.css" />
+
+<ui:insert name="head" />
+</head>
+<body>
+
+
+
+
+
+<div class="banner"><ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+	<h:panelGrid columns="3"
+		columnClasses="columnaBannerEmpresa,columnaBannerInnoplace,columnaBannerIdiomas"
+		style="width:100%;">
+
+		<h:panelGroup>
+			<h:graphicImage
+				value="/img/editorfip/#{localeSelector.language}/banner/logoredes.png"
+				alt="#{messages.template_banner_logo}"
+				title="#{messages.template_banner_logo}" />
+
+		</h:panelGroup>
+
+		<h:panelGroup>
+
+			<h:graphicImage
+				value="/img/editorfip/#{localeSelector.language}/banner/editorfip.jpg"
+				alt="#{messages.template_banner_editorfip}"
+				title="#{messages.template_banner_editorfip}" />
+
+
+		</h:panelGroup>
+
+		<h:panelGroup style="float:right;">
+
+			
+
+
+<!--  
+				<h:form>
+
+					<h:commandLink action="#{localeSelector.selectLanguage('es')}">
+						<h:graphicImage
+							value="/img/editorfip/#{localeSelector.language}/banner/espanol_p.jpg"
+							alt="#{messages.template_banner_idioma_espanol}"
+							title="#{messages.template_banner_idioma_espanol}" />
+					</h:commandLink>
+
+					<h:outputLabel />
+
+					<h:commandLink action="#{localeSelector.selectLanguage('en')}">
+						<h:graphicImage
+							value="/img/editorfip/#{localeSelector.language}/banner/ingles_p.jpg"
+							alt="#{messages.template_banner_idioma_ingles}"
+							title="#{messages.template_banner_idioma_ingles}" />
+					</h:commandLink>
+
+				</h:form>
+ -->
+ 				
+				<ice:outputConnectionStatus activeLabel="Ejecutando" inactiveLabel="En Reposo"
+					styleClass="connectionStatus" displayHourglassWhenActive="true" />
+				
+				
+				<h:panelGrid column="1">
+					<h:panelGroup>
+						<h:outputLabel value="#{messages.version}:"
+							styleClass="etiqueta_login" />
+						<h:outputLabel value="#{messages.template_version}" />
+					</h:panelGroup>
+
+				</h:panelGrid>
+				
+
+
+		</h:panelGroup>
+	</h:panelGrid>
+
+</ice:panelGroup></div>
+
+<div style="clear: both" />
+
+<div class="body"><h:messages id="messages" globalOnly="true"
+	styleClass="message" rendered="#{showGlobalMessages != 'false'}"
+	errorClass="errormsg" infoClass="infomsg" warnClass="warnmsg" /> <ui:insert
+	name="body" /></div>
+
+
+</body>
+</html>

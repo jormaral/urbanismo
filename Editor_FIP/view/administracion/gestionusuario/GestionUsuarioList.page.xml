@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd"
+ login-required="true" >
+ 
+ 
+ 
+ <begin-conversation flush-mode="MANUAL" join="true" />
+ <action execute="#{servicioUsuarioLista.inicializarLista('Usuario')}" on-postback="false"/>
+ <action execute="#{servicioUsuarioLista.setPagina(1)}" on-postback="false"/>
+ 
+ 
+ <navigation from-action="#{servicioUsuarioLista.verDetalle}">
+	<rule if-outcome="success">
+		<redirect view-id="/administracion/gestionusuario/GestionUsuarioDetalle.xhtml">
+			<param name="usuarioUsername" value="#{servicioUsuarioLista.usernameUsuarioSel}"/>
+		</redirect>
+	</rule>
+ </navigation>
+ <navigation from-action="#{servicioUsuarioLista.verDetalleBuscar}">
+	<rule if-outcome="success">
+		<redirect view-id="/administracion/gestionusuario/GestionUsuarioDetalle.xhtml">
+			<param name="usuarioUsername" value="#{servicioUsuarioLista.usuarioSel}"/>
+		</redirect>
+	</rule>
+ </navigation>
+ 
+</page>

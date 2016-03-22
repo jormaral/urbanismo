@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18-jul-2011 17:35:19 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="es.mitc.redes.urbanismoenred.data.validacion.Error" schema="validacion" table="error">
+        <id name="iden" type="int">
+            <column name="iden" />
+            <generator class="sequence">
+            	<param name="sequence">validacion.validacion_error_sequence</param>
+            </generator>
+        </id>
+        <many-to-one name="resultado" class="es.mitc.redes.urbanismoenred.data.validacion.Resultado" fetch="select">
+            <column name="idproceso" not-null="true" />
+            <column name="idvalidacion" not-null="true" />
+        </many-to-one>
+        <property name="mensaje" type="string">
+            <column name="mensaje" length="1000" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

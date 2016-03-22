@@ -1,0 +1,110 @@
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaEntidades"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+	<ice:panelGroup>
+					 		
+					<ice:dataTable id="listaEntidadDocumento"
+						value="#{listaEntidadesDocumento.entidadesDocumento}"
+						sortColumn="#{listaEntidadesDocumento.sortColumnName}"
+						sortAscending="#{listaEntidadesDocumento.ascending}"
+						var="item" rows="10"
+						rendered="#{not empty listaEntidadesDocumento.entidadesDocumento}">
+			
+						<ice:column>
+							<f:facet name="header">
+								<ice:commandSortHeader
+									columnName="#{listaEntidadesDocumento.nombreColumnName}"
+									arrow="true">
+									<ice:outputText
+										value="#{messages.entidad} " />
+								</ice:commandSortHeader>
+							</f:facet>
+							<ice:outputText value="#{item.nombre}" />
+						</ice:column>
+						
+						<ice:column style="text-align:center" rendered="#{variablesSesionUsuario.getIdTipoTramiteTrabajo()==3}">
+						    <f:facet name="header">
+						
+						        <ice:outputText escape="false" value="#{messages.borrar}"/>
+						
+						    </f:facet>
+					    
+						    <ice:commandLink value="X" style="color: #000000;font-family: Arial;font-size: 12px;font-weight:bold;" action="#{servicioGestionDocumentalCarpeta.borrarEntidadDocumento(item.iden)}">					       
+						    </ice:commandLink>
+						    
+						</ice:column>
+						
+					</ice:dataTable>
+			
+			
+					<!-- Paginator with page controls -->
+					<ice:panelGrid columns="1">
+					<ice:panelGroup styleClass="pnlGrpdataPaginator" >
+					<ice:dataPaginator id="dataScroll_listaEntidadesDocumentoDeterminacion"
+						for="listaEntidadDocumento" paginator="true" fastStep="3"
+						paginatorMaxPages="4"
+						rendered="#{not empty listaEntidadesDocumento.entidadesDocumento}" styleClass="botonesdataPaginator">
+						<f:facet name="first">
+							<ice:graphicImage url="/img/editorfip/es/arboles/arrow-first.gif"
+								style="border:none;" title="#{messages.primera_pagina}" />
+						</f:facet>
+						<f:facet name="last">
+							<ice:graphicImage url="/img/editorfip/es/arboles/arrow-last.gif"
+								style="border:none;" title="#{messages.ultima_pagina}" />
+						</f:facet>
+						<f:facet name="previous">
+							<ice:graphicImage
+								url="/img/editorfip/es/arboles/rrow-previous.gif"
+								style="border:none;" title="#{messages.pagina_anterior}" />
+						</f:facet>
+						<f:facet name="next">
+							<ice:graphicImage url="/img/editorfip/es/arboles/arrow-next.gif"
+								style="border:none;" title="#{messages.pagina_siguiente}" />
+						</f:facet>
+						<f:facet name="fastforward">
+							<ice:graphicImage url="/img/editorfip/es/arboles/arrow-ff.gif"
+								style="border:none;" title="#{messages.avance_rapido}" />
+						</f:facet>
+						<f:facet name="fastrewind">
+							<ice:graphicImage url="/img/editorfip/es/arboles/arrow-fr.gif"
+								style="border:none;" title="#{messages.retroceso_rapido}" />
+						</f:facet>
+					</ice:dataPaginator>
+					</ice:panelGroup>
+
+					<ice:panelGroup styleClass="pnlGrpdataPaginator" >
+					
+			
+					<!-- Display counts about the table and the currently displayed page -->
+					<ice:dataPaginator id="dataScroll_listaEntidadesDocumentoDeterminacion2"
+						for="listaEntidadDocumento"
+						rowsCountVar="rowsCount_gruposaplicacionList"
+						displayedRowsCountVar="displayedRowsCount_gruposaplicacionList"
+						firstRowIndexVar="firstRowIndex_gruposaplicacionList"
+						lastRowIndexVar="lastRowIndex_gruposaplicacionList"
+						pageCountVar="pageCount_gruposaplicacionList"
+						pageIndexVar="pageIndex_gruposaplicacionList"
+						rendered="#{not empty listaEntidadesDocumento.entidadesDocumento}" styleClass="paginasdataPaginator">
+						<ice:outputFormat
+							value="#{messages.mensaje_elementos_mostrados}"
+							styleClass="standard">
+							<f:param value="#{rowsCount_gruposaplicacionList}" />
+							<f:param value="#{displayedRowsCount_gruposaplicacionList}" />
+							<f:param value="#{firstRowIndex_gruposaplicacionList}" />
+							<f:param value="#{lastRowIndex_gruposaplicacionList}" />
+							<f:param value="#{pageIndex_gruposaplicacionList}" />
+							<f:param value="#{pageCount_gruposaplicacionList}" />
+						</ice:outputFormat>
+					</ice:dataPaginator>
+					</ice:panelGroup>
+					</ice:panelGrid>
+					
+					<ice:outputLabel rendered="#{empty listaEntidadesDocumento.entidadesDocumento}" value="#{messages.no_hay_datos}" styleClass="dataResult"/>
+			
+				</ice:panelGroup>
+
+</f:subview>

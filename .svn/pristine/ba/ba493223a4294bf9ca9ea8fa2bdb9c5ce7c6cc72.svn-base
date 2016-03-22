@@ -1,0 +1,173 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.busquedaavanzada_boton_buscardeterminaciones}"
+				view="/informacionfip/busqueda/busquedaDeterminacion.xhtml"
+				id="BusquedaAvanzadaNavegacionMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+	<ui:define name="body">
+		<ice:form id="formBusquedDet">
+
+			<ice:panelGrid columnClasses="testColMap2">
+				<ice:panelGroup>
+					<ice:graphicImage styleClass="tooltip_imagen"
+						alt="#{messages.genericos_info}"
+						url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+					<ice:outputLabel
+						value="#{messages.busquedaavanzada_informacion_detalle}"></ice:outputLabel>
+
+				</ice:panelGroup>
+			</ice:panelGrid>
+
+			<s:button styleClass="boton5"
+				value="#{messages.busquedaavanzada_botonrecargar}"
+				view="/informacionfip/busqueda/busquedaDeterminacion.xhtml"></s:button>
+
+
+			<ice:panelGrid columns="4">
+				<h:inputText styleClass="etiqueta-Usuario"
+					value="#{messages.nombre}" disabled="true" />
+				<h:inputText styleClass="input-Detalle"
+					value="#{servicioBusquedaDeterminacion.filtros.nombre}" />
+
+				<h:inputText styleClass="etiqueta-Usuario"
+					value="#{messages.tipoPlan}" disabled="true" />
+				<ice:selectOneListbox size="1"
+					value="#{servicioBusquedaDeterminacion.filtros.tipoPlanSeleccionado}"
+					partialSubmit="false">
+					<f:selectItems
+						value="#{servicioBusquedaDeterminacion.listaTipoPlan}" />
+				</ice:selectOneListbox>
+
+				<h:inputText styleClass="etiqueta-Usuario"
+					value="#{messages.apartado}" disabled="true" />
+				<h:inputText styleClass="input-Detalle"
+					value="#{servicioBusquedaDeterminacion.filtros.apartado}" />
+
+				<h:inputText styleClass="etiqueta-Usuario"
+					value="#{messages.tipofiltro}" disabled="true" />
+				<ice:selectOneListbox size="1"
+					value="#{servicioBusquedaDeterminacion.filtros.tipoFiltro}"
+					partialSubmit="false">
+					<f:selectItems
+						value="#{servicioBusquedaDeterminacion.listaTiposFiltro}" />
+				</ice:selectOneListbox>
+
+				<h:inputText styleClass="etiqueta-Usuario"
+					value="#{messages.articulado}" disabled="true" />
+				<h:inputText styleClass="input-Detalle"
+					value="#{servicioBusquedaDeterminacion.filtros.articulado}" />
+
+
+			</ice:panelGrid>
+
+			<ice:commandButton value="#{messages.genericos_buscar}"
+				action="#{servicioBusquedaDeterminacion.buscar}"
+				styleClass="boton1_up" alt="#{messages.genericos_buscar}"
+				title="#{messages.boton_title_busquedaAvanzada_buscarDeterminacion}" />
+
+			<br></br>
+			<br></br>
+
+			<ice:panelGroup scrollHeight="400px">
+				<ice:outputLabel rendered="#{!(servicioBusquedaDeterminacion.resultado.size()>0)}"
+					value="#{messages.busquedaavanzada_noresultado}"></ice:outputLabel>
+					
+				<ice:dataTable value="#{servicioBusquedaDeterminacion.resultado}" rendered="#{(servicioBusquedaDeterminacion.resultado.size()>0)}"
+					var="item" id="listaDeterminaciones" enableContextMenu="false"
+					selectionMode="none" style="position:static;z-index:-1;">
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.plan}" />
+						</f:facet>
+						<h:outputText value="#{item.plan}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.apartado}" />
+						</f:facet>
+						<h:outputText value="#{item.apartado}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.nombre}" />
+						</f:facet>
+						<h:outputText value="#{item.nombre}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.articulado}" />
+						</f:facet>
+						<h:outputText value="#{item.articulado}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.tipo}" />
+						</f:facet>
+						<h:outputText value="#{item.tipo}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.accion}" />
+						</f:facet>
+						<s:link target="_blank"
+							value="#{messages.botongenerico_verdetalle}"
+							action="#{servicioBusquedaDeterminacion.verDetalleDeterminacion(item.id, item.tipoPlan)}"
+							propagation="nest" styleClass="hiperenlace enlaceAzul"
+							alt="#{messages.botongenerico_verdetalle}"
+							title="#{messages.boton_title_PElista_verDetalle}">
+							<f:param name="idDeterminacion" value="#{item.id}"></f:param>
+							<f:param name="tipo" value="#{item.tipoPlan}"></f:param>
+						</s:link>
+					</ice:column>
+				</ice:dataTable>
+			</ice:panelGroup>
+
+		</ice:form>
+
+	</ui:define>
+
+</ui:composition>

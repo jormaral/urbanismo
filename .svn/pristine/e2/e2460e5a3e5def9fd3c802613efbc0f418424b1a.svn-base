@@ -1,0 +1,71 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaEntidadBotones"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+	<ice:panelGroup id="botonera" columns="5"
+		styleClass="botonesDeterminacion">
+
+		<ice:commandButton styleClass="botonAzul2"
+			action="#{gestionEntidades.prepararParaCrear}"
+			value="#{messages.botongenerico_crear_nueva_entidad}" alt="#{messages.botongenerico_crear_nueva_entidad}"
+			title="#{messages.boton_title_entidadBotones_crearNueva}" />
+			
+		<ice:commandButton styleClass="botonAzul"
+			action="#{gestionArbolEntidades.actualizoArbolDespuesDeGuardar}"
+			actionListener="#{gestionEntidades.guardarEntidad}"
+			panelConfirmation="#{gestionEntidades.entidad.iden!=0 ? 'guardarEntConfirm' : 'crearEntConfirm'}"
+			title="#{messages.boton_title_entidadBotones_guardar}" alt="#{messages.botongenerico_guardar}"
+			value="#{messages.botongenerico_guardar}" />
+
+		<ice:panelConfirmation id="guardarEntConfirm"
+			title="#{messages.entidadBotones_nuevaEntidad_title}"
+			message="#{messages.entidad_guardar_confirmacion}"
+			acceptLabel="#{messages.botongenerico_aceptar}" cancelLabel="#{messages.botongenerico_cancelar}"
+			styleClass="boton1" />
+			
+			<ice:panelConfirmation id="crearEntConfirm"
+			title="#{messages.entidadBotones_nuevaEntidad_title}"
+			message="#{messages.entidad_crear_confirmacion}"
+			acceptLabel="#{messages.botongenerico_aceptar}" cancelLabel="#{messages.botongenerico_cancelar}"
+			styleClass="boton1" />
+			
+		<ice:commandButton styleClass="botonAzul"
+			action="#{gestionEntidades.cancelar()}"
+			title="#{messages.boton_title_entidadBotones_cancelar}" alt="#{messages.botongenerico_cancelar}"
+			value="#{messages.botongenerico_cancelar}" />	
+
+		<ice:commandButton styleClass="botonAzul2"
+			action="#{gestionArbolEntidades.cargarArbolInicial}"
+			actionListener="#{gestionEntidades.borrarEntidadYCUEHijas}"
+			panelConfirmation="borrarEntidadYCUEHijasConfirm"
+			visible="#{gestionEntidades.idEntidad!=0}"
+			value="#{messages.botongenerico_borrar_entidadycuehijas}"
+			title="#{messages.botongenerico_borrar_entidadycuehijas}" />
+
+		<ice:panelConfirmation id="borrarEntidadYCUEHijasConfirm"
+			title="#{messages.entidadBotones_borrarEntidad_title}"
+			message="#{messages.entidad_borrar_confirmacion}"
+			acceptLabel="#{messages.botongenerico_aceptar}"
+			cancelLabel="#{messages.botongenerico_cancelar}" styleClass="boton1" />
+			
+			<ice:commandButton styleClass="botonAzul2"
+			action="#{gestionArbolEntidades.cargarArbolInicial}"
+			actionListener="#{gestionEntidades.duplicarEntidadConCUs}"
+			panelConfirmation="duplicarEntidadConfirm"
+			visible="#{gestionEntidades.idEntidad!=0}"
+			value="#{messages.entidad_boton_duplicar}"
+			title="#{messages.entidad_boton_duplicar}" />
+
+		<ice:panelConfirmation id="duplicarEntidadConfirm"
+			title="#{messages.entidad_duplicar_confirmacion_titulo}"
+			message="#{messages.entidad_duplicar_confirmacion_mensaje}"
+			acceptLabel="#{messages.botongenerico_aceptar}"
+			cancelLabel="#{messages.botongenerico_cancelar}" styleClass="boton1" />
+
+
+	</ice:panelGroup>
+
+</f:view>

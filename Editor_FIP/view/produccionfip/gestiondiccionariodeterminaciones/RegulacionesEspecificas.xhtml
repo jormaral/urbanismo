@@ -1,0 +1,35 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaRegulacionesEspecificas"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+
+<ice:form id="regulacionesEspecificasForm">
+
+	<ice:panelBorder id="regulacionespecBorder"
+				styleClass="panelBorderDemoLayoutMain" renderNorth="false"
+				renderSouth="false" renderCenter="true" renderWest="true"
+				renderEast="false">
+
+				<f:facet name="west">
+					<ice:panelGroup style="padding: 5px;">
+						<ice:panelTabSet>
+							<ui:include src="./ArbolRegulacionesEspecificas.xhtml"></ui:include>
+						</ice:panelTabSet>
+					</ice:panelGroup>
+				</f:facet>
+
+				<f:facet name="center">
+					<ice:panelGroup style="padding: 5px;">
+						<ice:panelTabSet>
+							<ui:include src="./ContenidoRegulacionesEspecificas.xhtml"></ui:include>
+						</ice:panelTabSet>
+					</ice:panelGroup>
+				</f:facet>
+			</ice:panelBorder>
+
+</ice:form>
+
+</f:view>

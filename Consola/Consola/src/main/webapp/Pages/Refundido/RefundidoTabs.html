@@ -1,0 +1,37 @@
+<div class="toolbarTabs">
+	<ul id="panelRefundidoTabs" class="tab-menu">
+		<li id='tabNuevoRefundido' class="selected"><a id="NuevoRefundido" href="Pages/Refundido/RefundidoData.html" title="Nuevo Refundido">Nuevo Refundido</a></li>
+		<li id='tabRefundidosRealizados'><a id="RefundidosRealizados" href="Pages/Refundido/RefundidoData.html" title="Refundidos Realizados">Refundidos Realizados</a></li>
+	</ul>
+	<div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+
+	$('NuevoRefundido').addEvent('click', function(e){
+		new Event(e).stop();
+
+		$('panelNuevoRefundido').setStyle('display', 'block'); //setOpacity(100);
+		$('panelRefundidosRealizados').setStyle('display', 'none'); //setOpacity(0);
+		
+		$('tabNuevoRefundido').set('class','selected');
+		$('tabRefundidosRealizados').set('class','');
+
+		MUI.rWidth();
+    });
+
+	$('RefundidosRealizados').addEvent('click', function(e){
+		new Event(e).stop();	
+
+		$('panelNuevoRefundido').setStyle('display', 'none'); //setOpacity(0);
+		$('panelRefundidosRealizados').setStyle('display', 'block'); //setOpacity(100);		
+		
+		$('tabNuevoRefundido').set('class','');
+		$('tabRefundidosRealizados').set('class','selected');
+
+		chargeTabRefundidosRealizados();
+		
+		MUI.rWidth();
+    });
+
+</script>

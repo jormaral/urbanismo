@@ -1,0 +1,34 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alvaro.Montero
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+ <div id="panelTramitesDeterminacionesDatosGenerales" class="centerElement"></div>
+ 
+ <div id="panelTramitesDeterminacionesValoresReferencia" class="centerElementScroll"></div>
+
+ <div id="panelTramitesDeterminacionesRegulacionesEspecificas"></div>
+
+ <div id="panelTramitesDeterminacionesDocumentos"></div>
+
+ <div id="panelTramitesDeterminacionesEsOperadoPor"></div>
+
+ <div id="panelTramitesDeterminacionesOperaA"></div>
+
+ <div id="panelTramitesDeterminacionesAplicaciones" class="centerElementScroll"></div>
+
+ <div id="panelTramitesDeterminacionesGruposAplicacion" class="centerElementScroll"></div>
+
+ <div id="panelTramitesDeterminacionesDeterminacionesReguladoras"></div>
+
+<!--  <div id="panelTramitesDeterminacionesUnidades">
+	<div id="gridTramitesDeterminacionesUnidades" class="centerElementScroll"></div>
+</div>
+ -->
+
+
+
+

@@ -1,0 +1,267 @@
+﻿.zoomBar {
+    top: 110px;
+    height: 158px;
+    right: 25px;
+    position: absolute;
+    width: 19px;
+    z-index: 5000;
+    background-image: url("img/zoombar.png");
+    background-position: center center;
+}
+#zoomBar_up {
+    background-image: url("img/north-mini.png");
+    background-position: center center;
+    cursor: pointer;
+    height: 18px;
+    left: 18px;
+    position: absolute;
+    top: 0px;
+    width: 18px;
+}
+#zoomBar_down {
+    background-image: url("img/south-mini.png");
+    background-position: center center;
+    cursor: pointer;
+    height: 18px;
+    left: 18px;
+    position: absolute;
+    top: 36px;
+    width: 18px;
+}
+#zoomBar_left {
+    background-image: url("img/west-mini.png");
+    background-position: center center;
+    cursor: pointer;
+    height: 18px;
+    left: 0;
+    position: absolute;
+    top: 18px;
+    width: 18px;
+}
+#zoomBar_right {
+    background-image: url("img/east-mini.png");
+    background-position: center center;
+    cursor: pointer;
+    height: 18px;
+    left: 36px;
+    position: absolute;
+    top: 18px;
+    width: 18px;
+}
+#zoomBar_center {
+    background-image: url("img/center.png");
+    background-position: center center;
+    cursor: pointer;
+    height: 18px;
+    left: 18px;
+    position: absolute;
+    top: 18px;
+    width: 18px;
+}
+#container_Pan {
+    float: left;
+    height: 54px;
+    left: -16px;
+    top: -72px;
+    width: 54px;
+    position: absolute;
+}
+#zoomBar_in {
+    background-image: url("img/zoom-plus-mini.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    float: left;
+    height: 18px;
+    left: 1px;
+    position: absolute;
+    top: -18px;
+    width: 100%;
+}
+#zoomBar_out {
+    background-image: url("img/zoom-minus-mini.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    float: left;
+    height: 18px;
+    left: 1px;
+    position: absolute;
+    bottom: -18px;
+    width: 100%;
+}
+#zoomBar_slider
+ {
+    float: left;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: none;
+    border: none;
+    /*overflow:hidden;*/
+}
+#zoomBar_slider .ui-slider-handle 
+{
+    background: url("img/slider.png");
+    cursor: pointer;
+    height: 8px;
+    min-height: 8px;
+    font-size :8px;
+    line-height:8px;
+    width: 100%;
+    background-position: center center;
+    background-repeat:no-repeat;
+    padding-left: 5px;
+    border:none;
+    outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#zoomBar_zonaMover_up:hover {
+    background-image: url("img/north-mini-hover.png");
+    background-position: center center;
+    cursor: pointer;
+    height: 16px;
+    left: 16px;
+    position: absolute;
+    top: 0;
+    width: 16px;
+}
+
+#zoomBar_zonaMover_down:hover {
+    background-image: url("img/south-mini-hover.png");
+    background-position: center center;
+    cursor: pointer;
+    height: 16px;
+    left: 16px;
+    position: absolute;
+    top: 32px;
+    width: 16px;
+}
+
+#zoomBar_zonaMover_left:hover {
+    background-image: url("img/west-mini-hover.png");
+    background-position: right -32px;
+    cursor: pointer;
+    height: 16px;
+    left: 0;
+    position: absolute;
+    top: 16px;
+    width: 16px;
+}
+
+#zoomBar_zonaMover_right:hover {
+    background-image: url("img/eest-mini-hover.png");
+    background-position: center center;
+    cursor: pointer;
+    height: 16px;
+    left: 32px;
+    position: absolute;
+    top: 16px;
+    width: 16px;
+}
+#zoomBar_zonaMover_center {
+    background-image: url("img/center.png");
+    background-position: center center;
+    cursor: pointer;
+    height: 16px;
+    left: 16px;
+    position: absolute;
+    top: 16px;
+    width: 16px;
+}
+#zoomBar_zonaMover_center:hover {
+    background-image: url("img/center-hover.png");
+    background-position: center center;
+    cursor: pointer;
+    height: 16px;
+    left: 16px;
+    position: absolute;
+    top: 16px;
+    width: 16px;
+}
+
+#zoomBar_zonaSlider_zoomIn {
+    background-image: url("img/zoom-plus-mini.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    float: left;
+    height: 32px;
+    left: 0;
+    position: relative;
+    top: 5px;
+    width: 100%;
+}
+#zoomBar_zonaSlider_zoomIn:hover {
+    background-image: url("img/zoom-plus-mini-hover.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    float: left;
+    height: 32px;
+    left: 0;
+    position: relative;
+    top: 5px;
+    width: 100%;
+}
+#zoomBar_zonaSlider_slider {
+    background-image: url("img/zoombar.png");
+    background-position: center center;
+    cursor: pointer;
+    float: left;
+    height: 124px;
+    left: 12px;
+    position: relative;
+    top: 5px;
+    width: 20px;
+}
+#knob {
+    width: 19px;
+    height: 8px;
+    cursor: pointer;
+    background-image: url(img/slider.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    left: 1px;
+}
+#zoomBar_zonaSlider_zoomOut {
+    background-image: url("img/zoom-minus-mini.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    float: left;
+    height: 32px;
+    left: 0;
+    position: relative;
+    top: 5px;
+    width: 100%;
+}
+#zoomBar_zonaSlider_zoomOut:hover {
+    background-image: url("img/zoom-minus-mini-hover.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    float: left;
+    height: 32px;
+    left: 0;
+    position: relative;
+    top: 5px;
+    width: 100%;
+}

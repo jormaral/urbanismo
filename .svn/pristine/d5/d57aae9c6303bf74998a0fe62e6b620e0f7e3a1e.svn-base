@@ -1,0 +1,111 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.importadores}"
+				view="/gestionfip/importadores/ImportadoresFipNavegacion.xhtml"
+				id="ImportadoresFipRutaMenu" propagation="none">
+
+			</s:link>
+
+					
+		</ice:panelGroup>
+			
+		
+		
+	</ui:define>
+	<ui:define name="body">
+
+		
+
+			<!--  Se define el cuerpo de la pagina -->
+			
+			<ice:panelGroup columns="4" styleClass="centerHome">
+			
+				<s:link view="/gestionfip/importadores/Entidades.xhtml" id="EntidadesNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/02_07_01_ENTIDADES.png"
+						alt="#{messages.entidades}" title="#{messages.entidades}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/gestionfip/importadores/Determinaciones.xhtml" id="DeterminacionesNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/02_07_02_DETERMINACIONES.png"
+						alt="#{messages.determinaciones}" title="#{messages.determinaciones}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/gestionfip/importadores/CondicionesUrbanisticas.xhtml" id="CondicionesUrbanisticasNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/02_07_03_CONDICIONES_URBANISTICAS.png"
+						alt="#{messages.condicionesurbanisticas}" title="#{messages.condicionesurbanisticas}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link action="#{servicioImportacionGeometrias.reiniciarElementos()}" id="GeometriasEntidadesNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/02_07_04_GEOMETRIAS_ENTIDADES.png"
+						alt="#{messages.geometriasentidades}" title="#{messages.geometriasentidades}" styleClass="iconoNav"/>
+				</s:link>	
+				
+				<!--
+				<s:link view="/gestionfip/importadores/modeloc/Entidades.xhtml"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/02_07_05_ENTIDADES_C.png"
+						alt="#{messages.entidadesCanarias}" title="#{messages.entidadesCanarias}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/gestionfip/importadores/modeloc/Determinaciones.xhtml"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/02_07_06_DETERMINACIONES_C.png"
+						alt="#{messages.determinacionesCanarias}" title="#{messages.determinacionesCanarias}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/gestionfip/importadores/modeloc/CondicionesUrbanisticas.xhtml"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/02_07_07_CONDICIONES_URBANISTICAS_C.png"
+						alt="#{messages.condicionesurbanisticasCanarias}" title="#{messages.condicionesurbanisticasCanarias}" styleClass="iconoNav"/>
+				</s:link>
+				
+				 -->
+				<s:link view="/gestionfip/GestionFipNavegacion.xhtml" id="VolverProcesamientoFipNavegacionMenu" 
+					propagation="none">
+					<h:graphicImage
+						value="/img/editorfip/#{localeSelector.language}/navegacion/00_VOLVER.png"
+						alt="#{messages.menu_volver}"
+						title="#{messages.menu_volver}" styleClass="iconoNav"/>
+				</s:link>
+
+			</ice:panelGroup>
+
+		
+
+
+	</ui:define>
+
+</ui:composition>

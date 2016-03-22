@@ -1,0 +1,158 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_proceso_validacion}"
+				view="/gestionfip/validaciones/ProcesoValidacionList.xhtml"
+				id="ProcesoValidacionNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_elementos_validados}"
+				view="/gestionfip/validaciones/ElementosValidadosList.xhtml"
+				id="ElementosValidadosNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+	</ui:define>
+
+	<ui:define name="buscar">
+		<!--  Se define el buscar	
+		 <h:graphicImage value="/img/editorfip/#{localeSelector.language}/comun/buscar.png"/> -->
+
+	</ui:define>
+
+	<ui:define name="body">
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+			<ice:form id="formEVList">
+				<h:panelGrid columns="4">
+
+					<h:outputLabel value="" />
+
+					<ice:panelGroup>
+						<ice:outputLabel value="#{messages.ver}" />
+						<ice:selectOneMenu partialSubmit="true"
+							valueChangeListener="#{listaElementosValidados.filtrarLista}">
+							<f:selectItem itemLabel="#{messages.todos}" itemValue="T" />
+							<f:selectItem itemLabel="#{messages.validados}" itemValue="V" />
+							<f:selectItem itemLabel="#{messages.novalidados}" itemValue="NV" />
+						</ice:selectOneMenu>
+					</ice:panelGroup>
+
+					<h:outputLabel value="" />
+					<h:outputLabel value="" />
+
+				</h:panelGrid>
+
+
+
+				<ice:panelGroup styleClass="iconodescargaexcel"
+					rendered="#{not empty listaElementosValidados.listaElementos}">
+					<ice:panelGrid columns="2">
+						<ice:dataExporter for="listaProcesosV" label="Descargar en EXCEL"
+							type="excel"
+							image="/img/editorfip/#{localeSelector.language}/comun/excel.jpg"
+							popupBlockerLabel="Bloqueador de Ventanas Emergentes detectado. Pulse aqui para descargar..."
+							clickToCreateFileText="(Descargar en EXCEL)" />
+
+						<ice:dataExporter for="listaProcesosV" label="Descargar en CSV"
+							type="csv"
+							image="/img/editorfip/#{localeSelector.language}/comun/csv.jpg"
+							popupBlockerLabel="Bloqueador de Ventanas Emergentes detectado. Pulse aqui para descargar..."
+							clickToCreateFileText="(Descargar en CSV)" />
+					</ice:panelGrid>
+				</ice:panelGroup>
+
+				<ice:dataTable value="#{listaElementosValidados.listaElementos}"
+					var="elementoVal" id="listaProcesosV" enableContextMenu="false"
+					selectionMode="none" style="position:static;z-index:-1;">
+
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.elementosvalidados_tipoval}" />
+						</f:facet>
+						<h:outputText
+							value="#{elementoVal.tipoValidacion.nombrevalidacion}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.elementosvalidados_nombreval}" />
+						</f:facet>
+						<h:outputText value="#{elementoVal.nombrevalidacion}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.elementosvalidados_obj}" />
+						</f:facet>
+						<h:outputText value="#{elementoVal.objetovalidado}" />
+					</ice:column>
+
+					<ice:column style="xls-column-export:false">
+						<f:facet name="header">
+							<ice:outputText value="#{messages.elementosvalidados_validado}" />
+						</f:facet>
+						<h:outputText value="#{messages.si}"
+							rendered="#{elementoVal.validacionok}" />
+						<h:outputText value="#{messages.no}"
+							rendered="#{!elementoVal.validacionok}" />
+
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText
+								value="#{messages.elementosvalidados_observaciones}" />
+						</f:facet>
+						<h:outputText value="#{elementoVal.observacionesvalidacion}" />
+					</ice:column>
+
+				</ice:dataTable>
+			</ice:form>
+		</ice:panelGroup>
+	</ui:define>
+
+
+
+</ui:composition>

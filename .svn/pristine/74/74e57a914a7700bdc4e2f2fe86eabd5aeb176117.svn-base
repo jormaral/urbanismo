@@ -1,0 +1,201 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_verlistado_fip2generados}"
+				view="/gestionfip/generacionfip2/Fip2GeneradosList.xhtml"
+				id="Fip2GeneradosListRutaMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+	</ui:define>
+
+
+
+	<ui:define name="body">
+
+		<ice:form>
+
+			<ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+
+
+
+				<ice:panelGroup>
+					<ice:commandButton value="Refrescar" styleClass="boton2" partialSubmit="true"
+						action="#{listadoFipGenerado.refrescarLista()}" />
+
+					<s:button value="#{messages.botongenerico_crear}"
+						view="/gestionfip/generacionfip2/CrearFIP2.seam"
+						propagation="nest" styleClass="boton1 botonCrear"
+						alt="#{messages.botongenerico_crear}"
+						title="#{messages.boton_title_Fip2Lista_crear}">
+						<f:param name="identificador" />
+					</s:button>
+				</ice:panelGroup>
+
+
+
+				<br></br>
+
+
+				<!--   - - - - - - - - - - - - - -
+			
+					T A B L A
+			
+				 - - - - - - - - - - - - - - - - - -  -->
+				<ice:dataTable value="#{listadoFipGenerado.listado}"
+					var="item"  id="listaDeFIPs2"
+					scrollHeight="600px">
+
+					<!-- <ice:column>
+						<center>
+							<h:selectBooleanCheckbox
+								value="#{listadoFipGenerado.seleccion[item.getId()]}"
+								onchange="javascript: pintarFilaSeleccionada(this)"
+								id="checkbox" />
+						</center>
+					</ice:column> -->
+
+					<ice:column style="text-align:center;">
+						<f:facet name="header">
+							<h:outputText value="#{messages.fechaGeneracion}" />
+						</f:facet>
+						<h:outputText value="#{item.fechaGeneracion}">
+							<f:convertDateTime pattern="dd/MM/yyyy, HH:mm" />
+						</h:outputText>
+					</ice:column>
+
+					<ice:column style="text-align:center;height:35px;">
+						<f:facet name="header">
+							<h:outputText value="#{messages.gestionusuario_usuario_nombre}" />
+						</f:facet>
+						<h:outputText value="#{item.nombre}" />
+					</ice:column>
+
+					<!-- ESTADO -->
+					<ice:column style="text-align:center;">
+						<f:facet name="header">
+							<h:outputText value="#{messages.fip1_estado_cabecera}" />
+						</f:facet>
+						<b> <h:outputText value="Errores" style="color:red"
+								rendered="#{item.estado=='ERRORES'}" /> <h:outputText
+								value="#{messages.fip2_estado_creando}" style="color:orange"
+								rendered="#{item.estado=='CREANDO'}" /> <h:outputText
+								value="#{messages.fip2_estado_creado}" style="color:green"
+								rendered="#{item.estado=='CREADO'}" /> </b>
+					</ice:column>
+
+					<ice:column style="text-align:center;height:35px;">
+						<f:facet name="header">
+							<h:outputText value="#{messages.ambito}" />
+						</f:facet>
+						<h:outputText
+							value="#{conversionFIPXML.nombreAmbitoDelTramite(item.idTramiteEncargado)}" />
+					</ice:column>
+
+					<ice:column style="text-align:center;">
+						<f:facet name="header">
+							<h:outputText value="#{messages.version}" />
+						</f:facet>
+						<h:outputText value="#{item.version}" />
+					</ice:column>
+					
+					<!-- Descargar ZIP -->
+					<ice:column style="text-align:center;">
+						<f:facet name="header">
+							<h:outputText value="Descargar FIP ZIP" />
+						</f:facet>
+						
+						<ice:commandButton value="Generar FIP ZIP" id="generarzipBtn" partialSubmit="true"
+							rendered="#{item.estado=='CREADO' and item.fipzip=='NOCREADO'}"
+							action="#{generarFipSincrono.generarFIP2ZIP(item.id)}"
+							styleClass="boton2">
+						</ice:commandButton>
+						
+						<ice:outputResource id="zip-button"
+							rendered="#{item.fipzip!='NOCREADO'}"
+							resource="#{resourceBean.obtenerResource(item.fipzip)}"
+							mimeType="application/zip" fileName="fip.zip"
+							shared="false" styleClass="hiperenlace enlaceAzul">
+						</ice:outputResource>
+
+					</ice:column>
+
+					<!-- Descargar -->
+					<ice:column style="text-align:center;">
+						<f:facet name="header">
+							<h:outputText value="Descargar FIP XML" />
+						</f:facet>
+
+						<ice:outputResource id="pdf-button"
+							rendered="#{item.estado=='CREADO'}"
+							resource="#{resourceBean.obtenerResource(item.url)}"
+							mimeType="application/xml" fileName="#{item.nombreArchivo}"
+							shared="false" styleClass="hiperenlace enlaceAzul">
+						</ice:outputResource>
+
+					</ice:column>
+
+					<!-- ACCION -->
+					<ice:column style="text-align:center;">
+						<f:facet name="header">
+							<h:outputText value="#{messages.accion}" />
+						</f:facet>
+
+						<ice:commandButton value="#{messages.borrar}" id="cborrarBtn"
+							panelConfirmation="borrarConfirm"
+							action="#{generarFipSincrono.borrarFIP2(item.id)}"
+							styleClass="boton2">
+						</ice:commandButton>
+
+						<ice:panelConfirmation id="borrarConfirm"
+							message="Va a borrar el FIP2" styleClass="boton1"
+							acceptLabel="#{messages.botongenerico_aceptar}"
+							cancelLabel="#{messages.botongenerico_cancelar}" title="Borrar" />
+
+					</ice:column>
+
+				</ice:dataTable>
+
+
+			</ice:panelGroup>
+
+		</ice:form>
+
+	</ui:define>
+
+</ui:composition>

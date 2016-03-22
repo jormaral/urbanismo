@@ -1,0 +1,478 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component" 
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="operacion" styleClass="edit">
+     <ice:panelGroup  id="editoperacionGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="editTextBoxId" value="#{operacionHome.managed ? 'Edit' : 'Add'} operacion"/>
+                  </td>
+              </tr>
+          </table>
+
+        <ice:panelGroup id="editPanelGroupId" styleClass="edit">		 
+
+
+            <s:decorate id="idenField" template="../layout/edit.xhtml">
+                <ui:define name="label">Iden</ui:define>
+                        <ice:inputText id="iden"
+			                partialSubmit="true"
+                       required="true"
+                       disabled="#{operacionHome.managed}"
+                                    value="#{operacionHome.instance.iden}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+
+
+
+
+
+
+            <s:decorate id="ordenField" template="../layout/edit.xhtml">
+                <ui:define name="label">Orden</ui:define>
+                        <ice:inputText id="orden"
+			                partialSubmit="true"
+                       required="true"
+                                    value="#{operacionHome.instance.orden}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="textoField" template="../layout/edit.xhtml">
+                <ui:define name="label">Texto</ui:define>
+                <ice:inputTextarea id="texto"
+                               cols="80"
+                               rows="3"
+                              value="#{operacionHome.instance.texto}"/>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+          </ice:panelGroup>
+       </ice:panelGroup>
+                  
+       <div class="actionButtons">
+        
+            <ice:commandButton id="save" 
+                          value="Save" 
+                         action="#{operacionHome.persist}"
+                       disabled="#{!operacionHome.wired}"
+                       rendered="#{!operacionHome.managed}"/>  
+                          			  
+            <ice:commandButton id="update" 
+                          value="Save" 
+                         action="#{operacionHome.update}"
+                       rendered="#{operacionHome.managed}"/>
+                        			  
+            <ice:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{operacionHome.remove}"
+                      immediate="true"
+                       rendered="#{operacionHome.managed}"/>
+                    
+            <s:button id="cancelEdit" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/Operacion.xhtml"
+                rendered="#{operacionHome.managed}"/>
+                
+            <s:button id="cancelAddoperacionHome" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/#{empty operacionFrom ? 'OperacionList' : operacionFrom}.xhtml"
+                rendered="#{!operacionHome.managed}"/>
+                
+        </div>
+        
+    </ice:form>
+
+ <ice:form id="form2operacionHome">  
+        <ice:panelTabSet id="editPanelTaboperacionHomeId" styleClass="componentPanelTabSetLayout" style="margin-bottom:5px;margin-top:10px;">
+ 	<ice:panelTab id="editPanelTaboperaciondeterminacionsId" label="Operaciondeterminacions">
+        <div class="association" id="operaciondeterminacionsChildren">
+        
+            <h:outputText value="There are no operaciondeterminacions associated with this operacion." 
+	                     id="editoperaciondeterminacionsTextId"
+                       rendered="#{empty operacionHome.operaciondeterminacions}"/>
+           <ice:dataTable value="#{operacionHome.operaciondeterminacions}" 
+                           var="operaciondeterminacion" 
+                      rendered="#{not empty operacionHome.operaciondeterminacions}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+			  columnClasses="allCols"
+                            id="editoperaciondeterminacionsTable">
+                <ice:column id="editidenId">
+                    <f:facet name="header">Iden</f:facet>
+                    <h:outputText id="editidenTextId" value="#{operaciondeterminacion.iden}"/>
+                </ice:column>
+                <ice:column id="editidtipooperaciondetId">
+                    <f:facet name="header">Idtipooperaciondet</f:facet>
+                    <h:outputText id="editidtipooperaciondetTextId" value="#{operaciondeterminacion.idtipooperaciondet}"/>
+                </ice:column>
+                <ice:column id="editoperaciondeterminacionId">
+                    <f:facet name="header">Action</f:facet>
+                    <s:link view="/seam/Operaciondeterminacion.xhtml" 
+                              id="selectoperaciondeterminacion" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="operaciondeterminacionIden" 
+                                value="#{operaciondeterminacion.iden}"/>
+                        <f:param name="operaciondeterminacionFrom" value="Operacion"/>
+                    </s:link>
+                </ice:column>
+           </ice:dataTable>
+      </div>
+        <f:subview rendered="#{operacionHome.managed}" id="operaciondeterminacionsId">
+        <div class="actionButtons">
+            <s:button id="addoperaciondeterminacionId" 
+                   value="Add operaciondeterminacion"
+                    view="/seam/OperaciondeterminacionEdit.xhtml"
+             propagation="none">
+                 <f:param name="operacionIden" 
+                         value="#{operacionHome.instance.iden}"/>
+                 <f:param name="operaciondeterminacionFrom" value="Operacion"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </ice:panelTab>
+ 	<ice:panelTab id="editPanelTaboperaciondeterminacions_1Id" label="Operaciondeterminacions_1">
+        <div class="association" id="operaciondeterminacions_1Children">
+        
+            <h:outputText value="There are no operaciondeterminacions_1 associated with this operacion." 
+	                     id="editoperaciondeterminacions_1TextId"
+                       rendered="#{empty operacionHome.operaciondeterminacions_1}"/>
+           <ice:dataTable value="#{operacionHome.operaciondeterminacions_1}" 
+                           var="operaciondeterminacion" 
+                      rendered="#{not empty operacionHome.operaciondeterminacions_1}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+			  columnClasses="allCols"
+                            id="editoperaciondeterminacions_1Table">
+                <ice:column id="editidenId">
+                    <f:facet name="header">Iden</f:facet>
+                    <h:outputText id="editidenTextId" value="#{operaciondeterminacion.iden}"/>
+                </ice:column>
+                <ice:column id="editidtipooperaciondetId">
+                    <f:facet name="header">Idtipooperaciondet</f:facet>
+                    <h:outputText id="editidtipooperaciondetTextId" value="#{operaciondeterminacion.idtipooperaciondet}"/>
+                </ice:column>
+                <ice:column id="editoperaciondeterminacionId">
+                    <f:facet name="header">Action</f:facet>
+                    <s:link view="/seam/Operaciondeterminacion.xhtml" 
+                              id="selectoperaciondeterminacion" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="operaciondeterminacionIden" 
+                                value="#{operaciondeterminacion.iden}"/>
+                        <f:param name="operaciondeterminacionFrom" value="Operacion"/>
+                    </s:link>
+                </ice:column>
+           </ice:dataTable>
+      </div>
+        <f:subview rendered="#{operacionHome.managed}" id="operaciondeterminacions_1Id">
+        <div class="actionButtons">
+            <s:button id="addoperaciondeterminacionId" 
+                   value="Add operaciondeterminacion"
+                    view="/seam/OperaciondeterminacionEdit.xhtml"
+             propagation="none">
+                 <f:param name="operacionIden" 
+                         value="#{operacionHome.instance.iden}"/>
+                 <f:param name="operaciondeterminacionFrom" value="Operacion"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </ice:panelTab>
+ 	<ice:panelTab id="editPanelTaboperacionentidadsId" label="Operacionentidads">
+        <div class="association" id="operacionentidadsChildren">
+        
+            <h:outputText value="There are no operacionentidads associated with this operacion." 
+	                     id="editoperacionentidadsTextId"
+                       rendered="#{empty operacionHome.operacionentidads}"/>
+           <ice:dataTable value="#{operacionHome.operacionentidads}" 
+                           var="operacionentidad" 
+                      rendered="#{not empty operacionHome.operacionentidads}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+			  columnClasses="allCols"
+                            id="editoperacionentidadsTable">
+                <ice:column id="editidenId">
+                    <f:facet name="header">Iden</f:facet>
+                    <h:outputText id="editidenTextId" value="#{operacionentidad.iden}"/>
+                </ice:column>
+                <ice:column id="editidtipooperacionentId">
+                    <f:facet name="header">Idtipooperacionent</f:facet>
+                    <h:outputText id="editidtipooperacionentTextId" value="#{operacionentidad.idtipooperacionent}"/>
+                </ice:column>
+                <ice:column id="editoperacionentidadId">
+                    <f:facet name="header">Action</f:facet>
+                    <s:link view="/seam/Operacionentidad.xhtml" 
+                              id="selectoperacionentidad" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="operacionentidadIden" 
+                                value="#{operacionentidad.iden}"/>
+                        <f:param name="operacionentidadFrom" value="Operacion"/>
+                    </s:link>
+                </ice:column>
+           </ice:dataTable>
+      </div>
+        <f:subview rendered="#{operacionHome.managed}" id="operacionentidadsId">
+        <div class="actionButtons">
+            <s:button id="addoperacionentidadId" 
+                   value="Add operacionentidad"
+                    view="/seam/OperacionentidadEdit.xhtml"
+             propagation="none">
+                 <f:param name="operacionIden" 
+                         value="#{operacionHome.instance.iden}"/>
+                 <f:param name="operacionentidadFrom" value="Operacion"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </ice:panelTab>
+ 	<ice:panelTab id="editPanelTaboperacionentidads_1Id" label="Operacionentidads_1">
+        <div class="association" id="operacionentidads_1Children">
+        
+            <h:outputText value="There are no operacionentidads_1 associated with this operacion." 
+	                     id="editoperacionentidads_1TextId"
+                       rendered="#{empty operacionHome.operacionentidads_1}"/>
+           <ice:dataTable value="#{operacionHome.operacionentidads_1}" 
+                           var="operacionentidad" 
+                      rendered="#{not empty operacionHome.operacionentidads_1}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+			  columnClasses="allCols"
+                            id="editoperacionentidads_1Table">
+                <ice:column id="editidenId">
+                    <f:facet name="header">Iden</f:facet>
+                    <h:outputText id="editidenTextId" value="#{operacionentidad.iden}"/>
+                </ice:column>
+                <ice:column id="editidtipooperacionentId">
+                    <f:facet name="header">Idtipooperacionent</f:facet>
+                    <h:outputText id="editidtipooperacionentTextId" value="#{operacionentidad.idtipooperacionent}"/>
+                </ice:column>
+                <ice:column id="editoperacionentidadId">
+                    <f:facet name="header">Action</f:facet>
+                    <s:link view="/seam/Operacionentidad.xhtml" 
+                              id="selectoperacionentidad" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="operacionentidadIden" 
+                                value="#{operacionentidad.iden}"/>
+                        <f:param name="operacionentidadFrom" value="Operacion"/>
+                    </s:link>
+                </ice:column>
+           </ice:dataTable>
+      </div>
+        <f:subview rendered="#{operacionHome.managed}" id="operacionentidads_1Id">
+        <div class="actionButtons">
+            <s:button id="addoperacionentidadId" 
+                   value="Add operacionentidad"
+                    view="/seam/OperacionentidadEdit.xhtml"
+             propagation="none">
+                 <f:param name="operacionIden" 
+                         value="#{operacionHome.instance.iden}"/>
+                 <f:param name="operacionentidadFrom" value="Operacion"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </ice:panelTab>
+ 	<ice:panelTab id="editPanelTaboperacionrelacionsId" label="Operacionrelacions">
+        <div class="association" id="operacionrelacionsChildren">
+        
+            <h:outputText value="There are no operacionrelacions associated with this operacion." 
+	                     id="editoperacionrelacionsTextId"
+                       rendered="#{empty operacionHome.operacionrelacions}"/>
+           <ice:dataTable value="#{operacionHome.operacionrelacions}" 
+                           var="operacionrelacion" 
+                      rendered="#{not empty operacionHome.operacionrelacions}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+			  columnClasses="allCols"
+                            id="editoperacionrelacionsTable">
+                <ice:column id="editidenId">
+                    <f:facet name="header">Iden</f:facet>
+                    <h:outputText id="editidenTextId" value="#{operacionrelacion.iden}"/>
+                </ice:column>
+                <ice:column id="editidtipooperacionrelId">
+                    <f:facet name="header">Idtipooperacionrel</f:facet>
+                    <h:outputText id="editidtipooperacionrelTextId" value="#{operacionrelacion.idtipooperacionrel}"/>
+                </ice:column>
+                <ice:column id="editoperacionrelacionId">
+                    <f:facet name="header">Action</f:facet>
+                    <s:link view="/seam/Operacionrelacion.xhtml" 
+                              id="selectoperacionrelacion" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="operacionrelacionIden" 
+                                value="#{operacionrelacion.iden}"/>
+                        <f:param name="operacionrelacionFrom" value="Operacion"/>
+                    </s:link>
+                </ice:column>
+           </ice:dataTable>
+      </div>
+        <f:subview rendered="#{operacionHome.managed}" id="operacionrelacionsId">
+        <div class="actionButtons">
+            <s:button id="addoperacionrelacionId" 
+                   value="Add operacionrelacion"
+                    view="/seam/OperacionrelacionEdit.xhtml"
+             propagation="none">
+                 <f:param name="operacionIden" 
+                         value="#{operacionHome.instance.iden}"/>
+                 <f:param name="operacionrelacionFrom" value="Operacion"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </ice:panelTab>
+ 	<ice:panelTab id="editPanelTaboperacionrelacions_1Id" label="Operacionrelacions_1">
+        <div class="association" id="operacionrelacions_1Children">
+        
+            <h:outputText value="There are no operacionrelacions_1 associated with this operacion." 
+	                     id="editoperacionrelacions_1TextId"
+                       rendered="#{empty operacionHome.operacionrelacions_1}"/>
+           <ice:dataTable value="#{operacionHome.operacionrelacions_1}" 
+                           var="operacionrelacion" 
+                      rendered="#{not empty operacionHome.operacionrelacions_1}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+			  columnClasses="allCols"
+                            id="editoperacionrelacions_1Table">
+                <ice:column id="editidenId">
+                    <f:facet name="header">Iden</f:facet>
+                    <h:outputText id="editidenTextId" value="#{operacionrelacion.iden}"/>
+                </ice:column>
+                <ice:column id="editidtipooperacionrelId">
+                    <f:facet name="header">Idtipooperacionrel</f:facet>
+                    <h:outputText id="editidtipooperacionrelTextId" value="#{operacionrelacion.idtipooperacionrel}"/>
+                </ice:column>
+                <ice:column id="editoperacionrelacionId">
+                    <f:facet name="header">Action</f:facet>
+                    <s:link view="/seam/Operacionrelacion.xhtml" 
+                              id="selectoperacionrelacion" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="operacionrelacionIden" 
+                                value="#{operacionrelacion.iden}"/>
+                        <f:param name="operacionrelacionFrom" value="Operacion"/>
+                    </s:link>
+                </ice:column>
+           </ice:dataTable>
+      </div>
+        <f:subview rendered="#{operacionHome.managed}" id="operacionrelacions_1Id">
+        <div class="actionButtons">
+            <s:button id="addoperacionrelacionId" 
+                   value="Add operacionrelacion"
+                    view="/seam/OperacionrelacionEdit.xhtml"
+             propagation="none">
+                 <f:param name="operacionIden" 
+                         value="#{operacionHome.instance.iden}"/>
+                 <f:param name="operacionrelacionFrom" value="Operacion"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </ice:panelTab>
+   
+ 	<ice:panelTab id="editTabtramiteId" label="Tramite *" >
+		<div class="association" id="tramiteParent">
+    
+        	<h:outputText id="edittramiteTextId" value="There is no tramite associated with this operacion." 
+                   rendered="#{operacionHome.instance.tramite == null}"/>
+       	<ice:dataTable var="tramite" 
+                   value="#{operacionHome.instance.tramite}" 
+                rendered="#{operacionHome.instance.tramite != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+		  columnClasses="allCols"
+                      id="edittramiteTableId">
+            <ice:column id="$editColumnidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{tramite.iden}
+            </ice:column>
+            <ice:column id="$editColumncodigofipId">
+                <f:facet name="header">Codigofip</f:facet>
+                #{tramite.codigofip}
+            </ice:column>
+            <ice:column id="$editColumncomentarioId">
+                <f:facet name="header">Comentario</f:facet>
+                #{tramite.comentario}
+            </ice:column>
+            <ice:column id="$editColumnfechaId">
+                <f:facet name="header">Fecha</f:facet>
+                #{tramite.fecha}
+            </ice:column>
+            <ice:column id="$editColumnfechaconsolidacionId">
+                <f:facet name="header">Fechaconsolidacion</f:facet>
+                #{tramite.fechaconsolidacion}
+            </ice:column>
+            <ice:column id="$editColumnidcentroproduccionId">
+                <f:facet name="header">Idcentroproduccion</f:facet>
+                #{tramite.idcentroproduccion}
+            </ice:column>
+            <ice:column id="$editColumnidorganoId">
+                <f:facet name="header">Idorgano</f:facet>
+                #{tramite.idorgano}
+            </ice:column>
+            <ice:column id="$editColumnidsentidoId">
+                <f:facet name="header">Idsentido</f:facet>
+                #{tramite.idsentido}
+            </ice:column>
+            <ice:column id="$editColumnidtipotramiteId">
+                <f:facet name="header">Idtipotramite</f:facet>
+                #{tramite.idtipotramite}
+            </ice:column>
+            <ice:column id="$editColumniteracionId">
+                <f:facet name="header">Iteracion</f:facet>
+                #{tramite.iteracion}
+            </ice:column>
+            <ice:column id="$editColumnnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{tramite.nombre}
+            </ice:column>
+            <ice:column id="$editColumnnumeroacuerdoId">
+                <f:facet name="header">Numeroacuerdo</f:facet>
+                #{tramite.numeroacuerdo}
+            </ice:column>
+            <ice:column id="$editColumnplanId">
+	    	    <f:facet name="header">Plan iden</f:facet>
+		    	#{tramite.plan.iden}
+            </ice:column>
+            <ice:column id="$editColumntextoId">
+                <f:facet name="header">Texto</f:facet>
+                #{tramite.texto}
+            </ice:column>
+            <ice:column id="editColumntramiteLinkId">
+                <f:facet name="header">Action</f:facet>
+                <s:link view="/seam/Tramite.xhtml" 
+                         id="viewtramite" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="tramiteIden" 
+                           value="#{tramite.iden}"/>
+                </s:link>
+            </ice:column>
+      </ice:dataTable>
+        <div class="actionButtons">
+            <s:button value="Select tramite"
+	              id="selectParent"
+                      view="/seam/TramiteList.xhtml">
+                <f:param name="from" value="OperacionEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+
+
+

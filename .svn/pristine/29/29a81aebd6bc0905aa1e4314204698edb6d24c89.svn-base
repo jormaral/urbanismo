@@ -1,0 +1,101 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="body">
+
+		<ice:form id="formularioCopiarCUEntidades">
+
+			<ice:panelPopup id="panelEntPadre" autoCentre="true" modal="true"
+				styleClass="panelPopup" visible="true">
+
+
+				<f:facet name="header">
+					<ice:panelGroup>
+						<ice:outputText value="#{messages.entidad_cu_copiar}" />
+						<s:button id="modalPnlCloseBtnEntP"
+							image="/fipeditor/img/editorfip/es/comun/cerrar_popup.png"
+							styleClass="popupHeaderImage"
+							view="/produccionfip/gestionentidades/VerEntidadPlanEncargado.xhtml"
+							propagation="none" title="#{messages.botongenerico_cerrar}"
+							alt="#{messages.botongenerico_cerrar}" />
+					</ice:panelGroup>
+				</f:facet>
+
+				<f:facet name="body">
+
+					<!-- TRee values -->
+					<ice:panelGroup styleClass="arbol" scrollHeight="400px"
+						scrollWidth="40em">
+						<ice:tree id="treeEntP" value="#{gestionArbolCopiarCU.model}"
+							var="node" binding="#{gestionArbolCopiarCU.treeComponent}"
+							imageDir="/fipeditor/img/editorfip/es/arboles/"
+							hideRootNode="false" hideNavigation="false"
+							actionListener="#{gestionArbolCopiarCU.menuEvent}">
+							<ice:treeNode>
+
+
+								<f:facet name="icon">
+									<ice:panelGroup style="display:inline;">
+										<h:graphicImage
+											value="/img/editorfip/es/arboles/#{node.userObject.icon}" />
+
+									</ice:panelGroup>
+								</f:facet>
+								<f:facet name="content">
+									<ice:panelGroup style="display:inline;">
+										<ice:panelGroup
+											styleClass="selectedNode#{node.userObject eq gestionArbolCopiarCU.selectedUserObject}"
+											style="display:inline;">
+
+											<ice:selectBooleanCheckbox id="checkTram"
+												partialSubmit="true" value="#{node.userObject.seleccionado}"
+												valueChangeListener="#{gestionArbolCopiarCU.processValueChange}">
+											</ice:selectBooleanCheckbox>
+
+
+											<ice:outputText id="TreeNode" value="#{node.userObject.text}" />
+
+										</ice:panelGroup>
+									</ice:panelGroup>
+								</f:facet>
+
+							</ice:treeNode>
+						</ice:tree>
+
+						<ice:commandButton id="botonSelCUTram"
+							value="Copiar CU"
+							rendered="#{gestionArbolCopiarCU.renderizarBtnSelTramite()}"
+							panelConfirmation="copiarCUConfirm"
+							action="#{gestionArbolCopiarCU.copiarCUsSeleccionadasEnNuevaEntidad()}"
+							styleClass="boton4" alt="#{messages.entidades_copiarcu}"
+							title="Copiar" />
+							
+							<ice:panelConfirmation id="copiarCUConfirm"
+								title="Confirmar la copia de CU"
+								message="¿Desea copiar las CUs en la entidad seleccionada?. Este proceso puede tardar un tiempo"
+								acceptLabel="#{messages.botongenerico_aceptar}" cancelLabel="#{messages.botongenerico_cancelar}"
+								styleClass="boton1" />
+
+						<s:button styleClass="boton1"
+							value="#{messages.botongenerico_cancelar}"
+							view="/produccionfip/gestionentidades/VerEntidadPlanEncargado.xhtml"
+							title="#{messages.botongenerico_cancelar}"
+							alt="#{messages.botongenerico_cancelar}" />
+
+					</ice:panelGroup>
+				</f:facet>
+			</ice:panelPopup>
+
+		</ice:form>
+
+
+	</ui:define>
+
+</ui:composition>

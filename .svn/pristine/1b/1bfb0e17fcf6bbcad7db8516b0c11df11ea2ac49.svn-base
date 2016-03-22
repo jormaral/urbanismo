@@ -1,0 +1,1444 @@
+/*
+ * Copyright 2011 red.es
+ * Autores: Arnaiz Consultores.
+ *
+ ** Licencia con arreglo a la EUPL, Versión 1.1 o -en cuanto
+ * sean aprobadas por la Comision Europea- versiones
+ * posteriores de la EUPL (la <<Licencia>>);
+ * Solo podra usarse esta obra si se respeta la Licencia.
+ * Puede obtenerse una copia de la Licencia en:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Salvo cuando lo exija la legislacion aplicable o se acuerde.
+ * por escrito, el programa distribuido con arreglo a la
+ * Licencia se distribuye <<TAL CUAL>>,
+ * SIN GARANTIAS NI CONDICIONES DE NINGUN TIPO, ni expresas
+ * ni implicitas.
+ * Vease la Licencia en el idioma concreto que rige
+ * los permisos y limitaciones que establece la Licencia.
+ */
+package es.mitc.redes.urbanismoenred.servicios.planeamiento;
+
+import java.io.File;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentoplan;
+import es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan;
+import es.mitc.redes.urbanismoenred.data.rpm.diccionario.Organo;
+import es.mitc.redes.urbanismoenred.data.rpm.diccionario.Sentido;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Ambitoaplicacionambito;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinaciongrupoentidad;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documento;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documentodeterminacion;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documentoentidad;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documentoshp;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidadlin;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidadpnt;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidadpol;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Opciondeterminacion;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operaciondeterminacion;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionentidad;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Planshp;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.PropiedadesUnidad;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Propiedadrelacion;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Regimenespecifico;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.RegulacionEspecifica;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Relacion;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion;
+import es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vinculocaso;
+import es.mitc.redes.urbanismoenred.servicios.comunes.GestionIntroduccionFIPenSistemaLocal;
+import es.mitc.redes.urbanismoenred.servicios.dal.ExcepcionPersistencia;
+import es.mitc.redes.urbanismoenred.servicios.dal.GestorConsultasLocal;
+import es.mitc.redes.urbanismoenred.utils.excepciones.RedesException;
+import es.mitc.redes.urbanismoenred.utils.recursos.textos.Textos;
+
+/**
+ * Session Bean implementation class ServicioPlaneamientoBean
+ */
+@Stateless(name = "ServicioPlaneamiento")
+public class ServicioPlaneamientoBean implements ServicioPlaneamientoLocal {
+	
+	private class ComparadorPlanes implements Comparator<Plan> {
+
+		@Override
+		public int compare(Plan o1, Plan o2) {
+			return o1.getOrden()-o2.getOrden();
+		}
+		
+	}
+
+    private final static List<Integer> tipoTramitesRefundibles;
+
+    static {
+        tipoTramitesRefundibles = new ArrayList<Integer>();
+
+        String txtTtsRefundibles = Textos.getTexto("consola", "tipotramitesrefundibles");
+        String[] arrTtsRefundibles = txtTtsRefundibles.split(",");
+        for (String tt : arrTtsRefundibles) {
+            try {
+                tipoTramitesRefundibles.add(Integer.valueOf(tt));
+            } catch (Exception e) {
+                //Si no es numérico no lo añadimos a la caché y pasamos al siguiente
+            }
+        }
+    }
+    @PersistenceContext(unitName = "rpmv2")
+    private EntityManager em;
+    @EJB
+    private GestorConsultasLocal gestorConsultas;
+    @EJB
+    private GestionIntroduccionFIPenSistemaLocal gestorFips;
+	@EJB
+	private ServicioDiccionariosLocal servicioDiccionario;
+
+    /**
+     * Default constructor. 
+     */
+    public ServicioPlaneamientoBean() {
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#asociarOperacion(int, int)
+     */
+    @Override
+    public void asociarOperacion(int idPlan, int instrumento) throws ExcepcionPlaneamiento {
+        Plan planOperador = em.find(Plan.class, idPlan);
+
+        if (planOperador != null) {
+        	
+        	for (Operacionplan paraBorrar : planOperador.getOperacionplansForIdplanoperador()) {
+        		em.remove(paraBorrar);
+        	}
+        	
+            Operacionplan op = new Operacionplan();
+
+            try {
+                Instrumentotipooperacionplan itop = (Instrumentotipooperacionplan) em.createNamedQuery("Instrumentotipooperacionplan.buscar")
+                		.setParameter("idInstrumento", instrumento)
+                		.setParameter("idTipoOperacion", Integer.parseInt(Textos.getTexto("consola", "idTramiteNoProcede")))
+                		.getSingleResult();
+
+                op.setIdinstrumentotipooperacion(itop.getIden());
+                op.setPlanByIdplanoperador(planOperador);
+
+                em.persist(op);
+            } catch (NoResultException nre) {
+                throw new ExcepcionPlaneamiento("No se ha podido recuperar el instrumento para la operación y el plan indicado. Plan: " + idPlan + " instrumento: " + instrumento);
+            } catch (NonUniqueResultException nure) {
+                throw new ExcepcionPlaneamiento("Se han encontrado varios instrumentos para la operación y el plan. Plan: " + idPlan + " instrumento: " + instrumento);
+            }
+        } else {
+            throw new ExcepcionPlaneamiento("No se ha encontrado el plan operador. " + idPlan);
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#asociarOperacion(int, int, java.lang.Integer[], java.lang.Integer[])
+     */
+    @Override
+    public void asociarOperacion(int idPlan, int instrumento,
+            Integer[] planesOperados, Integer[] operaciones) throws ExcepcionPlaneamiento {
+        Plan planOperador = em.find(Plan.class, idPlan);
+
+        if (planOperador != null) {
+            if (planesOperados.length == operaciones.length) {
+            	
+            	for (Operacionplan paraBorrar : planOperador.getOperacionplansForIdplanoperador()) {
+            		em.remove(paraBorrar);
+            	}
+            	
+                Operacionplan op;
+                Plan planOperado;
+                Instrumentotipooperacionplan itop;
+                int idNaturaleza = 0;
+                for (int i = 0; i < planesOperados.length; i++) {
+                    op = new Operacionplan();
+                    planOperado = em.find(Plan.class, planesOperados[i]);
+                    if (planOperado != null) {
+                        if (operaciones[i] != null) {
+                        	try {
+	                        	itop = (Instrumentotipooperacionplan) em.createNamedQuery("Instrumentotipooperacionplan.buscar")
+	                            		.setParameter("idInstrumento", instrumento)
+	                            		.setParameter("idTipoOperacion", operaciones[i])
+	                            		.getSingleResult();
+                        	} catch (NoResultException nre) {
+                                throw new ExcepcionPlaneamiento("No se ha podido recuperar el instrumento para la operación y el plan indicado. Operación: " + operaciones[i] + " instrumento: " + instrumento);
+                            } catch (NonUniqueResultException nure) {
+                                throw new ExcepcionPlaneamiento("Se han encontrado varios instrumentos para la operación y el instrumento. Operación: " + operaciones[i] + " instrumento: " + instrumento);
+                            }
+                        	if (idNaturaleza > 0 && idNaturaleza != itop.getInstrumentoplan().getNaturaleza().getIden()) {
+                        		throw new ExcepcionPlaneamiento("No todos los instrumentos de las operaciones seleccionadas son de la misma naturaleza.");
+                        	} else if (itop.getInstrumentoplan().getNaturaleza() != null) {
+                        		idNaturaleza = itop.getInstrumentoplan().getNaturaleza().getIden();
+                        	}
+                        	
+                            op.setIdinstrumentotipooperacion(itop.getIden());
+                            op.setPlanByIdplanoperado(planOperado);
+                            op.setPlanByIdplanoperador(planOperador);
+                            em.persist(op);
+                        } else {
+                            throw new ExcepcionPlaneamiento("No se ha definido operación. Operador: " + idPlan + " Operado: " + planesOperados[i]);
+                        }
+                    } else {
+                        throw new ExcepcionPlaneamiento("No se ha encontrado el plan operado. " + planesOperados[i]);
+                    }
+                }
+            } else {
+                throw new ExcepcionPlaneamiento("No coincide la lista de planes con la lista de operaciones. Plan: " + idPlan);
+            }
+        } else {
+            throw new ExcepcionPlaneamiento("No se ha encontrado el plan operador. " + idPlan);
+        }
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#borrar(java.lang.Object)
+     */
+    @Override
+    public void borrar(Object objeto) throws ExcepcionPlaneamiento {
+        try {
+            em.remove(objeto);
+            em.flush();
+        } catch (IllegalArgumentException iae) {
+            throw new ExcepcionPlaneamiento("No es un objeto de base de datos");
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#borrarDeterminacion(int)
+     */
+    @Override
+    public void borrarDeterminacion(int identificador) throws ExcepcionPlaneamiento {
+        Determinacion det = em.find(Determinacion.class, identificador);
+
+        if (det != null) {
+            // LOW jgarzon esto está extraído del original, pero no creo que 
+            // esté completo ni que sea correcto. Ya que hay más dependencias que no se contemplan.
+            // Una determinación base está siendo utilizada si:
+
+            // 1. Aparece en alguna determinación como idbase
+            if (det.getDeterminacionsForIdpadre().size() > 0) {
+                throw new ExcepcionPlaneamiento("La determinación tiene hijas y no se puede borrar. Elimine sus determinaciones dependientes");
+            }
+
+            // 2. Aparece en alguna determinación como idpadre
+            if (det.getDeterminacionsForIddeterminacionbase().size() > 0) {
+                throw new ExcepcionPlaneamiento("La determinación está en uso y no se puede borrar.");
+            }
+            // 3. Aparece en alguna entidaddeterminacion
+            if (det.getEntidaddeterminacions().size() > 0) {
+                throw new ExcepcionPlaneamiento("La determinación está en uso y no se puede borrar.");
+            }
+
+            try {
+                em.remove(det);
+            } catch (Exception e) {
+                throw new ExcepcionPlaneamiento("Error al borrar la determinacion con identificador " + det.getIden() + ". Causa: " + e.getMessage());
+            }
+
+        } else {
+            throw new ExcepcionPlaneamiento("No se ha encontrado determinación con identificador " + identificador);
+        }
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#borrarEntidad(int)
+     */
+    @Override
+    public void borrarEntidad(int identificador) throws ExcepcionPlaneamiento {
+        Entidad ent = em.find(Entidad.class, identificador);
+
+        if (ent != null) {
+            if (ent.getEntidadsForIdpadre().size() > 0) {
+                throw new ExcepcionPlaneamiento("La entidad tiene hijas y no se puede borrar. Elimine sus entidades dependientes");
+            }
+
+            if (ent.getEntidadsForIdentidadbase().size() > 0) {
+                throw new ExcepcionPlaneamiento("La entidad está en uso y no se puede borrar.");
+            }
+
+            if (ent.getEntidaddeterminacions().size() > 0) {
+                throw new ExcepcionPlaneamiento("La entidad está en uso y no se puede borrar.");
+            }
+
+            try {
+                em.remove(ent);
+            } catch (Exception e) {
+                throw new ExcepcionPlaneamiento("Error al borrar la entidad con identificador " + ent.getIden() + ". Causa: " + e.getMessage());
+            }
+        } else {
+            throw new ExcepcionPlaneamiento("No se ha encontrado entidad con identificador " + identificador);
+        }
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#crearPlan(java.lang.String, int, java.lang.String, java.lang.Integer, java.lang.Integer)
+     */
+	@SuppressWarnings("unchecked")
+	@Override
+	public Plan crearPlan(String nombre, int ambito, String texto, Integer padre, Integer base)
+			throws ExcepcionPlaneamiento {
+		Plan plan = new Plan();
+		plan.setNombre(nombre);
+		plan.setTexto(texto);
+		plan.setIdambito(ambito);
+		plan.setBsuspendido(false);
+		
+		if (padre != null) {
+			Plan planPadre = em.find(Plan.class, padre);
+			if (planPadre != null) {
+				plan.setPlanByIdpadre(planPadre);
+			} else {
+				throw new ExcepcionPlaneamiento("No se ha encontrado plan padre con identificador: " + padre);
+			}
+		}
+		Plan planBase = null;
+		if (base != null) {
+			planBase = em.find(Plan.class, base);
+		} else {
+			List<Plan> planesBase = em.createNamedQuery("Plan.buscarPlanesBase").getResultList();
+			
+			if (planesBase.size() > 0) {
+				planBase = planesBase.get(0);
+			}
+		}
+		
+		plan.setPlanByIdplanbase(planBase);
+		
+		try {
+			Object codigo = em.createNamedQuery("Plan.buscarSiguienteCodigo").getSingleResult();
+			
+			if (codigo != null) {
+				plan.setCodigo(String.format("%05d", Integer.parseInt(codigo.toString())+1));
+			} else {
+				plan.setCodigo(String.format("%05d", 1));
+			}
+			
+		} catch (NoResultException nre) {
+			plan.setCodigo(String.format("%05d", 1));
+		} catch (NonUniqueResultException nure) {
+			throw new ExcepcionPlaneamiento("Se han obtenido varios códigos para un mismo plan.");
+		}
+		
+		try {
+			Integer orden = (Integer) em.createNamedQuery("Plan.buscarSiguienteOrden").getSingleResult();
+			
+			if (orden != null) {
+				plan.setOrden(++orden);
+			} else {
+				plan.setOrden(1);
+			}
+			
+		} catch (NoResultException nre) {
+			plan.setOrden(1);
+		} catch (NonUniqueResultException nure) {
+			throw new ExcepcionPlaneamiento("Se han obtenido varios códigos para un mismo plan.");
+		}
+		
+		em.persist(plan);
+		
+		return plan;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#crearTramite(int, int, java.lang.String, java.lang.String, java.lang.String, int, java.lang.Integer, java.lang.String, java.util.Date)
+	 */
+	@Override
+	public Tramite crearTramite(int tipo, int idPlan, String nombre,
+			String texto, String comentario, int centroProduccion, Integer idorgano,
+			Integer idsentido, Date fecha)
+			throws ExcepcionPlaneamiento {
+		Tramite tramite = new Tramite();
+		Plan plan = em.find(Plan.class, idPlan);
+		if (plan != null) {
+			tramite.setIdtipotramite(tipo);
+			tramite.setFecha(fecha);
+			tramite.setNombre(nombre);
+			tramite.setTexto(texto);
+			tramite.setComentario(comentario);
+			tramite.setPlan(plan);
+			tramite.setIdcentroproduccion(centroProduccion);
+			if (idorgano != null) {
+				if (servicioDiccionario.get(Organo.class, idorgano) == null) {
+					throw new ExcepcionPlaneamiento("No existe órgano en el diccionario con identificador " + idorgano);
+				}
+			}
+			tramite.setIdorgano(idorgano);
+			if (idsentido != null) {
+				if (servicioDiccionario.get(Sentido.class, idsentido) == null) {
+					throw new ExcepcionPlaneamiento("No existe sentido en el diccionario con identificador " + idsentido);
+				}
+			}
+			tramite.setIdsentido(idsentido);
+			
+			Integer iteracion = 1;
+	        try {
+	        	iteracion = (Integer)em.createNativeQuery("Select 1+Max(iteracion) From planeamiento.Tramite Where idplan=" 
+	        			+ plan.getIden())
+	        			.getSingleResult();
+	        } catch (NoResultException nre) {
+	        	iteracion = 1;
+	        } 
+		    if (iteracion == null) {
+		    	iteracion = 1;
+		    }
+		    
+		    tramite.setIteracion(iteracion);
+			
+			try {
+				tramite.setCodigofip(gestorConsultas.generarCodigoTramite(tramite));
+			} catch (ExcepcionPersistencia e) {
+				throw new ExcepcionPlaneamiento(e.getMessage());
+			}
+			em.persist(tramite);
+			return tramite;
+		} else {
+			throw new ExcepcionPlaneamiento("No se ha encontrado un plan con id: " + idPlan);
+		}
+	}
+
+
+    /**
+     * 
+     * @param relaciones
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    private PropiedadesAdscripcion[] generarPropiedadesAdscripcion(List<Relacion> relaciones) {
+        Integer idDefEntidadOrigen = Integer.parseInt(Textos.getTexto("diccionario", "adscripcion.id_def_origen"));
+        Integer idDefEntidadDestino = Integer.parseInt(Textos.getTexto("diccionario", "adscripcion.id_def_destino"));
+        Integer idDefUnidad = Integer.parseInt(Textos.getTexto("diccionario", "adscripcion.id_def_unidad"));
+        Integer idDefTipo = Integer.parseInt(Textos.getTexto("diccionario", "adscripcion.id_def_tipo"));
+        Integer idDefCuantia = Integer.parseInt(Textos.getTexto("diccionario", "adscripcion.id_def_cuantia"));
+        Integer idDefTexto = Integer.parseInt(Textos.getTexto("diccionario", "adscripcion.id_def_texto"));
+
+        Query vrq = em.createNamedQuery("Vectorrelacion.obtenerPorRelacionYDef");
+        Query prq = em.createNamedQuery("Propiedadrelacion.obtenerPorRelacionYDef");
+        List<Vectorrelacion> vectores;
+        PropiedadesAdscripcion propiedades;
+        List<Propiedadrelacion> propiedadesRelacion;
+        List<PropiedadesAdscripcion> lista = new ArrayList<PropiedadesAdscripcion>();
+        for (Relacion relacion : relaciones) {
+            propiedades = new PropiedadesAdscripcion();
+            propiedadesRelacion = prq.setParameter("idRelacion", relacion.getIden()).setParameter("idDefPropiedad", idDefCuantia).getResultList();
+            if (propiedadesRelacion.size() > 0) {
+                propiedades.setCuantia(Double.parseDouble(propiedadesRelacion.get(0).getValor()));
+            }
+
+            vectores = vrq.setParameter("idRelacion", relacion.getIden()).setParameter("idDefVector", idDefEntidadDestino).getResultList();
+            if (vectores.size() > 0) {
+                propiedades.setDestino(em.find(Entidad.class, vectores.get(0).getValor()));
+            }
+
+            propiedades.setIden(relacion.getIden());
+
+            vectores = vrq.setParameter("idRelacion", relacion.getIden()).setParameter("idDefVector", idDefEntidadOrigen).getResultList();
+            if (vectores.size() > 0) {
+                propiedades.setOrigen(em.find(Entidad.class, vectores.get(0).getValor()));
+            }
+
+            propiedadesRelacion = prq.setParameter("idRelacion", relacion.getIden()).setParameter("idDefPropiedad", idDefTexto).getResultList();
+            if (propiedadesRelacion.size() > 0) {
+                propiedades.setTexto(propiedadesRelacion.get(0).getValor());
+            }
+
+            vectores = vrq.setParameter("idRelacion", relacion.getIden()).setParameter("idDefVector", idDefTipo).getResultList();
+            if (vectores.size() > 0) {
+                propiedades.setTipo(em.find(Determinacion.class, vectores.get(0).getValor()));
+            }
+
+            vectores = vrq.setParameter("idRelacion", relacion.getIden()).setParameter("idDefVector", idDefUnidad).getResultList();
+            if (vectores.size() > 0) {
+                propiedades.setUnidad(em.find(Determinacion.class, vectores.get(0).getValor()));
+            }
+            lista.add(propiedades);
+        }
+        return lista.toArray(new PropiedadesAdscripcion[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#get(java.lang.Class)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> T[] get(Class<T> clase) {
+        List<?> resultado = em.createNamedQuery(clase.getSimpleName() + ".obtenerTodos").getResultList();
+
+        return resultado.toArray((T[]) Array.newInstance(clase, 0));
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#get(java.lang.Class, java.lang.Object)
+     */
+    @Override
+    public <T> T get(Class<T> clase, Object identificador) {
+        return em.find(clase, identificador);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getAmbitos(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Ambitoaplicacionambito[] getAmbitos(int idTramite) {
+        return ((List<Ambitoaplicacionambito>) em.createNamedQuery("Ambitoaplicacionambito.obtenerPorTramite").setParameter("idTramite", idTramite).getResultList()).toArray(new Ambitoaplicacionambito[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getAplicacionesDeterminacion(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Entidad[] getAplicacionesDeterminacion(int idDeterminacion) {
+        return ((List<Entidad>) em.createNamedQuery("Entidaddeterminacion.obtenerPorDeterminacion").setParameter("idDeterminacion", idDeterminacion).getResultList()).toArray(new Entidad[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getArchivo(java.lang.String, java.lang.String)
+     */
+    @Override
+    public File getArchivo(String tramite, String archivo) throws ExcepcionPlaneamiento {
+        try {
+            String rutaBase = gestorFips.getUltimaVersionFIP(tramite);
+            // la ruta va con el nombre del archivo.
+            File f = new File(rutaBase.substring(0, rutaBase.lastIndexOf(File.separator)) + File.separator + archivo);
+            if (f != null && f.exists()) {
+                return f;
+            } else {
+                throw new ExcepcionPlaneamiento("El archivo no existe.");
+            }
+        } catch (RedesException e) {
+            throw new ExcepcionPlaneamiento(e.getMessage());
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getCasos(int, int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Casoentidaddeterminacion[] getCasos(int idEntidad,
+            int idDeterminacion) {
+        return ((List<Casoentidaddeterminacion>) em.createNamedQuery("Casoentidaddeterminacion.buscarPorEntidadDeterminacion").setParameter("idEnt", idEntidad).setParameter("idDet", idDeterminacion).getResultList()).toArray(new Casoentidaddeterminacion[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getCasosVinculados(int)
+     */
+    @Override
+    public Casoentidaddeterminacion[] getCasosVinculados(int idCaso) {
+        Casoentidaddeterminacion caso = em.find(Casoentidaddeterminacion.class, idCaso);
+        List<Casoentidaddeterminacion> ret = new ArrayList<Casoentidaddeterminacion>();
+        Set<Vinculocaso> vinculos = caso.getVinculocasosForIdcaso();
+        if (vinculos != null) {
+            for (Vinculocaso vinc : vinculos) {
+                ret.add(vinc.getCasoentidaddeterminacionByIdcasovinculado());
+            }
+        }
+        return ret.toArray(new Casoentidaddeterminacion[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getDeterminacionesActoEntidad(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Determinacion[] getDeterminacionesActoEntidad(int idEntidad) {
+        return ((List<Determinacion>) em.createNamedQuery("Determinacion.buscarPorActoEntidad").setParameter("idEntidad", idEntidad).getResultList()).toArray(new Determinacion[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getDeterminacionesHijas(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Determinacion[] getDeterminacionesEntidad(int idEntidad) {
+        return ((List<Determinacion>) em.createNamedQuery("Determinacion.buscarPorEntidad").setParameter("idEntidad", idEntidad).getResultList()).toArray(new Determinacion[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getDeterminacionesHijas(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Determinacion[] getDeterminacionesHijas(int idPadre) {
+        return ((List<Determinacion>) em.createNamedQuery("Determinacion.buscarHijas").setParameter("idPadre", idPadre).getResultList()).toArray(new Determinacion[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getDeterminacionesHijasPorActo(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Determinacion[] getDeterminacionesHijasPorActo(int idPadre) {
+        return ((List<Determinacion>) em.createNamedQuery("Determinacion.buscarHijaPorActo").setParameter("idPadre", idPadre).getResultList()).toArray(new Determinacion[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getDeterminacionesHijasPorRegimenDirecto(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Determinacion[] getDeterminacionesHijasPorRegimenDirecto(int idPadre) {
+        return ((List<Determinacion>) em.createNamedQuery("Determinacion.buscarHijaRegimenDirecto").setParameter("idPadre", idPadre).getResultList()).toArray(new Determinacion[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getDeterminacionesHijasPorUso(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Determinacion[] getDeterminacionesHijasPorUso(int idPadre) {
+        return ((List<Determinacion>) em.createNamedQuery("Determinacion.buscarHijaPorUso").setParameter("idPadre", idPadre).getResultList()).toArray(new Determinacion[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getDeterminacionesPorCaracter(int, int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Determinacion[] getDeterminacionesPorCaracter(int idTramite, int idCaracter) {
+        return ((List<Determinacion>) em.createNamedQuery("Determinacion.obtenerPorTramiteYCaracter").setParameter("idTramite", idTramite).setParameter("idCaracter", idCaracter).getResultList()).toArray(new Determinacion[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getDeterminacionesRaiz(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Determinacion[] getDeterminacionesRaiz(int idTramite) {
+        return ((List<Determinacion>) em.createNamedQuery("Determinacion.buscarRaiz").setParameter("idTramite", idTramite).getResultList()).toArray(new Determinacion[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getDeterminacionesRegimenDirectoEntidad(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Determinacion[] getDeterminacionesRegimenDirectoEntidad(int idEntidad) {
+        return ((List<Determinacion>) em.createNamedQuery("Determinacion.buscarPorEntidadRegimenDirecto").setParameter("idEntidad", idEntidad).getResultList()).toArray(new Determinacion[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getDeterminacionesReguladoras(int)
+     */
+    @Override
+    public Determinacion[] getDeterminacionesReguladoras(int identificador) {
+        Determinacion determinacion = em.find(Determinacion.class, identificador);
+
+        if (determinacion != null) {
+            @SuppressWarnings("unchecked")
+            List<Object> resultados = em.createNamedQuery("Vectorrelacion.buscarReguladoras").setParameter("iden", determinacion.getIden()).getResultList();
+            Map<Object, Determinacion> determinaciones = new HashMap<Object, Determinacion>();
+
+            for (Object resultado : resultados) {
+                if (!determinaciones.containsKey(resultado)) {
+                    determinaciones.put(resultado, em.find(Determinacion.class, resultado));
+                }
+            }
+
+            return determinaciones.values().toArray(new Determinacion[0]);
+        } else {
+            return new Determinacion[0];
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getDeterminacionesUsoEntidad(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Determinacion[] getDeterminacionesUsoEntidad(int idEntidad) {
+        return ((List<Determinacion>) em.createNamedQuery("Determinacion.buscarPorUsoEntidad").setParameter("idEntidad", idEntidad).getResultList()).toArray(new Determinacion[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getDocumentosDeterminacion(int)
+     */
+    @Override
+    public Documento[] getDocumentosDeterminacion(int identificador) {
+        Determinacion det = em.find(Determinacion.class, identificador);
+        List<Documento> docs = new ArrayList<Documento>();
+        if (det != null) {
+            for (Documentodeterminacion docdet : det.getDocumentodeterminacions()) {
+                docs.add(docdet.getDocumento());
+            }
+        }
+
+        return docs.toArray(new Documento[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getDocumentosEntidad(int)
+     */
+    @Override
+    public Documento[] getDocumentosEntidad(int idEntidad) {
+        Entidad ent = em.find(Entidad.class, idEntidad);
+        List<Documento> docs = new ArrayList<Documento>();
+        if (ent != null) {
+            for (Documentoentidad de : ent.getDocumentoentidads()) {
+                docs.add(de.getDocumento());
+            }
+        }
+        return docs.toArray(new Documento[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getDocumentosTramite(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Documento[] getDocumentosTramite(int idTramite) {
+        return ((List<Documento>) em.createNamedQuery("Documento.buscarPorTramite").setParameter("idTramite", idTramite).getResultList()).toArray(new Documento[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getEntidadesHijas(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Entidad[] getEntidadesHijas(int idPadre) {
+        return ((List<Entidad>) em.createNamedQuery("Entidad.buscarHijas").setParameter("idPadre", idPadre).getResultList()).toArray(new Entidad[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getEntidadesRaiz(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Entidad[] getEntidadesRaiz(int idTramite) {
+        return ((List<Entidad>) em.createNamedQuery("Entidad.buscarRaiz").setParameter("idTramite", idTramite).getResultList()).toArray(new Entidad[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getGeometriaEntidad(int)
+     */
+    @Override
+    public String[] getGeometriaEntidad(int idEntidad) {
+        Entidad entidad = em.find(Entidad.class, idEntidad);
+        List<String> geoms = new ArrayList<String>();
+        if (entidad != null) {
+            for (Entidadpol poligonos : entidad.getEntidadpols()) {
+                geoms.add(poligonos.getGeom());
+            }
+            for (Entidadlin lineas : entidad.getEntidadlins()) {
+                geoms.add(lineas.getGeom());
+            }
+            for (Entidadpnt puntos : entidad.getEntidadpnts()) {
+                geoms.add(puntos.getGeom());
+            }
+        }
+
+        return geoms.toArray(new String[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getGrupoEntidad(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Determinacion getGrupoEntidad(int idEntidad) {
+    	
+    	List<Determinacion> grupos = em.createNamedQuery("Determinacion.obtenerGrupoEntidad")
+    		.setParameter("idEntidad", idEntidad)
+    		.setParameter("idCaracter", Integer.parseInt(Textos.getTexto("diccionario", "caracterdeterminacion.grupoentidades")))
+    		.getResultList();
+    	
+    	if (!grupos.isEmpty()) {
+    		return grupos.get(0);
+    	} else {
+    		return null;
+    	}
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getGruposAplicacion(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Determinaciongrupoentidad[] getGruposAplicacion(int idDeterminacion) {
+        return ((List<Determinaciongrupoentidad>) em.createNamedQuery("Determinaciongrupoentidad.obtenerPorDeterminacion").setParameter("idDeterminacion", idDeterminacion).getResultList()).toArray(new Determinaciongrupoentidad[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getHojas(int)
+     */
+    @Override
+    public Documentoshp[] getHojas(int idDocumento) {
+        Documento doc = get(Documento.class, idDocumento);
+        return doc.getDocumentoshps().toArray(new Documentoshp[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getInstrumentosPlan()
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Instrumentoplan[] getInstrumentosPlan() {
+        return ((List<Instrumentoplan>) em.createNamedQuery("Instrumentoplan.buscarTodos").setParameter("idPlanBase",
+                Integer.parseInt(Textos.getTexto("diccionario", "instrumentoplan.planbase"))).getResultList()).toArray(new Instrumentoplan[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getNumeroPlanesHijos(java.lang.Integer, java.lang.Integer, es.mitc.redes.urbanismoenred.servicios.planeamiento.ModalidadPlanes)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public int getNumeroPlanesHijos(Integer id, Integer idInstrumento, ModalidadPlanes tipo) {
+        switch (tipo) {
+            case VALIDACION:
+                // Se devolverán los planes con trámites no consolidados o que 
+                // tengan planes hijos con trámites no consolidados.
+                Plan planPadre = em.find(Plan.class, id);
+                if (planPadre != null) {
+                    List<Tramite> tramites;
+
+                    tramites = em.createNamedQuery("Tramite.buscarNoConsolidadosPorAmbito").setParameter("idAmbito", planPadre.getIdambito()).getResultList();
+                    List<Plan> planesSinTramite = em.createNamedQuery("Plan.buscarSinTramite").setParameter("idAmbito", planPadre.getIdambito()).getResultList();
+                    return obtenerPlanesHijos(planPadre, idInstrumento, tramites, planesSinTramite).size();
+                } else {
+                    return 0;
+                }
+            case REF:
+            case FICHAS:
+            case RPM:
+                try {
+                    if (idInstrumento != null) {
+                        return Integer.valueOf(em.createNamedQuery("Tramite.numeroConsolidadosPorInstrumentoYPadre").setParameter("idInstrumento", idInstrumento).setParameter("idPadre", id).getSingleResult().toString());
+                    } else {
+                        return Integer.valueOf(em.createNamedQuery("Tramite.numeroConsolidadosPorPadre").setParameter("idPadre", id).getSingleResult().toString());
+                    }
+
+                } catch (NoResultException nre) {
+                    return 0;
+                }
+            case TODOS:
+                if (idInstrumento != null) {
+                        return Integer.valueOf(em.createNamedQuery("Plan.buscarPorInstrumentoYPadre").setParameter("idInstrumento", idInstrumento).setParameter("idPlan", id).getResultList().size());
+                    } else {
+                        return em.createNamedQuery("Plan.buscarPorPadre").setParameter("idPlan", id).getResultList().size();
+                    }
+        }
+
+        return 0;
+    }
+
+    @Override
+    public Opciondeterminacion[] getOpcionesDeterminacion(int identificador) {
+        Determinacion determinacion = em.find(Determinacion.class, identificador);
+        if (determinacion.getOpciondeterminacionsForIddeterminacion() != null) {
+            return determinacion.getOpciondeterminacionsForIddeterminacion().toArray(new Opciondeterminacion[0]);
+        } else {
+            return new Opciondeterminacion[0];
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getOperacionesPorDeterminacionOperada(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Operaciondeterminacion[] getOperacionesPorDeterminacionOperada(
+            int idDeterminacion) {
+        return ((List<Operaciondeterminacion>) em.createNamedQuery("Operaciondeterminacion.obtenerPorOperada").setParameter("idDeterminacion", idDeterminacion).getResultList()).toArray(new Operaciondeterminacion[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getOperacionesPorDeterminacionOperadora(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Operaciondeterminacion[] getOperacionesPorDeterminacionOperadora(
+            int idDeterminacion) {
+        return ((List<Operaciondeterminacion>) em.createNamedQuery("Operaciondeterminacion.obtenerPorOperadora").setParameter("idDeterminacion", idDeterminacion).getResultList()).toArray(new Operaciondeterminacion[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getOperacionesPorEntidadOperada(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Operacionentidad[] getOperacionesPorEntidadOperada(int idEntidad) {
+        return ((List<Operacionentidad>) em.createNamedQuery("Operacionentidad.obtenerOperaA").setParameter("idEntidad", idEntidad).getResultList()).toArray(new Operacionentidad[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getOperacionesPorOperador(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Operacionentidad[] getOperacionesPorEntidadOperadora(int idEntidad) {
+        return ((List<Operacionentidad>) em.createNamedQuery("Operacionentidad.obtenerOperadaPor").setParameter("idEntidad", idEntidad).getResultList()).toArray(new Operacionentidad[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getOperacionesPorInstrumento(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Instrumentotipooperacionplan[] getOperacionesPorInstrumento(
+            int idInstrumento) {
+        return ((List<Instrumentotipooperacionplan>) em.createNamedQuery("Instrumentotipooperacionplan.buscarPorInstrumento").setParameter("idInstrumento", idInstrumento).getResultList()).toArray(new Instrumentotipooperacionplan[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getPlanes(java.lang.Integer, es.mitc.redes.urbanismoenred.servicios.planeamiento.ModalidadPlanes)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Plan[] getPlanes(Integer ambito, ModalidadPlanes tipo) {
+        switch (tipo) {
+            case VALIDACION:
+                return ((List<Plan>) em.createNamedQuery("Plan.buscarNoConsolidadosPorAmbito").setParameter("idAmbito", ambito).getResultList()).toArray(new Plan[0]);
+            case RPM:
+                return ((List<Plan>) em.createNamedQuery("Plan.buscarConsolidadosPorAmbito").setParameter("idAmbito", ambito).getResultList()).toArray(new Plan[0]);
+            case REF:
+                return ((List<Plan>) em.createNamedQuery("Plan.buscarRefundiblesPorAmbito").setParameter("idAmbito", ambito).setParameter("listaRefundibles", tipoTramitesRefundibles).getResultList()).toArray(new Plan[0]);
+            case TODOS:
+                return ((List<Plan>) em.createNamedQuery("Plan.obtenerTodosPorAmbito").setParameter("idAmbito", ambito).getResultList()).toArray(new Plan[0]);
+        }
+        return new Plan[0];
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getPlanesBase()
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Plan[] getPlanesBase() {
+        return ((List<Plan>) em.createNamedQuery("Plan.buscarPlanesBase").getResultList()).toArray(new Plan[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getPlanesHijos(java.lang.Integer, java.lang.Integer, es.mitc.redes.urbanismoenred.servicios.planeamiento.ModalidadPlanes)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Plan[] getPlanesHijos(Integer id, Integer idInstrumento, ModalidadPlanes tipo) {
+        List<Tramite> tramites;
+
+        switch (tipo) {
+            case VALIDACION:
+                // Se devolverán los planes con trámites no consolidados o que 
+                // tengan planes hijos con trámites no consolidados.
+                Plan planPadre = em.find(Plan.class, id);
+                if (planPadre != null) {
+                    tramites = em.createNamedQuery("Tramite.buscarNoConsolidadosPorAmbito").setParameter("idAmbito", planPadre.getIdambito()).getResultList();
+                    List<Plan> planesSinTramite = em.createNamedQuery("Plan.buscarSinTramite").setParameter("idAmbito", planPadre.getIdambito()).getResultList();
+                    return obtenerPlanesHijos(planPadre, idInstrumento, tramites, planesSinTramite).toArray(new Plan[0]);
+                } else {
+                    return new Plan[0];
+                }
+            case REF:
+            case RPM:
+            case FICHAS:
+                if (idInstrumento != null) {
+                    tramites = em.createNamedQuery("Tramite.buscarConsolidadosPorInstrumentoYPadre").setParameter("idInstrumento", idInstrumento).setParameter("idPadre", id).getResultList();
+                } else {
+                    tramites = em.createNamedQuery("Tramite.buscarConsolidadosPorPadre").setParameter("idPadre", id).getResultList();
+                }
+
+                List<Plan> planes = new ArrayList<Plan>();
+                for (Tramite tramite : tramites) {
+                    if (!planes.contains(tramite.getPlan())) {
+                        planes.add(tramite.getPlan());
+                    }
+                }
+                return planes.toArray(new Plan[0]);
+            case TODOS:
+                if (idInstrumento != null) {
+                        return ((List<Plan>)em.createNamedQuery("Plan.buscarPorInstrumentoYPadre").setParameter("idInstrumento", idInstrumento).setParameter("idPlan", id).getResultList()).toArray(new Plan[0]);
+                    } else {
+                        return ((List<Plan>)em.createNamedQuery("Plan.buscarPorPadre").setParameter("idPlan", id).getResultList()).toArray(new Plan[0]);
+                    }
+                
+        }
+        return new Plan[0];
+    }
+
+    @Override
+    public Operacionplan[] getPlanesOperados(Integer identificador) {
+        Plan plan = em.find(es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan.class, identificador);
+        if (plan != null) {
+            return plan.getOperacionplansForIdplanoperador().toArray(new Operacionplan[0]);
+        } else {
+            return new Operacionplan[0];
+        }
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getPlanes(java.lang.Integer, es.mitc.redes.urbanismoenred.servicios.planeamiento.ModalidadPlanes)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Plan[] getPlanesRaiz(Integer ambito, ModalidadPlanes tipo) {
+        switch (tipo) {
+            case VALIDACION:
+                List<Tramite> tramitesNoconsolidados = em.createNamedQuery("Tramite.buscarNoConsolidadosPorAmbito").setParameter("idAmbito", ambito).getResultList();
+                List<Plan> planesSinTramite = em.createNamedQuery("Plan.buscarSinTramite").setParameter("idAmbito", ambito).getResultList();
+                return obtenerPlanesRaiz(tramitesNoconsolidados, planesSinTramite);
+            case REF:
+            case RPM:
+            case FICHAS:
+                List<Tramite> tramitesConsolidados = em.createNamedQuery("Tramite.buscarConsolidadosRaizPorAmbito").setParameter("idAmbito", ambito).getResultList();
+                return obtenerPlanesRaiz(tramitesConsolidados, null);
+//			case REF:
+//				List<Tramite> tramitesRefundibles = em.createNamedQuery("Tramite.buscarRefundiblesPorAmbito")
+//					.setParameter("idAmbito", ambito)
+//					.setParameter("listaRefundibles", tipoTramitesRefundibles)
+//					.getResultList();
+//				return obtenerPlanesRaiz(tramitesRefundibles);
+            case TODOS:
+                return ((List<Plan>) em.createNamedQuery("Plan.buscarRaizPorAmbito").setParameter("idAmbito", ambito).getResultList()).toArray(new Plan[0]);
+        }
+        return new Plan[0];
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getPoligonosPlan(int)
+     */
+    @Override
+    public String[] getPoligonosPlan(int idPlan) {
+        Plan plan = em.find(Plan.class, idPlan);
+        List<String> poligonos = new ArrayList<String>();
+        if (plan != null) {
+            for (Planshp shp : plan.getPlanshps()) {
+                poligonos.add(shp.getGeom());
+            }
+        }
+        return poligonos.toArray(new String[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getPoligonosPlan(int)
+     */
+    @Override
+    public String getPoligonoTramite(int idTramite) {
+        try {
+            Query query = em.createNamedQuery("Tramite.obtenerExtension").setParameter("idTramite", idTramite);
+            return String.valueOf(query.getSingleResult());
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getPropiedadesAdscripcion(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public PropiedadesAdscripcion[] getPropiedadesAdscripcionEntidad(int idEntidad) {
+        Integer idDefPropAdscripcion = Integer.parseInt(Textos.getTexto("diccionario", "adscripcion.id_definicion_adscripcion"));
+        Integer idDefEntidadOrigen = Integer.parseInt(Textos.getTexto("diccionario", "adscripcion.id_def_origen"));
+        Integer idDefEntidadDestino = Integer.parseInt(Textos.getTexto("diccionario", "adscripcion.id_def_destino"));
+
+        List<Relacion> relaciones = em.createNamedQuery("Relacion.obtenerAdscripciones").setParameter("idEnt", idEntidad).setParameter("idDefEntidadOrigen", idDefEntidadOrigen).setParameter("idDefEntidadDestino", idDefEntidadDestino).setParameter("idDefPropAdscripcion", idDefPropAdscripcion).getResultList();
+
+        return generarPropiedadesAdscripcion(relaciones);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getPropiedadesAdscripcionTramite(int)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public PropiedadesAdscripcion[] getPropiedadesAdscripcionTramite(
+            int idTramite) {
+        Integer idDefPropAdscripcion = Integer.parseInt(Textos.getTexto("diccionario", "adscripcion.id_definicion_adscripcion"));
+        Integer idDefEntidadOrigen = Integer.parseInt(Textos.getTexto("diccionario", "adscripcion.id_def_origen"));
+        Integer idDefEntidadDestino = Integer.parseInt(Textos.getTexto("diccionario", "adscripcion.id_def_destino"));
+
+        List<Relacion> relaciones = em.createNamedQuery("Relacion.obtenerAdscripcionesTramite").setParameter("idTramite", idTramite).setParameter("idDefEntidadOrigen", idDefEntidadOrigen).setParameter("idDefEntidadDestino", idDefEntidadDestino).setParameter("idDefPropAdscripcion", idDefPropAdscripcion).getResultList();
+
+        return generarPropiedadesAdscripcion(relaciones);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getPropiedadesUnidad(int)
+     */
+    @Override
+    public PropiedadesUnidad getPropiedadesUnidad(int idUnidad) {
+        Integer idDefAbreviatura = Integer.parseInt(Textos.getTexto("diccionario", "unidad.id_abreviatura"));
+        Integer idDefDefinicion = Integer.parseInt(Textos.getTexto("diccionario", "unidad.id_definicion"));
+
+        try {
+            Relacion relacion = (Relacion) em.createNamedQuery("Relacion.buscarPropiedadesUnidad").setParameter("idDeterminacion", idUnidad).getSingleResult();
+            Propiedadrelacion abreviatura;
+            Propiedadrelacion definicion;
+            try {
+                abreviatura = (Propiedadrelacion) em.createNamedQuery("Propiedadrelacion.obtenerPorRelacionYDef").setParameter("idRelacion", relacion.getIden()).setParameter("idDefPropiedad", idDefAbreviatura).getSingleResult();
+            } catch (NoResultException nre) {
+                abreviatura = null;
+            }
+            try {
+                definicion = (Propiedadrelacion) em.createNamedQuery("Propiedadrelacion.obtenerPorRelacionYDef").setParameter("idRelacion", relacion.getIden()).setParameter("idDefPropiedad", idDefDefinicion).getSingleResult();
+            } catch (NoResultException nre) {
+                definicion = null;
+            }
+            return new PropiedadesUnidad(relacion.getIden(),
+                    abreviatura != null ? abreviatura.getValor() : null,
+                    em.find(Determinacion.class, idUnidad),
+                    definicion != null ? definicion.getValor() : null);
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getRegimenDeCaso(int)
+     */
+    @Override
+    public Entidaddeterminacionregimen[] getRegimenDeCaso(int idCaso) {
+        Casoentidaddeterminacion ced = em.find(Casoentidaddeterminacion.class, idCaso);
+        if (ced != null) {
+            return ced.getEntidaddeterminacionregimensForIdcaso().toArray(new Entidaddeterminacionregimen[0]);
+        } else {
+            return new Entidaddeterminacionregimen[0];
+        }
+    }
+
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getRegimenesEspecificos(int)
+     */
+    @Override
+    public Regimenespecifico[] getRegimenesEspecificos(int identificador) {
+        Entidaddeterminacionregimen edr = em.find(Entidaddeterminacionregimen.class, identificador);
+        if (edr != null) {
+            return edr.getRegimenespecificos().toArray(new Regimenespecifico[0]);
+        } else {
+            return new Regimenespecifico[0];
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getRegimenesEspecificosHijos(int)
+     */
+    @Override
+    public Regimenespecifico[] getRegimenesEspecificosHijos(int identificador) {
+        Regimenespecifico padre = em.find(Regimenespecifico.class, identificador);
+        if (padre != null) {
+            return padre.getRegimenespecificos().toArray(new Regimenespecifico[0]);
+        } else {
+            return new Regimenespecifico[0];
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getRegulacionesEspecificas(int)
+     */
+    @Override
+    public RegulacionEspecifica[] getRegulacionesEspecificas(int identificador) {
+        Determinacion determinacion = em.find(Determinacion.class, identificador);
+
+        List<RegulacionEspecifica> regulaciones = new ArrayList<RegulacionEspecifica>();
+
+        if (determinacion != null) {
+
+            List<Object[]> resultados = getRegulacionesEspecificas(determinacion.getIden(), 0);
+
+            RegulacionEspecifica regulacion;
+
+            Map<Object, RegulacionEspecifica> res = new HashMap<Object, RegulacionEspecifica>();
+            HashSet<RegulacionEspecifica> regHijas;
+            for (Object[] registro : resultados) {
+                if (!res.containsKey(registro[0])) {
+                    regulacion = new RegulacionEspecifica(Integer.parseInt(registro[0].toString()),
+                            Integer.parseInt(registro[1].toString()),
+                            registro[2].toString(),
+                            registro[3].toString());
+                    regHijas = new HashSet<RegulacionEspecifica>();
+                    for (Object[] hija : getRegulacionesEspecificas(regulacion.getIden(), determinacion.getIden())) {
+                        regHijas.add(new RegulacionEspecifica(Integer.parseInt(hija[0].toString()),
+                                Integer.parseInt(hija[1].toString()),
+                                hija[2].toString(),
+                                hija[3].toString()));
+                    }
+                    regulacion.setRegulacionesespecificas(regHijas);
+                    regulaciones.add(regulacion);
+                }
+            }
+        }
+        return regulaciones.toArray(new RegulacionEspecifica[0]);
+    }
+
+    /**
+     * 
+     * @param identificador
+     * @param idpadre
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    private List<Object[]> getRegulacionesEspecificas(int identificador, int idpadre) {
+        return em.createNamedQuery("Relacion.buscarRegulacionesEspecificas").setParameter("iden", identificador).setParameter("padre", idpadre).getResultList();
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getTramitePorCodigo(java.lang.String)
+     */
+    @Override
+	public Tramite getTramitePorCodigo(String codigo) {
+		try {
+			return (Tramite) em.createNamedQuery("Tramite.findTramiteFromCodFip")
+				.setParameter("codigoFip", codigo)
+				.getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		} catch (NonUniqueResultException nure) {
+			return null;
+		}
+	}
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getTramitesPorPlan(int, es.mitc.redes.urbanismoenred.servicios.planeamiento.ModalidadPlanes)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Tramite[] getTramitesPorPlan(int idPlan, ModalidadPlanes tipo) {
+        Query query;
+        switch (tipo) {
+            case VALIDACION:
+                query = em.createNamedQuery("Tramite.buscarPorPlanNoConsolidados").setParameter("idPlan", idPlan);
+                break;
+            case RPM:
+                query = em.createNamedQuery("Tramite.buscarPorPlanConsolidados").setParameter("idPlan", idPlan);
+                break;
+            case REF:
+                query = em.createNamedQuery("Tramite.buscarPorPlanRefundibles").setParameter("listaRefundibles", tipoTramitesRefundibles).setParameter("idPlan", idPlan);
+                break;
+            case TODOS:
+            default:
+                query = em.createNamedQuery("Tramite.buscarPorPlan").setParameter("idPlan", idPlan);
+                break;
+        }
+        return ((List<Tramite>) query.getResultList()).toArray(new Tramite[0]);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#getUnidad(int)
+     */
+    @Override
+    public Determinacion getUnidad(int idDeterminacion) {
+        @SuppressWarnings("unchecked")
+        List<Object> resultados = em.createNamedQuery("Vectorrelacion.obtenerUnidades")
+        	.setParameter("idDeterminacion", idDeterminacion)
+        	.setParameter("idDefVector", Integer.parseInt(Textos.getTexto("diccionario", "id_determinacion_unidad_aplic")))
+        	.setParameter("idDefUnidad", Integer.parseInt(Textos.getTexto("diccionario", "id_definicion_unidad")))
+        	.setParameter("idDefDeterminacionUnidad", Integer.parseInt(Textos.getTexto("diccionario", "id_determinacion_unidad")))
+        	.getResultList();
+        if (resultados.size() > 0) {
+            return em.find(Determinacion.class, Integer.parseInt(resultados.get(0).toString()));
+        }
+        return null;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#guardar(java.lang.Object)
+     */
+    @Override
+    public void guardar(Object datos) {
+        em.persist(datos);
+        em.flush();
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see es.mitc.redes.urbanismoenred.servicios.planeamiento.ServicioPlaneamientoLocal#isTramiteRefundible(java.lang.Integer)
+     */
+    @Override
+    public boolean isTramiteRefundible(Integer idTramite) throws ExcepcionPlaneamiento {
+        Tramite tram = get(Tramite.class, idTramite);
+        return tipoTramitesRefundibles.contains(tram.getIdtipotramite());
+    }
+
+    /**
+     * Obtiene la lista de planes que son hijos de un determinado plan padre
+     * y que pertenecen a un determinado tipo.
+     * 
+     * @param planPadre
+     * @param idInstrumento
+     * @param tramites
+     * @param planesSinTramite 
+     * @return
+     */
+    private List<Plan> obtenerPlanesHijos(Plan planPadre, Integer idInstrumento,
+            List<Tramite> tramites, List<Plan> planesSinTramite) {
+        List<Plan> planes = new ArrayList<Plan>();
+        Plan plan;
+        Instrumentotipooperacionplan itop;
+        for (Tramite tramite : tramites) {
+            plan = tramite.getPlan();
+            while (plan.getPlanByIdpadre() != null) {
+                if (planPadre.getIden() == plan.getPlanByIdpadre().getIden()) {
+                    if (idInstrumento != null) {
+                        for (Operacionplan op : plan.getOperacionplansForIdplanoperador()) {
+                            itop = em.find(Instrumentotipooperacionplan.class, op.getIdinstrumentotipooperacion());
+                            if (itop != null && idInstrumento.equals(itop.getInstrumentoplan().getIden())) {
+                                if (!planes.contains(plan)) {
+                                    planes.add(plan);
+                                }
+                                break;
+                            }
+                        }
+                    } else {
+                        if (!planes.contains(plan)) {
+                            planes.add(plan);
+                        }
+                    }
+                    break;
+                }
+                plan = plan.getPlanByIdpadre();
+            }
+        }
+        
+        for (Plan planst : planesSinTramite) {
+            while (planst.getPlanByIdpadre() != null) {
+                if (planPadre.getIden() == planst.getPlanByIdpadre().getIden()) {
+                    if (idInstrumento != null) {
+                        for (Operacionplan op : planst.getOperacionplansForIdplanoperador()) {
+                            itop = em.find(Instrumentotipooperacionplan.class, op.getIdinstrumentotipooperacion());
+                            if (itop != null && idInstrumento.equals(itop.getInstrumentoplan().getIden())) {
+                                if (!planes.contains(planst)) {
+                                    planes.add(planst);
+                                }
+                                break;
+                            }
+                        }
+                    } else {
+                        if (!planes.contains(planst)) {
+                            planes.add(planst);
+                        }
+                    }
+                    break;
+                }
+                planst = planst.getPlanByIdpadre();
+            }
+        }
+        
+        
+
+        return planes;
+    }
+
+	/**
+     * Obtiene los planes raíz de los trámites especificados.
+     * 
+     * @param tramites
+	 * @param planesSinTramite 
+     * @return
+     */
+    private Plan[] obtenerPlanesRaiz(List<Tramite> tramites, List<Plan> planesSinTramite) {
+        List<Plan> planesPadre = new ArrayList<Plan>();
+        Plan plan;
+        for (Tramite tramite : tramites) {
+            plan = tramite.getPlan();
+            while (plan.getPlanByIdpadre() != null) {
+                plan = plan.getPlanByIdpadre();
+            }
+            if (!planesPadre.contains(plan)) {
+                planesPadre.add(plan);
+            }
+        }
+        
+        if (planesSinTramite != null) {
+        	for (Plan planst : planesSinTramite) {
+                while (planst.getPlanByIdpadre() != null) {
+                    planst = planst.getPlanByIdpadre();
+                }
+                if (!planesPadre.contains(planst)) {
+                    planesPadre.add(planst);
+                }
+            }
+        }
+        Plan[] resultado = planesPadre.toArray(new Plan[0]);
+        Arrays.sort(resultado, new ComparadorPlanes());
+        return resultado;
+    }
+}

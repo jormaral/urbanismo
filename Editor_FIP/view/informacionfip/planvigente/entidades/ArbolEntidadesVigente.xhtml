@@ -1,0 +1,58 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaArbolEntidadesVigente"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+<ice:form id="formulario">
+
+	<!-- TRee values -->
+	<ice:panelTabSet id="panelTabArbol">
+			
+			<ice:panelGroup styleClass="arbol" scrollHeight="400px" scrollWidth="40em">
+				<ice:tree id="arbolEntidad" value="#{servicioCopiarEntidades.model}"
+					var="node" binding="#{servicioCopiarEntidades.treeComponent}"
+					imageDir="/fipeditor/img/editorfip/es/arboles/"
+					hideRootNode="false" hideNavigation="false"
+					actionListener="#{servicioCopiarEntidades.menuEvent}">
+					<ice:treeNode>
+		
+		
+						<f:facet name="icon">
+							<ice:panelGroup style="display:inline;">
+								<h:graphicImage
+									value="/img/editorfip/es/arboles/#{node.userObject.icon}" />
+		
+							</ice:panelGroup>
+						</f:facet>
+						<f:facet name="content">
+							<ice:panelGroup style="display:inline;">
+								<ice:panelGroup
+									styleClass="selectedNode#{node.userObject eq servicioCopiarEntidades.selectedUserObject}"
+									style="display:inline;">
+		
+									<ice:selectBooleanCheckbox 
+							 			id="checkTram" partialSubmit="true" 
+							 			value="#{node.userObject.seleccionado}"
+							 			valueChangeListener="#{servicioCopiarEntidades.processValueChange}">										 			
+							        </ice:selectBooleanCheckbox>
+									
+									
+									<ice:outputText id="TreeNode"
+										value="#{node.userObject.text}" />
+									
+									
+								</ice:panelGroup>
+							</ice:panelGroup>
+						</f:facet>
+		
+					</ice:treeNode>
+				</ice:tree>
+							
+			</ice:panelGroup>
+			
+	</ice:panelTabSet>
+
+</ice:form>
+</f:view>

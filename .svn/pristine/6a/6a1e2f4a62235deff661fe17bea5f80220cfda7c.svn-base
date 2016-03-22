@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-abr-2012 12:30:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion"
+  schema="refundido" table="determinacion">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">refundido.refundido_determinacion_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Tramite"
+   fetch="select" name="tramite">
+   <column name="idtramite" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion"
+   fetch="select" name="determinacionByIddeterminacionoriginal">
+   <column name="iddeterminacionoriginal"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion"
+   fetch="select" name="determinacionByIdpadre">
+   <column name="idpadre"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion"
+   fetch="select" name="determinacionByIddeterminacionbase">
+   <column name="iddeterminacionbase"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="idcaracter" type="int">
+   <column name="idcaracter" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="apartado" type="string">
+   <column length="100" name="apartado"/>
+  </property>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column length="220" name="nombre" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="texto" type="string">
+   <column name="texto"/>
+  </property>
+  <property generated="never" lazy="false" name="etiqueta" type="string">
+   <column length="100" name="etiqueta"/>
+  </property>
+  <property generated="never" lazy="false" name="codigo" type="string">
+   <column length="10" name="codigo" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="bsuspendida" type="boolean">
+   <column name="bsuspendida" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="orden" type="int">
+   <column name="orden" not-null="true"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true"
+   name="documentodeterminacions" sort="unsorted" table="documentodeterminacion">
+   <key>
+    <column name="iddeterminacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Documentodeterminacion"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="determinacionsForIdpadre" sort="unsorted" table="determinacion">
+   <key>
+    <column name="idpadre"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="determinaciongrupoentidadsForIddeterminaciongrupo"
+   sort="unsorted" table="determinaciongrupoentidad">
+   <key>
+    <column name="iddeterminaciongrupo"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinaciongrupoentidad"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="determinacionsForIddeterminacionbase" sort="unsorted" table="determinacion">
+   <key>
+    <column name="iddeterminacionbase"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="opciondeterminacionsForIddeterminacion" sort="unsorted" table="opciondeterminacion">
+   <key>
+    <column name="iddeterminacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Opciondeterminacion"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="operaciondeterminacionsForIddeterminacionoperadora"
+   sort="unsorted" table="operaciondeterminacion">
+   <key>
+    <column name="iddeterminacionoperadora" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Operaciondeterminacion"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="opciondeterminacionsForIddeterminacionvalorref" sort="unsorted" table="opciondeterminacion">
+   <key>
+    <column name="iddeterminacionvalorref" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Opciondeterminacion"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="determinacionsForIddeterminacionoriginal" sort="unsorted" table="determinacion">
+   <key>
+    <column name="iddeterminacionoriginal"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="determinaciongrupoentidadsForIddeterminacion" sort="unsorted" table="determinaciongrupoentidad">
+   <key>
+    <column name="iddeterminacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinaciongrupoentidad"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="operaciondeterminacionsForIddeterminacion" sort="unsorted" table="operaciondeterminacion">
+   <key>
+    <column name="iddeterminacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Operaciondeterminacion"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="entidaddeterminacionregimens" sort="unsorted" table="entidaddeterminacionregimen">
+   <key>
+    <column name="iddeterminacionregimen"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacionregimen"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="entidaddeterminacions" sort="unsorted" table="entidaddeterminacion">
+   <key>
+    <column name="iddeterminacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacion"/>
+  </set>
+ </class>
+ <query name="refundido.Determinacion.buscarPorCodigoYProceso">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion det
+	WHERE det.codigo = :codigo AND det.tramite.iden IN (SELECT tr.idrefundido FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Traza tr WHERE tr.id.tabla = 'Tramite' AND tr.id.idproceso = :idProceso)</query>
+ <query name="refundido.Determinacion.obtenerApartados">SELECT SUBSTRING(d.apartado, 9)  FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion d 
+	WHERE d.apartado LIKE 'Apartado %' AND d.determinacionByIdpadre IS NULL AND d.tramite.iden = :idTramite</query>
+ <query name="refundido.Determinacion.obtenerCarpeta">SELECT DVR.iden FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion DVR,  
+                es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion D, 
+                es.mitc.redes.urbanismoenred.data.rpm.refundido.Opciondeterminacion OD 
+                Where D.tramite.iden= :idTramite
+                AND D.idcaracter= :idCaracter
+                AND OD.determinacionByIddeterminacion=D.iden 
+                AND OD.determinacionByIddeterminacionvalorref.iden=DVR.iden  
+                AND (DVR.codigo= :codigoVR
+                Or DVR.determinacionByIddeterminacionbase.iden IN (
+                	SELECT D.iden
+                		FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion D  
+                		WHERE D.codigo= :codigo
+                		AND D.tramite.iden IN (:listaTramites)))</query>
+ <query name="refundido.Determinacion.obtenerCualquieraPorTramiteYCaracter">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion det, es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad ent, es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacion ed
+	WHERE ent.tramite.iden = :idTramite AND ed.entidad.iden = ent.iden  AND det.idcaracter = :idCaracter 
+	AND ed.determinacion.iden = det.iden</query>
+ <query name="refundido.Determinacion.obtenerGrupoEntidad">SELECT edr.opciondeterminacion.determinacionByIddeterminacionvalorref FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Casoentidaddeterminacion ced, 
+                        es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacionregimen edr 
+                        WHERE ced.entidaddeterminacion.entidad.iden = :idEntidad
+	                        AND ced.entidaddeterminacion.determinacion.idcaracter = :idCaracter
+	                        AND edr.opciondeterminacion.determinacionByIddeterminacion.iden = ced.entidaddeterminacion.determinacion.iden
+	                        AND (edr.casoentidaddeterminacionByIdcaso.iden = ced.iden OR edr.casoentidaddeterminacionByIdcasoaplicacion=ced.iden)</query>
+ <query name="refundido.Determinacion.obtenerOrdenMaximo">SELECT MAX(det.orden) FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion det
+	WHERE det.tramite.iden = :idTramite AND det.determinacionByIdpadre IS NULL</query>
+ <query name="refundido.Determinacion.obtenerOrdenMaximoPadre">SELECT MAX(det.orden) FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion det
+	WHERE det.tramite.iden = :idTramite AND det.determinacionByIdpadre.iden = :idPadre</query>
+ <query name="refundido.Determinacion.obtenerPorTramiteCaracterYNombre">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion det
+	WHERE det.tramite.iden = :idTramite AND det.idcaracter = :idCaracter AND det.nombre = :nombre</query>
+ <query name="refundido.Determinacion.obtenerPorTramiteYCaracter">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion det
+	WHERE det.tramite.iden = :idTramite AND det.idcaracter = :idCaracter 
+	ORDER BY det.orden</query>
+ <query name="refundido.Determinacion.obtenerCarpetaCualquierTramite">SELECT DVR.iden FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion DVR,  
+                es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion D, 
+                es.mitc.redes.urbanismoenred.data.rpm.refundido.Opciondeterminacion OD 
+                Where D.idcaracter= :idCaracter
+                AND OD.determinacionByIddeterminacion=D.iden 
+                AND OD.determinacionByIddeterminacionvalorref.iden=DVR.iden  
+                AND (DVR.codigo= :codigoVR  OR DVR.determinacionByIddeterminacionbase.codigo = :codigo)
+		AND DVR.tramite.iden IN (SELECT tr.idrefundido FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Traza tr WHERE tr.id.tabla = 'Tramite' AND tr.id.idproceso = :idProceso)</query>
+ <query name="refundido.Determinacion.obtenerHijas">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion det 
+	WHERE det.determinacionByIdpadre.iden = :idPadre 
+	ORDER BY det.orden</query>
+ <query name="refundido.Determinacion.obtenerReguladoras">SELECT d FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion d, es.mitc.redes.urbanismoenred.data.rpm.refundido.Vectorrelacion vr
+	WHERE vr.valor = d.iden AND
+		vr.relacion IN (SELECT vr2.relacion FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Vectorrelacion vr2  WHERE vr2.valor=:iden AND vr2.iddefvector IN (8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38 ))
+		AND vr.relacion.iddefrelacion IN (4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19)
+		AND vr.iddefvector IN (9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39)</query>
+ <query name="refundido.Determinacion.obtenerUnidadesTramite">SELECT d FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion d, es.mitc.redes.urbanismoenred.data.rpm.refundido.Vectorrelacion vr 
+	WHERE vr.iddefvector = 1 AND vr.relacion.iddefrelacion = 1 AND vr.valor = d.iden AND d.tramite.iden = :idTramite</query>
+ <query name="refundido.Determinacion.obtenerRaiz">SELECT d FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion d
+	WHERE d.tramite.iden = :idTramite AND d.determinacionByIdpadre IS NULL
+	ORDER BY d.orden</query>
+ <sql-query name="refundido.Determinacion.obtenerMaximoCodigo">SELECT Max(SubStr(LPad(Trim(codigo), 10 ,'0'), 2, 9)) FROM refundido.determinacion
+	WHERE idtramite= :idTramite</sql-query>
+</hibernate-mapping>

@@ -1,0 +1,1070 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"   
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+      <ice:panelGroup  id="viewtramiteHomePanelGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="viewTexttramiteHomeId" value="Tramite"/>
+                  </td>
+              </tr>
+          </table>
+      
+
+
+        <s:decorate id="iden" template="../layout/display.xhtml">
+            <ui:define name="label">Iden</ui:define>
+            #{tramiteHome.instance.iden}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="codigofip" template="../layout/display.xhtml">
+            <ui:define name="label">Codigofip</ui:define>
+            #{tramiteHome.instance.codigofip}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="comentario" template="../layout/display.xhtml">
+            <ui:define name="label">Comentario</ui:define>
+            #{tramiteHome.instance.comentario}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="fecha" template="../layout/display.xhtml">
+            <ui:define name="label">Fecha</ui:define>
+            <ice:outputText id="viewfechaTextId"
+	                 value="#{tramiteHome.instance.fecha}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </ice:outputText>
+        </s:decorate>
+
+
+        <s:decorate id="fechaconsolidacion" template="../layout/display.xhtml">
+            <ui:define name="label">Fechaconsolidacion</ui:define>
+            <ice:outputText id="viewfechaconsolidacionTextId"
+	                 value="#{tramiteHome.instance.fechaconsolidacion}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </ice:outputText>
+        </s:decorate>
+
+
+        <s:decorate id="idcentroproduccion" template="../layout/display.xhtml">
+            <ui:define name="label">Idcentroproduccion</ui:define>
+            #{tramiteHome.instance.idcentroproduccion}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="idorgano" template="../layout/display.xhtml">
+            <ui:define name="label">Idorgano</ui:define>
+            #{tramiteHome.instance.idorgano}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="idsentido" template="../layout/display.xhtml">
+            <ui:define name="label">Idsentido</ui:define>
+            #{tramiteHome.instance.idsentido}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="idtipotramite" template="../layout/display.xhtml">
+            <ui:define name="label">Idtipotramite</ui:define>
+            #{tramiteHome.instance.idtipotramite}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="iteracion" template="../layout/display.xhtml">
+            <ui:define name="label">Iteracion</ui:define>
+            #{tramiteHome.instance.iteracion}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="nombre" template="../layout/display.xhtml">
+            <ui:define name="label">Nombre</ui:define>
+            #{tramiteHome.instance.nombre}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="numeroacuerdo" template="../layout/display.xhtml">
+            <ui:define name="label">Numeroacuerdo</ui:define>
+            #{tramiteHome.instance.numeroacuerdo}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="texto" template="../layout/display.xhtml">
+            <ui:define name="label">Texto</ui:define>
+            #{tramiteHome.instance.texto}&#160;
+        </s:decorate>
+
+          <div style="clear:both"/>
+ 
+
+    <div id="viewTramiteEditsearchButtons" class="actionButtons">      
+
+        <s:button view="/seam/TramiteEdit.xhtml" 
+                    id="edit" styleClass="iceCmdBtn"
+                 value="Edit"/>
+
+        <s:button view="/seam/#{empty tramiteFrom ? 'TramiteList' : tramiteFrom}.xhtml"
+                    id="done" styleClass="iceCmdBtn"
+                 value="Done"/>
+
+    </div>
+  </ice:panelGroup>
+
+
+    <ice:form id="view2tramiteHomeFormId">
+       <ice:panelTabSet id="viewtramiteHomeTabSetId" 
+                styleClass="componentPanelTabSetLayout" 
+		style="margin-bottom:5px;margin-top:10px;">
+
+   <ice:panelTab label="Boletintramites">
+    <div class="association" id="viewboletintramitesChildrenId">
+        
+        <h:outputText value="There are no boletintramites associated with this tramite." 
+	                 id="viewboletintramitesChildTextId"
+                   rendered="#{empty tramiteHome.boletintramites}"/>
+        
+        <ice:dataTable value="#{tramiteHome.boletintramites}" 
+                       var="boletintramite" 
+                  rendered="#{not empty tramiteHome.boletintramites}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewboletintramitesTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{boletintramite.iden}"/>
+            </ice:column>
+            <ice:column id="viewfechaId">
+                <f:facet name="header">Fecha</f:facet>
+                <h:outputText id="viewfechaTextId" 
+		           value="#{boletintramite.fecha}"/>
+            </ice:column>
+            <ice:column id="viewidboletinId">
+                <f:facet name="header">Idboletin</f:facet>
+                <h:outputText id="viewidboletinTextId" 
+		           value="#{boletintramite.idboletin}"/>
+            </ice:column>
+            <ice:column id="viewnumeroId">
+                <f:facet name="header">Numero</f:facet>
+                <h:outputText id="viewnumeroTextId" 
+		           value="#{boletintramite.numero}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectboletintramiteLinkId" 
+                     value="Select" 
+                      view="/seam/Boletintramite.xhtml">
+                    <f:param name="boletintramiteIden" 
+                            value="#{boletintramite.iden}"/>
+                    <f:param name="boletintramiteFrom" value="Tramite"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddboletintramiteButtonId" 
+               value="Add boletintramite"
+                view="/seam/BoletintramiteEdit.xhtml">
+            <f:param name="tramiteIden" 
+                    value="#{tramiteHome.instance.iden}"/>
+            <f:param name="boletintramiteFrom" value="Tramite"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Boletintramites_1">
+    <div class="association" id="viewboletintramites_1ChildrenId">
+        
+        <h:outputText value="There are no boletintramites_1 associated with this tramite." 
+	                 id="viewboletintramites_1ChildTextId"
+                   rendered="#{empty tramiteHome.boletintramites_1}"/>
+        
+        <ice:dataTable value="#{tramiteHome.boletintramites_1}" 
+                       var="boletintramite" 
+                  rendered="#{not empty tramiteHome.boletintramites_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewboletintramites_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{boletintramite.iden}"/>
+            </ice:column>
+            <ice:column id="viewfechaId">
+                <f:facet name="header">Fecha</f:facet>
+                <h:outputText id="viewfechaTextId" 
+		           value="#{boletintramite.fecha}"/>
+            </ice:column>
+            <ice:column id="viewidboletinId">
+                <f:facet name="header">Idboletin</f:facet>
+                <h:outputText id="viewidboletinTextId" 
+		           value="#{boletintramite.idboletin}"/>
+            </ice:column>
+            <ice:column id="viewnumeroId">
+                <f:facet name="header">Numero</f:facet>
+                <h:outputText id="viewnumeroTextId" 
+		           value="#{boletintramite.numero}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectboletintramiteLinkId" 
+                     value="Select" 
+                      view="/seam/Boletintramite.xhtml">
+                    <f:param name="boletintramiteIden" 
+                            value="#{boletintramite.iden}"/>
+                    <f:param name="boletintramiteFrom" value="Tramite"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddboletintramiteButtonId" 
+               value="Add boletintramite"
+                view="/seam/BoletintramiteEdit.xhtml">
+            <f:param name="tramiteIden" 
+                    value="#{tramiteHome.instance.iden}"/>
+            <f:param name="boletintramiteFrom" value="Tramite"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Determinacions">
+    <div class="association" id="viewdeterminacionsChildrenId">
+        
+        <h:outputText value="There are no determinacions associated with this tramite." 
+	                 id="viewdeterminacionsChildTextId"
+                   rendered="#{empty tramiteHome.determinacions}"/>
+        
+        <ice:dataTable value="#{tramiteHome.determinacions}" 
+                       var="determinacion" 
+                  rendered="#{not empty tramiteHome.determinacions}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdeterminacionsTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{determinacion.iden}"/>
+            </ice:column>
+            <ice:column id="viewapartadoId">
+                <f:facet name="header">Apartado</f:facet>
+                <h:outputText id="viewapartadoTextId" 
+		           value="#{determinacion.apartado}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{determinacion.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                <h:outputText id="viewcodigoTextId" 
+		           value="#{determinacion.codigo}"/>
+            </ice:column>
+            <ice:column id="viewetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                <h:outputText id="viewetiquetaTextId" 
+		           value="#{determinacion.etiqueta}"/>
+            </ice:column>
+            <ice:column id="viewidcaracterId">
+                <f:facet name="header">Idcaracter</f:facet>
+                <h:outputText id="viewidcaracterTextId" 
+		           value="#{determinacion.idcaracter}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{determinacion.nombre}"/>
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                <h:outputText id="viewordenTextId" 
+		           value="#{determinacion.orden}"/>
+            </ice:column>
+            <ice:column id="viewtextoId">
+                <f:facet name="header">Texto</f:facet>
+                <h:outputText id="viewtextoTextId" 
+		           value="#{determinacion.texto}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdeterminacionLinkId" 
+                     value="Select" 
+                      view="/seam/Determinacion.xhtml">
+                    <f:param name="determinacionIden" 
+                            value="#{determinacion.iden}"/>
+                    <f:param name="determinacionFrom" value="Tramite"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddeterminacionButtonId" 
+               value="Add determinacion"
+                view="/seam/DeterminacionEdit.xhtml">
+            <f:param name="tramiteIden" 
+                    value="#{tramiteHome.instance.iden}"/>
+            <f:param name="determinacionFrom" value="Tramite"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Determinacions_1">
+    <div class="association" id="viewdeterminacions_1ChildrenId">
+        
+        <h:outputText value="There are no determinacions_1 associated with this tramite." 
+	                 id="viewdeterminacions_1ChildTextId"
+                   rendered="#{empty tramiteHome.determinacions_1}"/>
+        
+        <ice:dataTable value="#{tramiteHome.determinacions_1}" 
+                       var="determinacion" 
+                  rendered="#{not empty tramiteHome.determinacions_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdeterminacions_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{determinacion.iden}"/>
+            </ice:column>
+            <ice:column id="viewapartadoId">
+                <f:facet name="header">Apartado</f:facet>
+                <h:outputText id="viewapartadoTextId" 
+		           value="#{determinacion.apartado}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{determinacion.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                <h:outputText id="viewcodigoTextId" 
+		           value="#{determinacion.codigo}"/>
+            </ice:column>
+            <ice:column id="viewetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                <h:outputText id="viewetiquetaTextId" 
+		           value="#{determinacion.etiqueta}"/>
+            </ice:column>
+            <ice:column id="viewidcaracterId">
+                <f:facet name="header">Idcaracter</f:facet>
+                <h:outputText id="viewidcaracterTextId" 
+		           value="#{determinacion.idcaracter}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{determinacion.nombre}"/>
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                <h:outputText id="viewordenTextId" 
+		           value="#{determinacion.orden}"/>
+            </ice:column>
+            <ice:column id="viewtextoId">
+                <f:facet name="header">Texto</f:facet>
+                <h:outputText id="viewtextoTextId" 
+		           value="#{determinacion.texto}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdeterminacionLinkId" 
+                     value="Select" 
+                      view="/seam/Determinacion.xhtml">
+                    <f:param name="determinacionIden" 
+                            value="#{determinacion.iden}"/>
+                    <f:param name="determinacionFrom" value="Tramite"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddeterminacionButtonId" 
+               value="Add determinacion"
+                view="/seam/DeterminacionEdit.xhtml">
+            <f:param name="tramiteIden" 
+                    value="#{tramiteHome.instance.iden}"/>
+            <f:param name="determinacionFrom" value="Tramite"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Documentos">
+    <div class="association" id="viewdocumentosChildrenId">
+        
+        <h:outputText value="There are no documentos associated with this tramite." 
+	                 id="viewdocumentosChildTextId"
+                   rendered="#{empty tramiteHome.documentos}"/>
+        
+        <ice:dataTable value="#{tramiteHome.documentos}" 
+                       var="documento" 
+                  rendered="#{not empty tramiteHome.documentos}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdocumentosTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{documento.iden}"/>
+            </ice:column>
+            <ice:column id="viewarchivoId">
+                <f:facet name="header">Archivo</f:facet>
+                <h:outputText id="viewarchivoTextId" 
+		           value="#{documento.archivo}"/>
+            </ice:column>
+            <ice:column id="viewcomentarioId">
+                <f:facet name="header">Comentario</f:facet>
+                <h:outputText id="viewcomentarioTextId" 
+		           value="#{documento.comentario}"/>
+            </ice:column>
+            <ice:column id="viewescalaId">
+                <f:facet name="header">Escala</f:facet>
+                <h:outputText id="viewescalaTextId" 
+		           value="#{documento.escala}"/>
+            </ice:column>
+            <ice:column id="viewidgrupodocumentoId">
+                <f:facet name="header">Idgrupodocumento</f:facet>
+                <h:outputText id="viewidgrupodocumentoTextId" 
+		           value="#{documento.idgrupodocumento}"/>
+            </ice:column>
+            <ice:column id="viewidtipodocumentoId">
+                <f:facet name="header">Idtipodocumento</f:facet>
+                <h:outputText id="viewidtipodocumentoTextId" 
+		           value="#{documento.idtipodocumento}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{documento.nombre}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdocumentoLinkId" 
+                     value="Select" 
+                      view="/seam/Documento.xhtml">
+                    <f:param name="documentoIden" 
+                            value="#{documento.iden}"/>
+                    <f:param name="documentoFrom" value="Tramite"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddocumentoButtonId" 
+               value="Add documento"
+                view="/seam/DocumentoEdit.xhtml">
+            <f:param name="tramiteIden" 
+                    value="#{tramiteHome.instance.iden}"/>
+            <f:param name="documentoFrom" value="Tramite"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Documentos_1">
+    <div class="association" id="viewdocumentos_1ChildrenId">
+        
+        <h:outputText value="There are no documentos_1 associated with this tramite." 
+	                 id="viewdocumentos_1ChildTextId"
+                   rendered="#{empty tramiteHome.documentos_1}"/>
+        
+        <ice:dataTable value="#{tramiteHome.documentos_1}" 
+                       var="documento" 
+                  rendered="#{not empty tramiteHome.documentos_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdocumentos_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{documento.iden}"/>
+            </ice:column>
+            <ice:column id="viewarchivoId">
+                <f:facet name="header">Archivo</f:facet>
+                <h:outputText id="viewarchivoTextId" 
+		           value="#{documento.archivo}"/>
+            </ice:column>
+            <ice:column id="viewcomentarioId">
+                <f:facet name="header">Comentario</f:facet>
+                <h:outputText id="viewcomentarioTextId" 
+		           value="#{documento.comentario}"/>
+            </ice:column>
+            <ice:column id="viewescalaId">
+                <f:facet name="header">Escala</f:facet>
+                <h:outputText id="viewescalaTextId" 
+		           value="#{documento.escala}"/>
+            </ice:column>
+            <ice:column id="viewidgrupodocumentoId">
+                <f:facet name="header">Idgrupodocumento</f:facet>
+                <h:outputText id="viewidgrupodocumentoTextId" 
+		           value="#{documento.idgrupodocumento}"/>
+            </ice:column>
+            <ice:column id="viewidtipodocumentoId">
+                <f:facet name="header">Idtipodocumento</f:facet>
+                <h:outputText id="viewidtipodocumentoTextId" 
+		           value="#{documento.idtipodocumento}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{documento.nombre}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdocumentoLinkId" 
+                     value="Select" 
+                      view="/seam/Documento.xhtml">
+                    <f:param name="documentoIden" 
+                            value="#{documento.iden}"/>
+                    <f:param name="documentoFrom" value="Tramite"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddocumentoButtonId" 
+               value="Add documento"
+                view="/seam/DocumentoEdit.xhtml">
+            <f:param name="tramiteIden" 
+                    value="#{tramiteHome.instance.iden}"/>
+            <f:param name="documentoFrom" value="Tramite"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Entidads">
+    <div class="association" id="viewentidadsChildrenId">
+        
+        <h:outputText value="There are no entidads associated with this tramite." 
+	                 id="viewentidadsChildTextId"
+                   rendered="#{empty tramiteHome.entidads}"/>
+        
+        <ice:dataTable value="#{tramiteHome.entidads}" 
+                       var="entidad" 
+                  rendered="#{not empty tramiteHome.entidads}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidadsTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidad.iden}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{entidad.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewclaveId">
+                <f:facet name="header">Clave</f:facet>
+                <h:outputText id="viewclaveTextId" 
+		           value="#{entidad.clave}"/>
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                <h:outputText id="viewcodigoTextId" 
+		           value="#{entidad.codigo}"/>
+            </ice:column>
+            <ice:column id="viewetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                <h:outputText id="viewetiquetaTextId" 
+		           value="#{entidad.etiqueta}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{entidad.nombre}"/>
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                <h:outputText id="viewordenTextId" 
+		           value="#{entidad.orden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Entidad.xhtml">
+                    <f:param name="entidadIden" 
+                            value="#{entidad.iden}"/>
+                    <f:param name="entidadFrom" value="Tramite"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidadButtonId" 
+               value="Add entidad"
+                view="/seam/EntidadEdit.xhtml">
+            <f:param name="tramiteIden" 
+                    value="#{tramiteHome.instance.iden}"/>
+            <f:param name="entidadFrom" value="Tramite"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Entidads_1">
+    <div class="association" id="viewentidads_1ChildrenId">
+        
+        <h:outputText value="There are no entidads_1 associated with this tramite." 
+	                 id="viewentidads_1ChildTextId"
+                   rendered="#{empty tramiteHome.entidads_1}"/>
+        
+        <ice:dataTable value="#{tramiteHome.entidads_1}" 
+                       var="entidad" 
+                  rendered="#{not empty tramiteHome.entidads_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidads_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidad.iden}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{entidad.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewclaveId">
+                <f:facet name="header">Clave</f:facet>
+                <h:outputText id="viewclaveTextId" 
+		           value="#{entidad.clave}"/>
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                <h:outputText id="viewcodigoTextId" 
+		           value="#{entidad.codigo}"/>
+            </ice:column>
+            <ice:column id="viewetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                <h:outputText id="viewetiquetaTextId" 
+		           value="#{entidad.etiqueta}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{entidad.nombre}"/>
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                <h:outputText id="viewordenTextId" 
+		           value="#{entidad.orden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Entidad.xhtml">
+                    <f:param name="entidadIden" 
+                            value="#{entidad.iden}"/>
+                    <f:param name="entidadFrom" value="Tramite"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidadButtonId" 
+               value="Add entidad"
+                view="/seam/EntidadEdit.xhtml">
+            <f:param name="tramiteIden" 
+                    value="#{tramiteHome.instance.iden}"/>
+            <f:param name="entidadFrom" value="Tramite"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Operacions">
+    <div class="association" id="viewoperacionsChildrenId">
+        
+        <h:outputText value="There are no operacions associated with this tramite." 
+	                 id="viewoperacionsChildTextId"
+                   rendered="#{empty tramiteHome.operacions}"/>
+        
+        <ice:dataTable value="#{tramiteHome.operacions}" 
+                       var="operacion" 
+                  rendered="#{not empty tramiteHome.operacions}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewoperacionsTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{operacion.iden}"/>
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                <h:outputText id="viewordenTextId" 
+		           value="#{operacion.orden}"/>
+            </ice:column>
+            <ice:column id="viewtextoId">
+                <f:facet name="header">Texto</f:facet>
+                <h:outputText id="viewtextoTextId" 
+		           value="#{operacion.texto}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectoperacionLinkId" 
+                     value="Select" 
+                      view="/seam/Operacion.xhtml">
+                    <f:param name="operacionIden" 
+                            value="#{operacion.iden}"/>
+                    <f:param name="operacionFrom" value="Tramite"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddoperacionButtonId" 
+               value="Add operacion"
+                view="/seam/OperacionEdit.xhtml">
+            <f:param name="tramiteIden" 
+                    value="#{tramiteHome.instance.iden}"/>
+            <f:param name="operacionFrom" value="Tramite"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Operacions_1">
+    <div class="association" id="viewoperacions_1ChildrenId">
+        
+        <h:outputText value="There are no operacions_1 associated with this tramite." 
+	                 id="viewoperacions_1ChildTextId"
+                   rendered="#{empty tramiteHome.operacions_1}"/>
+        
+        <ice:dataTable value="#{tramiteHome.operacions_1}" 
+                       var="operacion" 
+                  rendered="#{not empty tramiteHome.operacions_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewoperacions_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{operacion.iden}"/>
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                <h:outputText id="viewordenTextId" 
+		           value="#{operacion.orden}"/>
+            </ice:column>
+            <ice:column id="viewtextoId">
+                <f:facet name="header">Texto</f:facet>
+                <h:outputText id="viewtextoTextId" 
+		           value="#{operacion.texto}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectoperacionLinkId" 
+                     value="Select" 
+                      view="/seam/Operacion.xhtml">
+                    <f:param name="operacionIden" 
+                            value="#{operacion.iden}"/>
+                    <f:param name="operacionFrom" value="Tramite"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddoperacionButtonId" 
+               value="Add operacion"
+                view="/seam/OperacionEdit.xhtml">
+            <f:param name="tramiteIden" 
+                    value="#{tramiteHome.instance.iden}"/>
+            <f:param name="operacionFrom" value="Tramite"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+	<ice:panelTab id="viewplanpanelTab" label="Plan">
+   		<div class="association" id="planParent">
+        
+       		 <h:outputText value="There is no plan associated with this tramite." 
+		                  id="viewplanTextId"
+                   rendered="#{tramiteHome.instance.plan == null}"/>
+   
+        	<ice:dataTable  var="plan" 
+                   value="#{tramiteHome.instance.plan}" 
+                rendered="#{tramiteHome.instance.plan != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+	        columnClasses="allCols"
+                      id="viewplanTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{plan.iden}
+            </ice:column>
+            <ice:column id="viewbsuspendidoId">
+                <f:facet name="header">Bsuspendido</f:facet>
+                #{plan.bsuspendido}
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                #{plan.codigo}
+            </ice:column>
+            <ice:column id="viewidambitoId">
+                <f:facet name="header">Idambito</f:facet>
+                #{plan.idambito}
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{plan.nombre}
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{plan.orden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Plan by idpadre iden</f:facet>
+		    	#{plan.planByIdpadre.iden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Plan by idplanbase iden</f:facet>
+		    	#{plan.planByIdplanbase.iden}
+            </ice:column>
+            <ice:column id="viewtextoId">
+                <f:facet name="header">Texto</f:facet>
+                #{plan.texto}
+            </ice:column>
+            <ice:column id="viewplanColumnId">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewplanLinkId" 
+                     value="View" 
+                      view="/seam/Plan.xhtml">
+                    <f:param name="planIden" 
+                           value="#{plan.iden}"/>
+                </s:link>
+            </ice:column>
+       </ice:dataTable>
+       
+    </div>
+    </ice:panelTab>
+
+   <ice:panelTab label="Relacions for idtramiteborrador">
+    <div class="association" id="viewrelacionsForIdtramiteborradorChildrenId">
+        
+        <h:outputText value="There are no relacionsForIdtramiteborrador associated with this tramite." 
+	                 id="viewrelacionsForIdtramiteborradorChildTextId"
+                   rendered="#{empty tramiteHome.relacionsForIdtramiteborrador}"/>
+        
+        <ice:dataTable value="#{tramiteHome.relacionsForIdtramiteborrador}" 
+                       var="relacion" 
+                  rendered="#{not empty tramiteHome.relacionsForIdtramiteborrador}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewrelacionsForIdtramiteborradorTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{relacion.iden}"/>
+            </ice:column>
+            <ice:column id="viewiddefrelacionId">
+                <f:facet name="header">Iddefrelacion</f:facet>
+                <h:outputText id="viewiddefrelacionTextId" 
+		           value="#{relacion.iddefrelacion}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectrelacionLinkId" 
+                     value="Select" 
+                      view="/seam/Relacion.xhtml">
+                    <f:param name="relacionIden" 
+                            value="#{relacion.iden}"/>
+                    <f:param name="relacionFrom" value="Tramite"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddrelacionButtonId" 
+               value="Add relacion"
+                view="/seam/RelacionEdit.xhtml">
+            <f:param name="tramiteIden" 
+                    value="#{tramiteHome.instance.iden}"/>
+            <f:param name="relacionFrom" value="Tramite"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Relacions for idtramiteborrador_1">
+    <div class="association" id="viewrelacionsForIdtramiteborrador_1ChildrenId">
+        
+        <h:outputText value="There are no relacionsForIdtramiteborrador_1 associated with this tramite." 
+	                 id="viewrelacionsForIdtramiteborrador_1ChildTextId"
+                   rendered="#{empty tramiteHome.relacionsForIdtramiteborrador_1}"/>
+        
+        <ice:dataTable value="#{tramiteHome.relacionsForIdtramiteborrador_1}" 
+                       var="relacion" 
+                  rendered="#{not empty tramiteHome.relacionsForIdtramiteborrador_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewrelacionsForIdtramiteborrador_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{relacion.iden}"/>
+            </ice:column>
+            <ice:column id="viewiddefrelacionId">
+                <f:facet name="header">Iddefrelacion</f:facet>
+                <h:outputText id="viewiddefrelacionTextId" 
+		           value="#{relacion.iddefrelacion}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectrelacionLinkId" 
+                     value="Select" 
+                      view="/seam/Relacion.xhtml">
+                    <f:param name="relacionIden" 
+                            value="#{relacion.iden}"/>
+                    <f:param name="relacionFrom" value="Tramite"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddrelacionButtonId" 
+               value="Add relacion"
+                view="/seam/RelacionEdit.xhtml">
+            <f:param name="tramiteIden" 
+                    value="#{tramiteHome.instance.iden}"/>
+            <f:param name="relacionFrom" value="Tramite"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Relacions for idtramitecreador">
+    <div class="association" id="viewrelacionsForIdtramitecreadorChildrenId">
+        
+        <h:outputText value="There are no relacionsForIdtramitecreador associated with this tramite." 
+	                 id="viewrelacionsForIdtramitecreadorChildTextId"
+                   rendered="#{empty tramiteHome.relacionsForIdtramitecreador}"/>
+        
+        <ice:dataTable value="#{tramiteHome.relacionsForIdtramitecreador}" 
+                       var="relacion" 
+                  rendered="#{not empty tramiteHome.relacionsForIdtramitecreador}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewrelacionsForIdtramitecreadorTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{relacion.iden}"/>
+            </ice:column>
+            <ice:column id="viewiddefrelacionId">
+                <f:facet name="header">Iddefrelacion</f:facet>
+                <h:outputText id="viewiddefrelacionTextId" 
+		           value="#{relacion.iddefrelacion}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectrelacionLinkId" 
+                     value="Select" 
+                      view="/seam/Relacion.xhtml">
+                    <f:param name="relacionIden" 
+                            value="#{relacion.iden}"/>
+                    <f:param name="relacionFrom" value="Tramite"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddrelacionButtonId" 
+               value="Add relacion"
+                view="/seam/RelacionEdit.xhtml">
+            <f:param name="tramiteIden" 
+                    value="#{tramiteHome.instance.iden}"/>
+            <f:param name="relacionFrom" value="Tramite"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Relacions for idtramitecreador_1">
+    <div class="association" id="viewrelacionsForIdtramitecreador_1ChildrenId">
+        
+        <h:outputText value="There are no relacionsForIdtramitecreador_1 associated with this tramite." 
+	                 id="viewrelacionsForIdtramitecreador_1ChildTextId"
+                   rendered="#{empty tramiteHome.relacionsForIdtramitecreador_1}"/>
+        
+        <ice:dataTable value="#{tramiteHome.relacionsForIdtramitecreador_1}" 
+                       var="relacion" 
+                  rendered="#{not empty tramiteHome.relacionsForIdtramitecreador_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewrelacionsForIdtramitecreador_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{relacion.iden}"/>
+            </ice:column>
+            <ice:column id="viewiddefrelacionId">
+                <f:facet name="header">Iddefrelacion</f:facet>
+                <h:outputText id="viewiddefrelacionTextId" 
+		           value="#{relacion.iddefrelacion}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectrelacionLinkId" 
+                     value="Select" 
+                      view="/seam/Relacion.xhtml">
+                    <f:param name="relacionIden" 
+                            value="#{relacion.iden}"/>
+                    <f:param name="relacionFrom" value="Tramite"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddrelacionButtonId" 
+               value="Add relacion"
+                view="/seam/RelacionEdit.xhtml">
+            <f:param name="tramiteIden" 
+                    value="#{tramiteHome.instance.iden}"/>
+            <f:param name="relacionFrom" value="Tramite"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+

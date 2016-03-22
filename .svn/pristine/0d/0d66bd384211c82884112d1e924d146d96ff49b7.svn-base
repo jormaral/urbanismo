@@ -1,0 +1,6 @@
+#Archivo de recursos para las Clases JAVA
+nombre_plan_vigente=Plan Vigente de Plan Encargado
+nombre_tramite_vigente=Trámite Vigente de Plan Encargado
+nombre_tramite_encargado=Trámite Encargado de Plan Encargado
+error_guardando_planes_encargados= Error guardando el plan encargado
+plan_encargado_guardado_correctamente = Plan Encargado guardado correctamente

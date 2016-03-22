@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:application="http://java.sun.com/xml/ns/javaee/application_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_6.xsd" id="Application_ID" version="6">
+  <display-name>UrbanismoEnRedV2</display-name>
+  <module>
+    <ejb>Urbanismoenred-serviciosV2.jar</ejb>
+  </module>
+  <module>
+    <web>
+      <web-uri>Urbanismoenred-ConsolaV2.war</web-uri>
+      <context-root>Consola</context-root>
+    </web>
+  </module>
+  <module>
+    <web>
+      <web-uri>Urbanismoenred-ProductorV2.war</web-uri>
+      <context-root>Productor</context-root>
+    </web>
+  </module>
+  <library-directory>lib</library-directory>
+</application>

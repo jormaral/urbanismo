@@ -1,0 +1,102 @@
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaSelDeterminacionOperadora"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+	<ice:panelGroup>
+
+		<ice:panelPopup modal="true" id="panelDeterminacionOperadora" autoCentre="true" styleClass="panelPopup"
+			visible="#{gestionOperaciones.mostrarPopUpDeterminacionOperadora}">
+
+			<f:facet name="header">
+				<ice:panelGroup>
+					<ice:outputText value="#{messages.operacion_detoperadora}" />
+					<ice:commandButton
+						image="/img/editorfip/es/comun/cerrar_popup.png"
+						styleClass="popupHeaderImage"
+						action="#{gestionOperaciones.setMostrarPopUpDeterminacionOperadora(false)}"
+						title="#{messages.botongenerico_cerrar}"
+						alt="#{messages.botongenerico_cerrar}" />
+				</ice:panelGroup>
+			</f:facet>
+
+			<f:facet name="body">
+
+
+				<ice:panelGrid columns="1">
+				
+				<ice:panelGroup>
+						<ice:selectOneMenu partialSubmit="true" value="#{gestionArbolOperacionesDeterminacionesOperadoras.idTipoTramiteTrabajo}">
+							<f:selectItem itemLabel="#{messages.menuestado_planencargado}" itemValue="3"/>
+							<f:selectItem itemLabel="#{messages.menuestado_planvigente}" itemValue="2"/>
+						</ice:selectOneMenu>
+					</ice:panelGroup>
+
+					<ice:panelGroup styleClass="arbol" scrollHeight="300px"
+						scrollWidth="500px">
+						<ice:tree id="treeDetP"
+							value="#{gestionArbolOperacionesDeterminacionesOperadoras.model}" var="node"
+							binding="#{gestionArbolOperacionesDeterminacionesOperadoras.treeComponent}"
+							imageDir="/fipeditor/img/editorfip/es/arboles/"
+							hideRootNode="false" hideNavigation="false"
+							actionListener="#{gestionArbolOperacionesDeterminacionesOperadoras.menuEvent}">
+							<ice:treeNode>
+
+
+								<f:facet name="icon">
+									<ice:panelGroup style="display:inline;">
+										<h:graphicImage
+											value="/img/editorfip/es/arboles/#{node.userObject.icon}" />
+
+									</ice:panelGroup>
+								</f:facet>
+								<f:facet name="content">
+									<ice:panelGroup style="display:inline;">
+										<ice:panelGroup
+											styleClass="selectedNode#{node.userObject eq gestionArbolOperacionesDeterminacionesOperadoras.selectedUserObject}"
+											style="display:inline;">
+
+											<ice:commandLink
+												actionListener="#{gestionArbolOperacionesDeterminacionesOperadoras.nodeSelected}">
+												<f:param name="nodoId"
+													value="#{node.userObject.datosIdTextoArbolGenerico.idBaseDatos}" />
+												<ice:outputText id="TreeNodeDetP"
+													value="#{node.userObject.text}" />
+											</ice:commandLink>
+										</ice:panelGroup>
+									</ice:panelGroup>
+								</f:facet>
+
+							</ice:treeNode>
+						</ice:tree>
+					</ice:panelGroup>
+					
+					<ice:panelGroup styleClass="botonPopUpUnidades">
+
+							<ice:commandButton
+								rendered="#{gestionArbolOperacionesDeterminacionesOperadoras.idDeterminacionSeleccionada != 0}"
+								styleClass="boton1"
+								action="#{gestionOperaciones.seleccionarDeterminacionOperadora(gestionArbolOperacionesDeterminacionesOperadoras.idDeterminacionSeleccionada)}"
+								value="#{messages.seleccionar}" alt="#{messages.seleccionar}"
+								title="#{messages.boton_title_entidadAnadirGA_seleccionar}" />
+
+							<ice:commandButton value="#{messages.botongenerico_cancelar}"
+								styleClass="boton1"
+								action="#{gestionOperaciones.setMostrarPopUpDeterminacionOperadora(false)}"
+								alt="#{messages.botongenerico_cancelar}"
+								title="#{messages.boton_title_entidadAnadirGA_cancelar}" />
+
+						</ice:panelGroup>
+						
+				</ice:panelGrid>
+
+
+
+			</f:facet>
+
+		</ice:panelPopup>
+
+	</ice:panelGroup>
+</f:subview>

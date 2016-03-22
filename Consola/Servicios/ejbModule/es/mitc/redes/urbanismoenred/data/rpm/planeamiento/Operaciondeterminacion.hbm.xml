@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operaciondeterminacion"
+  schema="planeamiento" table="operaciondeterminacion">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">planeamiento.planeamiento_operaciondeterminacion_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacion"
+   fetch="select" name="operacion">
+   <column name="idoperacion" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion"
+   fetch="select" name="determinacionByIddeterminacion">
+   <column name="iddeterminacion" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion"
+   fetch="select" name="determinacionByIddeterminacionoperadora">
+   <column name="iddeterminacionoperadora" not-null="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="idtipooperaciondet" type="int">
+   <column name="idtipooperaciondet" not-null="true"/>
+  </property>
+ </class>
+ <query name="Operaciondeterminacion.obtenerPorOperadora">SELECT op FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operaciondeterminacion op
+	WHERE op.determinacionByIddeterminacionoperadora.iden = :idDeterminacion</query>
+ <query name="Operaciondeterminacion.obtenerPorOperada">SELECT op FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operaciondeterminacion op
+	WHERE op.determinacionByIddeterminacion.iden = :idDeterminacion</query>
+</hibernate-mapping>

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jul-2009 12:36:17 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class name="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Ambito"
+  schema="diccionario" table="ambito">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="assigned"/>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Literal"
+   fetch="select" name="literal">
+   <column name="idliteral"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipoambito"
+   fetch="select" name="tipoambito">
+   <column name="idtipoambito" not-null="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="codigoine" type="string">
+   <column length="5" name="codigoine"/>
+  </property>
+  <set inverse="true" name="organigramaambitosForIdambitopadre" sort="unsorted">
+   <key>
+    <column name="idambitopadre" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Organigramaambito"/>
+  </set>
+  <set inverse="true" name="organos" sort="unsorted">
+   <key>
+    <column name="idambito"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Organo"/>
+  </set>
+  <set inverse="true" name="organigramaambitosForIdambitohijo" sort="unsorted">
+   <key>
+    <column name="idambitohijo" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Organigramaambito"/>
+  </set>
+  <set inverse="true" name="ambitoshp" sort="unsorted">
+   <key>
+    <column name="idambito" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Ambitoshp"/>
+  </set>
+ </class>
+ <query name="Ambito.buscarPorNombre">SELECT amb FROM es.mitc.redes.urbanismoenred.data.rpm.diccionario.Ambito amb
+		INNER JOIN amb.literal lit
+		INNER JOIN lit.traduccions t 
+	WHERE t.idioma = :idioma AND LOWER(t.texto) LIKE  :nombre ORDER BY t.texto ASC</query>
+ <query name="Ambito.obtenerAmbitoRefundido">SELECT Distinct a.iden 
+	FROM es.mitc.redes.urbanismoenred.data.rpm.diccionario.Ambito a, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan p 
+	WHERE t.plan.idambito = a.iden AND t.iden IN (:listaTramites)</query>
+ <query name="Ambito.buscarPadres">select Distinct o from es.mitc.redes.urbanismoenred.data.rpm.diccionario.Ambito as o 
+    where o not in (select ambitoByIdambitohijo from es.mitc.redes.urbanismoenred.data.rpm.diccionario.Organigramaambito)</query>
+ <query name="Ambito.buscarWithPlan">select Distinct o from es.mitc.redes.urbanismoenred.data.rpm.diccionario.Ambito as o 
+        where iden in (select idambito from es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan)</query>
+ <query name="Ambito.buscarHijosWithPlan">select Distinct o from es.mitc.redes.urbanismoenred.data.rpm.diccionario.Ambito as o 
+        where iden in (select idambito from es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan)
+        and
+        o in (select ambitoByIdambitohijo from es.mitc.redes.urbanismoenred.data.rpm.diccionario.Organigramaambito where ambitoByIdambitopadre.iden=:idPadre)</query>
+ <query name="Ambito.obtenerTodos">SELECT a FROM es.mitc.redes.urbanismoenred.data.rpm.diccionario.Ambito a</query>
+ <sql-query name="Ambito.buscarFromGeom">select idambito from diccionario.ambitoshp where st_Intersects (geom,st_GeomFromText(:WKT))</sql-query>
+</hibernate-mapping>

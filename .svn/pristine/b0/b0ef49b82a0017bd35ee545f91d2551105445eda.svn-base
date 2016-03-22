@@ -1,0 +1,23 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alvaro.Montero
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div id="botoneraAmbitosConfiguradorVisor" class="toolbox divider">
+	<select name="configuradorVisorSelectAmbitos" id="configuradorVisorSelectAmbitos" size="1" style="width: 160px;margin-top: 3px;">
+    </select>
+</div>
+
+<div id="botoneraAccionesConfiguradorVisor" class="toolbox divider" style="float:right;">
+	<!--
+	<span class="iconWrapper"><img id="configuradorVisorBtnAddLayerGoogle" class="toolBoxAction" src="styles/images/google.png" width="18" height="18" alt="A&ntilde;adir capa google" title="A&ntilde;adir capa google"/></span>
+	<span class="iconWrapper"><img id="configuradorVisorBtnAddLayerKml" class="toolBoxAction" src="styles/images/kml.png" width="18" height="18" alt="A&ntilde;adir capa KML" title="A&ntilde;adir capa KML"/></span>
+	<span class="iconWrapper"><img id="configuradorVisorBtnAddLayerWfs" class="toolBoxAction" src="styles/images/wms.png" width="18" height="18" alt="A&ntilde;adir capa WFS" title="A&ntilde;adir capa WFS"/></span> 
+	 -->		
+	<span class="iconWrapper"><img id="configuradorVisorBtnAddLayerWms" class="toolBoxAction" src="styles/images/wms.png" width="18" height="18" alt="A&ntilde;adir capa WMS" title="A&ntilde;adir capa WMS"/></span>	
+	<span class="iconWrapper"><img id="configuradorVisorBtnAddFolder" class="toolBoxAction" src="styles/images/folderTree.gif" width="18" height="18" alt="A&ntilde;adir carpeta" title="A&ntilde;adir carpeta" /></span>
+	<span class="iconWrapper"><img id="configuradorVisorBtnSaveChanges" class="toolBoxAction" src="styles/images/save.png" alt="Guardar" title="Guardar cambios del arbol" /></span>	
+	<span class="iconWrapper"><img id="configuradorVisorBtnDeleteLayer" class="toolBoxAction" src="styles/images/delete.png" width="18" height="18" alt="Borrar" title="Borrar carpeta o capa" /></span>
+</div>

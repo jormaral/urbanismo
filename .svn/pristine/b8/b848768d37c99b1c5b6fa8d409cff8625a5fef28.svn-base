@@ -1,0 +1,21 @@
+/* 
+    Document   : PreviewVisor
+    Created on : 24-ene-2012, 12:42:43
+    Author     : a.centeno
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.btnLoadPlano{
+    background-image:  url(images/load.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    float:right;
+    right: 20px;
+    position:absolute;
+    cursor: pointer;
+    visibility: hidden;
+    width: 18px;
+    height: 18px;
+    top: -2px;
+}
+

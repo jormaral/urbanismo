@@ -1,0 +1,67 @@
+<div class="toolbarTabs">
+	<ul id="panelPlanesTabsRPM" class="tab-menu">
+		<li id='tabDatosGeneralesPlanes' class="selected"><a id="DatosGeneralesPlanes" href="Pages/VisorPLANES/Planes/PlanesData.html" title="Datos generales">Datos generales</a></li>
+		<li id='tabEsOperadorPorPlanes' style="display: none;"><a id="EsOperadorPorPlanes" href="Pages/VisorPLANES/Planes/PlanesData.html" title="Es operado por">Operado por</a></li>
+		<li id='tabOperaAPlanes' style="display: none;"><a id="OperaAPlanes" href="Pages/VisorPLANES/Planes/PlanesData.html" title="Opera a">Opera a</a></li>
+		<li id='tabPlanesCargando' style="display: none;"><div id="TramitesPlanes" class="progresoBasico16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+	</ul>
+	<div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+
+	//MochaUI.initializeTabs('panelPlanesTabsRPM','main-panel');
+	
+	$('DatosGeneralesPlanes').addEvent('click', function(e){
+		new Event(e).stop();
+
+		$('tabPlanes-panel').setStyle('overflow','hidden');
+
+		$('panelPlanesDatosGenerales').setStyle('display', 'block'); //setOpacity(100);
+		$('panelPlanesEsOperadorPor').setStyle('display', 'none'); //setOpacity(0);
+		$('panelPlanesOperaA').setStyle('display', 'none'); //setOpacity(0);
+		
+		$('tabDatosGeneralesPlanes').set('class','selected');
+		$('tabEsOperadorPorPlanes').set('class','');
+		$('tabOperaAPlanes').set('class','');
+
+		MUI.rWidth();
+    });
+
+	$('EsOperadorPorPlanes').addEvent('click', function(e){
+		new Event(e).stop();	
+
+		$('tabPlanes-panel').setStyle('overflow','auto');	
+
+		$('panelPlanesDatosGenerales').setStyle('display', 'none'); //setOpacity(0);
+		$('panelPlanesEsOperadorPor').setStyle('display', 'block'); //setOpacity(100);
+		$('panelPlanesOperaA').setStyle('display', 'none'); //setOpacity(0);		
+		
+		$('tabDatosGeneralesPlanes').set('class','');
+		$('tabEsOperadorPorPlanes').set('class','selected');
+		$('tabOperaAPlanes').set('class','');
+
+		if ($('panelPlanesEsOperadorPor').childNodes.length == 0){
+			ChargeTabPlanesEsOperadorPor(dataPlanesEsOperadorPor);
+		} else { MUI.rWidth(); }
+    });
+
+	$('OperaAPlanes').addEvent('click', function(e){
+		new Event(e).stop();
+
+		$('tabPlanes-panel').setStyle('overflow','auto');	
+
+		$('panelPlanesDatosGenerales').setStyle('display', 'none'); //setOpacity(0);
+		$('panelPlanesEsOperadorPor').setStyle('display', 'none'); //setOpacity(0);
+		$('panelPlanesOperaA').setStyle('display', 'block'); //setOpacity(100);		
+		
+		$('tabDatosGeneralesPlanes').set('class','');
+		$('tabEsOperadorPorPlanes').set('class','');
+		$('tabOperaAPlanes').set('class','selected');
+
+		if ($('panelPlanesOperaA').childNodes.length == 0){
+			ChargeTabPlanesOperaA(dataPlanesOperaA);
+		} else { MUI.rWidth(); }
+    });
+
+</script>

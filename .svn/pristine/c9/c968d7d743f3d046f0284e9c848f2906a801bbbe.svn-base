@@ -1,0 +1,139 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_ayuda}"
+				view="/ayuda/AyudaNavegacion.xhtml" id="AyudaRutaMenu"
+				propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_faq}"
+				view="/ayuda/faq/Faq.xhtml" id="FaqRutaMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+
+	</ui:define>
+
+	<ui:define name="body">
+		<ice:form id="form">
+			<!--  <ice:dataTable value="#{gestionFaq.resultado}" var="faq" id="listaFaq" enableContextMenu="false" selectionMode="none" styleClass="tablaFaq">
+				<ice:column>
+					<h:outputText value="#{faq.nombrefaq}"/>
+				</ice:column>
+				<ice:column>
+					<h:outputText value="#{faq.textofaq}" />
+				</ice:column>
+			</ice:dataTable> -->
+			<br></br>
+			<ice:commandButton value="#{messages.faq_anadir}"
+				renderedOnUserRole="ADM" immediate="true"
+				action="#{gestionFaq.setMostrarPanelNuevaFaq(true)}"
+				styleClass="boton1" alt="#{messages.faq_anadir}"
+				title="#{messages.boton_title_ayudaFaq_anadirFaq}" />
+
+			<ice:panelSeries id="icePnlSrs" value="#{gestionFaq.resultado}"
+				var="faq" style=" margin-top: 1%;">
+				<ice:panelGroup styleClass="dr-pnl-sinmargen">
+					<ice:panelGroup styleClass="pnlClpsblEnd">
+						<ice:panelCollapsible id="textPanel" expanded="true">
+							<f:facet name="header">
+								<ice:panelGroup>
+									<ice:outputText id="textHeader" value="#{faq.nombrefaq}" />
+									<ice:commandLink value="(#{messages.faq_borrar})"
+										action="#{gestionFaq.eliminarFaq(faq.id)}"
+										styleClass="enlaceAzul" />
+								</ice:panelGroup>
+							</f:facet>
+							<ice:panelGroup style="text-align: left;">
+								<ice:outputText id="textDesc" escape="false"
+									value="#{faq.textofaq}" />
+							</ice:panelGroup>
+						</ice:panelCollapsible>
+					</ice:panelGroup>
+				</ice:panelGroup>
+			</ice:panelSeries>
+
+			<ice:panelPopup id="anadirPnlPop" draggable="false" modal="true"
+				visible="#{gestionFaq.mostrarPanelNuevaFaq}" autoCentre="true">
+				<f:facet name="header">
+					<ice:panelGroup>
+						<ice:outputText value="#{messages.faq}" />
+						<ice:commandButton id="modalPnlCloseBtn" immediate="true"
+							image="/img/editorfip/es/comun/cerrar_popup.png"
+							action="#{gestionFaq.setMostrarPanelNuevaFaq(false)}"
+							styleClass="popupHeaderImage"
+							title="#{messages.botongenerico_cerrar}"
+							alt="#{messages.botongenerico_cerrar}" />
+					</ice:panelGroup>
+				</f:facet>
+				<f:facet name="body">
+					<ice:panelGroup>
+						<ice:panelGrid columns="3">
+
+							<ice:outputLabel value="#{messages.faq_titulo}" />
+							<ice:inputText id="inputTitulo"
+								required="#{gestionFaq.mostrarPanelNuevaFaq}"
+								value="#{gestionFaq.nuevaFaq.nombrefaq}" />
+							<ice:message for="inputTitulo" />
+
+							<ice:outputLabel value="#{messages.faq_contenido}" />
+							<ice:inputRichText id="inputDesc"
+								required="#{gestionFaq.mostrarPanelNuevaFaq}"
+								saveOnSubmit="true" toolbar="Basic"
+								value="#{gestionFaq.nuevaFaq.textofaq}" />
+							<ice:outputLabel />
+
+							<ice:outputLabel />
+							<ice:commandButton value="#{messages.botongenerico_guardar}"
+								action="#{gestionFaq.guardarFaq}"
+								alt="#{messages.botongenerico_guardar}"
+								title="#{messages.botongenerico_guardar}" styleClass="boton1" />
+							<ice:outputLabel />
+
+
+						</ice:panelGrid>
+					</ice:panelGroup>
+				</f:facet>
+			</ice:panelPopup>
+
+		</ice:form>
+
+
+		<!--  Se define el cuerpo de la pagina
+				<h:graphicImage value="/ayuda/faq/FAQ.png"/> -->
+
+
+
+	</ui:define>
+
+</ui:composition>

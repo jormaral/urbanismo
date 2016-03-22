@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-oct-2009 13:54:46 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class name="es.mitc.redes.urbanismoenred.data.rpm.seguridad.Usuario"
+  schema="seguridad" table="usuario">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">seguridad.usuarios_iden_seq</param>
+   </generator>
+  </id>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column name="nombre" not-null="true" unique="true"/>
+  </property>
+  <property generated="never" lazy="false" name="passwordmd5" type="string">
+   <column length="32" name="passwordmd5" not-null="true"/>
+  </property>
+  <property column="correo" generated="never" lazy="false" length="255"
+   name="correo" type="string"/>
+  <property column="dni" generated="never" lazy="false" length="9"
+   name="dni" type="string"/>
+  <set cascade="delete" inverse="true" name="usuariorols" sort="unsorted">
+   <key>
+    <column name="idusuario" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.seguridad.Usuariorol"/>
+  </set>
+ </class>
+ <query name="Usuario.findByNombre">SELECT DISTINCT user FROM es.mitc.redes.urbanismoenred.data.rpm.seguridad.Usuario user 
+	LEFT JOIN FETCH  user.usuariorols
+	WHERE user.nombre= :nombre</query>
+ <query name="Usuario.findByDNI">SELECT DISTINCT user FROM es.mitc.redes.urbanismoenred.data.rpm.seguridad.Usuario user 
+	LEFT JOIN FETCH  user.usuariorols
+	WHERE user.dni= :dni</query>
+ <query name="Usuario.findAll">SELECT user FROM es.mitc.redes.urbanismoenred.data.rpm.seguridad.Usuario user ORDER BY user.nombre ASC</query>
+</hibernate-mapping>

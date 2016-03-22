@@ -1,0 +1,147 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_verdeterminacionplanvigente}"
+				view="/informacionfip/PlanVigenteNavegacion.xhtml"
+				id="PlanVigenteRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_consulta_adscripciones}"
+				view="/informacionfip/planvigente/adscripciones/VerAdscripciones.xhtml"
+				id="VerAdscripcionesRutaMenu" propagation="none">
+
+
+
+			</s:link>
+
+		</ice:panelGroup>
+
+	</ui:define>
+
+	<ui:define name="body">
+
+		<ice:form>
+
+			<ice:panelGrid columns="2"
+				columnClasses="colLabelAdscr,colInputAdscr">
+				<ice:outputLabel value="Entidad Origen"></ice:outputLabel>
+
+				<ice:panelGroup>
+					<ice:panelGrid columns="2"
+						columnClasses="colLabelAdscrDatos,colInputAdscr">
+						<ice:outputText
+							value="#{gestionAdscripciones.adscripcionesDTO.nombreEntidadOrigen}"
+							style="width:250px"></ice:outputText>
+
+						<ice:outputLabel />
+
+
+					</ice:panelGrid>
+				</ice:panelGroup>
+
+
+				<ice:outputLabel value="Entidad Destino"></ice:outputLabel>
+				<ice:panelGroup>
+					<ice:panelGrid columns="2"
+						columnClasses="colLabelAdscrDatos,colInputAdscr">
+						<ice:outputText
+							value="#{gestionAdscripciones.adscripcionesDTO.nombreEntidadDestino}"
+							style="width:250px"></ice:outputText>
+
+						<ice:outputLabel />
+
+					</ice:panelGrid>
+				</ice:panelGroup>
+
+				<ice:outputLabel value="Unidad:"></ice:outputLabel>
+
+				<ice:panelGroup>
+					<ice:panelGrid columns="2"
+						columnClasses="colLabelAdscrDatos,colInputAdscr">
+						<ice:outputText
+							value="#{gestionAdscripciones.adscripcionesDTO.nombreDeterminacionUnidad}"></ice:outputText>
+
+						<ice:outputLabel />
+					</ice:panelGrid>
+				</ice:panelGroup>
+
+				<ice:outputLabel value="Tipo:"></ice:outputLabel>
+
+				<ice:panelGroup>
+					<ice:panelGrid columns="2"
+						columnClasses="colLabelAdscrDatos,colInputAdscr">
+						<ice:outputText
+							value="#{gestionAdscripciones.adscripcionesDTO.nombreDeterminacionTipo}"></ice:outputText>
+
+						<ice:outputLabel />
+					</ice:panelGrid>
+				</ice:panelGroup>
+
+				<ice:outputLabel value="Cuantia"></ice:outputLabel>
+				<ice:outputText
+					value="#{gestionAdscripciones.adscripcionesDTO.cuantia}"
+					style="width:250px"></ice:outputText>
+
+
+				<ice:outputLabel value="Texto"></ice:outputLabel>
+				<ice:outputText rows="10"
+					value="#{gestionAdscripciones.adscripcionesDTO.texto}"
+					style="width:250px">
+				</ice:outputText>
+
+			</ice:panelGrid>
+
+
+
+			<ice:panelGrid columns="2"
+				columnClasses="colLabelAdscr,colInputAdscr"
+				rendered="#{gestionAdscripciones.adscripcionesDTO.idRelacion != 0}">
+
+				<s:button value="#{messages.botongenerico_volver}"
+					view="/informacionfip/planvigente/adscripciones/VerAdscripciones.xhtml"
+					styleClass="boton1" propagation="none"
+					alt="#{messages.botongenerico_volver}"
+					title="#{messages.boton_title_adscripcion_crear_volver}" />
+				<ice:outputLabel />
+
+
+
+			</ice:panelGrid>
+
+
+		</ice:form>
+
+	</ui:define>
+
+</ui:composition>

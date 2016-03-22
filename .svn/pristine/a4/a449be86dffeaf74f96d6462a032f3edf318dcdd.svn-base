@@ -1,0 +1,13 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alvaro.Montero
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div class="toolbox divider">
+	<span class="iconWrapper"><img id="btnDictionaryAnadir" class="toolBoxAction" src="styles/images/add.png" alt="Añadir" title="Añadir un nuevo elemento al diccionario"/></span>
+	<span class="iconWrapper"><img id="btnDictionaryModify" class="toolBoxAction" src="styles/images/edit.png" alt="Editar" title="Editar el elemento seleccionado del diccionario"/></span>
+	<span class="iconWrapper"><img id="btnDictionaryRemove" class="toolBoxAction" src="styles/images/delete.png" alt="Eliminar" title="Eliminar elemento del diccionario" /></span>
+	<span class="iconWrapper"><img id="btnDictionarySave" class="toolBoxAction" src="styles/images/save.png" alt="Guardar" title="Guardar el elemento del diccionario"/></span>
+</div>

@@ -1,0 +1,148 @@
+/* 
+    Document   : lectorWMS
+    Created on : 23-dic-2009, 13:51:30
+    Author     : jorge.bodas
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#URL
+{
+    position:relative;
+    left:0px;
+    top:0px;
+    height:102px;
+    width:390px;
+    background-image:url(images/zonaAddWFS.gif);
+    overflow:hidden;
+}
+
+
+                #loading_URL_WFS
+                {
+                    position:absolute;
+                    left:339px;
+                    top:17px;
+                    height:32px;
+                    width:32px;
+                    background-image:url(images/ajax-loader_blanco.gif);
+                }
+                #txtWFS_URL
+                {
+                    position:absolute;
+                    left:56px;
+                    top:33px;
+                    height:40px;
+                    width:150px;
+                    font-size:15pt;
+                    font-weight: bold;
+                }
+                    #campoWFS_URL
+                    {
+                        position:absolute;
+                        left:0px;
+                        top:0px;
+                        height:18px;
+                        width:233px;
+                        font-size:9pt;
+                        border:0px;
+                        margin:0px;
+                        padding:0px;
+                        background:transparent;
+                    }
+                    #btnWFS_URL
+                    {
+                        position:absolute;
+                        left:309px;
+                        top:48px;
+                        height:36px;
+                        width:36px;
+                        font-size:9pt;
+                        border:0px;
+                        margin:0px;
+                        padding:0px;
+                        background:transparent;
+                        cursor:pointer;
+                    }
+                #txtWFS_FORMATO
+                {
+                    position:absolute;
+                    left:70px;
+                    top:127px;
+                    height:40px;
+                    width:150px;
+                    font-size:15pt;
+                }
+                    #campoWFS_FORMATO
+                    {
+                        position:absolute;
+                        left:71px;
+                        top:153px;
+                        height:18px;
+                        width:244px;
+                        font-size:9pt;
+                        margin:0px;
+                        padding:0px;
+                        background:transparent;
+                        border-right-style: solid;
+                        border-left-style: solid;
+                        border-bottom-style: solid;
+                        border-top-style: solid;
+                        border-right-width: 1px;
+                        border-left-width: 1px;
+                        border-bottom-width: 1px;
+                        border-top-width: 1px;
+                        border-right-color: #3399ff;
+                        border-left-color: #3399ff;
+                        border-bottom-color: #3399ff;
+                        border-top-color: #3399ff;
+}
+                #txtWFS_CAPAS
+                {
+                    position:absolute;
+                    left:70px;
+                    top:120px;
+                    height:40px;
+                    width:150px;
+                    font-size:15pt;
+                }
+                    #campoWFS_CAPAS
+                    {
+                        position:absolute;
+                        left:71px;
+                        top:145px;
+                        height:150px;
+                        width:244px;
+                        font-size:9pt;
+                        margin:0px;
+                        padding:0px;
+                        background:transparent;
+                        border-right-style: solid;
+                        border-left-style: solid;
+                        border-bottom-style: solid;
+                        border-top-style: solid;
+                        border-right-width: 1px;
+                        border-left-width: 1px;
+                        border-bottom-width: 1px;
+                        border-top-width: 1px;
+                        border-right-color: #3399ff;
+                        border-left-color: #3399ff;
+                        border-bottom-color: #3399ff;
+                        border-top-color: #3399ff;
+                    }
+                #btnWFS_ADD
+                {
+                    position:absolute;
+                    left:110px;
+                    top:310px;
+                    height:20px;
+                    width:150px;
+                    background:gray;
+                    color:#dddddd;
+                    cursor:pointer;
+                }

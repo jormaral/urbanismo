@@ -1,0 +1,176 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"  
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="operaciondeterminacionSearch" styleClass="edit">
+      <ice:panelGroup  id="searchGroup" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+                    <ice:outputText id="listOperaciondeterminacionId" value="Operaciondeterminacion search filter"/>
+                 </td>
+              </tr>
+         </table>	
+         <ice:panelGroup id="listPanelGroupOperaciondeterminacionId" styleClass="edit">
+		
+            <s:decorate template="../layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <ice:selectOneRadio id="logic" value="#{operaciondeterminacionList.restrictionLogicOperator}" partialSubmit="true">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </ice:selectOneRadio>
+            </s:decorate>
+          
+   
+	  </ice:panelGroup>
+  
+        
+        <div class="actionButtons">
+            <ice:commandButton id="search" value="Search" action="/OperaciondeterminacionList.xhtml"/>
+        </div>
+      </ice:panelGroup> 
+    </ice:form>
+    
+    <ice:panelGroup styleClass="formBorderHighlight">
+
+    <h3>operaciondeterminacion  search results</h3>
+
+    <div class="searchResults" id="listoperaciondeterminacionResults">
+    <ice:outputText value="The operaciondeterminacion search returned no results." 
+               rendered="#{empty operaciondeterminacionList.resultList}"/>
+               
+    <ice:dataTable id="operaciondeterminacionList" 
+                  var="operaciondeterminacion"
+                value="#{operaciondeterminacionList.resultList}" 
+            resizable="true"
+	columnClasses="allCols"
+             rendered="#{not empty operaciondeterminacionList.resultList}">
+        <ice:column id="listidenId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{operaciondeterminacionList}"/>
+                    <ui:param name="propertyLabel" value="Iden"/>
+                    <ui:param name="propertyPath" value="operaciondeterminacion.iden"/>
+                </ui:include>
+            </f:facet>
+            #{operaciondeterminacion.iden}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listColumndeterminacionByIddeterminacionId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{operaciondeterminacionList}"/>
+                    <ui:param name="propertyLabel" value="Determinacion by iddeterminacion iden"/>
+                    <ui:param name="propertyPath" value="operaciondeterminacion.determinacionByIddeterminacion.iden"/>
+                </ui:include>
+            </f:facet>
+            #{operaciondeterminacion.determinacionByIddeterminacion.iden}
+        </ice:column>
+        <ice:column id="listColumndeterminacionByIddeterminacionoperadoraId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{operaciondeterminacionList}"/>
+                    <ui:param name="propertyLabel" value="Determinacion by iddeterminacionoperadora iden"/>
+                    <ui:param name="propertyPath" value="operaciondeterminacion.determinacionByIddeterminacionoperadora.iden"/>
+                </ui:include>
+            </f:facet>
+            #{operaciondeterminacion.determinacionByIddeterminacionoperadora.iden}
+        </ice:column>
+        <ice:column id="listidtipooperaciondetId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{operaciondeterminacionList}"/>
+                    <ui:param name="propertyLabel" value="Idtipooperaciondet"/>
+                    <ui:param name="propertyPath" value="operaciondeterminacion.idtipooperaciondet"/>
+                </ui:include>
+            </f:facet>
+            #{operaciondeterminacion.idtipooperaciondet}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listColumnoperacionId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{operaciondeterminacionList}"/>
+                    <ui:param name="propertyLabel" value="Operacion iden"/>
+                    <ui:param name="propertyPath" value="operaciondeterminacion.operacion.iden"/>
+                </ui:include>
+            </f:facet>
+            #{operaciondeterminacion.operacion.iden}
+        </ice:column>
+        <ice:column id="listColumnOperaciondeterminacionId">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/seam/#{empty from ? 'Operaciondeterminacion' : from}.xhtml" 
+                   value="#{empty from ? 'View' : 'Select'}" 
+                      id="operaciondeterminacion">
+                <f:param name="operaciondeterminacionIden" 
+                        value="#{operaciondeterminacion.iden}"/>
+            </s:link>
+			#{' '}
+            <s:link view="/seam/OperaciondeterminacionEdit.xhtml"
+                   value="Edit" 
+                      id="operaciondeterminacionEdit"
+                      rendered="#{empty from}">
+                <f:param name="operaciondeterminacionIden" 
+                        value="#{operaciondeterminacion.iden}"/>
+            </s:link>
+        </ice:column>
+    </ice:dataTable>
+
+    </div>
+</ice:panelGroup>
+
+    <div class="tableControl">
+      
+        <s:link view="/seam/OperaciondeterminacionList.xhtml" 
+            rendered="#{operaciondeterminacionList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPageoperaciondeterminacionListId">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+        
+        <s:link view="/seam/OperaciondeterminacionList.xhtml" 
+            rendered="#{operaciondeterminacionList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPageoperaciondeterminacionListId">
+            <f:param name="firstResult" 
+                    value="#{operaciondeterminacionList.previousFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/OperaciondeterminacionList.xhtml" 
+            rendered="#{operaciondeterminacionList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPageoperaciondeterminacionListId">
+            <f:param name="firstResult" 
+                    value="#{operaciondeterminacionList.nextFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/OperaciondeterminacionList.xhtml" 
+            rendered="#{operaciondeterminacionList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPageoperaciondeterminacionListId">
+            <f:param name="firstResult" 
+                    value="#{operaciondeterminacionList.lastFirstResult}"/>
+        </s:link>
+        
+    </div>
+    
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/seam/OperaciondeterminacionEdit.xhtml"
+                    id="create" 
+                 value="Create operaciondeterminacion">
+            <f:param name="operaciondeterminacionIden"/>
+        </s:button>
+    </s:div>
+    
+</ui:define>
+
+</ui:composition>
+

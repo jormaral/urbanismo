@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-ene-2010 18:08:31 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class name="es.mitc.redes.urbanismoenred.data.rpm.seguridad.Fip1"
+  schema="seguridad" table="fip1">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">seguridad.fip1_iden_seq</param>
+   </generator>
+  </id>
+  <property generated="never" lazy="false" name="codfip" type="string">
+   <column length="32" name="codfip"/>
+  </property>
+  <property generated="never" lazy="false" name="fechacreacion" type="date">
+   <column length="13" name="fechacreacion"/>
+  </property>
+  <property generated="never" lazy="false" name="fecharefundido" type="date">
+   <column length="13" name="fecharefundido"/>
+  </property>
+  <property generated="never" lazy="false" name="ruta" type="string">
+   <column length="100" name="ruta"/>
+  </property>
+  <property generated="never" lazy="false" name="obsoleto" type="java.lang.Boolean">
+   <column name="obsoleto"/>
+  </property>
+  <property generated="never" lazy="false" name="fechadescarga" type="date">
+   <column length="13" name="fechadescarga"/>
+  </property>
+  <property generated="never" lazy="false" name="idambito" type="int">
+   <column name="idambito" not-null="true"/>
+  </property>
+ </class>
+ <query name="Fip1.buscarPorAmbito">SELECT f FROM es.mitc.redes.urbanismoenred.data.rpm.seguridad.Fip1 f WHERE f.idambito = :idAmbito</query>
+ <query name="Fip1.findAll">SELECT f FROM es.mitc.redes.urbanismoenred.data.rpm.seguridad.Fip1 f</query>
+ <query name="Fip1.findLastFip1ByCodigoFip">SELECT f FROM es.mitc.redes.urbanismoenred.data.rpm.seguridad.Fip1 f WHERE f.codfip = :codigoFip ORDER BY f.fecharefundido DESC</query>
+ <query name="Fip1.findLastFip1ByAmbito">SELECT f FROM es.mitc.redes.urbanismoenred.data.rpm.seguridad.Fip1 f WHERE f.idambito = :idAmbito ORDER BY f.fecharefundido DESC</query>
+ <query name="Fip1.obtenerFip1">SELECT f FROM es.mitc.redes.urbanismoenred.data.rpm.seguridad.Fip1 f WHERE f.codfip = :codigoFip</query>
+ <query name="Fip1.obtenerPlantilla">SELECT f FROM es.mitc.redes.urbanismoenred.data.rpm.seguridad.Fip1 f WHERE f.idambito = :idAmbito AND codfip IS NULL</query>
+ <query name="Fip1.obtenerTodos">SELECT f FROM es.mitc.redes.urbanismoenred.data.rpm.seguridad.Fip1 f</query>
+</hibernate-mapping>

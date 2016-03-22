@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18-ene-2010 19:40:37 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.seguridad.Subsistema"
+  schema="seguridad" table="subsistema">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">seguridad.subsistema_iden_seq</param>
+   </generator>
+  </id>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column length="25" name="nombre"/>
+  </property>
+ </class>
+ <query name="Subsistema.obtenerTodos">SELECT sub FROM es.mitc.redes.urbanismoenred.data.rpm.seguridad.Subsistema sub</query>
+</hibernate-mapping>

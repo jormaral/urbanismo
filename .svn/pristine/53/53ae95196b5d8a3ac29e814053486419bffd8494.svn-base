@@ -1,0 +1,124 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../layout/templateArbol.xhtml">
+
+
+
+	<ui:define name="body">
+
+		<ice:form id="formArbol">
+			<ice:panelGrid columns="2" columnClasses="testCol1,testCol2">
+				<ice:panelGroup>
+
+
+					<ice:panelTabSet id="panelTabArbolEnt" styleClass="arbol">
+						<ice:panelTab id="tabArbolEnt" label="Arbol Entidades">
+							<!-- TRee values -->
+							<ice:panelGroup styleClass="arbol" scrollHeight="800px"
+								scrollWidth="40em">
+								<ice:tree id="tree"
+									value="#{gestionArbolAsignacionTramite.model}" var="node"
+									binding="#{gestionArbolAsignacionTramite.treeComponent}"
+									imageDir="/fipeditor/xmlhttp/css/rime/css-images/"
+									hideRootNode="false" hideNavigation="false"
+									actionListener="#{gestionArbolAsignacionTramite.menuEvent}">
+									<ice:treeNode>
+
+
+										<f:facet name="icon">
+											<ice:panelGroup style="display: inline">
+												<h:graphicImage
+													value="/xmlhttp/css/rime/css-images/#{node.userObject.icon}" />
+
+											</ice:panelGroup>
+										</f:facet>
+										<f:facet name="content">
+
+											<ice:panelGroup
+												styleClass="selectedNode#{node.userObject eq gestionArbolAsignacionTramite.selectedUserObject}"
+												style="display: inline">
+
+
+												<ice:commandLink
+													actionListener="#{gestionArbolAsignacionTramite.nodeSelected}">
+													<f:param name="nodoId"
+														value="#{node.userObject.datosIdTextoArbolGenerico.idBaseDatos}" />
+													<ice:outputText id="TreeNode"
+														value="#{node.userObject.text}" />
+												</ice:commandLink>
+											</ice:panelGroup>
+
+										</f:facet>
+
+									</ice:treeNode>
+								</ice:tree>
+
+
+							</ice:panelGroup>
+						</ice:panelTab>
+					</ice:panelTabSet>
+
+
+
+				</ice:panelGroup>
+
+				<ice:panelGroup
+					styleClass="exampleBox firstChildTitle backBeanChangeContainer">
+
+					<!-- backing bean title box -->
+					<ice:panelGroup styleClass="backBeanChangeTitle"
+						style="width:600px;">
+						<ice:outputText value="Valores" />
+					</ice:panelGroup>
+
+					<!-- actual backing bean values. -->
+					<ice:panelGroup styleClass="backBeanChangeBody"
+						effect="#{gestionArbolAsignacionTramite.valueChangeEffect}">
+						<ice:panelGroup style="margin: 0; padding: 0;width:600px;">
+							<ice:panelGrid cellpadding="0" cellspacing="3" columns="2">
+
+								<ice:outputLabel value="Ruta" />
+								<ice:panelSeries id="icePnlSrs"
+									value="#{gestionArbolAsignacionTramite.selectedTreePath}"
+									var="treePath">
+									<ice:graphicImage width="11" height="8"
+										style="margin-left:3px;margin-right:3px;"
+										value="/xmlhttp/css/rime/css-images/bullet.gif" />
+									<ice:outputText id="treePath" value="#{treePath}" />
+								</ice:panelSeries>
+
+								<ice:outputLabel value="id" />
+								<ice:outputText id="employeeID"
+									value="#{gestionArbolAsignacionTramite.selectedUserObject.datosIdTextoArbolGenerico.idBaseDatos}" />
+
+								<ice:outputLabel value="Nombre" />
+								<ice:outputText id="employeeName"
+									value="#{gestionArbolAsignacionTramite.selectedUserObject.datosIdTextoArbolGenerico.texto}" />
+									
+									<ice:outputLabel value="Tipo" />
+								<ice:outputText id="tipoName"
+									value="#{gestionArbolAsignacionTramite.selectedUserObject.datosIdTextoArbolGenerico.tipo}" />
+								
+								<ice:commandButton id="botonSel" value="Seleccionar" rendered="#{gestionArbolAsignacionTramite.selectedUserObject.datosIdTextoArbolGenerico.tipo == 'tramite'}"/>
+
+							</ice:panelGrid>
+						</ice:panelGroup>
+					</ice:panelGroup>
+				</ice:panelGroup>
+			</ice:panelGrid>
+		</ice:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-oct-2009 13:54:46 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.seguridad.Usuariorol"
+  schema="seguridad" table="usuariorol">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">seguridad.usuariorol_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.seguridad.Usuario"
+   fetch="select" name="usuario">
+   <column name="idusuario" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.seguridad.Rol"
+   fetch="select" name="rol">
+   <column name="idrol" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Ambito"
+   fetch="select" name="ambito">
+   <column name="idambito" not-null="false"/>
+  </many-to-one>
+ </class>
+ <query name="Usuariorol.puedeValidarTramite">SELECT ur FROM es.mitc.redes.urbanismoenred.data.rpm.seguridad.Usuariorol ur,
+ es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite trm 
+WHERE ur.usuario.iden = :idUsuario AND trm.plan.idambito = ur.ambito.iden AND trm.codigofip = :codFip AND LOWER(ur.rol.codigo) = 'val'</query>
+</hibernate-mapping>

@@ -1,0 +1,346 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaDeterminacionDetalle"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+
+
+	<ice:form id="introDeterminaciones">
+
+		<!--		<ice:selectInputText rows="10" width="300" valueChangeListener="#{gestionDeterminaciones.actualizarLista}">-->
+		<!--                <f:selectItems value="#{gestionDeterminaciones.resultadosBusqueda}"/>-->
+		<!--          </ice:selectInputText>-->
+
+		
+
+		<ice:panelGroup
+			styleClass="firstChildTitle backBeanChangeContainer detalleDeterminacion"
+			effect="#{gestionArbolDeterminaciones.valueChangeEffect}">
+
+
+
+			<!-- actual backing bean values. -->
+
+			<ice:panelGroup>
+
+
+				<ice:panelGroup styleClass="rutaDeterminacion">
+					<ice:panelSeries id="icePnlSrs"
+						value="#{gestionArbolDeterminaciones.selectedTreePath}"
+						var="treePath">
+						<ice:outputLabel styleClass="simboloMayorBold"  value=" > "/>
+						<ice:outputText id="treePath" value="#{treePath}" />
+					</ice:panelSeries>
+				</ice:panelGroup>
+
+				<ice:panelGroup>
+					<ice:inputText id="nodoName" styleClass="nameFont"
+						style="border: 1px solid #7F9DB9;width: 98%;"
+						readonly="true"
+						value="#{gestionDeterminaciones.determinacion.nombre}"
+						required="true" />
+				</ice:panelGroup>
+
+
+			</ice:panelGroup>
+
+
+
+			<ice:panelGrid columns="2"
+				columnClasses="testColDetLabel,testColDetermDetalles" width="300px">
+
+				<ice:panelGroup style="margin: 0; padding: 0; ">
+					<ice:panelGrid cellpadding="0" cellspacing="3" columns="2"
+						columnClasses="colLabel,colInput">
+
+						<ice:panelGroup styleClass="labels" panelTooltip="tooltip_det_tipo">
+							<ice:outputLabel value="#{messages.determinacion_tipo}" />
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+						</ice:panelGroup>
+
+						<ice:selectOneListbox size="1" id="selectTipoCaracter"
+							disabled="true"
+							styleClass="exampleBoxLabel" style="white-space: pre;width:95%;"
+							value="#{gestionDeterminaciones.determinacion.idcaracter}"
+							partialSubmit="true">
+							<f:selectItems
+								value="#{servicioBasicoDeterminaciones.findCaracterTextoSelectItem()}" />
+						</ice:selectOneListbox>
+
+						<ice:panelGroup styleClass="labels" panelTooltip="tooltip_det_articulado">
+							<ice:outputLabel value="#{messages.determinacion_articulado}" styleClass="iceOutLblDetDetalle"/>
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+						</ice:panelGroup>
+						<ice:inputText id="detArticulado"
+							readonly="true"
+							style="white-space: pre;width:95%;"
+							value="#{gestionDeterminaciones.determinacion.apartado}"
+							styleClass="input-Detalle" />
+
+
+
+						<!-- <ice:panelGroup styleClass="labels" panelTooltip="tooltip_det_simbologia">
+							<ice:outputLabel value="#{messages.determinacion_simbologia}" styleClass="iceOutLblDetDetalle"/>
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+						</ice:panelGroup>
+						<ice:inputText style="white-space:pre;width:95%;"
+							readonly="true"
+							id="detSimbologia" styleClass="input-Detalle"
+							value="#{gestionDeterminaciones.determinacion.etiqueta}" /> -->
+
+
+						<ice:panelGroup styleClass="labels" panelTooltip="tooltip_det_definicion">
+							<ice:outputLabel value="#{messages.determinacion_definicion}" styleClass="iceOutLblDetDetalle"/>
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+						</ice:panelGroup>
+						<ice:inputText style="white-space:pre;width:95%;"
+							readonly="true"
+							id="detDefinicion" styleClass="input-Detalle"
+							value="#{gestionDeterminaciones.determinacion.texto}" />
+
+
+
+
+
+					</ice:panelGrid>
+
+					<ice:panelGrid
+						rendered="#{gestionDeterminaciones.idDeterminacion != 0}"
+						columns="1" columnClasses="colLabelDet"
+						styleClass="panelGridDeter">
+						<ice:outputLabel
+							value="#{messages.determinacion_entidadesdondeaplica}" />
+						<ice:outputLabel />
+					</ice:panelGrid>
+					<ice:panelGroup
+						rendered="#{gestionDeterminaciones.idDeterminacion != 0}">
+						<ui:include src="./listaEntidadesDondeSeAplicaDeterminacion.xhtml" />
+					</ice:panelGroup>
+
+				</ice:panelGroup>
+
+				<ice:panelGroup
+					rendered="#{gestionDeterminaciones.idDeterminacion == 0}" />
+
+				<ice:panelGroup
+					rendered="#{gestionDeterminaciones.idDeterminacion != 0}">
+
+
+					<ice:panelGrid columns="2" columnClasses="colLabelDet, colBotonDet">
+						<ice:panelGroup panelTooltip="tooltip_det_base">
+							<ice:outputLabel value="#{messages.determinacion_base}" />
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+						</ice:panelGroup>
+
+						
+					</ice:panelGrid>
+					<ice:panelGroup styleClass="exampleBoxLabelAdaptadoBoton">
+						<ice:outputText id="detBaseDet" style="white-space: pre;"
+							value="#{gestionDeterminaciones.determinacion.getDeterminacionByIddeterminacionbase().getNombre()} " />
+
+					</ice:panelGroup>
+					<br />
+
+					<ice:panelGrid columns="2" columnClasses="colLabelDet, colBotonDet"
+						styleClass="panelGridDeter">
+						<ice:panelGroup panelTooltip="tooltip_det_padre">
+							<ice:outputLabel value="#{messages.determinacion_padre}" />
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+						</ice:panelGroup>
+						
+					</ice:panelGrid>
+					<ice:panelGroup styleClass="exampleBoxLabelAdaptadoBoton">
+						<ice:outputText id="detPadreDet" style="white-space: pre-wrap;"
+							value="#{gestionDeterminaciones.determinacion.getDeterminacionByIdpadre().getNombre()} " />
+					</ice:panelGroup>
+					<br />
+
+					<ice:panelGrid columns="2" columnClasses="colLabelDet, colBotonDet"
+						styleClass="panelGridDeter">
+						<ice:panelGroup panelTooltip="tooltip_det_unidad">
+							<ice:outputLabel value="#{messages.determinacion_unidad}" />
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+						</ice:panelGroup>	
+						
+					</ice:panelGrid>
+					<ice:panelGroup styleClass="exampleBoxLabelAdaptadoBoton">
+						<ice:outputText style="white-space: pre-wrap;" id="detUnidad"
+							value="#{servicioBasicoDeterminaciones.obtenerUnidadDeDeterminacion(gestionDeterminaciones.determinacion.iden)} - #{servicioBasicoDeterminaciones.obtenerPlandeUnidadDeDeterminacion(gestionDeterminaciones.determinacion.iden)}" />
+					</ice:panelGroup>
+
+					<br />
+					<ice:panelGrid columns="2" columnClasses="colLabelDet, colBotonDet"
+						styleClass="panelGridDeter">
+						<ice:panelGroup panelTooltip="tooltip_det_reguladoras">
+							<ice:outputLabel value="#{messages.determinacion_reguladoras}" />
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+						</ice:panelGroup>
+						
+					</ice:panelGrid>
+					<ui:include src="./listaDeterminacionesReguladoras.xhtml" />
+
+					<br />
+
+					<ice:panelGrid columns="2" columnClasses="colLabelDet, colBotonDet"
+						styleClass="panelGridDeter">
+						<ice:panelGroup panelTooltip="tooltip_det_grupoentidad">
+							<ice:outputLabel value="#{messages.determinacion_grupoentidad}" />
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+						</ice:panelGroup>
+						
+					</ice:panelGrid>
+					<ui:include src="./listaGruposAplicacion.xhtml" />
+
+					<br />
+					<ice:panelGrid columns="2" columnClasses="colLabelDet, colBotonDet"
+						styleClass="panelGridDeter">
+						<ice:panelGroup panelTooltip="tooltip_det_valoresreferencia">
+							<ice:outputLabel value="#{messages.determinacion_valoresreferencia}" />
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+						</ice:panelGroup>
+						
+					</ice:panelGrid>
+
+					<ui:include src="./listaValoresReferencia.xhtml" />
+
+					<br />
+					<ice:panelGrid columns="2" columnClasses="colLabelDet, colBotonDet"
+						styleClass="panelGridDeter"
+						rendered="#{gestionDeterminaciones.idDeterminacion != 0}">
+						<ice:panelGroup panelTooltip="tooltip_det_regulacionesespecificas">
+							<ice:outputLabel value="#{messages.determinacion_regulacionesespecificas}" />
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+						</ice:panelGroup>
+						
+					</ice:panelGrid>
+					<ice:panelGroup
+						rendered="#{gestionDeterminaciones.idDeterminacion != 0}">
+						<ui:include src="./ArbolRegulacionesEspecificas.xhtml" />
+					</ice:panelGroup>
+				</ice:panelGroup>
+
+
+			</ice:panelGrid>
+
+
+		</ice:panelGroup>
+
+		<!-- Tooltips -->
+		<ice:panelTooltip id="tooltip_det_tipo" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_determinacion_tipo}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+
+		<ice:panelTooltip id="tooltip_det_base" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_determinacion_base}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+		
+		<ice:panelTooltip id="tooltip_det_articulado" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_determinacion_articulado}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+		
+		<!-- <ice:panelTooltip id="tooltip_det_simbologia" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_determinacion_simbologia}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip> -->
+		
+		<ice:panelTooltip id="tooltip_det_definicion" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_determinacion_definicion}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+		
+		<ice:panelTooltip id="tooltip_det_padre" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_determinacion_padre}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+		
+		<ice:panelTooltip id="tooltip_det_unidad" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_determinacion_unidad}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+		
+		<ice:panelTooltip id="tooltip_det_reguladoras" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_determinacion_reguladoras}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+		
+		<ice:panelTooltip id="tooltip_det_grupoentidad" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_determinacion_grupoentidad}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+		
+		<ice:panelTooltip id="tooltip_det_valoresreferencia" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_determinacion_valoresreferencia}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+		
+		<ice:panelTooltip id="tooltip_det_regulacionesespecificas" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_determinacion_regulacionesespecificas}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+		
+
+		
+
+		
+
+
+		<!-- Includes -->
+		<ui:include src="./FiltrosBusqueda.xhtml" />
+
+
+	</ice:form>
+
+
+
+
+
+</f:view>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3c.org/2001/XMLSchema">
+
+<!--
+    Document   : acercaDe.xml
+    Created on : 13 de enero de 2010, 10:05
+    Author     : Francisco.Morata
+    Description:
+        Purpose of the document follows.
+-->
+
+<xsd:element name="acercaDe">
+    <xsd:sequence name="bienvenido">
+        <xsd:element name="bienvenido_titulo" type="xsd:string" maxOccurs="30">
+        <xsd:element name="bienvenido_txt" type="xsd:string">
+    </xsd:sequence>
+
+    <xsd:sequence name="ayuntamiento">
+        <xsd:element name="ayuntamiento_titulo" type="xsd:string" maxOccurs="30">
+        <xsd:element name="ayuntamiento_txt" type="xsd:string">
+    </xsd:sequence>
+
+    <xsd:sequence name="ayuda">
+        <xsd:element name="ayuda_titulo" type="xsd:string" maxOccurs="30">
+        <xsd:element name="ayuda_txt" type="xsd:string">
+    </xsd:sequence>
+
+    <xsd:sequence name="acerca">
+        <xsd:element name="acerca_titulo" type="xsd:string" maxOccurs="30">
+        <xsd:element name="acerca_txt" type="xsd:string">
+    </xsd:sequence>
+
+</xsd:element>

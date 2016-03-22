@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vinculocaso"
+  schema="planeamiento" table="vinculocaso">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">planeamiento.planeamiento_vinculocaso_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion"
+   fetch="select" name="casoentidaddeterminacionByIdcasovinculado">
+   <column name="idcasovinculado" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion"
+   fetch="select" name="casoentidaddeterminacionByIdcaso">
+   <column name="idcaso" not-null="true"/>
+  </many-to-one>
+ </class>
+ <query name="Vinculocaso.buscarPorTramite">SELECT vc FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vinculocaso vc
+	WHERE vc.casoentidaddeterminacionByIdcaso.entidaddeterminacion.entidad.tramite = :idTramite</query>
+ <query name="Vinculocaso.obtenerTodos">SELECT vc FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vinculocaso vc</query>
+ <sql-query name="Vinculocaso.borrarPorCaso">Delete From planeamiento.Vinculocaso 
+                        Where idcaso In (
+                        Select iden From planeamiento.Casoentidaddeterminacion 
+                        Where identidaddeterminacion In (
+                        Select iden From planeamiento.Entidaddeterminacion 
+                        Where iden= :iden))</sql-query>
+ <sql-query name="Vinculocaso.borrarPorCasoVinculado">Delete From planeamiento.Vinculocaso 
+                        Where idcasovinculado In (
+                        Select iden From planeamiento.Casoentidaddeterminacion 
+                        Where identidaddeterminacion In (
+                        Select iden From planeamiento.Entidaddeterminacion 
+                        Where iden= :iden))</sql-query>
+</hibernate-mapping>

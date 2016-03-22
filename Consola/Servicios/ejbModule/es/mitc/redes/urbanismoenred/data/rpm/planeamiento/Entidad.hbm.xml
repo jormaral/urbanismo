@@ -1,0 +1,406 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad"
+  schema="planeamiento" table="entidad">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">planeamiento.planeamiento_entidad_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite"
+   fetch="select" name="tramite">
+   <column name="idtramite" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad"
+   fetch="select" name="entidadByIdentidadoriginal">
+   <column name="identidadoriginal"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad"
+   fetch="select" name="entidadByIdentidadbase">
+   <column name="identidadbase"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad"
+   fetch="select" name="entidadByIdpadre">
+   <column name="idpadre"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column length="100" name="nombre"/>
+  </property>
+  <property generated="never" lazy="false" name="clave" type="string">
+   <column length="15" name="clave"/>
+  </property>
+  <property generated="never" lazy="false" name="etiqueta" type="string">
+   <column length="100" name="etiqueta"/>
+  </property>
+  <property generated="never" lazy="false" name="codigo" type="string">
+   <column length="6" name="codigo" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="bsuspendida" type="boolean">
+   <column name="bsuspendida" not-null="true" precision="1" scale="0"/>
+  </property>
+  <property generated="never" lazy="false" name="orden" type="int">
+   <column name="orden" not-null="true"/>
+  </property>
+  <set inverse="true" name="entidadpnts" sort="unsorted">
+   <key>
+    <column name="identidad" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidadpnt"/>
+  </set>
+  <set inverse="true" name="entidaddeterminacions" sort="unsorted">
+   <key>
+    <column name="identidad" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion"/>
+  </set>
+  <set inverse="true" name="documentoentidads" sort="unsorted">
+   <key>
+    <column name="identidad" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documentoentidad"/>
+  </set>
+  <set inverse="true" name="operacionentidadsForIdentidad" sort="unsorted">
+   <key>
+    <column name="identidad" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionentidad"/>
+  </set>
+  <set inverse="true" name="entidadlins" sort="unsorted">
+   <key>
+    <column name="identidad"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidadlin"/>
+  </set>
+  <set inverse="true" name="entidadsForIdpadre" sort="unsorted">
+   <key>
+    <column name="idpadre"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad"/>
+  </set>
+  <set inverse="true" name="entidadsForIdentidadoriginal" sort="unsorted">
+   <key>
+    <column name="identidadoriginal"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad"/>
+  </set>
+  <set inverse="true" name="entidadsForIdentidadbase" sort="unsorted">
+   <key>
+    <column name="identidadbase"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad"/>
+  </set>
+  <set inverse="true" name="ambitoaplicacionambitos" sort="unsorted">
+   <key>
+    <column name="identidad" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Ambitoaplicacionambito"/>
+  </set>
+  <set inverse="true" name="entidadpols" sort="unsorted">
+   <key>
+    <column name="identidad" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidadpol"/>
+  </set>
+  <set inverse="true" name="operacionentidadsForIdentidadoperadora" sort="unsorted">
+   <key>
+    <column name="identidadoperadora" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionentidad"/>
+  </set>
+  <set inverse="true" name="planentidadordenacions" sort="unsorted">
+   <key>
+    <column name="identidadordenacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Planentidadordenacion"/>
+  </set>
+ </class>
+ <query name="Entidad.obtenerEntidadPorTramiteYCodigoEntidad">SELECT ent FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad ent
+	WHERE ent.codigo=:codigoEntidad AND ent.tramite.codigofip = :codigoTramite</query>
+ <query name="Entidad.buscarPorTramite">SELECT e FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad e WHERE e.tramite.iden = :idTramite</query>
+ <query name="Entidad.buscarRaiz">SELECT ent FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad ent
+	WHERE ent.entidadByIdpadre IS NULL AND ent.tramite.iden = :idTramite
+	ORDER BY ent.orden, ent.clave, ent.nombre</query>
+ <query name="Entidad.buscarHijas">SELECT ent FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad ent
+	WHERE ent.entidadByIdpadre.iden = :idPadre
+	ORDER BY ent.orden, ent.clave, ent.nombre</query>
+ <query name="Entidad.obtenerEntidadesIncorporar">SELECT ent FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad ent
+	WHERE ent.tramite.iden = :idTramite AND
+	ent.iden &lt;&gt; :idEnt AND (ent.entidadpnts IS NOT EMPTY OR ent.entidadlins IS NOT EMPTY OR ent.entidadpols IS NOT EMPTY)
+	ORDER BY ent.codigo</query>
+ <query name="Entidad.obtenerPorValorRefTramite">SELECT ed.entidad FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed, 
+                        es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion ced, 
+                        es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr 
+                        Where edr.opciondeterminacion.determinacionByIddeterminacionvalorref.iden= :idValorRef 
+                        And ced.entidaddeterminacion.iden =ed.iden 
+                        And (edr.casoentidaddeterminacionByIdcaso=ced.iden Or edr.casoentidaddeterminacionByIdcasoaplicacion=ced.iden) 
+                        And ed.entidad.tramite.iden= :idTramite</query>
+ <query name="Entidad.obtenerPorValorRefBaseTramite">SELECT ed.entidad FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed, 
+                        es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion ced, 
+                        es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr 
+                        Where edr.opciondeterminacion.determinacionByIddeterminacionvalorref.iden &lt;&gt; :idValorRef
+                        AND edr.opciondeterminacion.determinacionByIddeterminacionvalorref.determinacionByIddeterminacionbase.iden = :idBase
+                        And ced.entidaddeterminacion.iden =ed.iden 
+                        And (edr.casoentidaddeterminacionByIdcaso=ced.iden Or edr.casoentidaddeterminacionByIdcasoaplicacion=ced.iden) 
+                        And ed.entidad.tramite.iden= :idTramite</query>
+ <query name="Entidad.buscarPorTramiteYNombre">SELECT e FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad e 
+	WHERE e.tramite.iden = :idTramite AND e.nombre = :nombre</query>
+ <query name="Entidad.buscarEntidadesTramiteOperado">SELECT Distinct ed1.entidad FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed1, 
+			es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed2, 
+			es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion ced1, 
+			es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion ced2, 
+			es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr1, 
+			es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr2,
+        	es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Opciondeterminacion od1, 
+        	es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Opciondeterminacion od2,
+        	es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion dvr1, 
+        	es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion dvr2 
+	WHERE ed1.determinacion.iden= :idDetGrupoEntidadesO
+   		AND ed2.determinacion.iden= :idDetGrupoEntidadesR
+      	AND ced1.entidaddeterminacion.iden=ed1.iden 
+     	AND ced2.entidaddeterminacion.iden=ed2.iden 
+     	AND (edr1.casoentidaddeterminacionByIdcaso.iden=ced1.iden Or edr1.casoentidaddeterminacionByIdcasoaplicacion=ced1.iden) 
+     	AND (edr2.casoentidaddeterminacionByIdcaso.iden=ced2.iden Or edr2.casoentidaddeterminacionByIdcasoaplicacion.iden=ced2.iden) 
+        AND edr1.opciondeterminacion.iden=od1.iden 
+  		AND edr2.opciondeterminacion.iden=od2.iden 
+    	AND od1.determinacionByIddeterminacionvalorref.iden=dvr1.iden 
+   		AND od2.determinacionByIddeterminacionvalorref.iden=dvr2.iden 
+       	AND dvr1.determinacionByIddeterminacionbase.iden=dvr2.determinacionByIddeterminacionbase.iden 
+     	AND ed1.entidad.tramite.iden= :idTramiteO
+   		AND ed2.entidad.tramite.iden= :idTramiteR
+     	AND ed1.entidad.iden &lt;&gt; :idEntidad
+     	AND ed1.entidad.iden IN (SELECT entidad.iden FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidadpol)</query>
+ <query name="Entidad.buscarAportadas">SELECT DISTINCT ent FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad ent 
+	WHERE ent.tramite.iden= :idTramite AND ent.entidadByIdpadre IS NULL AND ent.iden &lt;&gt; :idEntidad 
+	ORDER BY ent.orden, ent.clave, ent.nombre</query>
+ <query name="Entidad.BuscarSuspendidasPorTramite">SELECT e FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad e WHERE e.tramite.iden = :idTramite
+	AND e.bsuspendida = true</query>
+ <query name="Entidad.obtenerParaEliminacion">SELECT e FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad e 
+	WHERE e NOT IN (SELECT e1.entidadByIdpadre From es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad e1 
+			WHERE e1.entidadByIdpadre IS NOT NULL) 
+		AND e.documentoentidads IS EMPTY
+		AND e.iden= :idEntidad
+		AND e.iden NOT IN (SELECT vr.valor FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion vr, 
+				es.mitc.redes.urbanismoenred.data.rpm.diccionario.Defvector dv
+			WHERE TRIM(UPPER(dv.tabla.nombre))='ENTIDAD' AND vr.iddefvector=dv.iden 
+				AND dv.basignacion=true)</query>
+ <query name="Entidad.obtenerSuspensionesParciales">SELECT e FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad e WHERE e.entidadByIdentidadoriginal.iden = :idEntidad AND e.bsuspendida = true</query>
+ <query name="Entidad.obtenerAmbitoAplicacion">SELECT DISTINCT edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.entidad FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr
+	WHERE edr.opciondeterminacion.determinacionByIddeterminacionvalorref.codigo = :codigoAmbitoAplicacion 
+		AND edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.entidad.tramite.iden = :idTramite</query>
+ <query name="Entidad.obtenerAmbitoAplicacionDerivado">SELECT DISTINCT edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.entidad FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr
+	WHERE edr.opciondeterminacion.determinacionByIddeterminacionvalorref.determinacionByIddeterminacionbase.codigo = :codigoAmbitoAplicacion 
+		AND edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.entidad.tramite.iden = :idTramite</query>
+ <sql-query name="Entidad.existeSuperposicionPolPol">SELECT Overlaps(ep1.geom, ep2.geom) FROM planeamiento.entidadpol ep1, planeamiento.entidadpol ep2 
+	WHERE ep1.identidad= :idEnt1 AND ep2.identidad= :idEnt2</sql-query>
+ <sql-query name="Entidad.existeSuperposicionPolLin">Select Overlaps(ep1.geom, ep2.geom) From planeamiento.entidadpol ep1, planeamiento.entidadlin ep2 
+                    Where ep1.identidad= :idEnt1  And ep2.identidad= :idEnt2</sql-query>
+ <sql-query name="Entidad.existeSuperposicionPolPnt">Select Overlaps(ep1.geom, ep2.geom) From planeamiento.entidadpol ep1, planeamiento.entidadpnt ep2 
+                    Where ep1.identidad= :idEnt1 And ep2.identidad= :idEnt2</sql-query>
+ <sql-query name="Entidad.existeSuperposicionLinPol">Select Overlaps(ep1.geom, ep2.geom) From planeamiento.entidadlin ep1, planeamiento.entidadpol ep2 
+                    Where ep1.identidad=:idEnt1 And ep2.identidad= :idEnt2</sql-query>
+ <sql-query name="Entidad.existeSuperposicionPntPol">Select Overlaps(ep1.geom, ep2.geom) From planeamiento.entidadpnt ep1, planeamiento.entidadpol ep2 
+                    Where ep1.identidad= :idEnt1 And ep2.identidad= :idEnt2</sql-query>
+ <sql-query name="Entidad.buscarRelacionadasRefundido">Select Distinct entf.iden as idenentf, Cast(trddr.texto As Text), r.iden as idenr 
+                    From planeamiento.Entidad entf, 
+                    planeamiento.Vectorrelacion vrt, planeamiento.Vectorrelacion vrf, 
+                    diccionario.Defvector dvt, diccionario.tabla tbt, diccionario.Defvector dvf, 
+                    diccionario.tabla tbf, planeamiento.Relacion r, diccionario.defrelacion dr, 
+                    diccionario.traduccion trddr, planeamiento.Determinacion dett 
+                    Where Upper(Trim(tbf.nombre))='ENTIDAD' 
+                    And Upper(Trim(tbt.nombre))='DETERMINACION' 
+                    And dvf.idtabla=tbf.iden 
+                    And dvt.idtabla=tbt.iden 
+                    And vrf.iddefvector=dvf.iden 
+                    And vrt.iddefvector=dvt.iden 
+                    And vrf.valor=entf.iden 
+                    And vrt.valor=dett.iden 
+                    And entf.idtramite&lt;&gt; :idTramite 
+                    And dett.idtramite= :idTramite 
+                    And vrt.valor=dett.iden 
+                    And dvf.bAsignacion=false 
+                    And dvt.bAsignacion=true 
+                    And vrt.idrelacion=r.iden 
+                    And vrf.idrelacion=r.iden 
+                    And r.iddefrelacion=dr.iden 
+                    And dvt.iddefrelacion=dr.iden 
+                    And dvf.iddefrelacion=dr.iden 
+                    And trddr.idliteral=dr.idliteral 
+	Union Select Distinct entf.iden as idenentf, Cast(trddr.texto As Text), r.iden as idenr 
+                    From planeamiento.Entidad entf, planeamiento.Entidad entt, 
+                    planeamiento.Vectorrelacion vrt, planeamiento.Vectorrelacion vrf, 
+                    diccionario.Defvector dvt, diccionario.tabla tbt, diccionario.Defvector dvf, 
+                    diccionario.tabla tbf, planeamiento.Relacion r, diccionario.defrelacion dr, 
+                    diccionario.traduccion trddr 
+                    Where Upper(Trim(tbf.nombre))='ENTIDAD' 
+                    And Upper(Trim(tbt.nombre))='ENTIDAD' 
+                    And dvf.idtabla=tbf.iden 
+                    And dvt.idtabla=tbt.iden 
+                    And vrf.iddefvector=dvf.iden 
+                    And vrt.iddefvector=dvt.iden 
+                    And vrf.valor=entf.iden 
+                    And vrt.valor=entt.iden 
+                    And entf.idtramite&lt;&gt; :idTramite
+                    And entt.idtramite= :idTramite 
+                    And vrt.valor=entt.iden 
+                    And dvf.bAsignacion=false 
+                    And dvt.bAsignacion=true 
+                    And vrt.idrelacion=r.iden 
+                    And vrf.idrelacion=r.iden 
+                    And r.iddefrelacion=dr.iden 
+                    And dvt.iddefrelacion=dr.iden 
+                    And dvf.iddefrelacion=dr.iden 
+                    And trddr.idliteral=dr.idliteral</sql-query>
+ <sql-query name="Entidad.buscarFromGeom">select identidad from planeamiento.entidadpol as o 
+                    INNER JOIN planeamiento.entidad ent ON o.identidad = ent.iden 
+                    where not ent.bsuspendida and st_Intersects (geom,st_GeomFromText(:WKT)) AND 
+                    o.identidad in (
+                           select iden 
+                           from planeamiento.entidad 
+                           where idtramite =:idTramite)
+    UNION select identidad from planeamiento.entidadlin as l 
+                    INNER JOIN planeamiento.entidad ent ON l.identidad = ent.iden 
+                    where not ent.bsuspendida and st_Intersects (geom,ST_Buffer(st_GeomFromText(:WKT),5)) AND 
+                    l.identidad in (
+                           select iden 
+                           from planeamiento.entidad 
+                           where idtramite =:idTramite)
+    UNION select identidad from planeamiento.entidadpnt as p 
+                    INNER JOIN planeamiento.entidad ent ON p.identidad = ent.iden 
+                    where not ent.bsuspendida and st_Intersects (geom,ST_Buffer(st_GeomFromText(:WKT),5)) AND
+                    p.identidad in (
+                            select iden 
+                            from planeamiento.entidad 
+                            where idtramite =:idTramite)</sql-query>
+ <sql-query name="Entidad.buscarRefundidoFromGeom">select identidad from planeamiento.entidadpol as o 
+                    INNER JOIN planeamiento.entidad ent ON o.identidad = ent.iden 
+                    where not ent.bsuspendida and st_Intersects (geom,st_GeomFromText(:WKT)) AND 
+                    o.identidad in (
+                           select iden 
+                           from planeamiento.entidad 
+                           where idtramite in (
+                                select (select iden from planeamiento.tramite where idplan=plan.iden and fechaconsolidacion is not null and idtipotramite=:IdTipoTramiteRefundido order by fechaconsolidacion DESC limit 1) as idultimotramite
+                                from planeamiento.plan 
+                                where plan.idambito=:idAmbito and((select iden from planeamiento.tramite where idplan=plan.iden and fechaconsolidacion is not null and idtipotramite=:IdTipoTramiteRefundido order by fechaconsolidacion DESC limit 1) is not null)
+                                ORDER BY ent.clave))
+    UNION select identidad from planeamiento.entidadlin as l 
+                    INNER JOIN planeamiento.entidad ent ON l.identidad = ent.iden 
+                    where not ent.bsuspendida and st_Intersects (geom,ST_Buffer(st_GeomFromText(:WKT),5)) AND 
+                    l.identidad in (
+                           select iden 
+                           from planeamiento.entidad 
+                           where idtramite in (
+                                select (select iden from planeamiento.tramite where idplan=plan.iden and fechaconsolidacion is not null and idtipotramite=:IdTipoTramiteRefundido order by fechaconsolidacion DESC limit 1) as idultimotramite  
+                                from planeamiento.plan 
+                                where plan.idambito=:idAmbito and((select iden from planeamiento.tramite where idplan=plan.iden and fechaconsolidacion is not null and idtipotramite=:IdTipoTramiteRefundido order by fechaconsolidacion DESC limit 1) is not null) 
+                                ORDER BY ent.clave))
+    UNION select identidad from planeamiento.entidadpnt as p 
+                    INNER JOIN planeamiento.entidad ent ON p.identidad = ent.iden 
+                    where not ent.bsuspendida and st_Intersects (geom,ST_Buffer(st_GeomFromText(:WKT),5)) AND
+                    p.identidad in (
+                            select iden 
+                            from planeamiento.entidad 
+                            where idtramite in (
+                                select (select iden from planeamiento.tramite where idplan=plan.iden and fechaconsolidacion is not null and idtipotramite=:IdTipoTramiteRefundido order by fechaconsolidacion DESC limit 1) as idultimotramite  
+                                from planeamiento.plan
+                                where plan.idambito=:idAmbito and((select iden from planeamiento.tramite where idplan=plan.iden and fechaconsolidacion is not null and idtipotramite=:IdTipoTramiteRefundido order by fechaconsolidacion DESC limit 1) is not null) 
+                                ORDER BY ent.clave))</sql-query>
+ <sql-query name="Entidad.buscarSuperficiesRefundidoFromGeom">select identidad,st_area(geom) as area,
+    st_area(st_intersection(geom,st_GeomFromText(:WKT))) as area_int
+    from planeamiento.entidadpol as o 
+                    INNER JOIN planeamiento.entidad ent ON o.identidad = ent.iden 
+                    where not ent.bsuspendida and st_Intersects (geom,st_GeomFromText(:WKT)) AND 
+                    o.identidad in (
+                           select iden 
+                           from planeamiento.entidad 
+                           where idtramite in (
+                                select (select iden from planeamiento.tramite where idplan=plan.iden and fechaconsolidacion is not null and idtipotramite=:IdTipoTramiteRefundido order by fechaconsolidacion DESC limit 1) as idultimotramite
+                                from planeamiento.plan 
+                                where plan.idambito=:idAmbito and((select iden from planeamiento.tramite where idplan=plan.iden and fechaconsolidacion is not null and idtipotramite=:IdTipoTramiteRefundido order by fechaconsolidacion DESC limit 1) is not null)
+                                ORDER BY ent.orden))
+    UNION select identidad,st_area(geom) as area,
+    st_area(st_intersection(geom,st_GeomFromText(:WKT))) as area_int
+    from planeamiento.entidadlin as l 
+                    INNER JOIN planeamiento.entidad ent ON l.identidad = ent.iden 
+                    where not ent.bsuspendida and st_Intersects (geom,ST_Buffer(st_GeomFromText(:WKT),5)) AND 
+                    l.identidad in (
+                           select iden 
+                           from planeamiento.entidad 
+                           where idtramite in (
+                                select (select iden from planeamiento.tramite where idplan=plan.iden and fechaconsolidacion is not null and idtipotramite=:IdTipoTramiteRefundido order by fechaconsolidacion DESC limit 1) as idultimotramite  
+                                from planeamiento.plan 
+                                where plan.idambito=:idAmbito and((select iden from planeamiento.tramite where idplan=plan.iden and fechaconsolidacion is not null and idtipotramite=:IdTipoTramiteRefundido order by fechaconsolidacion DESC limit 1) is not null) 
+                                ORDER BY ent.orden))
+    UNION select identidad,st_area(geom) as area,
+    st_area(st_intersection(geom,st_GeomFromText(:WKT))) as area_int
+    from planeamiento.entidadpnt as p 
+                    INNER JOIN planeamiento.entidad ent ON p.identidad = ent.iden 
+                    where not ent.bsuspendida and st_Intersects (geom,ST_Buffer(st_GeomFromText(:WKT),5)) AND
+                    p.identidad in (
+                            select iden 
+                            from planeamiento.entidad 
+                            where idtramite in (
+                                select (select iden from planeamiento.tramite where idplan=plan.iden and fechaconsolidacion is not null and idtipotramite=:IdTipoTramiteRefundido order by fechaconsolidacion DESC limit 1) as idultimotramite  
+                                from planeamiento.plan
+                                where plan.idambito=:idAmbito and((select iden from planeamiento.tramite where idplan=plan.iden and fechaconsolidacion is not null and idtipotramite=:IdTipoTramiteRefundido order by fechaconsolidacion DESC limit 1) is not null) 
+                                ORDER BY ent.orden))</sql-query>
+ <sql-query name="Entidad.buscarLikeNameAndPlan">select o.iden from planeamiento.entidad as o where nombre ilike :nombreEntidad AND 
+                    o.idtramite in (
+                        select 
+                            (select iden from planeamiento.tramite where idtipotramite &lt;&gt; :IdTipoTramiteRefundido and  idplan=plan.iden and fechaconsolidacion is not null order by fechaconsolidacion DESC limit 1) as idultimotramite
+                        from planeamiento.plan where 
+                            plan.nombre ilike :nombrePlan and plan.idambito=:idAmbito and 
+                            ((select iden from planeamiento.tramite where idplan=plan.iden and fechaconsolidacion is not null order by fechaconsolidacion DESC limit 1) is not null))
+                    ORDER BY o.nombre</sql-query>
+ <sql-query name="Entidad.buscarLikeName">select o.iden from planeamiento.entidad as o where nombre ilike :nombreEntidad AND 
+                    o.idtramite in (
+                        select 
+                            (select iden from planeamiento.tramite where idtipotramite &lt;&gt; :IdTipoTramiteRefundido and  idplan=plan.iden and fechaconsolidacion is not null order by fechaconsolidacion DESC limit 1) as idultimotramite
+                        from planeamiento.plan where 
+                            plan.idambito=:idAmbito and 
+                            ((select iden from planeamiento.tramite where idplan=plan.iden and fechaconsolidacion is not null order by fechaconsolidacion DESC limit 1) is not null))
+                    ORDER BY o.nombre</sql-query>
+ <sql-query name="Entidad.buscarLikeClave">select o.iden from planeamiento.entidad as o where clave ilike :claveEntidad AND 
+                    o.idtramite in (
+                        select 
+                            (select iden from planeamiento.tramite where idtipotramite &lt;&gt; :IdTipoTramiteRefundido and  idplan=plan.iden and fechaconsolidacion is not null order by fechaconsolidacion DESC limit 1) as idultimotramite
+                        from planeamiento.plan where 
+                            plan.idambito=:idAmbito and 
+                            ((select iden from planeamiento.tramite where idplan=plan.iden and fechaconsolidacion is not null order by fechaconsolidacion DESC limit 1) is not null))
+                    ORDER BY o.nombre</sql-query>
+ <sql-query name="Entidad.buscarSuperficiesFromGeom">select identidad,st_area(geom) as area,
+        st_area(st_intersection(geom,st_GeomFromText(:WKT))) as area_int
+        from planeamiento.entidadpol as o 
+        INNER JOIN planeamiento.entidad ent ON o.identidad = ent.iden 
+        where not ent.bsuspendida and st_Intersects (geom,st_GeomFromText(:WKT)) AND 
+        o.identidad in (
+        select iden 
+        from planeamiento.entidad 
+        where idtramite in (select iden from planeamiento.tramite where codigofip=:codigoTramite))
+        UNION select identidad,st_area(geom) as area,
+        st_area(st_intersection(geom,st_GeomFromText(:WKT))) as area_int
+        from planeamiento.entidadlin as l 
+        INNER JOIN planeamiento.entidad ent ON l.identidad = ent.iden 
+        where not ent.bsuspendida and st_Intersects (geom,ST_Buffer(st_GeomFromText(:WKT),5)) AND 
+        l.identidad in (
+        select iden 
+        from planeamiento.entidad 
+        where idtramite in (select iden from planeamiento.tramite where codigofip=:codigoTramite))
+        UNION select identidad,st_area(geom) as area,
+        st_area(st_intersection(geom,st_GeomFromText(:WKT))) as area_int
+        from planeamiento.entidadpnt as p 
+        INNER JOIN planeamiento.entidad ent ON p.identidad = ent.iden 
+        where not ent.bsuspendida and st_Intersects (geom,ST_Buffer(st_GeomFromText(:WKT),5)) AND
+        p.identidad in (
+        select iden 
+        from planeamiento.entidad 
+        where idtramite in (select iden from planeamiento.tramite where codigofip=:codigoTramite))</sql-query>
+</hibernate-mapping>

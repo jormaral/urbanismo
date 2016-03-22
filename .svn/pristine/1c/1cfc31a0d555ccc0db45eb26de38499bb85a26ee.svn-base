@@ -1,0 +1,14 @@
+.scroll{
+	/* fixes has-layout-bug in IE6*/
+	zoom:1;	
+}
+
+.scrollControlsY{	right:-1px;}
+
+.downBtn, .upBtn, .scrollHandle{	right:-1px	}
+
+.scrollHandleBottom{ bottom:-4px; }
+
+.scrollHandle {
+	height: 100%;
+}

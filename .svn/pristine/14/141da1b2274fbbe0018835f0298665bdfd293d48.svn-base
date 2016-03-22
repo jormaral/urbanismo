@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion"
+  schema="planeamiento" table="casoentidaddeterminacion">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">planeamiento.planeamiento_casoentidaddeterminacion_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion"
+   fetch="select" name="entidaddeterminacion">
+   <column name="identidaddeterminacion" not-null="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column length="150" name="nombre"/>
+  </property>
+  <property name="orden" type="int">
+            <column name="orden" not-null="true" />
+        </property>
+  <set inverse="true" name="documentocasos" sort="unsorted">
+   <key>
+    <column name="idcaso" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documentocaso"/>
+  </set>
+  <set inverse="true" name="vinculocasosForIdcaso" sort="unsorted">
+   <key>
+    <column name="idcaso" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vinculocaso"/>
+  </set>
+  <set inverse="true" name="entidaddeterminacionregimensForIdcaso" sort="unsorted">
+   <key>
+    <column name="idcaso" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen"/>
+  </set>
+  <set inverse="true" name="vinculocasosForIdcasovinculado" sort="unsorted">
+   <key>
+    <column name="idcasovinculado" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vinculocaso"/>
+  </set>
+  <set inverse="true"
+   name="entidaddeterminacionregimensForIdcasoaplicacion" sort="unsorted">
+   <key>
+    <column name="idcasoaplicacion"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen"/>
+  </set>
+ </class>
+ <query name="Casoentidaddeterminacion.buscarPorEntidadDeterminacion">SELECT caso FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion caso
+	WHERE caso.entidaddeterminacion.entidad.iden = :idEnt AND caso.entidaddeterminacion.determinacion.iden= :idDet</query>
+ <query name="Casoentidaddeterminacion.obtenerDeterminacionGrupo">SELECT edr.opciondeterminacion.determinacionByIddeterminacionvalorref FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion ced,
+ 		es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr
+ 	WHERE ced.entidaddeterminacion.entidad.iden = :idEntidad 
+ 		AND ced.entidaddeterminacion.determinacion.iden = edr.opciondeterminacion.determinacionByIddeterminacion.iden
+ 		AND (edr.casoentidaddeterminacionByIdcaso.iden = ced.iden OR edr.casoentidaddeterminacionByIdcasoaplicacion.iden = ced.iden)
+ 		AND ced.entidaddeterminacion.determinacion.idcaracter = :idCaracter</query>
+ <sql-query name="Casoentidaddeterminacion.borrarPorEntidadDet">Delete From planeamiento.Casoentidaddeterminacion 
+                        Where identidaddeterminacion = :iden</sql-query>
+</hibernate-mapping>

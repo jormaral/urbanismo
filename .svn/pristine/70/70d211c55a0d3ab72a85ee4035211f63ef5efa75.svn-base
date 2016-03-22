@@ -1,0 +1,166 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component" 
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="planshp" styleClass="edit">
+     <ice:panelGroup  id="editplanshpGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="editTextBoxId" value="#{planshpHome.managed ? 'Edit' : 'Add'} planshp"/>
+                  </td>
+              </tr>
+          </table>
+
+        <ice:panelGroup id="editPanelGroupId" styleClass="edit">		 
+
+
+            <s:decorate id="idenField" template="../layout/edit.xhtml">
+                <ui:define name="label">Iden</ui:define>
+                        <ice:inputText id="iden"
+			                partialSubmit="true"
+                       required="true"
+                       disabled="#{planshpHome.managed}"
+                                    value="#{planshpHome.instance.iden}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="geomField" template="../layout/edit.xhtml">
+                <ui:define name="label">Geom</ui:define>
+                        <ice:inputText id="geom"
+			                partialSubmit="true"
+                                    value="#{planshpHome.instance.geom}">
+                        </ice:inputText>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+          </ice:panelGroup>
+       </ice:panelGroup>
+                  
+       <div class="actionButtons">
+        
+            <ice:commandButton id="save" 
+                          value="Save" 
+                         action="#{planshpHome.persist}"
+                       disabled="#{!planshpHome.wired}"
+                       rendered="#{!planshpHome.managed}"/>  
+                          			  
+            <ice:commandButton id="update" 
+                          value="Save" 
+                         action="#{planshpHome.update}"
+                       rendered="#{planshpHome.managed}"/>
+                        			  
+            <ice:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{planshpHome.remove}"
+                      immediate="true"
+                       rendered="#{planshpHome.managed}"/>
+                    
+            <s:button id="cancelEdit" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/Planshp.xhtml"
+                rendered="#{planshpHome.managed}"/>
+                
+            <s:button id="cancelAddplanshpHome" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/#{empty planshpFrom ? 'PlanshpList' : planshpFrom}.xhtml"
+                rendered="#{!planshpHome.managed}"/>
+                
+        </div>
+        
+    </ice:form>
+
+ <ice:form id="form2planshpHome">  
+        <ice:panelTabSet id="editPanelTabplanshpHomeId" styleClass="componentPanelTabSetLayout" style="margin-bottom:5px;margin-top:10px;">
+   
+	<ice:panelTab id="editTabplanId" label="Plan">
+		<div class="association" id="planParent">
+    
+        	<h:outputText id="editplanTextId" value="There is no plan associated with this planshp." 
+                   rendered="#{planshpHome.instance.plan == null}"/>
+       	<ice:dataTable var="plan" 
+                   value="#{planshpHome.instance.plan}" 
+                rendered="#{planshpHome.instance.plan != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+		  columnClasses="allCols"
+                      id="editplanTableId">
+            <ice:column id="$editColumnidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{plan.iden}
+            </ice:column>
+            <ice:column id="$editColumnbsuspendidoId">
+                <f:facet name="header">Bsuspendido</f:facet>
+                #{plan.bsuspendido}
+            </ice:column>
+            <ice:column id="$editColumncodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                #{plan.codigo}
+            </ice:column>
+            <ice:column id="$editColumnidambitoId">
+                <f:facet name="header">Idambito</f:facet>
+                #{plan.idambito}
+            </ice:column>
+            <ice:column id="$editColumnnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{plan.nombre}
+            </ice:column>
+            <ice:column id="$editColumnordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{plan.orden}
+            </ice:column>
+            <ice:column id="$editColumnplanByIdpadreId">
+	    	    <f:facet name="header">Plan by idpadre iden</f:facet>
+		    	#{plan.planByIdpadre.iden}
+            </ice:column>
+            <ice:column id="$editColumnplanByIdplanbaseId">
+	    	    <f:facet name="header">Plan by idplanbase iden</f:facet>
+		    	#{plan.planByIdplanbase.iden}
+            </ice:column>
+            <ice:column id="$editColumntextoId">
+                <f:facet name="header">Texto</f:facet>
+                #{plan.texto}
+            </ice:column>
+            <ice:column id="editColumnplanLinkId">
+                <f:facet name="header">Action</f:facet>
+                <s:link view="/seam/Plan.xhtml" 
+                         id="viewplan" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="planIden" 
+                           value="#{plan.iden}"/>
+                </s:link>
+            </ice:column>
+      </ice:dataTable>
+        <div class="actionButtons">
+            <s:button value="Select plan"
+	              id="selectParent"
+                      view="/seam/PlanList.xhtml">
+                <f:param name="from" value="PlanshpEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+
+
+

@@ -1,0 +1,97 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="body">
+
+		<ice:form id="form">
+
+			<ice:panelPopup id="panelEntOrigen" autoCentre="true" modal="true"
+				styleClass="panelPopup"
+				visible="#{gestionAdscripciones.mostrarPanelEntidadOrigen}">
+
+
+				<f:facet name="header">
+					<ice:panelGroup>
+						<ice:outputText value="#{messages.adscripcion_entidad_origen}" />
+						<s:button id="modalPnlCloseBtnEntP"
+							image="/fipeditor/img/editorfip/es/comun/cerrar_popup.png"
+							action="#{gestionAdscripciones.setMostrarPanelEntidadOrigen(false)}"
+							styleClass="popupHeaderImage" view="#{pageRedirect}"
+							propagation="none" title="#{messages.botongenerico_cerrar}"
+							alt="#{messages.botongenerico_cerrar}" />
+					</ice:panelGroup>
+				</f:facet>
+
+				<f:facet name="body">
+
+					<!-- TRee values -->
+					<ice:panelGroup styleClass="arbol" scrollHeight="400px"
+						scrollWidth="40em">
+						<ice:tree id="treeEntP"
+							value="#{gestionArbolEntidadesPadre.model}" var="node"
+							binding="#{gestionArbolEntidadesPadre.treeComponent}"
+							imageDir="/fipeditor/img/editorfip/es/arboles/"
+							hideRootNode="false" hideNavigation="false"
+							actionListener="#{gestionArbolEntidadesPadre.menuEvent}">
+							<ice:treeNode>
+
+
+								<f:facet name="icon">
+									<ice:panelGroup style="display:inline;">
+										<h:graphicImage
+											value="/img/editorfip/es/arboles/#{node.userObject.icon}" />
+
+									</ice:panelGroup>
+								</f:facet>
+								<f:facet name="content">
+									<ice:panelGroup style="display:inline;">
+										<ice:panelGroup
+											styleClass="selectedNode#{node.userObject eq gestionArbolEntidadesPadre.selectedUserObject}"
+											style="display:inline;">
+
+											<ice:commandLink
+												actionListener="#{gestionArbolEntidadesPadre.nodeSelected}">
+												<f:param name="nodoId"
+													value="#{node.userObject.datosIdTextoArbolGenerico.idBaseDatos}" />
+												<f:param name="entidadPadreIden"
+													value="#{gestionEntidades.idEntidadPadre}" />
+												<ice:outputText id="TreeNodeEntP"
+													value="#{node.userObject.text}" />
+											</ice:commandLink>
+										</ice:panelGroup>
+									</ice:panelGroup>
+								</f:facet>
+
+							</ice:treeNode>
+						</ice:tree>
+
+						<s:button value="#{messages.botongenerico_seleccionar}"
+							disabled="#{gestionArbolEntidadesPadre.selectedUserObject.datosIdTextoArbolGenerico.idBaseDatos==0}"
+							view="#{pageRedirect}"
+							alt="#{messages.botongenerico_seleccionar}"
+							title="#{messages.boton_title_seleccionarEP_seleccionar}"
+							action="#{gestionAdscripciones.cargarDatosEntidadOrigen(gestionArbolEntidadesPadre.selectedUserObject.datosIdTextoArbolGenerico.getIdBaseDatos(),gestionArbolEntidadesPadre.selectedUserObject.datosIdTextoArbolGenerico.texto)}"
+							styleClass="boton1" />
+
+						<s:button value="#{messages.botongenerico_cancelar}"
+							alt="#{messages.botongenerico_cancelar}" view="#{pageRedirect}"
+							title="#{messages.boton_title_seleccionarEP_cancelar}"
+							action="#{gestionAdscripciones.setMostrarPanelEntidadOrigen(false)}"
+							styleClass="boton1" />
+					</ice:panelGroup>
+				</f:facet>
+			</ice:panelPopup>
+
+		</ice:form>
+
+
+	</ui:define>
+
+</ui:composition>

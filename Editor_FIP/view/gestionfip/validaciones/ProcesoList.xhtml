@@ -1,0 +1,165 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_proceso_validacion}"
+				view="/gestionfip/validaciones/ProcesoList.xhtml"
+				id="ProcesoValidacionNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+	</ui:define>
+
+	<ui:define name="buscar">
+		<!--  Se define el buscar	
+		 <h:graphicImage value="/img/editorfip/#{localeSelector.language}/comun/buscar.png"/> -->
+
+	</ui:define>
+
+	<ui:define name="body">
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+			<ice:form id="formPVList">
+				<h:panelGrid columns="1" styleClass="panelBotones">
+
+
+
+					<ice:panelGroup style="text-align:left;">
+
+						<ice:commandButton value="Refrescar" styleClass="boton2"
+							action="#{listaProcesosValidacionNuevo.refrescarLista}" />
+
+						<s:button value="#{messages.botongenerico_crear}"
+							view="/gestionfip/validaciones/ValidarTramiteEncargadoNuevo.xhtml"
+							styleClass="boton1 botonCrear"
+							alt="#{messages.botongenerico_crear}"
+							title="#{messages.boton_title_validacionesLista_crear}">
+						</s:button>
+					</ice:panelGroup>
+
+
+				</h:panelGrid>
+
+				<script type="text/javascript">
+				function pintarFilaSeleccionada(checkbox) {
+					
+					var seleccionada = checkbox.checked;
+					var fila = checkbox.parentNode.parentNode.parentNode;
+					if(seleccionada) {
+						fila.style.backgroundColor='#FFFF99';
+					} else {
+						fila.style.backgroundColor='#FFFFFF';
+					}
+				}	
+			</script>
+				<ice:dataTable value="#{listaProcesosValidacionNuevo.listaProcesos}"
+					var="proVal" id="listaProcesosV" enableContextMenu="false"
+					selectionMode="none">
+
+
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.fecha}" />
+						</f:facet>
+
+						<h:outputText value="#{proVal.inicio}">
+							<f:convertDateTime pattern="dd/MM/yyyy, HH:mm" />
+						</h:outputText>
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText
+								value="#{messages.procesosvalidacion_nombre_tramite}" />
+						</f:facet>
+						<h:outputText
+							value="#{servicioBasicoTramites.nombreTramite(proVal.idTramite)}" />
+					</ice:column>
+
+
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.procesosvalidacion_iteracion}" />
+						</f:facet>
+						<h:outputText value="#{proVal.iteracionValidacion}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.procesosvalidacion_estado}" />
+						</f:facet>
+						<h:outputText value="#{proVal.estado}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="Acciones" />
+						</f:facet>
+
+						<ice:panelGroup style="text-align:center;">
+						
+						<!-- 
+							<ice:commandButton styleClass="boton5"
+								value="#{messages.procesosvalidacion_ver_elementos}"
+								action="#{listaProcesosValidacionNuevo.verResultadosVal(proVal.iden)}" />
+						 -->
+						 
+						 <s:button value="Ver Resultado" alt="Ver Resultado"
+								view="/gestionfip/validaciones/ResultadoValidacionList.seam"
+								rendered="#{proVal.estado=='VALIDADO'}" styleClass="boton2"
+								title="Ver Resultado">
+								<f:param name="idProc" value="#{proVal.iden}" />
+							</s:button>
+
+							<ice:commandButton styleClass="boton5"
+								value="Borrar Proceso Validado"
+								action="#{listaProcesosValidacionNuevo.borrarProcVal(proVal.iden)}" />
+						</ice:panelGroup>
+
+					</ice:column>
+				</ice:dataTable>
+			</ice:form>
+		</ice:panelGroup>
+	</ui:define>
+
+
+
+</ui:composition>

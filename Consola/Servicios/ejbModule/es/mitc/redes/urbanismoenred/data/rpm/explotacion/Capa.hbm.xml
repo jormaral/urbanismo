@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-jul-2009 13:26:32 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.explotacion.Capa" table="capa" schema="explotacion">
+        <id name="iden" type="int">
+            <column name="iden" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <set name="capagrupos" inverse="true">
+            <key>
+                <column name="idcapa" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.explotacion.Capagrupo" />
+        </set>
+        <property name="orden" type="int">
+            <column name="orden" not-null="true" />
+        </property>
+    </class>
+    <query name="Capa.findFromCodigoGrupo">
+        SELECT capa  FROM es.mitc.redes.urbanismoenred.data.rpm.explotacion.Capa capa  
+          JOIN capa.capagrupos cg
+           WHERE cg.codigodeterminaciongrupo=:codigoDeterminacionGrupo
+           order by capa.orden
+    </query>
+</hibernate-mapping>

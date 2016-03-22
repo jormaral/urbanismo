@@ -1,0 +1,83 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaDeterminacionBotones"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+
+
+	<ice:panelGroup id="botonera" columns="7"
+		styleClass="botonesDeterminacion">
+
+		<ice:commandButton styleClass="botonAzul2"
+			actionListener="#{gestionDeterminaciones.prepararParaCrear}" alt="#{messages.botongenerico_crear_nueva_determinacion}"
+			value="#{messages.botongenerico_crear_nueva_determinacion}" title="#{messages.boton_title_determinacionBotones_crearNuevaDeterminacion}"/>
+
+		<ice:commandButton styleClass="botonAzul"
+			action="#{gestionArbolDeterminaciones.actualizoArbolDespuesDeGuardar}"
+			actionListener="#{gestionDeterminaciones.guardarDeterminacion}"
+			panelConfirmation="guardarDetConfirm" alt="#{messages.botongenerico_guardar}"
+			value="#{messages.botongenerico_guardar}" title="#{messages.boton_title_determinacionBotones_guardar}"/>
+
+		<ice:panelConfirmation id="guardarDetConfirm"
+			title="#{messages.determinacionBotones_guardarDeterminacion_title}"
+			message="#{messages.determinacion_guardar_confirmacion}"
+			acceptLabel="#{messages.botongenerico_aceptar}" cancelLabel="#{messages.botongenerico_cancelar}" styleClass="boton1" />
+			
+		<ice:commandButton styleClass="botonAzul" value="#{messages.botongenerico_cancelar}" alt="#{messages.botongenerico_cancelar}"
+							title="#{messages.botongenerico_cancelar}" action="#{gestionDeterminaciones.cancelar()}"/>	
+
+<!-- De momento lo comento, porque si tiene CU asociadas da fallo -->
+
+
+		<ice:commandButton styleClass="botonAzul3"
+			action="#{gestionArbolDeterminaciones.cargarArbolInicial}"
+			actionListener="#{gestionDeterminaciones.borrarSoloDeterminacionEHijas}"
+			panelConfirmation="borrarDetConfirm"
+			visible="#{gestionDeterminaciones.idDeterminacion!=0}"
+			value="#{messages.botongenerico_borrar_solodeterminacionehijas}" />
+
+		<ice:panelConfirmation id="borrarDetConfirm"
+			title="#{messages.determinacion_botones_borrarDetConfirm_title}"
+			message="#{messages.determinacion_botones_borrarDetConfirm_message}"
+			acceptLabel="#{messages.botongenerico_aceptar}" cancelLabel="#{messages.botongenerico_cancelar}" styleClass="boton1"/>
+ 
+<!--  		<ice:commandButton styleClass="botonAzul2"
+			action="#{gestionArbolDeterminaciones.cargarArbolInicial}"
+			actionListener="#{gestionDeterminaciones.borrarDeterminacionYCUEHijas}"
+			panelConfirmation="borrarDetYCUConfirm"
+			visible="#{gestionDeterminaciones.idDeterminacion!=0}"
+			value="#{messages.botongenerico_borrar_determinacionycuehijas}" title="#{messages.boton_title_determinacionBotones_borrar_determinacionycuehijas}"
+			alt="#{messages.botongenerico_borrar_determinacionycuehijas}"/>
+
+		<ice:panelConfirmation id="borrarDetYCUConfirm"
+			title="#{messages.determinacionBotones_borrarDeterminacion_title}"
+			message="#{messages.determinacionBotones_borrarDeterminacion_message}"
+			acceptLabel="#{messages.genericos_si}" cancelLabel="#{messages.genericos_no_volver}" styleClass="boton1"/>
+-->			
+
+		<ice:commandButton styleClass="botonAzul2"
+			rendered="#{not empty listaEntidadesDondeSeAplicaDeterminacion.listaEntidadesDondeAplicaDet}"
+			actionListener="#{gestionDeterminaciones.borrarSoloCUDeDeterminacion}"
+			panelConfirmation="borrarSoloCUdeDetConfirm"
+			title="#{messages.boton_title_determinacionBotones_borrar_solocudedeterminacion}"
+			visible="#{gestionDeterminaciones.idDeterminacion!=0}"
+			value="#{messages.botongenerico_borrar_solocudedeterminacion}" alt="#{messages.botongenerico_borrar_solocudedeterminacion}"/>
+
+		<ice:panelConfirmation id="borrarSoloCUdeDetConfirm"
+			title="#{messages.determinacionBotones_borrarCUs_title}"
+			message="#{messages.determinacionBotones_borrarCUs_message}"
+			acceptLabel="#{messages.botongenerico_aceptar}" cancelLabel="#{messages.botongenerico_cancelar}" styleClass="boton1"/>
+
+
+
+
+
+
+
+
+
+	</ice:panelGroup>
+
+</f:view>

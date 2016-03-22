@@ -1,0 +1,339 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.gestionplaneamientoencargado}"
+				view="/gestionfip/gestionplaneamientoencargado/PlaneamientoEncargadoList.xhtml"
+				id="PlaneamientoEncargadoListRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.genericos_listado}"
+				view="/gestionfip/gestionplaneamientoencargado/PlaneamientoEncargadoList.xhtml"
+				id="PlaneamientoEncargadoListRutaMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+	<ui:define name="buscar">
+		<!--  Se define el buscar	
+		 <h:graphicImage value="/img/editorfip/#{localeSelector.language}/comun/buscar.png"/>-->
+
+		<ice:form>
+			<ice:panelGrid columns="3">
+
+				<ice:selectInputText style="align:left" rows="10" width="250"
+					listVar="listado"
+					valueChangeListener="#{servicioPlanEncargadoLista.actualizarListaPlanesEncargados}"
+					listValue="#{servicioPlanEncargadoLista.resultadosBusqueda}">
+					<f:facet name="selectInputText">
+						<ice:panelGrid columns="1">
+							<ice:outputText style="text-align:left;width:10px"
+								value="#{listado.nombre}" />
+						</ice:panelGrid>
+					</f:facet>
+				</ice:selectInputText>
+
+				<!-- <ice:commandButton value="      "
+				
+				action="#{servicioPlanEncargadoLista.verDetalle}" 
+				styleClass="botonLupa" alt="Cargar Elemento"/> -->
+				<s:button value="      "
+					view="/gestionfip/gestionplaneamientoencargado/PlaneamientoEncargadoDetalle.seam"
+					propagation="nest" styleClass="sbotonLupa"
+					title="#{messages.boton_title_PElista_lupa}">
+					<f:param name="planIden"
+						value="#{servicioPlanEncargadoLista.planEncargadoSel}" />
+				</s:button>
+			</ice:panelGrid>
+
+
+		</ice:form>
+
+
+
+	</ui:define>
+	<ui:define name="body">
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+			<ice:form id="formUsrList">
+				<h:panelGrid columns="4" styleClass="panelBotones">
+
+
+
+					<!-- Menú Acciones -->
+
+					<ice:panelGroup style="text-align:right;">
+
+						<ice:panelGroup>
+							<ice:commandButton value="#{messages.gestionusuario_dardebaja}"
+								id="DarBaja" styleClass="boton1 ocultarBotonVerDetalle"
+								onmouseover="this.style.visibility='visible';document.getElementById('formUsrList:listaDeUsuarios').style.position='relative';"
+								onmouseout="this.style.visibility='hidden';document.getElementById('formUsrList:listaDeUsuarios').style.position='static';"
+								action="#{servicioPlanEncargadoLista.darDebaja}"
+								alt="#{messages.gestionusuario_dardebaja}"
+								title="#{messages.boton_title_PElista_darBaja}" />
+						</ice:panelGroup>
+					</ice:panelGroup>
+
+
+
+
+					<ice:panelGroup style="text-align:right;">
+						<!-- Menú Ver número de registros por página -->
+						<ice:commandButton value="#{messages.paginacion_ver}"
+							type="button" styleClass="boton3 botonVer"
+							alt="#{messages.paginacion_ver}"
+							title="#{messages.boton_title_PElista_ver}"
+							onmouseover="document.getElementById('formUsrList:Ver10').style.visibility='visible';document.getElementById('formUsrList:Ver20').style.visibility='visible';
+					 			  document.getElementById('formUsrList:Ver50').style.visibility='visible';document.getElementById('formUsrList:Ver100').style.visibility='visible';
+					 			 document.getElementById('formUsrList:listaDeUsuarios').style.position='relative';"
+							onmouseout="document.getElementById('formUsrList:Ver10').style.visibility='hidden';document.getElementById('formUsrList:Ver20').style.visibility='hidden';
+					 			 document.getElementById('formUsrList:Ver50').style.visibility='hidden';document.getElementById('formUsrList:Ver100').style.visibility='hidden';
+					 			document.getElementById('formUsrList:listaDeUsuarios').style.position='static';" />
+						<ice:panelGroup>
+							<ice:commandButton value="#{messages.paginacion_ver10}"
+								id="Ver10" styleClass="boton1 ocultarBotonVer10"
+								onmouseover="document.getElementById('formUsrList:Ver10').style.visibility='visible';document.getElementById('formUsrList:Ver20').style.visibility='visible';
+								document.getElementById('formUsrList:Ver50').style.visibility='visible';document.getElementById('formUsrList:Ver100').style.visibility='visible';
+								document.getElementById('formUsrList:listaDeUsuarios').style.position='relative';"
+								onmouseout="document.getElementById('formUsrList:Ver10').style.visibility='hidden';document.getElementById('formUsrList:Ver20').style.visibility='hidden';
+								document.getElementById('formUsrList:Ver50').style.visibility='hidden';document.getElementById('formUsrList:Ver100').style.visibility='hidden';
+								document.getElementById('formUsrList:listaDeUsuarios').style.position='static';"
+								action="#{servicioPlanEncargadoLista.setMaxResultados(10)}"
+								alt="#{messages.paginacion_ver10}"
+								title="#{messages.boton_title_PElista_verDiez}" />
+						</ice:panelGroup>
+						<ice:panelGroup>
+							<ice:commandButton value="#{messages.paginacion_ver20}"
+								id="Ver20" styleClass="boton1 ocultarBotonVer20"
+								onmouseover="document.getElementById('formUsrList:Ver10').style.visibility='visible';document.getElementById('formUsrList:Ver20').style.visibility='visible';
+								document.getElementById('formUsrList:Ver50').style.visibility='visible';document.getElementById('formUsrList:Ver100').style.visibility='visible';
+								document.getElementById('formUsrList:listaDeUsuarios').style.position='relative';"
+								onmouseout="document.getElementById('formUsrList:Ver10').style.visibility='hidden';document.getElementById('formUsrList:Ver20').style.visibility='hidden';
+								document.getElementById('formUsrList:Ver50').style.visibility='hidden';document.getElementById('formUsrList:Ver100').style.visibility='hidden';
+								document.getElementById('formUsrList:listaDeUsuarios').style.position='static';"
+								action="#{servicioPlanEncargadoLista.setMaxResultados(20)}"
+								alt="#{messages.paginacion_ver20}"
+								title="#{messages.boton_title_PElista_verVeinte}" />
+						</ice:panelGroup>
+						<ice:panelGroup>
+							<ice:commandButton value="#{messages.paginacion_ver50}"
+								id="Ver50" styleClass="boton1 ocultarBotonVer50"
+								onmouseover="document.getElementById('formUsrList:Ver10').style.visibility='visible';document.getElementById('formUsrList:Ver20').style.visibility='visible';
+								document.getElementById('formUsrList:Ver50').style.visibility='visible';document.getElementById('formUsrList:Ver100').style.visibility='visible';
+								document.getElementById('formUsrList:listaDeUsuarios').style.position='relative';"
+								onmouseout="document.getElementById('formUsrList:Ver10').style.visibility='hidden';document.getElementById('formUsrList:Ver20').style.visibility='hidden';
+								document.getElementById('formUsrList:Ver50').style.visibility='hidden';document.getElementById('formUsrList:Ver100').style.visibility='hidden';
+								document.getElementById('formUsrList:listaDeUsuarios').style.position='static';"
+								action="#{servicioPlanEncargadoLista.setMaxResultados(50)}"
+								alt="#{messages.paginacion_ver50}"
+								title="#{messages.boton_title_PElista_verCincuenta}" />
+						</ice:panelGroup>
+						<ice:panelGroup>
+							<ice:commandButton value="#{messages.paginacion_ver100}"
+								id="Ver100" styleClass="boton1 ocultarBotonVer100"
+								onmouseover="document.getElementById('formUsrList:Ver10').style.visibility='visible';document.getElementById('formUsrList:Ver20').style.visibility='visible';
+								document.getElementById('formUsrList:Ver50').style.visibility='visible';document.getElementById('formUsrList:Ver100').style.visibility='visible';
+								document.getElementById('formUsrList:listaDeUsuarios').style.position='relative';"
+								onmouseout="document.getElementById('formUsrList:Ver10').style.visibility='hidden';document.getElementById('formUsrList:Ver20').style.visibility='hidden';
+								document.getElementById('formUsrList:Ver50').style.visibility='hidden';document.getElementById('formUsrList:Ver100').style.visibility='hidden';
+								document.getElementById('formUsrList:listaDeUsuarios').style.position='static';"
+								action="#{servicioPlanEncargadoLista.setMaxResultados(100)}"
+								alt="#{messages.paginacion_ver100}"
+								title="#{messages.boton_title_PElista_verCien}" />
+						</ice:panelGroup>
+
+
+					</ice:panelGroup>
+
+
+
+					<!--  Paginación	 -->
+					<ice:panelGroup id="panelPaginacion" style="text-align:right;">
+						<ice:commandButton
+							action="#{servicioPlanEncargadoLista.setPagina(1)}"
+							rendered="#{servicioPlanEncargadoLista.pagina > 1}"
+							reRender="listaDeUsuarios" ajaxSingle="true"
+							image="/img/editorfip/#{localeSelector.language}/botones/Primero.png"
+							onmouseover="this.src='/fipeditor/img/editorfip/#{localeSelector.language}/botones/Primero2.png'"
+							onmouseout="this.src='/fipeditor/img/editorfip/#{localeSelector.language}/botones/Primero.png'"
+							styleClass="paginacionBotones"
+							alt="#{messages.botongenerico_primero}"
+							title="{messages.botongenerico_primero}" />
+						<ice:commandButton
+							action="#{servicioPlanEncargadoLista.antPagina}"
+							rendered="#{servicioPlanEncargadoLista.renderizarAnterior}"
+							reRender="listaDeUsuarios" ajaxSingle="true"
+							image="/img/editorfip/#{localeSelector.language}/botones/Anterior.png"
+							onmouseover="this.src='/fipeditor/img/editorfip/#{localeSelector.language}/botones/Anterior2.png'"
+							onmouseout="this.src='/fipeditor/img/editorfip/#{localeSelector.language}/botones/Anterior.png'"
+							styleClass="paginacionBotones"
+							alt="#{messages.botongenerico_anterior}"
+							title="{messages.botongenerico_anterior}" />
+
+						<ice:commandButton
+							value="#{messages.navegacion_pagina}:  #{servicioPlanEncargadoLista.getPagina()}  #{messages.genericos_de} #{servicioPlanEncargadoLista.numPaginas}"
+							styleClass="boton2 botonCrear"
+							style="margin-left:0px;margin-right:0px;" />
+						<ice:commandButton
+							action="#{servicioPlanEncargadoLista.sigPagina}"
+							rendered="#{servicioPlanEncargadoLista.renderizarSiguiente}"
+							reRender="listaDeUsuarios" ajaxSingle="true"
+							image="/img/editorfip/#{localeSelector.language}/botones/Siguiente.png"
+							onmouseover="this.src='/fipeditor/img/editorfip/#{localeSelector.language}/botones/Siguiente2.png'"
+							onmouseout="this.src='/fipeditor/img/editorfip/#{localeSelector.language}/botones/Siguiente.png'"
+							styleClass="paginacionBotones"
+							alt="#{messages.botongenerico_siguiente}"
+							title="{messages.botongenerico_siguiente}" />
+						<ice:commandButton
+							action="#{servicioPlanEncargadoLista.setPagina(servicioPlanEncargadoLista.numPaginas)}"
+							rendered="#{servicioPlanEncargadoLista.pagina != servicioPlanEncargadoLista.numPaginas}"
+							reRender="listaDeUsuarios" ajaxSingle="true"
+							image="/img/editorfip/#{localeSelector.language}/botones/Ultimo.png"
+							onmouseover="this.src='/fipeditor/img/editorfip/#{localeSelector.language}/botones/Ultimo2.png'"
+							onmouseout="this.src='/fipeditor/img/editorfip/#{localeSelector.language}/botones/Ultimo.png'"
+							styleClass="paginacionBotones"
+							alt="#{messages.botongenerico_ultimo}"
+							title="{messages.botongenerico_ultimo}" />
+					</ice:panelGroup>
+				</h:panelGrid>
+
+
+				<script type="text/javascript">
+				function pintarFilaSeleccionada(checkbox) {
+					
+					var seleccionada = checkbox.checked;
+					var fila = checkbox.parentNode.parentNode.parentNode;
+					if(seleccionada) {
+						fila.style.backgroundColor='#FFFF99';
+					} else {
+						fila.style.backgroundColor='#FFFFFF';
+					}
+				}	
+			</script>
+
+
+
+				<ice:dataTable
+					value="#{servicioPlanEncargadoLista.listaPlanesEncargados}"
+					var="item" id="listaDeUsuarios" enableContextMenu="false"
+					selectionMode="none" style="z-index:-1;position:static;"
+					onmouseover="document.getElementById('formUsrList:DarBaja').style.visibility='hidden';
+										 document.getElementById('formUsrList:Ver10').style.visibility='hidden';
+										 document.getElementById('formUsrList:Ver20').style.visibility='hidden';
+										 document.getElementById('formUsrList:Ver50').style.visibility='hidden';
+										 document.getElementById('formUsrList:Ver100').style.visibility='hidden';">
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.tramiteencargado_id}" />
+						</f:facet>
+						<h:outputText value="#{item.tramiteEncargado.iden}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.ambito}" />
+						</f:facet>
+						<h:outputText
+							value="#{servicioBasicoAmbitos.ambitoString(item.ambito.iden)}" />
+					</ice:column>
+
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:commandLink
+								value="#{messages.gestionusuario_usuario_nombre} #{servicioPlanEncargadoLista.orderColumn == 'nombre' ? (servicioPlanEncargadoLista.orderDirection == 'desc' ? messages.down : messages.up) : ''}"
+								action="#{servicioPlanEncargadoLista.ordenarLista('nombre', (servicioPlanEncargadoLista.orderDirection == 'asc' ? 'desc' : 'asc'))}"
+								style="color:#000000;font-family:tahoma;font-weight:bold;font-size:11px;" />
+						</f:facet>
+						<h:outputText value="#{item.nombre}" />
+					</ice:column>
+
+
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:commandLink
+								value="#{messages.fechaInicio} #{servicioPlanEncargadoLista.orderColumn == 'fechaInicio' ? (servicioPlanEncargadoLista.orderDirection == 'desc' ? messages.down : messages.up) : ''}"
+								action="#{servicioPlanEncargadoLista.ordenarLista('fechaInicio', (servicioPlanEncargadoLista.orderDirection == 'asc' ? 'desc' : 'asc'))}"
+								style="color:#000000;font-family:tahoma;font-weight:bold;font-size:11px;" />
+						</f:facet>
+						<h:outputText value="#{item.fechaInicio}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.estado}" />
+						</f:facet>
+						<h:outputText value="#{item.estado}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.botongenerico_verdetalle}" />
+						</f:facet>
+						<s:button value="#{messages.botongenerico_verdetalle}"
+							view="/gestionfip/gestionplaneamientoencargado/PlaneamientoEncargadoDetalle.seam"
+							propagation="nest" styleClass="boton1"
+							alt="#{messages.botongenerico_verdetalle}"
+							title="#{messages.boton_title_PElista_verDetalle}">
+							<f:param name="planIden" value="#{item.id}" />
+						</s:button>
+						<ice:commandButton styleClass="boton1"
+							value="#{messages.botongenerico_seleccionar}"
+							alt="#{messages.botongenerico_seleccionar}"
+							action="#{variablesSesionUsuario.seleccionarTramite(item.tramiteEncargado.iden, '')}"
+							title="#{messages.botongenerico_seleccionar}" />
+						<s:button value="#{messages.botongenerico_borrar}"
+							view="/gestionfip/gestionplaneamientoencargado/PlaneamientoEncargadoBorrar.seam"
+							propagation="nest" styleClass="boton1"
+							alt="#{messages.botongenerico_borrar}"
+							title="#{messages.botongenerico_borrar}">
+							<f:param name="planIden" value="#{item.id}" />
+						</s:button>
+					</ice:column>
+				</ice:dataTable>
+			</ice:form>
+		</ice:panelGroup>
+	</ui:define>
+
+</ui:composition>

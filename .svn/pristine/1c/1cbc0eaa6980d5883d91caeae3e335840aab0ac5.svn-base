@@ -1,0 +1,153 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+		
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			
+				<ice:outputLabel styleClass="hiperenlace"
+				value="#{messages.menu_inicio}" />
+				
+			</s:link>
+						
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link view="/gestionfip/GestionFipNavegacion.xhtml" id="GestionFipNavegacionRutaMenu"
+				propagation="none">
+				<ice:outputLabel styleClass="hiperenlace"
+				value="#{messages.menu_gestionfip}" />
+			</s:link>
+				
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+						
+			<s:link view="/gestionfip/importadores/ImportadoresFipNavegacion.xhtml" id="ImportadoresFipRutaMenu"
+				propagation="none">
+					<ice:outputLabel styleClass="hiperenlace"
+				value="#{messages.importadores}"/>
+			</s:link>
+			
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link view="/gestionfip/importadores/modeloc/Determinaciones.xhtml" id="DeterminacionesNavegacionMenu"
+					propagation="none">
+					<ice:outputLabel styleClass="hiperenlace"
+				value="#{messages.determinacionesCanarias}"/>
+			</s:link>
+			
+			
+					
+		</ice:panelGroup>
+			
+		
+		
+		
+		
+		
+		
+	</ui:define>
+	<ui:define name="body">
+
+		<ice:form id="formulario">
+
+
+			<ice:panelGrid columns="2" columnClasses="testCol1,testCol2">
+			 
+				<ice:panelGroup>
+					
+					<ice:panelGrid columns="2" style="vertical-align: top">
+
+						<ice:outputLabel value="#{messages.seleccionexls}"/>
+				
+						<ice:panelGroup>
+							<ice:inputFile id="inputFileComponent"
+								autoUpload="true"
+								actionListener="#{servicioImportacionDECanariasBean.uploadActionListener}"
+								progressListener="#{servicioImportacionDECanariasBean.progressListener}"
+								uniqueFolder="true" label="#{messages.genericos_cargar}"/>
+						
+							<ice:outputProgress 
+								labelComplete="#{servicioImportacionDECanariasBean.currentFile.fileName}"
+								value="#{servicioImportacionDECanariasBean.fileProgress}" />
+							<ice:panelGroup>
+								<ice:message for="inputFileComponent" />
+							</ice:panelGroup>
+						</ice:panelGroup>
+						<br/>				
+						<br/>				
+						
+						 <ice:outputLabel
+						 				rendered="#{!empty servicioImportacionDECanariasBean.sheetListItems}"
+				                        for="SlctSheet"
+				                        value="#{messages.seleccionehojas}" />
+				         <ice:selectManyMenu id="SlctSheet"  style="height:100px; width:300px"
+				         	
+				         				rendered="#{!empty servicioImportacionDECanariasBean.sheetListItems}"
+				                         value="#{servicioImportacionDECanariasBean.selectedSheet}"
+				                         partialSubmit="true">
+				               <f:selectItems id="SlctSheetItms"
+				                         value="#{servicioImportacionDECanariasBean.sheetListItems}"/>
+				         </ice:selectManyMenu>
+						<br/>
+						<ice:commandButton styleClass="boton4" action="#{servicioImportacionDECanariasBean.importarENExcel}" rendered="#{!empty servicioImportacionDECanariasBean.sheetListItems}"
+							value="#{messages.cargardeterminaciones}" alt="#{messages.cargardeterminaciones}" title="#{messages.boton_title_importadorDeterminaciones_cargarDeterminaciones}" />
+													
+					</ice:panelGrid>
+					
+					<ice:commandButton value="#{messages.exceldeterminacionesejemplo}" onclick="window.open('determinaciones_canarias.xls')" styleClass="boton4" type="button" style=" margin-left: 3%;"
+										alt="#{messages.exceldeterminacionesejemplo}" title="#{messages.boton_title_importadorDeterminaciones_descargarEjemplo}"/>
+
+				</ice:panelGroup>
+			 
+			  
+				<ice:panelGroup
+					styleClass="firstChildTitle backBeanChangeContainer">
+
+					<ice:outputText value="Resultado Importacion EXCEL" rendered="#{not empty servicioImportacionDECanariasBean.listadoErroresImportacion}"></ice:outputText>
+					
+					<ice:panelGroup style="width:180px;" rendered="#{not empty servicioImportacionDECanariasBean.listadoErroresImportacion}">
+					            <ice:dataExporter for="tramitesList" 
+					                label="#{messages.descargarenexcel}"
+					                type="excel"
+					                popupBlockerLabel="#{messages.bloqueadordeventanas}"
+					                clickToCreateFileText="#{messages.descargarenexcel}"
+					                
+					                />
+					</ice:panelGroup>
+					<ice:dataTable id="tramitesList" title="Errores de Importacion"
+						value="#{servicioImportacionDECanariasBean.listadoErroresImportacion}"
+						var="item" 
+						rendered="#{not empty servicioImportacionDECanariasBean.listadoErroresImportacion}"
+						>
+						<ice:column >
+							<f:facet name="header">
+			
+								<ice:outputText value="Errores Detectados para #{servicioImportacionDECanariasBean.currentFile.fileName} Hoja #{servicioImportacionDECanariasBean.sheetListItems[servicioImportacionDECanariasBean.selectedSheet[0]].label}">
+								</ice:outputText>
+			
+							</f:facet>
+							<ice:outputText value=" #{item}" />
+						</ice:column>
+			
+					</ice:dataTable>
+					
+				</ice:panelGroup>
+			</ice:panelGrid>
+
+
+		</ice:form>
+
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,161 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"   
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+      <ice:panelGroup  id="viewboletintramiteHomePanelGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="viewTextboletintramiteHomeId" value="Boletintramite"/>
+                  </td>
+              </tr>
+          </table>
+      
+
+
+        <s:decorate id="iden" template="../layout/display.xhtml">
+            <ui:define name="label">Iden</ui:define>
+            #{boletintramiteHome.instance.iden}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="fecha" template="../layout/display.xhtml">
+            <ui:define name="label">Fecha</ui:define>
+            <ice:outputText id="viewfechaTextId"
+	                 value="#{boletintramiteHome.instance.fecha}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </ice:outputText>
+        </s:decorate>
+
+
+        <s:decorate id="idboletin" template="../layout/display.xhtml">
+            <ui:define name="label">Idboletin</ui:define>
+            #{boletintramiteHome.instance.idboletin}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="numero" template="../layout/display.xhtml">
+            <ui:define name="label">Numero</ui:define>
+            #{boletintramiteHome.instance.numero}&#160;
+        </s:decorate>
+
+          <div style="clear:both"/>
+ 
+
+    <div id="viewBoletintramiteEditsearchButtons" class="actionButtons">      
+
+        <s:button view="/seam/BoletintramiteEdit.xhtml" 
+                    id="edit" styleClass="iceCmdBtn"
+                 value="Edit"/>
+
+        <s:button view="/seam/#{empty boletintramiteFrom ? 'BoletintramiteList' : boletintramiteFrom}.xhtml"
+                    id="done" styleClass="iceCmdBtn"
+                 value="Done"/>
+
+    </div>
+  </ice:panelGroup>
+
+
+    <ice:form id="view2boletintramiteHomeFormId">
+       <ice:panelTabSet id="viewboletintramiteHomeTabSetId" 
+                styleClass="componentPanelTabSetLayout" 
+		style="margin-bottom:5px;margin-top:10px;">
+
+	<ice:panelTab id="viewtramitepanelTab" label="Tramite">
+   		<div class="association" id="tramiteParent">
+        
+       		 <h:outputText value="There is no tramite associated with this boletintramite." 
+		                  id="viewtramiteTextId"
+                   rendered="#{boletintramiteHome.instance.tramite == null}"/>
+   
+        	<ice:dataTable  var="tramite" 
+                   value="#{boletintramiteHome.instance.tramite}" 
+                rendered="#{boletintramiteHome.instance.tramite != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+	        columnClasses="allCols"
+                      id="viewtramiteTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{tramite.iden}
+            </ice:column>
+            <ice:column id="viewcodigofipId">
+                <f:facet name="header">Codigofip</f:facet>
+                #{tramite.codigofip}
+            </ice:column>
+            <ice:column id="viewcomentarioId">
+                <f:facet name="header">Comentario</f:facet>
+                #{tramite.comentario}
+            </ice:column>
+            <ice:column id="viewfechaId">
+                <f:facet name="header">Fecha</f:facet>
+                #{tramite.fecha}
+            </ice:column>
+            <ice:column id="viewfechaconsolidacionId">
+                <f:facet name="header">Fechaconsolidacion</f:facet>
+                #{tramite.fechaconsolidacion}
+            </ice:column>
+            <ice:column id="viewidcentroproduccionId">
+                <f:facet name="header">Idcentroproduccion</f:facet>
+                #{tramite.idcentroproduccion}
+            </ice:column>
+            <ice:column id="viewidorganoId">
+                <f:facet name="header">Idorgano</f:facet>
+                #{tramite.idorgano}
+            </ice:column>
+            <ice:column id="viewidsentidoId">
+                <f:facet name="header">Idsentido</f:facet>
+                #{tramite.idsentido}
+            </ice:column>
+            <ice:column id="viewidtipotramiteId">
+                <f:facet name="header">Idtipotramite</f:facet>
+                #{tramite.idtipotramite}
+            </ice:column>
+            <ice:column id="viewiteracionId">
+                <f:facet name="header">Iteracion</f:facet>
+                #{tramite.iteracion}
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{tramite.nombre}
+            </ice:column>
+            <ice:column id="viewnumeroacuerdoId">
+                <f:facet name="header">Numeroacuerdo</f:facet>
+                #{tramite.numeroacuerdo}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Plan iden</f:facet>
+		    	#{tramite.plan.iden}
+            </ice:column>
+            <ice:column id="viewtextoId">
+                <f:facet name="header">Texto</f:facet>
+                #{tramite.texto}
+            </ice:column>
+            <ice:column id="viewtramiteColumnId">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewtramiteLinkId" 
+                     value="View" 
+                      view="/seam/Tramite.xhtml">
+                    <f:param name="tramiteIden" 
+                           value="#{tramite.iden}"/>
+                </s:link>
+            </ice:column>
+       </ice:dataTable>
+       
+    </div>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+

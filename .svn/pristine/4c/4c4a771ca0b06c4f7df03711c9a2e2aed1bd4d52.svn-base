@@ -1,0 +1,126 @@
+######################################################
+# Validaci\u00f3n de Integridad
+######################################################
+integridad=Validaci\u00f3n de Integridad
+integridad.xsd=Validar que el fichero posee correctamente la estructura definida en el XSD
+integridad.xsd.error=El fichero no posee la estructura definida en el XSD
+integridad.shp=Validar que los shapes incluidos en el FIP se encuentran en el sistema de ficheros y no se encuentran repetidos en la base de datos
+integridad.shp.sistfile=Validar que los shapes incluidos en el FIP se encuentran en el sistema de ficheros 
+integridad.shp.bd=Validar que los shapes incluidos en el FIP no se encuentran repetidos en la base de datos
+integridad.shp.sistfile.error=El shape no se encuentra en el sistema de ficheros
+integridad.shp.bd.error=El shape se encontraba previamente en la base de datos
+integridad.volcadodb= Validar que el volcado previo del FIP se ha realizado conrrectamente
+integridad.volcadodb.error= Se ha producido un fallo al volcar el FIP a la base de datos
+integridad.codigofip=Validar que el codigo fip del tramite que se quiere meter en el sistema no existe previamente
+integridad.codigofip.error=El codigo fip del tramite ya existe en el sistema.
+integridad.documentos=El fip no contiene el fichero correspondiente a alguno de los documentos referenciados.
+integridad.documentos.no.referenciados=El fip contiene ficheros no referenciados.
+integridad.codigofipRPM.error=El codigo fip del tramite no existe en RPM.
+integridad.codigofip.RPM_error=El codigo fip del tramite no existe en RPM.
+integridad.entidades=Deben existir todas las entidades del FIP
+integridad.entidades.error=No existen todas las entidades del FIP
+integridad.determinaciones=Deben existir todas las determinaciones referenciadas en el FIP
+integridad.determinaciones.error=No existen todas las determinaciones referenciadas en el FIP
+vigencia.fip= El FIP1 es vigente.
+vigencia.fip.error=El FIP que intenta cargar en el sistema ya no es vigente.
+encoding.fip=La codificaci\u00f3n del FIP ha de ser correcta.
+encoding.fip.error=Se ha detectado un problema en la codificaci\u00f3n del FIP
+######################################################
+# Validaci\u00f3n de tramite
+######################################################
+tramite=Validaci\u00f3n del Tramite
+tramite.vn210=Validaciones del Tramite Genericas
+tramite.vn211=El tramite debe contener al menos una determinacion
+tramite.vn212=El tramite debe contener al menos una entidad
+tramite.vn213=El codigo de tramite debe estar bien conformado segun la codificacion establecida en el FIP
+
+
+
+######################################################
+# Validaci\u00f3n de entidades
+######################################################
+entidades=Validaci\u00f3n de Entidades
+entidades.vn230=Validaciones de Entidades Genericas
+entidades.vn231=Una entidad no puede tener aplicada una determinacion de caracter de usos si no hay una determinacion del tramite que tenga  caracter de Norma de Usos y que sea aplicable a la entidad
+entidades.vn232=Una entidad no puede tener aplicada una determinacion de caracter de actos si no hay una determinacion del tramite que tenga  caracter de Norma de Actos y que sea aplicable a la entidad
+entidades.vn233=Una entidad con la determinacion de caracter grupo aplicada y cuyo valor de referencia sea Carpeta no puede efectuar ni sufrir operaciones
+entidades.vn234=Las entidades usadas como entidades base deben pertenecer al Plan Base
+entidades.vn235=La geometria de las entidades debe ser correcta segun el estandar WKT
+entidades.vn236=No puede haber una entidad con mas de una asignacion al mismo documento
+entidades.vn237=Todas las entidades deben tener obligatoriamente una unica aplicacion a una determinacion de caracter 'grupo' y un unico caso y valor de referencia
+
+
+
+
+######################################################
+# Validaci\u00f3n de Determinaciones
+######################################################
+determinaciones=Validaci\u00f3n de determinaciones
+determinaciones.vn240=Validaciones de Determinaciones Genericas
+determinaciones.vn241=Las determinaciones asignadas como unidades deben pertenecer al car\u00e1cter 'UNIDAD'
+determinaciones.vn242=Las determinaciones definidas como unidad deben ser del caracter 'UNIDAD'
+determinaciones.vn243=Las determinaciones de caracter 'UNIDAD' deben estar definidad como Unidad (con su definicion y abrevitatura
+determinaciones.vn244=Las determinaciones que regulan otras deben ser necesariamente de caracter 'REGULADORA'
+determinaciones.vn245=Las determinaciones que son valores de referencia deben tener caracter de valor de referencia
+determinaciones.vn246=Si la determinacion es un Enunciado, Valor de Referencia, Tipo de Adscripcion, Unidad, Enunciado Complementario o Regulacion, no tendra entidad de aplicacion
+determinaciones.vn247=Solo tendran valor de referencia las determinaciones de caracter Regimen de Usos, Regimen de Actos, Operadoras, Norma General Grafica o Norma General Literal
+determinaciones.vn248=Si la determinacion es Norma General Literal, Norma General Grafica, Acto, Uso, Grupo de Actos, Grupo de Usos, Norma de Actos, Norma de Usos, Norma de Adscripciones, Regimen de Actos o Regimen de Usos tendra al menos un grupo de aplicacion
+determinaciones.vn249=Las determinaciones con caracter 'REGULACION' siempre han de tener texto
+determinaciones.vn2410=No puede haber una determinacion con mas de una asignacion al mismo documento
+determinaciones.vn2411=No pueden existir dos determinaciones hijas al mismo nivel con el mismo nombre, caracter y unidad
+
+
+######################################################
+# Validaci\u00f3n de Condiciones Urbanisticas
+######################################################
+condicionesurbanisticas=Validaci\u00f3n de Condiciones Urbanisticas
+condicionesurbanisticas.vn250=Validaciones de Condiciones Urbanisticas Genericas
+condicionesurbanisticas.vn251=Si una entidad tiene aplicada la determinacion de caracter 'grupo' con valor de referencia 'carpeta' no puede recibir mas determinaciones
+condicionesurbanisticas.vn252=Las entidades utilizadas en la definicion de las condiciones urbanisticas deben pertenecer al tramite de trabajo
+condicionesurbanisticas.vn253=Una determinacion aplicada a varias entidades no puede tener un valor literal en unas ocasiones y un valor de referencia en otras
+condicionesurbanisticas.vn254=Una entidad no puede tener aplicada dos veces la misma determinacion
+condicionesurbanisticas.vn255=Una determinacion no puede estar aplicada a una entidad y no tener al menos un caso
+condicionesurbanisticas.vn256=No puede haber un caso con mas de una asignacion al mismo documento
+condicionesurbanisticas.vn257=Un caso debe tener al menos un documento y/o un regimen
+condicionesurbanisticas.vn258=Una determinacion solo puede estar aplicada a entidades definidas en los grupos de aplicacion
+condicionesurbanisticas.vn259=Si una determinacion tiene valores de referencia, solo podra estar aplicada con alguno de estos salvo en el caso de tener determinacion de regimen
+condicionesurbanisticas.vn2510=El caso de aplicacion de un regimen debe pertenecer a la misma entidad que el caso de dicho regimen
+
+
+######################################################
+# Validaci\u00f3n de otras
+######################################################
+otras=Otras Validaciones
+otras.vn290=Otras Validaciones Genericas
+#Documentos
+otras.vn221=No puede haber mas de un documento del mismo tipo y grupo con el mismo nombre
+otras.vn222=La geometria de los documentos debera ser siempre de tipo poligonal
+#Operaciones
+otras.vn261=Toda operacion de adscripcion debe tener Tipo, Cuantia y Unidad
+otras.vn262=Si una operacion entre entidades no es de creacion de adscripcion, no debera tener propiedades de adscripcion
+otras.vn263=
+otras.vn264=El orden de cada operacion debe ser unico dentro del tramite (considerando determinaciones y entidades)
+#Adscripciones
+otras.vn271=Las adscripciones definidas directamente sin operacion deben ser entre entidades del mismo plan
+otras.vn238=Validaci\u00f3n topol\u00f3gica
+
+
+
+######################################################
+# Validaci\u00f3n manual
+######################################################
+manuales=Validaci\u00f3n Manual
+
+######################################################
+# FIRMA DOCUMENTOS
+######################################################
+keystore.type=JKS
+keystore.file=/usr/lib/jvm/java-1.5.0-sun-1.5.0.16/bin/myKeyStore.jks
+keystore.password=abc12345
+keystore.private.password=abc1234
+keystore.private.alias=mi_cert_ejemplo
+
+
+idcaracter=9
+# C\u00f3digos de determinaci\u00f3n de Grupo (separados por coma) que no van a ser analizados topol\u00f3gicamente
+codigo_grupo_no_topol[]=7000000011

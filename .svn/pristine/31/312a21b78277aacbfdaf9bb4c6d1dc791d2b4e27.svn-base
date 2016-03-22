@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<page xmlns="http://jboss.com/products/seam/pages"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd"
+
+      no-conversation-view-id="/OperacionentidadList.xhtml"
+
+      login-required="true">
+
+   
+   <begin-conversation join="true" flush-mode="MANUAL"/>
+   
+   <action execute="#{operacionentidadHome.wire}"/>
+   
+   <param name="operacionentidadFrom"/>
+   <param name="operacionentidadIden" value="#{operacionentidadHome.operacionentidadIden}"/>
+   <param name="entidadFrom"/>
+   <param name="entidadIden" value="#{entidadHome.entidadIden}"/>
+   <param name="tramiteFrom"/>
+   <param name="tramiteIden" value="#{tramiteHome.tramiteIden}"/>
+   <param name="planFrom"/>
+   <param name="planIden" value="#{planHome.planIden}"/>
+
+
+
+   <param name="operacionFrom"/>
+   <param name="operacionIden" value="#{operacionHome.operacionIden}"/>
+
+
+
+   <navigation from-action="#{operacionentidadHome.persist}">
+       <rule if-outcome="persisted">
+          <end-conversation/>
+          <redirect view-id="/Operacionentidad.xhtml"/>
+       </rule>
+   </navigation>
+   
+   <navigation from-action="#{operacionentidadHome.update}">
+       <rule if-outcome="updated">
+          <end-conversation/>
+          <redirect view-id="/Operacionentidad.xhtml"/>
+       </rule>
+   </navigation>
+   
+   <navigation from-action="#{operacionentidadHome.remove}">
+       <rule if-outcome="removed">
+          <end-conversation/>
+          <redirect view-id="/OperacionentidadList.xhtml"/>
+       </rule>
+   </navigation>
+   
+</page>

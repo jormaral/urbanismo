@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion"
+  schema="planeamiento" table="vectorrelacion">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">planeamiento.planeamiento_vectorrelacion_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Relacion"
+   fetch="select" name="relacion">
+   <column name="idrelacion" not-null="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="iddefvector" type="int">
+   <column name="iddefvector" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="valor" type="int">
+   <column name="valor" not-null="true"/>
+  </property>
+ </class>
+ <query name="Vectorrelacion.obtenerPorRelacionYDef">SELECT vr FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion vr
+	WHERE vr.relacion.iden = :idRelacion AND vr.iddefvector = :idDefVector</query>
+ <query name="Vectorrelacion.obtenerVectorUnidad">SELECT vr FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion vr 
+	WHERE vr.iddefvector IN (1,3) AND vr.valor = :valor</query>
+ <query name="Vectorrelacion.obtenerDeEntidad">SELECT vr FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion vr 
+	WHERE vr.iddefvector NOT IN (4, 5, 41, 42) AND vr.valor = :valor</query>
+ <query name="Vectorrelacion.obtenerDeDeterminacion">SELECT vr FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion vr WHERE vr.iddefvector IN (1, 2, 3, 40) AND vr.valor = :valor</query>
+ <sql-query name="Vectorrelacion.buscarReguladoras">SELECT valor FROM planeamiento.vectorrelacion
+	WHERE idRelacion IN (SELECT idrelacion FROM planeamiento.vectorrelacion WHERE valor=:iden AND iddefvector IN (8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38 ))
+		AND idrelacion IN (SELECT idrelacion FROM planeamiento.relacion WHERE iddefrelacion IN (4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19))
+		AND iddefvector IN (9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39)</sql-query>
+ <sql-query name="Vectorrelacion.obtenerUnidades">SELECT valor FROM planeamiento.vectorrelacion
+	WHERE idRelacion IN 
+	(SELECT idrelacion FROM planeamiento.vectorrelacion WHERE valor = :idDeterminacion AND iddefvector= :idDefVector)
+	AND idrelacion in (select idrelacion from planeamiento.relacion where iddefrelacion in (:idDefUnidad))
+	AND iddefvector = :idDefDeterminacionUnidad</sql-query>
+</hibernate-mapping>

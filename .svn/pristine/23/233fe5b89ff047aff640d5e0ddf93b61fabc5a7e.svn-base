@@ -1,0 +1,44 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../layout/templateArbol.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="servicioConsultasEJB3aBDForm">
+
+        <ice:panelGroup>
+            <f:facet name="header">servicioConsultasEJB3aBD</f:facet>
+			
+			<s:decorate id="ejem" template="../layout/display.xhtml">
+            	<ui:define name="label">FIP XML</ui:define>
+            	<h:outputText id="ejemOutput" value="Pulsa para generar FIP XML"/>
+        	</s:decorate>
+			
+                             
+            
+           
+            
+            
+
+            <div style="clear:both"/>
+            
+                        
+
+        </ice:panelGroup>
+
+        <div class="actionButtons">
+            <h:commandButton id="servicioConsultasEJB3aBD" value="generar FIP XML"
+                    action="#{conversionFIPXML.guardarFIPenBD(218)}"/>
+        </div>
+
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

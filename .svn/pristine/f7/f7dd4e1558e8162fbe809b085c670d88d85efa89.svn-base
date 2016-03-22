@@ -1,0 +1,146 @@
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaListaCUSimplificada"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+
+	<ice:form id="listadoCUSimplificada">
+		<br/>
+
+		<ice:panelGrid columns="2" columnClasses="colLabelDet, colBotonDet"
+			styleClass="panelGridDeter">
+			<ice:panelGroup styleClass="labels label-izq"
+				panelTooltip="tooltip_cu">
+				<ice:outputLabel value="#{messages.entidad_condicionurbanistica_determinaciones}" />
+				<ice:graphicImage styleClass="tooltip_imagen"
+					alt="#{messages.genericos_info}"
+					url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+			</ice:panelGroup>
+			
+		</ice:panelGrid>
+
+
+		<ice:panelGroup>
+
+			<ice:dataTable id="listaCUSimplificada"
+				value="#{listaCUSimplificada.cuSimplificadaList}"
+				sortColumn="#{listaCUSimplificada.sortColumnName}"
+				sortAscending="#{listaCUSimplificada.ascending}" var="item"
+				
+				
+				rendered="#{not empty listaCUSimplificada.cuSimplificadaList}">
+
+
+
+
+
+				<ice:column groupOn=" #{item.nombreDeterminacion}">
+
+
+					<f:facet name="header">
+
+						<ice:commandSortHeader columnName="nombre" arrow="true">
+							<ice:outputText value="#{messages.cu_nombredeterminacion}">
+							</ice:outputText>
+						</ice:commandSortHeader>
+
+
+
+					</f:facet>
+					<ice:outputText value=" #{item.nombreDeterminacion}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+
+						<ice:outputText value="#{messages.cu_nombredeterminacionregimen}">
+						</ice:outputText>
+
+					</f:facet>
+					<ice:outputText value=" #{item.nombreDetRegimen}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+
+						<ice:outputText value="#{messages.cu_nombrevalorreferencia}">
+						</ice:outputText>
+
+					</f:facet>
+					<ice:outputText value=" #{item.nombreDetValorRef}" />
+				</ice:column>
+
+
+				<ice:column>
+
+					
+					<f:facet name="header">
+
+						<ice:outputText value="#{messages.cu_valor}">
+						</ice:outputText>
+
+					</f:facet>
+					<ice:outputText value=" #{item.valor}" />
+
+				</ice:column>
+
+
+				<ice:column>
+					<f:facet name="header">
+
+						<ice:outputText value="#{messages.cu_regespec}">
+						</ice:outputText>
+
+					</f:facet>
+
+					<ice:dataTable id="regespList" value="#{item.regimenesEspecificos}"
+						var="regesp" rendered="#{not empty item.regimenesEspecificos}">
+						<ice:column>
+							<f:facet name="header">
+
+								<ice:outputText value="#{messages.cu_re_nombre}">
+								</ice:outputText>
+
+							</f:facet>
+							<ice:outputText value=" #{regesp.nombreRegimenEspecifico}" />
+						</ice:column>
+
+						<ice:column>
+							<f:facet name="header">
+
+								<ice:outputText value="#{messages.cu_re_textoregimenesespecifico}">
+								</ice:outputText>
+
+							</f:facet>
+
+							<ice:outputText value=" #{regesp.textoRegimenEspecifico}">
+
+							</ice:outputText>
+
+
+
+						</ice:column>
+					</ice:dataTable>
+				</ice:column>
+
+				
+
+			</ice:dataTable>
+
+
+
+
+		</ice:panelGroup>
+		
+		<!-- Tooltips -->
+		<ice:panelTooltip id="tooltip_cu" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_entidad_cu}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+
+	</ice:form>
+</f:subview>

@@ -1,0 +1,156 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"  
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="conjuntoentidadSearch" styleClass="edit">
+      <ice:panelGroup  id="searchGroup" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+                    <ice:outputText id="listConjuntoentidadId" value="Conjuntoentidad search filter"/>
+                 </td>
+              </tr>
+         </table>	
+         <ice:panelGroup id="listPanelGroupConjuntoentidadId" styleClass="edit">
+		
+            <s:decorate template="../layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <ice:selectOneRadio id="logic" value="#{conjuntoentidadList.restrictionLogicOperator}" partialSubmit="true">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </ice:selectOneRadio>
+            </s:decorate>
+          
+   
+	  </ice:panelGroup>
+  
+        
+        <div class="actionButtons">
+            <ice:commandButton id="search" value="Search" action="/ConjuntoentidadList.xhtml"/>
+        </div>
+      </ice:panelGroup> 
+    </ice:form>
+    
+    <ice:panelGroup styleClass="formBorderHighlight">
+
+    <h3>conjuntoentidad  search results</h3>
+
+    <div class="searchResults" id="listconjuntoentidadResults">
+    <ice:outputText value="The conjuntoentidad search returned no results." 
+               rendered="#{empty conjuntoentidadList.resultList}"/>
+               
+    <ice:dataTable id="conjuntoentidadList" 
+                  var="conjuntoentidad"
+                value="#{conjuntoentidadList.resultList}" 
+            resizable="true"
+	columnClasses="allCols"
+             rendered="#{not empty conjuntoentidadList.resultList}">
+        <ice:column id="listidenId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{conjuntoentidadList}"/>
+                    <ui:param name="propertyLabel" value="Iden"/>
+                    <ui:param name="propertyPath" value="conjuntoentidad.iden"/>
+                </ui:include>
+            </f:facet>
+            #{conjuntoentidad.iden}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listColumnentidadByIdentidadconjuntoId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{conjuntoentidadList}"/>
+                    <ui:param name="propertyLabel" value="Entidad by identidadconjunto iden"/>
+                    <ui:param name="propertyPath" value="conjuntoentidad.entidadByIdentidadconjunto.iden"/>
+                </ui:include>
+            </f:facet>
+            #{conjuntoentidad.entidadByIdentidadconjunto.iden}
+        </ice:column>
+        <ice:column id="listColumnentidadByIdentidadmiembroId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{conjuntoentidadList}"/>
+                    <ui:param name="propertyLabel" value="Entidad by identidadmiembro iden"/>
+                    <ui:param name="propertyPath" value="conjuntoentidad.entidadByIdentidadmiembro.iden"/>
+                </ui:include>
+            </f:facet>
+            #{conjuntoentidad.entidadByIdentidadmiembro.iden}
+        </ice:column>
+        <ice:column id="listColumnConjuntoentidadId">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/seam/#{empty from ? 'Conjuntoentidad' : from}.xhtml" 
+                   value="#{empty from ? 'View' : 'Select'}" 
+                      id="conjuntoentidad">
+                <f:param name="conjuntoentidadIden" 
+                        value="#{conjuntoentidad.iden}"/>
+            </s:link>
+			#{' '}
+            <s:link view="/seam/ConjuntoentidadEdit.xhtml"
+                   value="Edit" 
+                      id="conjuntoentidadEdit"
+                      rendered="#{empty from}">
+                <f:param name="conjuntoentidadIden" 
+                        value="#{conjuntoentidad.iden}"/>
+            </s:link>
+        </ice:column>
+    </ice:dataTable>
+
+    </div>
+</ice:panelGroup>
+
+    <div class="tableControl">
+      
+        <s:link view="/seam/ConjuntoentidadList.xhtml" 
+            rendered="#{conjuntoentidadList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPageconjuntoentidadListId">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+        
+        <s:link view="/seam/ConjuntoentidadList.xhtml" 
+            rendered="#{conjuntoentidadList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPageconjuntoentidadListId">
+            <f:param name="firstResult" 
+                    value="#{conjuntoentidadList.previousFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/ConjuntoentidadList.xhtml" 
+            rendered="#{conjuntoentidadList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPageconjuntoentidadListId">
+            <f:param name="firstResult" 
+                    value="#{conjuntoentidadList.nextFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/ConjuntoentidadList.xhtml" 
+            rendered="#{conjuntoentidadList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPageconjuntoentidadListId">
+            <f:param name="firstResult" 
+                    value="#{conjuntoentidadList.lastFirstResult}"/>
+        </s:link>
+        
+    </div>
+    
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/seam/ConjuntoentidadEdit.xhtml"
+                    id="create" 
+                 value="Create conjuntoentidad">
+            <f:param name="conjuntoentidadIden"/>
+        </s:button>
+    </s:div>
+    
+</ui:define>
+
+</ui:composition>
+

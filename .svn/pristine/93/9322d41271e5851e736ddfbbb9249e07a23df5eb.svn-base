@@ -1,0 +1,154 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.importadores}"
+				view="/gestionfip/importadores/ImportadoresFipNavegacion.xhtml"
+				id="ImportadoresFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.entidades}"
+				view="/gestionfip/importadores/Entidades.xhtml"
+				id="EntidadesNavegacionMenu" propagation="none">
+
+			</s:link>
+
+
+
+		</ice:panelGroup>
+
+	</ui:define>
+	<ui:define name="body">
+	
+	
+
+		<ice:form id="formulario">
+
+
+			<ice:panelGrid columns="2" columnClasses="testCol1,testCol2">
+
+				<ice:panelGroup>
+
+					<ice:panelGrid columns="2" style="vertical-align: top">
+
+						<ice:outputLabel value="#{messages.seleccionexls}" />
+
+						<ice:panelGroup>
+							<ice:inputFile id="inputFileComponent" autoUpload="true"
+								actionListener="#{servicioImportacionEntidadBean.uploadActionListener}"
+								progressListener="#{servicioImportacionEntidadBean.progressListener}"
+								uniqueFolder="true" label="#{messages.genericos_cargar}" />
+
+							<ice:outputProgress
+								labelComplete="#{servicioImportacionEntidadBean.currentFile.fileName}"
+								value="#{servicioImportacionEntidadBean.fileProgress}" />
+							<ice:panelGroup>
+								<ice:message for="inputFileComponent" />
+							</ice:panelGroup>
+						</ice:panelGroup>
+						<br />
+						<br />
+
+						<ice:outputLabel
+							rendered="#{!empty servicioImportacionEntidadBean.sheetListItems}"
+							for="SlctSheet" value="#{messages.seleccionehojas}" />
+						<ice:selectManyMenu id="SlctSheet"
+							style="height:100px; width:300px"
+							rendered="#{!empty servicioImportacionEntidadBean.sheetListItems}"
+							value="#{servicioImportacionEntidadBean.selectedSheet}"
+							partialSubmit="true">
+							<f:selectItems id="SlctSheetItms"
+								value="#{servicioImportacionEntidadBean.sheetListItems}" />
+						</ice:selectManyMenu>
+						<br />
+						<ice:commandButton styleClass="boton2"
+							action="#{servicioImportacionEntidadBean.importarENExcel}"
+							rendered="#{!empty servicioImportacionEntidadBean.sheetListItems}"
+							value="#{messages.cargarentidades}"
+							alt="#{messages.cargarentidades}"
+							title="#{messages.boton_title_importadorEntidades_cargarEntidades}" />
+
+
+
+
+
+					</ice:panelGrid>
+
+					<ice:commandButton value="#{messages.excelentidadesejemplo}"
+						onclick="window.open('entidades.xls');" styleClass="boton4"
+						type="button" style=" margin-left: 3%;"
+						alt="#{messages.excelentidadesejemplo}"
+						title="#{messages.boton_title_importadorEntidades_descargarEjemplo}" />
+
+				</ice:panelGroup>
+
+
+				<ice:panelGroup styleClass="firstChildTitle backBeanChangeContainer">
+
+					<ice:outputText value="#{messages.resultadoimportacionxls}"
+						rendered="#{not empty servicioImportacionEntidadBean.listadoErroresImportacion}"></ice:outputText>
+
+					<ice:panelGroup style="width:180px;"
+						rendered="#{not empty servicioImportacionEntidadBean.listadoErroresImportacion}">
+						<ice:dataExporter for="tramitesList"
+							label="#{messages.descargarenexcel}" type="excel"
+							popupBlockerLabel="#{messages.bloqueadordeventanas}"
+							clickToCreateFileText="#{messages.descargarenexcel}" />
+					</ice:panelGroup>
+					<ice:dataTable id="tramitesList" title="Errores de Importacion"
+						value="#{servicioImportacionEntidadBean.listadoErroresImportacion}"
+						var="item"
+						rendered="#{not empty servicioImportacionEntidadBean.listadoErroresImportacion}">
+						<ice:column>
+							<f:facet name="header">
+
+								<ice:outputText
+									value="Errores Detectados para #{servicioImportacionEntidadBean.currentFile.fileName} Hoja #{servicioImportacionEntidadBean.sheetListItems[servicioImportacionEntidadBean.selectedSheet[0]].label}">
+								</ice:outputText>
+
+							</f:facet>
+							<ice:outputText value=" #{item}" />
+						</ice:column>
+
+					</ice:dataTable>
+
+				</ice:panelGroup>
+			</ice:panelGrid>
+
+
+		</ice:form>
+
+
+	</ui:define>
+
+</ui:composition>

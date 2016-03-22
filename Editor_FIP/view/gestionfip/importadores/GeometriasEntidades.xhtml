@@ -1,0 +1,223 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.importadores}"
+				view="/gestionfip/importadores/ImportadoresFipNavegacion.xhtml"
+				id="ImportadoresFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.geometriasentidades}"
+				view="/gestionfip/importadores/GeometriasEntidades.xhtml"
+				id="GeometriasEntidadesNavegacionMenu" propagation="none">
+
+			</s:link>
+
+
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+	<ui:define name="body">
+
+		<ice:form id="formularioGeometria">
+
+			<ice:panelGroup styleClass="infoseleccion">
+				<ice:graphicImage styleClass="tooltip_imagen"
+					alt="#{messages.genericos_info}"
+					url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				<ice:outputLabel value="#{messages.infoimportargeometrias}"
+					styleClass="labelseleccioninfo" />
+
+			</ice:panelGroup>
+
+			<ice:panelGroup>
+				<ice:outputLabel value="Trabajando con el nombre de archivo: " />
+				<ice:outputLabel
+					value="#{servicioImportacionGeometrias.nombreFichero}" />
+			</ice:panelGroup>
+
+			<ice:outputText></ice:outputText>
+
+			<ice:panelGrid columns="2" columnClasses="testCol1,testCol2">
+				<ice:panelGroup>
+
+					<ice:panelGroup>
+
+						<ice:panelGrid columns="2" style="vertical-align: top">
+
+							<ice:outputLabel value="Fichero SHP" />
+
+							<ice:panelGroup>
+								<ice:inputFile id="inputFileGeomtriaComponentSHP"
+									autoUpload="true"
+									actionListener="#{servicioImportacionGeometrias.uploadActionListenerSHP}"
+									progressListener="#{servicioImportacionGeometrias.progressListener}"
+									uniqueFolder="true" label="#{messages.genericos_cargar}" />
+
+
+								<ice:panelGroup>
+									<ice:message for="inputFileGeomtriaComponentSHP" />
+								</ice:panelGroup>
+							</ice:panelGroup>
+							<br />
+
+						</ice:panelGrid>
+					</ice:panelGroup>
+
+					<ice:panelGroup>
+
+						<ice:panelGrid columns="2" style="vertical-align: top">
+
+							<ice:outputLabel value="Fichero SHX" />
+
+							<ice:panelGroup>
+								<ice:inputFile id="inputFileGeomtriaComponentSHX"
+									autoUpload="true"
+									actionListener="#{servicioImportacionGeometrias.uploadActionListenerSHX}"
+									progressListener="#{servicioImportacionGeometrias.progressListener}"
+									uniqueFolder="true" label="#{messages.genericos_cargar}" />
+
+
+								<ice:panelGroup>
+									<ice:message for="inputFileGeomtriaComponentSHX" />
+								</ice:panelGroup>
+							</ice:panelGroup>
+							<br />
+
+						</ice:panelGrid>
+					</ice:panelGroup>
+
+					<ice:panelGroup>
+
+						<ice:panelGrid columns="2" style="vertical-align: top">
+
+							<ice:outputLabel value="Fichero DBF" />
+
+							<ice:panelGroup>
+								<ice:inputFile id="inputFileGeomtriaComponentDBF"
+									autoUpload="true"
+									actionListener="#{servicioImportacionGeometrias.uploadActionListenerDBF}"
+									progressListener="#{servicioImportacionGeometrias.progressListener}"
+									uniqueFolder="true" label="#{messages.genericos_cargar}" />
+
+								<ice:outputProgress
+									
+									value="#{servicioImportacionGeometrias.fileProgress}" />
+								<ice:panelGroup>
+									<ice:message for="inputFileGeomtriaComponentDBF" />
+								</ice:panelGroup>
+							</ice:panelGroup>
+							<br />
+
+						</ice:panelGrid>
+					</ice:panelGroup>
+
+					<ice:outputText></ice:outputText>
+
+					<ice:panelGroup>
+						<ice:panelGrid>
+							<ice:commandButton styleClass="boton2"
+								rendered="#{servicioImportacionGeometrias.archivosValidos()}"
+								action="#{servicioImportacionGeometrias.importarGeometria()}"
+								value="#{messages.cargargeometria}"
+								alt="#{messages.cargargeometria}"
+								title="#{messages.boton_title_importadorgeometria_cargarGeometria}" />
+
+						</ice:panelGrid>
+					</ice:panelGroup>
+
+				</ice:panelGroup>
+				<ice:outputText></ice:outputText>
+
+				<ice:panelGrid>
+					<ice:panelGroup>
+						<ice:dataTable id="listaDeterminacionDocumento"
+							value="#{servicioImportacionGeometrias.archivosTemporales}"
+							rendered="#{not empty servicioImportacionGeometrias.archivosTemporales}"
+							var="item">
+
+							<ice:column>
+								<f:facet name="header">
+									<ice:outputText value="#{messages.archivo} " />
+								</f:facet>
+								<ice:outputText value="#{item.archivo}" />
+							</ice:column>
+
+						</ice:dataTable>
+					</ice:panelGroup>
+				</ice:panelGrid>
+
+				<ice:outputText></ice:outputText>
+				<ice:outputText></ice:outputText>
+
+				<ice:panelGroup styleClass="firstChildTitle backBeanChangeContainer">
+
+					<ice:outputText value="#{messages.resultadoimportacionxls}"
+						rendered="#{not empty servicioImportacionGeometrias.listadoErroresImportacion}"></ice:outputText>
+
+					<ice:panelGroup style="width:180px;"
+						rendered="#{not empty servicioImportacionGeometrias.listadoErroresImportacion}">
+
+					</ice:panelGroup>
+					<ice:dataTable id="erroresImportGeometriaList"
+						title="Errores de Importacion"
+						value="#{servicioImportacionGeometrias.listadoErroresImportacion}"
+						var="item"
+						rendered="#{not empty servicioImportacionGeometrias.listadoErroresImportacion}">
+						<ice:column>
+							<f:facet name="header">
+
+								<ice:outputText
+									value="Errores Detectados para #{servicioImportacionGeometrias.currentFile.fileName}">
+								</ice:outputText>
+
+							</f:facet>
+							<ice:outputText value=" #{item}" />
+						</ice:column>
+
+					</ice:dataTable>
+
+				</ice:panelGroup>
+			</ice:panelGrid>
+
+
+		</ice:form>
+
+
+
+	</ui:define>
+
+</ui:composition>

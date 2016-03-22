@@ -1,0 +1,1863 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"   
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+      <ice:panelGroup  id="viewentidadHomePanelGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="viewTextentidadHomeId" value="Entidad"/>
+                  </td>
+              </tr>
+          </table>
+      
+
+
+        <s:decorate id="iden" template="../layout/display.xhtml">
+            <ui:define name="label">Iden</ui:define>
+            #{entidadHome.instance.iden}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="bsuspendida" template="../layout/display.xhtml">
+            <ui:define name="label">Bsuspendida</ui:define>
+            #{entidadHome.instance.bsuspendida}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="clave" template="../layout/display.xhtml">
+            <ui:define name="label">Clave</ui:define>
+            #{entidadHome.instance.clave}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="codigo" template="../layout/display.xhtml">
+            <ui:define name="label">Codigo</ui:define>
+            #{entidadHome.instance.codigo}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="etiqueta" template="../layout/display.xhtml">
+            <ui:define name="label">Etiqueta</ui:define>
+            #{entidadHome.instance.etiqueta}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="nombre" template="../layout/display.xhtml">
+            <ui:define name="label">Nombre</ui:define>
+            #{entidadHome.instance.nombre}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="orden" template="../layout/display.xhtml">
+            <ui:define name="label">Orden</ui:define>
+            #{entidadHome.instance.orden}&#160;
+        </s:decorate>
+
+          <div style="clear:both"/>
+ 
+
+    <div id="viewEntidadEditsearchButtons" class="actionButtons">      
+
+        <s:button view="/seam/EntidadEdit.xhtml" 
+                    id="edit" styleClass="iceCmdBtn"
+                 value="Edit"/>
+
+        <s:button view="/seam/#{empty entidadFrom ? 'EntidadList' : entidadFrom}.xhtml"
+                    id="done" styleClass="iceCmdBtn"
+                 value="Done"/>
+
+    </div>
+  </ice:panelGroup>
+
+
+    <ice:form id="view2entidadHomeFormId">
+       <ice:panelTabSet id="viewentidadHomeTabSetId" 
+                styleClass="componentPanelTabSetLayout" 
+		style="margin-bottom:5px;margin-top:10px;">
+
+   <ice:panelTab label="Ambitoaplicacionambitos">
+    <div class="association" id="viewambitoaplicacionambitosChildrenId">
+        
+        <h:outputText value="There are no ambitoaplicacionambitos associated with this entidad." 
+	                 id="viewambitoaplicacionambitosChildTextId"
+                   rendered="#{empty entidadHome.ambitoaplicacionambitos}"/>
+        
+        <ice:dataTable value="#{entidadHome.ambitoaplicacionambitos}" 
+                       var="ambitoaplicacionambito" 
+                  rendered="#{not empty entidadHome.ambitoaplicacionambitos}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewambitoaplicacionambitosTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{ambitoaplicacionambito.iden}"/>
+            </ice:column>
+            <ice:column id="viewidambitoId">
+                <f:facet name="header">Idambito</f:facet>
+                <h:outputText id="viewidambitoTextId" 
+		           value="#{ambitoaplicacionambito.idambito}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectambitoaplicacionambitoLinkId" 
+                     value="Select" 
+                      view="/seam/Ambitoaplicacionambito.xhtml">
+                    <f:param name="ambitoaplicacionambitoIden" 
+                            value="#{ambitoaplicacionambito.iden}"/>
+                    <f:param name="ambitoaplicacionambitoFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddambitoaplicacionambitoButtonId" 
+               value="Add ambitoaplicacionambito"
+                view="/seam/AmbitoaplicacionambitoEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="ambitoaplicacionambitoFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Ambitoaplicacionambitos_1">
+    <div class="association" id="viewambitoaplicacionambitos_1ChildrenId">
+        
+        <h:outputText value="There are no ambitoaplicacionambitos_1 associated with this entidad." 
+	                 id="viewambitoaplicacionambitos_1ChildTextId"
+                   rendered="#{empty entidadHome.ambitoaplicacionambitos_1}"/>
+        
+        <ice:dataTable value="#{entidadHome.ambitoaplicacionambitos_1}" 
+                       var="ambitoaplicacionambito" 
+                  rendered="#{not empty entidadHome.ambitoaplicacionambitos_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewambitoaplicacionambitos_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{ambitoaplicacionambito.iden}"/>
+            </ice:column>
+            <ice:column id="viewidambitoId">
+                <f:facet name="header">Idambito</f:facet>
+                <h:outputText id="viewidambitoTextId" 
+		           value="#{ambitoaplicacionambito.idambito}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectambitoaplicacionambitoLinkId" 
+                     value="Select" 
+                      view="/seam/Ambitoaplicacionambito.xhtml">
+                    <f:param name="ambitoaplicacionambitoIden" 
+                            value="#{ambitoaplicacionambito.iden}"/>
+                    <f:param name="ambitoaplicacionambitoFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddambitoaplicacionambitoButtonId" 
+               value="Add ambitoaplicacionambito"
+                view="/seam/AmbitoaplicacionambitoEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="ambitoaplicacionambitoFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Conjuntoentidads for identidadconjunto">
+    <div class="association" id="viewconjuntoentidadsForIdentidadconjuntoChildrenId">
+        
+        <h:outputText value="There are no conjuntoentidadsForIdentidadconjunto associated with this entidad." 
+	                 id="viewconjuntoentidadsForIdentidadconjuntoChildTextId"
+                   rendered="#{empty entidadHome.conjuntoentidadsForIdentidadconjunto}"/>
+        
+        <ice:dataTable value="#{entidadHome.conjuntoentidadsForIdentidadconjunto}" 
+                       var="conjuntoentidad" 
+                  rendered="#{not empty entidadHome.conjuntoentidadsForIdentidadconjunto}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewconjuntoentidadsForIdentidadconjuntoTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{conjuntoentidad.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectconjuntoentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Conjuntoentidad.xhtml">
+                    <f:param name="conjuntoentidadIden" 
+                            value="#{conjuntoentidad.iden}"/>
+                    <f:param name="conjuntoentidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddconjuntoentidadButtonId" 
+               value="Add conjuntoentidad"
+                view="/seam/ConjuntoentidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="conjuntoentidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Conjuntoentidads for identidadconjunto_1">
+    <div class="association" id="viewconjuntoentidadsForIdentidadconjunto_1ChildrenId">
+        
+        <h:outputText value="There are no conjuntoentidadsForIdentidadconjunto_1 associated with this entidad." 
+	                 id="viewconjuntoentidadsForIdentidadconjunto_1ChildTextId"
+                   rendered="#{empty entidadHome.conjuntoentidadsForIdentidadconjunto_1}"/>
+        
+        <ice:dataTable value="#{entidadHome.conjuntoentidadsForIdentidadconjunto_1}" 
+                       var="conjuntoentidad" 
+                  rendered="#{not empty entidadHome.conjuntoentidadsForIdentidadconjunto_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewconjuntoentidadsForIdentidadconjunto_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{conjuntoentidad.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectconjuntoentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Conjuntoentidad.xhtml">
+                    <f:param name="conjuntoentidadIden" 
+                            value="#{conjuntoentidad.iden}"/>
+                    <f:param name="conjuntoentidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddconjuntoentidadButtonId" 
+               value="Add conjuntoentidad"
+                view="/seam/ConjuntoentidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="conjuntoentidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Conjuntoentidads for identidadmiembro">
+    <div class="association" id="viewconjuntoentidadsForIdentidadmiembroChildrenId">
+        
+        <h:outputText value="There are no conjuntoentidadsForIdentidadmiembro associated with this entidad." 
+	                 id="viewconjuntoentidadsForIdentidadmiembroChildTextId"
+                   rendered="#{empty entidadHome.conjuntoentidadsForIdentidadmiembro}"/>
+        
+        <ice:dataTable value="#{entidadHome.conjuntoentidadsForIdentidadmiembro}" 
+                       var="conjuntoentidad" 
+                  rendered="#{not empty entidadHome.conjuntoentidadsForIdentidadmiembro}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewconjuntoentidadsForIdentidadmiembroTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{conjuntoentidad.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectconjuntoentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Conjuntoentidad.xhtml">
+                    <f:param name="conjuntoentidadIden" 
+                            value="#{conjuntoentidad.iden}"/>
+                    <f:param name="conjuntoentidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddconjuntoentidadButtonId" 
+               value="Add conjuntoentidad"
+                view="/seam/ConjuntoentidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="conjuntoentidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Conjuntoentidads for identidadmiembro_1">
+    <div class="association" id="viewconjuntoentidadsForIdentidadmiembro_1ChildrenId">
+        
+        <h:outputText value="There are no conjuntoentidadsForIdentidadmiembro_1 associated with this entidad." 
+	                 id="viewconjuntoentidadsForIdentidadmiembro_1ChildTextId"
+                   rendered="#{empty entidadHome.conjuntoentidadsForIdentidadmiembro_1}"/>
+        
+        <ice:dataTable value="#{entidadHome.conjuntoentidadsForIdentidadmiembro_1}" 
+                       var="conjuntoentidad" 
+                  rendered="#{not empty entidadHome.conjuntoentidadsForIdentidadmiembro_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewconjuntoentidadsForIdentidadmiembro_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{conjuntoentidad.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectconjuntoentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Conjuntoentidad.xhtml">
+                    <f:param name="conjuntoentidadIden" 
+                            value="#{conjuntoentidad.iden}"/>
+                    <f:param name="conjuntoentidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddconjuntoentidadButtonId" 
+               value="Add conjuntoentidad"
+                view="/seam/ConjuntoentidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="conjuntoentidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Documentoentidads">
+    <div class="association" id="viewdocumentoentidadsChildrenId">
+        
+        <h:outputText value="There are no documentoentidads associated with this entidad." 
+	                 id="viewdocumentoentidadsChildTextId"
+                   rendered="#{empty entidadHome.documentoentidads}"/>
+        
+        <ice:dataTable value="#{entidadHome.documentoentidads}" 
+                       var="documentoentidad" 
+                  rendered="#{not empty entidadHome.documentoentidads}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdocumentoentidadsTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{documentoentidad.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdocumentoentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Documentoentidad.xhtml">
+                    <f:param name="documentoentidadIden" 
+                            value="#{documentoentidad.iden}"/>
+                    <f:param name="documentoentidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddocumentoentidadButtonId" 
+               value="Add documentoentidad"
+                view="/seam/DocumentoentidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="documentoentidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Documentoentidads_1">
+    <div class="association" id="viewdocumentoentidads_1ChildrenId">
+        
+        <h:outputText value="There are no documentoentidads_1 associated with this entidad." 
+	                 id="viewdocumentoentidads_1ChildTextId"
+                   rendered="#{empty entidadHome.documentoentidads_1}"/>
+        
+        <ice:dataTable value="#{entidadHome.documentoentidads_1}" 
+                       var="documentoentidad" 
+                  rendered="#{not empty entidadHome.documentoentidads_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdocumentoentidads_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{documentoentidad.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdocumentoentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Documentoentidad.xhtml">
+                    <f:param name="documentoentidadIden" 
+                            value="#{documentoentidad.iden}"/>
+                    <f:param name="documentoentidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddocumentoentidadButtonId" 
+               value="Add documentoentidad"
+                view="/seam/DocumentoentidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="documentoentidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+	<ice:panelTab id="viewentidadByIdentidadbasepanelTab" label="Entidad by identidadbase">
+   		<div class="association" id="entidadByIdentidadbaseParent">
+        
+       		 <h:outputText value="There is no entidadByIdentidadbase associated with this entidad." 
+		                  id="viewentidadByIdentidadbaseTextId"
+                   rendered="#{entidadHome.instance.entidadByIdentidadbase == null}"/>
+   
+        	<ice:dataTable  var="entidad" 
+                   value="#{entidadHome.instance.entidadByIdentidadbase}" 
+                rendered="#{entidadHome.instance.entidadByIdentidadbase != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+	        columnClasses="allCols"
+                      id="viewentidadByIdentidadbaseTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{entidad.iden}
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                #{entidad.bsuspendida}
+            </ice:column>
+            <ice:column id="viewclaveId">
+                <f:facet name="header">Clave</f:facet>
+                #{entidad.clave}
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                #{entidad.codigo}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Entidad by identidadbase iden</f:facet>
+		    	#{entidad.entidadByIdentidadbase.iden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Entidad by identidadoriginal iden</f:facet>
+		    	#{entidad.entidadByIdentidadoriginal.iden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Entidad by idpadre iden</f:facet>
+		    	#{entidad.entidadByIdpadre.iden}
+            </ice:column>
+            <ice:column id="viewetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                #{entidad.etiqueta}
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{entidad.nombre}
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{entidad.orden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Tramite iden</f:facet>
+		    	#{entidad.tramite.iden}
+            </ice:column>
+            <ice:column id="viewentidadColumnId">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewentidadLinkId" 
+                     value="View" 
+                      view="/seam/Entidad.xhtml">
+                    <f:param name="entidadIden" 
+                           value="#{entidad.iden}"/>
+                </s:link>
+            </ice:column>
+       </ice:dataTable>
+       
+    </div>
+    </ice:panelTab>
+
+	<ice:panelTab id="viewentidadByIdentidadoriginalpanelTab" label="Entidad by identidadoriginal">
+   		<div class="association" id="entidadByIdentidadoriginalParent">
+        
+       		 <h:outputText value="There is no entidadByIdentidadoriginal associated with this entidad." 
+		                  id="viewentidadByIdentidadoriginalTextId"
+                   rendered="#{entidadHome.instance.entidadByIdentidadoriginal == null}"/>
+   
+        	<ice:dataTable  var="entidad" 
+                   value="#{entidadHome.instance.entidadByIdentidadoriginal}" 
+                rendered="#{entidadHome.instance.entidadByIdentidadoriginal != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+	        columnClasses="allCols"
+                      id="viewentidadByIdentidadoriginalTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{entidad.iden}
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                #{entidad.bsuspendida}
+            </ice:column>
+            <ice:column id="viewclaveId">
+                <f:facet name="header">Clave</f:facet>
+                #{entidad.clave}
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                #{entidad.codigo}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Entidad by identidadbase iden</f:facet>
+		    	#{entidad.entidadByIdentidadbase.iden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Entidad by identidadoriginal iden</f:facet>
+		    	#{entidad.entidadByIdentidadoriginal.iden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Entidad by idpadre iden</f:facet>
+		    	#{entidad.entidadByIdpadre.iden}
+            </ice:column>
+            <ice:column id="viewetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                #{entidad.etiqueta}
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{entidad.nombre}
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{entidad.orden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Tramite iden</f:facet>
+		    	#{entidad.tramite.iden}
+            </ice:column>
+            <ice:column id="viewentidadColumnId">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewentidadLinkId" 
+                     value="View" 
+                      view="/seam/Entidad.xhtml">
+                    <f:param name="entidadIden" 
+                           value="#{entidad.iden}"/>
+                </s:link>
+            </ice:column>
+       </ice:dataTable>
+       
+    </div>
+    </ice:panelTab>
+
+	<ice:panelTab id="viewentidadByIdpadrepanelTab" label="Entidad by idpadre">
+   		<div class="association" id="entidadByIdpadreParent">
+        
+       		 <h:outputText value="There is no entidadByIdpadre associated with this entidad." 
+		                  id="viewentidadByIdpadreTextId"
+                   rendered="#{entidadHome.instance.entidadByIdpadre == null}"/>
+   
+        	<ice:dataTable  var="entidad" 
+                   value="#{entidadHome.instance.entidadByIdpadre}" 
+                rendered="#{entidadHome.instance.entidadByIdpadre != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+	        columnClasses="allCols"
+                      id="viewentidadByIdpadreTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{entidad.iden}
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                #{entidad.bsuspendida}
+            </ice:column>
+            <ice:column id="viewclaveId">
+                <f:facet name="header">Clave</f:facet>
+                #{entidad.clave}
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                #{entidad.codigo}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Entidad by identidadbase iden</f:facet>
+		    	#{entidad.entidadByIdentidadbase.iden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Entidad by identidadoriginal iden</f:facet>
+		    	#{entidad.entidadByIdentidadoriginal.iden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Entidad by idpadre iden</f:facet>
+		    	#{entidad.entidadByIdpadre.iden}
+            </ice:column>
+            <ice:column id="viewetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                #{entidad.etiqueta}
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{entidad.nombre}
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{entidad.orden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Tramite iden</f:facet>
+		    	#{entidad.tramite.iden}
+            </ice:column>
+            <ice:column id="viewentidadColumnId">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewentidadLinkId" 
+                     value="View" 
+                      view="/seam/Entidad.xhtml">
+                    <f:param name="entidadIden" 
+                           value="#{entidad.iden}"/>
+                </s:link>
+            </ice:column>
+       </ice:dataTable>
+       
+    </div>
+    </ice:panelTab>
+
+   <ice:panelTab label="Entidaddeterminacions">
+    <div class="association" id="viewentidaddeterminacionsChildrenId">
+        
+        <h:outputText value="There are no entidaddeterminacions associated with this entidad." 
+	                 id="viewentidaddeterminacionsChildTextId"
+                   rendered="#{empty entidadHome.entidaddeterminacions}"/>
+        
+        <ice:dataTable value="#{entidadHome.entidaddeterminacions}" 
+                       var="entidaddeterminacion" 
+                  rendered="#{not empty entidadHome.entidaddeterminacions}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidaddeterminacionsTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidaddeterminacion.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidaddeterminacionLinkId" 
+                     value="Select" 
+                      view="/seam/Entidaddeterminacion.xhtml">
+                    <f:param name="entidaddeterminacionIden" 
+                            value="#{entidaddeterminacion.iden}"/>
+                    <f:param name="entidaddeterminacionFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidaddeterminacionButtonId" 
+               value="Add entidaddeterminacion"
+                view="/seam/EntidaddeterminacionEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="entidaddeterminacionFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Entidaddeterminacions_1">
+    <div class="association" id="viewentidaddeterminacions_1ChildrenId">
+        
+        <h:outputText value="There are no entidaddeterminacions_1 associated with this entidad." 
+	                 id="viewentidaddeterminacions_1ChildTextId"
+                   rendered="#{empty entidadHome.entidaddeterminacions_1}"/>
+        
+        <ice:dataTable value="#{entidadHome.entidaddeterminacions_1}" 
+                       var="entidaddeterminacion" 
+                  rendered="#{not empty entidadHome.entidaddeterminacions_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidaddeterminacions_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidaddeterminacion.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidaddeterminacionLinkId" 
+                     value="Select" 
+                      view="/seam/Entidaddeterminacion.xhtml">
+                    <f:param name="entidaddeterminacionIden" 
+                            value="#{entidaddeterminacion.iden}"/>
+                    <f:param name="entidaddeterminacionFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidaddeterminacionButtonId" 
+               value="Add entidaddeterminacion"
+                view="/seam/EntidaddeterminacionEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="entidaddeterminacionFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Entidadlins">
+    <div class="association" id="viewentidadlinsChildrenId">
+        
+        <h:outputText value="There are no entidadlins associated with this entidad." 
+	                 id="viewentidadlinsChildTextId"
+                   rendered="#{empty entidadHome.entidadlins}"/>
+        
+        <ice:dataTable value="#{entidadHome.entidadlins}" 
+                       var="entidadlin" 
+                  rendered="#{not empty entidadHome.entidadlins}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidadlinsTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidadlin.iden}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{entidadlin.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewgeomId">
+                <f:facet name="header">Geom</f:facet>
+                <h:outputText id="viewgeomTextId" 
+		           value="#{entidadlin.geom}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidadlinLinkId" 
+                     value="Select" 
+                      view="/seam/Entidadlin.xhtml">
+                    <f:param name="entidadlinIden" 
+                            value="#{entidadlin.iden}"/>
+                    <f:param name="entidadlinFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidadlinButtonId" 
+               value="Add entidadlin"
+                view="/seam/EntidadlinEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="entidadlinFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Entidadlins_1">
+    <div class="association" id="viewentidadlins_1ChildrenId">
+        
+        <h:outputText value="There are no entidadlins_1 associated with this entidad." 
+	                 id="viewentidadlins_1ChildTextId"
+                   rendered="#{empty entidadHome.entidadlins_1}"/>
+        
+        <ice:dataTable value="#{entidadHome.entidadlins_1}" 
+                       var="entidadlin" 
+                  rendered="#{not empty entidadHome.entidadlins_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidadlins_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidadlin.iden}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{entidadlin.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewgeomId">
+                <f:facet name="header">Geom</f:facet>
+                <h:outputText id="viewgeomTextId" 
+		           value="#{entidadlin.geom}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidadlinLinkId" 
+                     value="Select" 
+                      view="/seam/Entidadlin.xhtml">
+                    <f:param name="entidadlinIden" 
+                            value="#{entidadlin.iden}"/>
+                    <f:param name="entidadlinFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidadlinButtonId" 
+               value="Add entidadlin"
+                view="/seam/EntidadlinEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="entidadlinFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Entidadpnts">
+    <div class="association" id="viewentidadpntsChildrenId">
+        
+        <h:outputText value="There are no entidadpnts associated with this entidad." 
+	                 id="viewentidadpntsChildTextId"
+                   rendered="#{empty entidadHome.entidadpnts}"/>
+        
+        <ice:dataTable value="#{entidadHome.entidadpnts}" 
+                       var="entidadpnt" 
+                  rendered="#{not empty entidadHome.entidadpnts}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidadpntsTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidadpnt.iden}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{entidadpnt.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewgeomId">
+                <f:facet name="header">Geom</f:facet>
+                <h:outputText id="viewgeomTextId" 
+		           value="#{entidadpnt.geom}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidadpntLinkId" 
+                     value="Select" 
+                      view="/seam/Entidadpnt.xhtml">
+                    <f:param name="entidadpntIden" 
+                            value="#{entidadpnt.iden}"/>
+                    <f:param name="entidadpntFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidadpntButtonId" 
+               value="Add entidadpnt"
+                view="/seam/EntidadpntEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="entidadpntFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Entidadpnts_1">
+    <div class="association" id="viewentidadpnts_1ChildrenId">
+        
+        <h:outputText value="There are no entidadpnts_1 associated with this entidad." 
+	                 id="viewentidadpnts_1ChildTextId"
+                   rendered="#{empty entidadHome.entidadpnts_1}"/>
+        
+        <ice:dataTable value="#{entidadHome.entidadpnts_1}" 
+                       var="entidadpnt" 
+                  rendered="#{not empty entidadHome.entidadpnts_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidadpnts_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidadpnt.iden}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{entidadpnt.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewgeomId">
+                <f:facet name="header">Geom</f:facet>
+                <h:outputText id="viewgeomTextId" 
+		           value="#{entidadpnt.geom}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidadpntLinkId" 
+                     value="Select" 
+                      view="/seam/Entidadpnt.xhtml">
+                    <f:param name="entidadpntIden" 
+                            value="#{entidadpnt.iden}"/>
+                    <f:param name="entidadpntFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidadpntButtonId" 
+               value="Add entidadpnt"
+                view="/seam/EntidadpntEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="entidadpntFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Entidadpols">
+    <div class="association" id="viewentidadpolsChildrenId">
+        
+        <h:outputText value="There are no entidadpols associated with this entidad." 
+	                 id="viewentidadpolsChildTextId"
+                   rendered="#{empty entidadHome.entidadpols}"/>
+        
+        <ice:dataTable value="#{entidadHome.entidadpols}" 
+                       var="entidadpol" 
+                  rendered="#{not empty entidadHome.entidadpols}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidadpolsTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidadpol.iden}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{entidadpol.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewgeomId">
+                <f:facet name="header">Geom</f:facet>
+                <h:outputText id="viewgeomTextId" 
+		           value="#{entidadpol.geom}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidadpolLinkId" 
+                     value="Select" 
+                      view="/seam/Entidadpol.xhtml">
+                    <f:param name="entidadpolIden" 
+                            value="#{entidadpol.iden}"/>
+                    <f:param name="entidadpolFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidadpolButtonId" 
+               value="Add entidadpol"
+                view="/seam/EntidadpolEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="entidadpolFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Entidadpols_1">
+    <div class="association" id="viewentidadpols_1ChildrenId">
+        
+        <h:outputText value="There are no entidadpols_1 associated with this entidad." 
+	                 id="viewentidadpols_1ChildTextId"
+                   rendered="#{empty entidadHome.entidadpols_1}"/>
+        
+        <ice:dataTable value="#{entidadHome.entidadpols_1}" 
+                       var="entidadpol" 
+                  rendered="#{not empty entidadHome.entidadpols_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidadpols_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidadpol.iden}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{entidadpol.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewgeomId">
+                <f:facet name="header">Geom</f:facet>
+                <h:outputText id="viewgeomTextId" 
+		           value="#{entidadpol.geom}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidadpolLinkId" 
+                     value="Select" 
+                      view="/seam/Entidadpol.xhtml">
+                    <f:param name="entidadpolIden" 
+                            value="#{entidadpol.iden}"/>
+                    <f:param name="entidadpolFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidadpolButtonId" 
+               value="Add entidadpol"
+                view="/seam/EntidadpolEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="entidadpolFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Entidads for identidadbase">
+    <div class="association" id="viewentidadsForIdentidadbaseChildrenId">
+        
+        <h:outputText value="There are no entidadsForIdentidadbase associated with this entidad." 
+	                 id="viewentidadsForIdentidadbaseChildTextId"
+                   rendered="#{empty entidadHome.entidadsForIdentidadbase}"/>
+        
+        <ice:dataTable value="#{entidadHome.entidadsForIdentidadbase}" 
+                       var="entidad" 
+                  rendered="#{not empty entidadHome.entidadsForIdentidadbase}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidadsForIdentidadbaseTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidad.iden}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{entidad.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewclaveId">
+                <f:facet name="header">Clave</f:facet>
+                <h:outputText id="viewclaveTextId" 
+		           value="#{entidad.clave}"/>
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                <h:outputText id="viewcodigoTextId" 
+		           value="#{entidad.codigo}"/>
+            </ice:column>
+            <ice:column id="viewetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                <h:outputText id="viewetiquetaTextId" 
+		           value="#{entidad.etiqueta}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{entidad.nombre}"/>
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                <h:outputText id="viewordenTextId" 
+		           value="#{entidad.orden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Entidad.xhtml">
+                    <f:param name="entidadIden" 
+                            value="#{entidad.iden}"/>
+                    <f:param name="entidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidadButtonId" 
+               value="Add entidad"
+                view="/seam/EntidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="entidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Entidads for identidadbase_1">
+    <div class="association" id="viewentidadsForIdentidadbase_1ChildrenId">
+        
+        <h:outputText value="There are no entidadsForIdentidadbase_1 associated with this entidad." 
+	                 id="viewentidadsForIdentidadbase_1ChildTextId"
+                   rendered="#{empty entidadHome.entidadsForIdentidadbase_1}"/>
+        
+        <ice:dataTable value="#{entidadHome.entidadsForIdentidadbase_1}" 
+                       var="entidad" 
+                  rendered="#{not empty entidadHome.entidadsForIdentidadbase_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidadsForIdentidadbase_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidad.iden}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{entidad.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewclaveId">
+                <f:facet name="header">Clave</f:facet>
+                <h:outputText id="viewclaveTextId" 
+		           value="#{entidad.clave}"/>
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                <h:outputText id="viewcodigoTextId" 
+		           value="#{entidad.codigo}"/>
+            </ice:column>
+            <ice:column id="viewetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                <h:outputText id="viewetiquetaTextId" 
+		           value="#{entidad.etiqueta}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{entidad.nombre}"/>
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                <h:outputText id="viewordenTextId" 
+		           value="#{entidad.orden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Entidad.xhtml">
+                    <f:param name="entidadIden" 
+                            value="#{entidad.iden}"/>
+                    <f:param name="entidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidadButtonId" 
+               value="Add entidad"
+                view="/seam/EntidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="entidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Entidads for identidadoriginal">
+    <div class="association" id="viewentidadsForIdentidadoriginalChildrenId">
+        
+        <h:outputText value="There are no entidadsForIdentidadoriginal associated with this entidad." 
+	                 id="viewentidadsForIdentidadoriginalChildTextId"
+                   rendered="#{empty entidadHome.entidadsForIdentidadoriginal}"/>
+        
+        <ice:dataTable value="#{entidadHome.entidadsForIdentidadoriginal}" 
+                       var="entidad" 
+                  rendered="#{not empty entidadHome.entidadsForIdentidadoriginal}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidadsForIdentidadoriginalTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidad.iden}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{entidad.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewclaveId">
+                <f:facet name="header">Clave</f:facet>
+                <h:outputText id="viewclaveTextId" 
+		           value="#{entidad.clave}"/>
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                <h:outputText id="viewcodigoTextId" 
+		           value="#{entidad.codigo}"/>
+            </ice:column>
+            <ice:column id="viewetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                <h:outputText id="viewetiquetaTextId" 
+		           value="#{entidad.etiqueta}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{entidad.nombre}"/>
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                <h:outputText id="viewordenTextId" 
+		           value="#{entidad.orden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Entidad.xhtml">
+                    <f:param name="entidadIden" 
+                            value="#{entidad.iden}"/>
+                    <f:param name="entidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidadButtonId" 
+               value="Add entidad"
+                view="/seam/EntidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="entidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Entidads for identidadoriginal_1">
+    <div class="association" id="viewentidadsForIdentidadoriginal_1ChildrenId">
+        
+        <h:outputText value="There are no entidadsForIdentidadoriginal_1 associated with this entidad." 
+	                 id="viewentidadsForIdentidadoriginal_1ChildTextId"
+                   rendered="#{empty entidadHome.entidadsForIdentidadoriginal_1}"/>
+        
+        <ice:dataTable value="#{entidadHome.entidadsForIdentidadoriginal_1}" 
+                       var="entidad" 
+                  rendered="#{not empty entidadHome.entidadsForIdentidadoriginal_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidadsForIdentidadoriginal_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidad.iden}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{entidad.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewclaveId">
+                <f:facet name="header">Clave</f:facet>
+                <h:outputText id="viewclaveTextId" 
+		           value="#{entidad.clave}"/>
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                <h:outputText id="viewcodigoTextId" 
+		           value="#{entidad.codigo}"/>
+            </ice:column>
+            <ice:column id="viewetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                <h:outputText id="viewetiquetaTextId" 
+		           value="#{entidad.etiqueta}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{entidad.nombre}"/>
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                <h:outputText id="viewordenTextId" 
+		           value="#{entidad.orden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Entidad.xhtml">
+                    <f:param name="entidadIden" 
+                            value="#{entidad.iden}"/>
+                    <f:param name="entidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidadButtonId" 
+               value="Add entidad"
+                view="/seam/EntidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="entidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Entidads for idpadre">
+    <div class="association" id="viewentidadsForIdpadreChildrenId">
+        
+        <h:outputText value="There are no entidadsForIdpadre associated with this entidad." 
+	                 id="viewentidadsForIdpadreChildTextId"
+                   rendered="#{empty entidadHome.entidadsForIdpadre}"/>
+        
+        <ice:dataTable value="#{entidadHome.entidadsForIdpadre}" 
+                       var="entidad" 
+                  rendered="#{not empty entidadHome.entidadsForIdpadre}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidadsForIdpadreTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidad.iden}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{entidad.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewclaveId">
+                <f:facet name="header">Clave</f:facet>
+                <h:outputText id="viewclaveTextId" 
+		           value="#{entidad.clave}"/>
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                <h:outputText id="viewcodigoTextId" 
+		           value="#{entidad.codigo}"/>
+            </ice:column>
+            <ice:column id="viewetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                <h:outputText id="viewetiquetaTextId" 
+		           value="#{entidad.etiqueta}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{entidad.nombre}"/>
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                <h:outputText id="viewordenTextId" 
+		           value="#{entidad.orden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Entidad.xhtml">
+                    <f:param name="entidadIden" 
+                            value="#{entidad.iden}"/>
+                    <f:param name="entidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidadButtonId" 
+               value="Add entidad"
+                view="/seam/EntidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="entidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Entidads for idpadre_1">
+    <div class="association" id="viewentidadsForIdpadre_1ChildrenId">
+        
+        <h:outputText value="There are no entidadsForIdpadre_1 associated with this entidad." 
+	                 id="viewentidadsForIdpadre_1ChildTextId"
+                   rendered="#{empty entidadHome.entidadsForIdpadre_1}"/>
+        
+        <ice:dataTable value="#{entidadHome.entidadsForIdpadre_1}" 
+                       var="entidad" 
+                  rendered="#{not empty entidadHome.entidadsForIdpadre_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewentidadsForIdpadre_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{entidad.iden}"/>
+            </ice:column>
+            <ice:column id="viewbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                <h:outputText id="viewbsuspendidaTextId" 
+		           value="#{entidad.bsuspendida}"/>
+            </ice:column>
+            <ice:column id="viewclaveId">
+                <f:facet name="header">Clave</f:facet>
+                <h:outputText id="viewclaveTextId" 
+		           value="#{entidad.clave}"/>
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                <h:outputText id="viewcodigoTextId" 
+		           value="#{entidad.codigo}"/>
+            </ice:column>
+            <ice:column id="viewetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                <h:outputText id="viewetiquetaTextId" 
+		           value="#{entidad.etiqueta}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{entidad.nombre}"/>
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                <h:outputText id="viewordenTextId" 
+		           value="#{entidad.orden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Entidad.xhtml">
+                    <f:param name="entidadIden" 
+                            value="#{entidad.iden}"/>
+                    <f:param name="entidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddentidadButtonId" 
+               value="Add entidad"
+                view="/seam/EntidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="entidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Operacionentidads for identidad">
+    <div class="association" id="viewoperacionentidadsForIdentidadChildrenId">
+        
+        <h:outputText value="There are no operacionentidadsForIdentidad associated with this entidad." 
+	                 id="viewoperacionentidadsForIdentidadChildTextId"
+                   rendered="#{empty entidadHome.operacionentidadsForIdentidad}"/>
+        
+        <ice:dataTable value="#{entidadHome.operacionentidadsForIdentidad}" 
+                       var="operacionentidad" 
+                  rendered="#{not empty entidadHome.operacionentidadsForIdentidad}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewoperacionentidadsForIdentidadTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{operacionentidad.iden}"/>
+            </ice:column>
+            <ice:column id="viewidtipooperacionentId">
+                <f:facet name="header">Idtipooperacionent</f:facet>
+                <h:outputText id="viewidtipooperacionentTextId" 
+		           value="#{operacionentidad.idtipooperacionent}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectoperacionentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Operacionentidad.xhtml">
+                    <f:param name="operacionentidadIden" 
+                            value="#{operacionentidad.iden}"/>
+                    <f:param name="operacionentidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddoperacionentidadButtonId" 
+               value="Add operacionentidad"
+                view="/seam/OperacionentidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="operacionentidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Operacionentidads for identidad_1">
+    <div class="association" id="viewoperacionentidadsForIdentidad_1ChildrenId">
+        
+        <h:outputText value="There are no operacionentidadsForIdentidad_1 associated with this entidad." 
+	                 id="viewoperacionentidadsForIdentidad_1ChildTextId"
+                   rendered="#{empty entidadHome.operacionentidadsForIdentidad_1}"/>
+        
+        <ice:dataTable value="#{entidadHome.operacionentidadsForIdentidad_1}" 
+                       var="operacionentidad" 
+                  rendered="#{not empty entidadHome.operacionentidadsForIdentidad_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewoperacionentidadsForIdentidad_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{operacionentidad.iden}"/>
+            </ice:column>
+            <ice:column id="viewidtipooperacionentId">
+                <f:facet name="header">Idtipooperacionent</f:facet>
+                <h:outputText id="viewidtipooperacionentTextId" 
+		           value="#{operacionentidad.idtipooperacionent}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectoperacionentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Operacionentidad.xhtml">
+                    <f:param name="operacionentidadIden" 
+                            value="#{operacionentidad.iden}"/>
+                    <f:param name="operacionentidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddoperacionentidadButtonId" 
+               value="Add operacionentidad"
+                view="/seam/OperacionentidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="operacionentidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Operacionentidads for identidadoperadora">
+    <div class="association" id="viewoperacionentidadsForIdentidadoperadoraChildrenId">
+        
+        <h:outputText value="There are no operacionentidadsForIdentidadoperadora associated with this entidad." 
+	                 id="viewoperacionentidadsForIdentidadoperadoraChildTextId"
+                   rendered="#{empty entidadHome.operacionentidadsForIdentidadoperadora}"/>
+        
+        <ice:dataTable value="#{entidadHome.operacionentidadsForIdentidadoperadora}" 
+                       var="operacionentidad" 
+                  rendered="#{not empty entidadHome.operacionentidadsForIdentidadoperadora}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewoperacionentidadsForIdentidadoperadoraTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{operacionentidad.iden}"/>
+            </ice:column>
+            <ice:column id="viewidtipooperacionentId">
+                <f:facet name="header">Idtipooperacionent</f:facet>
+                <h:outputText id="viewidtipooperacionentTextId" 
+		           value="#{operacionentidad.idtipooperacionent}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectoperacionentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Operacionentidad.xhtml">
+                    <f:param name="operacionentidadIden" 
+                            value="#{operacionentidad.iden}"/>
+                    <f:param name="operacionentidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddoperacionentidadButtonId" 
+               value="Add operacionentidad"
+                view="/seam/OperacionentidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="operacionentidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Operacionentidads for identidadoperadora_1">
+    <div class="association" id="viewoperacionentidadsForIdentidadoperadora_1ChildrenId">
+        
+        <h:outputText value="There are no operacionentidadsForIdentidadoperadora_1 associated with this entidad." 
+	                 id="viewoperacionentidadsForIdentidadoperadora_1ChildTextId"
+                   rendered="#{empty entidadHome.operacionentidadsForIdentidadoperadora_1}"/>
+        
+        <ice:dataTable value="#{entidadHome.operacionentidadsForIdentidadoperadora_1}" 
+                       var="operacionentidad" 
+                  rendered="#{not empty entidadHome.operacionentidadsForIdentidadoperadora_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewoperacionentidadsForIdentidadoperadora_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{operacionentidad.iden}"/>
+            </ice:column>
+            <ice:column id="viewidtipooperacionentId">
+                <f:facet name="header">Idtipooperacionent</f:facet>
+                <h:outputText id="viewidtipooperacionentTextId" 
+		           value="#{operacionentidad.idtipooperacionent}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectoperacionentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Operacionentidad.xhtml">
+                    <f:param name="operacionentidadIden" 
+                            value="#{operacionentidad.iden}"/>
+                    <f:param name="operacionentidadFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddoperacionentidadButtonId" 
+               value="Add operacionentidad"
+                view="/seam/OperacionentidadEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="operacionentidadFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Planentidadordenacions">
+    <div class="association" id="viewplanentidadordenacionsChildrenId">
+        
+        <h:outputText value="There are no planentidadordenacions associated with this entidad." 
+	                 id="viewplanentidadordenacionsChildTextId"
+                   rendered="#{empty entidadHome.planentidadordenacions}"/>
+        
+        <ice:dataTable value="#{entidadHome.planentidadordenacions}" 
+                       var="planentidadordenacion" 
+                  rendered="#{not empty entidadHome.planentidadordenacions}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewplanentidadordenacionsTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{planentidadordenacion.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectplanentidadordenacionLinkId" 
+                     value="Select" 
+                      view="/seam/Planentidadordenacion.xhtml">
+                    <f:param name="planentidadordenacionIden" 
+                            value="#{planentidadordenacion.iden}"/>
+                    <f:param name="planentidadordenacionFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddplanentidadordenacionButtonId" 
+               value="Add planentidadordenacion"
+                view="/seam/PlanentidadordenacionEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="planentidadordenacionFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Planentidadordenacions_1">
+    <div class="association" id="viewplanentidadordenacions_1ChildrenId">
+        
+        <h:outputText value="There are no planentidadordenacions_1 associated with this entidad." 
+	                 id="viewplanentidadordenacions_1ChildTextId"
+                   rendered="#{empty entidadHome.planentidadordenacions_1}"/>
+        
+        <ice:dataTable value="#{entidadHome.planentidadordenacions_1}" 
+                       var="planentidadordenacion" 
+                  rendered="#{not empty entidadHome.planentidadordenacions_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewplanentidadordenacions_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{planentidadordenacion.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectplanentidadordenacionLinkId" 
+                     value="Select" 
+                      view="/seam/Planentidadordenacion.xhtml">
+                    <f:param name="planentidadordenacionIden" 
+                            value="#{planentidadordenacion.iden}"/>
+                    <f:param name="planentidadordenacionFrom" value="Entidad"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddplanentidadordenacionButtonId" 
+               value="Add planentidadordenacion"
+                view="/seam/PlanentidadordenacionEdit.xhtml">
+            <f:param name="entidadIden" 
+                    value="#{entidadHome.instance.iden}"/>
+            <f:param name="planentidadordenacionFrom" value="Entidad"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+	<ice:panelTab id="viewtramitepanelTab" label="Tramite">
+   		<div class="association" id="tramiteParent">
+        
+       		 <h:outputText value="There is no tramite associated with this entidad." 
+		                  id="viewtramiteTextId"
+                   rendered="#{entidadHome.instance.tramite == null}"/>
+   
+        	<ice:dataTable  var="tramite" 
+                   value="#{entidadHome.instance.tramite}" 
+                rendered="#{entidadHome.instance.tramite != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+	        columnClasses="allCols"
+                      id="viewtramiteTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{tramite.iden}
+            </ice:column>
+            <ice:column id="viewcodigofipId">
+                <f:facet name="header">Codigofip</f:facet>
+                #{tramite.codigofip}
+            </ice:column>
+            <ice:column id="viewcomentarioId">
+                <f:facet name="header">Comentario</f:facet>
+                #{tramite.comentario}
+            </ice:column>
+            <ice:column id="viewfechaId">
+                <f:facet name="header">Fecha</f:facet>
+                #{tramite.fecha}
+            </ice:column>
+            <ice:column id="viewfechaconsolidacionId">
+                <f:facet name="header">Fechaconsolidacion</f:facet>
+                #{tramite.fechaconsolidacion}
+            </ice:column>
+            <ice:column id="viewidcentroproduccionId">
+                <f:facet name="header">Idcentroproduccion</f:facet>
+                #{tramite.idcentroproduccion}
+            </ice:column>
+            <ice:column id="viewidorganoId">
+                <f:facet name="header">Idorgano</f:facet>
+                #{tramite.idorgano}
+            </ice:column>
+            <ice:column id="viewidsentidoId">
+                <f:facet name="header">Idsentido</f:facet>
+                #{tramite.idsentido}
+            </ice:column>
+            <ice:column id="viewidtipotramiteId">
+                <f:facet name="header">Idtipotramite</f:facet>
+                #{tramite.idtipotramite}
+            </ice:column>
+            <ice:column id="viewiteracionId">
+                <f:facet name="header">Iteracion</f:facet>
+                #{tramite.iteracion}
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{tramite.nombre}
+            </ice:column>
+            <ice:column id="viewnumeroacuerdoId">
+                <f:facet name="header">Numeroacuerdo</f:facet>
+                #{tramite.numeroacuerdo}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Plan iden</f:facet>
+		    	#{tramite.plan.iden}
+            </ice:column>
+            <ice:column id="viewtextoId">
+                <f:facet name="header">Texto</f:facet>
+                #{tramite.texto}
+            </ice:column>
+            <ice:column id="viewtramiteColumnId">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewtramiteLinkId" 
+                     value="View" 
+                      view="/seam/Tramite.xhtml">
+                    <f:param name="tramiteIden" 
+                           value="#{tramite.iden}"/>
+                </s:link>
+            </ice:column>
+       </ice:dataTable>
+       
+    </div>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+

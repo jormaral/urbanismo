@@ -1,0 +1,129 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_listardocumentonormas}"
+				view="/informacionfip/documentonormas/ListarDocumentoNormas.xhtml"
+				id="ListarDocumentoNormasRutaMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+	<ui:define name="body">
+
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+			<ice:form>
+
+				<ice:commandButton value="Refrescar" styleClass="boton2"
+					action="#{servicioListadoDocumentoNormas.refrescarListado()}" />
+
+			</ice:form>
+
+			<br></br>
+			<!--  Se define el cuerpo de la pagina -->
+			<ice:dataTable
+				value="#{servicioListadoDocumentoNormas.listadoDocumentoNormativa}"
+				var="item" id="listaDeUsuarios">
+
+				<ice:column style="text-align:center;">
+					<f:facet name="header">
+						<h:outputText value="#{messages.fechaGeneracion}" />
+					</f:facet>
+					<h:outputText value="#{item.fechaGeneracion}">
+						<f:convertDateTime pattern="dd/MM/yyyy, HH:mm" />
+					</h:outputText>
+				</ice:column>
+
+				<ice:column style="text-align:center;">
+					<f:facet name="header">
+						<h:outputText value="Nombre" />
+					</f:facet>
+					<h:outputText value="#{item.nombreTramite}">
+					</h:outputText>
+				</ice:column>
+
+				<ice:column style="text-align:center;">
+					<f:facet name="header">
+						<h:outputText value="#{messages.fip1_estado_cabecera}" />
+					</f:facet>
+					<b> <h:outputText value="Errores" style="color:red"
+							rendered="#{item.estado=='ERROR'}" /> <h:outputText
+							value="#{messages.fip2_estado_creando}" style="color:orange"
+							rendered="#{item.estado=='CREANDO'}" /> <h:outputText
+							value="#{messages.fip2_estado_creado}" style="color:green"
+							rendered="#{item.estado=='GENERADO'}" /> </b>
+				</ice:column>
+
+				<ice:column style="text-align:center;">
+					<f:facet name="header">
+						<h:outputText value="Documento Normas Entidades" />
+					</f:facet>
+
+					<ice:outputResource id="descargaEnt"
+						rendered="#{item.estado=='GENERADO'}"
+						resource="#{servicioListadoDocumentoNormas.obtenerFichero(item.urlDocNormativaEntidades)}"
+						mimeType="application/pdf" fileName="DocNormasEntidades.pdf"
+						shared="false" styleClass="hiperenlace enlaceAzul">
+					</ice:outputResource>
+
+				</ice:column>
+
+				<ice:column style="text-align:center;">
+					<f:facet name="header">
+						<h:outputText value="Documento Normas Determinaciones" />
+					</f:facet>
+
+					<ice:outputResource id="descargaDet"
+						rendered="#{item.estado=='GENERADO'}"
+						resource="#{servicioListadoDocumentoNormas.obtenerFichero(item.urlDocNormativaDeterminacion)}"
+						mimeType="application/pdf" fileName="DocNormasDeterminaciones.pdf"
+						shared="false" styleClass="hiperenlace enlaceAzul">
+					</ice:outputResource>
+
+				</ice:column>
+
+
+
+			</ice:dataTable>
+
+
+		</ice:panelGroup>
+
+
+	</ui:define>
+
+</ui:composition>

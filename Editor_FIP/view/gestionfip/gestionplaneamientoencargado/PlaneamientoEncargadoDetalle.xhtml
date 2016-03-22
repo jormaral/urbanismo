@@ -1,0 +1,159 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	 xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+			<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+			view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			
+			</s:link>
+						
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+			view="/gestionfip/GestionFipNavegacion.xhtml" id="GestionFipNavegacionRutaMenu"
+				propagation="none">
+				
+			</s:link>
+			
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link style="color:blue;" value="#{messages.gestionplaneamientoencargado}"
+			view="/gestionfip/gestionplaneamientoencargado/PlaneamientoEncargadoList.xhtml" id="PlaneamientoEncargadoListRutaMenu"
+					propagation="none">
+					
+			</s:link>
+			
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link style="color:blue;" value="#{messages.genericos_detalle}"
+			view="/gestionfip/gestionplaneamientoencargado/PlaneamientoEncargadoDetalle.xhtml" id="PlaneamientoEncargadoListRutaMenu"
+					propagation="none">
+					
+			</s:link>
+					
+		</ice:panelGroup>
+		
+	</ui:define>
+
+	<ui:define name="body">
+		
+		
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+			
+			<h:form id="formularioUsuario">
+					<ice:panelGroup styleClass="panelGroupDetalle">
+						<h:panelGroup>
+							<s:button view="/gestionfip/gestionplaneamientoencargado/PlaneamientoEncargadoList.xhtml" alt="#{messages.botongenerico_volver}"
+									  image="/fipeditor/img/editorfip/es/botones/Volver.png" styleClass="boton1_up"
+									  onmouseover="this.src='/fipeditor/img/editorfip/es/botones/Volver2.png'" 
+									  onmouseout="this.src='/fipeditor/img/editorfip/es/botones/Volver.png'"
+									  title="#{messages.boton_title_PEdetalle_volver}" id="Volver"/>
+						</h:panelGroup>					
+					
+						<h:panelGroup>
+							 <ice:commandButton value="#{messages.botongenerico_guardar}" action="#{servicioPlanEncargado.guardar}"  
+							 styleClass="boton1_up" alt="#{messages.botongenerico_guardar}" title="#{messages.boton_title_PEdetalle_guardar}" id="Guardar"/>
+						</h:panelGroup>
+						
+						
+						<h:panelGroup>
+							 <ice:commandButton action="#{servicioPlanEncargado.descartarCambios}" value="#{messages.botongenerico_desc_cambios}"
+							 					reRender="datosUsuarioPG" styleClass="boton2_up" alt="#{messages.botongenerico_desc_cambios}"
+							 					title="#{messages.boton_title_PEdetalle_descartarCambios}"/>
+						</h:panelGroup>	
+											
+					</ice:panelGroup>
+				
+				
+				<h:panelGrid columns="3" id="datosUsuarioPG" styleClass="tableDetalle">
+					
+					<h:inputText styleClass="etiqueta-Usuario" value="#{messages.codigofip}" disabled="true"/>
+					<h:inputText styleClass="input-Detalle" rendered="#{not servicioPlanEncargado.modificacion}"  
+						value="#{servicioPlanEncargado.planEncargado.codigoFip}" />
+					<h:inputText styleClass="input-Detalle" rendered="#{servicioPlanEncargado.modificacion}" 
+						value="#{servicioPlanEncargado.planEncargado.codigoFip}" />
+					<ice:outputLabel value=""/>
+					
+					<h:inputText styleClass="etiqueta-Usuario" value="#{messages.gestionusuario_usuario_nombre}" disabled="true" id="EtiquetaNombre"/>
+					<h:inputText styleClass="input-Detalle" value="#{servicioPlanEncargado.planEncargado.nombre}" id="Nombre"/>
+					<ice:outputLabel value=""/>
+
+					<h:inputText styleClass="etiqueta-Usuario" value="#{messages.ambito}" disabled="true"/>
+					<h:inputText styleClass="input-Detalle" value="#{servicioPlanEncargado.literalAmbito}" disabled="true"/>
+					<ice:outputLabel value=""/>
+					
+					<ice:outputLabel rendered="#{not servicioPlanEncargado.modificacion}" value=""/>
+					<ice:commandButton rendered="#{not servicioPlanEncargado.modificacion}" disabled="#{servicioPlanEncargado.modificacion}" value="#{messages.botonusuario_ambito}" id="aniadirAmbitoCB" partialSubmit="true" 
+							 actionListener="#{servicioPlanEncargado.mostrarPanelAmbitosAL}" alt="#{messages.botonusuario_ambito}"
+							 styleClass="boton2" title="#{messages.boton_title_PEdetalle_anadirAmbito}"/>
+					<ice:outputLabel rendered="#{not servicioPlanEncargado.modificacion}" value=""/>
+				
+					<h:inputText styleClass="etiqueta-Usuario" value="#{messages.plan_base}" disabled="true"/>
+					
+					<h:inputText styleClass="input-Detalle" rendered="#{servicioPlanEncargado.ambitoConPlanBase}" 
+						value="#{servicioPlanEncargado.planEncargado.tramiteBase.nombre}" disabled="true"/>
+						
+					<ice:selectOneListbox size="1" id="selectPlan"
+						rendered="#{not servicioPlanEncargado.ambitoConPlanBase}"
+						value="#{servicioPlanEncargado.planBase.iden}" partialSubmit="false">
+						<f:selectItems value="#{servicioPlanEncargado.planesBase}" />
+					</ice:selectOneListbox>
+					<h:inputHidden />
+					
+					<h:inputText styleClass="etiqueta-Usuario" value="#{messages.plan_vigente}" disabled="true"/>
+					<ice:selectOneListbox size="1" id="selectPlanVigente"
+						rendered="#{not servicioPlanEncargado.modificacion}" 
+						value="#{servicioPlanEncargado.planVigente.iden}" partialSubmit="false">
+						<f:selectItem itemValue="-1" itemLabel="#{messages.crear_nuevo_plan_vigente}" />
+						<f:selectItems value="#{servicioPlanEncargado.planesVigentes}" />
+					</ice:selectOneListbox>
+					<h:inputText styleClass="input-Detalle" rendered="#{servicioPlanEncargado.modificacion}" 
+						value="#{messages.crear_nuevo_plan_vigente}" disabled="true"/>
+					<h:inputHidden />
+					
+					<h:inputText styleClass="etiqueta-Usuario" value="#{messages.instrumento}" disabled="true"/>
+					<ice:selectOneListbox rendered="#{not servicioPlanEncargado.modificacion}" size="1" id="selectInstrumento"
+						value="#{servicioPlanEncargado.planEncargado.instrumento.iden}" partialSubmit="false">
+						<f:selectItems value="#{servicioPlanEncargado.listaInstrumentos}" />
+					</ice:selectOneListbox>
+					<h:inputText styleClass="input-Detalle" rendered="#{servicioPlanEncargado.modificacion}" 
+						value="#{servicioPlanEncargado.literalInstrumento}" disabled="true"/>
+					<h:inputHidden />
+					
+					<h:inputText styleClass="etiqueta-Usuario" value="#{messages.tipo_tramite}" disabled="true"/>
+					<ice:selectOneListbox size="1" id="selectTipoTramite" rendered="#{not servicioPlanEncargado.modificacion}" 
+						value="#{servicioPlanEncargado.planEncargado.tipotramite.iden}" partialSubmit="false">
+						<f:selectItems value="#{servicioPlanEncargado.listaTiposTramite}" />
+					</ice:selectOneListbox>
+					<h:inputText styleClass="input-Detalle" rendered="#{servicioPlanEncargado.modificacion}" 
+						value="#{servicioPlanEncargado.literalTipoTramite}" disabled="true"/>
+					<h:inputHidden />
+					
+					<h:inputText styleClass="etiqueta-Usuario" value="#{messages.proyeccion}" disabled="true"/>
+					<ice:selectOneListbox size="1" id="selectProyeccion"
+						value="#{servicioPlanEncargado.planEncargado.proyeccion}" partialSubmit="false">
+						<f:selectItems value="#{servicioPlanEncargado.proyecciones}" />
+					</ice:selectOneListbox>
+					
+				</h:panelGrid>
+				
+				<ui:include  src="/gestionfip/nuevoplaneamientosistematizado/AnnadirAmbito.xhtml"/>
+				
+			</h:form>		
+
+		</ice:panelGroup>
+	</ui:define>
+
+</ui:composition>

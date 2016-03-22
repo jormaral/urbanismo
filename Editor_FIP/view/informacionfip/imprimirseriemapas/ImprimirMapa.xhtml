@@ -1,0 +1,710 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="head">
+
+		<link rel="stylesheet" type="text/css"
+			href="../../ejemplo/Ext/resources/css/ext-all.css"></link>
+		<script type="text/javascript"
+			src="../../ejemplo/Ext/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript"
+			src="../../ejemplo/Ext/ext-all-debug.js"></script>
+
+		<script src="/fipeditor/scripts/ol211/lib/OpenLayers.js"></script> 
+		<script src="../../ejemplo/lib/GeoExt.js"></script>
+		<script
+			src="http://urbanismoenred.idom.com/geoserver/pdf/info.json?var=printCapabilities"></script>
+
+
+
+	</ui:define>
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_imprimirseriemapa}"
+				view="/informacionfip/imprimirseriemapas/ImprimirMapa.xhtml"
+				id="VerMapasRutaMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+	<ui:define name="body">
+	
+	<ice:panelGrid columnClasses="testColMap2">
+			<ice:panelGroup>
+				<ice:graphicImage styleClass="tooltip_imagen"
+					alt="#{messages.genericos_info}"
+					url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				<ice:outputLabel style="color:red;"
+					value="#{messages.mapa_sin_coordenadas}"
+					rendered="#{!servicioCoordenadasAmbito.existenCoordeandasAmbito(variablesSesionUsuario.idAmbito)}"></ice:outputLabel>
+				<ice:outputLabel style="color:blue;"
+					value="Si despues de pulsar sobre las capas, no ve ninguna geometria, compruebe que la capa del ambito_#{variablesSesionUsuario.idAmbito} esta dada de alta en el geoserver"></ice:outputLabel>
+			</ice:panelGroup>
+		</ice:panelGrid>
+
+		<br />
+		<div style="width: 100%; height: 700px" id="content"></div>
+
+
+
+		<script type="text/javascript">
+		var mapPanel, printPage, tree;
+
+		Ext.onReady(function() {
+		    // The printProvider that connects us to the print service
+		    var printProvider = new GeoExt.data.PrintProvider({
+		        method: "GET", // "POST" recommended for production use
+		        capabilities: printCapabilities, // from the info.json script in the html
+		        customParams: {
+		           
+		        }
+		    });
+		    // Our print page. Stores scale, center and rotation and gives us a page
+		    // extent feature that we can add to a layer.
+		    printPage = new GeoExt.data.PrintPage({
+		        printProvider: printProvider
+		    });
+		    // A layer to display the print page extent
+		    var pageLayer = new OpenLayers.Layer.Vector();
+		    pageLayer.addFeatures(printPage.feature);
+
+
+			
+			// Capa Base, PNOA
+			
+			var layer1 = new OpenLayers.Layer.WMS(
+					"PNOA",
+	                 "http://www.idee.es/wms/PNOA/PNOA",
+	                 {layers: 'PNOA'},
+	                 {
+	                    buffer: 0,
+	                    displayOutsideMaxExtent: true,
+	                    isBaseLayer: true,
+	                    displayInLayerSwitcher: false
+	                 });
+
+			 var layerInf = new OpenLayers.Layer.WMS(
+						
+		    		 "Info",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		                  displayInLayerSwitcher: false
+			                  
+		              });
+
+			//Capas del TrÃ¡mite Encargado   
+			
+		   var layerPeZon = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.zon}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteEncargadoTrabajo()}'+'_zon.xml'
+		              },
+		              {
+		                  visibility: false
+			                  
+		              });    
+
+		   var layerPeCla = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.cla}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteEncargadoTrabajo()}'+'_cla.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });   
+
+		   var layerPePro = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.pro}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteEncargadoTrabajo()}'+'_pro.xml'
+		              },
+		              {
+		                  visibility: false 
+			             
+			                  
+		              }); 
+
+		   var layerPeCat = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.cat}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteEncargadoTrabajo()}'+'_cat.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              }); 
+
+		   var layerPeAmb = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.amb}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteEncargadoTrabajo()}'+'_amb.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });
+
+		   var layerPeGes = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.ges}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteEncargadoTrabajo()}'+'_ges.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });
+
+              
+		   var layerPeAfe = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.afe}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteEncargadoTrabajo()}'+'_afe.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });
+
+		   var layerPeAcc = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.acc}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteEncargadoTrabajo()}'+'_acc.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });
+
+		   var layerPeSis = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.sis}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteEncargadoTrabajo()}'+'_sis.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });
+
+		   var layerPeAli = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.ali}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteEncargadoTrabajo()}'+'_ali.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });
+
+		   var layerPeRas = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.ras}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteEncargadoTrabajo()}'+'_ras.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });
+
+		   var layerPeSin = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.sincapa}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_sincapa_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteEncargadoTrabajo()}'+'_sin.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              }); 
+
+           //Capas del TrÃ¡mite Vigente   
+
+		   var layerPvZon = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.zon}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteVigenteTrabajo()}'+'_zon.xml'
+
+		               },
+			           {
+		                  visibility: false
+			                  
+		              });    
+
+		   var layerPvCla = new OpenLayers.Layer.WMS(
+					
+			         "#{messages.cla}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteVigenteTrabajo()}'+'_cla.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });   
+
+		   var layerPvPro = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.pro}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteVigenteTrabajo()}'+'_pro.xml'
+		              },
+		              {
+		                  visibility: false 
+			             
+			                  
+		              }); 
+
+		   var layerPvCat = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.cat}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteVigenteTrabajo()}'+'_cat.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              }); 
+
+		   var layerPvAmb = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.amb}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		                  
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteVigenteTrabajo()}'+'_amb.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });
+
+		   var layerPvGes = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.ges}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteVigenteTrabajo()}'+'_ges.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });
+
+              
+		   var layerPvAfe = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.afe}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		            
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteVigenteTrabajo()}'+'_afe.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });
+
+		   var layerPvAcc = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.acc}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteVigenteTrabajo()}'+'_acc.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });
+
+		   var layerPvSis = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.sis}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteVigenteTrabajo()}'+'_sis.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });  
+
+		   var layerPvAli = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.ali}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteVigenteTrabajo()}'+'_ali.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });
+
+		   var layerPvRas = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.ras}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteVigenteTrabajo()}'+'_ras.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              }); 
+
+		   var layerPvSin = new OpenLayers.Layer.WMS(
+					
+				     "#{messages.sincapa}",
+		    		 "#{messages.geoserver}",
+		               
+		              {
+		            	  LAYERS: 'topp:ambito_sincapa_'+'#{variablesSesionUsuario.getIdAmbito()}',
+		                  transparent:'true',
+		             
+		                  SLD: '#{messages.sld}'+'#{variablesSesionUsuario.getIdTramiteVigenteTrabajo()}'+'_sin.xml'
+		              },
+		              {
+		                  visibility: false
+			             
+			                  
+		              });
+
+                  
+
+		    var xmin = #{servicioCoordenadasAmbito.obtenerCoordenadasAmbito(variablesSesionUsuario.getIdAmbito()).getCoorxmin()};
+     		var ymin = #{servicioCoordenadasAmbito.obtenerCoordenadasAmbito(variablesSesionUsuario.getIdAmbito()).getCoorymin()};
+     		var xmax = #{servicioCoordenadasAmbito.obtenerCoordenadasAmbito(variablesSesionUsuario.getIdAmbito()).getCoorxmax()};
+     		var ymax = #{servicioCoordenadasAmbito.obtenerCoordenadasAmbito(variablesSesionUsuario.getIdAmbito()).getCoorymax()};
+     		
+		    // The map we want to print
+		    mapPanel = new GeoExt.MapPanel({
+		        region: "center",
+		        map: {
+		        	projection: new OpenLayers.Projection("#{mapa.projectionTramite(variablesSesionUsuario.getIdTramiteEncargadoTrabajo(), variablesSesionUsuario.getIdAmbito() )}"),
+		             displayProjection: new OpenLayers.Projection("#{mapa.projectionTramite(variablesSesionUsuario.getIdTramiteEncargadoTrabajo(), variablesSesionUsuario.getIdAmbito() )}"),
+		             units: "m",
+		             numZoomLevels: 19,
+		             maxResolution: 156543.0339,
+		             maxExtent: new OpenLayers.Bounds(xmin, ymin, xmax, ymax),
+		             allOverlays: false,
+		             theme: null,
+		            eventListeners: {
+		                // recenter/resize page extent after pan/zoom
+		                "moveend": function(){ printPage.fit(this, {mode: "screen"}); }
+		            }
+		        },
+		        layers: [layer1,layerPeSin, layerPeRas, layerPeAli, layerPeAcc, layerPePro, layerPeAfe, layerPeSis, layerPeGes, layerPeZon, layerPeCat, layerPeCla, layerPeAmb, layerPvSin, layerPvRas, layerPvAli, layerPvAcc, layerPvPro, layerPvAfe, layerPvSis, layerPvGes, layerPvZon, layerPvCat, layerPvCla, layerPvAmb, pageLayer]
+		    });
+
+
+		 // The form with fields controlling the print output
+		    var formPanel = new Ext.form.FormPanel({
+		        region: "west",
+		        border:true,
+		        split:true,
+		        collapsible:true,
+		        autoScroll: true,
+		        collapseMode: "mini",
+		        title: "Imprimir Serie Mapas",
+		        width: 150,
+		        bodyStyle: "padding:5px",
+		        labelAlign: "top",
+		        defaults: {anchor: "100%"},
+		        items: [{
+		            xtype: "textarea",
+		            name: "mapTitle",
+		            value: "",
+		            fieldLabel: "Titulo",
+		            plugins: new GeoExt.plugins.PrintPageField({
+		                printPage: printPage
+		            })
+		        },{
+		            xtype: "textarea",
+		            name: "comment",
+		            value: "",
+		            fieldLabel: "Comentario",
+		            plugins: new GeoExt.plugins.PrintPageField({
+		                printPage: printPage
+		            })
+		        }, {
+		            xtype: "combo",
+		            store: printProvider.layouts,
+		            displayField: "name",
+		            fieldLabel: "Hoja",
+		            typeAhead: true,
+		            mode: "local",
+		            triggerAction: "all",
+		            plugins: new GeoExt.plugins.PrintProviderField({
+		                printProvider: printProvider
+		            })
+		        }, {
+		            xtype: "combo",
+		            store: printProvider.scales,
+		            displayField: "name",
+		            fieldLabel: "Escala",
+		            typeAhead: true,
+		            mode: "local",
+		            triggerAction: "all",
+		            plugins: new GeoExt.plugins.PrintPageField({
+		                printPage: printPage
+		            })
+		        }, {
+		            xtype: "textfield",
+		            name: "rotation",
+		            fieldLabel: "Rotar",
+		            plugins: new GeoExt.plugins.PrintPageField({
+		                printPage: printPage
+		            })
+		        }
+		        ],
+		        buttons: [{
+		            text: "Crear PDF",
+		            handler: function() {
+		                printProvider.print(mapPanel, printPage);
+		            }
+		        }]
+		        
+		    });
+
+
+			   // ----
+			   
+			var storePV = new GeoExt.data.LayerStore({
+					    
+				layers: [layerPvSin, layerPvRas, layerPvAli, layerPvAcc, layerPvPro, layerPvAfe, layerPvSis, layerPvGes, layerPvZon, layerPvCat, layerPvCla, layerPvAmb]
+			});
+
+			var storePE = new GeoExt.data.LayerStore({
+			    
+				layers: [layerPeSin, layerPeRas, layerPeAli, layerPeAcc, layerPePro, layerPeAfe, layerPeSis, layerPeGes, layerPeZon, layerPeCat, layerPeCla, layerPeAmb ]
+			
+			});
+
+			var layerListPV = new GeoExt.tree.LayerContainer({
+			    text: '#{messages.capa_pv}',
+			    layerStore: storePV,
+			    leaf: false,
+			    expanded: true
+			});
+
+			var layerListPE = new GeoExt.tree.LayerContainer({
+			    text: '#{messages.capa_pe}',
+			    layerStore: storePE,
+			    leaf: false,
+			    expanded: true
+			});
+
+			var layerTree = new Ext.tree.TreePanel({
+			    title: 'Capas a Incluir',
+			    region: "east",
+		        border:true,
+		        split:true,
+		        collapsible:true,
+		        autoScroll: true,
+		        collapseMode: "mini",
+			    
+			    loader: new Ext.tree.TreeLoader({
+		            
+		        applyLoader: false,
+		
+		        }),
+		        root: {
+			        expanded:true,
+					children: [layerListPV,layerListPE]
+			    },
+		        rootVisible: false,
+		        lines: false
+		    });
+			   // ---
+		    
+		    
+		    // The main panel
+		    new Ext.Panel({
+		        renderTo: "content",
+		        layout: "border",
+		        width: 1200,
+		        height: 600,
+		        items: [mapPanel,formPanel,layerTree]
+		    });
+
+ 
+		});
+		</script>
+
+
+
+
+
+
+
+	</ui:define>
+
+</ui:composition>

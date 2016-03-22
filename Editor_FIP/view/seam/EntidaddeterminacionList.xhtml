@@ -1,0 +1,156 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"  
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="entidaddeterminacionSearch" styleClass="edit">
+      <ice:panelGroup  id="searchGroup" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+                    <ice:outputText id="listEntidaddeterminacionId" value="Entidaddeterminacion search filter"/>
+                 </td>
+              </tr>
+         </table>	
+         <ice:panelGroup id="listPanelGroupEntidaddeterminacionId" styleClass="edit">
+		
+            <s:decorate template="../layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <ice:selectOneRadio id="logic" value="#{entidaddeterminacionList.restrictionLogicOperator}" partialSubmit="true">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </ice:selectOneRadio>
+            </s:decorate>
+          
+   
+	  </ice:panelGroup>
+  
+        
+        <div class="actionButtons">
+            <ice:commandButton id="search" value="Search" action="/EntidaddeterminacionList.xhtml"/>
+        </div>
+      </ice:panelGroup> 
+    </ice:form>
+    
+    <ice:panelGroup styleClass="formBorderHighlight">
+
+    <h3>entidaddeterminacion  search results</h3>
+
+    <div class="searchResults" id="listentidaddeterminacionResults">
+    <ice:outputText value="The entidaddeterminacion search returned no results." 
+               rendered="#{empty entidaddeterminacionList.resultList}"/>
+               
+    <ice:dataTable id="entidaddeterminacionList" 
+                  var="entidaddeterminacion"
+                value="#{entidaddeterminacionList.resultList}" 
+            resizable="true"
+	columnClasses="allCols"
+             rendered="#{not empty entidaddeterminacionList.resultList}">
+        <ice:column id="listidenId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{entidaddeterminacionList}"/>
+                    <ui:param name="propertyLabel" value="Iden"/>
+                    <ui:param name="propertyPath" value="entidaddeterminacion.iden"/>
+                </ui:include>
+            </f:facet>
+            #{entidaddeterminacion.iden}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listColumndeterminacionId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{entidaddeterminacionList}"/>
+                    <ui:param name="propertyLabel" value="Determinacion iden"/>
+                    <ui:param name="propertyPath" value="entidaddeterminacion.determinacion.iden"/>
+                </ui:include>
+            </f:facet>
+            #{entidaddeterminacion.determinacion.iden}
+        </ice:column>
+        <ice:column id="listColumnentidadId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{entidaddeterminacionList}"/>
+                    <ui:param name="propertyLabel" value="Entidad iden"/>
+                    <ui:param name="propertyPath" value="entidaddeterminacion.entidad.iden"/>
+                </ui:include>
+            </f:facet>
+            #{entidaddeterminacion.entidad.iden}
+        </ice:column>
+        <ice:column id="listColumnEntidaddeterminacionId">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/seam/#{empty from ? 'Entidaddeterminacion' : from}.xhtml" 
+                   value="#{empty from ? 'View' : 'Select'}" 
+                      id="entidaddeterminacion">
+                <f:param name="entidaddeterminacionIden" 
+                        value="#{entidaddeterminacion.iden}"/>
+            </s:link>
+			#{' '}
+            <s:link view="/seam/EntidaddeterminacionEdit.xhtml"
+                   value="Edit" 
+                      id="entidaddeterminacionEdit"
+                      rendered="#{empty from}">
+                <f:param name="entidaddeterminacionIden" 
+                        value="#{entidaddeterminacion.iden}"/>
+            </s:link>
+        </ice:column>
+    </ice:dataTable>
+
+    </div>
+</ice:panelGroup>
+
+    <div class="tableControl">
+      
+        <s:link view="/seam/EntidaddeterminacionList.xhtml" 
+            rendered="#{entidaddeterminacionList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPageentidaddeterminacionListId">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+        
+        <s:link view="/seam/EntidaddeterminacionList.xhtml" 
+            rendered="#{entidaddeterminacionList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPageentidaddeterminacionListId">
+            <f:param name="firstResult" 
+                    value="#{entidaddeterminacionList.previousFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/EntidaddeterminacionList.xhtml" 
+            rendered="#{entidaddeterminacionList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPageentidaddeterminacionListId">
+            <f:param name="firstResult" 
+                    value="#{entidaddeterminacionList.nextFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/EntidaddeterminacionList.xhtml" 
+            rendered="#{entidaddeterminacionList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPageentidaddeterminacionListId">
+            <f:param name="firstResult" 
+                    value="#{entidaddeterminacionList.lastFirstResult}"/>
+        </s:link>
+        
+    </div>
+    
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/seam/EntidaddeterminacionEdit.xhtml"
+                    id="create" 
+                 value="Create entidaddeterminacion">
+            <f:param name="entidaddeterminacionIden"/>
+        </s:button>
+    </s:div>
+    
+</ui:define>
+
+</ui:composition>
+

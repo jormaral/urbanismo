@@ -1,0 +1,18 @@
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+projection=EPSG:23029
+tipotramitesrefundibles=3,4,5,6,7,8,9,12,14
+caracterregimendirecto=2,3
+caracteruso=9,14
+caracteracto=10,15
+rutaDocs=/var/RPM/Docs
+caracterdetocultos=16
+# diccionariosvisibles indica si se mostrar\u00E1 la funcionalidad de gesti\u00F3n de diccionarios
+# a aquellos usuarios que tengan rol de administrador. Valores aceptados: true, false
+diccionariosvisibles=true
+# planbasevisible indica si se mostrar\u00E1 la funcionalidad de gesti\u00F3n del plan base
+# a aquellos usuarios que tengan rol de administrador. Valores aceptados: true, false
+planbasevisible=true
+#ID del tipo de tramite "No procede"
+idTramiteNoProcede=5
+idIntrumentoPlanRefundido=52

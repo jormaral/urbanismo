@@ -1,0 +1,82 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+		
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}" 
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+				
+			</s:link>
+						
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link style="color:blue;" value="#{messages.menu_ayuda}"
+				view="/ayuda/AyudaNavegacion.xhtml" id="AyudaRutaMenu"
+				propagation="none">
+				
+			</s:link>	
+			
+					
+		</ice:panelGroup>
+		
+		
+	</ui:define>
+	<ui:define name="body">
+
+	
+			<!--  Se define el cuerpo de la pagina -->
+			
+			<ice:panelGroup columns="5" styleClass="centerHome">
+				<s:link view="/ayuda/manuales/Manuales.xhtml" id="ManualesNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/05_01_MANUALES.png"
+						alt="#{messages.menu_manuales}" title="#{messages.menu_manuales}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/ayuda/faq/Faq.xhtml" id="FaqNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/05_02_FAQ.png"
+						alt="#{messages.menu_faq}" title="#{messages.menu_faq}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/ayuda/mapaweb/MapaWeb.xhtml" id="MapaWebNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/05_03_MAPA_WEB.png"
+						alt="#{messages.menu_mapaweb}" title="#{messages.menu_mapaweb}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/ayuda/acercade/AcercaDe.xhtml" id="AcercaDeNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/05_04_ACERCA_DE.png"
+						alt="#{messages.menu_acercade}" title="#{messages.menu_acercade}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/home.xhtml" id="VolverNavegacionMenu"
+					propagation="none">
+					<h:graphicImage
+						value="/img/editorfip/#{localeSelector.language}/navegacion/00_VOLVER.png"
+						alt="#{messages.menu_volver}"
+						title="#{messages.menu_volver}" styleClass="iconoNav"/>
+				</s:link>
+				
+
+			</ice:panelGroup>
+			
+			
+
+
+
+	</ui:define>
+
+</ui:composition>

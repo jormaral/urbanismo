@@ -1,0 +1,1488 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio - Designer Edition 7.1.4.1284 (http://www.liquid-technologies.com)-->
+<xs:schema xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" blockDefault="" finalDefault="" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="FIP">
+    <xs:annotation>
+      <xs:documentation>Formato de Intercambio de Planeamiento.
+Se utilizará este formato para intercambio de datos entre el Organismo Gestor de Planeamiento y los Productores. La información que suministra el Organismo gestor será necesaria para que el Productor de Planeamiento pueda desarrollar su trabajo.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Un fichero FIP puede contener:
+    -FIP 1: Condiciones Sistematizadas, Diccionario, Planeamiento Vigente  y/o Planeamiento Encargado (información que se entrega al Productor)
+    -FIP 2: Planeamiento Producido (entrega del Productor al Centro Gestor de Planamiento).</xs:documentation>
+        </xs:annotation>
+        <xs:sequence minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>FIP de Tipo 1: Conjunto de Diccionarios, Plan Base (CATALOGO-SISTEMATIZADO), Planeamiento Vigente y  Planeamiento Encargado que se entregan al Productor</xs:documentation>
+          </xs:annotation>
+          <xs:element xmlns:q1="FIP_v002" name="DICCIONARIO" type="Diccionario">
+            <xs:annotation>
+              <xs:documentation>Condiciones Sistematizadas para la creación de Planeamiento.
+Son condiciones globales no modificables.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q2="FIP_v002" minOccurs="0" name="CATALOGO-SISTEMATIZADO" type="PlanRegistrado">
+            <xs:annotation>
+              <xs:documentation>Plan Digital que contiene las Condiciones de Sistematización para el Ambito territorial dado (habitualmente definidas por la Comunidad Autónoma)
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q3="FIP_v002" minOccurs="0" name="PLANEAMIENTO-VIGENTE" type="PlanRegistrado">
+            <xs:annotation>
+              <xs:documentation>Planeamiento Vigente de un ámbito que se entrega al Productor de Planeamiento</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element xmlns:q4="FIP_v002" name="PLANEAMIENTO-ENCARGADO" type="PlanDigital">
+            <xs:annotation>
+              <xs:documentation>Plan creado en el Registro de Planeamiento y sobre el cual debe trabajar el productor para redactar un nuevo trámite</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:element xmlns:q5="FIP_v002" name="TRAMITE" type="Tramite">
+          <xs:annotation>
+            <xs:documentation>FIP de Tipo 2: Trámite de un plan que se ha producido por parte del redactor de planeamiento y que se enrega al registro.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+      <xs:attribute name="PAIS">
+        <xs:annotation>
+          <xs:documentation>Codigo de Pais. Siempre será "es"</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:length value="2" />
+            <xs:enumeration value="es" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FECHA" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Fecha de Generación del Fichero en formato FIP
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="VERSION" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Versión del Fichero en Formato FIP entregado.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="SRS" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Código SRS que expresa el sistema de coordenadas utilizado en las geometrías del presente FIP</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Ambito">
+    <xs:annotation>
+      <xs:documentation>Ámbito sobre el que afecta un plan urbanístico</xs:documentation>
+    </xs:annotation>
+    <xs:sequence minOccurs="0">
+      <xs:element minOccurs="0" name="GEOMETRIA" type="Geometria">
+        <xs:annotation>
+          <xs:documentation>Geometría del ámbito (límite del término municipal, etc.)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="nombre" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Nombre del ámbito</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute xmlns:q7="FIP_v002" name="codigo" type="IdentificadorAmbito" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único del ámbito dentro del Registro de Planeamiento</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ine">
+      <xs:annotation>
+        <xs:documentation>Código INE del ámbito en caso de posserlo (para municipios y Comunidades Autónomas).
+El código INE es el código que establece el instituto nacional de estadística a las provincias y poblaciones de España 
+El código de municipio se compone de seis dígitos: los dos primeros corresponden al código de la provincia y los cuatro restantes al del municipio dentro de ésta. De estos cuatro, el último es un dígito de control que, asignado mediante una regla de cálculo, permite la detección de errores de grabación y codificación
+
+http://www.ine.es/jaxi/menu.do?type=pcaxis&amp;path=%2Ft20%2Fe245%2Fcodmun%2F&amp;file=inebase&amp;L=0
+</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="2" />
+          <xs:maxLength value="6" />
+          <xs:pattern value="[0-9]" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="tipoAmbito" type="IdentificadorTipoAmbito" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador del Tipo de Ámbito recogido en el diccionario</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="Diccionario">
+    <xs:annotation>
+      <xs:documentation>Conjunto de definiciones y dominios de datos básicos necesarios para posibilitar la redacción de planeamiento digital</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="TIPOS-AMBITO">
+        <xs:annotation>
+          <xs:documentation>Conjuntos de tipos de ámbito</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="TIPO-AMBITO" type="TipoAmbito" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AMBITOS">
+        <xs:annotation>
+          <xs:documentation>Ámbitos recogidos en el Registro de Planeamiento</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="AMBITO">
+              <xs:complexType>
+                <xs:complexContent mixed="false">
+                  <xs:extension base="Ambito" />
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ORGANIGRAMA-AMBITOS">
+        <xs:annotation>
+          <xs:documentation>Organización de los ámbitos, define qué ámbitos pertenecen a otros y define al menos la dependencia entre Comunidades Autónomas, Provincias y Municipios.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="RELACION">
+              <xs:annotation>
+                <xs:documentation>Relaciona ámbitos a través de una correspondencia entre padres/hijos</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:attribute name="PADRE" type="IdentificadorAmbito" use="required" />
+                <xs:attribute name="HIJO" type="IdentificadorAmbito" use="required" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CARACTERES-DETERMINACION">
+        <xs:annotation>
+          <xs:documentation>Conjunto de caracteres de determinación</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="CARACTER-DETERMINACION" type="CaracterDeterminacion" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TIPOS-ENTIDAD">
+        <xs:annotation>
+          <xs:documentation>Conjunto de los tipos de entidad</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="TIPO-ENTIDAD" type="TipoEntidad" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TIPOS-OPERACION-ENTIDAD">
+        <xs:annotation>
+          <xs:documentation>Conjunto de operaciones permitidas entre entidades  según su tipo</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="TIPO-OPERACION-ENTIDAD">
+              <xs:complexType>
+                <xs:complexContent mixed="false">
+                  <xs:extension base="TipoOperacionEntidad" />
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TIPOS-OPERACION-DETERMINACION">
+        <xs:annotation>
+          <xs:documentation>Conjunto de operaciones permitidas entre determinaciones</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="TIPO-OPERACION-DETERMINACION" type="TipoOperacionDeterminacion" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="OPERACIONES-CARACTERES">
+        <xs:annotation>
+          <xs:documentation>Conjuntos de Operaciones-Caracteres</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="OPERACION-CARACTER" type="OperacionCaracter" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TIPOS-DOCUMENTO">
+        <xs:annotation>
+          <xs:documentation>Conjunto de tipos de documento</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="TIPO-DOCUMENTO" type="TipoDocumento" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GRUPOS-DOCUMENTO">
+        <xs:annotation>
+          <xs:documentation>Conjunto de grupos de documento</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="GRUPO-DOCUMENTO" type="GrupoDocumento" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TIPOS-TRAMITE">
+        <xs:annotation>
+          <xs:documentation>Conjunto de posibles trámites de un plan</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="TIPO-TRAMITE" type="TipoTramite" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="INSTRUMENTOS">
+        <xs:annotation>
+          <xs:documentation>Conjunto de tipos de documento</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="INSTRUMENTO" type="Instrumento" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CaracterDeterminacion">
+    <xs:annotation>
+      <xs:documentation>Distintos caracteres que a los que debe pertenecer cada determinación (Norma general, Uso, Grupo de Entidad, Unidad,...).
+Mediante los Caracteres de Determinación se especifica el comportamiento
+de cada una en relación con su aplicación en las entidades.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="codigo" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único del carácter de determinación</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="IdentificadorCaracterDeterminacion">
+          <xs:length value="6" />
+          <xs:pattern value="[0-9]{6}" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="nombre" use="required">
+      <xs:annotation>
+        <xs:documentation>Nombre del carácter determinación</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="255" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="aplicaciones_max" type="xs:integer" use="required">
+      <xs:annotation>
+        <xs:documentation>Número máximo de aplicaciones que la determinación de este carácter puede aplicarse a una misma entidad</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="aplicaciones_min" type="xs:integer" use="required">
+      <xs:annotation>
+        <xs:documentation>Número mínimo de aplicaciones que la determinación de este carácter puede aplicarse a una misma entidad</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="OperacionCaracter">
+    <xs:annotation>
+      <xs:documentation>Indica, para cada tipo de operación, el carácter de las determinaciones que pueden entrar a formar parte de la misma como operadora y operadora</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="TipoOperacionDeterminacion" type="IdentificadorTipoOperacionDeterminacion" use="required">
+      <xs:annotation>
+        <xs:documentation>Tipo de operación entre determinaciones a definir</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="CaracterOperadora" type="IdentificadorCaracterDeterminacion" use="required">
+      <xs:annotation>
+        <xs:documentation>Carácter de la determinación que en el tipo de operación definido actuará como operadora</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="CaracterOperada" type="IdentificadorCaracterDeterminacion" use="required">
+      <xs:annotation>
+        <xs:documentation>Carácter de la determinación que en el tipo de operación definido actuará como operada</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="TipoAmbito">
+    <xs:annotation>
+      <xs:documentation>Tipo de ámbito (Comunidad Autónoma, Provincia, Municipio, Mancomunidad, Parque Regional,...)</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="codigo" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único del tipo de ámbito</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="IdentificadorTipoAmbito">
+          <xs:length value="6" />
+          <xs:pattern value="[0-9]{6}" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="nombre" use="required">
+      <xs:annotation>
+        <xs:documentation>Denominación del tipo de ámbito</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="255" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="TipoDocumento">
+    <xs:annotation>
+      <xs:documentation>Posibles tipos de documento (Textos, hojas de cálculo, imágenes,...)</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="codigo" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único del tipo de documento</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="IdentificadorTipoDocumento">
+          <xs:length value="6" />
+          <xs:pattern value="[0-9]{6}" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="nombre" use="required">
+      <xs:annotation>
+        <xs:documentation>Denominación del tipo de documento</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="255" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="TipoEntidad">
+    <xs:annotation>
+      <xs:documentation>Tipo geométrico de la entidad. Afecta al tipo de operación gráfica que una entidad puede realizar.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="codigo" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único del tipo de entidad</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="IdentificadorTipoEntidad">
+          <xs:length value="6" />
+          <xs:pattern value="[0-9]{6}" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="nombre" use="required">
+      <xs:annotation>
+        <xs:documentation>Denominación del tipo de entidad</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="255" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="TipoOperacionDeterminacion">
+    <xs:annotation>
+      <xs:documentation>Operaciones que se pueden dar entre determinaciones  (Adición normativa, Sustitución normativa,...).</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="codigo" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único del tipo de operación entre determinaciones</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="IdentificadorTipoOperacionDeterminacion">
+          <xs:length value="6" />
+          <xs:pattern value="[0-9]{6}" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="nombre" use="required">
+      <xs:annotation>
+        <xs:documentation>Denominación del tipo de operación entre determinaciones</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="255" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="TipoOperacionEntidad">
+    <xs:annotation>
+      <xs:documentation>Distintas operaciones que se pueden dar entre entidades afectando a su contenido normativo, a su contenido gráfico o a ambas (Acumulación completa, superposición, acmulación de usos,...).</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="codigo" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único del tipo de operación entre entidades</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="IdentificadorTipoOperacionEntidad">
+          <xs:length value="6" />
+          <xs:pattern value="[0-9]{6}" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="nombre" use="required">
+      <xs:annotation>
+        <xs:documentation>Denominación del tipo de operación entre entidades</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="255" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="tipoEntidad" type="IdentificadorTipoEntidad" use="optional">
+      <xs:annotation>
+        <xs:documentation>Identificador único del tipo de entidad a los que se puede aplicar el tipo de operación. Si este atributo no aparece o es nulo, el tipo de operación se puede aplicar a cualquier entidad independientemente de su tipo.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="TipoTramite">
+    <xs:annotation>
+      <xs:documentation>Trámite por los que puede pasar un plan (aprobación inicial, acuerdo definitivo,...)</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="codigo">
+      <xs:annotation>
+        <xs:documentation>Identificador único del tipo de trámite</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="IdentificadorTipoTramite">
+          <xs:length value="6" />
+          <xs:pattern value="[0-9]{6}" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="nombre">
+      <xs:annotation>
+        <xs:documentation>Denominación del tipo de trámite</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="255" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="Geometria">
+    <xs:annotation>
+      <xs:documentation>Geometría en formato WKT.
+WKT (Well Known Text), es una codificación o sintaxis diseñada específicamente para describir objetos espaciales expresados de forma vectorial. Los objetos que es capaz de describir son: puntos, multipuntos, líneas, multilíneas, polígonos, multipolígonos, colecciones de geometría y puntos en 3 y 4 dimensiones. Su especificación ha sido promovida por un organismo internacional, el Open GeoSpatial Consortium, siendo su sintaxis muy fácil de utilizar, de forma que es muy generalizado su uso en la industria geoinformática.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:complexType name="PlanRegistrado">
+    <xs:annotation>
+      <xs:documentation>Plan incorporado en el registro y que viaja en el FIP1 (Plan Base y Plan Refundido)</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="TRAMITE" type="Tramite">
+        <xs:annotation>
+          <xs:documentation>Trámite del plan registrado que recoje toda la información urbanística</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="ambito" type="IdentificadorAmbito" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único del ámbito al que pertenece el plan</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="nombre" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Denominación del plan</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="GrupoDocumento">
+    <xs:annotation>
+      <xs:documentation>Agrupaciones de documentos según su contenido (Sentencias judiciales, textos informativos propios o incorporados, expedientes administrativos,...)</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="codigo" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único del grupo de documento</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="IdentificadorGrupoDocumento">
+          <xs:length value="6" />
+          <xs:pattern value="[0-9]{6}" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="nombre" use="required">
+      <xs:annotation>
+        <xs:documentation>Denominación del grupo de documento</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="255" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="IdentificadorAmbito">
+    <xs:restriction base="xs:string">
+      <xs:length value="6" />
+      <xs:pattern value="[0-9]{6}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IdentificadorCaracterDeterminacion">
+    <xs:restriction base="xs:string">
+      <xs:length value="6" />
+      <xs:pattern value="[0-9]{6}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IdentificadorTipoAmbito">
+    <xs:restriction base="xs:string">
+      <xs:length value="6" />
+      <xs:pattern value="[0-9]{6}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IdentificadorTipoEntidad">
+    <xs:restriction base="xs:string">
+      <xs:length value="6" />
+      <xs:pattern value="[0-9]{6}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IdentificadorTipoTramite">
+    <xs:restriction base="xs:string">
+      <xs:length value="6" />
+      <xs:pattern value="[0-9]{6}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IdentificadorTipoOperacionDeterminacion">
+    <xs:restriction base="xs:string">
+      <xs:length value="6" />
+      <xs:pattern value="[0-9]{6}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IdentificadorTipoOperacionEntidad">
+    <xs:restriction base="xs:string">
+      <xs:length value="6" />
+      <xs:pattern value="[0-9]{6}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IdentificadorCaso">
+    <xs:restriction base="xs:string">
+      <xs:length value="10" />
+      <xs:pattern value="[0-9]{10}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IdentificadorTipoDocumento">
+    <xs:restriction base="xs:string">
+      <xs:length value="6" />
+      <xs:pattern value="[0-9]{6}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IdentificadorGrupoDocumento">
+    <xs:restriction base="xs:string">
+      <xs:length value="6" />
+      <xs:pattern value="[0-9]{6}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IdentificadorDocumento">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{10}" />
+      <xs:length value="10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IdentificadorEntidad">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{10}" />
+      <xs:length value="10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IdentificadorDeterminacion">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{10}" />
+      <xs:length value="10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IdentificadorTramite">
+    <xs:annotation>
+      <xs:documentation>Identificador de Trámite.
+
+Este código será una cadena de caracteres formada por el código MD5 generado a partir de la concatenación de los siguientes atributos del Trámite:
+
+AMBITO:              XXXXXX
+PLAN:                   XXXXXX
+TIPO-TRAMITE:  XXXXXX
+ITERACION:         XX
+
+Siendo la iteración el número de veces que se ha resentado el mismo tipo de trámite</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="32" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Tramite">
+    <xs:annotation>
+      <xs:documentation>Trámite sufrido por un plan</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TEXTO" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Texto que apoye el trámite</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="DOCUMENTOS">
+        <xs:annotation>
+          <xs:documentation>Documentación aportada por el trámite</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="DOCUMENTO" type="Documento" />
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="DOCUMENTO-REFUNDIDO">
+              <xs:annotation>
+                <xs:documentation>Documentación ya existente en el RPM a la que se hace referencia a partir de su identificador único</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:attribute name="codigo" type="IdentificadorDocumento">
+                  <xs:annotation>
+                    <xs:documentation>Identificador único del documento en el RPM</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ENTIDADES">
+        <xs:annotation>
+          <xs:documentation>Conjunto de entidades pertenecientes al trámite</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="ENTIDAD" type="Entidad" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DETERMINACIONES">
+        <xs:annotation>
+          <xs:documentation>Conjunto de determinaciones pertenecientes al trámite</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="DETERMINACION" type="Determinacion" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="CONDICIONES-URBANISTICAS">
+        <xs:annotation>
+          <xs:documentation>Condiciones urbanísticas del trámite</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="CONDICION-URBANISTICA" type="CondicionUrbanistica" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="OPERACIONES">
+        <xs:annotation>
+          <xs:documentation>Conjunto de operaciones definidas en el trámite</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="OPERACIONES-DETERMINACIONES">
+              <xs:annotation>
+                <xs:documentation>Conjunto de operaciones entre determinaciones especificadas en el trámite</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" name="OPERACION-DETERMINACION" type="OperacionDeterminacion">
+                    <xs:annotation>
+                      <xs:documentation>Cada una de las operaciones entre determinaciones</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="OPERACIONES-ENTIDADES">
+              <xs:annotation>
+                <xs:documentation>Conjunto de operaciones entre entidades especificadas en el trámite</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" name="OPERACION-ENTIDAD" type="OperacionEntidad">
+                    <xs:annotation>
+                      <xs:documentation>Cada una de las operaciones entre entidades</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="UNIDADES">
+        <xs:annotation>
+          <xs:documentation>Conjunto de unidades definidas en el trámite</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="UNIDAD" type="Unidad" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="APLICACION-AMBITOS">
+        <xs:annotation>
+          <xs:documentation>Para el caso de un plan redactado para varios ámbitos, se permite especificar una entidad 'ámbito de aplicación' general y por debajo de ella, un ámbito de aplicación para cada ámbito.
+Aquí se especifica qué entidades del trámite definen esos "ámbitos de aplicación individualizados"</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="APLICACION-AMBITO" type="AplicacionAmbito">
+              <xs:annotation>
+                <xs:documentation>Cada una de las correspondencias entre entidades del trámite y los ámbitos</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ADSCRIPCIONES">
+        <xs:annotation>
+          <xs:documentation>Conjunto de adscripciones entre entidades del mismo trámite</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="ADSCRIPCION" type="Adscripcion">
+              <xs:annotation>
+                <xs:documentation>Cada una de las correspondencias entre entidades del trámite y los ámbitos</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="tipoTramite" type="IdentificadorTipoTramite" use="required">
+      <xs:annotation>
+        <xs:documentation>Tipo de trámite</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="codigo" type="IdentificadorTramite" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único del trámite</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="Determinacion">
+    <xs:annotation>
+      <xs:documentation>Cada uno de los atributos que un trámite puede asignar a cada entidad según el grupo al que ésta pertenezca.
+Cada trámite puede crear su propio catálogo de Determinaciones</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TEXTO" type="xs:string" />
+      <xs:element minOccurs="0" name="VALORES-REFERENCIA">
+        <xs:annotation>
+          <xs:documentation>Lista cerrada de opciones a las que se tienen que ceñir los valores de la determinación en una entidad.
+Por ejemplo: las Determinaciones Suelo Urbano, Suelo Urbanizable y Suelo No Urbanizable son los posibles valores que la Determinación Clase de Suelo puede tener en las Entidades del Grupo Clase de Suelo.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="VALOR-REFERENCIA" type="CodigoDeterminacion">
+              <xs:annotation>
+                <xs:documentation>Determinación que establece el valor de referencia</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="HIJAS">
+        <xs:annotation>
+          <xs:documentation>Lista de determinaciones hijas de la determinación según el índice del plan.
+Este elemento es recursivo, pudiendo extender el árbol todo lo necesario para recoger todo el catálogo de determinaciones.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="DETERMINACION" type="Determinacion">
+              <xs:annotation>
+                <xs:documentation>Cada una de las determinaciones hijas de la determinación</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="DOCUMENTOS">
+        <xs:annotation>
+          <xs:documentation>Conjunto de referencias a documentos aportados por el plan que se refieren a la determinación</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="DOCUMENTO">
+              <xs:annotation>
+                <xs:documentation>Identificador de cade documento aportado por el plan que se refiere a la determinación</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:attribute name="codigo" type="IdentificadorDocumento" use="required" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="UNIDAD">
+        <xs:annotation>
+          <xs:documentation>Unidad en las que una determinación puede expresarse en el plan.
+Las unidades son determinaciones de carácter "UNIDAD"</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="CodigoDeterminacion" />
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="REGULACION">
+        <xs:annotation>
+          <xs:documentation>Permite consignar el modo en que la Determinación condiciona el desarrollo urbanístico de todas los Entidades en los que se aplique</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="DETERMINACIONES-REGULADORAS">
+              <xs:annotation>
+                <xs:documentation>La regulación de las determinaciones viene dada por otras determinaciones de caracter "Reguladora"</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" name="DETERMINACION-REGULADORA" type="CodigoDeterminacion" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="REGULACIONES-ESPECIFICAS">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" name="REGULACION-ESPECIFICA" type="RegulacionEspecifica">
+                    <xs:annotation>
+                      <xs:documentation>Regulación exclusiva de la determinación</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="BASE" type="CodigoDeterminacion" />
+      <xs:element minOccurs="0" name="GRUPOS-APLICACION">
+        <xs:annotation>
+          <xs:documentation>Conjunto de grupos de aplicación</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q8="FIP_v002" maxOccurs="unbounded" name="GRUPO-APLICACION" type="CodigoDeterminacion">
+              <xs:annotation>
+                <xs:documentation>Indica a que entidades se puede aplicar la determinación según el grupo de la misma (definido por la asignación de la entidad de carácter GRUPO)</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="codigo" type="IdentificadorDeterminacion" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único de la determinación dentro del trámite</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="caracter" type="IdentificadorCaracterDeterminacion" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificado del carácter de la determinación</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="apartado" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Valor que permite una presentación ordenada y categorizada de las determinaciones.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="nombre" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Denominación de la determinación</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="etiqueta" type="xs:string" />
+    <xs:attribute name="suspendida" type="xs:boolean" use="required">
+      <xs:annotation>
+        <xs:documentation>Valor binario que indica si una determinación está suspendida (true) o no (false)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="Entidad">
+    <xs:sequence minOccurs="0">
+      <xs:element minOccurs="0" name="GEOMETRIA" type="Geometria">
+        <xs:annotation>
+          <xs:documentation>Representación gráfica de la entidad en formato WKT, pueden ser formas poligonales, lineales o puntuales</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="HIJAS">
+        <xs:annotation>
+          <xs:documentation>Lista de entidades hijas de la entidad según el índice del plan.
+Este elemento es recursivo, pudiendo extender el árbol todo lo necesario para recoger todo el catálogo de entidades.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="ENTIDAD" type="Entidad">
+              <xs:annotation>
+                <xs:documentation>Cada una de las entidades hijas de la entidad</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="DOCUMENTOS">
+        <xs:annotation>
+          <xs:documentation>Conjunto de referencias a documentos aportados por el plan que se refieren a la entidad</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="DOCUMENTO">
+              <xs:annotation>
+                <xs:documentation>Identificador de cade documento aportado por el plan que se refiere a la entidad</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:attribute name="codigo" type="IdentificadorDocumento" use="required" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="BASE" type="CodigoEntidad" />
+    </xs:sequence>
+    <xs:attribute name="codigo" type="IdentificadorEntidad" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único de la entidad en el trámite</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="etiqueta" type="xs:string" />
+    <xs:attribute name="clave" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Código nemotécnico abreviado que identifica la entidad.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="nombre" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Denominación de la entidad.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="suspendida" type="xs:boolean" use="required">
+      <xs:annotation>
+        <xs:documentation>Valor binario que indica si la entidad está suspendida (true) o no (false)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="PlanDigital">
+    <xs:annotation>
+      <xs:documentation>Utilizado en el FIP 1 como información del encargo al productor, que deberá producir un trámite del plan descrito y creado en el registro de planeamiento.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AMBITO-APLICACION" type="Geometria">
+        <xs:annotation>
+          <xs:documentation>Geometría que define la porción de territorio  en la que un plan puede actuar (debe ser siempre poligonal)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="ambito" type="IdentificadorAmbito" use="required">
+      <xs:annotation>
+        <xs:documentation>Código de ámbito al que pertenece el plan</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="nombre" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Denominación del plan</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="instrumento" type="IdentificadorInstrumento" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único del Plan dentro del Registro de Planeamiento</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="iteracion" type="xs:integer" use="required">
+      <xs:annotation>
+        <xs:documentation>Número de iteración del trámite encargado que el redactor debe producir</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="tipoTramite" type="IdentificadorTipoTramite" use="required">
+      <xs:annotation>
+        <xs:documentation>Tipo de trámite encargado</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="codigoTramite" type="IdentificadorTramite" use="required">
+      <xs:annotation>
+        <xs:documentation>Código del trámite que debe realizar el productor de planeamiento</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="CodigoEntidad">
+    <xs:annotation>
+      <xs:documentation>Código Universal de Entidad.
+
+Estará formado por un Identificador de Trámite y un Identificador de entidad.
+
+</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="tramite" type="IdentificadorTramite" use="required" />
+    <xs:attribute name="entidad" type="IdentificadorEntidad" use="required" />
+  </xs:complexType>
+  <xs:complexType name="CodigoDeterminacion">
+    <xs:annotation>
+      <xs:documentation>Código Universal de Determinación.
+
+Estará formado por un Identificador de trámite y un Identificador de Determinación.
+
+</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="tramite" type="IdentificadorTramite" use="required" />
+    <xs:attribute name="determinacion" type="IdentificadorDeterminacion" use="required" />
+  </xs:complexType>
+  <xs:complexType name="CondicionUrbanistica">
+    <xs:annotation>
+      <xs:documentation>Una condición urbanística representa la aplicación de una determinación sobre una entidad</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="CODIGO" type="CodigoCondicionUrbanistica">
+        <xs:annotation>
+          <xs:documentation>Relaciona entidad y determinación aplicada</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CASOS">
+        <xs:annotation>
+          <xs:documentation>Cada condición urbanística deberá tener al menos un caso (caso único o caso por defecto), aunque puede contemplar varios casos.
+Por ejemplo, la aplicación de la determinación "Altura en plantas" puede variar según si el uso es "Residencial" o "Industrial"</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="CASO" type="Caso" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CodigoCondicionUrbanistica">
+    <xs:annotation>
+      <xs:documentation>Código universal de una condición urbanística vinculando el código universal de una determinación con el código universal de una entidad sobre la que se aplica.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ENTIDAD" type="CodigoEntidad" />
+      <xs:element name="DETERMINACION" type="CodigoDeterminacion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Caso">
+    <xs:annotation>
+      <xs:documentation>Cada caso individualizado de una condición urbanística</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="REGIMENES">
+        <xs:annotation>
+          <xs:documentation>Conjunto de valores que puede adoptar un caso.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="REGIMEN" type="Regimen">
+              <xs:annotation>
+                <xs:documentation>Cada uno de los valores que adopta un caso</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="VINCULOS">
+        <xs:annotation>
+          <xs:documentation>Listado de vínculos de casos de uso</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="VINCULO">
+              <xs:annotation>
+                <xs:documentation>Cada uno de los vínculos entre casos de uso.
+Para los casos de uso, vinculaciones de los mismos para especificar la permisibilidad del vinculado siempre que se de el principal</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:complexContent mixed="false">
+                  <xs:extension base="CodigoCaso" />
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="DOCUMENTOS">
+        <xs:annotation>
+          <xs:documentation>Conjunto de referencias a documentos aportados por el plan que se refieren al caso</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="DOCUMENTO">
+              <xs:annotation>
+                <xs:documentation>Identificador de cade documento aportado por el plan que se refiere al caso</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:attribute name="codigo" type="IdentificadorDocumento" use="required" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="nombre" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Denominación del caso</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="codigo" type="IdentificadorCaso" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único del caso dentro del trámite</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="Regimen">
+    <xs:annotation>
+      <xs:documentation>Valor que adopta un caso</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="COMENTARIO" type="xs:string" />
+      <xs:element minOccurs="0" name="REGIMENES-ESPECIFICOS">
+        <xs:annotation>
+          <xs:documentation>Conjunto de regímenes específicos del régimen</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="REGIMEN-ESPECIFICO" type="RegimenEspecifico">
+              <xs:annotation>
+                <xs:documentation>Cada uno de los regímenes específicos del régimen</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:choice>
+        <xs:annotation>
+          <xs:documentation>El valor de un régimen puede venir dado por un valor literal (VALOR) o por una determinación obtenida de los valores de referencia de la determinación aplicada en la condición urbanística (VALOR-REFERENCIA)</xs:documentation>
+        </xs:annotation>
+        <xs:element minOccurs="0" name="VALOR" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Valor literal del régimen</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" name="VALOR-REFERENCIA" type="CodigoDeterminacion">
+          <xs:annotation>
+            <xs:documentation>Determinación aplicada como valor de referencia</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+      <xs:element minOccurs="0" name="DETERMINACION-REGIMEN" type="CodigoDeterminacion">
+        <xs:annotation>
+          <xs:documentation>Indica la determinación de uso o de acto que define el valor</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CASO-APLICACION" type="CodigoCaso">
+        <xs:annotation>
+          <xs:documentation>Caso en el que se aplica un valor excepcional para el presente caso</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="superposicion" type="xs:integer" use="optional">
+      <xs:annotation>
+        <xs:documentation>Atributo utilizado por planes refundidos para definir grupos de valores creados por operaciones de superposición.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="RegimenEspecifico">
+    <xs:annotation>
+      <xs:documentation>Matizaciones del valor con condiciones normativas que pueden llegar a ser un texto extenso, por este motivo el Régimen específico puede estructurarse en carpetas (definidas por la recursividad HIJOS).
+</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TEXTO" type="xs:string" />
+      <xs:element minOccurs="0" name="HIJOS">
+        <xs:annotation>
+          <xs:documentation>Regímenes específicos hijos que definen el árbol de regímenes específicos.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="REGIMEN-ESPECIFICO" type="RegimenEspecifico" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="orden" type="xs:integer" use="required" />
+    <xs:attribute name="nombre" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Denominación del régimen específico</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="OperacionDeterminacion">
+    <xs:annotation>
+      <xs:documentation>Operación entre determinaciones</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="OPERADA" type="CodigoDeterminacion">
+        <xs:annotation>
+          <xs:documentation>Determinación operada, es decir, se ve modificada por la determinación operadora</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OPERADORA" type="CodigoDeterminacion">
+        <xs:annotation>
+          <xs:documentation>Determinación que opera modificando la determinación operada</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TEXTO" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="tipo" type="IdentificadorTipoOperacionDeterminacion" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único del tipo de operación entre determinaciones a ejecutar</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="orden" type="xs:long" use="required" />
+  </xs:complexType>
+  <xs:complexType name="OperacionEntidad">
+    <xs:annotation>
+      <xs:documentation>Operación entre entidades</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="OPERADA" type="CodigoEntidad">
+        <xs:annotation>
+          <xs:documentation>Entidad operada, es decir, se ve modificada por la entidad operadora.
+En el caso de una operación de creación de adscripción, actuará como entidad origen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OPERADORA" type="CodigoEntidad">
+        <xs:annotation>
+          <xs:documentation>Entidad que opera modificando la entidad operada
+En el caso de una operación de creación de adscripción, actuará como entidad destino</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TEXTO" type="xs:string" />
+      <xs:element minOccurs="0" name="PROPIEDADES-ADSCRIPCION" type="PropiedadesAdscripcion">
+        <xs:annotation>
+          <xs:documentation>Para el caso de una operación de tipo "Creación de Adscripción", define las propiedades extra necesarias.
+Las operaciones de este tipo siempre utilizará entidades de distintos planes. Para definir adscripciones entre entidades del mismo plan, se definirán explícitamente en el apartado del trámite ADSCRIPCIONES.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="tipo" type="IdentificadorTipoOperacionEntidad" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único del tipo de operación entre entidades a ejecutar</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="orden" type="xs:long" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Documento">
+    <xs:annotation>
+      <xs:documentation>Documentos escaneados a partir de documentos en papel que son los que ostentan la legalidad y vigencia del plan</xs:documentation>
+    </xs:annotation>
+    <xs:sequence minOccurs="0">
+      <xs:element minOccurs="0" name="COMENTARIO" type="xs:string" />
+      <xs:element minOccurs="0" name="HOJAS">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="HOJA" type="Hoja" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="grupo" type="IdentificadorGrupoDocumento" use="optional">
+      <xs:annotation>
+        <xs:documentation>Grupo del documento</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="tipo" type="IdentificadorTipoDocumento" use="required">
+      <xs:annotation>
+        <xs:documentation>Tipo de documento</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="escala" type="xs:long" use="optional">
+      <xs:annotation>
+        <xs:documentation>Para el caso de plano gráficos, la escala de los mismos</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="archivo" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Ruta relativa del fichero a partir de un directorio raíz</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="nombre" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Denominación del documento</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="codigo" type="IdentificadorDocumento" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador único del documento dentro del trámite</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="Unidad">
+    <xs:annotation>
+      <xs:documentation>Las unidades en que se pueden expresar las determinaciones son otras determinaciones con nuevos atributos:
+       -Abreviatura
+       -Definición</xs:documentation>
+    </xs:annotation>
+    <xs:sequence minOccurs="0">
+      <xs:element name="DEFINICION" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Definición de la unidad</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="determinacion" type="IdentificadorDeterminacion" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificador de la determinación de carácter "UNIDAD"</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="abreviatura" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Abreviatura de la unidad</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="PropiedadesAdscripcion">
+    <xs:annotation>
+      <xs:documentation>Una adscripción es una relación entre dos entidades con contenido informativo.
+Esta relación se define como una operación con propiedes extra que aporta este tipo complejo.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="UNIDAD" type="CodigoDeterminacion">
+        <xs:annotation>
+          <xs:documentation>Determinación de carácter "UNIDAD"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TIPO" type="CodigoDeterminacion">
+        <xs:annotation>
+          <xs:documentation>Determinación de carácter "TIPO DE ADSCRIPCION" que define los modos de adscripción posibles</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TEXTO" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="cuantia" type="xs:double" use="required">
+      <xs:annotation>
+        <xs:documentation>Dato numérico que normalmente corresponde
+a una superficie o una cantidad económica, en función de la unidad.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="AplicacionAmbito">
+    <xs:annotation>
+      <xs:documentation>Permite vincular entidades de los trámites con ámbitos</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="ambito" type="IdentificadorAmbito" use="required" />
+    <xs:attribute name="entidad" type="IdentificadorEntidad" use="required" />
+  </xs:complexType>
+  <xs:complexType name="RegulacionEspecifica">
+    <xs:annotation>
+      <xs:documentation>Regulación específica de la determinación en carpetas (definidas por la recursividad HIJAS).
+</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TEXTO" type="xs:string" />
+      <xs:element minOccurs="0" name="HIJAS">
+        <xs:annotation>
+          <xs:documentation>Regulaciones específicas hijos que definen el árbol de regulaciones específicas.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="REGULACION-ESPECIFICA" type="RegulacionEspecifica" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="orden" type="xs:integer" use="required" />
+    <xs:attribute name="nombre" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Denominación de la regulación específica</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="CodigoCaso">
+    <xs:annotation>
+      <xs:documentation>Código Universal de Caso.
+
+Estará formado por un Identificador de trámite y un Identificador de Caso.
+
+</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="tramite" type="IdentificadorTramite" use="required" />
+    <xs:attribute name="caso" type="IdentificadorCaso" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Adscripcion">
+    <xs:annotation>
+      <xs:documentation>El planeamiento define relaciones entre entidades que no son directamente obtenibles mediante relaciones topológicas o bien establece relaciones obtenibles topológicamente pero asocia a dicha relación más información que la simplemente posicional.
+Las Adscripciones se definen como relaciones entre dos entidades que tienen el siguiente contenido informativo:
+       - Unidad
+       - Tipo
+       - Cuantía</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="PROPIEDADES" type="PropiedadesAdscripcion">
+        <xs:annotation>
+          <xs:documentation>Propiedades que definen la Adscripción</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="entidadOrigen" type="IdentificadorEntidad" use="required">
+      <xs:annotation>
+        <xs:documentation>Entidad que actúa como origen en la adscripción</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="entidadDestino" type="IdentificadorEntidad" use="required">
+      <xs:annotation>
+        <xs:documentation>Entidad que actúa como destino en la adscripción</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="IdentificadorInstrumento">
+    <xs:restriction base="xs:string">
+      <xs:length value="6" />
+      <xs:pattern value="[0-9]{6}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Instrumento">
+    <xs:annotation>
+      <xs:documentation>Instrumentos de los planes (Plan General, Normas Subsidiarias, Plan Parcial, ...)</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="codigo">
+      <xs:annotation>
+        <xs:documentation>Identificador único del instrumento</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="IdentificadorInstrumento">
+          <xs:length value="6" />
+          <xs:pattern value="[0-9]{6}" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="nombre">
+      <xs:annotation>
+        <xs:documentation>Denominación del instrumento</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="255" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="Hoja">
+    <xs:sequence>
+      <xs:element name="GEOMETRIA" type="Geometria" />
+    </xs:sequence>
+    <xs:attribute name="nombre" type="xs:string" />
+  </xs:complexType>
+</xs:schema>

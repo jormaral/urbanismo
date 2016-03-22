@@ -1,0 +1,17 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alvaro.Montero
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+ <div id="panelTramitesDatosGenerales" class="centerElement"></div>
+ 
+ <div id="panelTramitesDeterminaciones"></div>
+
+ <div id="panelTramitesEntidades"></div>
+
+ <!-- <div id="panelTramitesAmbitosAplicacion" class="centerElementScroll"></div>  -->
+
+ <div id="panelTramitesDocumentos"></div>

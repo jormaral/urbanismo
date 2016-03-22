@@ -1,0 +1,189 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"   
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+      <ice:panelGroup  id="viewoperacionplanHomePanelGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="viewTextoperacionplanHomeId" value="Operacionplan"/>
+                  </td>
+              </tr>
+          </table>
+      
+
+
+        <s:decorate id="iden" template="../layout/display.xhtml">
+            <ui:define name="label">Iden</ui:define>
+            #{operacionplanHome.instance.iden}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="idinstrumentotipooperacion" template="../layout/display.xhtml">
+            <ui:define name="label">Idinstrumentotipooperacion</ui:define>
+            #{operacionplanHome.instance.idinstrumentotipooperacion}&#160;
+        </s:decorate>
+
+          <div style="clear:both"/>
+ 
+
+    <div id="viewOperacionplanEditsearchButtons" class="actionButtons">      
+
+        <s:button view="/seam/OperacionplanEdit.xhtml" 
+                    id="edit" styleClass="iceCmdBtn"
+                 value="Edit"/>
+
+        <s:button view="/seam/#{empty operacionplanFrom ? 'OperacionplanList' : operacionplanFrom}.xhtml"
+                    id="done" styleClass="iceCmdBtn"
+                 value="Done"/>
+
+    </div>
+  </ice:panelGroup>
+
+
+    <ice:form id="view2operacionplanHomeFormId">
+       <ice:panelTabSet id="viewoperacionplanHomeTabSetId" 
+                styleClass="componentPanelTabSetLayout" 
+		style="margin-bottom:5px;margin-top:10px;">
+
+	<ice:panelTab id="viewplanByIdplanoperadopanelTab" label="Plan by idplanoperado">
+   		<div class="association" id="planByIdplanoperadoParent">
+        
+       		 <h:outputText value="There is no planByIdplanoperado associated with this operacionplan." 
+		                  id="viewplanByIdplanoperadoTextId"
+                   rendered="#{operacionplanHome.instance.planByIdplanoperado == null}"/>
+   
+        	<ice:dataTable  var="plan" 
+                   value="#{operacionplanHome.instance.planByIdplanoperado}" 
+                rendered="#{operacionplanHome.instance.planByIdplanoperado != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+	        columnClasses="allCols"
+                      id="viewplanByIdplanoperadoTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{plan.iden}
+            </ice:column>
+            <ice:column id="viewbsuspendidoId">
+                <f:facet name="header">Bsuspendido</f:facet>
+                #{plan.bsuspendido}
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                #{plan.codigo}
+            </ice:column>
+            <ice:column id="viewidambitoId">
+                <f:facet name="header">Idambito</f:facet>
+                #{plan.idambito}
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{plan.nombre}
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{plan.orden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Plan by idpadre iden</f:facet>
+		    	#{plan.planByIdpadre.iden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Plan by idplanbase iden</f:facet>
+		    	#{plan.planByIdplanbase.iden}
+            </ice:column>
+            <ice:column id="viewtextoId">
+                <f:facet name="header">Texto</f:facet>
+                #{plan.texto}
+            </ice:column>
+            <ice:column id="viewplanColumnId">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewplanLinkId" 
+                     value="View" 
+                      view="/seam/Plan.xhtml">
+                    <f:param name="planIden" 
+                           value="#{plan.iden}"/>
+                </s:link>
+            </ice:column>
+       </ice:dataTable>
+       
+    </div>
+    </ice:panelTab>
+
+	<ice:panelTab id="viewplanByIdplanoperadorpanelTab" label="Plan by idplanoperador">
+   		<div class="association" id="planByIdplanoperadorParent">
+        
+       		 <h:outputText value="There is no planByIdplanoperador associated with this operacionplan." 
+		                  id="viewplanByIdplanoperadorTextId"
+                   rendered="#{operacionplanHome.instance.planByIdplanoperador == null}"/>
+   
+        	<ice:dataTable  var="plan" 
+                   value="#{operacionplanHome.instance.planByIdplanoperador}" 
+                rendered="#{operacionplanHome.instance.planByIdplanoperador != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+	        columnClasses="allCols"
+                      id="viewplanByIdplanoperadorTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{plan.iden}
+            </ice:column>
+            <ice:column id="viewbsuspendidoId">
+                <f:facet name="header">Bsuspendido</f:facet>
+                #{plan.bsuspendido}
+            </ice:column>
+            <ice:column id="viewcodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                #{plan.codigo}
+            </ice:column>
+            <ice:column id="viewidambitoId">
+                <f:facet name="header">Idambito</f:facet>
+                #{plan.idambito}
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{plan.nombre}
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{plan.orden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Plan by idpadre iden</f:facet>
+		    	#{plan.planByIdpadre.iden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Plan by idplanbase iden</f:facet>
+		    	#{plan.planByIdplanbase.iden}
+            </ice:column>
+            <ice:column id="viewtextoId">
+                <f:facet name="header">Texto</f:facet>
+                #{plan.texto}
+            </ice:column>
+            <ice:column id="viewplanColumnId">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewplanLinkId" 
+                     value="View" 
+                      view="/seam/Plan.xhtml">
+                    <f:param name="planIden" 
+                           value="#{plan.iden}"/>
+                </s:link>
+            </ice:column>
+       </ice:dataTable>
+       
+    </div>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+

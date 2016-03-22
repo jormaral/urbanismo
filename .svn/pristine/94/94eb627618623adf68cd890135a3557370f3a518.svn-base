@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-nov-2011 17:20:25 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.ficha.Determinacionclasifacto" table="determinacionclasifacto" schema="ficha">
+        <id name="iden" type="long">
+            <column name="iden"/>
+            <generator class="sequence">
+                <param name="sequence">ficha.determinacionclasifacto_iden_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="ficha" class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Ficha" fetch="select">
+            <column name="idficha" not-null="true" />
+        </many-to-one>
+        <property name="iddeterminacion" type="long">
+            <column name="iddeterminacion" not-null="true" />
+        </property>
+        <set name="valoresclasifactos" table="valoresclasifacto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="iddeterminacionclasifacto" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Valoresclasifacto" />
+        </set>
+    </class>
+    <query name="Determinacionclasifacto.buscaDeterminacionClasifPorFicha">
+            SELECT dca FROM es.mitc.redes.urbanismoenred.data.rpm.ficha.Determinacionclasifacto dca
+	WHERE dca.ficha.iden = :idFicha
+    </query>
+</hibernate-mapping>

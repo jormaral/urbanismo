@@ -1,0 +1,51 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaPanelFiltros"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<ice:panelPopup  id="panelFiltros" autoCentre="true" modal="true"
+		visible="#{gestionEntidades.mostrarPanelFiltros}" styleClass="panelPopup">
+
+
+		<f:facet name="header">
+			<ice:panelGroup>
+				<ice:outputText value="#{messages.filtrosBusqueda}" />
+				
+					<ice:commandButton id="modalFiltroCloseBtn" type="button"
+						image="/img/editorfip/es/comun/cerrar_popup.png"
+						partialSubmit="true"
+						actionListener="#{gestionEntidades.cerrarVentanaFiltros}"
+						styleClass="popupHeaderImage"
+						title="#{messages.botongenerico_cerrar}"
+						alt="#{messages.botongenerico_cerrar}" />
+				
+			</ice:panelGroup>
+		</f:facet>
+
+		<f:facet name="body">
+			<h:panelGrid columns="2" id="datosFiltros">
+					
+					<h:selectBooleanCheckbox
+						value="#{gestionEntidades.filtroNombre}"/>
+					<h:inputText styleClass="etiqueta-Usuario" value="#{messages.nombre}" disabled="true"/>
+					
+					<h:selectBooleanCheckbox
+						value="#{gestionEntidades.filtroDetAplicada}"/>
+					<h:inputText styleClass="etiqueta-Usuario" value="#{messages.determinacionAplicada}" disabled="true"/>
+					
+					<h:selectBooleanCheckbox
+						value="#{gestionEntidades.filtroClave}"/>
+					<h:inputText styleClass="etiqueta-Usuario" value="#{messages.clave}" disabled="true"/>
+					
+					 
+				<ice:commandButton value="#{messages.aplicar}" partialSubmit="true" alt="#{messages.aplicar}" title="#{messages.boton_title_entidad_filtrosBusqueda_aplicar}"
+						 actionListener="#{gestionEntidades.aceptarFiltros}" styleClass="boton2"/>
+				<h:outputText value="" />
+				
+			</h:panelGrid>
+		</f:facet>
+	</ice:panelPopup>
+</f:subview>

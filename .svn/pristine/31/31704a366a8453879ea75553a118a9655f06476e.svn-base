@@ -1,0 +1,131 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaPanelTramites"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+		<ice:panelPopup id="panelTramites" autoCentre="true" modal="true"
+						visible="#{servicioUsuario.mostrarPanelTramites}" styleClass="panelPopup">
+						
+		<f:facet name="header">
+			<ice:panelGroup>
+				<ice:outputText value="#{messages.botonusuario_tramite}" />
+				<ice:commandButton id="modalPnlCloseBtnTramites" type="button"
+					image="/img/editorfip/es/comun/cerrar_popup.png"
+					action="#{servicioUsuario.setMostrarPanelTramites(false)}"
+					styleClass="popupHeaderImage" immediate="true"
+					title="#{messages.boton_title_gestionUsuario_anadirPlan_cerrar}"
+					alt="#{messages.botongenerico_cerrar}" />
+			</ice:panelGroup>
+		</f:facet>
+						
+			<f:facet name="body">
+				
+				
+				<ice:panelGrid columns="1" columnClasses="testCol1,testCol2">
+				<ice:panelGroup>
+
+
+					<ice:panelTabSet id="panelTabArbolTram" styleClass="arbol tablePlanes">
+						<ice:panelTab id="tabArbolTram" label="#{messages.arbol_seleccionartramite}" style="color:transparent;">
+							<!-- TRee values -->
+							<ice:panelGroup scrollHeight="300px"
+								scrollWidth="500px">
+								<ice:tree id="treeTram"
+									value="#{gestionArbolAsignacionTramite.model}" var="node"
+									binding="#{gestionArbolAsignacionTramite.treeComponent}"
+									imageDir="/fipeditor/img/editorfip/es/arboles/"
+									hideRootNode="false" hideNavigation="false" immediate="true"
+									actionListener="#{gestionArbolAsignacionTramite.menuEvent}">
+									<ice:treeNode>
+
+
+										<f:facet name="icon">
+											<ice:panelGroup style="display: inline">
+												<h:graphicImage
+													value="/img/editorfip/es/arboles/#{node.userObject.icon}" />
+
+											</ice:panelGroup>
+										</f:facet>
+										<f:facet name="content">
+
+											<ice:panelGroup
+												styleClass="selectedNode#{node.userObject eq gestionArbolAsignacionTramite.selectedUserObject}"
+												style="display: inline">
+												
+												
+												<ice:selectBooleanCheckbox 
+											 			id="checkTram" partialSubmit="true" 
+											 			value="#{node.userObject.seleccionado}"
+											 			valueChangeListener="#{gestionArbolAsignacionTramite.processValueChange}">										 			
+											        </ice:selectBooleanCheckbox>
+											        
+<!--											        -->
+<!--											        <ice:commandLink-->
+<!--											        	rendered="#{not node.userObject.seleccionado}"-->
+<!--														actionListener="#{gestionArbolAsignacionTramite.processMultiValueChange}">-->
+<!--														<f:param name="nodoId"-->
+<!--															value="#{node.userObject.datosIdTextoArbolGenerico.idBaseDatos}" />-->
+<!--														<ice:graphicImage width="14" height="14"-->
+<!--															alt="#{messages.seleccionar_todos}"-->
+<!--															style="margin-left:2px;margin-right:2px;"-->
+<!--														value="/img/mas_verde.png" />-->
+<!--													</ice:commandLink>-->
+<!--													<ice:commandLink-->
+<!--											        	rendered="#{node.userObject.seleccionado}"-->
+<!--														actionListener="#{gestionArbolAsignacionTramite.processMultiValueChange}">-->
+<!--														<f:param name="nodoId"-->
+<!--															value="#{node.userObject.datosIdTextoArbolGenerico.idBaseDatos}" />-->
+<!--														<ice:graphicImage width="14" height="14"-->
+<!--														   	alt="#{messages.anular_seleccion}"-->
+<!--															style="margin-left:2px;margin-right:2px;"-->
+<!--														value="/img/menos_rojo.png" />-->
+<!--													</ice:commandLink>-->
+													
+													
+													<ice:outputText id="TreeNode"
+														value="#{node.userObject.text}" />
+												
+											</ice:panelGroup>
+
+										</f:facet>
+
+									</ice:treeNode>
+								</ice:tree>
+
+
+							</ice:panelGroup>
+						</ice:panelTab>
+					</ice:panelTabSet>
+
+
+
+				</ice:panelGroup>
+
+				<ice:panelGroup
+					styleClass="cajaSeleccion firstChildTitle backBeanChangeContainer">
+
+					<!-- actual backing bean values. -->
+					<ice:panelGroup styleClass="backBeanChangeBody">
+						<ice:panelGroup style="margin: 0; padding: 0;width:600px;">
+							<ice:panelGrid cellpadding="0" cellspacing="3" columns="2">
+								<ice:panelGroup style="text-align:right;">								
+								<ice:commandButton id="botonSelTram" value="#{messages.botongenerico_seleccionar}" disabled="#{!gestionArbolAsignacionTramite.renderizarBtnSelTramite()}" immediate="true"
+												   action="#{servicioUsuario.seleccionarTramite(gestionArbolAsignacionTramite.obtenerIdsTramitesSeleccionados())}" styleClass="boton1"
+												   alt="#{messages.botongenerico_seleccionar}" title="#{messages.boton_title_gestionUsuario_anadirPlan_seleccionar}"/>
+								</ice:panelGroup>
+								<ice:panelGroup style="text-align:left;">
+								<ice:commandButton value="#{messages.botongenerico_cancelar}" immediate="true" action="#{servicioUsuario.setMostrarPanelTramites(false)}" styleClass="boton1"
+										alt="#{messages.botongenerico_cancelar}" title="#{messages.boton_title_gestionUsuario_anadirPlan_cancelar}"/>
+								</ice:panelGroup>
+							</ice:panelGrid>
+						</ice:panelGroup>
+					</ice:panelGroup>
+				</ice:panelGroup>
+			</ice:panelGrid>
+			
+			</f:facet>
+		</ice:panelPopup>	
+</f:subview>

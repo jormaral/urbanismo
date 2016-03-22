@@ -1,0 +1,96 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
+                template="layout/template.xhtml">
+
+
+<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+		
+		
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}" view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			
+								
+			</s:link>
+		</ice:panelGroup>
+	</ui:define>
+
+<ui:define name="body">
+
+
+			
+
+		  	<ice:panelGroup columns="5" styleClass="centerHome" renderedOnUserRole="ADM,SUP"> 
+		  	
+				<s:link view="/administracion/AdministracionNavegacion.xhtml" id="AdministracionNavegacionMenu" 
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/01_ADMINISTRACION.png"
+						alt="#{messages.menu_administracion}" title="#{messages.menu_administracion}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/gestionfip/GestionFipNavegacion.xhtml" id="GestionFipNavegacionMenu" 
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/02_GESTION_FIP.png"
+						alt="#{messages.menu_gestionfip}" title="#{messages.menu_gestionfip}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/produccionfip/ProduccionFipNavegacion.xhtml" id="ProduccionFipNavegacionMenu" 
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/03_PRODUCCION_FIP.png"
+						alt="#{messages.menu_produccionfip}" title="#{messages.menu_produccionfip}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/informacionfip/InformacionFipNavegacion.xhtml" id="InformacionFipNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/04_INFORMACION_FIP.png"
+						alt="#{messages.menu_informacionfip}" title="#{messages.menu_informacionfip}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/ayuda/AyudaNavegacion.xhtml" id="AyudaNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/05_AYUDA.png"
+						alt="#{messages.menu_ayuda}" title="#{messages.menu_ayuda}" styleClass="iconoNav"/>
+				</s:link>
+				
+
+			</ice:panelGroup>
+			
+			<ice:panelGroup columns="3" styleClass="centerHome" renderedOnUserRole="SIS"> 
+		  	
+				
+				
+				<s:link view="/produccionfip/ProduccionFipNavegacion.xhtml" id="ProduccionFipNavegacionMenu" 
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/03_PRODUCCION_FIP.png"
+						alt="#{messages.menu_produccionfip}" title="#{messages.menu_produccionfip}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/informacionfip/InformacionFipNavegacion.xhtml" id="InformacionFipNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/04_INFORMACION_FIP.png"
+						alt="#{messages.menu_informacionfip}" title="#{messages.menu_informacionfip}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/ayuda/AyudaNavegacion.xhtml" id="AyudaNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/05_AYUDA.png"
+						alt="#{messages.menu_ayuda}" title="#{messages.menu_ayuda}" styleClass="iconoNav"/>
+				</s:link>
+				
+
+			</ice:panelGroup>
+			
+  			<div style="clear: both" />
+  			
+
+
+
+	</ui:define>
+</ui:composition>

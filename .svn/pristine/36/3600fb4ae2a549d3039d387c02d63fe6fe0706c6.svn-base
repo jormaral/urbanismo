@@ -1,0 +1,550 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.consultacontenidoplaneamiento}"
+				view="/informacionfip/consultacontenidoplaneamiento/VerContenidoPlaneamiento.xhtml"
+				id="VerContenidoPlaneamientoRutaMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+
+	</ui:define>
+	<ui:define name="body">
+
+		<ice:form id="formList">
+			<ice:panelGroup styleClass="infoseleccion">
+				<ice:graphicImage styleClass="tooltip_imagen"
+					alt="#{messages.genericos_info}"
+					url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				<ice:outputLabel
+					value="#{messages.seleccion_info_exportarentidadesexcel}"
+					styleClass="labelseleccioninfo" />
+
+			</ice:panelGroup>
+
+			<ice:panelGroup>
+				<ice:panelGrid columns="4"
+					columnClasses="colExcel1,colExcel2,colExcel3,colExcel4">
+					<ice:outputLabel value="#{messages.exportarentidadesexcel}"
+						styleClass="labelseleccioninfo" />
+					<ice:dataExporter for="listaDeUsuarios"
+						label="#{messages.descargar_excel}" type="excel"
+						image="/img/editorfip/#{localeSelector.language}/comun/excel.jpg"
+						popupBlockerLabel="#{messages.bloqueador_ventana_emergente}"
+						clickToCreateFileText="#{messages.descargar_excel_parentesis}" />
+
+					<ice:outputLabel value="#{messages.exportarentidadescsv}"
+						styleClass="labelseleccioninfo" />
+					<ice:dataExporter for="listaDeUsuarios"
+						label="#{messages.descargar_csv}" type="csv"
+						image="/img/editorfip/#{localeSelector.language}/comun/csv.jpg"
+						popupBlockerLabel="#{messages.bloqueador_ventana_emergente}"
+						clickToCreateFileText="#{messages.descargar_csv_parentesis}" />
+
+
+
+					<ice:outputLabel value="#{messages.exportardeterminacionesexcel}"
+						styleClass="labelseleccioninfo" />
+					<ice:dataExporter for="listaDeterminaciones"
+						label="#{messages.descargar_excel}" type="excel"
+						image="/img/editorfip/#{localeSelector.language}/comun/excel.jpg"
+						popupBlockerLabel="#{messages.bloqueador_ventana_emergente}"
+						clickToCreateFileText="#{messages.descargar_excel_parentesis}" />
+
+					<ice:outputLabel value="#{messages.exportardeterminacionescsv}"
+						styleClass="labelseleccioninfo" />
+					<ice:dataExporter for="listaDeterminaciones"
+						label="#{messages.descargar_csv}" type="csv"
+						image="/img/editorfip/#{localeSelector.language}/comun/csv.jpg"
+						popupBlockerLabel="#{messages.bloqueador_ventana_emergente}"
+						clickToCreateFileText="#{messages.descargar_csv_parentesis}" />
+
+					<ice:outputLabel value="#{messages.exportarcondicionesexcel}"
+						styleClass="labelseleccioninfo" />
+					<ice:dataExporter for="listaCU" label="#{messages.descargar_excel}"
+						type="excel"
+						image="/img/editorfip/#{localeSelector.language}/comun/excel.jpg"
+						popupBlockerLabel="#{messages.bloqueador_ventana_emergente}"
+						clickToCreateFileText="#{messages.descargar_excel_parentesis}" />
+
+					<ice:outputLabel value="#{messages.exportarcondicionescsv}"
+						styleClass="labelseleccioninfo" />
+					<ice:dataExporter for="listaCU" label="#{messages.descargar_csv}"
+						type="csv"
+						image="/img/editorfip/#{localeSelector.language}/comun/csv.jpg"
+						popupBlockerLabel="#{messages.bloqueador_ventana_emergente}"
+						clickToCreateFileText="#{messages.descargar_csv_parentesis}" />
+				</ice:panelGrid>
+			</ice:panelGroup>
+
+			<!-- LISTADO DE DETERMINACIONES -->
+
+			<ice:dataTable rendered="false"
+				value="#{servicioExportacionDE.listadoDEExcelDTO}" var="item"
+				id="listaDeterminaciones" enableContextMenu="false"
+				selectionMode="none" style="position:static;z-index:-1;">
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nivel1}" />
+					</f:facet>
+					<h:outputText value="#{item.ordenNivel_1}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombre1}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreNivel_1}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nivel2}" />
+					</f:facet>
+					<h:outputText value="#{item.ordenNivel_2}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombre2}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreNivel_2}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nivel3}" />
+					</f:facet>
+					<h:outputText value="#{item.ordenNivel_3}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombre3}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreNivel_3}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nivel4}" />
+					</f:facet>
+					<h:outputText value="#{item.ordenNivel_4}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombre4}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreNivel_4}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nivel5}" />
+					</f:facet>
+					<h:outputText value="#{item.ordenNivel_5}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombre5}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreNivel_5}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nivel6}" />
+					</f:facet>
+					<h:outputText value="#{item.ordenNivel_6}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombre6}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreNivel_6}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nivel7}" />
+					</f:facet>
+					<h:outputText value="#{item.ordenNivel_7}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombre7}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreNivel_7}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nivel8}" />
+					</f:facet>
+					<h:outputText value="#{item.ordenNivel_8}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombre8}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreNivel_8}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.caracter}" />
+					</f:facet>
+					<h:outputText value="#{item.textoCaracter}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.referencia}" />
+					</f:facet>
+					<h:outputText value="#{item.referencia}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.equivale}" />
+					</f:facet>
+					<h:outputText value="#{item.equivale}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.unidad}" />
+					</f:facet>
+					<h:outputText value="#{item.textoUnidad}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.grupoaplicacion}" />
+					</f:facet>
+					<h:outputText value="#{item.textoGrupoAplicacion}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.articulo}" />
+					</f:facet>
+					<h:outputText value="#{item.apartadoArticulo}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.etiqueta}" />
+					</f:facet>
+					<h:outputText value="#{item.etiqueta}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombrerg1}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreRegulacion1}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.textorg1}" />
+					</f:facet>
+					<h:outputText value="#{item.textoRegulacion1}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombrerg2}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreRegulacion2}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.textorg2}" />
+					</f:facet>
+					<h:outputText value="#{item.textoRegulacion2}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombrerg3}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreRegulacion3}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.textorg3}" />
+					</f:facet>
+					<h:outputText value="#{item.textoRegulacion3}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombrerg4}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreRegulacion4}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.textorg4}" />
+					</f:facet>
+					<h:outputText value="#{item.textoRegulacion4}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombrerg5}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreRegulacion5}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.textorg5}" />
+					</f:facet>
+					<h:outputText value="#{item.textoRegulacion5}" />
+				</ice:column>
+
+			</ice:dataTable>
+
+			<!-- LISTADO DE ENTIDADES -->
+
+
+			<ice:dataTable rendered="false"
+				value="#{servicioExportacionEntidad.listadoExcelDTO}" var="item"
+				id="listaDeUsuarios" enableContextMenu="false" selectionMode="none"
+				style="position:static;z-index:-1;">
+				<!-- <ice:rowSelector value="#{servicioUsuarioLista.seleccionUsuarios[usr.getUsername()]}" 
+									selectionAction="#{servicioUsuarioLista.seleccionarFila(usr.getUsername())}" toggleOnInput="false" /> -->
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.mun}" />
+					</f:facet>
+					<h:outputText value="#{item.municipio}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.plan}" />
+					</f:facet>
+					<h:outputText value="#{item.plan}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.codgrupo}" />
+					</f:facet>
+					<h:outputText value="#{item.codGrupo}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.grupo}" />
+					</f:facet>
+					<h:outputText value="#{item.grupo}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.codsubgrupo}" />
+					</f:facet>
+					<h:outputText value="#{item.codSubgrupo}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.subgrupo}" />
+					</f:facet>
+					<h:outputText value="#{item.subgrupo}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.codentidad}" />
+					</f:facet>
+					<h:outputText value="#{item.codEntidad}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.entidad}" />
+					</f:facet>
+					<h:outputText value="#{item.entidad}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.entidad}" />
+					</f:facet>
+					<h:outputText value="#{item.nivel4}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.etiqueta}" />
+					</f:facet>
+					<h:outputText value="#{item.etiqueta}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.equivalencias}" />
+					</f:facet>
+					<h:outputText value="#{item.equivalencias}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.fuente}" />
+					</f:facet>
+					<h:outputText value="#{item.fuente}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.clave}" />
+					</f:facet>
+					<h:outputText value="#{item.clave}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.observaciones}" />
+					</f:facet>
+					<h:outputText value="#{item.observaciones}" />
+				</ice:column>
+
+			</ice:dataTable>
+
+			<!-- LISTADO DE CONDICIONES URBANSTICAS -->
+
+			<ice:dataTable rendered="false"
+				value="#{servicioExportacionCU.listadoExcelDTO}" var="item"
+				id="listaCU" enableContextMenu="false" selectionMode="none"
+				style="position:static;z-index:-1;">
+				<!-- <ice:rowSelector value="#{servicioUsuarioLista.seleccionUsuarios[usr.getUsername()]}" 
+									selectionAction="#{servicioUsuarioLista.seleccionarFila(usr.getUsername())}" toggleOnInput="false" /> -->
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.codentidad}" />
+					</f:facet>
+					<h:outputText value="#{item.codigoEntidad}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombreentidad}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreEntidad}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.apdodeterminacion}" />
+					</f:facet>
+					<h:outputText value="#{item.apartadoDeterminacion}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombredeterminacion}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreDeterminacion}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.apdodeterminacionregimen}" />
+					</f:facet>
+					<h:outputText value="#{item.apartadoDeterminacionRegimen}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombredeterminacionregimen}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreDeterminacionRegimen}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.apdovalor}" />
+					</f:facet>
+					<h:outputText value="#{item.apartadoValorReferencia}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.valor}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreValor}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.tituloregesp}" />
+					</f:facet>
+					<h:outputText value="#{item.tituloRegEsp}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.textoregesp}" />
+					</f:facet>
+					<h:outputText value="#{item.textoRegEsp}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.apdogrupoapl}" />
+					</f:facet>
+					<h:outputText value="#{item.apartadoGrupoAplicacion}" />
+				</ice:column>
+				<ice:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.nombregrupoapl}" />
+					</f:facet>
+					<h:outputText value="#{item.nombreGrupoAplicacion}" />
+				</ice:column>
+
+			</ice:dataTable>
+
+		</ice:form>
+
+
+
+	</ui:define>
+
+</ui:composition>

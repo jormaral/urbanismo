@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-nov-2011 17:20:25 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.ficha.Ficha" table="ficha" schema="ficha">
+        <id name="iden" type="long">
+            <column name="iden"/>
+            <generator class="sequence">
+                <param name="sequence">ficha.ficha_iden_seq</param>
+            </generator>
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="2000" not-null="true" />
+        </property>
+        <property name="path" type="string">
+            <column name="path" length="2000" not-null="true" />
+        </property>
+        <property name="idtramite" type="long">
+            <column name="idtramite" not-null="true" />
+        </property>
+        <property name="xpath" type="string">
+            <column name="xpath" not-null="true" />
+        </property>
+        <set name="determinacionclasifactos" table="determinacionclasifacto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idficha" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Determinacionclasifacto" />
+        </set>
+        <set name="regimenesusos" table="regimenesuso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idficha" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Regimenesuso" />
+        </set>
+        <set name="regimenesactos" table="regimenesacto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idficha" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Regimenesacto" />
+        </set>
+        <set name="fichagrupodeterminacions" table="fichagrupodeterminacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idficha" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Fichagrupodeterminacion" />
+        </set>
+        <set name="fichaconjuntogrupos" table="fichaconjuntogrupo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idficha" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Fichaconjuntogrupo" />
+        </set>
+        <set name="determinacionclasifusos" table="determinacionclasifuso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idficha" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Determinacionclasifuso" />
+        </set>
+    </class>
+    <query name="Ficha.buscaPorTramite">SELECT f FROM es.mitc.redes.urbanismoenred.data.rpm.ficha.Ficha f 
+	WHERE f.idtramite = :idTramite
+	ORDER BY f.iden
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,183 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"  
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="boletintramiteSearch" styleClass="edit">
+      <ice:panelGroup  id="searchGroup" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+                    <ice:outputText id="listBoletintramiteId" value="Boletintramite search filter"/>
+                 </td>
+              </tr>
+         </table>	
+         <ice:panelGroup id="listPanelGroupBoletintramiteId" styleClass="edit">
+		
+            <s:decorate id="numerodecId" template="../layout/display.xhtml">
+                <ui:define name="label">Numero</ui:define>
+                <ice:inputText id="numero" 
+                          value="#{boletintramiteList.boletintramite.numero}"
+				  partialSubmit="true"/>
+            </s:decorate>
+
+            <s:decorate template="../layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <ice:selectOneRadio id="logic" value="#{boletintramiteList.restrictionLogicOperator}" partialSubmit="true">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </ice:selectOneRadio>
+            </s:decorate>
+          
+   
+	  </ice:panelGroup>
+  
+        
+        <div class="actionButtons">
+            <ice:commandButton id="search" value="Search" action="/BoletintramiteList.xhtml"/>
+        </div>
+      </ice:panelGroup> 
+    </ice:form>
+    
+    <ice:panelGroup styleClass="formBorderHighlight">
+
+    <h3>boletintramite  search results</h3>
+
+    <div class="searchResults" id="listboletintramiteResults">
+    <ice:outputText value="The boletintramite search returned no results." 
+               rendered="#{empty boletintramiteList.resultList}"/>
+               
+    <ice:dataTable id="boletintramiteList" 
+                  var="boletintramite"
+                value="#{boletintramiteList.resultList}" 
+            resizable="true"
+	columnClasses="allCols"
+             rendered="#{not empty boletintramiteList.resultList}">
+        <ice:column id="listidenId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{boletintramiteList}"/>
+                    <ui:param name="propertyLabel" value="Iden"/>
+                    <ui:param name="propertyPath" value="boletintramite.iden"/>
+                </ui:include>
+            </f:facet>
+            #{boletintramite.iden}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listfechaId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{boletintramiteList}"/>
+                    <ui:param name="propertyLabel" value="Fecha"/>
+                    <ui:param name="propertyPath" value="boletintramite.fecha"/>
+                </ui:include>
+            </f:facet>
+            #{boletintramite.fecha}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listidboletinId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{boletintramiteList}"/>
+                    <ui:param name="propertyLabel" value="Idboletin"/>
+                    <ui:param name="propertyPath" value="boletintramite.idboletin"/>
+                </ui:include>
+            </f:facet>
+            #{boletintramite.idboletin}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listnumeroId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{boletintramiteList}"/>
+                    <ui:param name="propertyLabel" value="Numero"/>
+                    <ui:param name="propertyPath" value="boletintramite.numero"/>
+                </ui:include>
+            </f:facet>
+            #{boletintramite.numero}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listColumntramiteId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{boletintramiteList}"/>
+                    <ui:param name="propertyLabel" value="Tramite iden"/>
+                    <ui:param name="propertyPath" value="boletintramite.tramite.iden"/>
+                </ui:include>
+            </f:facet>
+            #{boletintramite.tramite.iden}
+        </ice:column>
+        <ice:column id="listColumnBoletintramiteId">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/seam/#{empty from ? 'Boletintramite' : from}.xhtml" 
+                   value="#{empty from ? 'View' : 'Select'}" 
+                      id="boletintramite">
+                <f:param name="boletintramiteIden" 
+                        value="#{boletintramite.iden}"/>
+            </s:link>
+			#{' '}
+            <s:link view="/seam/BoletintramiteEdit.xhtml"
+                   value="Edit" 
+                      id="boletintramiteEdit"
+                      rendered="#{empty from}">
+                <f:param name="boletintramiteIden" 
+                        value="#{boletintramite.iden}"/>
+            </s:link>
+        </ice:column>
+    </ice:dataTable>
+
+    </div>
+</ice:panelGroup>
+
+    <div class="tableControl">
+      
+        <s:link view="/seam/BoletintramiteList.xhtml" 
+            rendered="#{boletintramiteList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPageboletintramiteListId">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+        
+        <s:link view="/seam/BoletintramiteList.xhtml" 
+            rendered="#{boletintramiteList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPageboletintramiteListId">
+            <f:param name="firstResult" 
+                    value="#{boletintramiteList.previousFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/BoletintramiteList.xhtml" 
+            rendered="#{boletintramiteList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPageboletintramiteListId">
+            <f:param name="firstResult" 
+                    value="#{boletintramiteList.nextFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/BoletintramiteList.xhtml" 
+            rendered="#{boletintramiteList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPageboletintramiteListId">
+            <f:param name="firstResult" 
+                    value="#{boletintramiteList.lastFirstResult}"/>
+        </s:link>
+        
+    </div>
+    
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/seam/BoletintramiteEdit.xhtml"
+                    id="create" 
+                 value="Create boletintramite">
+            <f:param name="boletintramiteIden"/>
+        </s:button>
+    </s:div>
+    
+</ui:define>
+
+</ui:composition>
+

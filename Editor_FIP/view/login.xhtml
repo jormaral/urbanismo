@@ -1,0 +1,97 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="layout/templateLogin.xhtml">
+
+	<ui:define name="body">
+
+		<ice:form id="loginForm">
+			
+			<br/>
+			<ice:panelGroup id="loginPanelGroupId"
+				styleClass="formBorderHighlight">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td class="iceDatTblColHdr2"><ice:outputText id="loginTextId"
+							value="#{messages.login_iniciarsesion}" /></td>
+					</tr>
+				</table>
+
+				<!--  Please login with the username 'admin' and a blank password. -->
+
+				<br/>
+
+				<ice:panelGrid id="loginPanelGridId"
+					columns="2" rowClasses="prop" columnClasses="nameLogin,value">
+					<ice:outputLabel for="username" styleClass="etiquetas"
+						value="#{messages.login_usuario}" />
+					<ice:inputText id="username" value="#{credentials.username}" />
+					<ice:outputLabel for="password" styleClass="etiquetas"
+						value="#{messages.login_clave}" />
+					<ice:inputSecret id="password" value="#{credentials.password}" />
+					
+
+					<ice:outputLabel />
+					<ice:panelGroup>
+						<ice:commandButton id="submit" alt="#{messages.login_iniciarsesion}" title="#{messages.boton_title_login_iniciarSesion}"
+							value="#{messages.login_iniciarsesion}"
+							action="#{identity.login}" styleClass="boton2" >
+								<s:defaultAction />
+							</ice:commandButton>
+						<br />
+						<ice:commandLink value="#{messages.rec_pass}"
+							action="#{rememberPass.setMostrarPopUp(true)}"
+							style="color:Silver;font-style:normal;" />
+					</ice:panelGroup>
+
+				</ice:panelGrid>
+
+			</ice:panelGroup>
+
+
+
+			<ice:panelPopup autoCentre="true" modal="true" id="rememberPassPopup"
+				visible="#{rememberPass.mostrarPopUp}" styleClass="panelPopup">
+				<f:facet name="header">
+					<ice:panelGroup>
+						<ice:outputText value="#{messages.rec_pass_titulo}" />
+						<ice:commandButton id="modalPnlCloseBtn" type="button"
+							image="/img/editorfip/es/comun/cerrar_popup.png"
+							action="#{rememberPass.setMostrarPopUp(false)}"
+							styleClass="popupHeaderImage" immediate="true"
+							title="#{messages.botongenerico_cerrar}"
+							alt="#{messages.botongenerico_cerrar}" />
+					</ice:panelGroup>
+				</f:facet>
+
+				<f:facet name="body">
+					<ice:panelGrid columnClasses="colRecPass">
+						<ice:outputText value="#{messages.rec_pass_mensaje}" />
+
+						<h:panelGrid columns="2">
+							<ice:selectOneMenu value="#{rememberPass.byUsername}">
+								<f:selectItem
+									itemLabel="#{messages.gestionusuario_usuario_username}"
+									itemValue="true" />
+								<f:selectItem
+									itemLabel="#{messages.gestionusuario_usuario_mail}"
+									itemValue="false" />
+							</ice:selectOneMenu>
+							<h:inputText value="#{rememberPass.campo}" />
+						</h:panelGrid>
+
+						<ice:commandButton value="#{messages.rec_pass_boton}" alt="#{messages.rec_pass_boton}" title="#{messages.boton_title_login_recuperarPass}"
+							action="#{rememberPass.remember}" styleClass="boton4"/>
+
+					</ice:panelGrid>
+				</f:facet>
+			</ice:panelPopup>
+
+		</ice:form>
+	</ui:define>
+</ui:composition>

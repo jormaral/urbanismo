@@ -1,0 +1,49 @@
+.mooTree_node {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 10px;
+	white-space: nowrap;
+        z-index:100;
+        /*width:400px;      Eliminado por bug en IE7*/
+        background-color: transparent;
+}
+
+.mooTree_text {
+	padding-top: 3px;
+	height: 15px;
+	cursor: pointer;
+        z-index:100;
+        /*width:300px;      Eliminado por bug en IE7*/
+        background-color: transparent;
+        overflow:visible;
+        color:#333333;
+}
+
+.mooTree_img {
+	float: left;
+	width: 18px;
+	height: 18px;
+	overflow: hidden;
+        z-index:100;
+        background-color: transparent;
+}
+
+.mooTree_selected	 {
+	background-color: #dddddd;
+	font-weight: bold;
+        /*width:300px;    Eliminado por bug en IE7*/
+        z-index:100;
+}
+
+.mooTree_selected_search	 {
+	background-color: #F2F5A9;
+	font-weight: bold;
+        /*width:300px;    Eliminado por bug en IE7*/
+        z-index:100;
+}
+
+
+
+.cloneElementClass
+{
+    z-index:80;
+}

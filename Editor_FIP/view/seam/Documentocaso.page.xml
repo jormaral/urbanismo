@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns="http://jboss.com/products/seam/pages"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd">
+
+      
+
+
+   <param name="documentocasoFrom"/>
+   <param name="documentocasoIden" value="#{documentocasoHome.documentocasoIden}"/>
+   <param name="casoentidaddeterminacionFrom"/>
+   <param name="casoentidaddeterminacionIden" value="#{casoentidaddeterminacionHome.casoentidaddeterminacionIden}"/>
+   <param name="entidaddeterminacionFrom"/>
+   <param name="entidaddeterminacionIden" value="#{entidaddeterminacionHome.entidaddeterminacionIden}"/>
+   <param name="determinacionFrom"/>
+   <param name="determinacionIden" value="#{determinacionHome.determinacionIden}"/>
+   <param name="tramiteFrom"/>
+   <param name="tramiteIden" value="#{tramiteHome.tramiteIden}"/>
+   <param name="planFrom"/>
+   <param name="planIden" value="#{planHome.planIden}"/>
+
+
+
+   <param name="entidadFrom"/>
+   <param name="entidadIden" value="#{entidadHome.entidadIden}"/>
+
+
+
+   <param name="documentoFrom"/>
+   <param name="documentoIden" value="#{documentoHome.documentoIden}"/>
+
+
+</page>

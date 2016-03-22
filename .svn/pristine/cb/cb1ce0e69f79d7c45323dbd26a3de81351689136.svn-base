@@ -1,0 +1,175 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+
+			<s:link style="color:blue;" value="#{messages.menu_verplanbase}"
+				view="/informacionfip/PlanBaseNavegacion.xhtml"
+				id="PlanBaseRutaMenu" propagation="none">
+
+
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_consulta_unidades}"
+				view="/informacionfip/planbase/unidades/VerUnidad.xhtml"
+				id="VerUnidadPlanBaseNavegacionMenu" propagation="none">
+
+			</s:link>
+
+
+
+		</ice:panelGroup>
+
+	</ui:define>
+
+	<ui:define name="body">
+
+		<ice:form>
+
+			<ice:panelGroup>
+
+				<ice:dataTable id="listaUnidades"
+					value="#{listaUnidades.unidadesList}"
+					sortColumn="#{listaUnidades.sortColumnName}"
+					sortAscending="#{listaUnidades.ascending}" var="item" rows="10"
+					rendered="#{not empty listaUnidades.unidadesList}">
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.unidad_iddet}" />
+						</f:facet>
+						<ice:outputText value="#{item.idDeterminacion}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.unidad_nomdet}" />
+						</f:facet>
+						<ice:outputText value="#{item.nombreDeterminacion}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:commandSortHeader
+								columnName="#{listaUnidades.abrevcolumnname}" arrow="true">
+								<ice:outputText value="#{messages.unidad_abrev}" />
+							</ice:commandSortHeader>
+						</f:facet>
+						<ice:outputText value="#{item.abreviatura}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.unidad_def}" />
+						</f:facet>
+						<ice:outputText value="#{item.definicion}" />
+					</ice:column>
+
+
+
+				</ice:dataTable>
+
+
+				<!-- Paginator with page controls -->
+				<ice:panelGrid columns="1">
+					<ice:panelGroup styleClass="pnlGrpdataPaginator">
+						<ice:dataPaginator id="dataScroll_listaUnidades"
+							for="listaUnidades" paginator="true" fastStep="3"
+							paginatorMaxPages="4"
+							rendered="#{not empty listaUnidades.unidadesList}"
+							styleClass="botonesdataPaginator">
+							<f:facet name="first">
+								<ice:graphicImage
+									url="/img/editorfip/es/arboles/arrow-first.gif"
+									style="border:none;" title="#{messages.primera_pagina}" />
+							</f:facet>
+							<f:facet name="last">
+								<ice:graphicImage url="/img/editorfip/es/arboles/arrow-last.gif"
+									style="border:none;" title="#{messages.ultima_pagina}" />
+							</f:facet>
+							<f:facet name="previous">
+								<ice:graphicImage
+									url="/img/editorfip/es/arboles/arrow-previous.gif"
+									style="border:none;" title="#{messages.pagina_anterior}" />
+							</f:facet>
+							<f:facet name="next">
+								<ice:graphicImage url="/img/editorfip/es/arboles/arrow-next.gif"
+									style="border:none;" title="#{messages.pagina_siguiente}" />
+							</f:facet>
+							<f:facet name="fastforward">
+								<ice:graphicImage url="/img/editorfip/es/arboles/arrow-ff.gif"
+									style="border:none;" title="#{messages.avance_rapido}" />
+							</f:facet>
+							<f:facet name="fastrewind">
+								<ice:graphicImage url="/img/editorfip/es/arboles/arrow-fr.gif"
+									style="border:none;" title="#{messages.retroceso_rapido}" />
+							</f:facet>
+						</ice:dataPaginator>
+					</ice:panelGroup>
+
+					<ice:panelGroup styleClass="pnlGrpdataPaginator">
+						<!-- Display counts about the table and the currently displayed page -->
+						<ice:dataPaginator id="dataScroll_listaUnidades2"
+							for="listaUnidades" rowsCountVar="rowsCount_unidadesList"
+							displayedRowsCountVar="displayedRowsCount_unidadesList"
+							firstRowIndexVar="firstRowIndex_unidadesList"
+							lastRowIndexVar="lastRowIndex_unidadesList"
+							pageCountVar="pageCount_unidadesList"
+							pageIndexVar="pageIndex_unidadesList"
+							rendered="#{not empty listaUnidades.unidadesList}"
+							styleClass="paginasdataPaginator">
+							<ice:outputFormat value="#{messages.mensaje_elementos_mostrados}"
+								styleClass="standard">
+								<f:param value="#{rowsCount_unidadesList}" />
+								<f:param value="#{displayedRowsCount_unidadesList}" />
+								<f:param value="#{firstRowIndex_unidadesList}" />
+								<f:param value="#{lastRowIndex_unidadesList}" />
+								<f:param value="#{pageIndex_unidadesList}" />
+								<f:param value="#{pageCount_unidadesList}" />
+							</ice:outputFormat>
+						</ice:dataPaginator>
+					</ice:panelGroup>
+				</ice:panelGrid>
+
+
+				<ice:outputLabel rendered="#{empty listaUnidades.unidadesList}"
+					value="#{messages.no_hay_datos}" styleClass="dataResult" />
+
+			</ice:panelGroup>
+
+		</ice:form>
+	</ui:define>
+
+</ui:composition>
+
+
+
+

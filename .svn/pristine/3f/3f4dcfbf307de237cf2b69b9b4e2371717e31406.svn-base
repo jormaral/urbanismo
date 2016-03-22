@@ -1,0 +1,22 @@
+ <div id="panelValidacionesPendientes" class="centerElement">
+ 	<div id="panelValidacionesPendientesHeader" class="panel-header" style="display: block;">
+		<div id="panelValidacionesPendientesHeaderToolbox" class="panel-header-toolbox">
+			<div class="toolbox divider" style="float:right;>
+				<span class="iconWrapper"><input type="text" class="searchFieldValidacion" id="txtImputSearch" name="search_query" maxlength="200" style="width:400px;"/></span>			
+				<span class="iconWrapper"><img id="btnSubmitSearch" class="toolBoxAction" src="styles/images/search_icon.png" alt="Buscar" title="Introduce un texto de búsqueda"/></span>
+			</div>
+		</div>
+	</div>
+	<div id="panelValidacionesPendientesData" class="centerElementScroll"></div>
+ </div>
+ <div id="panelValidacionesRealizadas" class="centerElement" style="display: none;">
+ 	<div id="panelValidacionesRealizadasHeader" class="panel-header" style="display: block;">
+		<div id="panelValidacionesRealizadasHeaderToolbox" class="panel-header-toolbox">
+			<div class="toolbox divider" style="float:right;>
+				<span class="iconWrapper"><input type="text" class="searchFieldValidacion" id="txtImputSearchRealizadas" name="search_query" maxlength="200" style="width:400px;"/></span>			
+				<span class="iconWrapper"><img id="btnSubmitSearchRealizadas" class="toolBoxAction" src="styles/images/search_icon.png" alt="Buscar" title="Introduce un texto de búsqueda"/></span>
+			</div>
+		</div>
+	</div>
+	<div id="panelValidacionesRealizadasData" class="centerElementScroll"></div>
+ </div> 

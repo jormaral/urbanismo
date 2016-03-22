@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-abr-2012 12:30:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.refundido.Proceso" schema="refundido" table="proceso">
+        <id name="iden" type="int">
+            <column name="iden" />
+            <generator class="sequence">
+    			<param name="sequence">refundido.refundido_proceso_sequence</param>
+   			</generator>
+        </id>
+        <property name="usuario" type="int">
+            <column name="usuario" not-null="true" />
+        </property>
+        <property name="ambito" type="int">
+            <column name="ambito" not-null="true" />
+        </property>
+        <property name="inicio" type="timestamp">
+            <column name="inicio" length="35" not-null="true" />
+        </property>
+        <property name="fin" type="timestamp">
+            <column name="fin" length="35" />
+        </property>
+        <property name="correcto" type="java.lang.Boolean">
+            <column name="correcto" />
+        </property>
+        <set name="archivos" table="archivo" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="proceso" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Archivo" />
+        </set>
+    </class>
+    <query name="Proceso.obtenerPorUsuario">SELECT proc FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Proceso proc WHERE proc.usuario = :idUsuario ORDER BY proc.inicio</query>
+</hibernate-mapping>

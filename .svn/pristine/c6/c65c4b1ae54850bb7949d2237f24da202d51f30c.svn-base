@@ -1,0 +1,106 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_planprerefundido}"
+				view="/informacionfip/planprerefundido/PlanesprerefundidoNavegacion.xhtml"
+				id="PlanesprerefundidoRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_consulta_determinaciones}"
+				view="/informacionfip/planprerefundido/determinaciones/Determinaciones.xhtml"
+				id="DeterminacionesRutaMenu" propagation="none">
+
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+
+	</ui:define>
+	<ui:define name="buscar">
+		<ice:form>
+			<ice:panelGrid columns="3">
+
+				<ice:selectInputText style="align:left" rows="10" width="250"
+					listVar="listado"
+					valueChangeListener="#{gestionDeterminaciones.actualizarListaDeterminacion}"
+					listValue="#{gestionDeterminaciones.resultadosBusqueda}">
+					<f:facet name="selectInputText">
+						<ice:panelGrid columns="1">
+							<ice:outputText style="text-align:left;width:10px"
+								value="#{listado.apartado}. #{listado.nombre}" />
+						</ice:panelGrid>
+					</f:facet>
+				</ice:selectInputText>
+				<ice:commandButton value="      "
+					title="#{messages.boton_title_determinacionPV_lupa}"
+					action="#{gestionArbolDeterminaciones.expandirNodo(gestionDeterminaciones.determinacionSel)}"
+					styleClass="botonLupa" alt="#{messages.lupa_determinacion}" />
+				<s:link id="selPlanEncargadoButtonId"
+					action="#{gestionDeterminaciones.mostrarPanel()}">
+					<ice:outputLabel styleClass="hiperenlace"
+						value="#{messages.filtros}" />
+				</s:link>
+			</ice:panelGrid>
+		</ice:form>
+	</ui:define>
+
+	<ui:define name="body">
+
+
+		<ice:panelGrid columns="2"
+			columnClasses="colArbolDeterm,colDetallesDeterm">
+			<ice:panelGroup>
+				<ui:include
+					src="../../../produccionfip/gestiondiccionariodeterminaciones/ArbolDeterminaciones.xhtml" />
+			</ice:panelGroup>
+
+			<ice:panelGroup>
+				<ui:include
+					src="../../../produccionfip/gestiondiccionariodeterminaciones/DeterminacionDetalleSinEditarPrerefundido.xhtml" />
+			</ice:panelGroup>
+
+		</ice:panelGrid>
+
+	</ui:define>
+
+
+
+
+</ui:composition>

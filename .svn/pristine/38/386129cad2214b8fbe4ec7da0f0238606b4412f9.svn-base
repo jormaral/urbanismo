@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-jul-2009 13:26:32 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.explotacion.Peticion" table="peticiongeom" schema="explotacion">
+        <id name="iden" type="int">
+            <generator class="sequence" >
+               <param name="sequence">explotacion.explotacion_peticiongeom_iden_seq</param>
+            </generator>
+        </id>
+        <property name="geom" type="binary" > <!--formula="AsText(geom)">-->
+            <column name="geom" />
+        </property>
+        <property name="codigo" type="string">
+            <column name="codigo" length="32" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

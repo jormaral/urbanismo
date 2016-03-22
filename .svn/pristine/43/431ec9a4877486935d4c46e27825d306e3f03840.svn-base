@@ -1,0 +1,67 @@
+<!-- 
+ * Copyright 2011 red.es
+ * Autores: Arnaiz Consultores.
+ *
+ ** Licencia con arreglo a la EUPL, Versión 1.1 o -en cuanto
+ * sean aprobadas por la Comision Europea- versiones
+ * posteriores de la EUPL (la <<Licencia>>);
+ * Solo podra usarse esta obra si se respeta la Licencia.
+ * Puede obtenerse una copia de la Licencia en:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Salvo cuando lo exija la legislacion aplicable o se acuerde.
+ * por escrito, el programa distribuido con arreglo a la
+ * Licencia se distribuye <<TAL CUAL>>,
+ * SIN GARANTIAS NI CONDICIONES DE NINGUN TIPO, ni expresas
+ * ni implicitas.
+ * Vease la Licencia en el idioma concreto que rige
+ * los permisos y limitaciones que establece la Licencia.
+-->
+<div class="toolbarTabs">
+    <ul id="panelFichasTabs" class="tab-menu">
+        <li id='tabArbolFicha' class="selected"><a id="tabArbolFicha" href="Pages/GestionFichas/FichasData.html" title="Configuración">Configuración</a></li>
+        <li id='tabPreviewFicha'><a id="tabPreviewFicha" href="Pages/GestionFichas/FichasData.html" title="Previsualización">Previsualización</a></li>
+    </ul>
+    <div class="clear"></div>
+</div>
+
+
+<script type="text/javascript">
+
+    //MochaUI.initializeTabs('panelTramitesTabs','main-panel');	 
+	
+    $('tabArbolFicha').addEvent('click', function(e){
+        new Event(e).stop();
+
+        if ($('tabArbolFicha').getStyle('opacity') != 0.5){
+            $('panelDchoFichas').setStyle('display', 'block'); //setOpacity(100);
+            $('panelPreviewFichas').setStyle('display', 'none'); //setOpacity(0);
+                        
+            $('tabArbolFicha').set('class','selected');
+            $('tabPreviewFicha').set('class','');
+        }		
+                
+    });
+
+    $('tabPreviewFicha').addEvent('click', function(e){
+        new Event(e).stop();
+
+        if ($('tabPreviewFicha').getStyle('opacity') != 0.5){
+            $('panelDchoFichas').setStyle('display', 'none');
+            $('panelPreviewFichas').setStyle('display', 'block');
+			
+            $('tabArbolFicha').set('class','');
+            $('tabPreviewFicha').set('class','selected');
+            
+           if ((typeof mapaPreviewFichas !== 'undefined')) {
+               mapaPreviewFichas.updateSize();
+               mapaPreviewFichas.zoomToExtent(mapaPreviewFichas.restrictedExtent,false);
+               mapaPreviewFichas.updateSize();
+               mapaPreviewFichas.zoomToExtent(mapaPreviewFichas.restrictedExtent,false);
+           }
+        }		
+    });
+
+
+</script>

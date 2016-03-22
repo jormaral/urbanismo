@@ -1,0 +1,53 @@
+/*
+    Document   : cssAdmin
+    Created on : 22-oct-2011, 16:15:24
+    Author     : Alvaro Montero
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*
+ * Popup Mensaje
+*/
+.popupmsg_wrapper{
+    position: relative;
+    margin: auto;
+    height: 200px;
+    /*background-image: url(images/note_64.png);
+    background-repeat: no-repeat;
+    background-position: center 20px;*/
+}
+
+.popupmsg_text{
+    text-align: center;
+    position: relative;
+    top: 0px;
+    font-size: 1.3em;
+    font-weight: bold;
+    overflow: visible;
+    color: #4C4C4C;
+}
+
+.popupmsg_okbtn{
+    position: absolute;
+    bottom: 50px;
+    left: 150px;
+    width: 50px;
+    text-align: center;
+}
+
+.popupmsg_yesbtn{
+    position: absolute;
+    bottom: 50px;
+    left: 90px;
+    width: 50px;
+    text-align: center;
+}
+
+.popupmsg_nobtn{
+    position: absolute;
+    bottom: 50px;
+    right: 90px;
+    width: 50px;
+    text-align: center;
+}

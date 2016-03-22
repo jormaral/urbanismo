@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd"
+	login-required="true">
+
+	<action execute="#{variablesSesionUsuario.setIdTipoTramiteTrabajo(4)}" />
+	<action execute="#{listaAdscripciones.refrescarLista()}" />
+
+	
+
+	<navigation from-action="#{gestionAdscripciones.verAdscripcion}">
+
+		<redirect view-id="/informacionfip/planprerefundido/adscripciones/DetalleAdscripcion.xhtml">
+		</redirect>
+
+	</navigation>
+	
+	 <navigation>
+		<rule if="#{!variablesSesionUsuario.estaTramitePrerefundidoEstablecido()}">
+
+			<redirect view-id="/informacionfip/planprerefundido/Listado.xhtml">
+				<param name="paginaOrigenFrom"
+					value="/informacionfip/planprerefundido/adscripciones/Adscripciones" />
+			</redirect>
+		</rule>
+	</navigation>  
+
+</page>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidadlin" table="entidadlin" schema="planeamiento">
+        <id name="iden" type="int">
+            <column name="iden" />
+            <generator class="sequence" >
+               <param name="sequence">planeamiento.planeamiento_entidadlin_iden_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="entidad" class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad" fetch="select">
+            <column name="identidad" />
+        </many-to-one>
+
+        <property name="geom" type="string" formula="AsText(geom)">
+            <column name="geom" />
+        </property>
+    </class>
+</hibernate-mapping>

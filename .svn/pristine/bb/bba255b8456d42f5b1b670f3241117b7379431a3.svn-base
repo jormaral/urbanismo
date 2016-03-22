@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Relacion"
+  schema="planeamiento" table="relacion">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">planeamiento.planeamiento_relacion_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite"
+   fetch="select" name="tramiteByIdtramitecreador">
+   <column name="idtramitecreador" not-null="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="iddefrelacion" type="int">
+   <column name="iddefrelacion" not-null="true"/>
+  </property>
+  <set inverse="true" name="operacionrelacions" sort="unsorted">
+   <key>
+    <column name="idrelacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionrelacion"/>
+  </set>
+  <set inverse="true" name="propiedadrelacions" sort="unsorted">
+   <key>
+    <column name="idrelacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Propiedadrelacion"/>
+  </set>
+  <set inverse="true" name="vectorrelacions" sort="unsorted">
+   <key>
+    <column name="idrelacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion"/>
+  </set>
+ </class>
+ <query name="Relacion.BuscarPorTramite">SELECT r FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Relacion r WHERE r.tramiteByIdtramitecreador = :idTramite</query>
+ <query name="Relacion.obtenerAdscripciones">SELECT DISTINCT rel FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Relacion as rel, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion as vrel
+	WHERE (vrel.iddefvector = :idDefEntidadOrigen OR vrel.iddefvector = :idDefEntidadDestino) AND rel.iddefrelacion = :idDefPropAdscripcion AND vrel.valor = :idEnt AND vrel.relacion = rel</query>
+ <query name="Relacion.obtenerAdscripcionPorEntidadOrigenDestino">SELECT DISTINCT rel FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Relacion as rel, 
+		es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion as vrelOrigen,
+		es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion as vrelDestino
+	WHERE vrelOrigen.iddefvector = :idDefEntidadOrigen AND vrelOrigen.valor = :idEntidadOrigen 
+		AND vrelDestino.iddefvector = :idDefEntidadDestino AND vrelDestino.valor = :idEntidadDestino
+		 AND rel.iddefrelacion = :idDefPropAdscripcion AND vrelDestino.relacion = rel AND vrelOrigen.relacion = rel</query>
+ <query name="Relacion.obtenerPorVector">SELECT vr.relacion FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion vr 
+	WHERE vr.iddefvector= :idDV AND vr.relacion.iddefrelacion= :idDR And vr.valor= :iden</query>
+ <query name="Relacion.obtenerAdscripcionesTramite">SELECT rel FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Relacion rel 
+	WHERE rel.iddefrelacion= :idDefPropAdscripcion AND (SELECT ent.tramite.iden FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad ent WHERE ent.iden IN 
+			(SELECT vr.valor FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion vr WHERE vr.relacion.iden = rel.iden AND vr.iddefvector= :idDefEntidadOrigen)) = :idTramite 
+		AND (SELECT ent2.tramite.iden FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad ent2 WHERE ent2.iden IN 
+				(SELECT vr2.valor from es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion vr2 WHERE vr2.relacion.iden = rel.iden AND iddefvector= :idDefEntidadDestino)) = :idTramite
+        AND rel.iden NOT IN (SELECT opr.relacion.iden FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionrelacion opr)</query>
+ <query name="Relacion.buscarPropiedadesUnidad">SELECT vr.relacion FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion vr
+	WHERE vr.relacion.iddefrelacion = 1 AND vr.iddefvector = 1
+		AND vr.valor = :idDeterminacion</query>
+ <sql-query name="Relacion.buscarRegulacionesEspecificas">SELECT r.iden, (select valor from planeamiento.Propiedadrelacion where iddefpropiedad = 5 and idrelacion=r.iden ) as orden,
+	(select valor from planeamiento.Propiedadrelacion where iddefpropiedad = 6 and idrelacion=r.iden ) as nombre,
+	(select valor from planeamiento.Propiedadrelacion where iddefpropiedad = 7  and idrelacion=r.iden ) as texto
+	FROM planeamiento.Relacion r, planeamiento.Vectorrelacion vr
+	WHERE r.iddefrelacion = 20 AND vr.iddefvector = 40 AND vr.valor = :iden
+		AND vr.idrelacion=r.iden AND (select valor from planeamiento.Vectorrelacion where iddefvector = 41 and idrelacion = r.iden) = :padre
+	ORDER BY orden</sql-query>
+</hibernate-mapping>

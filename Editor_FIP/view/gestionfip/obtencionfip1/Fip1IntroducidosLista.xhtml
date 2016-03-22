@@ -1,0 +1,352 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+			
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.verlistadofipcargados}"
+				view="/gestionfip/obtencionfip1/Fip1IntroducidosLista.xhtml"
+				id="ObtencionFip1RutaMenu" propagation="none">
+
+			</s:link>
+
+		</ice:panelGroup>
+
+
+
+
+	</ui:define>
+
+	<ui:define name="body">
+
+
+		<style>
+#divTable {
+	position: absolute;
+}
+
+#divButtons {
+	padding: 20px;
+	height: 30px;
+	float: left;
+	width: 800px;
+}
+
+#divButtons div {
+	float: left;
+	margin-right: 15px;
+}
+
+#divButtons #divActions {
+	float: left;
+	width: 80px;
+	height: 34px;
+	overflow: hidden;
+	position: relative;
+	z-index: 5;
+}
+
+#divButtons #divActions:hover {
+	height: 70px;
+}
+
+#divButtons #divOrder {
+	float: left;
+	width: 80px;
+	height: 34px;
+	overflow: hidden;
+	position: relative;
+	z-index: 5;
+}
+
+#divButtons #divOrder:hover {
+	height: 100px;
+}
+
+#divButtons #divView {
+	float: left;
+	width: 80px;
+	height: 34px;
+	overflow: hidden;
+	background-color: white;
+	position: relative;
+	z-index: 5;
+}
+
+#divButtons #divView:hover {
+	height: 130px;
+}
+
+#divButtons #divPagination {
+	margin-left: 35px;
+}
+
+#divButtons #divPage {
+	padding: 10px;
+	font-size: 13px;
+	margin: 0px;
+}
+</style>
+
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+			<ice:form id="formUsrList">
+
+				<h:panelGrid columns="5">
+					<!-- Panel de opciones de consolidar -->
+
+
+
+					<h:outputText value="" />
+					<h:outputText value="" />
+
+				</h:panelGrid>
+
+
+				<div id="divTable">
+
+
+
+					<!--   - - - - - - - - - - - - - -
+				
+						B O T O N E S
+				
+				 	- - - - - - - - - - - - - - - - - -  -->
+				<s:button styleClass="boton2" value="Refrescar"
+					view="/gestionfip/obtencionfip1/Fip1IntroducidosLista.xhtml"
+					id="ObtencionFip1RutaMenu" propagation="none">
+
+				</s:button>
+				<br></br>
+				<br></br>
+
+					<!--   - - - - - - - - - - - - - -
+				
+						T A B L A
+				
+					 - - - - - - - - - - - - - - - - - -  -->
+					<ice:dataTable value="#{servicioListadoFips.listado}" var="item"
+						id="listaDeUsuarios" enableContextMenu="false" scrollHeight="800px"
+						selectionMode="none"
+						onRowMouseOver="this.style.backgroundColor='#FFFFCC'"
+						onRowMouseOut="this.style.backgroundColor='#FFFFFF'">
+
+						<!-- 
+						<ice:column>
+							<center>
+								<h:selectBooleanCheckbox
+									value="#{servicioListadoFips.seleccion[item.getId()]}"
+									onchange="javascript: pintarFilaSeleccionada(this)"
+									id="checkbox" />
+							</center>
+						</ice:column>
+						 -->
+
+						<ice:column style="text-align:center;">
+							<f:facet name="header">
+								<h:outputText value="#{messages.fechaIntroduccion}" />
+							</f:facet>
+							<h:outputText value="#{item.fechaIntroduccion}">
+								<f:convertDateTime pattern="dd/MM/yyyy, HH:mm" />
+							</h:outputText>
+						</ice:column>
+
+						<ice:column style="text-align:center;height:20px;">
+							<f:facet name="header">
+								<h:outputText value="#{messages.ambito}" />
+							</f:facet>
+							<h:outputText
+								value="#{servicioBasicoAmbitos.ambitoString(item.idambito)}" />
+						</ice:column>
+
+						<ice:column style="text-align:center;height:35px;">
+							<f:facet name="header">
+								<h:outputText value="#{messages.gestionusuario_usuario_nombre}" />
+							</f:facet>
+							<h:outputText value="#{item.identificador}" />
+						</ice:column>
+
+
+						<ice:column style="text-align:center;">
+							<f:facet name="header">
+								<h:outputText value="#{messages.fip1_estado_cabecera}" />
+							</f:facet>
+							<b> <h:outputText
+									value="#{messages.fip1_estado_no_importado}" style="color:blue"
+									rendered="#{item.estado==null}" /> <h:outputText
+									value="#{messages.fip1_estado_importando} ... "
+									style="color:orange" rendered="#{item.estado=='En proceso'}" />
+								<h:outputText value="#{messages.fip1_estado_importado}"
+									style="color:green" rendered="#{item.estado=='IMPORTADO'}" />
+								<h:outputText value="#{messages.fip1_estado_errores}"
+									style="color:red" rendered="#{item.estado=='ERRORES'}" /> </b>
+						</ice:column>
+
+						<!-- 
+						<ice:column style="text-align:center;">
+							<f:facet name="header">
+								<h:outputText value="#{messages.fip1_estado_fecha_inicio}" />
+							</f:facet>
+							<h:outputText value="#{item.fechaInicio}">
+								<f:convertDateTime pattern="dd/MM/yyyy, HH:mm" />
+							</h:outputText>
+						</ice:column>
+
+						<ice:column style="text-align:center;">
+							<f:facet name="header">
+								<h:outputText value="#{messages.fechaConsolidacion}" />
+							</f:facet>
+							<h:outputText value="#{item.fechaConsolidacion}">
+								<f:convertDateTime pattern="dd/MM/yyyy, HH:mm" />
+							</h:outputText>
+						</ice:column>
+						
+						 -->
+
+						<ice:column style="text-align:center;">
+							<f:facet name="header">
+								<h:outputText value="#{messages.accion}" />
+							</f:facet>
+
+
+							<!-- IMPORTAR -->
+
+							<s:button value="#{messages.importar}" alt="#{messages.importar}"
+								view="/gestionfip/obtencionfip1/ImportacionFIP.seam"
+								rendered="#{item.estado==null}" styleClass="boton2"
+								title="#{messages.boton_title_Fip1lista_importar}">
+								<f:param name="idFipCargado" value="#{item.id}" />
+							</s:button>
+
+
+							<s:button value="#{messages.info}" alt="#{messages.info}"
+								title="#{messages.boton_title_Fip1lista_info}"
+								action="#{servicioListadoFips.mostrarInfo}"
+								rendered="#{item.estado!=null}" styleClass="boton2">
+								<f:param name="identificador" value="#{item.id}" />
+							</s:button>
+							
+							<ice:commandButton value="Importar Geometria Ambito Aplicacion" alt="Importar Geometria Ambito Aplicacion"
+								title="Importar Geometria Ambito Aplicacion"
+								action="#{servicioBasicoAmbitos.cargarAmbitoShpConGeometriaAmbitoPV(item.idambito)}"
+								rendered="#{item.estado=='IMPORTADO' and !servicioBasicoAmbitos.tieneGeometriaAmbitoShp(item.idambito)}" 
+								styleClass="boton5">
+							</ice:commandButton>
+
+							<ice:commandButton value="#{messages.borrar}"
+								panelConfirmation="borrarFipCargado" alt="#{messages.borrar}"
+								title="#{messages.borrar}"
+								action="#{servicioListadoFips.borrarRegistroFIPCargado(item.id)}"
+								styleClass="boton2" />
+							<h:outputText value="" />
+
+							<ice:panelConfirmation id="borrarFipCargado"
+								title="Borrar Registro FIP1 Cargado"
+								message="Va a borrar SOLO el registro de FIP1 Cargado. Si ya se ha importado el FIP1, este registro se borrara aunque no el propio FIP1, para ello debe ir a Borrar Planeamiento Encargado."
+								acceptLabel="#{messages.genericos_si}"
+								cancelLabel="#{messages.genericos_no_volver}"
+								styleClass="boton1" />
+
+						</ice:column>
+
+					</ice:dataTable>
+
+				</div>
+
+
+
+
+
+
+
+				<script type="text/javascript">
+					function pintarFilaSeleccionada(checkbox) {
+
+						var seleccionada = checkbox.checked;
+						var fila = checkbox.parentNode.parentNode.parentNode;
+						if (seleccionada) {
+							fila.style.backgroundColor = '#FFFF99';
+							fila.setAttribute('onmouseover', "");
+							fila.setAttribute('onmouseout', "");
+						} else {
+							fila.style.backgroundColor = '#FFFFCC';
+							fila.setAttribute('onmouseover',
+									"this.style.backgroundColor='#FFFFCC'");
+							fila.setAttribute('onmouseout',
+									"this.style.backgroundColor='#FFFFFF'");
+						}
+					}
+				</script>
+
+
+
+
+				<!-- - - - - - - - - - - - - - - - - - - - -
+				
+					P O P U P   I N F O
+				
+				- - - - - - - - - - - - - - - - - - - - - - - -->
+				<ice:panelPopup autoCentre="true" modal="true" id="panelInformacion"
+					visible="#{servicioListadoFips.mostrarPanelInformacion}"
+					styleClass="panelPopup">
+
+					<f:facet name="header">
+						<ice:panelGroup>
+							<ice:outputText value="#{messages.informacion}"
+								style="font-size:15px;" />
+							<ice:commandButton id="modalPnlCloseBtn" type="button"
+								image="/img/editorfip/es/comun/cerrar_popup.png"
+								action="#{servicioListadoFips.setMostrarPanelInformacion(false)}"
+								styleClass="popupHeaderImage"
+								title="#{messages.boton_title_Fip1lista_popupinfo_cerrar}"
+								alt="#{messages.botongenerico_cerrar}" />
+						</ice:panelGroup>
+					</f:facet>
+
+					<f:facet name="body">
+						<h:panelGrid columns="1" id="datosFipPI">
+							<!--  <ice:outputLabel value="#{servicioListadoFips.usuarioBloqueante}"/> -->
+							<textarea wrap="off"
+								style="overflow: auto; height: 500px; width: 850px; border: 1px solid #999999; padding: 6px;"
+								readonly="readonly">#{servicioListadoFips.fipCargado.resultado}</textarea>
+						</h:panelGrid>
+					</f:facet>
+
+				</ice:panelPopup>
+
+
+			</ice:form>
+		</ice:panelGroup>
+	</ui:define>
+
+</ui:composition>

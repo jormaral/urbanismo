@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://java.sun.com/xml/ns/javaee" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd"
+             version="5">
+    
+   <display-name>fipeditor</display-name>
+   
+   <module>
+      <web>
+         <web-uri>fipeditor.war</web-uri>
+         <context-root>/fipeditor</context-root>
+      </web>
+   </module>
+   
+   <module>
+      <ejb>fipeditor.jar</ejb>
+   </module>
+   
+   <!-- Seam and EL -->
+   <module>
+       <ejb>jboss-seam.jar</ejb>
+   </module>    
+    
+</application>

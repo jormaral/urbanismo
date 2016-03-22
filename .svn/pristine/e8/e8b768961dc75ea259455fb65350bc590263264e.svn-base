@@ -1,0 +1,72 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alvaro.Montero
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+ <div id="panelDatosUsuario">
+ 
+ <fieldset>
+    <legend>Datos personales del usuario</legend>
+    <br/>
+    
+    <div class="formRow">
+	<div class="formLabel">Nombre*:</div>
+	<div class="formField"><input type="text" class="input" id="txtNombre" value="" maxlength="50" style="width: 100%" /></div>
+	<div class="clear"></div>
+	</div>
+	
+	<div class="formRow">
+	<div class="formLabel">Correo electrónico*:</div>
+	<div class="formField"><input type="text" class="input" id="txtEmail" value="" maxlength="50" style="width: 100%"/></div>
+	<div class="clear"></div>
+	</div>
+	
+	<div class="formRow">
+	<div class="formLabel">DNI*:</div>
+	<div class="formField"><input type="text" class="input" id="txtDNI" value="" maxlength="9" style="width: 100%"/></div>
+	<div class="clear"></div>
+	</div>
+	
+	<div class="formRow">
+	<div class="formLabel">Contraseña:</div>
+	<div class="formField"><input type="password" class="input" id="txtPass" value="" maxlength="20" style="width: 100%"/></div>
+	<div class="clear"></div>
+	</div>
+	
+	<div class="formRow">
+	<div class="formLabel">Repetir Contraseña:</div>
+	<div class="formField"><input type="password" class="input" id="txtPassRepeat" value="" maxlength="20" style="width: 100%"/></div>
+	<div class="clear"></div>
+	</div>
+	
+    <br/>
+ </fieldset>
+ 
+ </div>
+ 
+ <div class="clear"></div>
+ <br/>
+ 
+ <div id="panelDatosRolUsuario">
+ 
+  <fieldset>
+    <legend>Roles asignados al usuario</legend>
+     <br/>
+     
+	<div id="panelRolesUsuario">
+	        <div id="rolesSeleccionados"></div>
+	        <button class="buttonSmall" type="button" id="btnAddRol"><img src="styles/images/add.png" alt="Añadir rol"/>
+	            <span>Añadir rol</span>
+	        </button>
+	        <div style="clear:both"></div>
+	</div>
+	<div id="panelAmbitosUsuario">
+	</div>
+
+	<br/>
+ </fieldset>
+ 
+ </div>

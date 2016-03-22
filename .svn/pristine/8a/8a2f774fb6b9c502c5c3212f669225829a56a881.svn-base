@@ -1,0 +1,18 @@
+projection=EPSG:25831
+fip.version=2.0
+fip.pais=es
+tipotramitesrefundibles=3,4,5,6,7,8,9,11,12,14,18
+caracterregimendirecto=2,3
+caracteruso=9,14
+caracteracto=10,15
+rutaDocs=/var/RPM/Docs
+caracterdetocultos=16
+# diccionariosvisibles indica si se mostrar\u00e1 la funcionalidad de gesti\u00f3n de diccionarios
+# a aquellos usuarios que tengan rol de administrador. Valores aceptados: true, false
+diccionariosvisibles=true
+# planbasevisible indica si se mostrar\u00e1 la funcionalidad de gesti\u00f3n del plan base
+# a aquellos usuarios que tengan rol de administrador. Valores aceptados: true, false
+planbasevisible=true
+#ID del tipo de tramite "No procede"
+idTramiteNoProcede=5
+idIntrumentoPlanRefundido=52

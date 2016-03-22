@@ -1,0 +1,11 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alvaro.Montero
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div class="toolbox divider nobr" style="float:right;">
+	<span class="iconWrapper"><input type="text" class="searchFieldValidacion" id="txtImputSearch" name="search_query" maxlength="200" style="width:400px;"/></span>			
+	<span class="iconWrapper"><img id="btnSubmitSearch" class="toolBoxAction" src="styles/images/search_icon.png" alt="Buscar" title="Introduce un texto de búsqueda"/></span>		
+</div>

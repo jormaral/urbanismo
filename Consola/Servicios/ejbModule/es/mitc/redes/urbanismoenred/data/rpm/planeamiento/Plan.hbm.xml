@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+ <class name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan"
+  schema="planeamiento" table="plan">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">planeamiento.planeamiento_plan_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan"
+   fetch="select" name="planByIdpadre">
+   <column name="idpadre"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan"
+   fetch="select" name="planByIdplanbase">
+   <column name="idplanbase"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column length="100" name="nombre" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="codigo" type="string">
+   <column length="5" name="codigo" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="texto" type="string">
+   <column name="texto"/>
+  </property>
+  <property generated="never" lazy="false" name="idambito" type="int">
+   <column name="idambito" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="bsuspendido" type="boolean">
+   <column name="bsuspendido" not-null="true" precision="1" scale="0"/>
+  </property>
+  <property generated="never" lazy="false" name="orden" type="int">
+   <column name="orden" not-null="true"/>
+  </property>
+  <set inverse="true" name="plansForIdplanbase" sort="unsorted">
+   <key>
+    <column name="idplanbase"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan"/>
+  </set>
+  <set inverse="true" name="planentidadordenacions" sort="unsorted">
+   <key>
+    <column name="idplan" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Planentidadordenacion"/>
+  </set>
+  <set inverse="true" name="operacionplansForIdplanoperador" sort="unsorted">
+   <key>
+    <column name="idplanoperador" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan"/>
+  </set>
+  <set inverse="true" name="planshps" sort="unsorted">
+   <key>
+    <column name="idplan"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Planshp"/>
+  </set>
+  <set inverse="true" name="tramites" sort="unsorted">
+   <key>
+    <column name="idplan" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite"/>
+  </set>
+  <set inverse="true" name="operacionplansForIdplanoperado" sort="unsorted">
+   <key>
+    <column name="idplanoperado"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan"/>
+  </set>
+  <set inverse="true" name="plansForIdpadre" sort="unsorted">
+   <key>
+    <column name="idpadre"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan"/>
+  </set>
+ </class>
+ <query name="Plan.buscarConsolidadosPorAmbito">SELECT DISTINCT tram.plan FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite tram
+	JOIN FETCH tram.plan.tramites
+	WHERE tram.plan.idambito = :idAmbito AND tram.fechaconsolidacion IS NOT NULL
+	ORDER BY tram.plan.orden, tram.plan.nombre</query>
+ <query name="Plan.buscarNoConsolidadosPorAmbito">SELECT DISTINCT tram.plan FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite tram
+	WHERE tram.plan.idambito = :idAmbito AND tram.fechaconsolidacion IS NULL
+	ORDER BY tram.plan.orden, tram.plan.nombre</query>
+ <query name="Plan.buscarPlanesBase">SELECT plan FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan plan
+	WHERE plan.planByIdplanbase IS NULL
+	ORDER BY plan.orden</query>
+ <query name="Plan.buscarPorInstrumentoYPadre">SELECT plan FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan plan,
+		es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan op,
+		es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan itop
+	WHERE plan.planByIdpadre.iden = :idPlan
+	AND plan = op.planByIdplanoperador
+	AND op.idinstrumentotipooperacion = itop.iden
+	AND itop.instrumentoplan.iden =:idInstrumento
+	ORDER BY plan.orden</query>
+ <query name="Plan.buscarPorPadre">SELECT plan FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan plan
+	WHERE plan.planByIdpadre.iden = :idPlan
+	ORDER BY plan.orden</query>
+ <query name="Plan.buscarPorPlanBase">SELECT plan FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan plan
+	WHERE plan.planByIdplanbase.iden = :idPlanBase</query>
+ <query name="Plan.buscarRaizPorAmbito">SELECT plan FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan plan
+	WHERE plan.idambito = :idAmbito AND plan.planByIdpadre IS NULL
+	ORDER BY plan.orden ASC</query>
+ <query name="Plan.buscarRefundiblesPorAmbito">SELECT DISTINCT plan FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite tram,
+		es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan plan
+	WHERE plan.idambito = :idAmbito AND tram.fechaconsolidacion IS NOT NULL
+		AND tram.idtipotramite IN (:listaRefundibles)
+		AND tram.plan.iden = plan.iden
+	ORDER BY plan.orden, plan.nombre</query>
+ <query name="Plan.buscarSiguienteCodigo">SELECT MAX(plan.codigo) FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan plan</query>
+ <query name="Plan.buscarSiguienteOrden">SELECT MAX(plan.orden) FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan plan</query>
+ <query name="Plan.buscarSinTramite">SELECT p FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan p WHERE p.tramites IS EMPTY AND p.idambito = :idAmbito</query>
+ <query name="Plan.obtenerNoProcede">SELECT plan FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan plan 
+ 	WHERE plan.planByIdpadre IS NULL AND plan.iden NOT IN (
+ 		SELECT OP.planByIdplanoperador.iden From es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan OP, 
+                es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan ITOP  
+                WHERE OP.idinstrumentotipooperacion=ITOP.iden  
+                AND ITOP.tipooperacionplan.iden = :idTipoOperacionPlan) And plan.iden IN (
+                	SELECT T.plan.iden From es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite T 
+                		WHERE T.iden IN (:listaTramites))</query>
+ <query name="Plan.obtenerPlanOperador">SELECT DISTINCT t.plan FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t, 
+    	es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan op, 
+    	es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan itop 
+   	WHERE t.plan.idambito= :idAmbito 
+    	AND t.iden= :idTramite 
+        AND op.planByIdplanoperador= t.plan 
+        AND op.idinstrumentotipooperacion= itop.iden 
+        AND itop.tipooperacionplan.iden NOT IN ( 4, 5, 9, 10)</query>
+ <query name="Plan.obtenerPlanResultanteRefundido">SELECT oplan.planByIdplanoperador FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan oplan
+	WHERE oplan.idinstrumentotipooperacion = :idItop
+		AND oplan.planByIdplanoperado.iden = :idPlan</query>
+ <query name="Plan.obtenerRefundido">SELECT Distinct t.plan FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t, 
+          	es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan op, 
+		es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan itop 
+	WHERE op.planByIdplanoperador.iden =t.plan.iden 
+		AND op.idinstrumentotipooperacion=itop.iden 
+              AND (itop.tipooperacionplan.iden = :tipoOperadionNoProcede  OR itop.tipooperacionplan.iden = :tipoOperacionSustitucion OR itop.tipooperacionplan.iden = 10 ) 
+              AND t.iden IN (:listaIdTramites)</query>
+ <query name="Plan.obtenerTodos">SELECT plan FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan plan</query>
+ <query name="Plan.obtenerTodosPorAmbito">SELECT DISTINCT tram.plan FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite tram
+	WHERE tram.plan.idambito = :idAmbito
+	ORDER BY tram.plan.orden, tram.plan.nombre</query>
+ <sql-query name="Plan.buscarFromGeom">select iden from planeamiento.plan where idambito=:idAmbito and iden in 
+            (select idplan from planeamiento.tramite where fechaconsolidacion is not null and iden in
+                (select idtramite from planeamiento.entidad where idtipotramite &lt;&gt; :IdTipoTramiteRefundido and iden in
+                    (select identidad from planeamiento.entidadpol as o 
+                    INNER JOIN planeamiento.entidad ent ON o.identidad = ent.iden 
+                    where st_Intersects (geom,st_GeomFromText(:WKT)))
+                )
+            )
+        order by orden</sql-query>
+ <sql-query name="Plan.buscarHijosFromGeom">select iden from planeamiento.plan where idpadre=:idPadre and iden in 
+            (select idplan from planeamiento.tramite where fechaconsolidacion is not null and iden in
+                (select idtramite from planeamiento.entidad where idtipotramite &lt;&gt; :IdTipoTramiteRefundido and iden in
+                    (select identidad from planeamiento.entidadpol as o 
+                    INNER JOIN planeamiento.entidad ent ON o.identidad = ent.iden 
+                    where st_Intersects (geom,st_GeomFromText(:WKT)))
+                )
+            )
+        order by orden</sql-query>
+ <sql-query name="Plan.buscarLikeName">select o.iden from planeamiento.Plan as o 
+        where nombre ilike :nombrePlan and iden in
+            (select idplan from planeamiento.Tramite where
+            fechaconsolidacion is not null and idtipotramite &lt;&gt; :IdTipoTramiteRefundido)
+        AND o.idambito=:idAmbito order by o.nombre</sql-query>
+ <sql-query name="Plan.isRefundido">select op.iden from planeamiento.operacionplan op where op.idplanoperador=:idPlan and op.idinstrumentotipooperacion in (
+                        select itop.iden from diccionario.instrumentotipooperacionplan itop where 
+                            itop.idinstrumentoplan = :idIntrumentoPlanRefundido)</sql-query>
+</hibernate-mapping>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-abr-2012 12:30:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.refundido.Regimenespecifico"
+  schema="refundido" table="regimenespecifico">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">refundido.refundido_regimenespecifico_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacionregimen"
+   fetch="select" name="entidaddeterminacionregimen">
+   <column name="identidaddeterminacionregimen" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Regimenespecifico"
+   fetch="select" name="regimenespecifico">
+   <column name="idpadre"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="orden" type="int">
+   <column name="orden" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column length="100" name="nombre"/>
+  </property>
+  <property generated="never" lazy="false" name="texto" type="string">
+   <column name="texto"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true"
+   name="regimenespecificos" sort="unsorted" table="regimenespecifico">
+   <key>
+    <column name="idpadre"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Regimenespecifico"/>
+  </set>
+ </class>
+ <query name="refundido.Regimenespecifico.obtenerMaxOrden">SELECT 1+Max(re.orden) FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Regimenespecifico re 
+	WHERE re.regimenespecifico IS NULL AND re.entidaddeterminacionregimen.iden = :idEntDetReg</query>
+</hibernate-mapping>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="com/mitc/redes/editorfip/servicios/procesamientofip/obtencionfip1/|com/mitc/redes/editorfip/servicios/gestionfip/obtencionfip/GestionPlanEncargado.java|com/mitc/redes/editorfip/servicios/gestionfip/obtencionfip/GestionPlanEncargadoBean.java|com/mitc/redes/editorfip/servicios/gestionfip/obtencionfip/ImportacionFIP1.java|com/mitc/redes/editorfip/servicios/gestionfip/obtencionfip/ImportacionFIP1Bean.java" kind="src" output="classes/main" path="src/main"/>
+	<classpathentry kind="src" output="classes/hot" path="src/hot"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_41"/>
+	<classpathentry kind="lib" path="bootstrap"/>
+	<classpathentry kind="lib" path="lib/hibernate-validator.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate-core.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate-entitymanager.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate-search.jar"/>
+	<classpathentry kind="lib" path="lib/jboss-seam.jar" sourcepath="lib/src/jboss-seam-sources.jar"/>
+	<classpathentry kind="lib" path="lib/jboss-seam-ui.jar" sourcepath="lib/src/jboss-seam-ui-sources.jar"/>
+	<classpathentry kind="lib" path="lib/jboss-seam-debug.jar"/>
+	<classpathentry kind="lib" path="lib/jboss-cache.jar"/>
+	<classpathentry kind="lib" path="lib/jbpm-jpdl.jar"/>
+	<classpathentry kind="lib" path="lib/antlr.jar"/>
+	<classpathentry kind="lib" path="lib/jgroups.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="lib/jsf-api.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="lib/jboss-el.jar"/>
+	<classpathentry kind="lib" path="lib/el-api.jar"/>
+	<classpathentry kind="lib" path="lib/mvel2.jar"/>
+	<classpathentry kind="lib" path="lib/drools-api.jar"/>
+	<classpathentry kind="lib" path="lib/drools-core.jar"/>
+	<classpathentry kind="lib" path="lib/drools-compiler.jar"/>
+	<classpathentry kind="lib" path="lib/drools-decisiontables.jar"/>
+	<classpathentry kind="lib" path="lib/drools-templates.jar"/>
+	<classpathentry kind="lib" path="lib/janino.jar"/>
+	<classpathentry kind="lib" path="lib/antlr-runtime.jar"/>
+	<classpathentry kind="lib" path="lib/mail.jar"/>
+	<classpathentry kind="lib" path="lib/persistence-api.jar"/>
+	<classpathentry kind="lib" path="lib/ejb-api.jar"/>
+	<classpathentry kind="lib" path="lib/jsr250-api.jar"/>
+	<classpathentry kind="lib" path="lib/jta.jar"/>
+	<classpathentry kind="lib" path="lib/core.jar"/>
+	<classpathentry kind="lib" path="lib/jboss-embedded-api.jar"/>
+	<classpathentry kind="lib" path="lib/postgresql-8.3-605.jdbc3.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-core.jar"/>
+	<classpathentry kind="lib" path="lib/icefaces.jar"/>
+	<classpathentry kind="lib" path="lib/icefaces-comps.jar"/>
+	<classpathentry kind="lib" path="lib/icefaces-facelets.jar"/>
+	<classpathentry kind="lib" path="lib/log4j.jar"/>
+	<classpathentry kind="lib" path="lib/jxl-2.6.jar"/>
+	<classpathentry kind="lib" path="lib/jasperreports-3.7.6.jar"/>
+	<classpathentry kind="lib" path="lib/gt-api-8.0-RC1.jar"/>
+	<classpathentry kind="lib" path="lib/gt-coverage-8.0-RC1.jar"/>
+	<classpathentry kind="lib" path="lib/gt-cql-8.0-RC1.jar"/>
+	<classpathentry kind="lib" path="lib/gt-data-8.0-RC1.jar"/>
+	<classpathentry kind="lib" path="lib/gt-epsg-postgresql-8.0-RC1.jar"/>
+	<classpathentry kind="lib" path="lib/gt-image-8.0-RC1.jar"/>
+	<classpathentry kind="lib" path="lib/gt-jdbc-8.0-RC1.jar"/>
+	<classpathentry kind="lib" path="lib/gt-jdbc-postgis-8.0-RC1.jar"/>
+	<classpathentry kind="lib" path="lib/gt-main-8.0-RC1.jar"/>
+	<classpathentry kind="lib" path="lib/gt-metadata-8.0-RC1.jar"/>
+	<classpathentry kind="lib" path="lib/gt-opengis-8.0-RC1.jar"/>
+	<classpathentry kind="lib" path="lib/gt-referencing-8.0-RC1.jar"/>
+	<classpathentry kind="lib" path="lib/gt-render-8.0-RC1.jar"/>
+	<classpathentry kind="lib" path="lib/gt-shapefile-8.0-RC1.jar"/>
+	<classpathentry kind="lib" path="lib/gt-swing-8.0-RC1.jar"/>
+	<classpathentry kind="lib" path="lib/jts-1.12.jar"/>
+	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
+	<classpathentry kind="output" path="test-build"/>
+</classpath>

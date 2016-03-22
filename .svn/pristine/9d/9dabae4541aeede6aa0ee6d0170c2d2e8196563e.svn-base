@@ -1,0 +1,116 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_verdeterminacionplanvigente}"
+				view="/informacionfip/PlanVigenteNavegacion.xhtml"
+				id="PlanVigenteRutaMenu" propagation="none">
+
+
+			</s:link>
+
+
+
+
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+	<ui:define name="body">
+
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+			<!--  Se define el cuerpo de la pagina -->
+
+			<ice:panelGroup columns="5" styleClass="centerHome">
+
+				<s:link
+					view="/informacionfip/planvigente/entidades/VerEntidadPlanVigente.xhtml"
+					id="VerEntidadPlanVigenteNavegacionMenu" propagation="none">
+					<h:graphicImage
+						value="/img/editorfip/#{localeSelector.language}/navegacion/04_02_01_CONSULTA_ENTIDADES.png"
+						alt="#{messages.menu_consulta_entidades}"
+						title="#{messages.menu_consulta_entidades}" styleClass="iconoNav" />
+				</s:link>
+
+				<s:link
+					view="/informacionfip/planvigente/determinaciones/VerDeterminacionPlanVigente.xhtml"
+					id="VerPlanVigenteNavegacionMenu" propagation="none">
+					<h:graphicImage
+						value="/img/editorfip/#{localeSelector.language}/navegacion/04_02_02_CONSULTA_DETERMINACIONES.png"
+						alt="#{messages.menu_consulta_determinaciones}"
+						title="#{messages.menu_consulta_determinaciones}"
+						styleClass="iconoNav" />
+				</s:link>
+
+				<!-- <s:link view="/informacionfip/planvigente/documento/VerDocumentos.xhtml" id="VerDocumentosPlanVigenteNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/04_02_03_CONSULTA_DOCUMENTOS.png"
+						alt="#{messages.menu_consulta_documentos}" title="#{messages.consulta_documentos}" styleClass="iconoNav"/>
+				</s:link> -->
+
+				<s:link
+					view="/informacionfip/planvigente/unidades/VerUnidades.xhtml"
+					id="VerUnidadesPlanVigenteNavegacionMenu" propagation="none">
+					<h:graphicImage
+						value="/img/editorfip/#{localeSelector.language}/navegacion/04_02_03_CONSULTA_UNIDADES.png"
+						alt="#{messages.menu_consulta_unidades}"
+						title="#{messages.consulta_unidades}" styleClass="iconoNav" />
+				</s:link>
+
+				<s:link
+					view="/informacionfip/planvigente/adscripciones/VerAdscripciones.xhtml"
+					id="VerAdscripcionesPlanVigenteNavegacionMenu" propagation="none">
+					<h:graphicImage
+						value="/img/editorfip/#{localeSelector.language}/navegacion/04_02_04_CONSULTA_ADSCRIPCIONES.png"
+						alt="#{messages.menu_consulta_adscripciones}"
+						title="#{messages.consulta_adscripciones}" styleClass="iconoNav" />
+				</s:link>
+
+
+				<s:link view="/informacionfip/InformacionFipNavegacion.xhtml"
+					id="VolverNavegacionMenu" propagation="none">
+					<h:graphicImage
+						value="/img/editorfip/#{localeSelector.language}/navegacion/00_VOLVER.png"
+						alt="#{messages.menu_volver}" title="#{messages.menu_volver}"
+						styleClass="iconoNav" />
+				</s:link>
+
+			</ice:panelGroup>
+
+		</ice:panelGroup>
+
+
+	</ui:define>
+
+</ui:composition>

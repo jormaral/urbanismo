@@ -1,0 +1,35 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaPanelInformacion"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	
+	<ice:panelPopup autoCentre="true" modal="true" id="panelInformacion" style="width:800px;height:400px;"
+				visible="#{servicioListadoFips.mostrarPanelInformacion}" styleClass="panelPopup">
+
+		<f:facet name="header">
+			<ice:panelGroup>
+				<ice:outputText value="#{messages.informacion}" style="font-size:15px;"/>
+				<ice:commandButton id="modalPnlCloseBtn" type="button"
+					image="/img/editorfip/es/comun/cerrar_popup.png"
+					action="#{servicioListadoFips.setMostrarPanelInformacion(false)}"
+					styleClass="popupHeaderImage"
+					title="#{messages.botongenerico_cerrar}"
+					alt="#{messages.botongenerico_cerrar}" />
+			</ice:panelGroup>
+		</f:facet>
+
+		<f:facet name="body">
+			<h:panelGrid columns="1" id="datosFipPI">
+					<!--  <ice:outputLabel value="#{servicioListadoFips.usuarioBloqueante}"/> -->
+					<textarea style="height:330px;width:750px; border:1px solid #999999;padding:6px;" readonly="true">
+						#{servicioListadoFips.fipCargado.resultado}
+					</textarea>
+			</h:panelGrid>
+		</f:facet>		
+		
+	</ice:panelPopup>
+</f:subview>

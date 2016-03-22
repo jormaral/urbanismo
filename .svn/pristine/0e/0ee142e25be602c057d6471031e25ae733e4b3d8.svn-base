@@ -1,0 +1,271 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+		       
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}" view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			
+				
+			</s:link>
+			
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link style="color:blue;" value="#{messages.menu_administracion}"
+				view="/administracion/AdministracionNavegacion.xhtml" id="AdministracionRutaMenu"
+				propagation="none">
+				
+			</s:link>
+			
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link style="color:blue;" value="#{messages.administracion_usuario}"
+				view="/administracion/gestionusuario/GestionUsuarioList.xhtml" id="GestionUsuarioListRutaMenu"
+				propagation="none">
+				
+				</s:link>
+				
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link style="color:blue;" value="#{messages.genericos_detalle}" 
+				view="/administracion/gestionusuario/GestionUsuarioDetalle.xhtml" id="GestionUsuarioListRutaMenu" propagation="none">
+				
+			</s:link>			
+				
+		</ice:panelGroup>
+		
+		
+		
+	</ui:define>
+	
+	<ui:define name="body">
+		
+		
+		<ice:panelGroup styleClass="dr-pnl-sinmargen" renderedOnUserRole="ADM,SUP">
+
+			<!--  Se define el cuerpo de la pagina -->
+<!--			<h:panelGrid columns="1">-->
+<!--				<rich:panel style="border-width:0px">-->
+<!--					<s:link view="/administracion/gestionusuario/GestionUsuarioList.xhtml" id="VolverGestionUsuarioListNavegacionMenu"-->
+<!--						value="Volver" propagation="none">-->
+<!--					</s:link>-->
+<!--				</rich:panel>	-->
+<!--				<rich:panel style="border-width:0px">-->
+<!--					<s:link id="GestionUsuarioDetalleNavegacionMenu"-->
+<!--						propagation="none">-->
+<!--						<h:graphicImage-->
+<!--							value="/administracion/gestionusuario/Detalle.png"-->
+<!--						 />-->
+<!--					</s:link>-->
+<!--				</rich:panel>-->
+<!--			</h:panelGrid>-->
+
+			
+			<ice:form id="formularioUsuario">
+					<ice:panelGroup>
+						<h:panelGroup>
+							<s:button view="/administracion/gestionusuario/GestionUsuarioList.xhtml"
+									  image="/fipeditor/img/editorfip/es/botones/Volver.png" styleClass="boton1"
+									  onmouseover="this.src='/fipeditor/img/editorfip/es/botones/Volver2.png'" 
+									  onmouseout="this.src='/fipeditor/img/editorfip/es/botones/Volver.png'" title="#{messages.boton_title_usuarioLista_volver}"/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							 <ice:commandButton value="#{messages.botongenerico_guardar}" action="#{servicioUsuario.guardarUsuario}"  							
+							 styleClass="boton1_up"  rendered="#{!usuarioHome.instance.dadoBaja}" alt="#{messages.botongenerico_guardar}" title="#{messages.boton_title_usuarioDetalle_guardar}"/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							 <ice:commandButton action="#{servicioUsuario.descartarCambios}" 
+							 	value="#{messages.botongenerico_desc_cambios}"
+							 	reRender="datosUsuarioPG" styleClass="boton2_up" alt="#{messages.botongenerico_desc_cambios}"
+							 	rendered="#{!usuarioHome.instance.dadoBaja and !servicioUsuario.esUsuarioNuevo}" title="#{messages.boton_title_usuarioDetalle_descartarCambios}"/>
+							 
+						</h:panelGroup>	
+						<ice:panelGroup styleClass="infoseleccion">
+							<ice:graphicImage styleClass="tooltip_imagen"
+												alt="#{messages.genericos_info}"
+												url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+							<ice:outputLabel value="#{messages.info_usuario_detalle}" styleClass="labelseleccioninfo"/>	
+						</ice:panelGroup>
+											
+					</ice:panelGroup>
+				
+				
+				<h:panelGrid columns="3" id="datosUsuarioPG" styleClass="tablaDetalle">
+					
+					<h:inputText value="#{messages.gestionusuario_usuario_username}" styleClass="etiqueta-Usuario" disabled="true" />
+					<ice:panelGroup>
+						<ice:inputText value="#{usuarioHome.instance.username}" id="username" required="true"
+									 rendered="#{servicioUsuario.esUsuarioNuevo}" styleClass="input-Detalle" validator="#{servicioUsuario.validatorUsername}">
+							<f:validateLength minimum="4" maximum="150"/>
+						</ice:inputText>
+						<h:inputText value="#{usuarioHome.instance.username}" rendered="#{!servicioUsuario.esUsuarioNuevo}" styleClass="input-Detalle" disabled="true"/>
+						<ice:message id="usernameError" for="username"/>
+					</ice:panelGroup>
+					<h:outputText value="" />
+				
+					
+					<h:inputText value="#{messages.gestionusuario_usuario_clave}" styleClass="etiqueta-Usuario" disabled="true"/>
+					<ice:panelGroup>
+						<ice:inputSecret  styleClass="input-Detalle" id="clave" redisplay="true" value="#{servicioUsuario.nuevaPassword}" required="#{servicioUsuario.esUsuarioNuevo}">
+							<f:validateLength minimum="5" maximum="150"/>
+						</ice:inputSecret>
+						<ice:message id="claveError" for="clave"/>
+					</ice:panelGroup>
+					<h:outputText value="" />
+					
+					<h:inputText value="#{messages.gestionusuario_repetirclave}" styleClass="etiqueta-Usuario" disabled="true"/>
+					<ice:panelGroup>
+						<ice:inputSecret id="confirmClave" value="#{servicioUsuario.confirmPassword}" redisplay="true" styleClass="input-Detalle" required="#{servicioUsuario.esUsuarioNuevo}">
+							<f:validateLength minimum="5" maximum="150"/>
+						</ice:inputSecret>
+						<ice:message id="confirmClaveError" for="confirmClave"/>
+					</ice:panelGroup>
+					<h:outputText value="" />
+
+					
+					<h:inputText value="#{messages.gestionusuario_usuario_mail}" styleClass="etiqueta-Usuario" disabled="true"/>
+					<ice:panelGroup>
+						<ice:inputText value="#{usuarioHome.instance.detalle.mail}" styleClass="input-Detalle" 
+									   id="mail" required="true" validator="#{servicioUsuario.validatorEmail}"/>
+						<ice:message id="mailError" for="mail"/>
+					</ice:panelGroup>
+					<h:outputText value="" />
+					
+					
+					<h:inputText value="#{messages.gestionusuario_usuario_nombre}" styleClass="etiqueta-Usuario" disabled="true"/>
+					<ice:panelGroup>
+						<ice:inputText value="#{usuarioHome.instance.detalle.nombre}" styleClass="input-Detalle" id="nombre" required="true"/>
+						<ice:message for="nombre"/>
+					</ice:panelGroup>
+					<h:outputText value="" />
+					
+					
+					<h:inputText value="#{messages.gestionusuario_usuario_papellido}" styleClass="etiqueta-Usuario" disabled="true"/>
+					<ice:panelGroup>
+						<ice:inputText value="#{usuarioHome.instance.detalle.primerApellido}" styleClass="input-Detalle" id="pApellido" required="true"/>
+						<ice:message for="pApellido"/>
+					</ice:panelGroup>
+					<h:outputText value="" />
+					
+					<h:inputText value="#{messages.gestionusuario_usuario_sapellido}" styleClass="etiqueta-Usuario" disabled="true"/>
+					<ice:panelGroup>
+						<ice:inputText value="#{usuarioHome.instance.detalle.segundoApellido}" styleClass="input-Detalle" id="sApellido" required="true"/>
+						<ice:message for="sApellido"/>
+					</ice:panelGroup>
+					<h:outputText value="" />
+					
+					<h:inputText value="#{messages.gestionusuario_usuario_dni}" styleClass="etiqueta-Usuario" disabled="true"/>
+					<ice:panelGroup>
+						<ice:inputText value="#{usuarioHome.instance.dni}" styleClass="input-Detalle" id="dni" required="true">
+							<f:validateLength minimum="5" maximum="9"/>
+						</ice:inputText>
+						<ice:message id="dniError" for="dni"/>
+					</ice:panelGroup>
+					<h:outputText value="" />
+					
+					<h:inputText value="#{messages.gestionusuario_roles}" styleClass="etiqueta-Usuario" disabled="true" rendered="#{!servicioUsuario.esAdministrador()}"/>
+					<h:outputLabel rendered="#{servicioUsuario.esAdministrador()}" />
+					<ice:selectOneRadio id="SlctRol" 
+                            value="#{servicioUsuario.codigoRolSeleccionado}" visible="#{!servicioUsuario.esAdministrador()}">
+                        <f:selectItems  id="SlctRolItms"
+                                        value="#{servicioUsuario.listaRoles}"/>
+                    </ice:selectOneRadio>
+                    <h:outputLabel rendered="#{servicioUsuario.esAdministrador()}" />
+					<h:outputLabel rendered="#{!servicioUsuario.esAdministrador()}" />
+					
+					<h:inputText value="#{messages.gestionusuario_ambitos}" styleClass="etiqueta-Usuario" disabled="true" />
+					<ice:panelGroup>
+						<ice:commandButton value="#{messages.botonusuario_ambito}" id="aniadirAmbitoCB" alt="#{messages.botonusuario_ambito}"
+										   actionListener="#{servicioUsuario.mostrarPanelAmbitosAL}" rendered="#{!usuarioHome.instance.dadoBaja}"
+										   styleClass="boton2" style="vertical-align:middle;" title="#{messages.boton_title_usuarioDetalle_anadirAmbito}">
+						</ice:commandButton>
+					</ice:panelGroup>
+					<h:outputLabel />
+					
+					<h:outputLabel />
+					<ice:dataTable value="#{servicioUsuario.ambitosUsuario}"
+					var="ambUsr" id="ambitosUsuarioList" styleClass="tablaRAT" style="width: 30%;">
+						<h:column>
+							<h:outputText value="#{ambUsr.texto}"/>
+						</h:column>
+						<h:column rendered="#{!usuarioHome.instance.dadoBaja}">
+							<ice:commandLink action="#{servicioUsuario.eliminarAmbito(ambUsr.getIdBaseDatos())}" 
+											 ajaxSingle="true" reRender="ambitosUsuarioList" styleClass="iconoNav">
+								<h:graphicImage value="/img/editorfip/es/comun/eliminar_fila.png" height="16px" width="16px" title="#{messages.boton_title_usuarioDetalle_eliminarAmbito}"/>
+							</ice:commandLink>
+						</h:column>
+					</ice:dataTable>
+					<h:outputLabel />
+					
+					
+					<h:inputText value="#{messages.gestionusuario_tramites}" styleClass="etiqueta-Usuario" disabled="true"/>
+					<ice:panelGroup>
+					<ice:commandButton value="#{messages.botonusuario_tramite}" id="aniadirTramitesCB" alt="#{messages.botonusuario_tramite}"								   
+									   actionListener="#{servicioUsuario.mostrarPanelTramitesAL}" 	rendered="#{!usuarioHome.instance.dadoBaja}"								  
+									   styleClass="boton2" style="vertical-align:middle;" title="#{messages.boton_title_usuarioDetalle_anadirTramite}">
+					</ice:commandButton>
+					</ice:panelGroup>
+					<h:outputLabel />
+					
+					<h:outputLabel />
+					<ice:dataTable value="#{usuarioHome.instance.tramitesAsignados}" var="tramiteUsr" id="tramitesUsuarioList" styleClass="tablaRAT" style="width:60%;">
+						<ice:column>
+							<h:outputText value="#{servicioUsuario.obtenerNombreAmbito(tramiteUsr.tramite.plan.getIdambito())}" />
+						</ice:column>
+						<h:column>
+							<h:outputText value="#{tramiteUsr.tramite.nombre}" />
+						</h:column>
+						<h:column rendered="#{!usuarioHome.instance.dadoBaja}">
+							<ice:commandLink action="#{servicioUsuario.eliminarTramite(tramiteUsr.tramite.getIden())}" reRender="tramitesUsuarioList" immediate="true" styleClass="iconoNav">
+								<h:graphicImage value="/img/editorfip/es/comun/eliminar_fila.png" height="16px" width="16px" title="#{messages.boton_title_usuarioDetalle_eliminarTramite}"/>
+							</ice:commandLink>
+						</h:column>
+					</ice:dataTable>
+					<h:outputLabel />
+					
+					
+				</h:panelGrid>
+				
+				<ui:include  src="/administracion/gestionusuario/AnnadirAmbito.xhtml"/>				
+				<ui:include src="/administracion/gestionusuario/AnnadirPlan.xhtml"/>
+				
+				
+				<br></br>
+				<br></br>
+				<ice:panelGroup>
+						
+						
+						<h:panelGroup>
+							 <ice:commandButton value="#{messages.botongenerico_guardar}" action="#{servicioUsuario.guardarUsuario}"  							
+							 styleClass="boton1_up"  rendered="#{!usuarioHome.instance.dadoBaja}" alt="#{messages.botongenerico_guardar}" title="#{messages.boton_title_usuarioDetalle_guardar}"/>
+						</h:panelGroup>
+						
+						<h:panelGroup>
+							 <ice:commandButton action="#{servicioUsuario.descartarCambios}" 
+							 	value="#{messages.botongenerico_desc_cambios}"
+							 	reRender="datosUsuarioPG" styleClass="boton2_up" alt="#{messages.botongenerico_desc_cambios}"
+							 	rendered="#{!usuarioHome.instance.dadoBaja and !servicioUsuario.esUsuarioNuevo}" title="#{messages.boton_title_usuarioDetalle_descartarCambios}"/>
+							 
+						</h:panelGroup>	
+						
+											
+					</ice:panelGroup>
+
+			</ice:form>		
+
+		</ice:panelGroup>
+	</ui:define>
+
+</ui:composition>

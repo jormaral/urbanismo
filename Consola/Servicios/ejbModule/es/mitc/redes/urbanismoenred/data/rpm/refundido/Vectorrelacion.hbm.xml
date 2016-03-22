@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-abr-2012 12:30:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.refundido.Vectorrelacion"
+  schema="refundido" table="vectorrelacion">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">refundido.refundido_vectorrelacion_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Relacion"
+   fetch="select" name="relacion">
+   <column name="idrelacion" not-null="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="iddefvector" type="int">
+   <column name="iddefvector" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="valor" type="int">
+   <column name="valor" not-null="true"/>
+  </property>
+ </class>
+ <query name="refundido.Vectorrelacion.obtenerUnidades">SELECT valor FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Vectorrelacion vr
+	WHERE vr.relacion IN 
+	(SELECT vr2.relacion FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Vectorrelacion vr2 WHERE vr2.valor = :idDeterminacion AND vr2.iddefvector= 2)
+	AND vr.iddefvector = 3
+</query>
+</hibernate-mapping>

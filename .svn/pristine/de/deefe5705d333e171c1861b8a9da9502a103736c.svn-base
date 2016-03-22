@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jul-2009 12:36:17 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentoplan"
+  schema="diccionario" table="instrumentoplan">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">diccionario.diccionario_instrumentoplan_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Naturaleza"
+   fetch="select" name="naturaleza">
+   <column name="idnaturaleza"/>
+  </many-to-one>
+  <many-to-one cascade="delete"
+   class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Literal"
+   fetch="select" name="literal">
+   <column name="idliteral"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="nemo" type="string">
+   <column length="12" name="nemo" not-null="true"/>
+  </property>
+  <set inverse="true" name="instrumentotipooperacionplans" sort="unsorted">
+   <key>
+    <column name="idinstrumentoplan" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan"/>
+  </set>
+ </class>
+ <query name="Instrumentoplan.buscarTodos">SELECT ip FROM es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentoplan ip, es.mitc.redes.urbanismoenred.data.rpm.diccionario.Traduccion trd
+	WHERE ip.literal = trd.literal AND trd.idioma = 'es' AND ip.iden &lt;&gt; :idPlanBase
+	ORDER BY  trd.texto</query>
+ <query name="Instrumentoplan.obtenerTodos">SELECT ip FROM es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentoplan ip</query>
+</hibernate-mapping>

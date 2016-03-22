@@ -1,0 +1,129 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.procesoprerefundido}"
+				view="/gestionfip/gestionprerefundido/GestionPrerefundido.xhtml"
+				id="GestionPrerefundidoRutaMenu" propagation="none">
+
+			</s:link>
+
+		</ice:panelGroup>
+
+	</ui:define>
+
+	<ui:define name="body">
+
+		<ice:form>
+
+			<ice:panelGroup styleClass="infoseleccion">
+				<ice:graphicImage styleClass="tooltip_imagen"
+					alt="#{messages.genericos_info}"
+					url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				<ice:outputLabel value="#{messages.prerefundido_previavalidacion}"
+					style="color:blue;" />
+
+			</ice:panelGroup>
+
+			<ice:panelGroup styleClass="infoseleccion">
+				<ice:graphicImage styleClass="tooltip_imagen"
+					alt="#{messages.genericos_info}"
+					url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				<ice:outputLabel value="#{messages.prerefundido_info_general}"
+					styleClass="labelseleccioninfo" />
+
+			</ice:panelGroup>
+
+			<ice:panelGrid columns="2"
+				columnClasses="testColDetLabel,testColDetermDetalles">
+
+				<ice:panelGroup styleClass="labels"
+					panelTooltip="tooltip_preref_tipooperacionplan">
+					<ice:outputLabel value="#{messages.prerefundido_tipooperacionplan}" />
+					<ice:graphicImage styleClass="tooltip_imagen"
+						alt="#{messages.genericos_info}"
+						url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				</ice:panelGroup>
+
+				<ice:selectOneListbox size="1" id="selectTipoOperacionPlan"
+					styleClass="exampleBoxLabel" style="white-space: pre;width:95%;"
+					value="#{gestionPrerefundido.idTipoOperacionPlan}"
+					partialSubmit="true">
+					<f:selectItems
+						value="#{servicioBasicoPlanes.obtenerListaTipoOperacionPlanSelectItem()}" />
+				</ice:selectOneListbox>
+
+				<ice:panelGroup styleClass="labels">
+					<ice:outputLabel value="#{messages.prerefundido_tramiteencargado}"
+						styleClass="labels" />
+				</ice:panelGroup>
+
+				<ice:outputText id="tramEncargado"
+					style="white-space: pre;width:95%;"
+					value="#{variablesSesionUsuario.tramiteEncargadoTrabajo.nombre}" />
+
+				<ice:panelGroup styleClass="labels">
+					<ice:outputLabel value="#{messages.prerefundido_tramitevigente}"
+						styleClass="labels" />
+				</ice:panelGroup>
+				<ice:outputText id="tramVigente" style="white-space: pre;width:95%;"
+					value="#{variablesSesionUsuario.tramiteVigenteTrabajo.nombre}" />
+
+			</ice:panelGrid>
+
+			<ice:panelGroup style="width: 30%">
+				<ice:commandButton
+					title="#{messages.boton_title_generarPrere_generarPrere}"
+					value="#{messages.prerefundido_generarprerefundido}"
+					alt="#{messages.prerefundido_generarprerefundido}"
+					action="#{gestionPrerefundido.guardarPrerefundido()}"
+					styleClass="boton4" style="float: right" />
+
+			</ice:panelGroup>
+			
+			<s:link style="color:blue;" value="Ir al Listado"
+				view="/gestionfip/gestionprerefundido/GestionPrerefundido.xhtml"
+				id="GestionPrerefundidoRutaMenuList" propagation="none">
+
+			</s:link>
+
+			<ice:panelTooltip id="tooltip_preref_tipooperacionplan"
+				styleClass="tooltip_panel">
+				<f:facet name="body">
+					<ice:outputText
+						value="#{messages.tooltip_determinacion_regulacionesespecificas}#{messages.tooltip_determinacion_masinfo}"
+						styleClass="tooltip_texto" />
+				</f:facet>
+			</ice:panelTooltip>
+		</ice:form>
+	</ui:define>
+
+</ui:composition>

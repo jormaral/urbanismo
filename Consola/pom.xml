@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>es.mitc.redes.urbanismoenred</groupId>
+	<artifactId>UrbanismoEnRed-Padre</artifactId>
+	<version>2.0.0</version>
+	<packaging>pom</packaging>
+	<name>Servicios de Urbanismo En Red</name>
+	<description>Proyecto de generación del sistema de gestión digital de planes de urbanismo</description>
+	<properties>
+    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	</properties>
+	<licenses>
+		<license>
+			<name>EUPL</name>
+			<url>http://ec.europa.eu/idabc/eupl5</url>
+		</license>
+	</licenses>
+	<modules>
+		<module>Servicios</module>
+		<module>Consola</module>
+		<module>Productor</module>
+		<module>Despliegue</module>
+		<module>ServiciosWeb</module>
+		<module>Visor</module>
+	</modules>
+</project>

@@ -1,0 +1,219 @@
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaListaCUSimplificada"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+
+	<ice:form id="listCUSimplificada">
+		<br />
+
+		<ice:panelGrid columns="2" columnClasses="colLabelDet, colBotonDet"
+			styleClass="panelGridDeter">
+			<ice:panelGroup styleClass="labels label-izq"
+				panelTooltip="tooltip_entidad_cu">
+				<ice:outputLabel
+					value="#{messages.entidad_condicionurbanistica_determinaciones}" />
+				<ice:graphicImage styleClass="tooltip_imagen"
+					alt="#{messages.genericos_info}"
+					url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+			</ice:panelGroup>
+			<ice:panelGroup>
+
+				<ice:commandButton value="#{messages.entidad_cu_anadir}"
+					action="#{listaCUSimplificada.llamarPopUpCU}"
+					rendered="#{listaCUSimplificada.isEntidadAplicadaGrupoAplicacion()}"
+					styleClass="boton1" alt="#{messages.entidad_cu_anadir}"
+					title="#{messages.boton_title_CUsimplificada_anadirCU}" />
+				<ice:commandButton value="#{messages.entidad_ga_anadir}"
+					action="#{listaCUSimplificada.llamarPopUpGA}"
+					rendered="#{not listaCUSimplificada.isEntidadAplicadaGrupoAplicacion()}"
+					styleClass="boton5" alt="#{messages.entidad_ga_anadir}"
+					title="#{messages.boton_title_CUsimplificada_anadirGA}" />
+				<ice:commandButton value="#{messages.entidad_cu_copiar}"
+					rendered="#{listaCUSimplificada.isEntidadAplicadaGrupoAplicacion()}"
+					action="#{listaCUSimplificada.seleccionarEntidadesCopiar}"
+					styleClass="boton5" alt="#{messages.entidad_cu_copiar}"
+					title="#{messages.boton_title_CUsimplificada_copiarCu}" />
+
+			</ice:panelGroup>
+		</ice:panelGrid>
+
+
+
+		<ice:panelGroup>
+
+			<ice:dataTable id="listaCUSimplificada"
+				value="#{listaCUSimplificada.cuSimplificadaList}" var="item"
+				rendered="#{not empty listaCUSimplificada.cuSimplificadaList}">
+
+				<ice:column>
+					<f:facet name="header">
+						<ice:outputText value="Selec.">
+						</ice:outputText>
+						<!--  
+						<ice:panelGroup>
+							<ice:commandLink value="#{messages.seleccionar_todas}"
+								styleClass="enlaceAzul"
+								action="#{listaCUSimplificada.seleccionarTodas(true)}"
+								visible="#{!listaCUSimplificada.seleccionadasTodas}" />
+							<ice:commandLink value="#{messages.seleccionar_ninguna}"
+								styleClass="enlaceAzul"
+								action="#{listaCUSimplificada.seleccionarTodas(false)}"
+								visible="#{listaCUSimplificada.seleccionadasTodas}" />
+						</ice:panelGroup>
+						-->
+					</f:facet>
+					
+					<ice:selectBooleanCheckbox value="#{item.seleccionada}" />
+
+				</ice:column>
+
+				<ice:column groupOn=" #{item.nombreDeterminacion}">
+
+
+					<f:facet name="header">
+
+
+						<ice:outputText value="#{messages.cu_nombredeterminacion}">
+						</ice:outputText>
+
+
+
+
+					</f:facet>
+					<ice:outputText value=" #{item.nombreDeterminacion}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+
+						<ice:outputText value="#{messages.cu_nombredeterminacionregimen}">
+						</ice:outputText>
+
+					</f:facet>
+					<ice:outputText value=" #{item.nombreDetRegimen}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+
+						<ice:outputText value="#{messages.cu_nombrevalorreferencia}">
+						</ice:outputText>
+
+					</f:facet>
+					<ice:outputText value=" #{item.nombreDetValorRef}" />
+				</ice:column>
+
+
+				<ice:column>
+
+
+					<f:facet name="header">
+
+						<ice:outputText value="#{messages.cu_valor}">
+						</ice:outputText>
+
+					</f:facet>
+					<ice:outputText value=" #{item.valor}" />
+
+				</ice:column>
+
+
+				<ice:column>
+					<f:facet name="header">
+
+						<ice:outputText value="#{messages.cu_regespec}">
+						</ice:outputText>
+
+					</f:facet>
+
+					<ice:dataTable id="regespList" value="#{item.regimenesEspecificos}"
+						var="regesp" rendered="#{not empty item.regimenesEspecificos}">
+						<ice:column>
+							<f:facet name="header">
+
+								<ice:outputText value="#{messages.cu_re_nombre}">
+								</ice:outputText>
+
+							</f:facet>
+							<ice:outputText value=" #{regesp.nombreRegimenEspecifico}" />
+						</ice:column>
+
+						<ice:column>
+							<f:facet name="header">
+
+								<ice:outputText
+									value="#{messages.cu_re_textoregimenesespecifico}">
+								</ice:outputText>
+
+							</f:facet>
+
+							<ice:outputText value=" #{regesp.textoRegimenEspecifico}">
+
+							</ice:outputText>
+
+
+
+						</ice:column>
+					</ice:dataTable>
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+
+						<ice:outputText escape="false" value="Acción" />
+
+
+					</f:facet>
+					<ice:panelGrid columns="1">
+
+
+
+						<ice:commandLink styleClass="hiperenlace enlaceAzul"
+							title="#{messages.botongenerico_editar}"
+							value="#{messages.botongenerico_editar}"
+							actionListener="#{gestionCondicionesUrbanisticas.establecerCUSeleccionada}">
+							<f:param name="idRegimenCU" value="#{item.idRegimen}"></f:param>
+						</ice:commandLink>
+
+						<ice:commandLink styleClass="hiperenlace enlaceAzul"
+							title="#{messages.botongenerico_nuevoregimen}"
+							value="#{messages.botongenerico_nuevoregimen}"
+							action="#{gestionCondicionesUrbanisticas.crearDeterminacionCUSeleccionada(item.idDeterminacion)}">
+							<f:param name="idDeterminacionCU" value="#{item.idDeterminacion}"></f:param>
+						</ice:commandLink>
+
+						<ice:commandLink styleClass="hiperenlace enlaceAzul"
+							title="#{messages.botongenerico_borrar}"
+							value="#{messages.botongenerico_borrar}"
+							actionListener="#{gestionCondicionesUrbanisticas.borrarRegimen}">
+							<f:param name="idRegimenCU" value="#{item.idRegimen}"></f:param>
+						</ice:commandLink>
+
+
+
+
+					</ice:panelGrid>
+
+				</ice:column>
+
+			</ice:dataTable>
+
+
+
+
+		</ice:panelGroup>
+
+		<!-- Tooltips -->
+		<ice:panelTooltip id="tooltip_entidad_cu" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText
+					value="#{messages.tooltip_entidad_cu}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+
+	</ice:form>
+</f:subview>

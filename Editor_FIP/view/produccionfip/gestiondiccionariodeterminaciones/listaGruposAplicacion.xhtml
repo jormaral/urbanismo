@@ -1,0 +1,51 @@
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaListaGruposAplicacion"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+	<ice:panelGroup scrollHeight="250px">
+					 		
+					<ice:dataTable id="listaGrupoAplicacionsDeterminacion"
+						value="#{listaGruposAplicacion.gruposAplicacion}"
+						
+						var="item" 
+						rendered="#{not empty listaGruposAplicacion.gruposAplicacion}">
+			
+						<ice:column>
+							<f:facet name="header">
+								<ice:outputText
+										value="#{messages.nombre_determinacion} " />
+							</f:facet>
+							<ice:outputText value="#{item.nombre}" />
+						</ice:column>
+						
+						<ice:column>
+							<f:facet name="header">
+								<ice:outputText	value="#{messages.nombre_plan} " />
+							</f:facet>
+							<ice:outputText value="#{item.tramite.iden==variablesSesionUsuario.idTramiteTrabajoActual?'Mismo Plan':item.tramite.plan.nombre}" />
+						</ice:column>
+			
+						<ice:column style="text-align:center" rendered="#{variablesSesionUsuario.getIdTipoTramiteTrabajo()==3}">
+						    <f:facet name="header">
+						
+						        <ice:outputText escape="false" value="#{messages.borrar}"/>
+						
+						    </f:facet>
+					    
+						    <ice:commandLink value="X" style="color: #000000;font-family: Arial;font-size: 12px;font-weight:bold;" action="#{listaGruposAplicacion.borrarGrupoAplicacionDeterminacion(item.iden)}">					       
+						    </ice:commandLink>
+						    
+						</ice:column>
+						
+					</ice:dataTable>
+			
+			
+					
+					<ice:outputLabel rendered="#{empty listaGruposAplicacion.gruposAplicacion}" value="#{messages.no_hay_datos}" styleClass="dataResult"/>
+			
+				</ice:panelGroup>
+
+</f:subview>

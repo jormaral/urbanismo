@@ -1,0 +1,28 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alvaro.Montero
+-->
+
+<div class="toolbox divider">
+	<span class="iconWrapper"><img id="BtnVisorPlanesAddPlanes" class="toolBoxAction" src="styles/images/addPlan.png" alt="A&ntilde;adir" title="Crear nuevo plan"/></span>
+	<span class="iconWrapper"><img id="BtnVisorPlanesAddTramites" class="toolBoxAction" src="styles/images/addTramite.png" alt="A&ntilde;adir" title="Crear nuevo tr&aacute;mite"/></span>
+</div>
+
+<div class="toolbox divider">
+	<span class="iconWrapper"><img id="BtnVisorPlanesEditPlanes" class="toolBoxAction" src="styles/images/ModificarPlan.png" alt="Modificar" title="Modificar plan" /></span>
+	<span class="iconWrapper"><img id="BtnVisorPlanesEditTramites" class="toolBoxAction" src="styles/images/ModificarTramite.png" alt="Modificar" title="Modificar tr&aacute;mite" /></span>
+</div>
+
+<div class="toolbox divider">
+	<span class="iconWrapper"><img id="BtnVisorPlanesRemoveTramites" class="toolBoxAction" src="styles/images/delete.png" alt="Borrar" title="Borrar tr&aacute;mite" /></span>
+</div>
+
+<div class="toolbox divider">
+	<span class="iconWrapper"><img id="BtnVisorPlanesExpandir" class="toolBoxAction" src="styles/images/expandir.png" alt="Expandir" title="Expandir el nodo seleccionado"/></span>
+	<span class="iconWrapper"><img id="BtnVisorPlanesContraer" class="toolBoxAction" src="styles/images/Contraer.png" alt="Contraer" title="Contraer todo" /></span>	
+</div>
+
+<div class="toolbox divider">
+	<span class="iconWrapper"><img id="BtnVisorPlanesBuscar" class="toolBoxAction" src="styles/images/search_icon.png" alt="Buecar" title="Buscar"/></span>	
+</div>

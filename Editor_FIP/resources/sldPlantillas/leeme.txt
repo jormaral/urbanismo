@@ -1,0 +1,11 @@
+- Se va a hacer en un bean aparte, llamado GenerarSLDdeTramitesBean, a traves de un metodo que se llame generarSLD(int idtramite, int idambito)
+
+- Hay que generar estos ficheros por cada tramite que se consolida (a traves de fip1 o el que se crea con sistematizacion planeamiento, que llamara a este servicio anterior)
+
+- Crear estos ficheros para idtramiteplanvigente y idtramiteplanencargado. Ej: 222_acc.xml, 222_afe.xml, etc
+
+- Dentro de cada uno de los ficheros hay que modificar:
+	<sld:Name>topp:ambito_3222</sld:Name>  -> hay que sustituir ambito_3222 por el ambito_"idambito" adecuado
+	 <ogc:Literal>227</ogc:Literal -> Hay que sustituir todas las apariciones de 227 por el idtramite adecuado (ya sea vigente o encargado)
+
+- Hay que guardar estos ficheros generados en: <ruta_jboss>\var\sld.war	

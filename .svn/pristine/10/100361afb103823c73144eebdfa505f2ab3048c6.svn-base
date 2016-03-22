@@ -1,0 +1,101 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_ayuda}"
+				view="/ayuda/AyudaNavegacion.xhtml" id="AyudaRutaMenu"
+				propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_manuales}"
+				view="/ayuda/manuales/Manuales.xhtml" id="ManualesRutaMenu"
+				propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+
+
+	</ui:define>
+
+	<ui:define name="body">
+
+		<ice:form>
+
+			<s:button value="#{messages.subirmanual}" renderedOnUserRole="ADM"
+				view="/ayuda/manuales/ManualDetalle.xhtml"
+				alt="#{messages.subirmanual}"
+				title="#{messages.boton_title_ayudaManuales_subirManual}"
+				styleClass="boton2" />
+
+			<ice:dataTable value="#{gestionManuales.resultado}" var="manual">
+
+				<ice:column>
+					<f:facet name="header">
+						<ice:outputLabel value="#{messages.titulo}" />
+					</f:facet>
+					<ice:outputText value="#{manual.titulo}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<ice:outputLabel value="#{messages.descripcion}" />
+					</f:facet>
+					<ice:outputText value="#{manual.descripcion}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<ice:outputLabel value="#{messages.descargar}" />
+					</f:facet>
+					<ice:outputResource
+						resource="#{gestionManuales.obtenerFichero(manual.archivo)}"
+						fileName="#{manual.archivo}" shared="false"
+						styleClass="enlaceAzul" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+						<ice:outputLabel value="#{messages.borrar}" />
+					</f:facet>
+					<ice:commandLink value="#{messages.manual_borrar}"
+						styleClass="enlaceAzul"
+						action="#{gestionManuales.eliminarManual(manual.id)}" />
+				</ice:column>
+
+			</ice:dataTable>
+
+		</ice:form>
+
+	</ui:define>
+
+</ui:composition>

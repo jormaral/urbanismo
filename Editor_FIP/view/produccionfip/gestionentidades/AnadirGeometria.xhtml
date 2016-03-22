@@ -1,0 +1,53 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="body">
+
+		<ice:form>
+
+			<ice:panelPopup id="panelGeometria" autoCentre="true" modal="true"
+				styleClass="panelPopup"
+				visible="true">
+
+				<f:facet name="header">
+					<ice:panelGroup>
+						<ice:outputText value="#{messages.entidad_geometria}" />
+						<s:button id="modalPnlCloseBtnGeo"
+							image="/fipeditor/img/editorfip/es/comun/cerrar_popup.png"
+							styleClass="popupHeaderImage" view="#{pageRedirect}"
+							propagation="none" title="#{messages.botongenerico_cerrar}"
+							alt="#{messages.botongenerico_cerrar}" />
+					</ice:panelGroup>
+				</f:facet>
+
+				<f:facet name="body">
+					<h:panelGroup>
+						<ice:panelGrid columns="2">
+							<ice:outputLabel value="#{messages.geometria_wkt}"/>
+							<ice:inputTextarea value="#{gestionEntidades.geometriaWKT}"  partialSubmit="true" cols="100" rows="15" />
+						</ice:panelGrid>
+						
+						
+						<ice:panelGrid columns="2">
+							
+							<s:button action="#{gestionEntidades.guardarGeometriaEntidad()}" value="#{messages.botongenerico_guardar}" view="#{pageRedirect}" propagation="none" styleClass="boton1"/>
+							<s:button value="#{messages.botongenerico_cancelar}" view="#{pageRedirect}" propagation="none" styleClass="boton1"/>
+						</ice:panelGrid>
+						
+					</h:panelGroup>
+				</f:facet>
+			</ice:panelPopup>
+
+		</ice:form>
+
+
+	</ui:define>
+
+</ui:composition>

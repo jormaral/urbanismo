@@ -1,0 +1,202 @@
+/* 
+    Document   : Cabecera
+    Created on : 17-Diciembre-2009, 11:42:06
+    Author     : francisco.morata
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+
+.zonaImpresion
+{
+    position:absolute;
+    left:0px;
+    top:0px;
+    height:100%;
+    width:100%;
+    background-image: url(images/cabecera_impresion.png);
+    background-repeat: no-repeat;
+}
+
+#zonaImpresion select
+{
+    border:0px;
+    margin:0px;
+    /*padding:0px;*/
+    background-color: #EBEBEB;
+    margin-top:2px;
+    font-size: 8pt;
+    /*nfot-variant: small-caps;*/
+    border:1px solid #2987F8;
+
+}
+#zonaImpresion option
+{
+    font-size: 8pt;
+    /*font-variant: small-caps;*/
+}
+#lblEscala
+{
+    position:absolute;
+    left:27px;
+    top:23px;
+    height:15px;
+    width:100px;
+}
+#select_escala {
+    height:21px;
+    left:27px;
+    position:absolute;
+    top:37px;
+    width:202px;
+}
+#lblResolucion
+{
+    position:absolute;
+    left:27px;
+    top:67px;
+    height:15px;
+    width:100px;
+}
+#select_resolucion {
+    height:21px;
+    left:27px;
+    position:absolute;
+    top:81px;
+    width:202px;
+}
+#lblFormato
+{
+    position:absolute;
+    left:27px;
+    top:111px;
+    height:15px;
+    width:100px;
+}
+#select_formato{
+    height:21px;
+    left:27px;
+    position:absolute;
+    top:125px;
+    width:201px;
+}
+#lblHoja
+{
+    position:absolute;
+    left:27px;
+    top:155px;
+    height:15px;
+    width:100px;
+}
+#select_hoja{
+    height:21px;
+    left:27px;
+    position:absolute;
+    top:169px;
+    width:201px;
+}
+#lblFilas
+{
+    position:absolute;
+    left:27px;
+    top:199px;
+    height:15px;
+    width:100px;
+}
+#text_filas {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background:transparent none repeat scroll 0 0;
+    border:0 none;
+    height:17px;
+    left:27px;
+    position:absolute;
+    top:216px;
+    width:30px;
+}
+#lblColumnas
+{
+    position:absolute;
+    left:27px;
+    top:241px;
+    height:15px;
+    width:100px;
+}
+#text_columnas {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background:transparent none repeat scroll 0 0;
+    border:0 none;
+    height:17px;
+    left:27px;
+    position:absolute;
+    top:258px;
+    width:30px;
+}
+#lblCabecera
+{
+    position:absolute;
+    left:255px;
+    top:22px;
+    height:15px;
+    width:100px;
+}
+#text_cabecera {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background:transparent none repeat scroll 0 0;
+    border:0 none;
+    height:17px;
+    left:260px;
+    position:absolute;
+    top:41px;
+    width:208px;
+}
+#lblPie
+{
+    position:absolute;
+    left:255px;
+    top:69px;
+    height:15px;
+    width:100px;
+}
+#text_pie {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background:transparent none repeat scroll 0 0;
+    border:0 none;
+    height:169px;
+    left:260px;
+    position:absolute;
+    top:92px;
+    width:209px;
+    resize: none;
+    font-family: Century Gothic;
+    font-size: 9pt;
+}
+#btnEnviarImpresion {
+    -moz-background-inline-policy: continuous;
+    background: none repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 32px;
+    left: 352px;
+    position: absolute;
+    top: 284px;
+    width: 32px;
+}
+#btnEnviarImpresion:hover {
+    background-image: url("images/cabecera_busquedas_goON.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    height: 32px;
+    left: 352px;
+    position: absolute;
+    top: 284px;
+    width: 32px;
+}

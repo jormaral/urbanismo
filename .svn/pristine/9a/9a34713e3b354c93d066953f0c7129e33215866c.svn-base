@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-nov-2011 17:20:25 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.ficha.Conjuntogrupo" table="conjuntogrupo" schema="ficha">
+        <id name="iden" type="long">
+            <column name="iden"/>
+            <generator class="sequence">
+                <param name="sequence">ficha.conjuntogrupo_iden_seq</param>
+            </generator>
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" not-null="true" />
+        </property>
+        <set name="conjuntodeterminaciongrupos" table="conjuntodeterminaciongrupo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idconjunto" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Conjuntodeterminaciongrupo" />
+        </set>
+        <set name="fichaconjuntogrupos" table="fichaconjuntogrupo" inverse="true" lazy="false" fetch="select" cascade="all-delete-orphan">
+            <key>
+                <column name="idconjunto" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Fichaconjuntogrupo" />
+        </set>
+        <set name="grupodeterminacions" table="grupodeterminacion" inverse="true" lazy="true" fetch="select" cascade="all-delete-orphan">
+            <key>
+                <column name="idconjuntogrupo" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Grupodeterminacion" />
+        </set>
+    </class>
+    <query name="Conjuntogrupo.buscaPorFicha">SELECT c FROM es.mitc.redes.urbanismoenred.data.rpm.ficha.Fichaconjuntogrupo fcg 
+        JOIN fcg.conjuntogrupo c
+	WHERE fcg.ficha.iden = :idFicha
+	ORDER BY fcg.orden
+    </query>
+</hibernate-mapping>

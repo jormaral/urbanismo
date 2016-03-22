@@ -1,0 +1,137 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../../layout/template.xhtml">
+
+	<ui:define name="head">
+		<script src="/fipeditor/scripts/ol211/lib/OpenLayers.js"></script> 
+	</ui:define>
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_verdeterminacionplanvigente}"
+				view="/informacionfip/PlanVigenteNavegacion.xhtml"
+				id="PlanVigenteRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.consulta_entidades}"
+				view="/informacionfip/planvigente/entidades/VerEntidadPlanVigente.xhtml"
+				id="VerEntidadPlanVigenteRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link
+				view="/informacionfip/planvigente/entidades/CopiarEntidades.xhtml"
+				id="CopiarEntidadPlanVigenteRutaMenu" propagation="none">
+				<ice:outputLabel styleClass="hiperenlace"
+					value="#{messages.entidades_copiar}" />
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+
+	<ui:define name="body">
+	
+	<ice:panelGrid columnClasses="testColMap2">
+			<ice:panelGroup>
+				<ice:graphicImage styleClass="tooltip_imagen"
+					alt="#{messages.genericos_info}"
+					url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				
+				<ice:outputLabel style="color:blue;"
+					value="Seleccione la entidad que quiere copiar del Plan Vigente y luego seleccione el padre sobre el que se copiara del Plan Encargado. Finalmente pulse en 'Copiar Seleccionados'"></ice:outputLabel>
+			</ice:panelGroup>
+		</ice:panelGrid>
+
+		<ice:form>
+			<ice:panelGrid>
+				<ice:panelGroup style="text-align:left">
+					<ice:commandButton value="#{messages.copiar_seleccionados}"
+						disabled="#{!servicioCopiarEntidades.renderizarBtnSelTramite() or gestionArbolEntidadesCopiar.nodoSeleccionado==null}"
+						immediate="true"
+						action="#{servicioCopiarEntidades.copiarSeleccionados(gestionArbolEntidadesCopiar.nodoSeleccionado)}"
+						styleClass="boton4" style="width: 158px!important;"
+						alt="#{messages.copiar_seleccionados}"
+						title="#{messages.copiar_seleccionados}" />
+
+					<ice:commandButton value="#{messages.reiniciar_seleccion}"
+						action="#{gestionArbolEntidadesCopiar.cargarArbolInicial}"
+						styleClass="boton2" alt="#{messages.reiniciar_seleccion}"
+						title="#{messages.reiniciar_seleccion}" />
+
+				</ice:panelGroup>
+			</ice:panelGrid>
+		</ice:form>
+
+		<ice:panelGrid columns="2">
+
+			<ice:panelGroup style="text-align:left">
+				<ice:outputText value="Arbol de Entidades del Plan Vigente" />
+			</ice:panelGroup>
+
+			<ice:panelGroup style="text-align:left">
+				<ice:outputText value="Arbol de Entidades del Plan Encargado" />
+			</ice:panelGroup>
+
+			<ice:outputText></ice:outputText>
+
+			<ice:panelGroup style="text-align:left">
+				<ice:outputText value="Nodo seleccionado: " />
+				<ice:outputText
+					value="#{gestionArbolEntidadesCopiar.selectedUserObject.datosIdTextoArbolGenerico.texto}"
+					rendered="#{gestionArbolEntidadesCopiar.selectedUserObject.datosIdTextoArbolGenerico.idBaseDatos>0}" />
+				<ice:outputText value="Raiz"
+					rendered="#{gestionArbolEntidadesCopiar.selectedUserObject.datosIdTextoArbolGenerico.idBaseDatos==0}" />
+			</ice:panelGroup>
+
+			<ice:panelGroup>
+				<ui:include src="./ArbolEntidadesVigente.xhtml" />
+			</ice:panelGroup>
+
+			<ice:panelGroup>
+				<ui:include src="./ArbolEntidades.xhtml" />
+			</ice:panelGroup>
+
+		</ice:panelGrid>
+
+		<ice:panelGrid>
+
+
+		</ice:panelGrid>
+	</ui:define>
+
+</ui:composition>

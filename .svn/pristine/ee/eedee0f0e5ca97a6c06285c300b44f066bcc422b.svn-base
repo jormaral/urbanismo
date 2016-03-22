@@ -1,0 +1,158 @@
+/* 
+    Document   : base
+    Created on : 24-nov-2009, 12:15:22
+    Author     : jorge.bodas
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+html,body
+{
+    margin:0;
+    padding:0;
+    background-color:#eeeeee;
+    color:#555555;
+    font-family:'Century Gothic';
+    font-size:9pt;
+    height:100%;
+    width:100%;
+    overflow:hidden;
+    background-image:url(images/fondo.png);
+}
+#versionContainer {
+    background-image: url("images/versionContainer.png");
+    bottom: 10px;
+    color: #000000;
+    font-size: 10px;
+    height: 30px;
+    line-height: 22px;
+    padding-left: 9px;
+    position: absolute;
+    right: -20px;
+    text-align: left;
+    width: 102px;
+    z-index: 99999999;
+}
+#map
+{
+    position:absolute;
+    left:0px;
+    top:0px;
+    height:100%;
+    width:100%;
+}
+
+#fullscreen
+{
+    position:absolute;
+    left:0px;
+    top:0px;
+    height:100%;
+    width:100%;
+    visibility:hidden;
+    z-index:9999999;
+}
+
+/*input{
+    cursor:pointer;
+}*/
+/*.curved
+{
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    behavior:url(styles/border-radius.htc);
+}*/
+
+
+/*ATRIBUTION*/
+
+.olLayerGoogleCopyright {
+    left: 2px;
+    bottom: 2px;
+    visibility:hidden;
+}
+.olLayerGooglePoweredBy {
+    left: 2px;
+    bottom: 15px;
+    visibility:hidden;
+}
+.olControlAttribution {
+    font-size: smaller;
+    right: 3px;
+    bottom: 4.5em;
+    position: absolute;
+    display: block;
+    visibility:hidden;
+}
+
+
+/*ESCALA*/
+.olControlScale {
+    right: 3px;
+    bottom: 3em;
+    display: block;
+    position: absolute;
+    font-size: smaller;
+}
+.olControlScaleLine {
+   left: 10px;
+   bottom: 15px;
+   font-size: xx-small;
+}
+.olControlScaleLineBottom {
+   border: solid 2px black;
+   border-bottom: none;
+   margin-top:-2px;
+   text-align: center;
+}
+.olControlScaleLineTop {
+   border: solid 2px black;
+   border-top: none;
+   text-align: center;
+}
+
+
+
+.olMarkerLabel
+{
+    position:absolute;
+    left:-12px;
+    top:-9px;
+    height:32px;
+    width:1000px;
+    /*background-image: url(images/markerLabel.png);
+    background-repeat: no-repeat;*/
+    font-weight: bold;
+    font-style: italic;
+    padding-left:36px;
+    line-height: 34px;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 5px #000000,-2px 2px 5px #000000,2px -2px 5px #000000,-2px -2px 5px #000000,0px 0px 5px #000000;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color=#2E2E2E,direction=0,strenth=0)
+            progid:DXImageTransform.Microsoft.Shadow(color=#2E2E2E,direction=180,strenth=0)
+            progid:DXImageTransform.Microsoft.Shadow(color=#2E2E2E,direction=90,strenth=0)
+            progid:DXImageTransform.Microsoft.Shadow(color=#2E2E2E,direction=270,strenth=0);
+}
+.littlePopupMarkerLabelClass
+{
+    position:absolute;
+    left:-12px;
+    top:0px;
+    height:200px;
+    width:300px;
+    background-image: url(images/littlePopup.png);
+    background-repeat: no-repeat;
+    padding-left:36px;
+    line-height: 34px;
+}
+
+
+#btnVerPDF
+{
+    width:200px;
+    overflow:hidden;
+}

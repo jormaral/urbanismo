@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodes>
+	<node text="GOOGLE" type="carpeta">
+		<node text="G-BASE"
+                      type="GOOGLE"
+                      layers="G_NORMAL_MAP"
+                      isBaseLayers="true"
+                      visibility="true"
+                />
+		<node text="G-SATELITE"
+                      type="GOOGLE"
+                      layers="G_SATELLITE_MAP"
+                      isBaseLayers="false"
+                      visibility="true"
+                />
+		<node text="G-HÍBRIDO"
+                      type="GOOGLE"
+                      layers="G_HYBRID_MAP"
+                      isBaseLayers="false"
+                      visibility="true"
+                />
+		<node text="G-CALLEJERO"
+                      type="GOOGLE"
+                      layers="G_NORMAL_MAP"
+                      isBaseLayers="false"
+                      visibility="true"
+                />
+	</node>
+	<node text="IDEE" open="true" type="carpeta">
+            <node text="NACIONALES" open="true" type="carpeta">
+		<node text="CATASTRO"
+                      type="WMS"
+                      url="http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx"
+                      layers="catastro"
+                      transparent="true"
+                      format="image/gif"
+                />
+            </node>
+            <!-- <node text="LOCALES" open="true" type="carpeta">
+                <node text="TERRASSA PDI´S"/>
+                <node text="SEVILLA ORTO"/>
+            </node> -->
+	</node>
+	<node text="CAPA X"/>
+	<node text="CAPA X2" load="javascripts/mooTree2/example.xml"/>
+</nodes>

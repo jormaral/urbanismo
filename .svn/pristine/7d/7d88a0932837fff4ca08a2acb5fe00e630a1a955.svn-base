@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<page xmlns="http://jboss.com/products/seam/pages"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd"
+
+      no-conversation-view-id="/DocumentoshpList.xhtml"
+
+      login-required="true">
+
+   
+   <begin-conversation join="true" flush-mode="MANUAL"/>
+   
+   <action execute="#{documentoshpHome.wire}"/>
+   
+   <param name="documentoshpFrom"/>
+   <param name="documentoshpIden" value="#{documentoshpHome.documentoshpIden}"/>
+   <param name="documentoFrom"/>
+   <param name="documentoIden" value="#{documentoHome.documentoIden}"/>
+   <param name="tramiteFrom"/>
+   <param name="tramiteIden" value="#{tramiteHome.tramiteIden}"/>
+   <param name="planFrom"/>
+   <param name="planIden" value="#{planHome.planIden}"/>
+
+
+
+
+
+   <navigation from-action="#{documentoshpHome.persist}">
+       <rule if-outcome="persisted">
+          <end-conversation/>
+          <redirect view-id="/Documentoshp.xhtml"/>
+       </rule>
+   </navigation>
+   
+   <navigation from-action="#{documentoshpHome.update}">
+       <rule if-outcome="updated">
+          <end-conversation/>
+          <redirect view-id="/Documentoshp.xhtml"/>
+       </rule>
+   </navigation>
+   
+   <navigation from-action="#{documentoshpHome.remove}">
+       <rule if-outcome="removed">
+          <end-conversation/>
+          <redirect view-id="/DocumentoshpList.xhtml"/>
+       </rule>
+   </navigation>
+   
+</page>

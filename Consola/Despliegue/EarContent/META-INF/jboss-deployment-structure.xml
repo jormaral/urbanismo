@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jboss-deployment-structure>
+	<!-- Make sub deployments isolated by default, so they cannot see each others classes without a Class-Path entry -->
+	<ear-subdeployments-isolated>false</ear-subdeployments-isolated>
+	<!-- This corresponds to the top level deployment. For a war this is the war's module, for an ear -->
+	<!-- This is the top level ear module, which contains all the classes in the EAR's lib folder -->
+		
+	<deployment>
+		<!-- Exclusions allow you to prevent the server from automatically adding 
+			some dependencies -->
+		<exclusions>
+		</exclusions>
+		<!-- This allows you to define additional dependencies, it is the same as using the Dependencies: manifest attribute -->
+		<dependencies>
+			<module name="org.apache.commons.logging" export="true" />
+			<module name="org.apache.commons.lang" export="true" />
+			<module name="org.apache.log4j" export="true"/>
+			<module name="org.hibernate" export="true"/>
+		</dependencies>
+		<!-- These add additional classes to the module. In this case it is the same as including the jar in the EAR's lib directory resources>
+		    <resource-root path="jboss-seam.jar" />
+		</resources -->
+	</deployment>
+
+	<!--sub-deployment name="MyTest.EJB.jar"/-->
+
+	<sub-deployment name="Urbanismoenred-serviciosV2.jar">
+		<!-- Exclusions allow you to prevent the server from automatically adding 
+			some dependencies -->
+		<exclusions>
+		</exclusions>
+		<!-- This allows you to define additional dependencies, it is the same as using the Dependencies: manifest attribute -->
+		<dependencies>
+			
+		</dependencies>
+		<!-- These add additional classes to the module. In this case it is the same as including the jar in the EAR's lib directory -->
+		<!-- resources>
+		    <resource-root path="MyTest.EJB.jar" />
+		</resources -->
+	</sub-deployment>
+	
+	<sub-deployment name="Urbanismoenred-ConsolaV2.war">
+		<!-- Exclusions allow you to prevent the server from automatically adding 
+			some dependencies -->
+		<exclusions>
+		</exclusions>
+		<!-- This allows you to define additional dependencies, it is the same as using the Dependencies: manifest attribute -->
+		<dependencies>
+			<module name="org.codehaus.jackson.jackson-core-asl"/>
+			<module name="org.codehaus.jackson.jackson-mapper-asl"/>
+			<module name="org.apache.commons.io"/>
+		</dependencies>
+		<!-- These add additional classes to the module. In this case it is the same as including the jar in the EAR's lib directory -->
+		<!-- resources>
+		    <resource-root path="MyTest.EJB.jar" />
+		</resources -->
+	</sub-deployment>
+	
+	<sub-deployment name="Urbanismoenred-ProductorV2.war">
+		<!-- Exclusions allow you to prevent the server from automatically adding 
+			some dependencies -->
+		<exclusions>
+		</exclusions>
+		<!-- This allows you to define additional dependencies, it is the same as using the Dependencies: manifest attribute -->
+		<dependencies>
+		</dependencies>
+		<!-- These add additional classes to the module. In this case it is the same as including the jar in the EAR's lib directory -->
+		<!-- resources>
+		    <resource-root path="MyTest.EJB.jar" />
+		</resources -->
+	</sub-deployment>
+
+</jboss-deployment-structure>

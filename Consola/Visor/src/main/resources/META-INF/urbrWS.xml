@@ -1,0 +1,1304 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="urbrWS" targetNamespace="http://serviciosweb.urbanismoenred.redes.mitc.es/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://serviciosweb.urbanismoenred.redes.mitc.es/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://serviciosweb.urbanismoenred.redes.mitc.es/" version="1.0" xmlns:tns="http://serviciosweb.urbanismoenred.redes.mitc.es/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="ambitosHijo" type="tns:ambitosHijo"/>
+<xs:element name="ambitosHijoResponse" type="tns:ambitosHijoResponse"/>
+<xs:element name="ambitosPadre" type="tns:ambitosPadre"/>
+<xs:element name="ambitosPadreResponse" type="tns:ambitosPadreResponse"/>
+<xs:element name="ambitosWithPlan" type="tns:ambitosWithPlan"/>
+<xs:element name="ambitosWithPlanResponse" type="tns:ambitosWithPlanResponse"/>
+<xs:element name="consultaGrafica" type="tns:consultaGrafica"/>
+<xs:element name="consultaGraficaExtendida" type="tns:consultaGraficaExtendida"/>
+<xs:element name="consultaGraficaExtendidaResponse" type="tns:consultaGraficaExtendidaResponse"/>
+<xs:element name="consultaGraficaResponse" type="tns:consultaGraficaResponse"/>
+<xs:element name="coordenadasRefCatastral" type="tns:coordenadasRefCatastral"/>
+<xs:element name="coordenadasRefCatastralResponse" type="tns:coordenadasRefCatastralResponse"/>
+<xs:element name="creaWMSDoc" type="tns:creaWMSDoc"/>
+<xs:element name="creaWMSDocResponse" type="tns:creaWMSDocResponse"/>
+<xs:element name="determinacionesHijas" type="tns:determinacionesHijas"/>
+<xs:element name="determinacionesHijasResponse" type="tns:determinacionesHijasResponse"/>
+<xs:element name="determinacionesPadre" type="tns:determinacionesPadre"/>
+<xs:element name="determinacionesPadreResponse" type="tns:determinacionesPadreResponse"/>
+<xs:element name="entidadesFromClave" type="tns:entidadesFromClave"/>
+<xs:element name="entidadesFromClaveResponse" type="tns:entidadesFromClaveResponse"/>
+<xs:element name="entidadesFromNombre" type="tns:entidadesFromNombre"/>
+<xs:element name="entidadesFromNombreResponse" type="tns:entidadesFromNombreResponse"/>
+<xs:element name="entidadesFromNombre_Plan" type="tns:entidadesFromNombre_Plan"/>
+<xs:element name="entidadesFromNombre_PlanResponse" type="tns:entidadesFromNombre_PlanResponse"/>
+<xs:element name="estadoDocumentosTramite" type="tns:estadoDocumentosTramite"/>
+<xs:element name="estadoDocumentosTramiteResponse" type="tns:estadoDocumentosTramiteResponse"/>
+<xs:element name="estadoRegistro" type="tns:estadoRegistro"/>
+<xs:element name="estadoRegistroResponse" type="tns:estadoRegistroResponse"/>
+<xs:element name="extensionAmbito" type="tns:extensionAmbito"/>
+<xs:element name="extensionAmbitoResponse" type="tns:extensionAmbitoResponse"/>
+<xs:element name="extensionEntidad" type="tns:extensionEntidad"/>
+<xs:element name="extensionEntidadResponse" type="tns:extensionEntidadResponse"/>
+<xs:element name="extensionPlan" type="tns:extensionPlan"/>
+<xs:element name="extensionPlanResponse" type="tns:extensionPlanResponse"/>
+<xs:element name="fechaRefundido" type="tns:fechaRefundido"/>
+<xs:element name="fechaRefundidoResponse" type="tns:fechaRefundidoResponse"/>
+<xs:element name="geometriaEntidad" type="tns:geometriaEntidad"/>
+<xs:element name="geometriaEntidadResponse" type="tns:geometriaEntidadResponse"/>
+<xs:element name="geometriaPlan" type="tns:geometriaPlan"/>
+<xs:element name="geometriaPlanResponse" type="tns:geometriaPlanResponse"/>
+<xs:element name="getCoordenadas" type="tns:getCoordenadas"/>
+<xs:element name="getCoordenadasResponse" type="tns:getCoordenadasResponse"/>
+<xs:element name="getLeyenda" type="tns:getLeyenda"/>
+<xs:element name="getLeyendaResponse" type="tns:getLeyendaResponse"/>
+<xs:element name="getVersion" type="tns:getVersion"/>
+<xs:element name="getVersionResponse" type="tns:getVersionResponse"/>
+<xs:element name="getVias" type="tns:getVias"/>
+<xs:element name="getViasResponse" type="tns:getViasResponse"/>
+<xs:element name="gisPrevio" type="tns:gisPrevio"/>
+<xs:element name="gisPrevioResponse" type="tns:gisPrevioResponse"/>
+<xs:element name="idAmbito" type="tns:idAmbito"/>
+<xs:element name="idAmbitoResponse" type="tns:idAmbitoResponse"/>
+<xs:element name="metadatosPlan" type="tns:metadatosPlan"/>
+<xs:element name="metadatosPlanResponse" type="tns:metadatosPlanResponse"/>
+<xs:element name="metadatosTramite" type="tns:metadatosTramite"/>
+<xs:element name="metadatosTramiteResponse" type="tns:metadatosTramiteResponse"/>
+<xs:element name="municipiosCallejero" type="tns:municipiosCallejero"/>
+<xs:element name="municipiosCallejeroResponse" type="tns:municipiosCallejeroResponse"/>
+<xs:element name="planesFromNombre" type="tns:planesFromNombre"/>
+<xs:element name="planesFromNombreResponse" type="tns:planesFromNombreResponse"/>
+<xs:element name="planesHijo" type="tns:planesHijo"/>
+<xs:element name="planesHijoResponse" type="tns:planesHijoResponse"/>
+<xs:element name="planesPadre" type="tns:planesPadre"/>
+<xs:element name="planesPadreResponse" type="tns:planesPadreResponse"/>
+<xs:element name="provinciasCallejero" type="tns:provinciasCallejero"/>
+<xs:element name="provinciasCallejeroResponse" type="tns:provinciasCallejeroResponse"/>
+<xs:element name="referenciaCatastral" type="tns:referenciaCatastral"/>
+<xs:element name="referenciaCatastralResponse" type="tns:referenciaCatastralResponse"/>
+<xs:element name="tiposCalle" type="tns:tiposCalle"/>
+<xs:element name="tiposCalleResponse" type="tns:tiposCalleResponse"/>
+<xs:element name="urlDoc" type="tns:urlDoc"/>
+<xs:element name="urlDocResponse" type="tns:urlDocResponse"/>
+<xs:complexType name="determinacionesPadre">
+<xs:sequence>
+<xs:element name="idTramite" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="determinacionesPadreResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="metadatosTramite">
+<xs:sequence>
+<xs:element name="idTramite" type="xs:int"/>
+<xs:element minOccurs="0" name="idioma" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="metadatosTramiteResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="municipiosCallejero">
+<xs:sequence>
+<xs:element minOccurs="0" name="provincia" type="xs:string"/>
+<xs:element minOccurs="0" name="municipio" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="municipiosCallejeroResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="tiposCalle">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="tiposCalleResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getVias">
+<xs:sequence>
+<xs:element minOccurs="0" name="provincia" type="xs:string"/>
+<xs:element minOccurs="0" name="municipio" type="xs:string"/>
+<xs:element minOccurs="0" name="abrevTipo" type="xs:string"/>
+<xs:element minOccurs="0" name="nombreVia" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getViasResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ambitosHijo">
+<xs:sequence>
+<xs:element minOccurs="0" name="idioma" type="xs:string"/>
+<xs:element name="idPadre" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ambitosHijoResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="extensionAmbito">
+<xs:sequence>
+<xs:element name="idAmbito" type="xs:int"/>
+<xs:element minOccurs="0" name="srs" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="extensionAmbitoResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ambitosWithPlan">
+<xs:sequence>
+<xs:element minOccurs="0" name="idioma" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ambitosWithPlanResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="provinciasCallejero">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="provinciasCallejeroResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCoordenadas">
+<xs:sequence>
+<xs:element minOccurs="0" name="provincia" type="xs:string"/>
+<xs:element minOccurs="0" name="municipio" type="xs:string"/>
+<xs:element minOccurs="0" name="abrevTipo" type="xs:string"/>
+<xs:element minOccurs="0" name="nombreVia" type="xs:string"/>
+<xs:element minOccurs="0" name="numero" type="xs:string"/>
+<xs:element minOccurs="0" name="srs" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCoordenadasResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="consultaGraficaExtendida">
+<xs:sequence>
+<xs:element minOccurs="0" name="wktGeometry" type="xs:string"/>
+<xs:element minOccurs="0" name="srs" type="xs:string"/>
+<xs:element minOccurs="0" name="idioma" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="consultaGraficaExtendidaResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="planesFromNombre">
+<xs:sequence>
+<xs:element minOccurs="0" name="nombre" type="xs:string"/>
+<xs:element name="idAmbito" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="planesFromNombreResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="fechaRefundido">
+<xs:sequence>
+<xs:element name="idAmbito" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="fechaRefundidoResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="referenciaCatastral">
+<xs:sequence>
+<xs:element minOccurs="0" name="provincia" type="xs:string"/>
+<xs:element minOccurs="0" name="municipio" type="xs:string"/>
+<xs:element minOccurs="0" name="abrevTipo" type="xs:string"/>
+<xs:element minOccurs="0" name="nombreVia" type="xs:string"/>
+<xs:element minOccurs="0" name="numero" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="referenciaCatastralResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="geometriaPlan">
+<xs:sequence>
+<xs:element name="idPlan" type="xs:int"/>
+<xs:element minOccurs="0" name="srs" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="geometriaPlanResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="idAmbito">
+<xs:sequence>
+<xs:element minOccurs="0" name="X" type="xs:double"/>
+<xs:element minOccurs="0" name="Y" type="xs:double"/>
+<xs:element minOccurs="0" name="srs" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="idAmbitoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="entidadesFromNombre_Plan">
+<xs:sequence>
+<xs:element minOccurs="0" name="nombre" type="xs:string"/>
+<xs:element minOccurs="0" name="nombrePlan" type="xs:string"/>
+<xs:element name="idAmbito" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="entidadesFromNombre_PlanResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="planesPadre">
+<xs:sequence>
+<xs:element name="idAmbito" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="planesPadreResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="geometriaEntidad">
+<xs:sequence>
+<xs:element name="idEntidad" type="xs:int"/>
+<xs:element name="maxPuntosGeometriaRespuesta" type="xs:int"/>
+<xs:element minOccurs="0" name="srs" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="geometriaEntidadResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ambitosPadre">
+<xs:sequence>
+<xs:element minOccurs="0" name="idioma" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ambitosPadreResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="extensionEntidad">
+<xs:sequence>
+<xs:element name="idEntidad" type="xs:int"/>
+<xs:element minOccurs="0" name="srs" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="extensionEntidadResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="consultaGrafica">
+<xs:sequence>
+<xs:element minOccurs="0" name="wktGeometry" type="xs:string"/>
+<xs:element minOccurs="0" name="srs" type="xs:string"/>
+<xs:element minOccurs="0" name="idioma" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="consultaGraficaResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="entidadesFromClave">
+<xs:sequence>
+<xs:element minOccurs="0" name="Clave" type="xs:string"/>
+<xs:element name="idAmbito" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="entidadesFromClaveResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="planesHijo">
+<xs:sequence>
+<xs:element name="idPadre" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="planesHijoResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="extensionPlan">
+<xs:sequence>
+<xs:element name="idPlan" type="xs:int"/>
+<xs:element minOccurs="0" name="srs" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="extensionPlanResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="creaWMSDoc">
+<xs:sequence>
+<xs:element name="idHoja" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="creaWMSDocResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getLeyenda">
+<xs:sequence>
+<xs:element name="idHoja" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getLeyendaResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="determinacionesHijas">
+<xs:sequence>
+<xs:element name="idPadre" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="determinacionesHijasResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getVersion">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="getVersionResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="metadatosPlan">
+<xs:sequence>
+<xs:element name="idPlan" type="xs:int"/>
+<xs:element minOccurs="0" name="idioma" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="metadatosPlanResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="entidadesFromNombre">
+<xs:sequence>
+<xs:element minOccurs="0" name="nombre" type="xs:string"/>
+<xs:element name="idAmbito" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="entidadesFromNombreResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="coordenadasRefCatastral">
+<xs:sequence>
+<xs:element minOccurs="0" name="refCatastral" type="xs:string"/>
+<xs:element minOccurs="0" name="srs" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="coordenadasRefCatastralResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="urlDoc">
+<xs:sequence>
+<xs:element name="idDoc" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="urlDocResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="estadoDocumentosTramite">
+<xs:sequence>
+<xs:element name="idTramite" type="xs:int"/>
+<xs:element minOccurs="0" name="idioma" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="estadoDocumentosTramiteResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="gisPrevio">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="gisPrevioResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="estadoRegistro">
+<xs:sequence>
+<xs:element name="idAmbito" type="xs:int"/>
+<xs:element minOccurs="0" name="idioma" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="estadoRegistroResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ambitosHijoResponse">
+    <wsdl:part element="tns:ambitosHijoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="entidadesFromClave">
+    <wsdl:part element="tns:entidadesFromClave" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="extensionEntidadResponse">
+    <wsdl:part element="tns:extensionEntidadResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="estadoDocumentosTramiteResponse">
+    <wsdl:part element="tns:estadoDocumentosTramiteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="metadatosPlanResponse">
+    <wsdl:part element="tns:metadatosPlanResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="determinacionesPadre">
+    <wsdl:part element="tns:determinacionesPadre" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="coordenadasRefCatastral">
+    <wsdl:part element="tns:coordenadasRefCatastral" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaGraficaResponse">
+    <wsdl:part element="tns:consultaGraficaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="coordenadasRefCatastralResponse">
+    <wsdl:part element="tns:coordenadasRefCatastralResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="entidadesFromNombreResponse">
+    <wsdl:part element="tns:entidadesFromNombreResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="metadatosPlan">
+    <wsdl:part element="tns:metadatosPlan" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getVias">
+    <wsdl:part element="tns:getVias" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="urlDoc">
+    <wsdl:part element="tns:urlDoc" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ambitosHijo">
+    <wsdl:part element="tns:ambitosHijo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ambitosPadre">
+    <wsdl:part element="tns:ambitosPadre" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ambitosPadreResponse">
+    <wsdl:part element="tns:ambitosPadreResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="creaWMSDoc">
+    <wsdl:part element="tns:creaWMSDoc" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="estadoRegistro">
+    <wsdl:part element="tns:estadoRegistro" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fechaRefundido">
+    <wsdl:part element="tns:fechaRefundido" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="entidadesFromClaveResponse">
+    <wsdl:part element="tns:entidadesFromClaveResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="tiposCalle">
+    <wsdl:part element="tns:tiposCalle" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getViasResponse">
+    <wsdl:part element="tns:getViasResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="entidadesFromNombre_PlanResponse">
+    <wsdl:part element="tns:entidadesFromNombre_PlanResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="metadatosTramite">
+    <wsdl:part element="tns:metadatosTramite" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="provinciasCallejero">
+    <wsdl:part element="tns:provinciasCallejero" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fechaRefundidoResponse">
+    <wsdl:part element="tns:fechaRefundidoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenciaCatastral">
+    <wsdl:part element="tns:referenciaCatastral" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="extensionAmbito">
+    <wsdl:part element="tns:extensionAmbito" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="entidadesFromNombre">
+    <wsdl:part element="tns:entidadesFromNombre" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="planesFromNombre">
+    <wsdl:part element="tns:planesFromNombre" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="creaWMSDocResponse">
+    <wsdl:part element="tns:creaWMSDocResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getVersionResponse">
+    <wsdl:part element="tns:getVersionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="referenciaCatastralResponse">
+    <wsdl:part element="tns:referenciaCatastralResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="municipiosCallejeroResponse">
+    <wsdl:part element="tns:municipiosCallejeroResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="determinacionesPadreResponse">
+    <wsdl:part element="tns:determinacionesPadreResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="planesHijoResponse">
+    <wsdl:part element="tns:planesHijoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLeyenda">
+    <wsdl:part element="tns:getLeyenda" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCoordenadas">
+    <wsdl:part element="tns:getCoordenadas" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="planesPadreResponse">
+    <wsdl:part element="tns:planesPadreResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="idAmbito">
+    <wsdl:part element="tns:idAmbito" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="extensionEntidad">
+    <wsdl:part element="tns:extensionEntidad" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="extensionAmbitoResponse">
+    <wsdl:part element="tns:extensionAmbitoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="geometriaPlan">
+    <wsdl:part element="tns:geometriaPlan" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="entidadesFromNombre_Plan">
+    <wsdl:part element="tns:entidadesFromNombre_Plan" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="urlDocResponse">
+    <wsdl:part element="tns:urlDocResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="determinacionesHijas">
+    <wsdl:part element="tns:determinacionesHijas" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaGrafica">
+    <wsdl:part element="tns:consultaGrafica" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="planesFromNombreResponse">
+    <wsdl:part element="tns:planesFromNombreResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="estadoDocumentosTramite">
+    <wsdl:part element="tns:estadoDocumentosTramite" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ambitosWithPlanResponse">
+    <wsdl:part element="tns:ambitosWithPlanResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="idAmbitoResponse">
+    <wsdl:part element="tns:idAmbitoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaGraficaExtendidaResponse">
+    <wsdl:part element="tns:consultaGraficaExtendidaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="tiposCalleResponse">
+    <wsdl:part element="tns:tiposCalleResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="determinacionesHijasResponse">
+    <wsdl:part element="tns:determinacionesHijasResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCoordenadasResponse">
+    <wsdl:part element="tns:getCoordenadasResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaGraficaExtendida">
+    <wsdl:part element="tns:consultaGraficaExtendida" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="gisPrevioResponse">
+    <wsdl:part element="tns:gisPrevioResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="municipiosCallejero">
+    <wsdl:part element="tns:municipiosCallejero" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="geometriaPlanResponse">
+    <wsdl:part element="tns:geometriaPlanResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ambitosWithPlan">
+    <wsdl:part element="tns:ambitosWithPlan" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="estadoRegistroResponse">
+    <wsdl:part element="tns:estadoRegistroResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="provinciasCallejeroResponse">
+    <wsdl:part element="tns:provinciasCallejeroResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="geometriaEntidadResponse">
+    <wsdl:part element="tns:geometriaEntidadResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="planesHijo">
+    <wsdl:part element="tns:planesHijo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="extensionPlanResponse">
+    <wsdl:part element="tns:extensionPlanResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getVersion">
+    <wsdl:part element="tns:getVersion" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="metadatosTramiteResponse">
+    <wsdl:part element="tns:metadatosTramiteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="planesPadre">
+    <wsdl:part element="tns:planesPadre" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="geometriaEntidad">
+    <wsdl:part element="tns:geometriaEntidad" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="extensionPlan">
+    <wsdl:part element="tns:extensionPlan" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLeyendaResponse">
+    <wsdl:part element="tns:getLeyendaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="gisPrevio">
+    <wsdl:part element="tns:gisPrevio" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="urbrWS">
+    <wsdl:operation name="determinacionesPadre">
+      <wsdl:input message="tns:determinacionesPadre" name="determinacionesPadre">
+    </wsdl:input>
+      <wsdl:output message="tns:determinacionesPadreResponse" name="determinacionesPadreResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="metadatosTramite">
+      <wsdl:input message="tns:metadatosTramite" name="metadatosTramite">
+    </wsdl:input>
+      <wsdl:output message="tns:metadatosTramiteResponse" name="metadatosTramiteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="municipiosCallejero">
+      <wsdl:input message="tns:municipiosCallejero" name="municipiosCallejero">
+    </wsdl:input>
+      <wsdl:output message="tns:municipiosCallejeroResponse" name="municipiosCallejeroResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tiposCalle">
+      <wsdl:input message="tns:tiposCalle" name="tiposCalle">
+    </wsdl:input>
+      <wsdl:output message="tns:tiposCalleResponse" name="tiposCalleResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVias">
+      <wsdl:input message="tns:getVias" name="getVias">
+    </wsdl:input>
+      <wsdl:output message="tns:getViasResponse" name="getViasResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ambitosHijo">
+      <wsdl:input message="tns:ambitosHijo" name="ambitosHijo">
+    </wsdl:input>
+      <wsdl:output message="tns:ambitosHijoResponse" name="ambitosHijoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="extensionAmbito">
+      <wsdl:input message="tns:extensionAmbito" name="extensionAmbito">
+    </wsdl:input>
+      <wsdl:output message="tns:extensionAmbitoResponse" name="extensionAmbitoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ambitosWithPlan">
+      <wsdl:input message="tns:ambitosWithPlan" name="ambitosWithPlan">
+    </wsdl:input>
+      <wsdl:output message="tns:ambitosWithPlanResponse" name="ambitosWithPlanResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="provinciasCallejero">
+      <wsdl:input message="tns:provinciasCallejero" name="provinciasCallejero">
+    </wsdl:input>
+      <wsdl:output message="tns:provinciasCallejeroResponse" name="provinciasCallejeroResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCoordenadas">
+      <wsdl:input message="tns:getCoordenadas" name="getCoordenadas">
+    </wsdl:input>
+      <wsdl:output message="tns:getCoordenadasResponse" name="getCoordenadasResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaGraficaExtendida">
+      <wsdl:input message="tns:consultaGraficaExtendida" name="consultaGraficaExtendida">
+    </wsdl:input>
+      <wsdl:output message="tns:consultaGraficaExtendidaResponse" name="consultaGraficaExtendidaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="planesFromNombre">
+      <wsdl:input message="tns:planesFromNombre" name="planesFromNombre">
+    </wsdl:input>
+      <wsdl:output message="tns:planesFromNombreResponse" name="planesFromNombreResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fechaRefundido">
+      <wsdl:input message="tns:fechaRefundido" name="fechaRefundido">
+    </wsdl:input>
+      <wsdl:output message="tns:fechaRefundidoResponse" name="fechaRefundidoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenciaCatastral">
+      <wsdl:input message="tns:referenciaCatastral" name="referenciaCatastral">
+    </wsdl:input>
+      <wsdl:output message="tns:referenciaCatastralResponse" name="referenciaCatastralResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="geometriaPlan">
+      <wsdl:input message="tns:geometriaPlan" name="geometriaPlan">
+    </wsdl:input>
+      <wsdl:output message="tns:geometriaPlanResponse" name="geometriaPlanResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idAmbito">
+      <wsdl:input message="tns:idAmbito" name="idAmbito">
+    </wsdl:input>
+      <wsdl:output message="tns:idAmbitoResponse" name="idAmbitoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="entidadesFromNombre_Plan">
+      <wsdl:input message="tns:entidadesFromNombre_Plan" name="entidadesFromNombre_Plan">
+    </wsdl:input>
+      <wsdl:output message="tns:entidadesFromNombre_PlanResponse" name="entidadesFromNombre_PlanResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="planesPadre">
+      <wsdl:input message="tns:planesPadre" name="planesPadre">
+    </wsdl:input>
+      <wsdl:output message="tns:planesPadreResponse" name="planesPadreResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="geometriaEntidad">
+      <wsdl:input message="tns:geometriaEntidad" name="geometriaEntidad">
+    </wsdl:input>
+      <wsdl:output message="tns:geometriaEntidadResponse" name="geometriaEntidadResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ambitosPadre">
+      <wsdl:input message="tns:ambitosPadre" name="ambitosPadre">
+    </wsdl:input>
+      <wsdl:output message="tns:ambitosPadreResponse" name="ambitosPadreResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="extensionEntidad">
+      <wsdl:input message="tns:extensionEntidad" name="extensionEntidad">
+    </wsdl:input>
+      <wsdl:output message="tns:extensionEntidadResponse" name="extensionEntidadResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaGrafica">
+      <wsdl:input message="tns:consultaGrafica" name="consultaGrafica">
+    </wsdl:input>
+      <wsdl:output message="tns:consultaGraficaResponse" name="consultaGraficaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="entidadesFromClave">
+      <wsdl:input message="tns:entidadesFromClave" name="entidadesFromClave">
+    </wsdl:input>
+      <wsdl:output message="tns:entidadesFromClaveResponse" name="entidadesFromClaveResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="planesHijo">
+      <wsdl:input message="tns:planesHijo" name="planesHijo">
+    </wsdl:input>
+      <wsdl:output message="tns:planesHijoResponse" name="planesHijoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="extensionPlan">
+      <wsdl:input message="tns:extensionPlan" name="extensionPlan">
+    </wsdl:input>
+      <wsdl:output message="tns:extensionPlanResponse" name="extensionPlanResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="creaWMSDoc">
+      <wsdl:input message="tns:creaWMSDoc" name="creaWMSDoc">
+    </wsdl:input>
+      <wsdl:output message="tns:creaWMSDocResponse" name="creaWMSDocResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLeyenda">
+      <wsdl:input message="tns:getLeyenda" name="getLeyenda">
+    </wsdl:input>
+      <wsdl:output message="tns:getLeyendaResponse" name="getLeyendaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="determinacionesHijas">
+      <wsdl:input message="tns:determinacionesHijas" name="determinacionesHijas">
+    </wsdl:input>
+      <wsdl:output message="tns:determinacionesHijasResponse" name="determinacionesHijasResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <wsdl:input message="tns:getVersion" name="getVersion">
+    </wsdl:input>
+      <wsdl:output message="tns:getVersionResponse" name="getVersionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="metadatosPlan">
+      <wsdl:input message="tns:metadatosPlan" name="metadatosPlan">
+    </wsdl:input>
+      <wsdl:output message="tns:metadatosPlanResponse" name="metadatosPlanResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="entidadesFromNombre">
+      <wsdl:input message="tns:entidadesFromNombre" name="entidadesFromNombre">
+    </wsdl:input>
+      <wsdl:output message="tns:entidadesFromNombreResponse" name="entidadesFromNombreResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="coordenadasRefCatastral">
+      <wsdl:input message="tns:coordenadasRefCatastral" name="coordenadasRefCatastral">
+    </wsdl:input>
+      <wsdl:output message="tns:coordenadasRefCatastralResponse" name="coordenadasRefCatastralResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="urlDoc">
+      <wsdl:input message="tns:urlDoc" name="urlDoc">
+    </wsdl:input>
+      <wsdl:output message="tns:urlDocResponse" name="urlDocResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="estadoDocumentosTramite">
+      <wsdl:input message="tns:estadoDocumentosTramite" name="estadoDocumentosTramite">
+    </wsdl:input>
+      <wsdl:output message="tns:estadoDocumentosTramiteResponse" name="estadoDocumentosTramiteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="gisPrevio">
+      <wsdl:input message="tns:gisPrevio" name="gisPrevio">
+    </wsdl:input>
+      <wsdl:output message="tns:gisPrevioResponse" name="gisPrevioResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="estadoRegistro">
+      <wsdl:input message="tns:estadoRegistro" name="estadoRegistro">
+    </wsdl:input>
+      <wsdl:output message="tns:estadoRegistroResponse" name="estadoRegistroResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="urbrWSSoapBinding" type="tns:urbrWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="determinacionesPadre">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="determinacionesPadre">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="determinacionesPadreResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="metadatosTramite">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="metadatosTramite">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="metadatosTramiteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="municipiosCallejero">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="municipiosCallejero">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="municipiosCallejeroResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tiposCalle">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="tiposCalle">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="tiposCalleResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ambitosHijo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="ambitosHijo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ambitosHijoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVias">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getVias">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getViasResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="extensionAmbito">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="extensionAmbito">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="extensionAmbitoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ambitosWithPlan">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="ambitosWithPlan">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ambitosWithPlanResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCoordenadas">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCoordenadas">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCoordenadasResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="provinciasCallejero">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="provinciasCallejero">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="provinciasCallejeroResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaGraficaExtendida">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="consultaGraficaExtendida">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultaGraficaExtendidaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="planesFromNombre">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="planesFromNombre">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="planesFromNombreResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fechaRefundido">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="fechaRefundido">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="fechaRefundidoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="referenciaCatastral">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="referenciaCatastral">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="referenciaCatastralResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="geometriaPlan">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="geometriaPlan">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="geometriaPlanResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="idAmbito">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="idAmbito">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="idAmbitoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="entidadesFromNombre_Plan">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="entidadesFromNombre_Plan">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="entidadesFromNombre_PlanResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ambitosPadre">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="ambitosPadre">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ambitosPadreResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="geometriaEntidad">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="geometriaEntidad">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="geometriaEntidadResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="planesPadre">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="planesPadre">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="planesPadreResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="extensionEntidad">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="extensionEntidad">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="extensionEntidadResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaGrafica">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="consultaGrafica">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultaGraficaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="entidadesFromClave">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="entidadesFromClave">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="entidadesFromClaveResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="planesHijo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="planesHijo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="planesHijoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="extensionPlan">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="extensionPlan">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="extensionPlanResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="creaWMSDoc">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="creaWMSDoc">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="creaWMSDocResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLeyenda">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getLeyenda">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getLeyendaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="determinacionesHijas">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="determinacionesHijas">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="determinacionesHijasResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getVersion">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getVersionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="entidadesFromNombre">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="entidadesFromNombre">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="entidadesFromNombreResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="metadatosPlan">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="metadatosPlan">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="metadatosPlanResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="coordenadasRefCatastral">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="coordenadasRefCatastral">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="coordenadasRefCatastralResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="urlDoc">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="urlDoc">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="urlDocResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="estadoDocumentosTramite">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="estadoDocumentosTramite">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="estadoDocumentosTramiteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="estadoRegistro">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="estadoRegistro">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="estadoRegistroResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="gisPrevio">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gisPrevio">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gisPrevioResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="urbrWS">
+    <wsdl:port binding="tns:urbrWSSoapBinding" name="urbrWSPort">
+      <soap:address location="http://localhost:8080/urbanismoenredWS/urbrWS"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

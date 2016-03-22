@@ -1,0 +1,231 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.procesoprerefundido}"
+				view="/gestionfip/gestionprerefundido/GestionPrerefundido.xhtml"
+				id="GestionPrerefundidoRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.genericos_listado}"
+				view="/gestionfip/gestionprerefundido/GestionPrerefundido.xhtml"
+				id="GestionPrerefundidoListadoRutaMenu" propagation="none">
+
+			</s:link>
+
+		</ice:panelGroup>
+
+	</ui:define>
+
+
+	<ui:define name="body">
+
+
+		<ice:form>
+
+			<br />
+				<ice:commandButton value="Refrescar" styleClass="boton2"
+							action="#{listaPrerefundido.refrescarLista()}" />
+				
+				<s:button value="#{messages.nuevo_prerefundido}"
+				view="/gestionfip/gestionprerefundido/GenerarPrerefundido.xhtml"
+				alt="#{messages.nuevo_prerefundido}"
+				title="#{messages.boton_title_nuevoprerefundido}"
+				styleClass="boton4" />
+
+			<br />
+			<ice:panelGroup style="padding-top:10px;" scrollHeight="450px">
+
+				<ice:dataTable id="listaPreref"
+					value="#{listaPrerefundido.obtenerListaPrerefundido()}"
+					sortColumn="#{listaPrerefundido.sortColumnName}"
+					sortAscending="#{listaPrerefundido.ascending}" var="item" 
+					rendered="#{not empty listaPrerefundido.obtenerListaPrerefundido()}">
+
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.preref_fecha}" />
+						</f:facet>
+						<ice:outputText value="#{item.fechaInicio}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							
+								<ice:outputText value="#{messages.preref_ambito}" />
+							
+						</f:facet>
+						<ice:outputText
+							value="#{(item.ambito.iden>0)?servicioBasicoAmbitos.ambitoString(item.ambito.iden):'EN PROCESO'}" />
+					</ice:column>
+					
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="Ref. Correcto" />
+						</f:facet>
+						<ice:outputText
+							value="#{(listaPrerefundido.refundidoCorrecto(item.idprocesorefundido))==true ? messages.si : messages.no}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="Consolidado" />
+						</f:facet>
+						<ice:outputText
+							value="#{(item.consolidado)==true ? messages.si : messages.no}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.preref_trampreref}" />
+						</f:facet>
+						<ice:outputText value="#{(item.idTramitePrerefundido>0)?servicioBasicoTramites.nombreTramite(item.idTramitePrerefundido):'EN PROCESO...'}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.preref_tramvigente}" />
+						</f:facet>
+						<ice:outputText value="#{servicioBasicoTramites.nombreTramite(item.idTramiteVigente)}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.preref_tramencargado}" />
+						</f:facet>
+						<ice:outputText value="#{servicioBasicoTramites.nombreTramite(item.idTramiteEncargado)}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.preref_tipooperacion}" />
+						</f:facet>
+						<ice:outputText
+							value="#{servicioBasicoPlanes.tipoOperacionPlanString(item.tipoopplan.iden)}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="LOG" />
+						</f:facet>
+						<ice:outputResource id="logFileId"
+						
+						resource="#{listaPrerefundido.obtenerFichero(listaPrerefundido.rutaLog(item.idprocesorefundido))}"
+						mimeType="application/xml" fileName="log.txt"
+						shared="false" styleClass="hiperenlace enlaceAzul">
+					</ice:outputResource>
+						
+					</ice:column>
+					
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="Descarga FIP" />
+						</f:facet>
+						<ice:outputResource id="fipFileId"
+						rendered="#{(listaPrerefundido.refundidoCorrecto(item.idprocesorefundido))}"
+						resource="#{listaPrerefundido.obtenerFichero(listaPrerefundido.rutaFip(item.idprocesorefundido))}"
+						mimeType="application/xml" fileName="fip.zip"
+						shared="false" styleClass="hiperenlace enlaceAzul">
+						</ice:outputResource>
+					
+						
+					</ice:column>
+
+
+
+					<ice:column>
+						<f:facet name="header">
+
+							<ice:outputText escape="false"
+								value="#{messages.botongenerico_accion}" />
+
+						</f:facet>
+						
+						<ice:panelGrid columns="2"> 
+						
+							<ice:commandButton  value="#{messages.consolidar}" id="cconsolidarBtn"
+								panelConfirmation="consolidarConfirm"
+								rendered="#{(listaPrerefundido.refundidoCorrecto(item.idprocesorefundido)) and ((item.consolidado)==false) and (item.getIdTramitePrerefundido()!=-1)}"
+								action="#{gestionPrerefundido.consolidarPrerefundido(item.id)}"
+								styleClass="boton2">
+							</ice:commandButton>
+							
+							<ice:commandButton  value="#{messages.borrar}" id="cborrarBtn"
+								panelConfirmation="borrarConfirm"
+								
+								action="#{gestionPrerefundido.borrarPrerefundido(item.id)}"
+								styleClass="boton2">
+							</ice:commandButton>
+	
+							
+						</ice:panelGrid>
+						
+						<ice:panelConfirmation id="consolidarConfirm"
+								message="#{messages.consolidacion_confirm_msg}"
+								styleClass="boton1" acceptLabel="#{messages.consolidar}"
+								cancelLabel="#{messages.botongenerico_cancelar}"
+								title="#{messages.consolidacion_confirm_title}" />
+				
+						<ice:panelConfirmation id="borrarConfirm"
+								message="Va a borrar el Registro del Plan Prerefundido"
+								styleClass="boton1" acceptLabel="#{messages.botongenerico_aceptar}"
+								cancelLabel="#{messages.botongenerico_cancelar}"
+								title="Borrar" />
+
+					</ice:column>
+
+				</ice:dataTable>
+
+				
+								
+								
+				
+
+				<ice:outputLabel
+					rendered="#{empty listaPrerefundido.obtenerListaPrerefundido()}"
+					value="#{messages.no_hay_datos}" styleClass="dataResult" />
+
+			</ice:panelGroup>
+
+
+
+		</ice:form>
+
+
+	</ui:define>
+
+
+</ui:composition>

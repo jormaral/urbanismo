@@ -1,0 +1,259 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component" 
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="determinaciongrupoentidad" styleClass="edit">
+     <ice:panelGroup  id="editdeterminaciongrupoentidadGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="editTextBoxId" value="#{determinaciongrupoentidadHome.managed ? 'Edit' : 'Add'} determinaciongrupoentidad"/>
+                  </td>
+              </tr>
+          </table>
+
+        <ice:panelGroup id="editPanelGroupId" styleClass="edit">		 
+
+
+            <s:decorate id="idenField" template="../layout/edit.xhtml">
+                <ui:define name="label">Iden</ui:define>
+                        <ice:inputText id="iden"
+			                partialSubmit="true"
+                       required="true"
+                       disabled="#{determinaciongrupoentidadHome.managed}"
+                                    value="#{determinaciongrupoentidadHome.instance.iden}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+          </ice:panelGroup>
+       </ice:panelGroup>
+                  
+       <div class="actionButtons">
+        
+            <ice:commandButton id="save" 
+                          value="Save" 
+                         action="#{determinaciongrupoentidadHome.persist}"
+                       disabled="#{!determinaciongrupoentidadHome.wired}"
+                       rendered="#{!determinaciongrupoentidadHome.managed}"/>  
+                          			  
+            <ice:commandButton id="update" 
+                          value="Save" 
+                         action="#{determinaciongrupoentidadHome.update}"
+                       rendered="#{determinaciongrupoentidadHome.managed}"/>
+                        			  
+            <ice:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{determinaciongrupoentidadHome.remove}"
+                      immediate="true"
+                       rendered="#{determinaciongrupoentidadHome.managed}"/>
+                    
+            <s:button id="cancelEdit" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/Determinaciongrupoentidad.xhtml"
+                rendered="#{determinaciongrupoentidadHome.managed}"/>
+                
+            <s:button id="cancelAdddeterminaciongrupoentidadHome" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/#{empty determinaciongrupoentidadFrom ? 'DeterminaciongrupoentidadList' : determinaciongrupoentidadFrom}.xhtml"
+                rendered="#{!determinaciongrupoentidadHome.managed}"/>
+                
+        </div>
+        
+    </ice:form>
+
+ <ice:form id="form2determinaciongrupoentidadHome">  
+        <ice:panelTabSet id="editPanelTabdeterminaciongrupoentidadHomeId" styleClass="componentPanelTabSetLayout" style="margin-bottom:5px;margin-top:10px;">
+   
+ 	<ice:panelTab id="editTabdeterminacionByIddeterminacionId" label="Determinacion by iddeterminacion *" >
+		<div class="association" id="determinacionByIddeterminacionParent">
+    
+        	<h:outputText id="editdeterminacionByIddeterminacionTextId" value="There is no determinacionByIddeterminacion associated with this determinaciongrupoentidad." 
+                   rendered="#{determinaciongrupoentidadHome.instance.determinacionByIddeterminacion == null}"/>
+       	<ice:dataTable var="determinacion" 
+                   value="#{determinaciongrupoentidadHome.instance.determinacionByIddeterminacion}" 
+                rendered="#{determinaciongrupoentidadHome.instance.determinacionByIddeterminacion != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+		  columnClasses="allCols"
+                      id="editdeterminacionByIddeterminacionTableId">
+            <ice:column id="$editColumnidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{determinacion.iden}
+            </ice:column>
+            <ice:column id="$editColumnapartadoId">
+                <f:facet name="header">Apartado</f:facet>
+                #{determinacion.apartado}
+            </ice:column>
+            <ice:column id="$editColumnbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                #{determinacion.bsuspendida}
+            </ice:column>
+            <ice:column id="$editColumncodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                #{determinacion.codigo}
+            </ice:column>
+            <ice:column id="$editColumndeterminacionByIddeterminacionbaseId">
+	    	    <f:facet name="header">Determinacion by iddeterminacionbase iden</f:facet>
+		    	#{determinacion.determinacionByIddeterminacionbase.iden}
+            </ice:column>
+            <ice:column id="$editColumndeterminacionByIddeterminacionoriginalId">
+	    	    <f:facet name="header">Determinacion by iddeterminacionoriginal iden</f:facet>
+		    	#{determinacion.determinacionByIddeterminacionoriginal.iden}
+            </ice:column>
+            <ice:column id="$editColumndeterminacionByIdpadreId">
+	    	    <f:facet name="header">Determinacion by idpadre iden</f:facet>
+		    	#{determinacion.determinacionByIdpadre.iden}
+            </ice:column>
+            <ice:column id="$editColumnetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                #{determinacion.etiqueta}
+            </ice:column>
+            <ice:column id="$editColumnidcaracterId">
+                <f:facet name="header">Idcaracter</f:facet>
+                #{determinacion.idcaracter}
+            </ice:column>
+            <ice:column id="$editColumnnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{determinacion.nombre}
+            </ice:column>
+            <ice:column id="$editColumnordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{determinacion.orden}
+            </ice:column>
+            <ice:column id="$editColumntextoId">
+                <f:facet name="header">Texto</f:facet>
+                #{determinacion.texto}
+            </ice:column>
+            <ice:column id="$editColumntramiteId">
+	    	    <f:facet name="header">Tramite iden</f:facet>
+		    	#{determinacion.tramite.iden}
+            </ice:column>
+            <ice:column id="editColumndeterminacionLinkId">
+                <f:facet name="header">Action</f:facet>
+                <s:link view="/seam/Determinacion.xhtml" 
+                         id="viewdeterminacion" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="determinacionIden" 
+                           value="#{determinacion.iden}"/>
+                </s:link>
+            </ice:column>
+      </ice:dataTable>
+        <div class="actionButtons">
+            <s:button value="Select determinacionByIddeterminacion"
+	              id="selectParent"
+                      view="/seam/DeterminacionList.xhtml">
+                <f:param name="from" value="DeterminaciongrupoentidadEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </ice:panelTab>
+   
+	<ice:panelTab id="editTabdeterminacionByIddeterminaciongrupoId" label="Determinacion by iddeterminaciongrupo">
+		<div class="association" id="determinacionByIddeterminaciongrupoParent">
+    
+        	<h:outputText id="editdeterminacionByIddeterminaciongrupoTextId" value="There is no determinacionByIddeterminaciongrupo associated with this determinaciongrupoentidad." 
+                   rendered="#{determinaciongrupoentidadHome.instance.determinacionByIddeterminaciongrupo == null}"/>
+       	<ice:dataTable var="determinacion" 
+                   value="#{determinaciongrupoentidadHome.instance.determinacionByIddeterminaciongrupo}" 
+                rendered="#{determinaciongrupoentidadHome.instance.determinacionByIddeterminaciongrupo != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+		  columnClasses="allCols"
+                      id="editdeterminacionByIddeterminaciongrupoTableId">
+            <ice:column id="$editColumnidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{determinacion.iden}
+            </ice:column>
+            <ice:column id="$editColumnapartadoId">
+                <f:facet name="header">Apartado</f:facet>
+                #{determinacion.apartado}
+            </ice:column>
+            <ice:column id="$editColumnbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                #{determinacion.bsuspendida}
+            </ice:column>
+            <ice:column id="$editColumncodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                #{determinacion.codigo}
+            </ice:column>
+            <ice:column id="$editColumndeterminacionByIddeterminacionbaseId">
+	    	    <f:facet name="header">Determinacion by iddeterminacionbase iden</f:facet>
+		    	#{determinacion.determinacionByIddeterminacionbase.iden}
+            </ice:column>
+            <ice:column id="$editColumndeterminacionByIddeterminacionoriginalId">
+	    	    <f:facet name="header">Determinacion by iddeterminacionoriginal iden</f:facet>
+		    	#{determinacion.determinacionByIddeterminacionoriginal.iden}
+            </ice:column>
+            <ice:column id="$editColumndeterminacionByIdpadreId">
+	    	    <f:facet name="header">Determinacion by idpadre iden</f:facet>
+		    	#{determinacion.determinacionByIdpadre.iden}
+            </ice:column>
+            <ice:column id="$editColumnetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                #{determinacion.etiqueta}
+            </ice:column>
+            <ice:column id="$editColumnidcaracterId">
+                <f:facet name="header">Idcaracter</f:facet>
+                #{determinacion.idcaracter}
+            </ice:column>
+            <ice:column id="$editColumnnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{determinacion.nombre}
+            </ice:column>
+            <ice:column id="$editColumnordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{determinacion.orden}
+            </ice:column>
+            <ice:column id="$editColumntextoId">
+                <f:facet name="header">Texto</f:facet>
+                #{determinacion.texto}
+            </ice:column>
+            <ice:column id="$editColumntramiteId">
+	    	    <f:facet name="header">Tramite iden</f:facet>
+		    	#{determinacion.tramite.iden}
+            </ice:column>
+            <ice:column id="editColumndeterminacionLinkId">
+                <f:facet name="header">Action</f:facet>
+                <s:link view="/seam/Determinacion.xhtml" 
+                         id="viewdeterminacion" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="determinacionIden" 
+                           value="#{determinacion.iden}"/>
+                </s:link>
+            </ice:column>
+      </ice:dataTable>
+        <div class="actionButtons">
+            <s:button value="Select determinacionByIddeterminaciongrupo"
+	              id="selectParent"
+                      view="/seam/DeterminacionList.xhtml">
+                <f:param name="from" value="DeterminaciongrupoentidadEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+
+
+

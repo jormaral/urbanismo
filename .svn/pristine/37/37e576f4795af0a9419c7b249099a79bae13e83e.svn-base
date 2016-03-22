@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-abr-2012 12:30:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.refundido.Operacion" schema="refundido" table="operacion">
+        <id name="iden" type="int">
+            <column name="iden" />
+            <generator class="sequence">
+    			<param name="sequence">refundido.refundido_operacion_iden_seq</param>
+   			</generator>
+        </id>
+        <many-to-one name="tramite" class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Tramite" fetch="select">
+            <column name="idtramiteordenante" not-null="true" />
+        </many-to-one>
+        <property name="texto" type="string">
+            <column name="texto" />
+        </property>
+        <property name="orden" type="int">
+            <column name="orden" not-null="true" />
+        </property>
+        <set name="operacionentidads" table="operacionentidad" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idoperacion" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Operacionentidad" />
+        </set>
+        <set name="operaciondeterminacions" table="operaciondeterminacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idoperacion" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Operaciondeterminacion" />
+        </set>
+        <set name="operacionrelacions" table="operacionrelacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idoperacion" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Operacionrelacion" />
+        </set>
+    </class>
+</hibernate-mapping>

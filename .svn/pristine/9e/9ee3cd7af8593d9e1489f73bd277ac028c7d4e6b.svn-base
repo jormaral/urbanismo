@@ -1,0 +1,105 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_exportargeometria}"
+				view="/informacionfip/exportargeometria/ExportarGeometriaTramite.xhtml"
+				id="ExportarGeometriaTramiteMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+	<ui:define name="body">
+
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+			<!--  Se define el cuerpo de la pagina -->
+			<ice:panelGroup>
+
+				<ice:graphicImage styleClass="tooltip_imagen"
+					alt="#{messages.genericos_info}"
+					url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				<ice:outputLabel
+					value="#{messages.exportargeometria_info}"></ice:outputLabel>
+			</ice:panelGroup>
+
+			<br></br>
+			<br></br>
+
+			<ice:form>
+				<ice:panelGrid columns="2">
+
+					<ice:commandButton value="#{messages.exportargeometria_planencargardo}"
+						panelConfirmation="panelconfconplanencargado" styleClass="boton5"
+						action="#{servicioExportacionGeometria.exportarGeometria(variablesSesionUsuario.getIdTramiteEncargadoTrabajo())}" />
+
+					<ice:commandButton value="#{messages.exportargeometria_planvigente}"
+						panelConfirmation="panelconfconplanvigente" styleClass="boton5"
+						action="#{servicioExportacionGeometria.exportarGeometria(variablesSesionUsuario.getIdTramiteVigenteTrabajo())}" />
+
+					<ice:panelConfirmation id="panelconfconplanencargado"
+						title="#{messages.exportargeometria_generacion}"
+						message="#{messages.exportargeometria_planencargado_confirmacion}"
+						acceptLabel="#{messages.botongenerico_aceptar}"
+						cancelLabel="#{messages.botongenerico_cancelar}" />
+
+					<ice:panelConfirmation id="panelconfconplanvigente"
+						title="#{messages.exportargeometria_generacion}"
+						message="#{messages.exportargeometria_planvigente_confirmacion}"
+						acceptLabel="#{messages.botongenerico_aceptar}"
+						cancelLabel="#{messages.botongenerico_cancelar}" />
+						
+						<ice:outputLabel value="Descargar Geometria: "
+							rendered="#{servicioExportacionGeometria.isGeometriaGenerada()}" />
+						<ice:outputResource id="pdfFicha"
+							rendered="#{servicioExportacionGeometria.isGeometriaGenerada()}"
+							resource="#{servicioExportacionGeometria.obtenerFichero()}"
+							mimeType="application/zip"
+							fileName="Geometria.zip"
+							styleClass="hiperenlace enlaceAzul" shared="false" />
+						<ice:outputLabel />
+
+				</ice:panelGrid>
+
+				
+			</ice:form>
+
+		</ice:panelGroup>
+
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,241 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.busquedaavanzada_boton_buscardocumentos}"
+				view="/informacionfip/busqueda/busquedaDocumento.xhtml"
+				id="BusquedaAvanzadaNavegacionMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+	<ui:define name="body">
+		<ice:form id="formBusquedDocs">
+
+			<ice:panelGrid columnClasses="testColMap2">
+				<ice:panelGroup>
+					<ice:graphicImage styleClass="tooltip_imagen"
+						alt="#{messages.genericos_info}"
+						url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+					<ice:outputLabel
+						value="#{messages.busquedaavanzada_informacion_detalle}"></ice:outputLabel>
+
+				</ice:panelGroup>
+			</ice:panelGrid>
+
+			<s:button styleClass="boton5"
+				value="#{messages.busquedaavanzada_botonrecargar}"
+				view="/informacionfip/busqueda/busquedaDocumento.xhtml"></s:button>
+
+
+			<ice:panelGrid columns="4">
+
+				<h:inputText styleClass="etiqueta-Usuario"
+					value="#{messages.nombreArchivo}" disabled="true" />
+				<h:inputText styleClass="input-Detalle"
+					value="#{servicioBusquedaDocumento.filtros.nombreArchivo}" />
+
+				<h:inputText styleClass="etiqueta-Usuario"
+					value="#{messages.tipoPlan}" disabled="true" />
+				<ice:selectOneListbox size="1"
+					value="#{servicioBusquedaDocumento.filtros.tipoPlanSeleccionado}"
+					partialSubmit="false">
+					<f:selectItems value="#{servicioBusquedaDocumento.listaTipoPlan}" />
+				</ice:selectOneListbox>
+
+				<h:inputText styleClass="etiqueta-Usuario"
+					value="#{messages.titulo}" disabled="true" />
+				<h:inputText styleClass="input-Detalle"
+					value="#{servicioBusquedaDocumento.filtros.titulo}" />
+
+				<h:inputText styleClass="etiqueta-Usuario" value="#{messages.grupo}"
+					disabled="true" />
+				<ice:selectOneListbox size="1" id="selectGrupo"
+					value="#{servicioBusquedaDocumento.filtros.grupoDoc}"
+					partialSubmit="false">
+					<f:selectItems
+						value="#{servicioBusquedaDocumento.listaGrupoDocumento}" />
+				</ice:selectOneListbox>
+
+				<ice:outputLabel />
+				<ice:outputLabel />
+
+				<h:inputText styleClass="etiqueta-Usuario" value="#{messages.tipo}"
+					disabled="true" />
+				<ice:selectOneListbox size="1"
+					value="#{servicioBusquedaDocumento.filtros.tipoDoc}"
+					partialSubmit="false">
+					<f:selectItems
+						value="#{servicioBusquedaDocumento.listaTipoDocumento}" />
+				</ice:selectOneListbox>
+
+
+
+				<ice:outputLabel />
+				<ice:outputLabel />
+
+				<h:inputText styleClass="etiqueta-Usuario"
+					value="#{messages.asociadoentidad}" disabled="true" />
+				<ice:selectOneListbox size="1"
+					value="#{servicioBusquedaDocumento.filtros.asociadoEntidad}"
+					partialSubmit="false">
+					<f:selectItems
+						value="#{servicioBusquedaDocumento.listaAsociadoEntidad}" />
+				</ice:selectOneListbox>
+
+				<ice:outputLabel />
+				<ice:outputLabel />
+
+				<h:inputText styleClass="etiqueta-Usuario"
+					value="#{messages.asociadodeterminacion}" disabled="true" />
+				<ice:selectOneListbox size="1"
+					value="#{servicioBusquedaDocumento.filtros.asociadoDeterminacion}"
+					partialSubmit="false">
+					<f:selectItems
+						value="#{servicioBusquedaDocumento.listaAsociadoDeterminacion}" />
+				</ice:selectOneListbox>
+
+				<ice:outputLabel />
+				<ice:outputLabel />
+
+				<h:inputText styleClass="etiqueta-Usuario"
+					value="#{messages.tipofiltro}" disabled="true" />
+				<ice:selectOneListbox size="1"
+					value="#{servicioBusquedaDocumento.filtros.tipoFiltro}"
+					partialSubmit="false">
+					<f:selectItems
+						value="#{servicioBusquedaDocumento.listaTiposFiltro}" />
+				</ice:selectOneListbox>
+
+
+
+
+
+			</ice:panelGrid>
+
+			<ice:commandButton value="#{messages.genericos_buscar}"
+				action="#{servicioBusquedaDocumento.buscar}" styleClass="boton1_up"
+				alt="#{messages.genericos_buscar}"
+				title="#{messages.genericos_buscar}" />
+
+			<br></br>
+			<br></br>
+
+			<ice:panelGroup scrollHeight="400px">
+				<ice:outputLabel
+					rendered="#{!(servicioBusquedaDocumento.resultado.size()>0)}"
+					value="#{messages.busquedaavanzada_noresultado}"></ice:outputLabel>
+				<ice:dataTable value="#{servicioBusquedaDocumento.resultado}"
+					var="item"
+					rendered="#{(servicioBusquedaDocumento.resultado.size()>0)}"
+					id="listaDeterminaciones" enableContextMenu="false"
+					selectionMode="none" style="position:static;z-index:-1;">
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.plan}" />
+						</f:facet>
+						<h:outputText value="#{item.plan}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.titulo}" />
+						</f:facet>
+						<h:outputText value="#{item.titulo}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.nombreArchivo}" />
+						</f:facet>
+						<h:outputText value="#{item.nombreArchivo}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.grupo}" />
+						</f:facet>
+						<h:outputText value="#{item.grupo}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.tipo}" />
+						</f:facet>
+						<h:outputText value="#{item.tipo}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.entidadAsociada}" />
+						</f:facet>
+						<h:outputText value="#{item.entidadAsociada}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.determinacionAsociada}" />
+						</f:facet>
+						<h:outputText value="#{item.determinacionAsociada}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.accion}" />
+						</f:facet>
+						<s:link rendered="#{item.carpeta}"
+							value="#{messages.botongenerico_verdetalle}" target="_blank"
+							view="/produccionfip/gestiondocumental/GestionDocumentalCarpetaDetalle.xhtml"
+							styleClass="hiperenlace enlaceAzul">
+							<f:param name="idDocumento" value="#{item.id}" />
+						</s:link>
+
+						<s:link rendered="#{!item.carpeta}"
+							value="#{messages.botongenerico_verdetalle}" target="_blank"
+							view="/produccionfip/gestiondocumental/GestionDocumentalDetalle.xhtml"
+							styleClass="hiperenlace enlaceAzul">
+							<f:param name="idDocumento" value="#{item.id}" />
+						</s:link>
+					</ice:column>
+
+				</ice:dataTable>
+			</ice:panelGroup>
+
+		</ice:form>
+
+	</ui:define>
+
+</ui:composition>

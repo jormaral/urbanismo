@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite"
+  schema="planeamiento" table="tramite">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">planeamiento.planeamiento_tramite_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan"
+   fetch="select" name="plan">
+   <column name="idplan" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipotramite"
+   fetch="select" insert="false" name="tipotramite" update="false">
+   <column name="idtipotramite" not-null="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="idtipotramite" type="int">
+   <column name="idtipotramite" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="idorgano" type="java.lang.Integer">
+   <column name="idorgano"/>
+  </property>
+  <property generated="never" lazy="false" name="idsentido" type="java.lang.Integer">
+   <column name="idsentido"/>
+  </property>
+  <property generated="never" lazy="false" name="fecha" type="date">
+   <column length="13" name="fecha"/>
+  </property>
+  <property generated="never" lazy="false" name="fechaconsolidacion" type="date">
+   <column length="13" name="fechaconsolidacion"/>
+  </property>
+  <property generated="never" lazy="false" name="texto" type="string">
+   <column name="texto"/>
+  </property>
+  <property generated="never" lazy="false" name="comentario" type="string">
+   <column name="comentario"/>
+  </property>
+  <property generated="never" lazy="false" name="numeroacuerdo" type="string">
+   <column length="20" name="numeroacuerdo"/>
+  </property>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column length="50" name="nombre"/>
+  </property>
+  <property generated="never" lazy="false" name="idcentroproduccion" type="int">
+   <column name="idcentroproduccion" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="iteracion" type="int">
+   <column name="iteracion" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="codigofip" type="string">
+   <column length="32" name="codigofip"/>
+  </property>
+  <set inverse="true" name="relacionsForIdtramitecreador" sort="unsorted">
+   <key>
+    <column name="idtramitecreador" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Relacion"/>
+  </set>
+  <set inverse="true" name="determinacions" sort="unsorted">
+   <key>
+    <column name="idtramite" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion"/>
+  </set>
+  <set inverse="true" name="boletintramites" sort="unsorted">
+   <key>
+    <column name="idtramite" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Boletintramite"/>
+  </set>
+  <set inverse="true" name="documentos" sort="unsorted">
+   <key>
+    <column name="idtramite" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documento"/>
+  </set>
+  <set inverse="true" name="operacions" sort="unsorted">
+   <key>
+    <column name="idtramiteordenante" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacion"/>
+  </set>
+  <set inverse="true" name="entidads" sort="unsorted">
+   <key>
+    <column name="idtramite" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad"/>
+  </set>
+ </class>
+ <query name="Tramite.findAll">select t from es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t</query>
+ <query name="Tramite.findVigente">SELECT tram FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite tram WHERE tram.plan.iden = :idPlan AND tram.fechaconsolidacion IS NOT NULL ORDER BY tram.iteracion, tram.fechaconsolidacion</query>
+ <query name="Tramite.findTramiteFromCodFip">SELECT tram FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite tram WHERE tram.codigofip=:codigoFip</query>
+ <query name="Tramite.findTramiteBase">SELECT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t WHERE t.plan IN (SELECT op.planByIdplanoperador FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan op WHERE op.idinstrumentotipooperacion IN (SELECT itop.iden FROM es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan itop WHERE itop.instrumentoplan.iden=:id))</query>
+ <query name="Tramite.findPendientes">SELECT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t WHERE t.fechaconsolidacion IS NULL</query>
+ <query name="Tramite.buscarPorPlan">SELECT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t 
+	WHERE t.plan.iden = :idPlan
+	ORDER BY t.idtipotramite, t.iteracion</query>
+ <query name="Tramite.ordenar">SELECT tram FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite tram
+	WHERE  tram.iden IN (:listaTramites)
+	ORDER BY tram.plan.orden, tram.fecha</query>
+ <query name="Tramite.obtenerIdTramitesBase">SELECT Distinct TB.iden From es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite TB, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite T            
+                WHERE T.plan.planByIdplanbase.iden = TB.plan.iden 
+                AND TB.idtipotramite= :idTipoTramite 
+                AND T.iden IN (:listaTramites)</query>
+ <query name="Tramite.esDesarrollo">SELECT tram FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite tram, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan op ,es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan itop 
+	WHERE tram.iden = :idTramite AND tram.plan.iden = op.planByIdplanoperador.iden AND op.idinstrumentotipooperacion=itop.iden
+		AND itop.tipooperacionplan.iden = :idTipoOperacionPlan</query>
+ <query name="Tramite.buscarNoConsolidadosPorAmbito">SELECT DISTINCT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t
+	WHERE t.fechaconsolidacion IS NULL
+	AND t.plan.idambito = :idAmbito 
+	ORDER BY t.fecha, t.iteracion ASC</query>
+ <query cacheable="true" name="Tramite.buscarConsolidadosPorAmbito">SELECT DISTINCT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t
+	WHERE t.fechaconsolidacion IS NOT NULL
+	AND t.plan.idambito = :idAmbito 
+	ORDER BY t.fecha, t.iteracion ASC</query>
+ <query name="Tramite.buscarPorPlanConsolidados">SELECT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t 
+	WHERE t.plan.iden = :idPlan AND t.fechaconsolidacion IS NOT NULL
+	ORDER BY t.fecha, t.iteracion</query>
+ <query name="Tramite.buscarPorPlanNoConsolidados">SELECT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t 
+	WHERE t.plan.iden = :idPlan AND t.fechaconsolidacion IS NULL
+	ORDER BY t.fecha, t.iteracion</query>
+ <query cacheable="true" name="Tramite.buscarConsolidadosPorPadre">SELECT DISTINCT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t
+	WHERE t.fechaconsolidacion IS NOT NULL
+	AND t.plan.planByIdpadre.iden = :idPadre 
+	ORDER BY t.fecha, t.iteracion ASC</query>
+ <query name="Tramite.buscarConsolidadosRaizPorAmbito">SELECT DISTINCT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t
+	WHERE t.fechaconsolidacion IS NOT NULL
+	AND t.plan.idambito = :idAmbito AND t.plan.planByIdpadre IS NULL
+	ORDER BY t.fecha, t.iteracion ASC</query>
+ <query name="Tramite.obtenerDesarrollo">SELECT tro FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan op, 
+              es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite tro, 
+		es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite trr, 
+            	es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan itop 
+	WHERE trr.iden= :idTramite
+		AND tro.plan.iden=op.planByIdplanoperado.iden AND trr.plan.iden=op.planByIdplanoperador.iden 
+        AND op.idinstrumentotipooperacion=itop.iden 
+        AND itop.tipooperacionplan.iden=:idTipoOperacion</query>
+ <query name="Tramite.obtenerPendientesPlan">SELECT tram FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite tram WHERE tram.plan.iden = :idPlan AND tram.fechaconsolidacion IS NULL ORDER BY tram.iteracion, tram.fecha</query>
+ <query name="Tramite.obtenerTramiteRefundido">SELECT tram FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite tram
+	WHERE  tram.plan.iden = :idPlan AND tram.iden IN (:listaIdTramites)</query>
+ <query name="Tramite.numeroConsolidadosPorPadre">SELECT COUNT(DISTINCT t) FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t
+	WHERE t.fechaconsolidacion IS NOT NULL
+	AND t.plan.planByIdpadre.iden = :idPadre</query>
+ <query name="Tramite.buscarNoConsolidadosPorInstrumentoYAmbito">SELECT DISTINCT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t,
+		es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan op,
+		es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan itop
+	WHERE t.fechaconsolidacion IS NULL
+	AND t.plan.idambito = :idAmbito 
+	AND t.plan = op.planByIdplanoperador
+	AND op.idinstrumentotipooperacion = itop.iden
+	AND itop.instrumentoplan.iden =:idInstrumento
+	ORDER BY t.fecha, t.iteracion ASC</query>
+ <query name="Tramite.numeroConsolidadosPorInstrumentoYPadre">SELECT COUNT(DISTINCT t) FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t,
+		es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan op,
+		es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan itop
+	WHERE t.fechaconsolidacion IS NOT NULL
+	AND t.plan.planByIdpadre.iden = :idPadre
+	AND t.plan = op.planByIdplanoperador
+	AND op.idinstrumentotipooperacion = itop.iden
+	AND itop.instrumentoplan.iden =:idInstrumento</query>
+ <query name="Tramite.buscarConsolidadosPorInstrumentoYPadre">SELECT DISTINCT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t,
+		es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan op,
+		es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan itop
+	WHERE t.fechaconsolidacion IS NOT NULL
+		AND t.plan.planByIdpadre.iden = :idPadre 
+		AND t.plan = op.planByIdplanoperador
+		AND op.idinstrumentotipooperacion = itop.iden
+		AND itop.instrumentoplan.iden =:idInstrumento
+	ORDER BY t.fecha, t.iteracion ASC</query>
+ <query name="Tramite.buscarRefundiblesPorAmbito">SELECT DISTINCT tram FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite tram
+	WHERE tram.plan.idambito = :idAmbito AND tram.fechaconsolidacion IS NOT NULL
+		AND tram.idtipotramite IN (:listaRefundibles)
+	ORDER BY tram.fecha, tram.iteracion ASC</query>
+ <query name="Tramite.buscarPorPlanRefundibles">SELECT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t 
+	WHERE t.plan.iden = :idPlan AND t.fechaconsolidacion IS NOT NULL
+	AND t.idtipotramite IN (:listaRefundibles)
+	ORDER BY t.fecha, t.iteracion</query>
+ <query name="Tramite.buscarUltimoConsolidadoFromPlan">SELECT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t WHERE plan.iden=:idPlan
+            AND t.fechaconsolidacion IS NOT NULL
+            ORDER BY t.fechaconsolidacion desc limit 1</query>
+ <query name="Tramite.findUltimoTramiteRefundido">select t from es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t 
+ 	WHERE t.plan IN (select p from es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Plan p WHERE p.idambito=:idAmbito) 
+ 		AND t.fechaconsolidacion is not null and t.idtipotramite=:IdTipoTramiteRefundido order by t.fechaconsolidacion DESC limit 1</query>
+ <query name="Tramite.obtenerTodos">SELECT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t</query>
+ <query name="Tramite.buscarPorCentroproduccion">SELECT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t JOIN FETCH t.plan
+	WHERE t.fechaconsolidacion IS NULL AND t.idcentroproduccion = :idCentro</query>
+ <query name="Tramite.obtenerTramiteRefundidoVigente">SELECT t FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite t, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionplan oplan, es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan itop
+	WHERE t.fechaconsolidacion IS NOT NULL AND t.plan.idambito = :idAmbito AND t.plan = oplan.planByIdplanoperador AND oplan.idinstrumentotipooperacion = itop.iden 
+		AND itop.tipooperacionplan.iden = 10
+	ORDER BY t.iteracion DESC, t.fecha DESC</query>
+ <sql-query name="Tramite.mostrarOperaciones">Select Cast(trd.texto As text), Cast(po.codigo As text)   
+                    From planeamiento.Plan po, planeamiento.Operacionplan opp, 
+                    diccionario.Instrumentotipooperacionplan itop, diccionario.Tipooperacionplan tpop,
+                    diccionario.Traduccion trd
+                    Where opp.idplanoperado=po.iden
+                    And opp.idplanoperador= :idPlan
+                    And opp.idinstrumentotipooperacion=itop.iden And itop.idtipooperacionplan=tpop.iden 
+                    And tpop.idliteral=trd.idliteral
+                    And trd.idioma = :idioma 
+                    Union
+                    Select  trd.texto , null 
+                    From planeamiento.Operacionplan opp, diccionario.Instrumentotipooperacionplan itop, 
+                    diccionario.Tipooperacionplan tpop, diccionario.Traduccion trd 
+                    Where opp.idplanoperado Is Null And opp.idplanoperador= :idPlan
+                    And opp.idinstrumentotipooperacion=itop.iden 
+                    And itop.idtipooperacionplan=tpop.iden And tpop.idliteral=trd.idliteral 
+                    And trd.idioma = :idioma</sql-query>
+ <sql-query name="Tramite.obtenerExtension">select st_astext(st_envelope(st_union(st_envelope(geom)))) from planeamiento.entidadpol inner join planeamiento.entidad on entidadpol.identidad=entidad.iden inner join planeamiento.tramite on entidad.idtramite=tramite.iden where tramite.iden=:idTramite group by tramite.iden</sql-query>
+ <sql-query name="Tramite.buscarFromGeom">select iden from planeamiento.tramite where fechaconsolidacion is not null and iden in
+        (select idtramite from planeamiento.entidad where iden in
+        (select identidad from planeamiento.entidadpol as o 
+        INNER JOIN planeamiento.entidad ent ON o.identidad = ent.iden 
+        where st_Intersects (geom,st_GeomFromText(:WKT)))
+        )</sql-query>
+ <sql-query name="Tramite.buscarFromGeomCodigos">select iden from planeamiento.tramite where codigofip in (:codigos) and fechaconsolidacion is not null and iden in
+        (select idtramite from planeamiento.entidad where iden in
+        (select identidad from planeamiento.entidadpol as o 
+        INNER JOIN planeamiento.entidad ent ON o.identidad = ent.iden 
+        where st_Intersects (geom,st_GeomFromText(:WKT)))
+        )
+  </sql-query>
+</hibernate-mapping>

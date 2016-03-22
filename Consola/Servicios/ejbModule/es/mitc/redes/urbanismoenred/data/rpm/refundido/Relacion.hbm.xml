@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-abr-2012 12:30:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+ <class name="es.mitc.redes.urbanismoenred.data.rpm.refundido.Relacion"
+  schema="refundido" table="relacion">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">refundido.refundido_relacion_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Tramite"
+   fetch="select" name="tramiteByIdtramiteborrador">
+   <column name="idtramiteborrador"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Tramite"
+   fetch="select" name="tramiteByIdtramitecreador">
+   <column name="idtramitecreador" not-null="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="iddefrelacion" type="int">
+   <column name="iddefrelacion" not-null="true"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true"
+   name="operacionrelacions" sort="unsorted" table="operacionrelacion">
+   <key>
+    <column name="idrelacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Operacionrelacion"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="propiedadrelacions" sort="unsorted" table="propiedadrelacion">
+   <key>
+    <column name="idrelacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Propiedadrelacion"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true" name="vectorrelacions"
+   sort="unsorted" table="vectorrelacion">
+   <key>
+    <column name="idrelacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Vectorrelacion"/>
+  </set>
+ </class>
+ <query name="refundido.Relacion.obtenerAdscripcionesTramite">SELECT rel FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Relacion rel 
+	WHERE rel.iddefrelacion= :idDefPropAdscripcion AND (SELECT ent.tramite.iden FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad ent WHERE ent.iden IN 
+			(SELECT vr.valor FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Vectorrelacion vr WHERE vr.relacion.iden = rel.iden AND vr.iddefvector= :idDefEntidadOrigen)) = :idTramite 
+		AND (SELECT ent2.tramite.iden FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad ent2 WHERE ent2.iden IN 
+				(SELECT vr2.valor from es.mitc.redes.urbanismoenred.data.rpm.refundido.Vectorrelacion vr2 WHERE vr2.relacion.iden = rel.iden AND iddefvector= :idDefEntidadDestino)) = :idTramite
+        AND rel.iden NOT IN (SELECT opr.relacion.iden FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Operacionrelacion opr)</query>
+ <query name="refundido.Relacion.obtenerRegulacionesEspecificas">SELECT DISTINCT vr.relacion FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Vectorrelacion vr WHERE
+	vr.iddefvector = 40 AND vr.valor = :idDeterminacion AND vr.relacion.iddefrelacion = 20</query>
+ <query name="refundido.Relacion.obtenerReguladas">SELECT DISTINCT vr.relacion FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Vectorrelacion vr WHERE
+	vr.relacion.iddefrelacion IN (4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19) AND vr.iddefvector IN (8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38)
+	AND vr.valor = :idDeterminacion</query>
+ <query name="refundido.Relacion.obtenerHerenciaClaveEntidad">SELECT DISTINCT vr.relacion FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Vectorrelacion vr WHERE
+	vr.iddefvector = 42 AND vr.relacion.iddefrelacion = 21
+	AND vr.valor = :idEntidad</query>
+ <query name="refundido.Relacion.buscarRelacionesEntreEntidades">SELECT vr.relacion FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Vectorrelacion vr WHERE vr.valor = :idEntidad AND vr.iddefvector IN (4,5,42)</query>
+ <query name="refundido.Relacion.obtenerPropiedadesUnidad">SELECT vr.relacion FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Vectorrelacion vr
+	WHERE vr.relacion.iddefrelacion = 1 AND vr.iddefvector = 1
+		AND vr.valor = :idDeterminacion</query>
+ <sql-query name="refundido.Relacion.obtenerRegulacionesEspecificasPorPadre">SELECT r.iden, (select valor from refundido.Propiedadrelacion where iddefpropiedad = 5 and idrelacion=r.iden ) as orden,
+	(select valor from refundido.Propiedadrelacion where iddefpropiedad = 6 and idrelacion=r.iden ) as nombre,
+	(select valor from refundido.Propiedadrelacion where iddefpropiedad = 7  and idrelacion=r.iden ) as texto
+	FROM refundido.Relacion r, refundido.Vectorrelacion vr
+	WHERE r.iddefrelacion = 20 AND vr.iddefvector = 40 AND vr.valor = :iden
+		AND vr.idrelacion=r.iden AND (select valor from refundido.Vectorrelacion where iddefvector = 41 and idrelacion = r.iden) = :padre
+	ORDER BY orden</sql-query>
+</hibernate-mapping>

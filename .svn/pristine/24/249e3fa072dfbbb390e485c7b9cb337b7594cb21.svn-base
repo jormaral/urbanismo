@@ -1,0 +1,64 @@
+/*
+    Document   : cssConfigVisor
+    Created on : 04-feb-2010, 12:23:02
+    Author     : Alvaro
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+
+#wrapperConfigVisor{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    overflow: auto;
+}
+
+    #selecAmbitoConfigVisor{
+        width: 400px;
+        margin: 10px auto 0px auto;
+        font-size: 1.2em;
+        color: #3F3F3F;
+    }
+        #selecAmbitoConfigVisor h3{
+            font-size: 1.4em;
+            margin: 0px 0px 10px 0px;
+            padding: 0px;
+            text-align: center;
+
+        }
+
+        #selecAmbitoConfigVisor ul{
+            padding: 5px 0px;
+            margin: 0px;
+            list-style-type: none;
+        }
+            #selecAmbitoConfigVisor li{
+                background-color:#DDDDDD;
+                padding: 10px 0px 10px 15px;
+                cursor: pointer;
+            }
+                #selecAmbitoConfigVisor li a{
+                    color: inherit;
+                    text-decoration: none;
+                }
+
+                #selecAmbitoConfigVisor li:hover{
+                    background-color:#3F3F3F;
+                    color: #FFFFFF;
+                }
+            #selecAmbitoConfigVisor li.even{
+                background-color: white;
+            }
+                #selecAmbitoConfigVisor li.even:hover{
+                    background-color:#3F3F3F;
+                    color: #FFFFFF;
+                }
+        

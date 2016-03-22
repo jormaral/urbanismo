@@ -1,0 +1,235 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component" 
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="documentoentidad" styleClass="edit">
+     <ice:panelGroup  id="editdocumentoentidadGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="editTextBoxId" value="#{documentoentidadHome.managed ? 'Edit' : 'Add'} documentoentidad"/>
+                  </td>
+              </tr>
+          </table>
+
+        <ice:panelGroup id="editPanelGroupId" styleClass="edit">		 
+
+
+            <s:decorate id="idenField" template="../layout/edit.xhtml">
+                <ui:define name="label">Iden</ui:define>
+                        <ice:inputText id="iden"
+			                partialSubmit="true"
+                       required="true"
+                       disabled="#{documentoentidadHome.managed}"
+                                    value="#{documentoentidadHome.instance.iden}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+          </ice:panelGroup>
+       </ice:panelGroup>
+                  
+       <div class="actionButtons">
+        
+            <ice:commandButton id="save" 
+                          value="Save" 
+                         action="#{documentoentidadHome.persist}"
+                       disabled="#{!documentoentidadHome.wired}"
+                       rendered="#{!documentoentidadHome.managed}"/>  
+                          			  
+            <ice:commandButton id="update" 
+                          value="Save" 
+                         action="#{documentoentidadHome.update}"
+                       rendered="#{documentoentidadHome.managed}"/>
+                        			  
+            <ice:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{documentoentidadHome.remove}"
+                      immediate="true"
+                       rendered="#{documentoentidadHome.managed}"/>
+                    
+            <s:button id="cancelEdit" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/Documentoentidad.xhtml"
+                rendered="#{documentoentidadHome.managed}"/>
+                
+            <s:button id="cancelAdddocumentoentidadHome" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/#{empty documentoentidadFrom ? 'DocumentoentidadList' : documentoentidadFrom}.xhtml"
+                rendered="#{!documentoentidadHome.managed}"/>
+                
+        </div>
+        
+    </ice:form>
+
+ <ice:form id="form2documentoentidadHome">  
+        <ice:panelTabSet id="editPanelTabdocumentoentidadHomeId" styleClass="componentPanelTabSetLayout" style="margin-bottom:5px;margin-top:10px;">
+   
+ 	<ice:panelTab id="editTabdocumentoId" label="Documento *" >
+		<div class="association" id="documentoParent">
+    
+        	<h:outputText id="editdocumentoTextId" value="There is no documento associated with this documentoentidad." 
+                   rendered="#{documentoentidadHome.instance.documento == null}"/>
+       	<ice:dataTable var="documento" 
+                   value="#{documentoentidadHome.instance.documento}" 
+                rendered="#{documentoentidadHome.instance.documento != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+		  columnClasses="allCols"
+                      id="editdocumentoTableId">
+            <ice:column id="$editColumnidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{documento.iden}
+            </ice:column>
+            <ice:column id="$editColumnarchivoId">
+                <f:facet name="header">Archivo</f:facet>
+                #{documento.archivo}
+            </ice:column>
+            <ice:column id="$editColumncomentarioId">
+                <f:facet name="header">Comentario</f:facet>
+                #{documento.comentario}
+            </ice:column>
+            <ice:column id="$editColumndocumentoId">
+	    	    <f:facet name="header">Documento iden</f:facet>
+		    	#{documento.documento.iden}
+            </ice:column>
+            <ice:column id="$editColumnescalaId">
+                <f:facet name="header">Escala</f:facet>
+                #{documento.escala}
+            </ice:column>
+            <ice:column id="$editColumnidgrupodocumentoId">
+                <f:facet name="header">Idgrupodocumento</f:facet>
+                #{documento.idgrupodocumento}
+            </ice:column>
+            <ice:column id="$editColumnidtipodocumentoId">
+                <f:facet name="header">Idtipodocumento</f:facet>
+                #{documento.idtipodocumento}
+            </ice:column>
+            <ice:column id="$editColumnnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{documento.nombre}
+            </ice:column>
+            <ice:column id="$editColumntramiteId">
+	    	    <f:facet name="header">Tramite iden</f:facet>
+		    	#{documento.tramite.iden}
+            </ice:column>
+            <ice:column id="editColumndocumentoLinkId">
+                <f:facet name="header">Action</f:facet>
+                <s:link view="/seam/Documento.xhtml" 
+                         id="viewdocumento" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="documentoIden" 
+                           value="#{documento.iden}"/>
+                </s:link>
+            </ice:column>
+      </ice:dataTable>
+        <div class="actionButtons">
+            <s:button value="Select documento"
+	              id="selectParent"
+                      view="/seam/DocumentoList.xhtml">
+                <f:param name="from" value="DocumentoentidadEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </ice:panelTab>
+   
+ 	<ice:panelTab id="editTabentidadId" label="Entidad *" >
+		<div class="association" id="entidadParent">
+    
+        	<h:outputText id="editentidadTextId" value="There is no entidad associated with this documentoentidad." 
+                   rendered="#{documentoentidadHome.instance.entidad == null}"/>
+       	<ice:dataTable var="entidad" 
+                   value="#{documentoentidadHome.instance.entidad}" 
+                rendered="#{documentoentidadHome.instance.entidad != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+		  columnClasses="allCols"
+                      id="editentidadTableId">
+            <ice:column id="$editColumnidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{entidad.iden}
+            </ice:column>
+            <ice:column id="$editColumnbsuspendidaId">
+                <f:facet name="header">Bsuspendida</f:facet>
+                #{entidad.bsuspendida}
+            </ice:column>
+            <ice:column id="$editColumnclaveId">
+                <f:facet name="header">Clave</f:facet>
+                #{entidad.clave}
+            </ice:column>
+            <ice:column id="$editColumncodigoId">
+                <f:facet name="header">Codigo</f:facet>
+                #{entidad.codigo}
+            </ice:column>
+            <ice:column id="$editColumnentidadByIdentidadbaseId">
+	    	    <f:facet name="header">Entidad by identidadbase iden</f:facet>
+		    	#{entidad.entidadByIdentidadbase.iden}
+            </ice:column>
+            <ice:column id="$editColumnentidadByIdentidadoriginalId">
+	    	    <f:facet name="header">Entidad by identidadoriginal iden</f:facet>
+		    	#{entidad.entidadByIdentidadoriginal.iden}
+            </ice:column>
+            <ice:column id="$editColumnentidadByIdpadreId">
+	    	    <f:facet name="header">Entidad by idpadre iden</f:facet>
+		    	#{entidad.entidadByIdpadre.iden}
+            </ice:column>
+            <ice:column id="$editColumnetiquetaId">
+                <f:facet name="header">Etiqueta</f:facet>
+                #{entidad.etiqueta}
+            </ice:column>
+            <ice:column id="$editColumnnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{entidad.nombre}
+            </ice:column>
+            <ice:column id="$editColumnordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{entidad.orden}
+            </ice:column>
+            <ice:column id="$editColumntramiteId">
+	    	    <f:facet name="header">Tramite iden</f:facet>
+		    	#{entidad.tramite.iden}
+            </ice:column>
+            <ice:column id="editColumnentidadLinkId">
+                <f:facet name="header">Action</f:facet>
+                <s:link view="/seam/Entidad.xhtml" 
+                         id="viewentidad" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="entidadIden" 
+                           value="#{entidad.iden}"/>
+                </s:link>
+            </ice:column>
+      </ice:dataTable>
+        <div class="actionButtons">
+            <s:button value="Select entidad"
+	              id="selectParent"
+                      view="/seam/EntidadList.xhtml">
+                <f:param name="from" value="DocumentoentidadEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+
+
+

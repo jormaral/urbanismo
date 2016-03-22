@@ -1,0 +1,75 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_busqueda}"
+				view="/informacionfip/busqueda/BusquedaAvanzada.xhtml"
+				id="BusquedaAvanzadaNavegacionMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+	<ui:define name="body">
+		<ice:form id="formBusqued">
+
+			<ice:panelGroup>
+				<ice:panelGrid columns="2">
+					<s:button styleClass="boton5"
+						value="#{messages.busquedaavanzada_boton_buscartramites}"
+						view="/informacionfip/busqueda/busquedaTramite.xhtml"></s:button>
+					<s:button styleClass="boton5"
+						value="#{messages.busquedaavanzada_boton_buscarentidades}"
+						view="/informacionfip/busqueda/busquedaEntidad.xhtml"></s:button>
+					<s:button styleClass="boton5"
+						value="#{messages.busquedaavanzada_boton_buscardeterminaciones}"
+						view="/informacionfip/busqueda/busquedaDeterminacion.xhtml"></s:button>
+					<s:button styleClass="boton5"
+						value="#{messages.busquedaavanzada_boton_buscarcu}"
+						view="/informacionfip/busqueda/busquedaCondicion.xhtml"></s:button>
+					<s:button styleClass="boton5"
+						value="#{messages.busquedaavanzada_boton_buscaroperaciones}"
+						view="/informacionfip/busqueda/busquedaOperacion.xhtml"></s:button>
+					<s:button styleClass="boton5"
+						value="#{messages.busquedaavanzada_boton_buscardocumentos}"
+						view="/informacionfip/busqueda/busquedaDocumento.xhtml"></s:button>
+
+				</ice:panelGrid>
+			</ice:panelGroup>
+
+		</ice:form>
+
+	</ui:define>
+
+</ui:composition>

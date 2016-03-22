@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd" login-required="true">
+ <begin-conversation flush-mode="MANUAL" join="true"/>
+ <param name="usuarioUsername"/>
+ <action execute="#{servicioUsuario.cargarUsuario(usuarioUsername)}" on-postback="false"/>
+ 
+  <navigation from-action="#{servicioUsuario.guardarUsuario}">
+	<rule if-outcome="success">
+		<redirect view-id="/administracion/gestionusuario/GestionUsuarioList.xhtml">
+		</redirect>
+	</rule>
+ </navigation>
+</page>

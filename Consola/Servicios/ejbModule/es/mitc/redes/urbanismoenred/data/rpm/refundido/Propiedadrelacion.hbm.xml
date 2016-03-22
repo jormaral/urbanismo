@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-abr-2012 12:30:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.refundido.Propiedadrelacion" schema="refundido" table="propiedadrelacion">
+        <id name="iden" type="int">
+            <column name="iden" />
+            <generator class="sequence">
+    			<param name="sequence">refundido.refundido_propiedadrelacion_iden_seq</param>
+   			</generator>
+        </id>
+        <many-to-one name="relacion" class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Relacion" fetch="select">
+            <column name="idrelacion" not-null="true" />
+        </many-to-one>
+        <property name="iddefpropiedad" type="int">
+            <column name="iddefpropiedad" not-null="true" />
+        </property>
+        <property name="valor" type="string">
+            <column name="valor" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

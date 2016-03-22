@@ -1,0 +1,94 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="breadcrumb">
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link value="#{messages.menu_inicio}" style="color:blue;" view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+				
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_administracion}"  view="/administracion/AdministracionNavegacion.xhtml"
+				id="AdministracionNavegacionRutaMenu" propagation="none">
+				
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_configuracion_visor}"
+				view="/administracion/configuracionvisor/ConfiguracionVisorNavegacion.xhtml"
+				id="ConfiguracionVisorNavegacionRutaMenu" propagation="none">
+				
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_geometrias_ambitos}"
+				view="/administracion/configuracionvisor/GeometriasAmbitosList.xhtml"
+				id="GeometriasAmbitosNavegacionRutaMenu" propagation="none">
+				
+			</s:link>
+
+		</ice:panelGroup>
+
+	</ui:define>
+
+	<ui:define name="body">
+
+		<ice:form id="formularioUsuario">
+
+			<ice:panelGrid columns="2" >
+
+
+				<ice:outputLabel value="#{messages.geometria_wkt}" />
+				<ice:inputTextarea
+					value="#{servicioImportacionGeometriaAmbito.wktOrigen}"
+					partialSubmit="true" cols="100" rows="15" />
+
+
+				<ice:outputLabel value="#{messages.ambito}" />
+
+
+				<ice:panelGroup>
+					<h:outputText value="#{servicioImportacionGeometriaAmbito.idAmbito}"/>
+					<ice:commandButton value="#{messages.botonusuario_ambito}"
+						id="aniadirAmbitoCB" alt="#{messages.botonusuario_ambito}"
+						actionListener="#{servicioImportacionGeometriaAmbito.mostrarPanelAmbitosAL}"
+						styleClass="boton2" style="vertical-align:middle;"
+						title="#{messages.boton_title_usuarioDetalle_anadirAmbito}">
+					</ice:commandButton>
+				</ice:panelGroup>
+				<s:button
+					action="#{servicioImportacionGeometriaAmbito.guardarGeometriaAmbito()}"
+					value="#{messages.botongenerico_guardar}" 
+					propagation="none" styleClass="boton1" />
+				
+
+
+			</ice:panelGrid>
+
+
+
+			
+			<ui:include
+				src="/administracion/configuracionvisor/AnnadirAmbito.xhtml" />
+
+
+		</ice:form>
+
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-name="conjuntodeterminaciongrupo"></table-filter>
+	<table-filter match-name="conjuntogrupo"></table-filter>
+	<table-filter match-name="determinacionclasifacto"></table-filter>
+	<table-filter match-name="determinacionclasifuso"></table-filter>
+	<table-filter match-name="ficha"></table-filter>
+	<table-filter match-name="fichaconjuntogrupo"></table-filter>
+	<table-filter match-name="fichagrupodeterminacion"></table-filter>
+	<table-filter match-name="grupodeterminacion"></table-filter>
+	<table-filter match-name="grupodeterminaciondeterminacion"></table-filter>
+	<table-filter match-name="regimenesacto"></table-filter>
+	<table-filter match-name="regimenesuso"></table-filter>
+	<table-filter match-name="valoresclasifacto"></table-filter>
+	<table-filter match-name="valoresclasifuso"></table-filter>
+</hibernate-reverse-engineering>

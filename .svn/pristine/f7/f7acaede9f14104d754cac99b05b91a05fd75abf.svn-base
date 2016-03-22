@@ -1,0 +1,138 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="body">
+
+
+
+		<ice:panelPopup id="panelTipoAdsc" autoCentre="true" modal="true"
+			styleClass="panelPopup"
+			visible="#{gestionOperaciones.isMostrarPanelTipoAdscripcion()}">
+
+
+			<f:facet name="header">
+				<ice:panelGroup>
+					<ice:outputText value="#{messages.adscripcion_tipo}" />
+					<s:button id="modalPnlCloseBtnAdscTipo"
+						image="/fipeditor/img/editorfip/es/comun/cerrar_popup.png"
+						action="#{gestionOperaciones.setMostrarPanelTipoAdscripcion(false)}"
+						styleClass="popupHeaderImage" view="#{pageRedirect}"
+						propagation="none" title="#{messages.botongenerico_cerrar}"
+						alt="#{messages.botongenerico_cerrar}" />
+				</ice:panelGroup>
+			</f:facet>
+
+			<f:facet name="body">
+
+				<ice:panelGrid columns="1">
+
+					<script type="text/javascript">
+						function pintarFilaSeleccionada(checkbox) {
+							
+							var seleccionada = checkbox.checked;
+							var fila = checkbox.parentNode.parentNode;
+							if(seleccionada) {
+								fila.style.backgroundColor='#FFFF99';
+							} else {
+								fila.style.backgroundColor='#FFFFFF';
+							}
+						}	
+					</script>
+
+					<ice:form>
+
+						<ice:panelGroup styleClass="selectOneAplicacion">
+							<ice:selectOneListbox size="1" id="selectTipoTramiteTrabajoSU"
+								value="#{listaTipoAdscripciones.idTipoTramiteTrabajoSU}"
+								partialSubmit="true">
+								<f:selectItems
+									value="#{variablesSesionUsuario.tipoPlanesSeleccion()}" />
+							</ice:selectOneListbox>
+						</ice:panelGroup>
+					</ice:form>
+
+					<ice:form>
+
+						<ice:panelGroup
+							rendered="#{not empty listaTipoAdscripciones.obtenerListaAdscripcionesTipo()}">
+
+							<ice:dataTable id="listaTipoAdscr"
+								value="#{listaTipoAdscripciones.obtenerListaAdscripcionesTipo()}"
+								sortColumn="#{listaAdscripciones.sortColumnName}"
+								sortAscending="#{listaAdscripciones.ascending}" var="item"
+								scrollable="true" scrollHeight="450px"
+								columnWidths="20px,100px,300px">
+
+
+								<ice:column>
+									<ice:selectBooleanCheckbox value="#{item.seleccionada}"
+										partialSubmit="true"
+										onchange="javascript: pintarFilaSeleccionada(this)"
+										id="checkbox" />
+								</ice:column>
+
+								<ice:column>
+									<f:facet name="header">
+										<ice:outputText value="#{messages.orden}" />
+									</f:facet>
+									<ice:outputText value="#{item.ordenArbol}" />
+								</ice:column>
+
+								<ice:column>
+									<f:facet name="header">
+										<ice:commandSortHeader
+											columnName="#{listaTipoAdscripciones.nombreColumnName}"
+											arrow="true">
+											<ice:outputText value="#{messages.nombre_determinacion}" />
+										</ice:commandSortHeader>
+									</f:facet>
+									<ice:outputText value="#{item.nombreDeterminacion}" />
+								</ice:column>
+
+							</ice:dataTable>
+
+
+						</ice:panelGroup>
+
+						<ice:panelGroup>
+							<ice:outputText value="Seleccionada:" />
+							<ice:outputText style="font-weight:bold;"
+								value="#{listaTipoAdscripciones.obtenerTipoAdscripcionSeleccionado().getNombreDeterminacion()}" />
+						</ice:panelGroup>
+
+						<ice:outputLabel
+							rendered="#{empty listaTipoAdscripciones.obtenerListaAdscripcionesTipo()}"
+							value="#{messages.no_hay_datos}" styleClass="dataResult" />
+
+						<ice:panelGroup styleClass="botonPopUpUnidades">
+
+							<ice:commandButton styleClass="boton1"
+								value="#{messages.seleccionar}" view="#{pageRedirect}"
+								action="#{gestionOperaciones.cargarDatosDeterminacionTipo(listaTipoAdscripciones.obtenerTipoAdscripcionSeleccionado(),pageRedirect)}"
+								alt="#{messages.seleccionar}"
+								title="#{messages.boton_title_adscripcion_tipo_seleccionar}" />
+
+							<s:button value="#{messages.botongenerico_cancelar}"
+								view="#{pageRedirect}"
+								action="#{gestionOperaciones.setMostrarPanelTipoAdscripcion(false)}"
+								styleClass="boton1" propagation="none"
+								alt="#{messages.botongenerico_cancelar}"
+								title="#{messages.boton_title_adscripcion_tipo_cancelar}" />
+
+						</ice:panelGroup>
+					</ice:form>
+				</ice:panelGrid>
+			</f:facet>
+		</ice:panelPopup>
+
+
+
+	</ui:define>
+
+</ui:composition>

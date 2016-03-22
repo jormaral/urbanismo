@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-abr-2012 12:30:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacion"
+  schema="refundido" table="entidaddeterminacion">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">refundido.refundido_entidaddeterminacion_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad"
+   fetch="select" name="entidad">
+   <column name="identidad" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion"
+   fetch="select" name="determinacion">
+   <column name="iddeterminacion" not-null="true"/>
+  </many-to-one>
+  <set fetch="select" inverse="true" lazy="true"
+   name="casoentidaddeterminacions" sort="unsorted" table="casoentidaddeterminacion">
+   <key>
+    <column name="identidaddeterminacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Casoentidaddeterminacion"/>
+  </set>
+ </class>
+ <query name="refundido.Entidaddeterminacion.obtenerPorEntidadYDeterminacion">SELECT ed FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacion ed WHERE
+	ed.determinacion.iden = :idDeterminacion AND ed.entidad.iden = :idEntidad</query>
+ <query name="refundido.Entidaddeterminacion.obtenerParaCopia">SELECT DISTINCT edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacionregimen edr WHERE 
+	edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.entidad.id = :idOperadora AND edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.determinacion.idcaracter IN (:listaCaracteres) AND (edr.superposicion IS NULL OR edr.superposicion = 0) 
+	AND edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.determinacion NOT IN 
+		(SELECT edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.determinacion FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacionregimen edr WHERE 
+			edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.entidad.id = :idOperada AND (edr.superposicion IS NULL OR edr.superposicion = 0))</query>
+ <query name="refundido.Entidaddeterminacion.buscarMismaDeterminacion">Select ed From es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacion ed
+                        WHERE ed.entidad.iden= :idEntidadOperada
+                        AND ed.determinacion.iden IN (SELECT ed2.determinacion.iden 
+                        	FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacion ed2
+                        	WHERE ed2.entidad.iden= :idEntidadOperadora)</query>
+ <query name="refundido.Entidaddeterminacion.obtenerCondicionesUrbanisticas">SELECT ed FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacion ed WHERE
+	ed.entidad.tramite.iden = :idTramite AND
+	ed.casoentidaddeterminacions IS NOT EMPTY</query>
+</hibernate-mapping>

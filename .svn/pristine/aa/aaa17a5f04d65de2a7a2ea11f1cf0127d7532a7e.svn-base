@@ -1,0 +1,175 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component" 
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="documentoshp" styleClass="edit">
+     <ice:panelGroup  id="editdocumentoshpGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="editTextBoxId" value="#{documentoshpHome.managed ? 'Edit' : 'Add'} documentoshp"/>
+                  </td>
+              </tr>
+          </table>
+
+        <ice:panelGroup id="editPanelGroupId" styleClass="edit">		 
+
+
+            <s:decorate id="idenField" template="../layout/edit.xhtml">
+                <ui:define name="label">Iden</ui:define>
+                        <ice:inputText id="iden"
+			                partialSubmit="true"
+                       required="true"
+                       disabled="#{documentoshpHome.managed}"
+                                    value="#{documentoshpHome.instance.iden}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+
+            <s:decorate id="geomField" template="../layout/edit.xhtml">
+                <ui:define name="label">Geom</ui:define>
+                        <ice:inputText id="geom"
+			                partialSubmit="true"
+                                    value="#{documentoshpHome.instance.geom}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="hojaField" template="../layout/edit.xhtml">
+                <ui:define name="label">Hoja</ui:define>
+                <ice:inputTextarea id="hoja"
+                               cols="80"
+                               rows="3"
+                              value="#{documentoshpHome.instance.hoja}"/>
+            </s:decorate>
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+          </ice:panelGroup>
+       </ice:panelGroup>
+                  
+       <div class="actionButtons">
+        
+            <ice:commandButton id="save" 
+                          value="Save" 
+                         action="#{documentoshpHome.persist}"
+                       disabled="#{!documentoshpHome.wired}"
+                       rendered="#{!documentoshpHome.managed}"/>  
+                          			  
+            <ice:commandButton id="update" 
+                          value="Save" 
+                         action="#{documentoshpHome.update}"
+                       rendered="#{documentoshpHome.managed}"/>
+                        			  
+            <ice:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{documentoshpHome.remove}"
+                      immediate="true"
+                       rendered="#{documentoshpHome.managed}"/>
+                    
+            <s:button id="cancelEdit" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/Documentoshp.xhtml"
+                rendered="#{documentoshpHome.managed}"/>
+                
+            <s:button id="cancelAdddocumentoshpHome" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/#{empty documentoshpFrom ? 'DocumentoshpList' : documentoshpFrom}.xhtml"
+                rendered="#{!documentoshpHome.managed}"/>
+                
+        </div>
+        
+    </ice:form>
+
+ <ice:form id="form2documentoshpHome">  
+        <ice:panelTabSet id="editPanelTabdocumentoshpHomeId" styleClass="componentPanelTabSetLayout" style="margin-bottom:5px;margin-top:10px;">
+   
+	<ice:panelTab id="editTabdocumentoId" label="Documento">
+		<div class="association" id="documentoParent">
+    
+        	<h:outputText id="editdocumentoTextId" value="There is no documento associated with this documentoshp." 
+                   rendered="#{documentoshpHome.instance.documento == null}"/>
+       	<ice:dataTable var="documento" 
+                   value="#{documentoshpHome.instance.documento}" 
+                rendered="#{documentoshpHome.instance.documento != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+		  columnClasses="allCols"
+                      id="editdocumentoTableId">
+            <ice:column id="$editColumnidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{documento.iden}
+            </ice:column>
+            <ice:column id="$editColumnarchivoId">
+                <f:facet name="header">Archivo</f:facet>
+                #{documento.archivo}
+            </ice:column>
+            <ice:column id="$editColumncomentarioId">
+                <f:facet name="header">Comentario</f:facet>
+                #{documento.comentario}
+            </ice:column>
+            <ice:column id="$editColumndocumentoId">
+	    	    <f:facet name="header">Documento iden</f:facet>
+		    	#{documento.documento.iden}
+            </ice:column>
+            <ice:column id="$editColumnescalaId">
+                <f:facet name="header">Escala</f:facet>
+                #{documento.escala}
+            </ice:column>
+            <ice:column id="$editColumnidgrupodocumentoId">
+                <f:facet name="header">Idgrupodocumento</f:facet>
+                #{documento.idgrupodocumento}
+            </ice:column>
+            <ice:column id="$editColumnidtipodocumentoId">
+                <f:facet name="header">Idtipodocumento</f:facet>
+                #{documento.idtipodocumento}
+            </ice:column>
+            <ice:column id="$editColumnnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{documento.nombre}
+            </ice:column>
+            <ice:column id="$editColumntramiteId">
+	    	    <f:facet name="header">Tramite iden</f:facet>
+		    	#{documento.tramite.iden}
+            </ice:column>
+            <ice:column id="editColumndocumentoLinkId">
+                <f:facet name="header">Action</f:facet>
+                <s:link view="/seam/Documento.xhtml" 
+                         id="viewdocumento" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="documentoIden" 
+                           value="#{documento.iden}"/>
+                </s:link>
+            </ice:column>
+      </ice:dataTable>
+        <div class="actionButtons">
+            <s:button value="Select documento"
+	              id="selectParent"
+                      view="/seam/DocumentoList.xhtml">
+                <f:param name="from" value="DocumentoshpEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+
+
+

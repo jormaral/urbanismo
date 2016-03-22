@@ -1,0 +1,13 @@
+<m:message xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:m="http://jboss.com/products/seam/mail"
+    xmlns:h="http://java.sun.com/jsf/html">
+  
+    <m:from name="#{messages.rec_pass_rem_nombre}" address="#{messages.rec_pass_remitente}" />
+    <m:to name="#{usuarioHome.instance.detalle.nombre} #{usuarioHome.instance.detalle.primerApellido}">#{usuarioHome.instance.detalle.mail}</m:to>
+    <m:subject>#{messages.rec_pass_titulo}</m:subject>
+    
+    <m:body>
+        <p><h:outputText value="#{messages.rec_pass_texto}  #{usuarioHome.instance.clave}" /></p>
+    </m:body>
+    
+</m:message>

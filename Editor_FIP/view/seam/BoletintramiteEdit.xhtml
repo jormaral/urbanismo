@@ -1,0 +1,209 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component" 
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="boletintramite" styleClass="edit">
+     <ice:panelGroup  id="editboletintramiteGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="editTextBoxId" value="#{boletintramiteHome.managed ? 'Edit' : 'Add'} boletintramite"/>
+                  </td>
+              </tr>
+          </table>
+
+        <ice:panelGroup id="editPanelGroupId" styleClass="edit">		 
+
+
+            <s:decorate id="idenField" template="../layout/edit.xhtml">
+                <ui:define name="label">Iden</ui:define>
+                        <ice:inputText id="iden"
+			                partialSubmit="true"
+                       required="true"
+                       disabled="#{boletintramiteHome.managed}"
+                                    value="#{boletintramiteHome.instance.iden}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="fechaField" template="../layout/edit.xhtml">
+                <ui:define name="label">Fecha</ui:define>
+                        <ice:selectInputDate id="fecha" 
+                              renderAsPopup="true"
+
+                                  value="#{boletintramiteHome.instance.fecha}">
+                                    <s:convertDateTime type="date"/> 
+                       </ice:selectInputDate>
+            </s:decorate>
+
+
+            <s:decorate id="idboletinField" template="../layout/edit.xhtml">
+                <ui:define name="label">Idboletin</ui:define>
+                        <ice:inputText id="idboletin"
+			                partialSubmit="true"
+                       required="true"
+                                    value="#{boletintramiteHome.instance.idboletin}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="numeroField" template="../layout/edit.xhtml">
+                <ui:define name="label">Numero</ui:define>
+                        <ice:inputText id="numero" 
+			                partialSubmit="true"
+                                   size="20"
+                              maxlength="20"
+                                  value="#{boletintramiteHome.instance.numero}">
+                        </ice:inputText>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+          </ice:panelGroup>
+       </ice:panelGroup>
+                  
+       <div class="actionButtons">
+        
+            <ice:commandButton id="save" 
+                          value="Save" 
+                         action="#{boletintramiteHome.persist}"
+                       disabled="#{!boletintramiteHome.wired}"
+                       rendered="#{!boletintramiteHome.managed}"/>  
+                          			  
+            <ice:commandButton id="update" 
+                          value="Save" 
+                         action="#{boletintramiteHome.update}"
+                       rendered="#{boletintramiteHome.managed}"/>
+                        			  
+            <ice:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{boletintramiteHome.remove}"
+                      immediate="true"
+                       rendered="#{boletintramiteHome.managed}"/>
+                    
+            <s:button id="cancelEdit" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/Boletintramite.xhtml"
+                rendered="#{boletintramiteHome.managed}"/>
+                
+            <s:button id="cancelAddboletintramiteHome" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/#{empty boletintramiteFrom ? 'BoletintramiteList' : boletintramiteFrom}.xhtml"
+                rendered="#{!boletintramiteHome.managed}"/>
+                
+        </div>
+        
+    </ice:form>
+
+ <ice:form id="form2boletintramiteHome">  
+        <ice:panelTabSet id="editPanelTabboletintramiteHomeId" styleClass="componentPanelTabSetLayout" style="margin-bottom:5px;margin-top:10px;">
+   
+ 	<ice:panelTab id="editTabtramiteId" label="Tramite *" >
+		<div class="association" id="tramiteParent">
+    
+        	<h:outputText id="edittramiteTextId" value="There is no tramite associated with this boletintramite." 
+                   rendered="#{boletintramiteHome.instance.tramite == null}"/>
+       	<ice:dataTable var="tramite" 
+                   value="#{boletintramiteHome.instance.tramite}" 
+                rendered="#{boletintramiteHome.instance.tramite != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+		  columnClasses="allCols"
+                      id="edittramiteTableId">
+            <ice:column id="$editColumnidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{tramite.iden}
+            </ice:column>
+            <ice:column id="$editColumncodigofipId">
+                <f:facet name="header">Codigofip</f:facet>
+                #{tramite.codigofip}
+            </ice:column>
+            <ice:column id="$editColumncomentarioId">
+                <f:facet name="header">Comentario</f:facet>
+                #{tramite.comentario}
+            </ice:column>
+            <ice:column id="$editColumnfechaId">
+                <f:facet name="header">Fecha</f:facet>
+                #{tramite.fecha}
+            </ice:column>
+            <ice:column id="$editColumnfechaconsolidacionId">
+                <f:facet name="header">Fechaconsolidacion</f:facet>
+                #{tramite.fechaconsolidacion}
+            </ice:column>
+            <ice:column id="$editColumnidcentroproduccionId">
+                <f:facet name="header">Idcentroproduccion</f:facet>
+                #{tramite.idcentroproduccion}
+            </ice:column>
+            <ice:column id="$editColumnidorganoId">
+                <f:facet name="header">Idorgano</f:facet>
+                #{tramite.idorgano}
+            </ice:column>
+            <ice:column id="$editColumnidsentidoId">
+                <f:facet name="header">Idsentido</f:facet>
+                #{tramite.idsentido}
+            </ice:column>
+            <ice:column id="$editColumnidtipotramiteId">
+                <f:facet name="header">Idtipotramite</f:facet>
+                #{tramite.idtipotramite}
+            </ice:column>
+            <ice:column id="$editColumniteracionId">
+                <f:facet name="header">Iteracion</f:facet>
+                #{tramite.iteracion}
+            </ice:column>
+            <ice:column id="$editColumnnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{tramite.nombre}
+            </ice:column>
+            <ice:column id="$editColumnnumeroacuerdoId">
+                <f:facet name="header">Numeroacuerdo</f:facet>
+                #{tramite.numeroacuerdo}
+            </ice:column>
+            <ice:column id="$editColumnplanId">
+	    	    <f:facet name="header">Plan iden</f:facet>
+		    	#{tramite.plan.iden}
+            </ice:column>
+            <ice:column id="$editColumntextoId">
+                <f:facet name="header">Texto</f:facet>
+                #{tramite.texto}
+            </ice:column>
+            <ice:column id="editColumntramiteLinkId">
+                <f:facet name="header">Action</f:facet>
+                <s:link view="/seam/Tramite.xhtml" 
+                         id="viewtramite" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="tramiteIden" 
+                           value="#{tramite.iden}"/>
+                </s:link>
+            </ice:column>
+      </ice:dataTable>
+        <div class="actionButtons">
+            <s:button value="Select tramite"
+	              id="selectParent"
+                      view="/seam/TramiteList.xhtml">
+                <f:param name="from" value="BoletintramiteEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+
+
+

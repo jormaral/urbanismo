@@ -1,0 +1,203 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="body">
+
+		<ice:form id="formularioGeometria">
+
+			<ice:panelPopup id="panelGeometria" autoCentre="true" modal="true"
+				styleClass="panelPopup" visible="true">
+
+				<f:facet name="header">
+					<ice:panelGroup>
+						<ice:outputText value="#{messages.entidad_geometria}" />
+						<s:button id="modalPnlCloseBtnGeo"
+							image="/fipeditor/img/editorfip/es/comun/cerrar_popup.png"
+							styleClass="popupHeaderImage"
+							action="#{gestionEntidades.cerrarAnadirGeometriaShape(servicioImportacionGeometrias.nombreFichero)}"
+							propagation="none" title="#{messages.botongenerico_cerrar}"
+							alt="#{messages.botongenerico_cerrar}" />
+					</ice:panelGroup>
+				</f:facet>
+
+				<f:facet name="body">
+
+					<ice:panelGroup>
+						<ice:outputLabel value="#{messages.info_trabajando}" />
+						<ice:outputLabel
+							value="#{servicioImportacionGeometrias.nombreFichero}" />
+					</ice:panelGroup>
+
+					<ice:outputText></ice:outputText>
+
+					<ice:panelGrid columns="2" columnClasses="testCol1,testCol2">
+
+						<ice:panelGroup>
+							<ice:panelGroup styleClass="infoseleccion">
+								<ice:graphicImage styleClass="tooltip_imagen"
+									alt="#{messages.genericos_info}"
+									url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+								<ice:outputLabel value="#{messages.info_shape}"
+									styleClass="labelseleccioninfo" />
+							</ice:panelGroup>
+
+
+							<ice:panelGrid columns="2" style="vertical-align: top">
+
+								<ice:outputLabel value="#{messages.seleccione_shape}" />
+
+								<ice:panelGroup>
+									<ice:inputFile id="inputFileGeomtriaComponent"
+										autoUpload="true"
+										actionListener="#{servicioImportacionGeometrias.uploadActionListener}"
+										progressListener="#{servicioImportacionGeometrias.progressListener}"
+										uniqueFolder="true" label="#{messages.genericos_cargar}" />
+
+									<ice:outputProgress
+										labelComplete="#{servicioImportacionGeometrias.currentFile.fileName}"
+										value="#{servicioImportacionGeometrias.fileProgress}" />
+									<ice:panelGroup>
+										<ice:message for="inputFileGeomtriaComponent" />
+									</ice:panelGroup>
+								</ice:panelGroup>
+								<br />
+
+							</ice:panelGrid>
+						</ice:panelGroup>
+
+						<ice:outputText></ice:outputText>
+
+						<ice:panelGroup>
+							<ice:panelGrid>
+								<ice:commandButton styleClass="boton2"
+									rendered="#{servicioImportacionGeometrias.archivosValidos()}"
+									action="#{servicioImportacionGeometrias.importarGeometriaToEntidad()}"
+									value="#{messages.cargargeometria}"
+									alt="#{messages.cargargeometria}"
+									title="#{messages.boton_title_importadorgeometria_cargarGeometria}" />
+
+							</ice:panelGrid>
+						</ice:panelGroup>
+
+						<ice:outputText></ice:outputText>
+
+						<ice:panelGrid>
+							<ice:panelGroup>
+								<ice:dataTable id="listaDeterminacionDocumento"
+									value="#{servicioImportacionGeometrias.archivosTemporales}"
+									rendered="#{not empty servicioImportacionGeometrias.archivosTemporales}"
+									var="item">
+
+									<ice:column>
+										<f:facet name="header">
+											<ice:outputText value="#{messages.archivo} " />
+										</f:facet>
+										<ice:outputText value="#{item.archivo}" />
+									</ice:column>
+
+								</ice:dataTable>
+							</ice:panelGroup>
+						</ice:panelGrid>
+
+						<ice:outputText></ice:outputText>
+
+						<ice:panelGrid>
+							<ice:panelGroup scrollHeight="200px">
+								<ice:dataTable id="listaGeometrias"
+									value="#{servicioImportacionGeometrias.geometriaLista}"
+									rendered="#{not empty servicioImportacionGeometrias.geometriaLista}"
+									var="item">
+									<ice:column>
+										<f:facet name="header">
+											<ice:outputText value="#{messages.clave} " />
+										</f:facet>
+										<ice:outputText value="#{item.clave}" />
+									</ice:column>
+									<ice:column>
+										<f:facet name="header">
+											<ice:outputText value="#{messages.accion} " />
+										</f:facet>
+										<ice:commandLink value="#{messages.seleccionar}"
+											action="#{gestionEntidades.guardarGeometriaShapeEntidad(item.geometriaWKT, servicioImportacionGeometrias.nombreFichero)}"
+											styleClass="enlaceAzul">
+										</ice:commandLink>
+									</ice:column>
+								</ice:dataTable>
+							</ice:panelGroup>
+
+
+							<!-- <ice:panelGroup styleClass="pnlGrpdataPaginator" >
+				<ice:dataPaginator id="dataScroll_listaGeometrias" for="listaGeometrias"
+					paginator="true" fastStep="3" paginatorMaxPages="4"
+					rendered="#{not empty servicioImportacionGeometrias.geometriaLista}" styleClass="botonesdataPaginator">
+					<f:facet name="first">
+						<ice:graphicImage url="/img/editorfip/es/arboles/arrow-first.gif"
+							style="border:none;" title="#{messages.primera_pagina}" />
+					</f:facet>
+					<f:facet name="last">
+						<ice:graphicImage url="/img/editorfip/es/arboles/arrow-last.gif"
+							style="border:none;" title="#{messages.ultima_pagina}" />
+					</f:facet>
+					<f:facet name="previous">
+						<ice:graphicImage
+							url="/img/editorfip/es/arboles/arrow-previous.gif"
+							style="border:none;" title="#{messages.pagina_anterior}" />
+					</f:facet>
+					<f:facet name="next">
+						<ice:graphicImage url="/img/editorfip/es/arboles/arrow-next.gif"
+							style="border:none;" title="#{messages.pagina_siguiente}" />
+					</f:facet>
+					<f:facet name="fastforward">
+						<ice:graphicImage url="/img/editorfip/es/arboles/arrow-ff.gif"
+							style="border:none;" title="#{messages.avance_rapido}" />
+					</f:facet>
+					<f:facet name="fastrewind">
+						<ice:graphicImage url="/img/editorfip/es/arboles/arrow-fr.gif"
+							style="border:none;" title="#{messages.retroceso_rapido}" />
+					</f:facet>
+				</ice:dataPaginator>
+				</ice:panelGroup>
+				
+				<ice:panelGroup styleClass="pnlGrpdataPaginator" >
+				Display counts about the table and the currently displayed page 
+				<ice:dataPaginator id="dataScroll_listaGeometrias2" for="listaGeometrias"
+					rowsCountVar="rowsCount_geometriaLista"
+					displayedRowsCountVar="displayedRowsCount_geometriaLista"
+					firstRowIndexVar="firstRowIndex_geometriaLista"
+					lastRowIndexVar="lastRowIndex_geometriaLista"
+					pageCountVar="pageCount_geometriaLista"
+					pageIndexVar="pageIndex_geometriaLista"
+					rendered="#{not empty servicioImportacionGeometrias.geometriaLista}" styleClass="paginasdataPaginator">
+					<ice:outputFormat value="#{messages.mensaje_elementos_mostrados}"
+						styleClass="standard">
+						<f:param value="#{rowsCount_geometriaLista}" />
+						<f:param
+							value="#{displayedRowsCount_geometriaLista}" />
+						<f:param value="#{firstRowIndex_geometriaLista}" />
+						<f:param value="#{lastRowIndex_geometriaLista}" />
+						<f:param value="#{pageIndex_geometriaLista}" />
+						<f:param value="#{pageCount_geometriaLista}" />
+					</ice:outputFormat>
+				</ice:dataPaginator>
+				</ice:panelGroup> -->
+
+						</ice:panelGrid>
+
+					</ice:panelGrid>
+
+				</f:facet>
+			</ice:panelPopup>
+
+		</ice:form>
+
+
+	</ui:define>
+
+</ui:composition>

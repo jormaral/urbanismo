@@ -1,0 +1,136 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+				<ice:outputLabel styleClass="hiperenlace"
+					value="#{messages.menu_inicio}" />
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipNavegacionRutaMenu" propagation="none">
+				<ice:outputLabel styleClass="hiperenlace"
+					value="#{messages.menu_gestionfip}" />
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link view="/gestionfip/obtencionfip1/ObtencionFip.xhtml"
+				id="ObtencionFip1Menu" propagation="none">
+				<ice:outputLabel styleClass="hiperenlace"
+					value="#{messages.obtencionfip1}" />
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link view="/gestionfip/obtencionfip1/Fip1IntroducidosLista.xhtml"
+				id="ObtencionFip1RutaListaMenu" propagation="none">
+				<ice:outputLabel styleClass="hiperenlace"
+					value="#{messages.menu_listado_pre}" />
+			</s:link>
+
+		</ice:panelGroup>
+	</ui:define>
+
+
+
+
+	<ui:define name="body">
+
+
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+			<ice:form id="fmImportarFIP1">
+
+
+				<ice:panelGroup
+					rendered="#{!gestionImportacionFIP1.comprobarExistePlanEncargado(idFipCargado)}">
+					<ice:panelGrid columns="2" columnClasses="colLabel,colInput">
+						
+						<ice:outputLabel value="" />
+						<ice:outputLabel value="" />
+						
+						<ice:outputLabel value="#{messages.planencargado}" />
+						<ice:outputLabel value="#{messages.fip1sinplanencargado}" />
+						
+						<ice:outputLabel value="#{messages.planbase}" />
+						<ice:outputLabel value="#{messages.planbaseanterior}"  rendered="#{gestionImportacionFIP1.idPlanBaseImportarFIP(idFipCargado)!=0}"/>
+						<ice:outputLabel value="#{messages.planbaseimportar}"  rendered="#{gestionImportacionFIP1.idPlanBaseImportarFIP(idFipCargado)==0}"/>
+						
+												 
+						<ice:commandButton styleClass="boton2" panelConfirmation="panelconfsinplanencargado"
+							action="#{gestionImportacionFIP1.importacionFIP(idFipCargado)}"
+							value="#{messages.importar}" alt="#{messages.botongenerico_importarfip1}"
+							title="#{messages.boton_title_importarfip1}" />
+							
+						<ice:panelConfirmation id="panelconfsinplanencargado"
+						title="#{messages.botongenerico_importarfip1}"
+						message="#{messages.panelconfsinplanencargado_confirmacion}"
+						acceptLabel="#{messages.botongenerico_aceptar}" cancelLabel="#{messages.botongenerico_cancelar}"
+						styleClass="boton1" />
+			
+		
+						
+					</ice:panelGrid>
+
+					
+					
+				</ice:panelGroup>
+
+				<ice:panelGroup
+					rendered="#{gestionImportacionFIP1.comprobarExistePlanEncargado(idFipCargado)}">
+					
+					<ice:panelGrid columns="2" columnClasses="colLabel,colInput">
+						
+						<ice:outputLabel value="" />
+						<ice:outputLabel value="" />
+						
+						<ice:outputLabel value="#{messages.planencargado}" />
+						<ice:outputLabel value="#{messages.fip1conplanencargado}" />
+						
+						<ice:outputLabel value="#{messages.planbase}" />
+						<ice:outputLabel value="#{messages.planbaseanterior}"  rendered="#{gestionImportacionFIP1.idPlanBaseImportarFIP(idFipCargado)!=0}"/>
+						<ice:outputLabel value="#{messages.planbaseimportar}"  rendered="#{gestionImportacionFIP1.idPlanBaseImportarFIP(idFipCargado)==0}"/>
+						
+	
+						<ice:commandButton styleClass="boton2" panelConfirmation="panelconfconplanencargado"
+							action="#{gestionImportacionFIP1.importacionFIP(idFipCargado)}"
+							value="#{messages.importar} #{idFipCargado}" alt="#{messages.botongenerico_importarfip1}"
+							title="#{messages.boton_title_importarfip1}" />
+							
+						<ice:panelConfirmation id="panelconfconplanencargado"
+						title="#{messages.botongenerico_importarfip1}"
+						message="#{messages.panelconfconplanencargado_confirmacion}"
+						acceptLabel="#{messages.botongenerico_aceptar}" cancelLabel="#{messages.botongenerico_cancelar}"
+						styleClass="boton1" />
+					
+					</ice:panelGrid>
+
+				</ice:panelGroup>
+
+			</ice:form>
+		</ice:panelGroup>
+		
+		
+		
+	</ui:define>
+
+</ui:composition>

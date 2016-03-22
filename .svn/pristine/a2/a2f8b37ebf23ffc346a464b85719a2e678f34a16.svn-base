@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-nov-2011 17:20:25 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.ficha.Fichaconjuntogrupo" table="fichaconjuntogrupo" schema="ficha">
+        <id name="iden" type="long">
+            <column name="iden"/>
+            <generator class="sequence">
+                <param name="sequence">ficha.fichaconjuntogrupo_iden_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="conjuntogrupo" class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Conjuntogrupo" fetch="select">
+            <column name="idconjunto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ficha" class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Ficha" fetch="select">
+            <column name="idficha" not-null="true" />
+        </many-to-one>
+        <property name="orden" type="long">
+            <column name="orden" not-null="true" />
+        </property>
+        <property name="regimen_directo" type="boolean">
+            <column name="regimen_directo" not-null="true" />
+        </property>
+        <property name="usos" type="boolean">
+            <column name="usos" not-null="true" />
+        </property>
+        <property name="actos" type="boolean">
+            <column name="actos" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

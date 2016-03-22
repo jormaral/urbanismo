@@ -1,0 +1,228 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+				<ice:outputLabel styleClass="hiperenlace"
+					value="#{messages.menu_inicio}" />
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link view="/produccionfip/ProduccionFipNavegacion.xhtml"
+				id="ProduccionFipRutaMenu" propagation="none">
+				<ice:outputLabel styleClass="hiperenlace"
+					value="#{messages.menu_edicionfip}" />
+
+			</s:link>
+
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link
+				view="/produccionfip/gestionoperaciones/VerListaOperaciones.xhtml"
+				id="VerListaOperacionesRutaMenu" propagation="none">
+				<ice:outputLabel styleClass="hiperenlace"
+					value="#{messages.gestion_operaciones}" />
+
+			</s:link>
+			
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link
+				view="/produccionfip/gestionoperaciones/OrdenarOperaciones.xhtml"
+				id="VerListaOperacionesEntidadRutaMenu" propagation="none">
+				<ice:outputLabel styleClass="hiperenlace"
+					value="#{messages.menu_gestionoperaciones_ordenar}" />
+
+			</s:link>
+
+
+
+
+
+		</ice:panelGroup>
+
+
+
+
+	</ui:define>
+
+	<ui:define name="body">
+
+		<ice:form>
+			
+			
+			
+			<ice:panelGroup>
+
+				<ice:dataTable id="listaOrdenarOp"
+					value="#{ordenarOperaciones.operacionesList}"
+					sortColumn="#{ordenarOperaciones.sortColumnName}"
+					sortAscending="#{ordenarOperaciones.ascending}" var="item" rows="10"
+					rendered="#{not empty ordenarOperaciones.operacionesList}">
+
+
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:commandSortHeader
+								columnName="#{ordenarOperaciones.ordenColumnName}" arrow="true">
+								<ice:outputText value="#{messages.operacion_orden}" />
+							</ice:commandSortHeader>
+
+						</f:facet>
+						<ice:outputText value="#{item.orden}" />
+					</ice:column>
+					
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.operacion_tipo}" />
+						</f:facet>
+						<ice:outputText value="#{item.operacionEntDet}" />
+					</ice:column>
+
+					
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.operacion_entoperadora}" />
+						</f:facet>
+						<ice:outputText value="#{item.entidadOperadora}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.operacion_tramite}" />
+						</f:facet>
+						<ice:outputText value="#{item.tramiteOperado}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.operacion_entoperada}" />
+						</f:facet>
+						<ice:outputText value="#{item.entidadOperada}" />
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<ice:outputText value="#{messages.operacion_tipo}" />
+						</f:facet>
+						<ice:outputText value="#{item.tipoOperacion}" />
+					</ice:column>
+
+					<ice:column>
+
+						<f:facet name="header">
+							<ice:outputText escape="false"
+								value="#{messages.genericos_ordenar}" />
+						</f:facet>
+
+
+						<ice:panelGrid columns="2">
+							<ice:commandLink value="Subir" styleClass="hiperenlace enlaceAzul"
+								action="#{ordenarOperaciones.subirOrden(item.iden)}" visible="#{item.orden gt 1}">
+							</ice:commandLink>
+							<ice:commandLink value="Bajar" styleClass="hiperenlace enlaceAzul"
+								action="#{ordenarOperaciones.bajarOrden(item.iden)}" visible="#{item.orden lt ordenarOperaciones.ordenMaximo}">
+							</ice:commandLink>
+							
+							
+						</ice:panelGrid>
+
+					</ice:column>
+
+
+
+
+
+				</ice:dataTable>
+
+
+				<!-- Paginator with page controls -->
+				<ice:panelGrid columns="1">
+				<ice:panelGroup styleClass="pnlGrpdataPaginator" >
+				<ice:dataPaginator id="dataScroll_listaDRTramite" for="listaOrdenarOp"
+					paginator="true" fastStep="3" paginatorMaxPages="4"
+					rendered="#{not empty ordenarOperaciones.operacionesList}" styleClass="botonesdataPaginator">
+					<f:facet name="first">
+						<ice:graphicImage url="/img/editorfip/es/arboles/arrow-first.gif"
+							style="border:none;" title="#{messages.primera_pagina}" />
+					</f:facet>
+					<f:facet name="last">
+						<ice:graphicImage url="/img/editorfip/es/arboles/arrow-last.gif"
+							style="border:none;" title="#{messages.ultima_pagina}" />
+					</f:facet>
+					<f:facet name="previous">
+						<ice:graphicImage
+							url="/img/editorfip/es/arboles/arrow-previous.gif"
+							style="border:none;" title="#{messages.pagina_anterior}" />
+					</f:facet>
+					<f:facet name="next">
+						<ice:graphicImage url="/img/editorfip/es/arboles/arrow-next.gif"
+							style="border:none;" title="#{messages.pagina_siguiente}" />
+					</f:facet>
+					<f:facet name="fastforward">
+						<ice:graphicImage url="/img/editorfip/es/arboles/arrow-ff.gif"
+							style="border:none;" title="#{messages.avance_rapido}" />
+					</f:facet>
+					<f:facet name="fastrewind">
+						<ice:graphicImage url="/img/editorfip/es/arboles/arrow-fr.gif"
+							style="border:none;" title="#{messages.retroceso_rapido}" />
+					</f:facet>
+				</ice:dataPaginator>
+				</ice:panelGroup>
+
+				<ice:panelGroup styleClass="pnlGrpdataPaginator" >
+					
+				<!-- Display counts about the table and the currently displayed page -->
+				<ice:dataPaginator id="dataScroll_listaDRTramite2" for="listaOrdenarOp"
+					rowsCountVar="rowsCount_determinacionesreguladorasList"
+					displayedRowsCountVar="displayedRowsCount_determinacionesreguladorasList"
+					firstRowIndexVar="firstRowIndex_determinacionesreguladorasList"
+					lastRowIndexVar="lastRowIndex_determinacionesreguladorasList"
+					pageCountVar="pageCount_determinacionesreguladorasList"
+					pageIndexVar="pageIndex_determinacionesreguladorasList"
+					rendered="#{not empty ordenarOperaciones.operacionesList}" styleClass="paginasdataPaginator">
+					<ice:outputFormat value="#{messages.mensaje_elementos_mostrados}"
+						styleClass="standard">
+						<f:param value="#{rowsCount_determinacionesreguladorasList}" />
+						<f:param
+							value="#{displayedRowsCount_determinacionesreguladorasList}" />
+						<f:param value="#{firstRowIndex_determinacionesreguladorasList}" />
+						<f:param value="#{lastRowIndex_determinacionesreguladorasList}" />
+						<f:param value="#{pageIndex_determinacionesreguladorasList}" />
+						<f:param value="#{pageCount_determinacionesreguladorasList}" />
+					</ice:outputFormat>
+				</ice:dataPaginator>
+				</ice:panelGroup>
+				</ice:panelGrid>
+
+				<ice:outputLabel
+					rendered="#{empty ordenarOperaciones.operacionesList}"
+					value="#{messages.no_hay_datos}" styleClass="dataResult" />
+
+			</ice:panelGroup>
+
+		</ice:form>
+	</ui:define>
+
+</ui:composition>
+
+
+
+

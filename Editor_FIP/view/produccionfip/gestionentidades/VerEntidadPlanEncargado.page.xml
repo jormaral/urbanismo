@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd"
+      login-required="true">
+
+   <action execute="#{variablesSesionUsuario.setIdTipoTramiteTrabajo(3)}" />
+   <action execute="#{listaCUSimplificada.refrescarLista}" />
+   <param name="idEntidad"/>
+   
+   <navigation>
+		<rule if="#{!variablesSesionUsuario.estaTramiteTrabajoEstablecido()}">
+
+			<redirect view-id="/seleccion/seleccionArbolPlanEncargado.xhtml">
+				<param name="paginaOrigenFrom"
+					value="/produccionfip/gestionentidades/VerEntidadPlanEncargado" />
+			</redirect>
+		</rule>
+	</navigation>
+	
+	<action execute="#{gestionArbolEntidades.cargarYExpandirEntidad(idEntidad)}" on-postback="false"/>
+
+</page>

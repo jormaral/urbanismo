@@ -1,0 +1,157 @@
+/* 
+    Document   : base
+    Created on : 24-nov-2009, 12:15:22
+    Author     : jorge.bodas
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.jwCabecera
+{
+    position:relative;
+    float:left;
+    left:0px;
+    top:0px;
+    height:25px;
+    width:100%;
+    background-image:url(images/JobWindow_cabecera_blanco.png);
+    /*background-position:center center;*/
+    cursor:pointer;
+}
+
+        .jwTitulo
+        {
+            position:relative;
+            float:left;
+            left:0px;
+            top:0px;
+            height:25px;
+            width:287px;
+            overflow:visible;
+            color:#777777;
+            line-height:24px;
+            padding-left:6px;
+        }
+.jwBotonera
+{
+    position:absolute;
+    right:0px;
+    top:0px;
+    height:25px;
+    width:auto;
+    /*background-position:center center;*/
+    cursor:pointer;
+}
+        .jwBotonera_BtnClose
+        {
+            position:absolute;
+            right:0px;
+            top:1px;
+            height:25px;
+            width:25px;
+            background-image:url(images/closebox.png)
+        }
+            .jwBotonera_BtnClose:hover
+            {
+                position:absolute;
+                right:0px;
+                top:1px;
+                height:25px;
+                width:25px;
+                background-image:url(images/closebox_over.png)
+            }
+
+
+.jwPie
+{
+    position:absolute;
+    /*float:left;*/
+    left:0px;
+    bottom:0px;
+    height:18px;
+    width:100%;
+    background-color: transparent;
+    /*background-image:url(images/JobWindow_cabecera.png);
+    background-position:center center;*/
+}
+
+        .jwPie_status
+        {
+            position:relative;
+            float:left;
+            left:0px;
+            top:0px;
+            height:18px;
+            width:25px;
+            overflow:visible;
+        }
+        .jwPie_tirador
+        {
+            position:absolute;
+            right:0px;
+            top:16px;
+            height:18px;
+            width:25px;
+            overflow:hidden;
+            background-color:red;
+        }
+
+.botoneraZonaActiva
+{
+    position:relative;
+    float:left;
+    clear:left;
+    left:0px;
+    top:0px;
+    height:25px;
+    width:100%;
+    background-image: url(images/JobWindow_botoneraZonaActiva.gif);
+}
+
+    .jwBtnBotonera
+    {
+        position:relative;
+        float:left;
+        left:0px;
+        top:0px;
+        height:25px;
+        width:95px;
+        text-align:center;
+        line-height: 24px;
+        background-color:transparent;
+        color:#007ADD;
+        cursor:pointer;
+    }
+        .jwBtnBotonera:hover
+        {
+            position:relative;
+            float:left;
+            left:0px;
+            top:0px;
+            height:25px;
+            width:95px;
+            text-align:center;
+            line-height: 24px;
+            background-image:url(images/JobWindow_botoneraZonaActiva_over.gif);
+            color:#ffffff;
+            cursor:pointer;
+        }
+        .jwBtnBotoneraOVER
+        {
+            position:relative;
+            float:left;
+            left:0px;
+            top:0px;
+            height:25px;
+            width:127px;
+            text-align:center;
+            line-height: 24px;
+            background-image:url(images/JobWindow_botoneraZonaActiva_over.gif);
+            color:#ffffff;
+            cursor:pointer;
+        }

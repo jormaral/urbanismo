@@ -1,0 +1,114 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+
+
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_verlistado_fip2generados}"
+				view="/gestionfip/generacionfip2/Fip2GeneradosList.xhtml"
+				id="Fip2GeneradosListRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.generacionfip2}"
+				view="/gestionfip/generacionfip2/CrearFIP2.xhtml"
+				id="CrearDocumentoNormasRutaMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+	</ui:define>
+	<ui:define name="body">
+
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+			<!--  Se define el cuerpo de la pagina -->
+			<ice:panelGroup>
+
+				<ice:graphicImage styleClass="tooltip_imagen"
+					alt="#{messages.genericos_info}"
+					url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				<ice:outputLabel
+					value="Puede crear el FIP2 del plan encargado y del plan prerefundido (previamente debe seleccionarlo). Este proceso puede tardar mucho tiempo (horas). Vaya al listado de FIP2 Generados para ver el estado."></ice:outputLabel>
+			</ice:panelGroup>
+
+			<br></br>
+			<br></br>
+
+			<ice:form>
+				<ice:panelGrid columns="1">
+
+					<ice:panelGroup style="text-align:left;">
+						<ice:commandButton value="Crear FIP2 Plan Encargado"
+							panelConfirmation="panelconfconplanencargado" styleClass="boton5"
+							action="#{generarFipSincrono.generarFipSincrono(variablesSesionUsuario.getIdTramiteEncargadoTrabajo())}" />
+
+						<ice:commandButton value="Crear FIP2 Plan Prerefundido"
+							panelConfirmation="panelconfconplanvigente" styleClass="boton5"
+							rendered="#{variablesSesionUsuario.getIdTramitePrerefundidoTrabajo()!=0}"
+							action="#{generarFipSincrono.generarFipSincrono(variablesSesionUsuario.getIdTramitePrerefundidoTrabajo())}" />
+
+					</ice:panelGroup>
+
+					<ice:panelConfirmation id="panelconfconplanencargado"
+						title="#{messages.fip2_planencargado_generacion}"
+						message="#{messages.fip2_planencargado_confirmacion}"
+						acceptLabel="#{messages.botongenerico_aceptar}"
+						cancelLabel="#{messages.botongenerico_cancelar}" />
+
+					<ice:panelConfirmation id="panelconfconplanvigente"
+						title="#{messages.fip2_planprerefundido_generacion}"
+						message="#{messages.fip2_planprerefundido_confirmacion}"
+						acceptLabel="#{messages.botongenerico_aceptar}"
+						cancelLabel="#{messages.botongenerico_cancelar}" />
+
+				</ice:panelGrid>
+
+				<s:link view="/gestionfip/generacionfip2/Fip2GeneradosList.xhtml"
+					styleClass="hiperenlace" id="botonListado" propagation="none">
+					<ice:outputLabel styleClass="hiperenlace"
+						value="Ir Listado FIP2 Generados" />
+				</s:link>
+			</ice:form>
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-nov-2011 17:20:25 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.ficha.Valoresclasifacto" table="valoresclasifacto" schema="ficha">
+        <id name="iden" type="long">
+            <column name="iden"/>
+            <generator class="sequence">
+                <param name="sequence">ficha.valoresclasifacto_iden_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="determinacionclasifacto" class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Determinacionclasifacto" fetch="select">
+            <column name="iddeterminacionclasifacto" not-null="true" />
+        </many-to-one>
+        <property name="iddeterminacionvalorregimen" type="long">
+            <column name="iddeterminacionvalorregimen" not-null="true" />
+        </property>
+        <property name="orden" type="long">
+            <column name="orden" not-null="true" />
+        </property>
+    </class>
+    <query name="Valoresclasifacto.buscaDeterminacionPorFichaDetClasif">
+            SELECT vca FROM es.mitc.redes.urbanismoenred.data.rpm.ficha.Valoresclasifacto vca
+	WHERE vca.determinacionclasifacto.ficha.iden = :idFicha AND vca.determinacionclasifacto.iddeterminacion=:idDeterminacion
+        ORDER BY vca.orden
+    </query>
+</hibernate-mapping>

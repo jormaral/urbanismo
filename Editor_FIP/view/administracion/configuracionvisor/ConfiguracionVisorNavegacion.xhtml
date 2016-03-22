@@ -1,0 +1,72 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+		<!--  Se define el breadcrumb -->
+		
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}" view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			
+				
+			</s:link>
+			
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link style="color:blue;" value="#{messages.menu_administracion}" view="/administracion/AdministracionNavegacion.xhtml" id="AdministracionNavegacionRutaMenu"
+				propagation="none">
+				
+			</s:link>
+			
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link style="color:blue;" value="#{messages.menu_configuracion_visor}"
+				view="/administracion/configuracionvisor/ConfiguracionVisorNavegacion.xhtml" id="ConfiguracionVisorNavegacionRutaMenu"
+				propagation="none">
+				
+			</s:link>
+			
+		</ice:panelGroup>	
+		
+	</ui:define>
+	<ui:define name="body">
+		
+
+			<!--  Se define el cuerpo de la pagina -->
+
+			<ice:panelGroup columns="3" styleClass="centerHome">
+			
+				<s:link view="/administracion/configuracionvisor/GeometriasAmbitos.xhtml" id="GeometriasAmbitosNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/01_02_01_GEOMETRIAS_AMBITOS.png"
+						alt="#{messages.geometrias_ambitos}" title="#{messages.geometrias_ambitos}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/administracion/configuracionvisor/GestionCapas.xhtml" id="GestionCapasNavegacionMenu"
+					propagation="none">
+					<h:graphicImage value="/img/editorfip/#{localeSelector.language}/navegacion/01_02_02_GESTION_CAPAS.png"
+						alt="#{messages.gestion_capas}" title="#{messages.gestion_capas}" styleClass="iconoNav"/>
+				</s:link>
+				
+				<s:link view="/home.xhtml" id="VolverNavegacionMenu" propagation="none">
+				<h:graphicImage
+					value="/img/editorfip/#{localeSelector.language}/navegacion/00_VOLVER.png" alt="#{messages.menu_volver}"
+					title="#{messages.menu_volver}" styleClass="iconoNav"/>
+				</s:link>
+				
+			</ice:panelGroup>
+
+			<div style="clear: both" />
+
+	
+
+	</ui:define>
+
+</ui:composition>

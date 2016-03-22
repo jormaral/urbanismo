@@ -1,0 +1,97 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+	
+	<ui:define name="body">
+	
+	<ice:form>
+		
+		<ice:panelPopup id="panelEntidad" autoCentre="true" modal="true" styleClass="panelPopup"
+		visible="true">
+
+
+		<f:facet name="header">
+			<ice:panelGroup>
+				<ice:outputText value="#{messages.entidad_asociaradoc}" />
+				<s:button id="modalPnlCloseBtnDetP" 
+				    propagation="none"
+					image="/fipeditor/img/editorfip/es/comun/cerrar_popup.png"
+					view="/produccionfip/gestiondocumental/GestionDocumentalDetalle.xhtml"
+					styleClass="popupHeaderImage" 
+					title="#{messages.botongenerico_cerrar}"
+					alt="#{messages.botongenerico_cerrar}">
+					<f:param name="idDocumento" value="#{variablesSesionGenerales.idDocumentoSeleccionado}"/>
+				</s:button>
+			</ice:panelGroup>
+		</f:facet>
+
+		<f:facet name="body">
+		
+	<!-- TRee values -->
+	<ice:panelGroup styleClass="arbol" scrollHeight="400px" 
+		scrollWidth="40em">
+		<ice:tree id="treeDetP" value="#{gestionArbolEntidadesDocumento.model}"
+			var="node" binding="#{gestionArbolEntidadesDocumento.treeComponent}"
+			imageDir="/fipeditor/img/editorfip/es/arboles/"
+			hideRootNode="false" hideNavigation="false"
+			actionListener="#{gestionArbolEntidadesDocumento.menuEvent}">
+			<ice:treeNode>
+
+
+				<f:facet name="icon">
+					<ice:panelGroup style="display:inline;">
+						<h:graphicImage
+							value="/img/editorfip/es/arboles/#{node.userObject.icon}" />
+
+					</ice:panelGroup>
+				</f:facet>
+				<f:facet name="content">
+					<ice:panelGroup style="display:inline;">
+						<ice:panelGroup
+							styleClass="selectedNode#{node.userObject eq gestionArbolEntidadesDocumento.selectedUserObject}"
+							style="display:inline;">
+
+							<ice:commandLink
+								actionListener="#{gestionArbolEntidadesDocumento.nodeSelected}">
+								<f:param name="nodoId"
+									value="#{node.userObject.datosIdTextoArbolGenerico.idBaseDatos}" />
+									<f:param name="determinacionPadreIden" 
+                        				value="#{servicioGestionDocumental.idDeterminacion}"/>
+								<ice:outputText id="TreeNodeDetP" value="#{node.userObject.text}" />
+							</ice:commandLink>
+						</ice:panelGroup>
+					</ice:panelGroup>
+				</f:facet>
+
+			</ice:treeNode>
+		</ice:tree>
+		
+						<s:button value="#{messages.botongenerico_seleccionar}" alt="#{messages.botongenerico_seleccionar}"
+						  disabled="#{gestionArbolEntidadesDocumento.selectedUserObject.datosIdTextoArbolGenerico.idBaseDatos==0}"
+						  view="/produccionfip/gestiondocumental/GestionDocumentalDetalle.xhtml" title="#{messages.boton_title_determinacionPadre_seleccionar}"
+						  action="#{servicioGestionDocumental.crearRelacionDocumentoEntidad(gestionArbolEntidadesDocumento.selectedUserObject.datosIdTextoArbolGenerico.getIdBaseDatos(), variablesSesionGenerales.idDocumentoSeleccionado)}" styleClass="boton1">
+						  <f:param name="idDocumento" value="#{variablesSesionGenerales.idDocumentoSeleccionado}"/>
+						 </s:button>
+						
+						<s:button value="#{messages.botongenerico_cancelar}"   propagation="none" alt="#{messages.botongenerico_cancelar}"
+								  styleClass="boton1"
+								  view="/produccionfip/gestiondocumental/GestionDocumentalDetalle.xhtml" 
+								  title="#{messages.boton_title_determinacionPadre_cancelar}">
+								  <f:param name="idDocumento" value="#{variablesSesionGenerales.idDocumentoSeleccionado}"/>
+						</s:button>
+						
+	</ice:panelGroup>
+</f:facet>
+</ice:panelPopup>
+
+</ice:form>
+
+</ui:define>
+
+</ui:composition>

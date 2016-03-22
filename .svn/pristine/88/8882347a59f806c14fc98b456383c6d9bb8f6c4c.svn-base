@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-nov-2011 17:20:25 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.ficha.Grupodeterminacion" table="grupodeterminacion" schema="ficha">
+        <id name="iden" type="long">
+            <column name="iden"/>
+            <generator class="sequence">
+                <param name="sequence">ficha.grupodeterminacion_iden_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="conjuntogrupo" class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Conjuntogrupo" fetch="select">
+            <column name="idconjuntogrupo" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" not-null="true" />
+        </property>
+        <set name="grupodeterminaciondeterminacions" table="grupodeterminaciondeterminacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idgrupo" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Grupodeterminaciondeterminacion" />
+        </set>
+        <set name="fichagrupodeterminacions" table="fichagrupodeterminacion" inverse="true" lazy="false" fetch="select" cascade="all-delete-orphan">
+            <key>
+                <column name="idgrupo" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.ficha.Fichagrupodeterminacion" />
+        </set>
+    </class>
+    <query name="Grupodeterminacion.buscaPorFichaConjunto">SELECT gd FROM 
+        es.mitc.redes.urbanismoenred.data.rpm.ficha.Grupodeterminacion gd,
+        es.mitc.redes.urbanismoenred.data.rpm.ficha.Fichagrupodeterminacion fgd
+        JOIN gd.conjuntogrupo
+	WHERE gd.conjuntogrupo.iden=:idConjunto AND 
+        fgd.grupodeterminacion=gd AND fgd.ficha.iden=:idFicha
+	ORDER BY fgd.orden
+    </query>
+</hibernate-mapping>

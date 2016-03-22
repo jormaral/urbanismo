@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion"
+  schema="planeamiento" table="entidaddeterminacion">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">planeamiento.planeamiento_entidaddeterminacion_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad"
+   fetch="select" name="entidad">
+   <column name="identidad" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion"
+   fetch="select" name="determinacion">
+   <column name="iddeterminacion" not-null="true"/>
+  </many-to-one>
+  <set inverse="true" name="casoentidaddeterminacions" sort="unsorted">
+   <key>
+    <column name="identidaddeterminacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion"/>
+  </set>
+ </class>
+ <query name="EntidadDeterminacion.buscarPorTramite">SELECT ed FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed WHERE ed.entidad.tramite = :idTramite</query>
+ <query name="Entidaddeterminacion.obtenerPorDeterminacion">SELECT endet.entidad FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion endet
+	WHERE endet.determinacion.iden = :idDeterminacion</query>
+ <query name="Entidaddeterminacion.obtenerConMismaEntidad">SELECT ed FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed2
+	WHERE ed2.iden = :iden AND ed2.determinacion.iden = ed.determinacion.iden AND ed.entidad.iden = :idEntidad</query>
+ <query name="Entidaddeterminacion.obtenerAplicacion">SELECT ed FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed
+	WHERE ed.entidad.iden = :idEntidad AND ed.determinacion.iden &lt;&gt; :idDeterminacion</query>
+ <query name="Entidaddeterminacion.buscarPorEntidadCaracter">SELECT ed FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed
+	WHERE ed.entidad.iden = :idEntidad AND ed.determinacion.idcaracter &lt;&gt; :idCaracter</query>
+ <query name="Entidaddeterminacion.buscarPorEntidadCaracterParcial">SELECT ed FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed
+	WHERE ed.entidad.iden = :idEntidad AND ed.determinacion.idcaracter &lt;&gt; :idCaracter
+		AND ed.determinacion.iden In (Select ed2.determinacion.iden 
+                        FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed2
+                        WHERE ed2.entidad.iden = :idEnt2)</query>
+ <query name="Entidaddeterminacion.buscarPorEntidadDet">Select ed From es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed
+                        WHERE ed.entidad.iden= :idEntidadO
+                        AND ed.determinacion.iden IN (SELECT ed2.determinacion.iden 
+                        	FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed2
+                        	WHERE ed2.entidad.iden= :idEntidadR)</query>
+ <query name="Entidaddeterminacion.obtenerAcumulacion">SELECT ed FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed WHERE 
+	ed.entidad.iden = :idOperadora AND ed.determinacion.idcaracter IN (:listaCaracteres) 
+	AND ed.determinacion IN 
+		(SELECT edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.determinacion FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr WHERE 
+			edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.entidad.id = :idOperadora AND (edr.superposicion = 0 OR edr.superposicion IS NULL)) 
+	AND ed.determinacion NOT IN 
+		(SELECT edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.determinacion FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr WHERE 
+			edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.entidad.id = :idOperada AND (edr.superposicion = 0 OR edr.superposicion IS NULL))</query>
+ <query name="Entidaddeterminacion.obtenerAcumulacionCompleta">SELECT ed FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed WHERE 
+	ed.entidad.iden = :idOperadora AND ed.determinacion IN 
+		(SELECT edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.determinacion FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr WHERE 
+			edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.entidad.id = :idOperadora AND (edr.superposicion = 0 OR edr.superposicion IS NULL)) 
+	AND ed.determinacion NOT IN 
+		(SELECT edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.determinacion FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr WHERE 
+			edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.entidad.id = :idOperada AND (edr.superposicion = 0 OR edr.superposicion IS NULL))</query>
+ <sql-query name="Entidaddeterminacion.obtenerEntidadesAcumulacionCompleta">Select ed.iden From planeamiento.Entidaddeterminacion ed 
+	Where ed.identidad= :idEntidadR
+	And ed.iddeterminacion In(
+		Select ed.iddeterminacion From planeamiento.Entidaddeterminacion ed, 
+                    planeamiento.Entidaddeterminacionregimen edr, 
+                    planeamiento.Casoentidaddeterminacion ced 
+                    Where ed.identidad= :idEntidadR
+                    And ced.identidaddeterminacion=ed.iden 
+                    And edr.idcaso=ced.iden 
+                    And (edr.superposicion=0 OR edr.superposicion IS NULL)) 
+                    And ed.iddeterminacion Not In( 
+                    Select ed.iddeterminacion From planeamiento.Entidaddeterminacion ed, 
+			planeamiento.Entidaddeterminacionregimen edr, 
+			planeamiento.Casoentidaddeterminacion ced 
+			Where ed.identidad= :idEntidadO 
+			And ced.identidaddeterminacion=ed.iden 
+			And edr.idcaso=ced.iden 
+			And (edr.superposicion=0 OR edr.superposicion IS NULL))</sql-query>
+ <sql-query name="Entidaddeterminacion.buscarPorEntidad">Select iden From planeamiento.Entidaddeterminacion 
+                        Where identidad= :idEntidad</sql-query>
+ <sql-query name="Entidaddeterminacion.obtenerParaSuperposicion">Select ed.iden 
+                    From planeamiento.Entidaddeterminacion ed 
+                    Where ed.identidad= :idEntidad
+                    And ed.iddeterminacion In( 
+                    Select ed.iddeterminacion 
+                    From planeamiento.Entidaddeterminacion ed, 
+                    planeamiento.Entidaddeterminacionregimen edr, 
+                    planeamiento.Casoentidaddeterminacion ced 
+                    Where ed.identidad= :idEntR
+                    And ced.identidaddeterminacion=ed.iden 
+                    And edr.idcaso=ced.iden ) 
+                    And ed.iddeterminacion Not In( 
+                    Select ed.iddeterminacion 
+                    From planeamiento.Entidaddeterminacion ed, 
+                    planeamiento.Entidaddeterminacionregimen edr, 
+                    planeamiento.Casoentidaddeterminacion ced 
+                    Where ed.identidad= :idEntO
+                    And ced.identidaddeterminacion=ed.iden 
+                    And edr.idcaso=ced.iden )</sql-query>
+ <sql-query name="Entidaddeterminacion.obtenerEntidadesAcumulacion">Select ed.iden 
+                    From planeamiento.Entidaddeterminacion ed, planeamiento.Determinacion d 
+                    Where ed.identidad= :idEntR
+                    And ed.iddeterminacion=d.iden 
+                    And (d.idcaracter= :idCaracter1
+                    Or d.idcaracter= :idCaracter2) 
+                    And ed.iddeterminacion In( 
+                    Select ed.iddeterminacion 
+                    From planeamiento.Entidaddeterminacion ed, 
+                    planeamiento.Entidaddeterminacionregimen edr, 
+                    planeamiento.Casoentidaddeterminacion ced 
+                    Where ed.identidad= :idEntR 
+                    And ced.identidaddeterminacion=ed.iden 
+                    And edr.idcaso=ced.iden 
+                    And (edr.superposicion=0 OR edr.superposicion IS NULL)) 
+                    And ed.iddeterminacion Not In( 
+                    Select ed.iddeterminacion 
+                    From planeamiento.Entidaddeterminacion ed, 
+                    planeamiento.Entidaddeterminacionregimen edr, 
+                    planeamiento.Casoentidaddeterminacion ced 
+                    Where ed.identidad= :idEntO
+                    And ced.identidaddeterminacion=ed.iden 
+                    And edr.idcaso=ced.iden 
+                    And (edr.superposicion=0 OR edr.superposicion IS NULL))</sql-query>
+</hibernate-mapping>

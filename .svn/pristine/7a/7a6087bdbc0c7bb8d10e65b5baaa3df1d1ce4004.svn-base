@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-abr-2012 12:30:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacionregimen"
+  schema="refundido" table="entidaddeterminacionregimen">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">refundido.refundido_entidaddeterminacionregimen_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Opciondeterminacion"
+   fetch="select" name="opciondeterminacion">
+   <column name="idopciondeterminacion"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Casoentidaddeterminacion"
+   fetch="select" name="casoentidaddeterminacionByIdcasoaplicacion">
+   <column name="idcasoaplicacion"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Casoentidaddeterminacion"
+   fetch="select" name="casoentidaddeterminacionByIdcaso">
+   <column name="idcaso" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Determinacion"
+   fetch="select" name="determinacion">
+   <column name="iddeterminacionregimen"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="valor" type="string">
+   <column length="50" name="valor"/>
+  </property>
+  <property generated="never" lazy="false" name="superposicion" type="java.lang.Integer">
+   <column name="superposicion"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true"
+   name="regimenespecificos" sort="unsorted" table="regimenespecifico">
+   <key>
+    <column name="identidaddeterminacionregimen" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Regimenespecifico"/>
+  </set>
+ </class>
+ <query name="refundido.Entidaddeterminacionregimen.obtenerMaximaSuperposicion">SELECT MAX(edr.superposicion) FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacionregimen edr WHERE 
+	edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.entidad.iden = :idEntidad</query>
+</hibernate-mapping>

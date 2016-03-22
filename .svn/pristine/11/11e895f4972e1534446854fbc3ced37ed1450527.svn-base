@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-abr-2012 12:30:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.refundido.Casoentidaddeterminacion" schema="refundido" table="casoentidaddeterminacion">
+        <id name="iden" type="int">
+            <column name="iden" />
+            <generator class="sequence">
+		    	<param name="sequence">refundido.refundido_casoentidaddeterminacion_iden_seq</param>
+		   	</generator>
+        </id>
+        <many-to-one name="entidaddeterminacion" class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacion" fetch="select">
+            <column name="identidaddeterminacion" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="150" />
+        </property>
+        <property name="orden" type="int">
+            <column name="orden" not-null="true" />
+        </property>
+        <set name="documentocasos" table="documentocaso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idcaso" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Documentocaso" />
+        </set>
+        <set name="entidaddeterminacionregimensForIdcaso" table="entidaddeterminacionregimen" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idcaso" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacionregimen" />
+        </set>
+        <set name="vinculocasosForIdcaso" table="vinculocaso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idcaso" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Vinculocaso" />
+        </set>
+        <set name="vinculocasosForIdcasovinculado" table="vinculocaso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idcasovinculado" not-null="true" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Vinculocaso" />
+        </set>
+        <set name="entidaddeterminacionregimensForIdcasoaplicacion" table="entidaddeterminacionregimen" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idcasoaplicacion" />
+            </key>
+            <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacionregimen" />
+        </set>
+    </class>
+</hibernate-mapping>

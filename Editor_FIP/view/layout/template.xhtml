@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+<head>
+<ice:outputDeclaration doctypeRoot="HTML"
+	doctypePublic="-//W3C//DTD XHTML 1.0 Transitional//EN"
+	doctypeSystem="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>fipeditor</title>
+<link rel="shortcut icon" href="#{request.contextPath}/favicon.ico" />
+<link rel="stylesheet" type="text/css"
+	href="#{request.contextPath}/xmlhttp/css/rime/rime.css" />
+<link rel="stylesheet" type="text/css"
+	href="#{request.contextPath}/stylesheet/theme.css" />
+<ui:insert name="head" />
+</head>
+	
+	
+<body>
+
+
+
+
+<div class="banner"><ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+	<h:panelGrid columns="3"
+		columnClasses="columnaBannerEmpresa,columnaBannerInnoplace,columnaBannerIdiomas"
+		style="width:100%;">
+
+		<h:panelGroup>
+			<h:graphicImage
+				value="/img/editorfip/#{localeSelector.language}/banner/logoredes.png"
+				alt="#{messages.template_banner_logo}"
+				title="#{messages.template_banner_logo}" />
+
+		</h:panelGroup>
+
+		<h:panelGroup>
+
+			<h:graphicImage
+				value="/img/editorfip/#{localeSelector.language}/banner/editorfip.jpg"
+				alt="#{messages.template_banner_editorfip}"
+				title="#{messages.template_banner_editorfip}" />
+
+
+		</h:panelGroup>
+
+		<h:panelGroup>
+
+			<h:panelGrid columns="3" style="float: right;"
+				columnClasses="columnaBandera">
+
+
+<!--  
+				<h:form>
+
+					<h:commandLink action="#{localeSelector.selectLanguage('es')}">
+						<h:graphicImage
+							value="/img/editorfip/#{localeSelector.language}/banner/espanol_p.jpg"
+							alt="#{messages.template_banner_idioma_espanol}"
+							title="#{messages.template_banner_idioma_espanol}" />
+					</h:commandLink>
+
+					<h:outputLabel />
+
+					<h:commandLink action="#{localeSelector.selectLanguage('en')}">
+						<h:graphicImage
+							value="/img/editorfip/#{localeSelector.language}/banner/ingles_p.jpg"
+							alt="#{messages.template_banner_idioma_ingles}"
+							title="#{messages.template_banner_idioma_ingles}" />
+					</h:commandLink>
+
+				</h:form>
+ -->
+				<ice:outputConnectionStatus activeLabel="Ejecutando" inactiveLabel="En Reposo" disconnectedLabel="Desconectado" 
+					styleClass="connectionStatus" displayHourglassWhenActive="true" />
+
+				<h:panelGrid column="1" style="float: right;">
+					<h:panelGroup>
+						<h:outputLabel value="#{messages.version}:"
+							styleClass="etiqueta_login" />
+						<h:outputLabel value="#{messages.template_version}" />
+					</h:panelGroup>
+
+					<h:panelGroup  rendered="#{identity.loggedIn}">
+						<h:outputLabel value="#{messages.menuestado_registrado}:"
+							styleClass="etiqueta_login" />
+						<h:outputLabel value="#{credentials.username}" />
+					</h:panelGroup>
+
+					<s:link id="cerrarSesionButtonId" style="color:blue;" value="#{messages.menu_cerrarsesion}" action="#{identity.logout}" view="/home.xhtml" propagation="none"  rendered="#{identity.loggedIn}">
+						
+					</s:link>
+
+				</h:panelGrid>
+
+
+			</h:panelGrid>
+
+
+
+		</h:panelGroup>
+	</h:panelGrid>
+
+</ice:panelGroup></div>
+
+<ice:panelGrid columns="2"
+	columnClasses="columnaMenu,columnaBuscar" style="width:100%;">
+	<h:panelGroup>
+		<ui:insert name="menu">
+			<ui:include src="menu.xhtml"></ui:include>
+		</ui:insert>
+	</h:panelGroup>
+	<h:panelGroup>
+		<ui:insert name="buscar" />
+	</h:panelGroup>
+
+</ice:panelGrid>
+
+<ice:panelGrid columns="4" styleClass="barra_login"
+	columnClasses="colMenuEstadoAmbito,colMenuEstadoPlanEncargado,colMenuEstadoPlanVigente,colMenuEstadoPlanBase">
+	<h:panelGroup columns="1">
+
+		<h:outputLabel value="#{messages.menuestado_ambito}:"
+			styleClass="etiqueta_login" />
+
+		<ice:outputLabel styleClass="etiqueta_planes"
+			value="#{variablesSesionUsuario.ambitoNombre}" />
+
+	</h:panelGroup>
+	<h:panelGroup columns="1">
+
+		<h:outputLabel value="#{messages.menuestado_planencargado}"
+			styleClass="etiqueta_login" />
+		<h:outputLabel value="(" styleClass="etiqueta_login" />
+		<s:link id="selPlanEncargadoButtonId" value="#{messages.seleccionar}" style="color:blue;"
+			view="/seleccion/seleccionArbolPlanEncargado.xhtml">
+			
+		</s:link>
+		<h:outputLabel value="):" styleClass="etiqueta_login" />
+
+		<ice:outputLabel styleClass="etiqueta_planes"
+			rendered="#{variablesSesionUsuario.idTramiteEncargadoTrabajo!=0}"
+			value="#{variablesSesionUsuario.idTramiteEncargadoTrabajo} - #{variablesSesionUsuario.tramiteEncargadoTrabajo.nombre}" />
+
+	</h:panelGroup>
+
+	<h:panelGroup columns="1">
+		<h:outputLabel value="#{messages.menuestado_planvigente}:"
+			styleClass="etiqueta_login" />
+		<ice:outputLabel styleClass="etiqueta_planes"
+			rendered="#{variablesSesionUsuario.idTramiteEncargadoTrabajo!=0}"
+			value="#{variablesSesionUsuario.idTramiteVigenteTrabajo} - #{variablesSesionUsuario.tramiteVigenteTrabajo.nombre}" />
+	</h:panelGroup>
+	<h:panelGroup columns="1" rendered="#{variablesSesionUsuario.idTramitePrerefundidoTrabajo==0}">
+		<h:outputLabel value="#{messages.menuestado_planbase}:"
+			styleClass="etiqueta_login" />
+		<ice:outputLabel styleClass="etiqueta_planes"
+			rendered="#{variablesSesionUsuario.idTramiteEncargadoTrabajo!=0}"
+			value="#{variablesSesionUsuario.idTramiteBaseTrabajo} - #{variablesSesionUsuario.tramiteBaseTrabajo.nombre}" />
+	</h:panelGroup>
+	
+	<h:panelGroup columns="1" rendered="#{variablesSesionUsuario.idTramitePrerefundidoTrabajo!=0}">
+		<h:outputLabel value="#{messages.menuestado_planprerefundido}:"
+			styleClass="etiqueta_login" />
+		<ice:outputLabel styleClass="etiqueta_planes"
+			
+			value="#{variablesSesionUsuario.idTramitePrerefundidoTrabajo} - #{variablesSesionUsuario.tramitePrerefundidoTrabajo.nombre}" />
+	</h:panelGroup>
+
+</ice:panelGrid>
+
+
+
+
+
+
+
+
+<ice:panelGroup styleClass="columnaBreadcrumb">
+	<ui:insert name="breadcrumb" />
+</ice:panelGroup>
+
+
+<div style="clear: both" />
+
+<div class="body"><h:messages id="messages" globalOnly="true"
+	styleClass="message" rendered="#{showGlobalMessages != 'false'}"
+	errorClass="errormsg" infoClass="infomsg" warnClass="warnmsg" /> <ui:insert
+	name="body" /></div>
+
+
+</body>
+</html>

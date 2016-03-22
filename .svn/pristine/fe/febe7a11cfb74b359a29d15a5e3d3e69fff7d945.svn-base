@@ -1,0 +1,11 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alvaro.Montero
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div class="toolbox divider">
+	<span class="iconWrapper"><img id="AdminUserbtnAnadir" class="toolBoxAction" src="styles/images/add.png" alt="Añadir" title="Añadir un nuevo usuario"/></span>
+	<span class="iconWrapper"><img id="AdminUserbtnEliminar" class="toolBoxAction" src="styles/images/delete.png" alt="Eliminar" title="Eliminar el usuario seleccionado" /></span>
+</div>

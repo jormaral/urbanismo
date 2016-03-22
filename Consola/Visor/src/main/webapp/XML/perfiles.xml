@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : perfiles.xml
+    Created on : 1 de diciembre de 2008, 16:02
+    Author     : jorge.bodas
+    Description:
+        Purpose of the document follows.
+-->
+<visores>
+    <visor ubicacionVisor="BURGOS, ESPAÑA"
+                   idAmbito="2028"
+                   idAmbitoBusquedas="2028"
+                   ambito="BURGOS"
+                   provincia="BURGOS"
+                   baseLayerGoogle="true"
+                   projection="EPSG:900913"
+                   displayProjection="EPSG:900913"
+                   projectionConsultaServicios="EPSG:4326"
+                   zoomInicial="13"
+                   maxExtent="-426880,5203745,-395140,5221154"
+                   center="-412090,5212058"
+                   lang="es"
+                   maxAreaConsultaPoligono="50000"
+                   imgPath="styles/images/"
+                   onImageLoadErrorColor="transparent"
+                   IMAGE_RELOAD_ATTEMPTS="2"
+                   tileWidth="256"
+                   tileHeight="256"
+                   rutaLogo1="styles/images/logotipoBurgos.gif"
+                   rutaLogo2="styles/images/logotipoFEDER.png"
+                   rutaXMLServicios="http://localhost:8080/urbanismoenredWS/RestMethod"
+                   rutaExportDibujos="/urbr/app/jboss/build/output/var/tmp"
+                   urlRegistro="http://localhost:8080/urbanismoenredWS/lanzaderas/arbolambitosVIS/arbolambVIS.jsp"
+                   urlRegistroCoordenadas="http://localhost:8080/urbanismoenredWS/lanzaderas/arbolambitosCoords/arbolambCoords.jsp"
+                   urlRegistroWS="http://localhost:8080/urbanismoenredWS/"
+                   rutaSuperficies="http://localhost:8080/urbanismoenredWS/FichaSuperficies"
+                   maxResolution="0.0027656249999999938"
+                   numZoomLevels="19"
+       	           rutaCatastroProvincias="http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/ConsultaProvincia"
+                   rutaCatastroMunicipios="http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/ConsultaMunicipio"
+                   rutaCatastroCoord="http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCoordenadas.asmx/Consulta_RCCOOR_Distancia"
+                   rutaCatastroRefCat="http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCoordenadas.asmx/Consulta_CPMRC"
+                   serviciosWMS="IDEE-Geologico,http://www.idee.es/wms/IDEE-Geologico/IDEE-Geologico?;Catastro,http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx?;Cartociudad,http://www.cartociudad.es/wms/CARTOCIUDAD/CARTOCIUDAD?;PNOA,http://www.idee.es/wms/PNOA/PNOA?;SIU,http://siu.vivienda.es/ows/wms?;Vías Pecuarias,http://wms.marm.es/sig/biodivViasPecuarias/wms.aspx?;Humedales,http://wms.marm.es/sig/biodivHumedales/wms.aspx?;Espacios Naturales Protegidos,http://wms.marm.es/sig/biodivENP/wms.aspx?;Zonas de Interés para las Aves (Ibas),http://wms.marm.es/sig/biodivIBAS/wms.aspx?;Dominio Público Marítimo Terrestre,http://wms.marm.es/sig/DPMT/wms.aspx;Mapa de cultivos y aprovechamientos (2000-2010),http://wms.marm.es/sig/MapaCultivos2000-2010/wms.aspx;Mapa Forestal de España (MFE50),http://wms.marm.es/sig/MFE/wms.aspx?"
+                   serviciosWFS="SIU,http://siu.vivienda.es/geoserver/wfs"
+                   activarConsultaFicha="true"
+                   tiposDeFichas="FichaUrbanistica;FichaGenerica?Plantilla=PlantillaDeterminaciones;FichaGenerica?Plantilla=PlantillaEstructurada"
+                   rutaFichasBase="http://localhost:8080/urbanismoenredWS/"
+                   rutaPrintModule="http://localhost:8080/urbanismoenredWS/Print"
+                   zoomResultadosBusquedas="14"
+                   maxPuntosGeometria="5000"
+                   ExtensionTiles="-2.003750834E7,-2.003750834E7,2.003750834E7,2.003750834E7"
+                   >
+            </visor>
+</visores>
+

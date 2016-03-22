@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jul-2009 12:36:17 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipotramite"
+  schema="diccionario" table="tipotramite">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">diccionario.diccionario_tipotramite_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one cascade="delete"
+   class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Literal"
+   fetch="select" name="literal">
+   <column name="idliteral"/>
+  </many-to-one>
+ </class>
+ <query name="Tipotramite.obtenerTodos">SELECT tt FROM es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipotramite tt</query>
+</hibernate-mapping>

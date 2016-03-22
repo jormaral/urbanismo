@@ -1,0 +1,143 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaPanelDetReg"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<ice:panelPopup id="panelDetReg" autoCentre="true" modal="true"
+		draggable="true" clientOnly="true"
+		visible="#{gestionCondicionesUrbanisticas.mostrarPanelDetReg}"
+		styleClass="panelPopup">
+
+		<f:facet name="header">
+			<ice:panelGroup>
+				<ice:outputText value="Determinacion Regimen" />
+				<ice:commandButton id="modalPnlCloseBtnDetReg"
+					image="/img/editorfip/es/comun/cerrar_popup.png"
+					action="#{gestionCondicionesUrbanisticas.setMostrarPanelDetReg(false)}"
+					styleClass="popupHeaderImage" immediate="true"
+					title="#{messages.botongenerico_cerrar}"
+					alt="#{messages.botongenerico_cerrar}" />
+			</ice:panelGroup>
+		</f:facet>
+
+		<f:facet name="body">
+
+
+			<ice:panelGrid columns="1" columnClasses="testCol1,testCol2">
+
+				<ice:panelGroup>
+					<ice:selectOneMenu partialSubmit="true"
+						value="#{listaDeterminacionesRegimenCU.idTipoTramiteTrabajo}">
+						<f:selectItem itemLabel="#{messages.menuestado_planbase}"
+							itemValue="1" />
+						<f:selectItem itemLabel="#{messages.menuestado_planvigente}"
+							itemValue="2" />
+						<f:selectItem itemLabel="#{messages.menuestado_planencargado}"
+							itemValue="3" />
+					</ice:selectOneMenu>
+				</ice:panelGroup>
+
+				<ice:panelGroup scrollHeight="250px">
+
+					<ice:dataTable id="listaDetRegCU"
+						value="#{listaDeterminacionesRegimenCU.determinacionesRegimenCUList}"
+						var="item" rows="10"
+						rendered="#{not empty listaDeterminacionesRegimenCU.determinacionesRegimenCUList}">
+
+						<!-- 
+							<ice:column>
+								<ice:rowSelector value="#{item.seleccionada}"/>
+								<f:facet name="header">
+									<ice:outputText value="#{messages.iden}" />
+								</f:facet>
+								<ice:outputText value="#{item.idDeterminacion}" />
+							</ice:column>
+							 -->
+
+						<ice:column>
+							<ice:rowSelector value="#{item.seleccionada}" selectionListener="#{listaDeterminacionesRegimenCU.rowSelectionListener}"/>
+							<f:facet name="header">
+								<ice:outputText value="#{messages.orden}" />
+							</f:facet>
+							<ice:outputText value="#{item.ordenArbol}" />
+						</ice:column>
+
+						<ice:column>
+							<f:facet name="header">
+
+								<ice:outputText value="#{messages.nombre_determinacion}" />
+
+							</f:facet>
+							<ice:outputText value="#{item.nombreDeterminacion}" />
+						</ice:column>
+
+					</ice:dataTable>
+
+					<ice:outputLabel
+						rendered="#{empty listaDeterminacionesRegimenCU.determinacionesRegimenCUList}"
+						value="#{messages.no_hay_datos}" styleClass="dataResult" />
+
+				</ice:panelGroup>
+
+
+				<ice:panelGrid columns="2"
+					columnClasses="testColDetLabel,testColDetermDetalles">
+					<ice:outputLabel value="#{messages.seleccionado}"
+						styleClass="dataResult" />
+					<ice:outputText
+						value="#{seleccionarListaDeterminacionRegimenCU.seleccionado.nombre}" />
+				</ice:panelGrid>
+
+				<ice:panelGroup styleClass="botonPopUpUnidades">
+
+					<s:button
+						rendered="#{seleccionarListaDeterminacionRegimenCU.mostrar}"
+						value="#{messages.seleccionar}"
+						action="#{gestionCondicionesUrbanisticas.cargarDeterminacionRegimenCUSeleccionada(seleccionarListaDeterminacionRegimenCU.idGASel)}"
+						styleClass="boton1" propagation="none"
+						alt="#{messages.botongenerico_seleccionar}"
+						title="#{messages.boton_title_entidadAnadirGA_seleccionar}" />
+
+
+					<ice:commandButton id="modalPnlCloseBtnDetReg"
+								action="#{gestionCondicionesUrbanisticas.setMostrarPanelDetReg(false)}"
+								styleClass="boton1" value="#{messages.botongenerico_cancelar}"
+								title="#{messages.boton_title_seleccionarDetReg_cancelar}"
+								alt="#{messages.botongenerico_cancelar}" />
+
+				</ice:panelGroup>
+
+				<!--  
+			<ice:panelGroup styleClass="firstChildTitle backBeanChangeContainer">
+
+				
+				<ice:panelGroup styleClass="backBeanChangeBody">
+					<ice:panelGroup style="margin: 0; padding: 0;">
+						<ice:panelGrid cellpadding="0" cellspacing="3" columns="2">
+							<ice:commandButton id="botonSelDetReg"
+								value="#{messages.botongenerico_seleccionar}"
+								alt="#{messages.botongenerico_seleccionar}"
+								title="#{messages.boton_title_seleccionarDetReg_seleccionar}"
+								styleClass="boton1"
+								rendered="#{listaDeterminacionesRegimenCU.mostrarBotonSeleccionar()}"
+								action="#{gestionCondicionesUrbanisticas.cargarDeterminacionRegimenCUSeleccionada(listaDeterminacionesRegimenCU.obtenerIdRegimenSel())}" />
+							<ice:commandButton id="modalPnlCloseBtnDetReg"
+								action="#{gestionCondicionesUrbanisticas.setMostrarPanelDetReg(false)}"
+								styleClass="boton1" value="#{messages.botongenerico_cancelar}"
+								title="#{messages.boton_title_seleccionarDetReg_cancelar}"
+								alt="#{messages.botongenerico_cancelar}" />
+
+						</ice:panelGrid>
+					</ice:panelGroup>
+				</ice:panelGroup>
+			</ice:panelGroup>
+	-->
+
+			</ice:panelGrid>
+
+		</f:facet>
+	</ice:panelPopup>
+</f:subview>

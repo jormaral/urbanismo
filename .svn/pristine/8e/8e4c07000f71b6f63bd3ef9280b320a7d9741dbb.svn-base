@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichasXML" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="403"/>
+	<style name="Titulo1" mode="Opaque" fill="Solid" pattern="" fontSize="14" isItalic="true" isUnderline="false" isStrikeThrough="true" pdfFontName="Courier"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/Users/franguerreroaranda/Desarrollo/jboss-5.1.0.GA/var/ficha/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BBOX" class="java.lang.String"/>
+	<parameter name="SRS" class="java.lang.String"/>
+	<queryString language="xPath">
+		<![CDATA[FICHA/CAPA/GRUPO/ENTIDADES/ENTIDAD/CONDICIONES/CONDICION/CASOS/CASO/VALORES/VALOR/REGIMENES-ESPECIFICOS/REGIMEN-ESPECIFICO]]>
+	</queryString>
+	<field name="situacion" class="java.lang.String">
+		<fieldDescription><![CDATA[/FICHA/SITUACION]]></fieldDescription>
+	</field>
+	<field name="planeamiento" class="java.lang.Object">
+		<fieldDescription><![CDATA[/FICHA/PLANEAMIENTO]]></fieldDescription>
+	</field>
+	<group name="Planeamiento">
+		<groupExpression><![CDATA[$F{planeamiento}]]></groupExpression>
+		<groupHeader>
+			<band height="330">
+				<staticText>
+					<reportElement mode="Opaque" x="17" y="3" width="521" height="20" backcolor="#C8C8C8"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Situación]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="19" y="23" width="521" height="20"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{situacion}]]></textFieldExpression>
+				</textField>
+				
+				<image>
+					<reportElement positionType="Float" x="18" y="66" width="520" height="260"/>
+					<imageExpression class="java.lang.String"><![CDATA["http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx?LAYERS=Catastro&TRANSPARENT=true&FORMAT=image%2Fpng&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&SRS=" + $P{SRS} + "&BBOX=" + $P{BBOX} + "&WIDTH=1040&HEIGHT=520"]]></imageExpression>
+				</image>
+				
+			</band>
+			
+		</groupHeader>
+	</group>
+	<group name="SinDatos">
+		<groupExpression><![CDATA["Sin Datos"]]></groupExpression>
+		<groupHeader>
+			<band height="23">
+				<staticText>
+					<reportElement mode="Opaque" x="17" y="3" width="521" height="20" backcolor="#C8C8C8"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SinDatos]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="44" splitType="Stretch">
+			<image scaleImage="RetainShape" vAlign="Middle">
+				<reportElement key="image-1" x="17" y="0" width="138" height="44"/>
+				<imageExpression class="java.lang.String"><![CDATA["/Users/franguerreroaranda/Desarrollo/jboss-5.1.0.GA/var/ficha/izquierda.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="155" y="10" width="245" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ficha Urbanística]]></text>
+			</staticText>
+			<image scaleImage="RetainShape" hAlign="Right" vAlign="Middle">
+				<reportElement key="image-1" x="400" y="0" width="137" height="44"/>
+				<imageExpression class="java.lang.String"><![CDATA["/Users/franguerreroaranda/Desarrollo/jboss-5.1.0.GA/var/ficha/derecha.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<textField pattern="">
+				<reportElement x="467" y="4" width="71" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="17" y="3" width="521" height="1"/>
+			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="17" y="4" width="85" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="102" y="4" width="365" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Documento de carácter informativo - Datos obtenidos del planeamiento refundido]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

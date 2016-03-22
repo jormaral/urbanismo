@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jul-2009 12:36:17 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Defrelacion"
+  schema="diccionario" table="defrelacion">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="assigned"/>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Literal"
+   fetch="select" name="literal">
+   <column name="idliteral" not-null="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="nmininstancias" type="int">
+   <column name="nmininstancias" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="nmaxinstancias" type="int">
+   <column name="nmaxinstancias" not-null="true"/>
+  </property>
+  <set inverse="true" name="defpropiedads" sort="unsorted">
+   <key>
+    <column name="iddefrelacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Defpropiedad"/>
+  </set>
+  <set inverse="true" name="defvectors" sort="unsorted">
+   <key>
+    <column name="iddefrelacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Defvector"/>
+  </set>
+ </class>
+ <sql-query name="Defrelacion.obtenerDefinicionesTabla">Select dr.iden As idendr, dv.iden As idendv From diccionario.Defrelacion dr, diccionario.Defvector dv, diccionario.Tabla t 
+	Where Upper(Trim(t.nombre))='ENTIDAD' And dv.idtabla=t.iden</sql-query>
+</hibernate-mapping>

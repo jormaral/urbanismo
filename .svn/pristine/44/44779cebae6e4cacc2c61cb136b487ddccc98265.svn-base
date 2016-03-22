@@ -1,0 +1,59 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaPanelAmbitos"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<ice:panelPopup id="panelAmbitos" autoCentre="true" modal="true"
+		visible="#{servicioListadoFips.mostrarPanelFip}" styleClass="panelPopup">
+
+
+		<f:facet name="header">
+			<ice:panelGroup>
+				<ice:outputText value="#{messages.importarFip}" />
+				<ice:commandButton id="modalPnlCloseBtn" type="button"
+					image="/img/editorfip/es/comun/cerrar_popup.png"
+					action="#{servicioListadoFips.setMostrarPanelFip(false)}"
+					styleClass="popupHeaderImage"
+					title="#{messages.botongenerico_cerrar}"
+					alt="#{messages.botongenerico_cerrar}" />
+			</ice:panelGroup>
+		</f:facet>
+
+		<f:facet name="body">
+			<h:panelGrid columns="2" id="datosUsuarioPG">
+					
+					<h:inputText styleClass="etiqueta-Usuario" value="#{messages.fichero}" disabled="true"/>
+					<h:inputText styleClass="input-Detalle"  
+						value="#{servicioListadoFips.fipCargado.identificador}" disabled="true"/>
+					
+					<h:inputText styleClass="etiqueta-Usuario" value="#{messages.importado}" disabled="true"/>
+					<h:inputText styleClass="input-Detalle"  
+						value="#{messages.si}" rendered="#{servicioListadoFips.fipCargado.consolidado}" disabled="true"/>
+					<h:inputText styleClass="input-Detalle"  
+						value="#{messages.no}" rendered="#{not servicioListadoFips.fipCargado.consolidado}" disabled="true"/>
+				
+					<h:inputText styleClass="etiqueta-Usuario" value="#{messages.fechaIntroduccion}" disabled="true"/>
+					<h:inputText styleClass="input-Detalle"  
+						value="#{servicioListadoFips.fipCargado.fechaIntroduccion}" disabled="true"/>
+						
+					<h:inputText styleClass="etiqueta-Usuario" value="#{messages.fechaConsolidacion}" disabled="true"/>
+					<h:inputText styleClass="input-Detalle"  
+						value="#{servicioListadoFips.fipCargado.fechaConsolidacion}" disabled="true"/>
+				
+				<s:button value="#{messages.importar}" alt="#{messages.importar}" title="#{messages.boton_title_consolidarFip_importar}"
+						action="#{servicioListadoFips.importacionAsincrona(servicioListadoFips.fipCargado.id)}" styleClass="boton2"/>
+				<h:outputText value="" />
+				
+				<!--  
+				<s:button value="#{messages.importarssss}"
+						action="#{servicioListadoFips.importacionSincrona}" styleClass="boton2"/>
+				<h:outputText value="" />
+				-->
+				
+			</h:panelGrid>
+		</f:facet>
+	</ice:panelPopup>
+</f:subview>

@@ -1,0 +1,44 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../layout/templateArbol.xhtml">
+
+<ui:define name="body">
+
+      			
+  			<ice:form>
+  				<br></br>
+  				<br></br>
+  				Creacion Documento Normas 11 (es un ejemplo)
+  				<ice:commandButton value="Crear Todo" action="#{servicioGestionDocumentoNormas.crearDocumentoNormas(11)}" />
+  				<br></br><br></br>
+  				
+  				<ice:commandButton value="Crear Doc Normas" action="#{servicioGestionDocumentoNormas.generarDocumentoNormasEntidades(11)}" />
+  				<br></br><br></br>
+  				
+  				<ice:commandButton value="Crear Doc Det" action="#{servicioGestionDocumentoNormas.generarDocumentoNormasDeterminacion(11)}" />
+  				<br></br><br></br>
+  				
+  				<!--
+  				<ice:outputLabel value="#{messages.fichacu_enlace}: "
+							rendered="#{servicioGestionDocumentoNormas.fichaGenerada}" />
+						<ice:outputResource id="pdfFicha"
+							rendered="#{servicioGestionDocumentoNormas.fichaGenerada}"
+							resource="#{servicioGestionDocumentoNormas.pdfFichaGenerada}"
+							mimeType="application/pdf"
+							fileName="#{servicioGestionDocumentoNormas.textoFichaPdf()}"
+							styleClass="hiperenlace enlaceAzul" shared="false" />
+						<ice:outputLabel />
+				  -->
+  				
+			</ice:form>
+		
+
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,121 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaPanelAmbitos"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<ice:panelPopup id="panelAmbitosSHP" autoCentre="true" modal="true"
+		visible="#{servicioImportacionGeometriaAmbito.mostrarPanelAmbitos}" styleClass="panelPopup">
+
+
+		<f:facet name="header">
+			<ice:panelGroup>
+				<ice:outputText value="#{messages.botonusuario_ambito}" />
+				<ice:commandButton id="modalPnlCloseBtn" type="button"
+					image="/img/editorfip/es/comun/cerrar_popup.png"
+					action="#{servicioImportacionGeometriaAmbito.setMostrarPanelAmbitos(false)}"
+					styleClass="popupHeaderImage" immediate="true"
+					title="#{messages.boton_title_gestionUsuario_anadirAmbito_cerrar}"
+					alt="#{messages.botongenerico_cerrar}" />
+			</ice:panelGroup>
+		</f:facet>
+
+		<f:facet name="body">
+			<ice:panelGrid columns="2" columnClasses="testCol1,testCol2">
+				<ice:panelGroup>
+
+
+					<ice:panelTabSet id="panelTabArbolAmb">
+						<ice:panelTab id="tabArbolAmb" label="" style="color:transparent;">
+							<!-- TRee values -->
+							<ice:panelGroup styleClass="arbol" scrollHeight="350px"
+								scrollWidth="400px">
+								<ice:tree id="treeAmb" value="#{gestionArbolAmbito.model}"
+									var="node" binding="#{gestionArbolAmbito.treeComponent}"
+									imageDir="/fipeditor/img/editorfip/es/arboles/"
+									hideRootNode="false" hideNavigation="false" immediate="true"
+									actionListener="#{gestionArbolAmbito.menuEvent}">
+									<ice:treeNode>
+
+										<f:facet name="icon">
+											<ice:panelGroup style="display: inline">
+												<h:graphicImage
+													value="/img/editorfip/es/arboles/#{node.userObject.icon}" />
+
+											</ice:panelGroup>
+										</f:facet>
+										<f:facet name="content">
+											
+												<ice:panelGroup
+													styleClass="selectedNode#{node.userObject eq gestionArbolAmbito.selectedUserObject}"
+													style="display: inline">
+													<ice:commandLink immediate="true" partialSubmit="false" 
+														actionListener="#{gestionArbolAmbito.nodeSelected}">
+														<f:param name="nodoId"
+															value="#{node.userObject.datosIdTextoArbolGenerico.idBaseDatos}" />
+														<ice:outputText id="TreeNode"
+															value="#{node.userObject.text}" />
+													</ice:commandLink>
+												
+											</ice:panelGroup>
+										</f:facet>
+
+									</ice:treeNode>
+								</ice:tree>
+
+
+							</ice:panelGroup>
+						</ice:panelTab>
+					</ice:panelTabSet>
+
+
+
+				</ice:panelGroup>
+
+				<ice:panelGroup
+					styleClass="cajaSeleccion firstChildTitle backBeanChangeContainer">
+
+					<!-- backing bean title box -->
+					<ice:panelGroup styleClass="backBeanChangeTitle">
+						<ice:outputText value="#{messages.valores}" />
+					</ice:panelGroup>
+
+					<!-- actual backing bean values. -->
+					<ice:panelGroup styleClass="backBeanChangeBody"
+						effect="#{gestionArbolAmbito.valueChangeEffect}">
+						<ice:panelGroup style="margin: 0; padding: 0;">
+							<ice:panelGrid cellpadding="0" cellspacing="3" columns="1">
+
+						<ice:panelGroup	styleClass="firstChildTitle backBeanChangeContainer">			
+								<ice:panelSeries id="icePnlSrsAmb" style="border:0px"
+									value="#{gestionArbolAmbito.selectedTreePath}" var="treePath">
+									<ice:outputLabel styleClass="simboloMayorBold"  value=" > " />
+									<ice:outputText id="treePathAmb" value="#{treePath}" />
+								</ice:panelSeries>
+						</ice:panelGroup>
+						
+						<ice:panelGroup styleClass="firstChildTitle backBeanChangeContainer" style="text-align:left;">
+								<ice:outputText id="nombreParIdentificador" styleClass="output-Detalle"
+								value="#{gestionArbolAmbito.selectedUserObject.datosIdTextoArbolGenerico.texto}" />
+						</ice:panelGroup>
+
+							</ice:panelGrid>
+						</ice:panelGroup>						
+					</ice:panelGroup>
+					
+					<ice:panelGroup style="text-align:center;">
+						<ice:commandButton value="#{messages.botongenerico_seleccionar}" immediate="true"  disabled="#{gestionArbolAmbito.selectedUserObject.datosIdTextoArbolGenerico.texto==''}"
+							action="#{servicioImportacionGeometriaAmbito.setIdAmbito(gestionArbolAmbito.selectedUserObject.datosIdTextoArbolGenerico.getIdBaseDatos())}" styleClass="boton1"
+							alt="#{messages.botongenerico_seleccionar}" title="#{messages.boton_title_gestionUsuario_anadirAmbito_seleccionar}"/>
+						
+						<ice:commandButton value="#{messages.botongenerico_cancelar}" immediate="true" action="#{servicioImportacionGeometriaAmbito.setMostrarPanelAmbitos(false)}" styleClass="boton1"
+										alt="#{messages.botongenerico_cancelar}" title="#{messages.boton_title_gestionUsuario_anadirAmbito_cancelar}"/>
+					</ice:panelGroup>
+					
+				</ice:panelGroup>
+			</ice:panelGrid>
+		</f:facet>
+	</ice:panelPopup>
+</f:subview>

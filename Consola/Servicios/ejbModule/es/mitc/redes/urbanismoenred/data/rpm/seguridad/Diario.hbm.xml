@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-abr-2010 13:47:19 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class name="es.mitc.redes.urbanismoenred.data.rpm.seguridad.Diario"
+  schema="seguridad" table="diario">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">seguridad.diario_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.seguridad.Operaciones"
+   fetch="select" lazy="false" name="operaciones">
+   <column name="operaciones"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.seguridad.Subsistema"
+   fetch="select" lazy="false" name="subsistema">
+   <column name="modulo"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.seguridad.Usuario"
+   fetch="select" lazy="false" name="usuario">
+   <column name="usuario" not-null="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="fechalogin" type="timestamp">
+   <column length="35" name="fechalogin"/>
+  </property>
+  <property generated="never" lazy="false" name="log" type="string">
+   <column length="150" name="log"/>
+  </property>
+ </class>
+ <query name="Diario.buscarPorUsuario">SELECT diario FROM es.mitc.redes.urbanismoenred.data.rpm.seguridad.Diario diario
+	WHERE diario.usuario.iden = :idUsuario
+	ORDER BY diario.fechalogin DESC</query>
+ <query name="Diario.buscarPorSubsistema">SELECT diario FROM es.mitc.redes.urbanismoenred.data.rpm.seguridad.Diario diario
+	WHERE diario.subsistema.iden = :idSubsistema
+	ORDER BY diario.fechalogin DESC</query>
+ <query name="Diario.buscarPorFecha">SELECT diario FROM es.mitc.redes.urbanismoenred.data.rpm.seguridad.Diario diario
+	WHERE diario.fechalogin &gt; :inicio AND diario.fechalogin &lt; :fin
+	ORDER BY diario.fechalogin DESC</query>
+</hibernate-mapping>

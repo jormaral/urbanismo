@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen"
+  schema="planeamiento" table="entidaddeterminacionregimen">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">planeamiento.planeamiento_entidaddeterminacionregimen_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Opciondeterminacion"
+   fetch="select" name="opciondeterminacion">
+   <column name="idopciondeterminacion"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion"
+   fetch="select" name="casoentidaddeterminacionByIdcasoaplicacion">
+   <column name="idcasoaplicacion"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion"
+   fetch="select" name="casoentidaddeterminacionByIdcaso">
+   <column name="idcaso" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion"
+   fetch="select" name="determinacion">
+   <column name="iddeterminacionregimen"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="valor" type="string">
+   <column length="50" name="valor"/>
+  </property>
+  <property generated="never" lazy="false" name="superposicion" type="java.lang.Integer">
+   <column name="superposicion"/>
+  </property>
+  <set inverse="true" name="regimenespecificos" order-by="orden asc" sort="unsorted">
+   <key>
+    <column name="identidaddeterminacionregimen" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Regimenespecifico"/>
+  </set>
+ </class>
+ <query name="Entidaddeterminacionregimen.buscarPorTramite">SELECT edr FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr
+	WHERE edr.casoentidaddeterminacionByIdcaso.entidaddeterminacion.entidad.tramite = :idTramite</query>
+ <query name="Entidaddeterminacionregimen.buscarPorCaso">SELECT edr FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr
+	WHERE edr.casoentidaddeterminacionByIdcaso.iden = :idCaso</query>
+ <sql-query name="Entidaddeterminacionregimen.borrarPorCaso">Delete From planeamiento.Entidaddeterminacionregimen 
+                        Where idcaso In (
+                        Select iden From planeamiento.Casoentidaddeterminacion 
+                        Where identidaddeterminacion In (
+                        Select iden From planeamiento.Entidaddeterminacion 
+                        Where iden= :iden))</sql-query>
+ <sql-query name="Entidaddeterminacionregimen.borrarPorCasoAplicacion">Delete From planeamiento.Entidaddeterminacionregimen 
+                        Where idcasoaplicacion In (
+                        Select iden From planeamiento.Casoentidaddeterminacion 
+                        Where identidaddeterminacion In (
+                        Select iden From planeamiento.Entidaddeterminacion 
+                        Where iden=:iden))</sql-query>
+ <sql-query name="Entidaddeterminacionregimen.obtenerMaximaSuperposicion">Select Max(superposicion) 
+                    From planeamiento.Entidaddeterminacionregimen edr, 
+                    planeamiento.Casoentidaddeterminacion ced, 
+                    planeamiento.Entidaddeterminacion ed 
+                    Where edr.idCaso=ced.iden 
+                    And ced.idEntidadDeterminacion=ed.iden</sql-query>
+</hibernate-mapping>

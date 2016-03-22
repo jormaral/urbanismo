@@ -1,0 +1,200 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"  
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="regimenespecificoSearch" styleClass="edit">
+      <ice:panelGroup  id="searchGroup" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+                    <ice:outputText id="listRegimenespecificoId" value="Regimenespecifico search filter"/>
+                 </td>
+              </tr>
+         </table>	
+         <ice:panelGroup id="listPanelGroupRegimenespecificoId" styleClass="edit">
+		
+            <s:decorate id="nombredecId" template="../layout/display.xhtml">
+                <ui:define name="label">Nombre</ui:define>
+                <ice:inputText id="nombre" 
+                          value="#{regimenespecificoList.regimenespecifico.nombre}"
+				  partialSubmit="true"/>
+            </s:decorate>
+
+            <s:decorate id="textodecId" template="../layout/display.xhtml">
+                <ui:define name="label">Texto</ui:define>
+                <ice:inputText id="texto" 
+                          value="#{regimenespecificoList.regimenespecifico.texto}"
+				  partialSubmit="true"/>
+            </s:decorate>
+
+            <s:decorate template="../layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <ice:selectOneRadio id="logic" value="#{regimenespecificoList.restrictionLogicOperator}" partialSubmit="true">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </ice:selectOneRadio>
+            </s:decorate>
+          
+   
+	  </ice:panelGroup>
+  
+        
+        <div class="actionButtons">
+            <ice:commandButton id="search" value="Search" action="/RegimenespecificoList.xhtml"/>
+        </div>
+      </ice:panelGroup> 
+    </ice:form>
+    
+    <ice:panelGroup styleClass="formBorderHighlight">
+
+    <h3>regimenespecifico  search results</h3>
+
+    <div class="searchResults" id="listregimenespecificoResults">
+    <ice:outputText value="The regimenespecifico search returned no results." 
+               rendered="#{empty regimenespecificoList.resultList}"/>
+               
+    <ice:dataTable id="regimenespecificoList" 
+                  var="regimenespecifico"
+                value="#{regimenespecificoList.resultList}" 
+            resizable="true"
+	columnClasses="allCols"
+             rendered="#{not empty regimenespecificoList.resultList}">
+        <ice:column id="listidenId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{regimenespecificoList}"/>
+                    <ui:param name="propertyLabel" value="Iden"/>
+                    <ui:param name="propertyPath" value="regimenespecifico.iden"/>
+                </ui:include>
+            </f:facet>
+            #{regimenespecifico.iden}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listColumnentidaddeterminacionregimenId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{regimenespecificoList}"/>
+                    <ui:param name="propertyLabel" value="Entidaddeterminacionregimen iden"/>
+                    <ui:param name="propertyPath" value="regimenespecifico.entidaddeterminacionregimen.iden"/>
+                </ui:include>
+            </f:facet>
+            #{regimenespecifico.entidaddeterminacionregimen.iden}
+        </ice:column>
+        <ice:column id="listnombreId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{regimenespecificoList}"/>
+                    <ui:param name="propertyLabel" value="Nombre"/>
+                    <ui:param name="propertyPath" value="regimenespecifico.nombre"/>
+                </ui:include>
+            </f:facet>
+            #{regimenespecifico.nombre}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listordenId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{regimenespecificoList}"/>
+                    <ui:param name="propertyLabel" value="Orden"/>
+                    <ui:param name="propertyPath" value="regimenespecifico.orden"/>
+                </ui:include>
+            </f:facet>
+            #{regimenespecifico.orden}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listColumnregimenespecificoId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{regimenespecificoList}"/>
+                    <ui:param name="propertyLabel" value="Regimenespecifico iden"/>
+                    <ui:param name="propertyPath" value="regimenespecifico.regimenespecifico.iden"/>
+                </ui:include>
+            </f:facet>
+            #{regimenespecifico.regimenespecifico.iden}
+        </ice:column>
+        <ice:column id="listtextoId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{regimenespecificoList}"/>
+                    <ui:param name="propertyLabel" value="Texto"/>
+                    <ui:param name="propertyPath" value="regimenespecifico.texto"/>
+                </ui:include>
+            </f:facet>
+            #{regimenespecifico.texto}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listColumnRegimenespecificoId">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/seam/#{empty from ? 'Regimenespecifico' : from}.xhtml" 
+                   value="#{empty from ? 'View' : 'Select'}" 
+                      id="regimenespecifico">
+                <f:param name="regimenespecificoIden" 
+                        value="#{regimenespecifico.iden}"/>
+            </s:link>
+			#{' '}
+            <s:link view="/seam/RegimenespecificoEdit.xhtml"
+                   value="Edit" 
+                      id="regimenespecificoEdit"
+                      rendered="#{empty from}">
+                <f:param name="regimenespecificoIden" 
+                        value="#{regimenespecifico.iden}"/>
+            </s:link>
+        </ice:column>
+    </ice:dataTable>
+
+    </div>
+</ice:panelGroup>
+
+    <div class="tableControl">
+      
+        <s:link view="/seam/RegimenespecificoList.xhtml" 
+            rendered="#{regimenespecificoList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPageregimenespecificoListId">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+        
+        <s:link view="/seam/RegimenespecificoList.xhtml" 
+            rendered="#{regimenespecificoList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPageregimenespecificoListId">
+            <f:param name="firstResult" 
+                    value="#{regimenespecificoList.previousFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/RegimenespecificoList.xhtml" 
+            rendered="#{regimenespecificoList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPageregimenespecificoListId">
+            <f:param name="firstResult" 
+                    value="#{regimenespecificoList.nextFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/RegimenespecificoList.xhtml" 
+            rendered="#{regimenespecificoList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPageregimenespecificoListId">
+            <f:param name="firstResult" 
+                    value="#{regimenespecificoList.lastFirstResult}"/>
+        </s:link>
+        
+    </div>
+    
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/seam/RegimenespecificoEdit.xhtml"
+                    id="create" 
+                 value="Create regimenespecifico">
+            <f:param name="regimenespecificoIden"/>
+        </s:button>
+    </s:div>
+    
+</ui:define>
+
+</ui:composition>
+

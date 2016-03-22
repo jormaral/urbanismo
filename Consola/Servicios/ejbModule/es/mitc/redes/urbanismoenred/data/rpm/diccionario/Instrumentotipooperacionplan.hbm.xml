@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jul-2009 12:36:17 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan"
+  schema="diccionario" table="instrumentotipooperacionplan">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">diccionario.diccionario_instrumentotipooperacionplan_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipooperacionplan"
+   fetch="select" lazy="false" name="tipooperacionplan">
+   <column name="idtipooperacionplan" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentoplan"
+   fetch="select" lazy="false" name="instrumentoplan">
+   <column name="idinstrumentoplan" not-null="true"/>
+  </many-to-one>
+ </class>
+ <query name="Instrumentotipooperacionplan.buscar">SELECT itop FROM es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan itop
+	WHERE itop.instrumentoplan.iden = :idInstrumento AND itop.tipooperacionplan.iden = :idTipoOperacion</query>
+ <query name="Instrumentotipooperacionplan.buscarPorInstrumento">SELECT itop FROM es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan itop
+	WHERE itop.instrumentoplan.iden = :idInstrumento</query>
+ <query name="Instrumentotipooperacionplan.obtenerTodos">SELECT itop FROM es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan itop</query>
+ <query name="Instrumentotipooperacionplan.buscarPorInstrumentoYOperacion">SELECT itop FROM es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentotipooperacionplan itop
+	WHERE itop.instrumentoplan.iden = :idInstrumento AND itop.tipooperacionplan.iden = :idTipoOperacion</query>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns="http://jboss.com/products/seam/pages"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd">
+
+      
+
+
+   <param name="firstResult" value="#{tramiteList.firstResult}"/>
+   <param name="sort" value="#{tramiteList.orderColumn}"/>
+   <param name="dir" value="#{tramiteList.orderDirection}"/>
+   <param name="logic" value="#{tramiteList.restrictionLogicOperator}"/>
+   <param name="from"/>
+   <param name="codigofip" value="#{tramiteList.tramite.codigofip}"/>
+   <param name="comentario" value="#{tramiteList.tramite.comentario}"/>
+   <param name="nombre" value="#{tramiteList.tramite.nombre}"/>
+   <param name="numeroacuerdo" value="#{tramiteList.tramite.numeroacuerdo}"/>
+   <param name="texto" value="#{tramiteList.tramite.texto}"/>
+</page>

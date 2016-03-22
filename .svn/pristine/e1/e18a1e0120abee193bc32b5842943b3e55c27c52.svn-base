@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jul-2009 12:36:17 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class name="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Literal"
+  schema="diccionario" table="literal">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">diccionario.diccionario_literal_iden_seq</param>
+   </generator>
+  </id>
+  <property generated="never" lazy="false" name="comentario" type="string">
+   <column length="1000" name="comentario"/>
+  </property>
+  <set inverse="true" name="tipooperacionplans" sort="unsorted">
+   <key>
+    <column name="idliteral"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipooperacionplan"/>
+  </set>
+  <set inverse="true" name="caracterdeterminacions" sort="unsorted">
+   <key>
+    <column name="idliteral"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Caracterdeterminacion"/>
+  </set>
+  <set inverse="true" name="instrumentoplans" sort="unsorted">
+   <key>
+    <column name="idliteral"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Instrumentoplan"/>
+  </set>
+  <set inverse="true" name="tipooperaciondeterminacions" sort="unsorted">
+   <key>
+    <column name="idliteral"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipooperaciondeterminacion"/>
+  </set>
+  <set inverse="true" name="organos" sort="unsorted">
+   <key>
+    <column name="idliteral"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Organo"/>
+  </set>
+  <set inverse="true" name="tipoentidads" sort="unsorted">
+   <key>
+    <column name="idliteral" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipoentidad"/>
+  </set>
+  <set inverse="true" name="tipodocumentos" sort="unsorted">
+   <key>
+    <column name="idliteral"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipodocumento"/>
+  </set>
+  <set inverse="true" name="sentidos" sort="unsorted">
+   <key>
+    <column name="idliteral"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Sentido"/>
+  </set>
+  <set cascade="delete" inverse="true" name="traduccions" sort="unsorted">
+   <key>
+    <column name="idliteral" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Traduccion"/>
+  </set>
+  <set inverse="true" name="naturalezas" sort="unsorted">
+   <key>
+    <column name="idliteral" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Naturaleza"/>
+  </set>
+  <set inverse="true" name="boletins" sort="unsorted">
+   <key>
+    <column name="idliteral"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Boletin"/>
+  </set>
+  <set inverse="true" name="defpropiedads" sort="unsorted">
+   <key>
+    <column name="idliteral" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Defpropiedad"/>
+  </set>
+  <set inverse="true" name="tipotramites" sort="unsorted">
+   <key>
+    <column name="idliteral"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipotramite"/>
+  </set>
+  <set inverse="true" name="tipooperacionrelacions" sort="unsorted">
+   <key>
+    <column name="idliteral" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipooperacionrelacion"/>
+  </set>
+  <set inverse="true" name="centroproduccions" sort="unsorted">
+   <key>
+    <column name="idliteral"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Centroproduccion"/>
+  </set>
+  <set inverse="true" name="tipodefpropiedads" sort="unsorted">
+   <key>
+    <column name="idliteral" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipodefpropiedad"/>
+  </set>
+  <set inverse="true" name="tipooperacionentidads" sort="unsorted">
+   <key>
+    <column name="idliteral" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipooperacionentidad"/>
+  </set>
+  <set inverse="true" name="tipoambitos" sort="unsorted">
+   <key>
+    <column name="idliteral"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipoambito"/>
+  </set>
+  <set inverse="true" name="defrelacions" sort="unsorted">
+   <key>
+    <column name="idliteral" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Defrelacion"/>
+  </set>
+  <set inverse="true" name="defvectors" sort="unsorted">
+   <key>
+    <column name="idliteral" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Defvector"/>
+  </set>
+  <set inverse="true" name="ambitos" sort="unsorted">
+   <key>
+    <column name="idliteral"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Ambito"/>
+  </set>
+  <set inverse="true" name="grupodocumentos" sort="unsorted">
+   <key>
+    <column name="idliteral"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Grupodocumento"/>
+  </set>
+ </class>
+</hibernate-mapping>

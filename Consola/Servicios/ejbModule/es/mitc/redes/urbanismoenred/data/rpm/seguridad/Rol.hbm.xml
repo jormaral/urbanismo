@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-oct-2009 13:54:46 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class name="es.mitc.redes.urbanismoenred.data.rpm.seguridad.Rol"
+  schema="seguridad" table="rol">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">seguridad.rol_iden_seq</param>
+   </generator>
+  </id>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column name="nombre" not-null="true" unique="true"/>
+  </property>
+  <property generated="never" lazy="false" name="codigo" type="string">
+   <column length="3" name="codigo" not-null="true" unique="true"/>
+  </property>
+  <set inverse="true" name="usuariorols" sort="unsorted">
+   <key>
+    <column name="idrol" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.seguridad.Usuariorol"/>
+  </set>
+ </class>
+ <query name="Rol.findAll">select rol from Rol rol</query>
+</hibernate-mapping>

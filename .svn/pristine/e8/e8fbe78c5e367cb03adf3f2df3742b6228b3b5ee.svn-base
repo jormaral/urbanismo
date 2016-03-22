@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacionrelacion" table="operacionrelacion" schema="planeamiento">
+        <id name="iden" type="int">
+            <column name="iden" />
+            <generator class="sequence" >
+               <param name="sequence">planeamiento.planeamiento_operacionrelacion_iden_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="relacion" class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Relacion" fetch="select">
+            <column name="idrelacion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="operacion" class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operacion" fetch="select">
+            <column name="idoperacion" not-null="true" />
+        </many-to-one>
+        <property name="idtipooperacionrel" type="int">
+            <column name="idtipooperacionrel" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

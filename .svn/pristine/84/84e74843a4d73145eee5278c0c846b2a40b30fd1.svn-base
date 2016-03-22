@@ -1,0 +1,214 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="head">
+
+		<script src="/fipeditor/scripts/ol211/lib/OpenLayers.js"></script> 
+
+
+	</ui:define>
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_consuta_entidades_urbanisticas}"
+				view="/informacionfip/consultafichaurbanistica/FichaCU.xhtml"
+				id="FichaCURutaMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+	</ui:define>
+
+
+	<ui:define name="body">
+
+		<ice:panelGroup>
+
+			<h:form id="idFormFichaCU">
+
+				<ice:panelGroup styleClass="infoseleccion" id="panelInformacion"
+					visible="true"
+					rendered="#{!servicioGestionFichaUrbanistica.fichaGenerada}">
+					<ice:graphicImage styleClass="tooltip_imagen"
+						alt="#{messages.genericos_info}"
+						url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+					<ice:outputLabel value="#{messages.fichacu_info_generar}"
+						styleClass="labelseleccioninfo" />
+
+				</ice:panelGroup>
+
+				<ice:panelGrid id="idPanelGridFicha" columns="2"
+					style="vertical-align: top; padding-top: 30px;"
+					columnClasses="testColFichaCU1,testColFichaCU2">
+
+					<ice:panelGrid id="idPanelGridDatos" columns="3">
+
+						<ice:outputLabel value="#{messages.fichacu_x}" />
+						<ice:inputText value="#{servicioGestionFichaUrbanistica.x}"
+							id="coordX" required="true" />
+						<ice:message id="msgCoordX" for="coordX" />
+
+
+						<ice:outputLabel value="#{messages.fichacu_y}" />
+						<ice:inputText value="#{servicioGestionFichaUrbanistica.y}"
+							id="coordY" required="true" />
+						<ice:message id="msgCoordY" for="coordY" />
+
+						<!-- 
+						<ice:outputLabel value="#{messages.fichacu_srs}" />
+						<ice:selectOneMenu id="srs"
+							value="#{servicioGestionFichaUrbanistica.SRS}">
+							<f:selectItem itemLabel="EPSG:23030" itemValue="EPSG:23030" />
+							<f:selectItem itemLabel="EPSG:23029" itemValue="EPSG:23029" />
+							<f:selectItem itemLabel="EPSG:23028" itemValue="EPSG:23028" />
+							<f:selectItem itemLabel="EPSG:25828" itemValue="EPSG:25828" />
+							<f:selectItem itemLabel="EPSG:25830" itemValue="EPSG:25830" />
+							<f:selectItem itemLabel="EPSG:25831" itemValue="EPSG:25831" />
+							<f:selectItem itemLabel="EPSG:32630" itemValue="EPSG:32630" />
+							<f:selectItem itemLabel="EPSG:32628" itemValue="EPSG:32628" />
+							<f:selectItem itemLabel="EPSG:900913" itemValue="EPSG:900913" />
+						</ice:selectOneMenu>
+						<ice:outputLabel />
+						 -->
+
+
+						<ice:outputLabel />
+						<ice:commandButton styleClass="boton4"
+							value="#{messages.fichacu_generar}"
+							alt="#{messages.fichacu_generar}"
+							title="#{messages.boton_title_fichaCU_generar}"
+							action="#{servicioGestionFichaUrbanistica.generarFichaUrbanistica}" />
+						<ice:outputLabel />
+
+						<ice:outputLabel value="#{messages.fichacu_enlace}: "
+							rendered="#{servicioGestionFichaUrbanistica.fichaGenerada}" />
+						<ice:outputResource id="pdfFicha"
+							rendered="#{servicioGestionFichaUrbanistica.fichaGenerada}"
+							resource="#{servicioGestionFichaUrbanistica.pdfFichaGenerada}"
+							mimeType="application/pdf"
+							fileName="#{servicioGestionFichaUrbanistica.textoFichaPdf()}"
+							styleClass="hiperenlace enlaceAzul" shared="false" />
+						<ice:outputLabel />
+
+					</ice:panelGrid>
+
+					<div style="height: 500px;" id="map"></div>
+
+
+
+				</ice:panelGrid>
+
+
+				<script type="text/javascript">
+
+					/* <![CDATA[ */
+					
+										
+									
+					         		var projection = new OpenLayers.Projection("#{mapa.projectionTramite(variablesSesionUsuario.getIdTramiteEncargadoTrabajo(), variablesSesionUsuario.getIdAmbito() )}")
+
+				
+									var xmin = #{servicioCoordenadasAmbito.obtenerCoordenadasAmbito(variablesSesionUsuario.getIdAmbito()).getCoorxmin()};
+					         		var ymin = #{servicioCoordenadasAmbito.obtenerCoordenadasAmbito(variablesSesionUsuario.getIdAmbito()).getCoorymin()};
+					         		var xmax = #{servicioCoordenadasAmbito.obtenerCoordenadasAmbito(variablesSesionUsuario.getIdAmbito()).getCoorxmax()};
+					         		var ymax = #{servicioCoordenadasAmbito.obtenerCoordenadasAmbito(variablesSesionUsuario.getIdAmbito()).getCoorymax()};
+			
+					         		var map = new OpenLayers.Map('map',{
+							             projection: projection,
+							             displayProjection: new OpenLayers.Projection("#{mapa.projectionTramite(variablesSesionUsuario.getIdTramiteEncargadoTrabajo(), variablesSesionUsuario.getIdAmbito() )}"),
+							             units: "m",
+							             numZoomLevels: 19,
+							             maxResolution: 156543.0339,
+							             maxExtent: new OpenLayers.Bounds(xmin, ymin, xmax, ymax),
+							             allOverlays: false,
+							             theme: null,
+							          
+							         });   
+
+					         		var layer1 = new OpenLayers.Layer.WMS(
+											"PNOA",
+							                 "http://www.idee.es/wms/PNOA/PNOA",
+							                 {layers: 'PNOA'},
+							                 {
+							                    buffer: 0,
+							                    displayOutsideMaxExtent: true,
+							                    isBaseLayer: true,
+							                    displayInLayerSwitcher: false
+							                 });
+						                 
+									var layerInf = new OpenLayers.Layer.WMS(
+													
+										    		 "Ambito",
+										    		 "#{messages.geoserver}",
+										               
+										              {
+										    			   CQL_FILTER:'identidad='+'#{mapa.obtenerAmbitoDeTramite(variablesSesionUsuario.getIdTramiteVigenteTrabajo())}',
+										                   LAYERS: 'topp:entidades_capa_'+'#{mapa.projectionTramite(variablesSesionUsuario.getIdTramiteEncargadoTrabajo(), variablesSesionUsuario.getIdAmbito() )}' ,
+										                   transparent:'true',
+											                  
+										              });
+								
+						               
+					         		map.addLayer(layer1);
+					         		map.addLayer(layerInf);
+					         						         		
+            						map.events.register("click", map, function(event) {
+            			                var lonlat = map.getLonLatFromPixel(event.xy);
+            			                var xField = document.getElementById('idFormFichaCU:coordX');
+					                    var yField = document.getElementById('idFormFichaCU:coordY');
+					                    var srsField = document.getElementById('idFormFichaCU:srs');
+					                    
+					                    xField.value = lonlat.lon;
+					                    yField.value= lonlat.lat;
+					                    srsField.value = projection;
+            			            });
+						
+
+			   				 map.zoomToMaxExtent();	
+					
+
+
+							    /* ]]> */     
+							    
+							    
+							</script>
+
+			</h:form>
+
+
+
+
+		</ice:panelGroup>
+
+
+	</ui:define>
+
+</ui:composition>

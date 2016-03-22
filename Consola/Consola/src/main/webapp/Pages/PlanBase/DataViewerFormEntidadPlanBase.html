@@ -1,0 +1,66 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alvaro.Montero
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<script language="JavaScript">
+function maximaLongitud(texto,maxlong)
+{
+	var tecla, int_value, out_value;
+	
+	if (texto.value.length > maxlong)
+	{
+		/*con estas 3 sentencias se consigue que el texto se reduzca
+		al tamaño maximo permitido, sustituyendo lo que se haya
+		introducido, por los primeros caracteres hasta dicho limite*/
+		in_value = texto.value;
+		out_value = in_value.substring(0,maxlong);
+		texto.value = out_value;
+		alert("La longitud máxima es de " + maxlong + " caractéres");
+		return false;
+	}
+	return true;
+}
+</script>
+
+
+ <div id="panelDeterminacion">
+ 
+ <fieldset>
+    <legend>Entidad</legend>
+    <input type="hidden" id="idEnt" name="idEnt" value=""/>
+    <input type="hidden" id="idTramite" name="idTramite" value=""/>
+    <input type="hidden" id="idEntPadre" name="idEntPadre" value=""/>
+    <br/>
+    
+    <div class="formRow">
+	<div class="formLabel">Nombre:</div>
+	<div class="formField"><input type="text" class="input" id="txtNombre" value="" maxlength="50" style="width: 100%" /></div>
+	<div class="clear"></div>
+	</div>
+	
+	<div class="formRow">
+	<div class="formLabel">Clave:</div>
+	<div class="formField"><input type="text" class="input" id="txtClave" value="" maxlength="50" style="width: 100%"/></div>
+	<div class="clear"></div>
+	</div>
+	
+	<div class="formRow">
+	<div class="formLabel">Código:</div>
+	<div class="formField"><input type="text" class="input" id="txtCodigo" disabled="true" value="" maxlength="50" style="width: 100%"/></div>
+	<div class="clear"></div>
+	</div>
+
+	<div class="formRow">
+	<div class="formLabel">Etiqueta:</div>
+	<div class="formField"><input type="text" class="input" id="txtEtiqueta" value="" maxlength="50" style="width: 100%"/></div>
+	<div class="clear"></div>
+	</div>
+	
+    <br/>
+ </fieldset>
+ 
+ </div>

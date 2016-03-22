@@ -1,0 +1,749 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"   
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+      <ice:panelGroup  id="viewdocumentoHomePanelGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="viewTextdocumentoHomeId" value="Documento"/>
+                  </td>
+              </tr>
+          </table>
+      
+
+
+        <s:decorate id="iden" template="../layout/display.xhtml">
+            <ui:define name="label">Iden</ui:define>
+            #{documentoHome.instance.iden}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="archivo" template="../layout/display.xhtml">
+            <ui:define name="label">Archivo</ui:define>
+            #{documentoHome.instance.archivo}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="comentario" template="../layout/display.xhtml">
+            <ui:define name="label">Comentario</ui:define>
+            #{documentoHome.instance.comentario}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="escala" template="../layout/display.xhtml">
+            <ui:define name="label">Escala</ui:define>
+            #{documentoHome.instance.escala}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="idgrupodocumento" template="../layout/display.xhtml">
+            <ui:define name="label">Idgrupodocumento</ui:define>
+            #{documentoHome.instance.idgrupodocumento}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="idtipodocumento" template="../layout/display.xhtml">
+            <ui:define name="label">Idtipodocumento</ui:define>
+            #{documentoHome.instance.idtipodocumento}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="nombre" template="../layout/display.xhtml">
+            <ui:define name="label">Nombre</ui:define>
+            #{documentoHome.instance.nombre}&#160;
+        </s:decorate>
+
+          <div style="clear:both"/>
+ 
+
+    <div id="viewDocumentoEditsearchButtons" class="actionButtons">      
+
+        <s:button view="/seam/DocumentoEdit.xhtml" 
+                    id="edit" styleClass="iceCmdBtn"
+                 value="Edit"/>
+
+        <s:button view="/seam/#{empty documentoFrom ? 'DocumentoList' : documentoFrom}.xhtml"
+                    id="done" styleClass="iceCmdBtn"
+                 value="Done"/>
+
+    </div>
+  </ice:panelGroup>
+
+
+    <ice:form id="view2documentoHomeFormId">
+       <ice:panelTabSet id="viewdocumentoHomeTabSetId" 
+                styleClass="componentPanelTabSetLayout" 
+		style="margin-bottom:5px;margin-top:10px;">
+
+	<ice:panelTab id="viewdocumentopanelTab" label="Documento">
+   		<div class="association" id="documentoParent">
+        
+       		 <h:outputText value="There is no documento associated with this documento." 
+		                  id="viewdocumentoTextId"
+                   rendered="#{documentoHome.instance.documento == null}"/>
+   
+        	<ice:dataTable  var="documento" 
+                   value="#{documentoHome.instance.documento}" 
+                rendered="#{documentoHome.instance.documento != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+	        columnClasses="allCols"
+                      id="viewdocumentoTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{documento.iden}
+            </ice:column>
+            <ice:column id="viewarchivoId">
+                <f:facet name="header">Archivo</f:facet>
+                #{documento.archivo}
+            </ice:column>
+            <ice:column id="viewcomentarioId">
+                <f:facet name="header">Comentario</f:facet>
+                #{documento.comentario}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Documento iden</f:facet>
+		    	#{documento.documento.iden}
+            </ice:column>
+            <ice:column id="viewescalaId">
+                <f:facet name="header">Escala</f:facet>
+                #{documento.escala}
+            </ice:column>
+            <ice:column id="viewidgrupodocumentoId">
+                <f:facet name="header">Idgrupodocumento</f:facet>
+                #{documento.idgrupodocumento}
+            </ice:column>
+            <ice:column id="viewidtipodocumentoId">
+                <f:facet name="header">Idtipodocumento</f:facet>
+                #{documento.idtipodocumento}
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{documento.nombre}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Tramite iden</f:facet>
+		    	#{documento.tramite.iden}
+            </ice:column>
+            <ice:column id="viewdocumentoColumnId">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewdocumentoLinkId" 
+                     value="View" 
+                      view="/seam/Documento.xhtml">
+                    <f:param name="documentoIden" 
+                           value="#{documento.iden}"/>
+                </s:link>
+            </ice:column>
+       </ice:dataTable>
+       
+    </div>
+    </ice:panelTab>
+
+   <ice:panelTab label="Documentocasos">
+    <div class="association" id="viewdocumentocasosChildrenId">
+        
+        <h:outputText value="There are no documentocasos associated with this documento." 
+	                 id="viewdocumentocasosChildTextId"
+                   rendered="#{empty documentoHome.documentocasos}"/>
+        
+        <ice:dataTable value="#{documentoHome.documentocasos}" 
+                       var="documentocaso" 
+                  rendered="#{not empty documentoHome.documentocasos}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdocumentocasosTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{documentocaso.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdocumentocasoLinkId" 
+                     value="Select" 
+                      view="/seam/Documentocaso.xhtml">
+                    <f:param name="documentocasoIden" 
+                            value="#{documentocaso.iden}"/>
+                    <f:param name="documentocasoFrom" value="Documento"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddocumentocasoButtonId" 
+               value="Add documentocaso"
+                view="/seam/DocumentocasoEdit.xhtml">
+            <f:param name="documentoIden" 
+                    value="#{documentoHome.instance.iden}"/>
+            <f:param name="documentocasoFrom" value="Documento"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Documentocasos_1">
+    <div class="association" id="viewdocumentocasos_1ChildrenId">
+        
+        <h:outputText value="There are no documentocasos_1 associated with this documento." 
+	                 id="viewdocumentocasos_1ChildTextId"
+                   rendered="#{empty documentoHome.documentocasos_1}"/>
+        
+        <ice:dataTable value="#{documentoHome.documentocasos_1}" 
+                       var="documentocaso" 
+                  rendered="#{not empty documentoHome.documentocasos_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdocumentocasos_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{documentocaso.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdocumentocasoLinkId" 
+                     value="Select" 
+                      view="/seam/Documentocaso.xhtml">
+                    <f:param name="documentocasoIden" 
+                            value="#{documentocaso.iden}"/>
+                    <f:param name="documentocasoFrom" value="Documento"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddocumentocasoButtonId" 
+               value="Add documentocaso"
+                view="/seam/DocumentocasoEdit.xhtml">
+            <f:param name="documentoIden" 
+                    value="#{documentoHome.instance.iden}"/>
+            <f:param name="documentocasoFrom" value="Documento"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Documentodeterminacions">
+    <div class="association" id="viewdocumentodeterminacionsChildrenId">
+        
+        <h:outputText value="There are no documentodeterminacions associated with this documento." 
+	                 id="viewdocumentodeterminacionsChildTextId"
+                   rendered="#{empty documentoHome.documentodeterminacions}"/>
+        
+        <ice:dataTable value="#{documentoHome.documentodeterminacions}" 
+                       var="documentodeterminacion" 
+                  rendered="#{not empty documentoHome.documentodeterminacions}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdocumentodeterminacionsTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{documentodeterminacion.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdocumentodeterminacionLinkId" 
+                     value="Select" 
+                      view="/seam/Documentodeterminacion.xhtml">
+                    <f:param name="documentodeterminacionIden" 
+                            value="#{documentodeterminacion.iden}"/>
+                    <f:param name="documentodeterminacionFrom" value="Documento"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddocumentodeterminacionButtonId" 
+               value="Add documentodeterminacion"
+                view="/seam/DocumentodeterminacionEdit.xhtml">
+            <f:param name="documentoIden" 
+                    value="#{documentoHome.instance.iden}"/>
+            <f:param name="documentodeterminacionFrom" value="Documento"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Documentodeterminacions_1">
+    <div class="association" id="viewdocumentodeterminacions_1ChildrenId">
+        
+        <h:outputText value="There are no documentodeterminacions_1 associated with this documento." 
+	                 id="viewdocumentodeterminacions_1ChildTextId"
+                   rendered="#{empty documentoHome.documentodeterminacions_1}"/>
+        
+        <ice:dataTable value="#{documentoHome.documentodeterminacions_1}" 
+                       var="documentodeterminacion" 
+                  rendered="#{not empty documentoHome.documentodeterminacions_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdocumentodeterminacions_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{documentodeterminacion.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdocumentodeterminacionLinkId" 
+                     value="Select" 
+                      view="/seam/Documentodeterminacion.xhtml">
+                    <f:param name="documentodeterminacionIden" 
+                            value="#{documentodeterminacion.iden}"/>
+                    <f:param name="documentodeterminacionFrom" value="Documento"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddocumentodeterminacionButtonId" 
+               value="Add documentodeterminacion"
+                view="/seam/DocumentodeterminacionEdit.xhtml">
+            <f:param name="documentoIden" 
+                    value="#{documentoHome.instance.iden}"/>
+            <f:param name="documentodeterminacionFrom" value="Documento"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Documentoentidads">
+    <div class="association" id="viewdocumentoentidadsChildrenId">
+        
+        <h:outputText value="There are no documentoentidads associated with this documento." 
+	                 id="viewdocumentoentidadsChildTextId"
+                   rendered="#{empty documentoHome.documentoentidads}"/>
+        
+        <ice:dataTable value="#{documentoHome.documentoentidads}" 
+                       var="documentoentidad" 
+                  rendered="#{not empty documentoHome.documentoentidads}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdocumentoentidadsTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{documentoentidad.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdocumentoentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Documentoentidad.xhtml">
+                    <f:param name="documentoentidadIden" 
+                            value="#{documentoentidad.iden}"/>
+                    <f:param name="documentoentidadFrom" value="Documento"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddocumentoentidadButtonId" 
+               value="Add documentoentidad"
+                view="/seam/DocumentoentidadEdit.xhtml">
+            <f:param name="documentoIden" 
+                    value="#{documentoHome.instance.iden}"/>
+            <f:param name="documentoentidadFrom" value="Documento"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Documentoentidads_1">
+    <div class="association" id="viewdocumentoentidads_1ChildrenId">
+        
+        <h:outputText value="There are no documentoentidads_1 associated with this documento." 
+	                 id="viewdocumentoentidads_1ChildTextId"
+                   rendered="#{empty documentoHome.documentoentidads_1}"/>
+        
+        <ice:dataTable value="#{documentoHome.documentoentidads_1}" 
+                       var="documentoentidad" 
+                  rendered="#{not empty documentoHome.documentoentidads_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdocumentoentidads_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{documentoentidad.iden}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdocumentoentidadLinkId" 
+                     value="Select" 
+                      view="/seam/Documentoentidad.xhtml">
+                    <f:param name="documentoentidadIden" 
+                            value="#{documentoentidad.iden}"/>
+                    <f:param name="documentoentidadFrom" value="Documento"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddocumentoentidadButtonId" 
+               value="Add documentoentidad"
+                view="/seam/DocumentoentidadEdit.xhtml">
+            <f:param name="documentoIden" 
+                    value="#{documentoHome.instance.iden}"/>
+            <f:param name="documentoentidadFrom" value="Documento"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Documentos">
+    <div class="association" id="viewdocumentosChildrenId">
+        
+        <h:outputText value="There are no documentos associated with this documento." 
+	                 id="viewdocumentosChildTextId"
+                   rendered="#{empty documentoHome.documentos}"/>
+        
+        <ice:dataTable value="#{documentoHome.documentos}" 
+                       var="documento" 
+                  rendered="#{not empty documentoHome.documentos}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdocumentosTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{documento.iden}"/>
+            </ice:column>
+            <ice:column id="viewarchivoId">
+                <f:facet name="header">Archivo</f:facet>
+                <h:outputText id="viewarchivoTextId" 
+		           value="#{documento.archivo}"/>
+            </ice:column>
+            <ice:column id="viewcomentarioId">
+                <f:facet name="header">Comentario</f:facet>
+                <h:outputText id="viewcomentarioTextId" 
+		           value="#{documento.comentario}"/>
+            </ice:column>
+            <ice:column id="viewescalaId">
+                <f:facet name="header">Escala</f:facet>
+                <h:outputText id="viewescalaTextId" 
+		           value="#{documento.escala}"/>
+            </ice:column>
+            <ice:column id="viewidgrupodocumentoId">
+                <f:facet name="header">Idgrupodocumento</f:facet>
+                <h:outputText id="viewidgrupodocumentoTextId" 
+		           value="#{documento.idgrupodocumento}"/>
+            </ice:column>
+            <ice:column id="viewidtipodocumentoId">
+                <f:facet name="header">Idtipodocumento</f:facet>
+                <h:outputText id="viewidtipodocumentoTextId" 
+		           value="#{documento.idtipodocumento}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{documento.nombre}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdocumentoLinkId" 
+                     value="Select" 
+                      view="/seam/Documento.xhtml">
+                    <f:param name="documentoIden" 
+                            value="#{documento.iden}"/>
+                    <f:param name="documentoFrom" value="Documento"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddocumentoButtonId" 
+               value="Add documento"
+                view="/seam/DocumentoEdit.xhtml">
+            <f:param name="documentoIden" 
+                    value="#{documentoHome.instance.iden}"/>
+            <f:param name="documentoFrom" value="Documento"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Documentos_1">
+    <div class="association" id="viewdocumentos_1ChildrenId">
+        
+        <h:outputText value="There are no documentos_1 associated with this documento." 
+	                 id="viewdocumentos_1ChildTextId"
+                   rendered="#{empty documentoHome.documentos_1}"/>
+        
+        <ice:dataTable value="#{documentoHome.documentos_1}" 
+                       var="documento" 
+                  rendered="#{not empty documentoHome.documentos_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdocumentos_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{documento.iden}"/>
+            </ice:column>
+            <ice:column id="viewarchivoId">
+                <f:facet name="header">Archivo</f:facet>
+                <h:outputText id="viewarchivoTextId" 
+		           value="#{documento.archivo}"/>
+            </ice:column>
+            <ice:column id="viewcomentarioId">
+                <f:facet name="header">Comentario</f:facet>
+                <h:outputText id="viewcomentarioTextId" 
+		           value="#{documento.comentario}"/>
+            </ice:column>
+            <ice:column id="viewescalaId">
+                <f:facet name="header">Escala</f:facet>
+                <h:outputText id="viewescalaTextId" 
+		           value="#{documento.escala}"/>
+            </ice:column>
+            <ice:column id="viewidgrupodocumentoId">
+                <f:facet name="header">Idgrupodocumento</f:facet>
+                <h:outputText id="viewidgrupodocumentoTextId" 
+		           value="#{documento.idgrupodocumento}"/>
+            </ice:column>
+            <ice:column id="viewidtipodocumentoId">
+                <f:facet name="header">Idtipodocumento</f:facet>
+                <h:outputText id="viewidtipodocumentoTextId" 
+		           value="#{documento.idtipodocumento}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{documento.nombre}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdocumentoLinkId" 
+                     value="Select" 
+                      view="/seam/Documento.xhtml">
+                    <f:param name="documentoIden" 
+                            value="#{documento.iden}"/>
+                    <f:param name="documentoFrom" value="Documento"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddocumentoButtonId" 
+               value="Add documento"
+                view="/seam/DocumentoEdit.xhtml">
+            <f:param name="documentoIden" 
+                    value="#{documentoHome.instance.iden}"/>
+            <f:param name="documentoFrom" value="Documento"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Documentoshps">
+    <div class="association" id="viewdocumentoshpsChildrenId">
+        
+        <h:outputText value="There are no documentoshps associated with this documento." 
+	                 id="viewdocumentoshpsChildTextId"
+                   rendered="#{empty documentoHome.documentoshps}"/>
+        
+        <ice:dataTable value="#{documentoHome.documentoshps}" 
+                       var="documentoshp" 
+                  rendered="#{not empty documentoHome.documentoshps}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdocumentoshpsTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{documentoshp.iden}"/>
+            </ice:column>
+            <ice:column id="viewgeomId">
+                <f:facet name="header">Geom</f:facet>
+                <h:outputText id="viewgeomTextId" 
+		           value="#{documentoshp.geom}"/>
+            </ice:column>
+            <ice:column id="viewhojaId">
+                <f:facet name="header">Hoja</f:facet>
+                <h:outputText id="viewhojaTextId" 
+		           value="#{documentoshp.hoja}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdocumentoshpLinkId" 
+                     value="Select" 
+                      view="/seam/Documentoshp.xhtml">
+                    <f:param name="documentoshpIden" 
+                            value="#{documentoshp.iden}"/>
+                    <f:param name="documentoshpFrom" value="Documento"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddocumentoshpButtonId" 
+               value="Add documentoshp"
+                view="/seam/DocumentoshpEdit.xhtml">
+            <f:param name="documentoIden" 
+                    value="#{documentoHome.instance.iden}"/>
+            <f:param name="documentoshpFrom" value="Documento"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Documentoshps_1">
+    <div class="association" id="viewdocumentoshps_1ChildrenId">
+        
+        <h:outputText value="There are no documentoshps_1 associated with this documento." 
+	                 id="viewdocumentoshps_1ChildTextId"
+                   rendered="#{empty documentoHome.documentoshps_1}"/>
+        
+        <ice:dataTable value="#{documentoHome.documentoshps_1}" 
+                       var="documentoshp" 
+                  rendered="#{not empty documentoHome.documentoshps_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewdocumentoshps_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{documentoshp.iden}"/>
+            </ice:column>
+            <ice:column id="viewgeomId">
+                <f:facet name="header">Geom</f:facet>
+                <h:outputText id="viewgeomTextId" 
+		           value="#{documentoshp.geom}"/>
+            </ice:column>
+            <ice:column id="viewhojaId">
+                <f:facet name="header">Hoja</f:facet>
+                <h:outputText id="viewhojaTextId" 
+		           value="#{documentoshp.hoja}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectdocumentoshpLinkId" 
+                     value="Select" 
+                      view="/seam/Documentoshp.xhtml">
+                    <f:param name="documentoshpIden" 
+                            value="#{documentoshp.iden}"/>
+                    <f:param name="documentoshpFrom" value="Documento"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAdddocumentoshpButtonId" 
+               value="Add documentoshp"
+                view="/seam/DocumentoshpEdit.xhtml">
+            <f:param name="documentoIden" 
+                    value="#{documentoHome.instance.iden}"/>
+            <f:param name="documentoshpFrom" value="Documento"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+	<ice:panelTab id="viewtramitepanelTab" label="Tramite">
+   		<div class="association" id="tramiteParent">
+        
+       		 <h:outputText value="There is no tramite associated with this documento." 
+		                  id="viewtramiteTextId"
+                   rendered="#{documentoHome.instance.tramite == null}"/>
+   
+        	<ice:dataTable  var="tramite" 
+                   value="#{documentoHome.instance.tramite}" 
+                rendered="#{documentoHome.instance.tramite != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+	        columnClasses="allCols"
+                      id="viewtramiteTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{tramite.iden}
+            </ice:column>
+            <ice:column id="viewcodigofipId">
+                <f:facet name="header">Codigofip</f:facet>
+                #{tramite.codigofip}
+            </ice:column>
+            <ice:column id="viewcomentarioId">
+                <f:facet name="header">Comentario</f:facet>
+                #{tramite.comentario}
+            </ice:column>
+            <ice:column id="viewfechaId">
+                <f:facet name="header">Fecha</f:facet>
+                #{tramite.fecha}
+            </ice:column>
+            <ice:column id="viewfechaconsolidacionId">
+                <f:facet name="header">Fechaconsolidacion</f:facet>
+                #{tramite.fechaconsolidacion}
+            </ice:column>
+            <ice:column id="viewidcentroproduccionId">
+                <f:facet name="header">Idcentroproduccion</f:facet>
+                #{tramite.idcentroproduccion}
+            </ice:column>
+            <ice:column id="viewidorganoId">
+                <f:facet name="header">Idorgano</f:facet>
+                #{tramite.idorgano}
+            </ice:column>
+            <ice:column id="viewidsentidoId">
+                <f:facet name="header">Idsentido</f:facet>
+                #{tramite.idsentido}
+            </ice:column>
+            <ice:column id="viewidtipotramiteId">
+                <f:facet name="header">Idtipotramite</f:facet>
+                #{tramite.idtipotramite}
+            </ice:column>
+            <ice:column id="viewiteracionId">
+                <f:facet name="header">Iteracion</f:facet>
+                #{tramite.iteracion}
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{tramite.nombre}
+            </ice:column>
+            <ice:column id="viewnumeroacuerdoId">
+                <f:facet name="header">Numeroacuerdo</f:facet>
+                #{tramite.numeroacuerdo}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Plan iden</f:facet>
+		    	#{tramite.plan.iden}
+            </ice:column>
+            <ice:column id="viewtextoId">
+                <f:facet name="header">Texto</f:facet>
+                #{tramite.texto}
+            </ice:column>
+            <ice:column id="viewtramiteColumnId">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewtramiteLinkId" 
+                     value="View" 
+                      view="/seam/Tramite.xhtml">
+                    <f:param name="tramiteIden" 
+                           value="#{tramite.iden}"/>
+                </s:link>
+            </ice:column>
+       </ice:dataTable>
+       
+    </div>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+

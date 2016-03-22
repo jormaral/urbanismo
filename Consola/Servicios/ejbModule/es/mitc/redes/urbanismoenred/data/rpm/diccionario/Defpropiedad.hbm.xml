@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jul-2009 12:36:17 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Defpropiedad" table="defpropiedad" schema="diccionario">
+        <id name="iden" type="int">
+            <column name="iden" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tipodefpropiedad" class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipodefpropiedad" fetch="select">
+            <column name="idtipodefpropiedad" not-null="true" />
+        </many-to-one>
+        <many-to-one name="literal" class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Literal" fetch="select">
+            <column name="idliteral" not-null="true" />
+        </many-to-one>
+        <many-to-one name="defrelacion" class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Defrelacion" fetch="select">
+            <column name="iddefrelacion" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

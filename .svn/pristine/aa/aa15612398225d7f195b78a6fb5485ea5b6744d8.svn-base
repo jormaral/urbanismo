@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-abr-2012 12:30:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+ <class name="es.mitc.redes.urbanismoenred.data.rpm.refundido.Documento"
+  schema="refundido" table="documento">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">refundido.refundido_documento_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Tramite"
+   fetch="select" name="tramite">
+   <column name="idtramite" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Documento"
+   fetch="select" name="documento">
+   <column name="iddocumentooriginal"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column name="nombre" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="archivo" type="string">
+   <column name="archivo" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="comentario" type="string">
+   <column name="comentario"/>
+  </property>
+  <property generated="never" lazy="false" name="escala" type="java.lang.Integer">
+   <column name="escala"/>
+  </property>
+  <property generated="never" lazy="false" name="idtipodocumento" type="java.lang.Integer">
+   <column name="idtipodocumento"/>
+  </property>
+  <property generated="never" lazy="false" name="idgrupodocumento" type="java.lang.Integer">
+   <column name="idgrupodocumento"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true"
+   name="documentoentidads" sort="unsorted" table="documentoentidad">
+   <key>
+    <column name="iddocumento" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Documentoentidad"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true" name="documentocasos"
+   sort="unsorted" table="documentocaso">
+   <key>
+    <column name="iddocumento" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Documentocaso"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="documentodeterminacions" sort="unsorted" table="documentodeterminacion">
+   <key>
+    <column name="iddocumento" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Documentodeterminacion"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true" name="documentos"
+   sort="unsorted" table="documento">
+   <key>
+    <column name="iddocumentooriginal"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Documento"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true" name="documentoshps"
+   sort="unsorted" table="documentoshp">
+   <key>
+    <column name="iddocumento"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Documentoshp"/>
+  </set>
+ </class>
+ <query name="refundido.Documento.obtenerNoTramite">SELECT d FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Documento d WHERE
+	d.tramite.iden = :idTramite AND (d.documentocasos IS NOT EMPTY OR d.documentodeterminacions IS NOT EMPTY OR d.documentoentidads IS NOT EMPTY)</query>
+</hibernate-mapping>

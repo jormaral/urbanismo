@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documento"
+  schema="planeamiento" table="documento">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">planeamiento.planeamiento_documento_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite"
+   fetch="select" name="tramite">
+   <column name="idtramite" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documento"
+   fetch="select" name="documento">
+   <column name="iddocumentooriginal"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column name="nombre" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="archivo" type="string">
+   <column name="archivo" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="comentario" type="string">
+   <column name="comentario"/>
+  </property>
+  <property generated="never" lazy="false" name="escala" type="java.lang.Integer">
+   <column name="escala"/>
+  </property>
+  <property generated="never" lazy="false" name="idtipodocumento" type="java.lang.Integer">
+   <column name="idtipodocumento"/>
+  </property>
+  <property generated="never" lazy="false" name="idgrupodocumento" type="java.lang.Integer">
+   <column name="idgrupodocumento"/>
+  </property>
+  <set inverse="true" name="documentoentidads" sort="unsorted">
+   <key>
+    <column name="iddocumento" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documentoentidad"/>
+  </set>
+  <set inverse="true" name="documentocasos" sort="unsorted">
+   <key>
+    <column name="iddocumento" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documentocaso"/>
+  </set>
+  <set inverse="true" name="documentodeterminacions" sort="unsorted">
+   <key>
+    <column name="iddocumento" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documentodeterminacion"/>
+  </set>
+  <set inverse="true" name="documentos" sort="unsorted">
+   <key>
+    <column name="iddocumentooriginal"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documento"/>
+  </set>
+  <set inverse="true" name="documentoshps" sort="unsorted">
+   <key>
+    <column name="iddocumento"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documentoshp"/>
+  </set>
+ </class>
+ <query name="Documento.buscarPorCodigoTramite">SELECT d FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documento d WHERE d.tramite.codigofip = :codigoTramite</query>
+ <query name="Documento.buscarPorTramite">SELECT DISTINCT d FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documento d 
+	WHERE d.tramite.iden = :idTramite
+		AND d.documentocasos IS EMPTY
+		AND d.documentoentidads  IS EMPTY
+		AND d.documentodeterminacions  IS EMPTY</query>
+ <query name="Documento.buscarPorTramiteDEC">SELECT DISTINCT d FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documento d 
+	WHERE d.tramite.iden = :idTramite
+		AND (d.documentocasos IS NOT EMPTY
+		OR d.documentoentidads  IS NOT EMPTY
+		OR d.documentodeterminacions  IS NOT EMPTY)</query>
+ <sql-query name="Documento.obtenerParaRefundido">Select Cast(d.nombre As Text) As C1, Cast(d.archivo As Text) As C2,  
+                    Cast(d.comentario As Text) As C3, 
+                    d.escala As C4, d.iddocumentooriginal As C5, 
+                    d.idtipodocumento As C6, d.idgrupodocumento As C7,  
+                    AsText(dshp.geom) As C8, Cast(dshp.hoja As Text) As C9, 
+                    d.iden As C10 
+                    From planeamiento.Documento d  
+                    Left Join planeamiento.documentoshp dshp On (d.iden=dshp.iddocumento) 
+                    Where d.idtramite= :idTramite 
+                    And d.iden Not In(Select iddocumento From planeamiento.DocumentoDeterminacion 
+                    Union 
+                    Select iddocumento From planeamiento.DocumentoEntidad 
+                    Union 
+                    Select iddocumento From planeamiento.DocumentoDeterminacion)</sql-query>
+</hibernate-mapping>

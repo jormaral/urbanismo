@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-abr-2012 12:30:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+ <class name="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad"
+  schema="refundido" table="entidad">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">refundido.refundido_entidad_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Tramite"
+   fetch="select" name="tramite">
+   <column name="idtramite" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad"
+   fetch="select" name="entidadByIdentidadoriginal">
+   <column name="identidadoriginal"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad"
+   fetch="select" name="entidadByIdentidadbase">
+   <column name="identidadbase"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad"
+   fetch="select" name="entidadByIdpadre">
+   <column name="idpadre"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column length="100" name="nombre"/>
+  </property>
+  <property generated="never" lazy="false" name="clave" type="string">
+   <column name="clave"/>
+  </property>
+  <property generated="never" lazy="false" name="etiqueta" type="string">
+   <column length="100" name="etiqueta"/>
+  </property>
+  <property generated="never" lazy="false" name="codigo" type="string">
+   <column length="10" name="codigo" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="bsuspendida" type="boolean">
+   <column name="bsuspendida" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="orden" type="int">
+   <column name="orden" not-null="true"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true" name="entidadlins"
+   sort="unsorted" table="entidadlin">
+   <key>
+    <column name="identidad"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidadlin"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true" name="entidadpnts"
+   sort="unsorted" table="entidadpnt">
+   <key>
+    <column name="identidad" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidadpnt"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="entidaddeterminacions" sort="unsorted" table="entidaddeterminacion">
+   <key>
+    <column name="identidad" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacion"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="entidadsForIdpadre" sort="unsorted" table="entidad">
+   <key>
+    <column name="idpadre"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="entidadsForIdentidadbase" sort="unsorted" table="entidad">
+   <key>
+    <column name="identidadbase"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="entidadsForIdentidadoriginal" sort="unsorted" table="entidad">
+   <key>
+    <column name="identidadoriginal"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="documentoentidads" sort="unsorted" table="documentoentidad">
+   <key>
+    <column name="identidad" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Documentoentidad"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="ambitoaplicacionambitos" sort="unsorted" table="ambitoaplicacionambito">
+   <key>
+    <column name="identidad" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Ambitoaplicacionambito"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="operacionentidadsForIdentidad" sort="unsorted" table="operacionentidad">
+   <key>
+    <column name="identidad" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Operacionentidad"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true" name="entidadpols"
+   sort="unsorted" table="entidadpol">
+   <key>
+    <column name="identidad" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidadpol"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="operacionentidadsForIdentidadoperadora" sort="unsorted" table="operacionentidad">
+   <key>
+    <column name="identidadoperadora" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Operacionentidad"/>
+  </set>
+ </class>
+ <query name="refundido.Entidad.buscarPorTramiteYNombre">SELECT e FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad e 
+	WHERE e.tramite.iden = :idTramite AND e.nombre = :nombre</query>
+ <query name="refundido.Entidad.obtenerHijas">SELECT e FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad e
+	WHERE e.entidadByIdpadre.iden = :idPadre
+	ORDER BY e.orden</query>
+ <query name="refundido.Entidad.obtenerOrdenMaximo">SELECT MAX(ent.orden) FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad ent
+	WHERE ent.tramite.iden = :idTramite AND ent.entidadByIdpadre IS NULL</query>
+ <query name="refundido.Entidad.obtenerOrdenMaximoPadre">SELECT MAX(ent.orden) FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad ent
+	WHERE ent.tramite.iden = :idTramite AND ent.entidadByIdpadre.iden = :idPadre</query>
+ <query name="refundido.Entidad.obtenerPorTramite">SELECT e FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad e
+	WHERE e.tramite.iden = :idTramite</query>
+ <query name="refundido.Entidad.obtenerPorValorRefTramite">SELECT ced.entidaddeterminacion.entidad FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Casoentidaddeterminacion ced, 
+                        es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacionregimen edr 
+                        WHERE edr.opciondeterminacion.determinacionByIddeterminacionvalorref.iden= :idValorRef 
+                        AND ced.entidaddeterminacion.entidad.tramite.iden= :idTramite 
+                        AND (edr.casoentidaddeterminacionByIdcaso=ced.iden OR edr.casoentidaddeterminacionByIdcasoaplicacion=ced.iden)</query>
+ <query name="refundido.Entidad.obtenerPorValorRefBaseTramite">SELECT ced.entidaddeterminacion.entidad FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Casoentidaddeterminacion ced, 
+                        es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidaddeterminacionregimen edr 
+                        WHERE edr.opciondeterminacion.determinacionByIddeterminacionvalorref.iden &lt;&gt; :idValorRef
+                        AND edr.opciondeterminacion.determinacionByIddeterminacionvalorref.determinacionByIddeterminacionbase.iden = :idBase
+                        AND ced.entidaddeterminacion.entidad.tramite.iden= :idTramite 
+                        AND (edr.casoentidaddeterminacionByIdcaso=ced.iden OR edr.casoentidaddeterminacionByIdcasoaplicacion=ced.iden)</query>
+ <query name="refundido.Entidad.obtenerRaiz">SELECT e FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Entidad e
+	WHERE e.tramite.iden = :idTramite AND e.entidadByIdpadre IS NULL
+	ORDER BY e.orden</query>
+ <sql-query name="refundido.Entidad.obtenerMaximoCodigo">SELECT Max(SubStr(LPad(Trim(codigo), 10 ,'0'), 2, 9)) FROM refundido.entidad
+	WHERE idtramite= :idTramite</sql-query>
+</hibernate-mapping>

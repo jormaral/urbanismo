@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<StyledLayerDescriptor version="1.0.0"
+	xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd"
+	xmlns:sld="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"
+	xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<sld:NamedLayer>
+		<sld:Name>topp:ambito_##idAmbito##</sld:Name>
+		<sld:UserStyle>
+			<sld:Name>Categorias</sld:Name>
+			<sld:Title>Default polygon style</sld:Title>
+			<sld:Abstract>A sample style that just draws out a solid gray
+				interior with a black 1px outline</sld:Abstract>
+			<sld:FeatureTypeStyle>
+				<sld:Name>name</sld:Name>
+				<sld:FeatureTypeName>Feature</sld:FeatureTypeName>
+				<sld:SemanticTypeIdentifier>SemanticType[ANY]
+				</sld:SemanticTypeIdentifier>
+				<sld:Rule>
+					<sld:Name>default</sld:Name>
+					<sld:Title>Suelo Urbano Consolidado</sld:Title>
+					<ogc:Filter>
+						<ogc:And>
+							<ogc:PropertyIsLike wildCard="*" singleChar="?"
+								escape="\">
+								<ogc:PropertyName>grupo</ogc:PropertyName>
+								<ogc:Literal>Categor?as</ogc:Literal>
+							</ogc:PropertyIsLike>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+								<ogc:Literal>SUC</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>idtramite</ogc:PropertyName>
+								<ogc:Literal>##idTramite##</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+						</ogc:And>
+					</ogc:Filter>
+					<sld:PolygonSymbolizer>
+						<sld:Fill>
+							<sld:CssParameter name="fill">
+								<ogc:Literal>#FF0000</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="fill-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Fill>
+						<sld:Stroke>
+							<sld:CssParameter name="stroke">
+								<ogc:Literal>#000000</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linecap">
+								<ogc:Literal>butt</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linejoin">
+								<ogc:Literal>miter</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-width">
+								<ogc:Literal>0.1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-dashoffset">
+								<ogc:Literal>0</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Stroke>
+					</sld:PolygonSymbolizer>
+				</sld:Rule>
+				<sld:Rule>
+					<sld:Name>default</sld:Name>
+					<sld:Title>Suelo Urbano No Consolidado</sld:Title>
+					<ogc:Filter>
+						<ogc:And>
+							<ogc:PropertyIsLike wildCard="*" singleChar="?"
+								escape="\">
+								<ogc:PropertyName>grupo</ogc:PropertyName>
+								<ogc:Literal>Categor?as</ogc:Literal>
+							</ogc:PropertyIsLike>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+								<ogc:Literal>SUNC</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>idtramite</ogc:PropertyName>
+								<ogc:Literal>##idTramite##</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+						</ogc:And>
+					</ogc:Filter>
+					<sld:PolygonSymbolizer>
+						<sld:Fill>
+							<sld:CssParameter name="fill">
+								<ogc:Literal>#CC0000</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="fill-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Fill>
+						<sld:Stroke>
+							<sld:CssParameter name="stroke">
+								<ogc:Literal>#000000</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linecap">
+								<ogc:Literal>butt</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linejoin">
+								<ogc:Literal>miter</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-width">
+								<ogc:Literal>0.1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-dashoffset">
+								<ogc:Literal>0</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Stroke>
+					</sld:PolygonSymbolizer>
+				</sld:Rule>
+				<sld:Rule>
+					<sld:Name>default</sld:Name>
+					<sld:Title>Suelo Urbano Incorporado</sld:Title>
+					<ogc:Filter>
+						<ogc:And>
+							<ogc:PropertyIsLike wildCard="*" singleChar="?"
+								escape="\">
+								<ogc:PropertyName>grupo</ogc:PropertyName>
+								<ogc:Literal>Categor?as</ogc:Literal>
+							</ogc:PropertyIsLike>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+								<ogc:Literal>SUI</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>idtramite</ogc:PropertyName>
+								<ogc:Literal>##idTramite##</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+						</ogc:And>
+					</ogc:Filter>
+					<sld:PolygonSymbolizer>
+						<sld:Fill>
+							<sld:CssParameter name="fill">
+								<ogc:Literal>#960000</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="fill-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Fill>
+						<sld:Stroke>
+							<sld:CssParameter name="stroke">
+								<ogc:Literal>#000000</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linecap">
+								<ogc:Literal>butt</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linejoin">
+								<ogc:Literal>miter</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-width">
+								<ogc:Literal>0.1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-dashoffset">
+								<ogc:Literal>0</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Stroke>
+					</sld:PolygonSymbolizer>
+				</sld:Rule>
+				<sld:Rule>
+					<sld:Name>default</sld:Name>
+					<sld:Title>Suelo Urbanizable Programado</sld:Title>
+					<ogc:Filter>
+						<ogc:And>
+							<ogc:PropertyIsLike wildCard="*" singleChar="?"
+								escape="\">
+								<ogc:PropertyName>grupo</ogc:PropertyName>
+								<ogc:Literal>Categor?as</ogc:Literal>
+							</ogc:PropertyIsLike>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+								<ogc:Literal>SURP</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>idtramite</ogc:PropertyName>
+								<ogc:Literal>##idTramite##</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+						</ogc:And>
+					</ogc:Filter>
+					<sld:PolygonSymbolizer>
+						<sld:Fill>
+							<sld:CssParameter name="fill">
+								<ogc:Literal>#F79646</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="fill-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Fill>
+						<sld:Stroke>
+							<sld:CssParameter name="stroke">
+								<ogc:Literal>#000000</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linecap">
+								<ogc:Literal>butt</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linejoin">
+								<ogc:Literal>miter</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-width">
+								<ogc:Literal>0.1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-dashoffset">
+								<ogc:Literal>0</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Stroke>
+					</sld:PolygonSymbolizer>
+				</sld:Rule>
+				<sld:Rule>
+					<sld:Name>default</sld:Name>
+					<sld:Title>Suelo Urbanizable No Programado</sld:Title>
+					<ogc:Filter>
+						<ogc:And>
+							<ogc:PropertyIsLike wildCard="*" singleChar="?"
+								escape="\">
+								<ogc:PropertyName>grupo</ogc:PropertyName>
+								<ogc:Literal>Categor?as</ogc:Literal>
+							</ogc:PropertyIsLike>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+								<ogc:Literal>SURNP</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>idtramite</ogc:PropertyName>
+								<ogc:Literal>##idTramite##</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+						</ogc:And>
+					</ogc:Filter>
+					<sld:PolygonSymbolizer>
+						<sld:Fill>
+							<sld:CssParameter name="fill">
+								<ogc:Literal>#B49646</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="fill-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Fill>
+						<sld:Stroke>
+							<sld:CssParameter name="stroke">
+								<ogc:Literal>#000000</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linecap">
+								<ogc:Literal>butt</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linejoin">
+								<ogc:Literal>miter</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-width">
+								<ogc:Literal>0.1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-dashoffset">
+								<ogc:Literal>0</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Stroke>
+					</sld:PolygonSymbolizer>
+				</sld:Rule>
+				<sld:Rule>
+					<sld:Name>default</sld:Name>
+					<sld:Title>Suelo Urbanizable Incorporado</sld:Title>
+					<ogc:Filter>
+						<ogc:And>
+							<ogc:PropertyIsLike wildCard="*" singleChar="?"
+								escape="\">
+								<ogc:PropertyName>grupo</ogc:PropertyName>
+								<ogc:Literal>Categor?as</ogc:Literal>
+							</ogc:PropertyIsLike>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+								<ogc:Literal>SURI</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>idtramite</ogc:PropertyName>
+								<ogc:Literal>##idTramite##</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+						</ogc:And>
+					</ogc:Filter>
+					<sld:PolygonSymbolizer>
+						<sld:Fill>
+							<sld:CssParameter name="fill">
+								<ogc:Literal>#FF6464</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="fill-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Fill>
+						<sld:Stroke>
+							<sld:CssParameter name="stroke">
+								<ogc:Literal>#000000</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linecap">
+								<ogc:Literal>butt</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linejoin">
+								<ogc:Literal>miter</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-width">
+								<ogc:Literal>0.1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-dashoffset">
+								<ogc:Literal>0</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Stroke>
+					</sld:PolygonSymbolizer>
+				</sld:Rule>
+				<sld:Rule>
+					<sld:Name>default</sld:Name>
+					<sld:Title>Suelo No Urbanizable Comun</sld:Title>
+					<ogc:Filter>
+						<ogc:And>
+							<ogc:PropertyIsLike wildCard="*" singleChar="?"
+								escape="\">
+								<ogc:PropertyName>grupo</ogc:PropertyName>
+								<ogc:Literal>Categor?as</ogc:Literal>
+							</ogc:PropertyIsLike>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+								<ogc:Literal>SNUC</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>idtramite</ogc:PropertyName>
+								<ogc:Literal>##idTramite##</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+						</ogc:And>
+					</ogc:Filter>
+					<sld:PolygonSymbolizer>
+						<sld:Fill>
+							<sld:CssParameter name="fill">
+								<ogc:Literal>#00CC00</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="fill-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Fill>
+						<sld:Stroke>
+							<sld:CssParameter name="stroke">
+								<ogc:Literal>#000000</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linecap">
+								<ogc:Literal>butt</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linejoin">
+								<ogc:Literal>miter</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-width">
+								<ogc:Literal>0.1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-dashoffset">
+								<ogc:Literal>0</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Stroke>
+					</sld:PolygonSymbolizer>
+				</sld:Rule>
+				<sld:Rule>
+					<sld:Name>default</sld:Name>
+					<sld:Title>Suelo No Urbanizable Protegido</sld:Title>
+					<ogc:Filter>
+						<ogc:And>
+							<ogc:PropertyIsLike wildCard="*" singleChar="?"
+								escape="\">
+								<ogc:PropertyName>grupo</ogc:PropertyName>
+								<ogc:Literal>Categor?as</ogc:Literal>
+							</ogc:PropertyIsLike>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+								<ogc:Literal>SNUP</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+							<ogc:PropertyIsEqualTo>
+								<ogc:PropertyName>idtramite</ogc:PropertyName>
+								<ogc:Literal>##idTramite##</ogc:Literal>
+							</ogc:PropertyIsEqualTo>
+						</ogc:And>
+					</ogc:Filter>
+					<sld:PolygonSymbolizer>
+						<sld:Fill>
+							<sld:CssParameter name="fill">
+								<ogc:Literal>#339933</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="fill-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Fill>
+						<sld:Stroke>
+							<sld:CssParameter name="stroke">
+								<ogc:Literal>#000000</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linecap">
+								<ogc:Literal>butt</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linejoin">
+								<ogc:Literal>miter</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-width">
+								<ogc:Literal>0.1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-dashoffset">
+								<ogc:Literal>0</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Stroke>
+					</sld:PolygonSymbolizer>
+				</sld:Rule>
+
+				<sld:Rule>
+					<sld:Name>default</sld:Name>
+					<sld:Title>Otras Categorias</sld:Title>
+					<ogc:Filter>
+						<ogc:Or>
+							<ogc:And>
+								<ogc:PropertyIsLike wildCard="*" singleChar="?"
+									escape="\">
+									<ogc:PropertyName>grupo</ogc:PropertyName>
+									<ogc:Literal>Categor?as</ogc:Literal>
+								</ogc:PropertyIsLike>
+								<ogc:PropertyIsEqualTo>
+									<ogc:PropertyName>idtramite</ogc:PropertyName>
+									<ogc:Literal>##idTramite##</ogc:Literal>
+								</ogc:PropertyIsEqualTo>
+								<ogc:PropertyIsNull>
+									<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+								</ogc:PropertyIsNull>
+							</ogc:And>
+							<ogc:And>
+								<ogc:PropertyIsLike wildCard="*" singleChar="?"
+									escape="\">
+									<ogc:PropertyName>grupo</ogc:PropertyName>
+									<ogc:Literal>Categor?as</ogc:Literal>
+								</ogc:PropertyIsLike>
+								<ogc:PropertyIsEqualTo>
+									<ogc:PropertyName>idtramite</ogc:PropertyName>
+									<ogc:Literal>##idTramite##</ogc:Literal>
+								</ogc:PropertyIsEqualTo>
+								<ogc:PropertyIsNotEqualTo>
+									<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+									<ogc:Literal>SUC</ogc:Literal>
+								</ogc:PropertyIsNotEqualTo>
+								<ogc:PropertyIsNotEqualTo>
+									<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+									<ogc:Literal>SUNC</ogc:Literal>
+								</ogc:PropertyIsNotEqualTo>
+								<ogc:PropertyIsNotEqualTo>
+									<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+									<ogc:Literal>SUI</ogc:Literal>
+								</ogc:PropertyIsNotEqualTo>
+								<ogc:PropertyIsNotEqualTo>
+									<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+									<ogc:Literal>SURP</ogc:Literal>
+								</ogc:PropertyIsNotEqualTo>
+								<ogc:PropertyIsNotEqualTo>
+									<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+									<ogc:Literal>SURNP</ogc:Literal>
+								</ogc:PropertyIsNotEqualTo>
+								<ogc:PropertyIsNotEqualTo>
+									<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+									<ogc:Literal>SURI</ogc:Literal>
+								</ogc:PropertyIsNotEqualTo>
+								<ogc:PropertyIsNotEqualTo>
+									<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+									<ogc:Literal>SNUC</ogc:Literal>
+								</ogc:PropertyIsNotEqualTo>
+								<ogc:PropertyIsNotEqualTo>
+									<ogc:PropertyName>claveentidadbase</ogc:PropertyName>
+									<ogc:Literal>SNUP</ogc:Literal>
+								</ogc:PropertyIsNotEqualTo>
+
+							</ogc:And>
+						</ogc:Or>
+					</ogc:Filter>
+					<sld:PolygonSymbolizer>
+						<sld:Fill>
+							<sld:CssParameter name="fill">
+								<ogc:Literal>#AAAAAA</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="fill-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Fill>
+						<sld:Stroke>
+							<sld:CssParameter name="stroke">
+								<ogc:Literal>#000000</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linecap">
+								<ogc:Literal>butt</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-linejoin">
+								<ogc:Literal>miter</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-opacity">
+								<ogc:Literal>1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-width">
+								<ogc:Literal>0.1</ogc:Literal>
+							</sld:CssParameter>
+							<sld:CssParameter name="stroke-dashoffset">
+								<ogc:Literal>0</ogc:Literal>
+							</sld:CssParameter>
+						</sld:Stroke>
+					</sld:PolygonSymbolizer>
+					<sld:TextSymbolizer>
+						<sld:Label>
+							<ogc:PropertyName>entidad</ogc:PropertyName>
+						</sld:Label>
+					</sld:TextSymbolizer>
+				</sld:Rule>
+
+			</sld:FeatureTypeStyle>
+		</sld:UserStyle>
+	</sld:NamedLayer>
+</StyledLayerDescriptor>

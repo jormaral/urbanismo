@@ -1,0 +1,286 @@
+/* 
+    Document   : Cabecera
+    Created on : 25-nov-2009, 11:42:06
+    Author     : jorge.bodas
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.bpContenedor
+{
+    position:absolute;
+    left:0%;
+    top:84px;
+    height:40px;
+    width:304px;
+    margin-left:2%;
+    z-index:5000;
+}
+
+        #bpContenedor_zonaIzquierda
+        {
+            position:absolute;
+            left:0px;
+            top:0px;
+            height:40px;
+            width:10px;
+            background-image:url(images/BotoneraTransparente.png);
+
+        }
+        #bpContenedor_zonaCentral
+        {
+            position:absolute;
+            left:3%;
+            top:0px;
+            height:40px;
+            width:280px;
+            background-image:url(images/BotoneraTransparente_center.png);
+            background-repeat:repeat-x;
+
+        }
+            
+            .bpOpcion {
+                    background-color:transparent;
+                    cursor:pointer;
+                    float:right;
+                    height:30px;
+                    right:7px;
+                    line-height:19px;
+                    margin-left:3px;
+                    overflow:hidden;
+                    position:relative;
+                    text-align:center;
+                    top:2px;
+                    width:30px;
+                    background-image:url(images/BotoneraPrincipal.png);
+
+            }
+            /*.bpOpcion:hover {
+                    background-color:#004A85;
+                    cursor:pointer;
+                    float:right;
+                    height:30px;
+                    right:0px;
+                    line-height:19px;
+                    margin-left:1px;
+                    overflow:hidden;
+                    position:relative;
+                    text-align:center;
+                    top:2px;
+                    width:30px;
+                    border-bottom:4px solid #004A85;
+
+            }*/
+            .olControlNavigationHistory {
+                background: transparent;
+                width: 30px;
+                height: 30px;
+                }
+        #bpContenedor_zonaDerecha
+        {
+            position:absolute;
+            right:0px;
+            top:0px;
+            height:40px;
+            width:15px;
+            background-image:url(images/BotoneraTransparente.png);
+            background-position:top right;
+
+        }
+
+
+.bpPanelInformativo
+{
+     background-color:#eeeeee;
+     border-radius:7px 7px 7px 7px;
+     z-index:9999;
+     overflow:visible;
+}
+
+    .tipoConsultaON
+    {
+        background-image:url(images/checkBox.png);
+        background-position:10px top;
+        background-repeat:no-repeat;
+        cursor:pointer
+    }
+    .tipoConsultaOFF
+    {
+        background-image:url(images/checkBox.png);
+        background-position:10px bottom;
+        background-repeat:no-repeat;
+        cursor:pointer
+    }
+            .tipoConsultaOFF:hover
+            {
+                background-image:url(images/checkBox.png);
+                background-position:10px center;
+                background-repeat:no-repeat;
+                cursor:pointer
+            }
+
+.bpPanelInformativoAux
+{
+     background-color:#eeeeee;
+     border-radius:7px 7px 7px 7px;
+}
+    #contentInfo
+    {
+        text-align:center;
+    }
+        .lineaConsulta
+        {
+           position:relative;
+           float:left;
+           left:0px;
+           top:0px;
+           height:20px;
+           width:100%;
+           line-height:18px;
+           background-color:#ffffff;
+           background-image: url(images/ajax-loader.gif);
+           background-repeat: no-repeat;
+           background-position: 10px center;
+           color:#333333;
+           margin-bottom:2px;
+           cursor:pointer;
+           padding-left:30px;
+           text-align: left;
+
+        }
+                .lineaConsulta:hover
+                {
+                   position:relative;
+                   float:left;
+                   left:0px;
+                   top:0px;
+                   height:20px;
+                   width:100%;
+                   line-height:18px;
+                   background-color:#004A85;
+                   background-image: url(images/ajax-loader.gif);
+                   background-repeat: no-repeat;
+                   background-position: 10px center;
+                   color:#ffffff;
+                   margin-bottom:2px;
+                    cursor:pointer;
+                   padding-left:30px;
+                   text-align: left;
+
+                }
+
+        .btnPaint
+        {
+            position:relative;
+            float:left;
+            left:0px;
+            top:-3px;
+            height:26px;
+            width:30px;
+            background-image: url(images/BotoneraDibujo.png);
+            margin-right: 1px;
+            cursor:pointer;
+
+        }
+
+
+.btnMenuPaint_EDIT {
+    height: 26px;
+    left: 0;
+    position: absolute;
+    top: 1px;
+    width: 50%;
+    text-align: center;
+    line-height: 24px;
+    cursor:pointer;
+}
+.btnMenuPaint_PERS
+{
+    height: 26px;
+    right: 0px;
+    position: absolute;
+    top: 1px;
+    width: 50%;
+    text-align: center;
+    line-height: 24px;
+    cursor:pointer;
+}
+
+    #botoneraHerramientasDibujo
+    {
+        position:absolute;
+        left:0px;
+        top:0px;
+        height:97%;
+        width:107px;
+    }
+        .btnHerramientaDibujo
+        {
+            position:relative;
+            float: left;
+            left:0px;
+            top:0px;
+            height:20px;
+            width:100%;
+            margin-bottom: 1px;
+            text-align: center;
+            border-bottom: 1px solid #dddddd;
+            cursor: pointer;
+        }
+                .btnHerramientaDibujo:hover
+                {
+                    position:relative;
+                    float: left;
+                    left:0px;
+                    top:0px;
+                    height:20px;
+                    width:100%;
+                    margin-bottom: 1px;
+                    text-align: center;
+                    border-bottom: 1px solid #dddddd;
+                    background-color: #ffffff;
+                    cursor: pointer;
+
+                }
+    #contenedorHerramientasDibujo
+    {
+        position:absolute;
+        right:0px;
+        top:0px;
+        height:97%;
+        width:189px;
+        overflow-x:hidden;
+        overflow-y:auto;
+    }
+
+    #cmbTipoBorrado {
+            background-color: white;
+            height: 40px;
+            left: 284px;
+            position: absolute;
+            top: 147px;
+            width: 200px;
+            z-index: 9999;
+        }
+        .lineaTipoBorrado{
+            position:relative;
+            float:left;
+            left:0px;
+            top:0px;
+            height:20px;
+            width:200px;
+            cursor:pointer;
+            border-bottom:#aaaaaa;
+            text-align:center;
+        }
+                .lineaTipoBorrado:hover{
+                    position:relative;
+                    float:left;
+                    left:0px;
+                    top:0px;
+                    height:20px;
+                    width:200px;
+                    cursor:pointer;
+                    background-color:#dddddd;
+                    border-bottom:#aaaaaa;
+                    text-align:center;
+                }

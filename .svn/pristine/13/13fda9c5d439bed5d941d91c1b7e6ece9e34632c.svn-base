@@ -1,0 +1,1420 @@
+up=\u2191
+down=\u2193
+left=\u2039
+right=\u203A
+
+
+template_version = 2.0.0 - 090813
+template_nombreaplicacion = Editor FIP
+template_banner_logo = Red.es
+template_banner_editorfip = Editor FIP
+template_banner_idioma_espanol = Español
+template_banner_idioma_ingles = Ingles
+template_banner_idioma_catalan = Catalán
+template_banner_idioma_gallego = Gallego
+template_banner_idioma_euskera = Euskera
+
+#Geoserver
+
+geoserver = http://urbanismoenred.idom.com/geoserver/topp/wms
+url_base= http://localhost:8080
+sld= http://urbanismoenred.idom.com/sld/
+
+# Acerca de
+acercade_texto = El editor FIP es un Sistema de Información que proporciona las herramientas necesarias para la producción, edición y generación de Ficheros de Intercambio de Planeamiento (FIP) para su intercambio con la Consola de Planeamiento que gestiona el Registro de Planeamiento Municipal (RPM).
+acercade_licencia= Licencia con arreglo a la EUPL, Versión 1.1 o -en cuanto sean aprobadas por la Comisión Europea- versiones posteriores de la EUPL 1.1
+acercade_licencia2= Sólo podrá usarse esta obra si se respeta la Licencia. Puede obtenerse una copia de la Licencia en
+acercade_urleulp= http://ec.europa.eu/idabc/eupl5
+
+# Busqueda
+busquedaavanzada_informacion_detalle = Al realizar una búsqueda, si pulsa sobre 'Ver Detalle', se abrirá una nueva pestaña en su navegador con el resultado de la búsqueda. Si quiere realizar una nueva búsqueda, primero tendrá que pulsar sobre el botón "Recargar después 'Ver Detalle'"
+busquedaavanzada_botonrecargar = Recargar después 'Ver Detalle'
+busquedaavanzada_noresultado = No hay resultado de la búsqueda realizada.
+busquedaavanzada_boton_buscarentidades = Búsqueda Avanzada de Entidades
+busquedaavanzada_boton_buscartramites = Búsqueda Avanzada de Trámites
+busquedaavanzada_boton_buscardeterminaciones = Búsqueda Avanzada de Determinaciones
+busquedaavanzada_boton_buscarcu = Búsqueda Avanzada de Condiciones Urbanísticas
+busquedaavanzada_boton_buscarcu2 = Búsqueda Avanzada de Condiciones Urb.
+busquedaavanzada_boton_buscaroperaciones = Búsqueda Avanzada de Operaciones
+busquedaavanzada_boton_buscardocumentos = Búsqueda Avanzada de Documentos
+# Exportar Geometria
+menu_exportargeometria = Exportar Geometría
+exportargeometria_info = Puede exportar la geometría del Plan Encargado o del Plan Vigente. Pulse sobre uno de los botones y posteriormente descargue el archivo generado
+exportargeometria_planencargardo = Exportar Geometría Plan Encargado
+exportargeometria_planvigente = Exportar Geometría Plan Vigente
+exportargeometria_generacion = Exportación de Geometría del Plan
+exportargeometria_planencargado_confirmacion = Se va a exportar toda la geometría para el plan encargado. Este proceso puede durar mucho tiempo.
+exportargeometria_planvigente_confirmacion = Se va a exportar toda la geometr\u00EDa para el plan vigente. Este proceso puede durar mucho tiempo. 
+
+# Advertencia si hay nuevo FIP1
+nuevofip1_titulo = Advertencia antes de guardar un nuevo Planeamiento Sistematizado
+nuevofip1_advertencia = Atención, va a guardar un nuevo Planeamiento Sistematizado. Antes de guardarlo debería asegurarse si existe un nuevo FIP1 para ese ámbito. ¿Desea continuar y guardar el planeamiento sistematizado de todas formas?
+nuevofip1_antescargar = Atención, antes de cargar el FIP1 debería asegurarse que no hay ningún FIP1 más reciente para dicho ámbito
+
+# Mapa
+mapa_advertencia = Si después de pulsar sobre las capas, no ve ninguna geometría, asegúrese que el ámbito tiene la geometría (Administrador->Configuración Visor) y que la capa del ambito_
+mapa_advertencia2 = está dada de alta en el geoserver
+
+# Documento Normas
+menu_documentonormas = Documento de Normas
+menu_creardocumentonormas = Crear Documento de Normas
+menu_listardocumentonormas = Listado Documento de Normas Generados
+docnormas_generacion = Generación de Documento de Normas
+docnorma_planencargado_confirmacion = Se va a generar el documento de normas para el plan encargado. Este proceso puede durar mucho tiempo. Puede consultar el estado en el Listado de Documentos de Normas
+docnorma_planvigente_confirmacion = Se va a generar el documento de normas para el plan vigente. Este proceso puede durar mucho tiempo. Puede consultar el estado en el Listado de Documentos de Normas
+
+# Imprimir Serie de Mapas
+menu_imprimirseriemapa = Imprimir Serie de Mapas
+
+# Importadores
+importar_excel_determinaciones = Antes de importar el Excel de Determinaciones, asegúrese de que no existe ninguna Determinación. En caso de que existan, borrenla previamente a la importación
+
+#Informacion Seleccion
+seleccion_info_general = Debe seleccionar, en el árbol de trámites del panel izquierdo, el trámite del plan encargado con el cual desee trabajar. Al seleccionar el trámite del plan encargado, automáticamente será asignado el plan base y plan vigente asociados a dicho plan encargado.
+tramiteencargado_seleccionado_ok = Se ha seleccionado correctamente el trámite: ({0}) {1}
+tramiteencargado_id = Identificador del Tramite Encargado
+
+prerefundido_seleccionado_ok = Se ha seleccionado correctamente el plan de Pre-refundido: ({0}) {1}
+
+# Exportacion excel
+seleccion_info_exportardeterminacionesexcel = Puede descargar el documento con las determinaciones en formato EXCEL o CSV. Este proceso puede tardar unos minutos dependiendo del plan. Por favor, espere mientras se genera y descarga el excel.
+exportardeterminacionesexcel = Obtener Excel de Determinaciones
+exportardeterminacionescsv = Obtener CSV de Determinaciones
+seleccion_info_exportarentidadesexcel = Puede descargar el documento con las entidades en formato EXCEL o CSV. Este proceso puede tardar unos minutos dependiendo del plan. Por favor, espere mientras se genera y descarga el excel.
+exportarentidadesexcel = Obtener Excel de Entidades
+exportarentidadescsv = Obtener CSV de Entidades
+exportarcondicionesexcel = Obtener Excel de Condiciones Urbanísticas
+exportarcondicionescsv = Obtener CSV de Condiciones Urbanísticas
+
+# validaciones
+validacion_211_nombre = El trámite debe contener, al menos, una determinación
+validacion_212_nombre = El trámite debe contener, al menos, una entida
+validacion_213_nombre = El código del trámite debe estar bien conformado según la codificación establecida en el FIP
+validacion_221_nombre = No puede haber más de un documento del mismo tipo y grupo con el mismo nombre
+validacion_222_nombre = La geometría de los documentos deberá ser siempre tipo poligonal
+validacion_231_nombre = Una entidad no puede tener aplicada una determinación de carácter de usos si no hay una determinación del trámite que tenga carácter de Normas de Usos y que se aplicable a la entidad
+validacion_232_nombre = Una entidad no puede tener aplicada una determinación de carácter de actos si no hay una determinación del trámite que tenga carácter de Normas de Actos y que sea aplicablea la entidad
+validacion_233_nombre = Una entidad con la determinación de carácter GRUPO aplicada y cuyo valor de referencia sea CARPETA no puede efectuar ni sufrir operaciones
+validacion_234_nombre = Las entidades usadas como entidades base deben pertenecer al Plan Base
+validacion_235_nombre = La geometría de las entidades debe ser correcta según el estándar WKT
+validacion_236_nombre = No puede haber una entidad con más de una asignación al mismo documento
+validacion_237_nombre = Todas las entidades deben tener obligatoriamente una única aplicación a una determinación de carácter "GRUPO" y un único caso y valor
+validacion_238_nombre = Ninguna de las geometrías definidas para las entidades de un trámite deben salirse del ámbito de aplicación definido para el Plan
+validacion_239_nombre = Validación topológica
+validacion_241_nombre = Las determinaciones asignadas como unidades deben pertenecer al carácter "UNIDAD"
+validacion_242_nombre = Las determinaciones definidas como unidad deben ser del carácter "UNIDAD"
+validacion_243_nombre = Las determinaciones de carácter "UNIDAD" deben estar definidas como tal(a través de su definición y abreviatura)
+validacion_244_nombre = Las determinaciones que regulan otras deben ser necesariamente de carácter "REGULADORA"
+validacion_245_nombre = Las determinaciones que son de valores de referencia, deben tener carácter de valor de referencia
+validacion_246_nombre = Si la determinación es un Enunciado, Valor de Referencia, Tipo de Adscripción, Unidad, Enunciado Complementario, o Regulación, no tendrán entidad de aplicación
+validacion_247_nombre = Sólo tendrán valor de referencia las determinaciones de carácter Régimen de Usos, Régimen de Actos, Operadoras, Norma General Gráfica, o Norma General Literal
+validacion_248_nombre = Si la determinación es Norma General Literal, Norma General Gráfica, Acto, Uso, Grupo de Actos, Grupo de Usos, Norma de Actos, Norma de Usos, Norma de Adscripciones, Régimen de Actos, Régimen de Usos, tendrá, al menos, un grupo de aplicación
+validacion_249_nombre = Las determinaciones con carácter "REGULACIÓN" siempre han de tener texto
+validacion_2410_nombre = No puede haber una determinación con más de una asignación al mismo documento
+validacion_2411_nombre = No pueden existir dos determinaciones hijas al mismo nivel con el mismo nombre, carácter y unidad
+validacion_251_nombre = Si una entidad tiene aplicada la determinación de carácter "GRUPO" con valor de referencia "CARPETA", no puede recibir más determinaciones
+validacion_252_nombre = Las entidades utilizadas en la definición de las condiciones urbanísticas deben pertenecer al trámite de trabajo
+validacion_253_nombre = Una determinación aplicada a varias entidades, no puede tener un valor literal en unas ocasiones, y un valor de referencia en otras
+validacion_254_nombre = Una entidad no puede tener aplicada dos veces la misma determinación
+validacion_255_nombre = Una determinación no puede estar aplicada a una entidad y no tener asignado, al menos, un caso
+validacion_256_nombre = No puede haber un caso con más de una asignación al mismo documento
+validacion_257_nombre = Un caso debe tener al menos un documento y/o un régimen
+validacion_258_nombre = Una determinación sólo puede estar aplicada a entidades definidas en los grupos de aplicación
+validacion_259_nombre = Si una determinación tiene valores de referencia, sólo podrá estar aplicada con alguno de éstos salvo en el caso de tener determianción de régimen
+validacion_2510_nombre = El caso de aplicación de un régimen debe pertenecer a la misma entidad que el caso de dicho régimen
+validacion_261_nombre = Toda operación de adscripción debe tener Tipo, Cuantía y Unidad
+validacion_262_nombre = Si una operación entre entidades no es de creación de adscripción, no deberá tener propiedades de Adscripción
+validacion_263_nombre = Las operaciones entre determinaciones sólo pueden efectuarse entre caracteres permitidos en el diccionario
+validacion_264_nombre = El orden de cada operación debe ser único dentro del trámite (considerando determinaciones y entidades)
+validacion_271_nombre = Las adscripciones definidas directamente sin operación deben ser entre entidades del mismo plan
+
+# Tooltip
+tooltip_determinacion_masinfo = (Para m\u00E1s informaci\u00F3n consultar la Ayuda) 
+tooltip_determinacion_tipo = Las determinaciones urbanísticas se clasifican en distintos tipos según su naturaleza y función dentro del Plan Digital y su comportamiento en relación con las entidades.
+tooltip_determinacion_base = Determinación del Plan Base asignada de la determinación seleccionada.
+tooltip_determinacion_articulado = Título, Capítulo o Artículo del Plan del que proviene la Determinación. Las Determinaciones no se ordenan por este campo.
+tooltip_determinacion_simbologia = Establece el símbolo de representación de la Determinación, este símbolo se utilizaba cuando existían Determinaciones gráficas. En la actualidad se ha desestimado el uso de las Determinaciones Gráficas.
+tooltip_determinacion_definicion = Texto que explica el significado de la Determinación.
+tooltip_determinacion_padre = Determinación padre de la determinación seleccionada.
+tooltip_determinacion_unidad = Determinación que define la unidad de medida en la que se expresa la Determinación. Es una propiedad obligatoria, deberá incluirse simempre aunque sea NP.
+tooltip_determinacion_reguladoras = Corresponde a Determinaciones que sirven para asociar un mismo texto regulador a varias Determinaciones.
+tooltip_determinacion_grupoaplicacion = Identifica los Grupos de Entidad en los que se aplicará la Determinación. Este campo no tiene uso en los Tipos de Determinación: Regulación (Determinación Reguladora), Unidad, Enunciado, Operación y Grupo de Entidad.
+tooltip_determinacion_grupoentidad = Identifica los Grupos de Entidad en los que se aplicará la Determinación. Este campo no tiene uso en los Tipos de Determinación: Regulación (Determinación Reguladora), Unidad, Enunciado, Operación y Grupo de Entidad.
+tooltip_determinacion_valoresreferencia = Corresponden con las Determinaciones que forman la lista de opciones que puede tomar como valor la Determinación en una Entidad.
+tooltip_determinacion_regulacionesespecificas = Corresponde a un texto estructurado que permite consignar el modo en que la Determinación condiciona el desarrollo urbanístico de todas las Entidades en las que se aplique. Se compone mediante dos tipos de información: Texto estructurado y Vínculos a otras Determianciones.
+
+tooltip_entidad_clave = Corresponde a un código nemotécnico abreviado que identifica obligatoriamente a la Entidad. Será clave única para todas las Entidades contenidad en un Grupo de Entidades.
+tooltip_entidad_etiqueta = Establece el símbolo de representación de la Entidad, es el que aparecerá al representar gráficamente la Entidad en una consulta temática en el Visor de Planeamiento. Es obligatorio incluir este campo siempre que exista en los planes del Plan a sistematizar o se identifiquen con él Entidades de Gestión o Catálogo en sus fichas.
+tooltip_entidad_base = Entidad del Plan Base asignada a la entidad seleccionada.
+tooltip_entidad_padre = Entidad Padre de la Entidad seleccionada.
+tooltip_entidad_geometria = Define la representación gráfica de la Entidad. Podrá ser un Recinto, una Línea o un Punto.
+tooltip_entidad_cu = Una condición urbanística representa la aplicación de un valor a una determinación sobre una entidad. El contenido de éstas dependerá del tipo de valores que se estén expresando.
+
+tooltip_documento_titulo = Título del documento que se va a crear
+tooltip_documento_archivo = Representa el fichero adjuntado al documento
+tooltip_documento_grupo = Se trata de los diferentes grupos en los que se puede clasificar la documentación del plan en función a la naturaleza de los mismos. La asignación de un documento a un grupo concreto permite clasificar y organizar la documentación del plan
+tooltip_documento_tipo = Se trata de las diferentes tipologías de ficheros digitales en las que puede presentarse la documentación del plan
+tooltip_documento_comentario = Texto descriptivo del documento
+
+tooltip_adscripciones_entidad_origen = Entidad origen de la adscripción
+tooltip_adscripciones_entidad_destino = Entidad destino de la adscripción
+tooltip_adscripciones_unidad = De la cuantía, será cualquiera de las unidades en las que una determinación puede expresarse en el plan.
+tooltip_adscripciones_tipo = Explicación normativa del motivo de la adscripción, se utilizarán determinaciones definidas expresamente para explicar esa causa.
+tooltip_adscripciones_cuantia = Corresponde a un dato numérico que normalmente coincide con una superficie o una cantidad económica, en función de la unidad.
+tooltip_adscripciones_texto = Texto descriptivo asociado a la adscripción
+
+tooltip_operaciones_determinacion_tipo = Operación que se va a aplicar
+tooltip_operaciones_determinacion_operadora = Determinación que ejecuta la operación
+tooltip_operaciones_determinacion_operada = Determinaci\u00F3n sobre la que se aplica la operaci\u00F3n 
+
+tooltip_operaciones_entidad_tipo = Operación que se va a aplicar
+tooltip_operaciones_entidad_operadora = Entidad que ejecuta la operación
+tooltip_operaciones_entidad_operada = Entidad sobre la que se aplica la operación
+
+tooltip_busqueda_fecha_aprobacion = Fecha en la que el trámite fue aprobado
+ 
+
+#tooltip Nuevo Planeamiento Sistematizado
+
+tooltip_sistematizado_codigofip = Identificador único del trámite. Se asignará automáticamente
+tooltip_sistematizado_nombre = Nombre que recibe el trámite del nuevo planeamiento a sistematizar
+tooltip_sistematizado_ambito = Lugar geográfico (localidad) al cual pertenece el planeamiento a sistematizar
+tooltip_sistematizado_planBase = Plan Base que aplica al \u00E1mbito del planeamiento. 
+tooltip_sistematizado_planVigente =	Selecciona si el nuevo planeamiento a sistematizar va a operar contra un plan vigente previo de ese ámbito o sobre un plan vigente vacío.
+tooltip_sistematizado_instrumento = Clase de Plan a sistematizar
+tooltip_sistematizado_tipoTramite = Estado del trámite urbanístico a sistematizar
+tooltip_sistematizado_proyeccion = Uso cartográfico al que pertenece el ámbito y en el cual se representarán los recintos geográficos
+
+# Login
+login_iniciarsesion= Iniciar Sesión
+login_usuario = Usuario
+login_clave = Clave
+login_recordar = Recordarme
+
+fip1sinplanencargado = El FIP1.xml que intenta importar no tiene Planeamiento Encargado. Se creará un Plan Encargado por defecto del mismo ámbito que el Plan Vigente
+fip1conplanencargado = El FIP1.xml que intenta importar tiene Planeamiento Encargado. Se importará dicho Plan Encargado
+planencargado = Plan Encargado
+planbase = Plan Base
+planbaseanterior = Existen en la BD planes del mismo ámbito, por lo que el Plan Base del FIP1.xml no se importará sino que se asociara al Plan Base existente de la BD
+planbaseimportar = No existe en la BD un plan base para el ámbito del FIP1.xml que se intenta importar, se importará en Plan Base del FIP1.xml
+
+botongenerico_importarfip1 = Importar FIP1
+boton_title_importarfip1 = Pulse para importar el FIP1
+panelconfsinplanencargado_confirmacion = Se va a importar del FIP1.xml. Este FIP1.xml no contiene Plan Encargado, pero se creará uno por defecto. Este proceso puede tardar mucho tiempo. Tenga paciencia.
+panelconfconplanencargado_confirmacion = Se va a importar del FIP1.xml. Este proceso puede tardar mucho tiempo. Tenga paciencia.
+
+anadir = Añadir
+anadir_wkt = Añadir WKT
+anadirshp = Añadir Shape
+version = Versión
+login= Login
+logout = Logout
+menu_seleccionplanencargado = Seleccionar Plan Encargado
+menu_administracion = Administración
+menu_configuracion_visor = Configuración Visor
+menu_gestion_capas = Gestión Capas
+menu_geometrias_ambitos = Geometrías Ámbitos
+menu_inicio = Inicio
+gestionusuario = Gestión de Usuario
+administracion_usuario = Administración de Usuarios
+administracion mapa = Administración del Mapa
+configuracion_visor = Configuración Visor
+gestion_capas = Gestión Capas
+geometrias_ambitos = Geometrías Ámbitos
+menu_verlistado_usuario = Lista de Usuarios
+menu_crearnuevo_usuario = Crear Nuevo Usuario
+gestionrol = Gestión de Roles
+menu_verlistado_rol = Listado de Roles
+gestionsistema = Gestión del Sistema
+procesamientofip = Procesamiento FIP
+menu_gestionparametrossistema = Gestión de Parámetros del Sistema
+menu_gestionfaq = Gestión de FAQs
+menu_gestionfip = Gestión FIP
+menu_elementos_validados = Elementos Validados
+menu_proceso_validacion = Proceso de Validación
+obtencionfip1 = Carga de FIP1 en Sistema
+plan_sistematizado = Nuevo Planeamiento Sistematizado
+crear_plan_sistematizado = Crear Nuevo Planeamiento Sistematizado
+fichero_intercambio = Generación Fichero Intercambio FIP2
+menu_obtencionfip1 = Obtención FIP1
+menu_obtenerfip1_web = Obtener FIP1 desde la Web
+menu_obtenerfip1_cargalocal = Obtener FIP1 de Forma Local
+gestionplaneamientoencargado = Gestión de Planeamientos Encargados
+gestionprerefundidos = Gestión de Pre-refundido
+procesoprerefundido = Proceso de Pre-refundido
+nuevo_prerefundido = Crear Pre-refundido
+menu_planprerefundido = Plan Pre-refundido
+menu_planes_prerefundidos = Planes Pre-refundido
+menu_listado_pre = Listado
+menu_consulta_entidades = Consulta de Entidades
+menu_consulta_determinaciones = Consulta de Determinaciones
+menu_consulta_documentos = Consulta de Documentos
+menu_consulta_unidades = Consulta de Unidades
+menu_consulta_adscripciones = Consulta de Adscripciones
+gestionvalidaciones = Gestión de Validaciones
+gestionplanencargado = Gestión del Plan Encargado
+menu_verlistado_planeamientoencargado = Lista de Planeamientos Encargados
+gestionplanes = Gestión de Planes
+menu_verlistado_plan = Lista de Planes
+menu_crearnuevo_plan = Crear Nuevo Plan
+menu_gestiontramites = Gestión de Trámites
+generacionfip2 = Generación de Fichero de Intercambio FIP2
+menu_verlistado_fip2generados = Lista de FIP2 Generados
+menu_generarfip2 = Generar FIP2
+importadores = Importadores
+geometriasentidades = Geometrías de Entidades
+condicionesurbanisticas = Condiciones Urbanísticas
+entidades = Entidades
+determinaciones = Determinaciones
+gestionprerefundido = Gestión de Pre-refundido
+menu_prerefundirplan = Pre-refundir plan
+menu_produccionfip = Edición FIP
+menu_edicionfip = Edición FIP
+gestiondiccionariodeterminaciones = Gestión de Diccionario de Determinaciones
+menu_verplanbase = Plan Base
+menu_verplanvigente = Plan Vigente
+menu_verdeterminacionplanvigente = Plan Vigente
+menu_verdeterminacionplanencargado = Ver Plan Encargado
+menu_crearplanencargado = Nuevo Plan Encargado
+gestionentidades = Gestión de Entidades
+menu_verentidadplanvigente = Ver Plan Vigente
+menu_verentidadplanbase = Ver Plan Base
+menu_planesprerefundido = Planes Pre-refundido
+menu_copiarplanvigenteplanencargado = Copiar Plan Vigente a Plan Encargado
+menu_verentidadplanencargado = Ver Plan Encargado
+menu_creararbolentidadesplanencargado = Nuevo Árbol de Entidades del Plan Encargado
+menu_asignardeterminacionesplanencargado = Asignar Determinaciones al Plan Encargado
+gestiondocumental = Gestión Documental
+menu_gestiondocumentos = Edición de Documentos
+menu_creardocumento = Nuevo Documento
+gestionoperaciones = Gestión de Operaciones
+menu_gestionoperaciones_ordenar = Ordenar Operaciones
+menu_gestionoperaciones_entidad = Gestion Operaciones Entidad
+menu_gestionoperaciones_determinacion = Gestion Operaciones Determinaciones
+menu_edicion_operaciones = Edición de Operaciones
+menu_edicion_operaciones_determinacion = Edición de Operaciones de Determinaciones
+menu_edicion_operaciones_entidad = Edición de Operaciones de Entidades
+menu_edicion_diccionario = Edici\u00F3n de Diccionario Determinaciones
+menu_edicion_entidades = Edición de Entidades
+menu_edicion_documentos = Edición de Documentos
+menu_edicion_unidades = Edición de Unidades
+menu_edicion_adscripciones = Edición de Adscripciones
+menu_crearoperacion = Nueva Operación
+menu_busqueda = Búsqueda Avanzada
+menu_informacionfip = Información FIP
+consultainformaciontextual = Consulta de Información Contextual
+menu_documentonormasurbanisticas = Documento de Normas Urbanísticas
+menu_fichacu = Ficha Urbanística
+menu_consuta_entidades_urbanisticas = Consulta de Entidades Urbanísticas (Ficha)
+menu_consuta_entidades_urbanisticas_PE = Consulta de Entidades Urbanísticas del Plan Encargado
+menu_consuta_entidades_urbanisticas_PV = Consulta de Entidades Urbanísticas del Plan Vigente
+menu_consuta_entidades_urbanisticas_PP = Consulta de Entidades Urbanísticas del Plan Pre-refundido
+menu_fichacu_planencargado = Ficha Urbanística del Plan Encargado
+menu_fichacu_planvigente = Ficha Urbanística del Plan Vigente
+menu_fichacu_planprerrefundido = Ficha Urbanística del Plan Pre-Refundido
+consultamapas = Consulta de Mapas
+menu_vermapas = Ver Mapas
+menu_visor_geografico = Visor Geográfico
+consultacontenidoplaneamiento = Consulta de Contenido de Planeamiento
+menu_vercontenidoplaneamiento = Ver contenido de Planeamiento
+menu_ayuda = Ayuda
+menu_manuales = Manuales
+menu_faq = FAQ
+menu_mapaweb = Mapa Web
+menu_acercade = Acerca de
+menu_volver = Volver
+menu_cerrarsesion = Cerrar Sesión
+fip2_estado_creando=Creando
+fip2_estado_creado=Creado
+consulta_entidades = Consulta de Entidades
+consulta_determinaciones = Consulta de Determinaciones
+consulta_documentos = Consulta de Documentos
+consulta_unidades = Consulta de Unidades
+consulta_adscripciones = Consulta de Adscripciones
+gestion_determinaciones = Gestión de Determinaciones
+gestion_entidades = Gestión de Entidades
+gestion_documentos = Gestión de Documentos
+gestion_operaciones = Gestión de Operaciones
+gestion_unidades = Gestión de Unidades
+gestion_adscripciones = Gestión de Adscripciones
+proyeccion = Proyección
+
+
+#Doc
+determinacion_asociaradoc = Determinación Asociada
+entidad_asociaradoc = Entidad Asociada
+
+# Duplicar Entidad
+entidad_boton_duplicar = Duplicar Entidad
+entidad_duplicar_confirmacion_titulo = Confirmar que desea duplicar la Entidad
+entidad_duplicar_confirmacion_mensaje = A continuación se va a proceder a realizar una copia de la Entidad, tanto de sus valores como de sus Condiciones Urbanísticas. ¿Desea Continuar?
+
+# Operacion
+operacion_detoperada = Determinaci\u00F3n operada
+operacion_detoperadora = Determinaci\u00F3n operadora
+
+#Gestion Unidades
+
+unidad_iddet = Id Determinación
+unidad_nomdet = Nombre Determinación
+unidad_abrev = Abreviatura
+unidad_def = Definición
+
+
+# Condiciones urbanisticas
+entidad_condicionurbanistica = Condiciones Urbanísticas
+entidad_condicionurbanistica_determinaciones = Condiciones Urbanísticas (Valores de Determinaciones)
+entidad_cu_anadir = Añadir CU
+entidad_cu_copiar = Copiar CU's seleccionadas en entidades 
+entidad_ga_anadir = Añadir Grupo de Entidad
+cu_nombredeterminacion = Título
+cu_nombredeterminacionregimen = Det. Régimen
+cu_nombrevalorreferencia = V. Referencia
+cu_valor = Valor
+cu_valor_numerico = Valor Numérico
+cu_regespec = Reg. Específico
+cu_re_nombre = Nombre R.E.
+cu_re_textoregimenesespecifico = Texto R.E.
+
+#Condiciones urbanisticas statusMessages
+regimen_borrado_ok = Se ha borrado correctamente el régimen
+regimen_borrado_errorATENCION = No se ha podido borrar el régimen de la Condición Urbanística Seleccionada
+cu_creada_ok = Condición urbanística creada correctamente
+cu_creada_error0 = Error al guardar la Condici\u00F3n Urban\u00EDstica 
+cu_creada_error1 = Error: La Entidad aun no tiene aplicado ningun Grupo de Aplicacion. Debe aplicar primero un Grupo a la entidad antes de construir otras Condiciones Urbanisticas
+cu_creada_error2 = Error\: No se ha encontrado en la determinacion a aplicar que tenga como grupo a la determinacion de grupo aplicada a la entidad. Agregue el Grupo de Aplicacion a la determinacion
+cu_guardar_ok = Condicion Urbanistica guardada correctamente
+cu_guardar_error = Error al actualizar la Condicion Urbanistica 
+cu_valor_ok = Valor guardado Correctamente
+cu_valor_error = Error al guardar el Valor 
+
+#Gestion entidades statusMessages
+entidad_creada_ok = Entidad Creada Correctamente
+entidad_modificada_ok = Entidad Modificada Correctamente
+entidad_guardar_error = ERROR\: Se ha producido un error al guardar la entidad\: 
+entidadgeom_borrar_ok = Geometria de la Entidad  Borradas Correctamente
+entidadgeom_borrar_error = ERROR\: Se ha producido un error al borrar la Geometria de la Entidad\: 
+entidadycu_borrar_ok = entidad Y CUs Asociadas A entidad borrada Correctamente
+entidadycu_borrar_error = ERROR\: Se ha producido un error al borrar  entidad Y CUs Asociadas A entidad\: 
+entidad_borrar_hijas_error = No se ha podido borrar la determinación porque ella o sus hijas tienen condiciones urbanísticas asociadas. Borre primero las condiciones urbanísticas asociadas.
+
+#Gestion diccionario determinaciones statusMessages
+determinacion_creada_ok = Determinacion Creada Correctamente
+determinacion_borrar_ok = Determinacion Borrada Correctamente
+determinacion_borrar_error = ERROR\: Se ha producido un error al borrar la determinacion\: 
+determinacion_comosolucionar_borrar_error = INFO: Para borrar la determinacion (y sus hijas) debe borrar también las CUs Asociadas a dicha determinacion
+determinacionycu_borrar_ok =  Determinacion Y CUs Asociadas A Determinacion borrada Correctamente
+determinacionycu_borrar_error = ERROR\: Se ha producido un error al borrar  Determinacion Y CUs Asociadas A Determinacion\: 
+cudedeterminacion_borrar_ok = CUs Asociadas A Determinacion  Borradas Correctamente
+cudedeterminacion_borrar_error = ERROR\: Se ha producido un error al borrar la CUs Asociadas A Determinacion\: 
+determinacion_modificada_ok = Determinacion Modificada Correctamente
+determinacion_guardar_error = ERROR\: Se ha producido un error al guardar la determinacion\: 
+determinacion_grupoentidad = Grupo de Aplicaci\u00F3n 
+
+#Gestion regulaciones especificas statusMessages
+regesp_borrado_ok = Regulacion Especifica Borrado Correctamente
+regesp_modificada_error = ERROR\: Se ha producido un error al borrar el Regulacion Especifica\: 
+regesp_modificada_ok = Regulacion Especifica Modificado Correctamente
+regesp_creada_ok = Regulacion Especifica Creada Correctamente
+regesp_guardar_error = ERROR\: Se ha producido un error al guardar el regimen\: 
+
+#Gestion pre-refundido
+
+prerefundido_tipooperacionplan = Tipo de Operación del Plan
+prerefundido_info_general = Esta funcionalidad permite crear un prerrefundido entre el plan encargado seleccionado y el plan vigente. Debe seleccionar el tipo de operacion que se realizara entre ambos planes (ej: Sustitucion entre Plan Vigente Vacio y Plan General Encargado). Este proceso puede tardar mucho tiempo
+prerefundido_tramiteencargado = Trámite Encargado
+prerefundido_tramitevigente = Trámite Vigente
+prerefundido_generarprerefundido = Generar Pre-refundido
+prerefundido_previavalidacion = Debe validar los planes antes de prerefundir y asegurarse de que no contiene errores. De lo contrario el refundido podria contener errores y no consolidar correctamente
+
+#Gestion Documental
+
+archivos_hoja = Hoja
+adjuntar_hoja_info = Para adjuntar una hoja introduzca el nombre, seleccione la extensión y pulse Guardar y Adjuntar. Siempre debe adjuntar el archivo con la extensión seleccionada y además para PNG (un .PGW o .PNGW), para JPG (un .JPW o .JPGW) y para TIF (un .TFW o TIFW)
+guardar_adjuntar = Guardar y adjuntar
+cancelar_borrar = Cancelar y Borrar
+
+
+#Listado pre-refundido
+
+seleccion_prerefundido_info_general = Información General
+preref_fecha = Fecha
+preref_consolidado = Consolidado
+preref_trampreref = Trámite Pre-refundido
+preref_rutafichero = Ruta fichero
+preref_ambito = Ámbito
+preref_tramvigente = Trámite Vigente
+preref_tramencargado = Trámite Encargado
+preref_tipooperacion = Tipo de Operación
+preref_iden = Identificador
+
+#Adscripciones
+
+adsc_entidad_origen = Entidad de Origen
+adsc_entidad_destino = Entidad de Destino
+adsc_verdetalle = Ver Detalle
+adsc_borrar = Borrar
+adscripcion_entidad_origen = Entidad de Origen
+adscripcion_entidad_destino = Entidad de Destino
+adscripcion_unidad = Unidad
+adscripcion_tipo = Tipo
+adscripcion_cuantia = Cuantía
+adscripcion_texto = Texto
+adscripcion_guardar_confirmacion = ¿Está seguro de que quiere guardar la nueva adscripción?
+adscripcion_guardar_title = Guardar adscripción
+adscripcion_unidades = Seleccionar la Unidad de la Adscripción
+
+#Adscripciones Plan Encargado
+
+adscripcion_guardar = Guardar Adscripción
+adscripcion_nueva = Nueva Adscripción
+
+
+#Manuales
+
+subirmanual = Subir manual
+
+#mapas
+
+cla = Clasificación
+acc = Acciones
+afe = Afecciones
+amb = Ámbito
+pro = Protecciones
+ges = Gestión
+cat = Categorías
+ali = Alineaciones
+sis = Sistemas
+ras = Rasantes
+zon = Zonas
+sincapa = Entidades sin Grupo de Entidades
+
+capa_pr = Capas del Trámite Prerefundido
+capa_pe = Capas del Trámite Encargado
+capa_pv = Capas del Trámite Vigente
+capas_info = Información de las capas
+mapa_info = Información
+mapa_nav = Navegación
+mapa_sin_coordenadas = Este ámbito no tiene coordenadas. Vaya a Administración -> Configuración Visor
+
+
+#FIP2
+fip2_planencargado_generacion = Creación del FIP2 del Plan Encargado
+fip2_planencargado_confirmacion = A continuación va a crear el FIP2 del Plan Encargado. Este proceso puede tardar mucho tiempo. Vaya al Listado de FIP2 generados
+fip2_planprerefundido_generacion = Creación del FIP2 del Plan Prerefundido
+fip2_planprerefundido_confirmacion = A continuación va a crear el FIP2 del Plan Prerefundido. Este proceso puede tardar mucho tiempo. Vaya al Listado de FIP2 generados
+
+#barra de usuario
+
+menuestado_ambito = Ámbito
+menuestado_planencargado = Plan Encargado
+menuestado_planvigente = Plan Vigente
+menuestado_planprerefundido = Plan Pre-refundido
+menuestado_planbase = Plan Base
+menuestado_registrado = Registrado
+seleccionar = Seleccionar
+seleccionar_planencargado = Seleccionar Plan Encargado
+seleccionar_planbase = Seleccionar Plan Base
+seleccionar_planvigente = Seleccionar Plan Vigente
+
+# Genericos
+genericos_lista = Lista
+genericos_listado = Listado
+genericos_detalle = Detalle
+genericos_arbol = Árbol
+genericos_ordenar = Ordenar
+genericos_refrescar_arbol = Refrescar arbol
+genericos_de = de
+genericos_campo_obligatorio = El campo {0} es obligatorio
+genericos_si = Si
+genericos_no_volver = No, volver
+genericos_info = Info
+genericos_buscar = Buscar
+genericos_cargar = Cargar archivo
+
+# Navegacion
+navegacion_anterior = Anterior
+navegacion_primero = Primero
+navegacion_siguiente = Siguiente
+navegacion_ultimo = Ultimo
+navegacion_pagina = Pagina
+
+
+# Paginacion
+paginacion_ver10 = Ver 10
+paginacion_ver20 = Ver 20
+paginacion_ver50 = Ver 50
+paginacion_ver100 = Ver 100
+paginacion_ver = Ver
+
+# Botones genericos
+botongenerico_crear = Crear
+botongenerico_crearcarpeta = Crear Carpeta / Hojas
+botongenerico_editar = Editar
+botongenerico_verdetalle = Ver detalle
+botongenerico_guardar = Guardar 
+botongenerico_suprimir = Suprimir 
+botongenerico_acciones = Acciones
+botongenerico_accion = Acción
+botongenerico_desc_cambios = Descartar cambios
+botongenerico_seleccionar = Seleccionar
+botongenerico_cancelar = Cancelar
+botongenerico_cerrar = Cerrar
+botongenerico_borrar = Borrar
+botongenerico_aceptar = Aceptar
+botongenerico_borrar_solodeterminacionehijas = Borrar Solo Determinaciones
+botongenerico_borrar_determinacionycuehijas = Borrar Determ. y CU Asociadas
+botongenerico_borrar_solocudedeterminacion = Borrar CU Asociadas 
+botongenerico_crear_nueva_determinacion = Crear Nueva Determinación
+botongenerico_crear_nueva_entidad = Crear Nueva Entidad
+botongenerico_borrar_entidadycuehijas = Borrar Entidades y CU
+botongenerico_borrar_entidadgeometria = Borrar Geometria
+botongenerico_nuevoregimen = Nuevo Régimen
+botongenerico_siguiente = Siguiente
+botongenerico_anterior = Anterior
+botongenerico_primero = Primero
+botongenerico_ultimo = Último
+botongenerico_volver = Volver
+botongenerico_anadir = Añadir
+
+#Ayuda
+adjuntar_fichero = Adjuntar fichero
+
+# Botones de gestios de Usuario
+botonusuario_ambito = Añadir ámbito
+botonusuario_tramite = Añadir trámite
+boton_title_usuarioLista_crear = Crear un nuevo usuario
+boton_title_usuarioLista_acciones = Acciones disponibles para el usuario
+boton_title_usuarioLista_verDetalle = Ver detalles del usuario seleccionado
+boton_title_usuarioLista_darBaja = Dar de baja al usuario seleccionado
+boton_title_usuarioLista_volver = Volver
+
+#Titles botones
+boton_title_gestionUsuario_anadirAmbito_cerrar = Cierra y cancela la selección de Ámbito para un usuario
+boton_title_gestionUsuario_anadirAmbito_seleccionar = Selecciona el Ámbito que será asignado al usuario, el cual podrá acceder a todos los planes de dicho Ámbito
+boton_title_gestionUsuario_anadirAmbito_cancelar = Cancela la selección de ámbito para un usuario
+boton_title_gestionUsuario_anadirPlan_seleccionar = Selecciona uno o más planes que serán asignados al usuario para que este pueda acceder
+boton_title_gestionUsuario_anadirPlan_cerrar = Cierra y cancela la selección de planes para un usuario
+boton_title_gestionUsuario_anadirPlan_cancelar = Cancela la selección de planes para un usuario
+
+
+boton_title_usuarioDetalle_guardar = Guardar los cambios realizados en el usuario
+boton_title_usuarioDetalle_descartarCambios = Descartar los cambios realizados en el usuario
+boton_title_usuarioDetalle_anadirAmbito = Añadir un nuevo Ámbito al usuario
+boton_title_usuarioDetalle_anadirTramite = Añadir un nuevo Trámite el usuario
+boton_title_usuarioDetalle_eliminarAmbito = Eliminar el ámbito asignado
+boton_title_usuarioDetalle_eliminarTramite = Eliminar el trámite asignado
+
+
+boton_title_usuarioLista_lupa = Buscar
+boton_title_usuarioLista_ver = Mostrar el listado de usuarios
+boton_title_usuarioLista_verDiez = Mostrar diez usuarios por página
+boton_title_usuarioLista_verVeinte = Mostrar veinte usuarios por página
+boton_title_usuarioLista_verCincuenta = Mostrar cincuenta usuarios por página
+boton_title_usuarioLista_verCien = Mostrar cien usuarios por página
+
+boton_title_gestionCapas_crear = 
+
+boton_title_gestionPE_anadirAmbito_seleccionar = Seleccionar el Ámbito
+boton_title_gestionPE_anadirAmbito_cancelar = Cancelar
+
+boton_title_PEdetalle_volver = Volver
+boton_title_PEdetalle_guardar = Guardar cambios en el Plan Encargado
+boton_title_PEdetalle_descartarCambios = Descartar cambios en el Plan Encargado
+boton_title_PEdetalle_anadirAmbito = Añadir un Ámbito al Plan Encargado
+
+boton_title_PElista_lupa = Buscar
+boton_title_PElista_crear = Crear un nuevo Plan Encargado
+boton_title_PElista_darBaja = Dar de baja el Plan Encargado seleccionado
+boton_title_PElista_ver = Mostrar el listado de Planes Encargados
+boton_title_PElista_verDiez = Mostrar diez Planes Encargados por página
+boton_title_PElista_verVeinte = Mostrar veinte Planes Encargados por página
+boton_title_PElista_verCincuenta = Mostrar cincuenta Planes Encargados por página
+boton_title_PElista_verCien = Mostrar cien Planes Encargados por página
+boton_title_PElista_verDetalle = Ver detalles del Plan Encargado seleccionado
+boton_title_PElista_seleccionar = Seleccionar Plan Encargado
+
+boton_title_Fip2Arbol_generarFip = Generar el fichero de intercambio de los Trámites seleccionados
+
+boton_title_Fip2Lista_crear = Crear un nuevo fichero de intercambio
+boton_title_Fip2Lista_acciones = Acciones disponibles para el fichero seleccionado
+boton_title_Fip2Lista_verDetalle = Ver detalles del fichero de intercambio
+boton_title_Fip2Lista_darBaja = Dar de baja el fichero seleccionado
+boton_title_Fip2Lista_ver = Mostrar el listado de ficheros
+boton_title_Fip2Lista_verDiez = Mostrar diez ficheros por página
+boton_title_Fip2Lista_verVeinte = Mostrar veinte ficheros por página
+boton_title_Fip2Lista_verCincuenta = Mostrar cincuenta ficheros por página
+boton_title_Fip2Lista_verCien = Mostrar cien ficheros por página
+
+boton_title_consolidarFip_importar = Importar un fichero de intercambio 
+
+boton_title_Fip1lista_ordenar = Ordenar ficheros
+boton_title_Fip1lista_fecha = Ordenar ficheros por fecha
+boton_title_Fip1lista_nombre =  Ordenar ficheros por nombre
+boton_title_Fip1lista_importar = Importar un nuevo fichero de intercambio
+boton_title_Fip1lista_info = Información del fichero
+boton_title_Fip1lista_popupinfo_cerrar = Cerrar
+
+boton_title_importacionFip1_importar = Importar un nuevo fichero de intercambio
+boton_title_importacionFip1_importarPB = Importar un nuevo Plan Base
+
+boton_title_obtencionFip_verListado = Mostrar el listado de ficheros de intercambio
+boton_title_obtencionFip_verificarServicio = Verificar la dirección del Servicio Web desde donde se va a descargar el fichero de intercambio
+boton_title_obtencionFip_descargarFip1 = Descargar el fichero de intercambio
+
+boton_title_obtenerServicio_obtenerServicio = Obtener el Servicio Web seleccionado
+
+boton_title_contenidoRegulacionesEspecificas_guardar = Guardar la nueva Regulación Específica
+boton_title_contenidoRegulacionesEspecificas_borrar = Borrar la Regulación Específica seleccionada
+boton_title_contenidoRegulacionesEspecificas_cancelar = Cancelar los cambios realizados
+
+boton_title_determinacionBotones_crearNuevaDeterminacion = Crear una nueva Determinación
+boton_title_determinacionBotones_guardar = Guardar los cambios efectuados en la Determinación
+boton_title_determinacionBotones_borrar_determinacionycuehijas = Borrar la Determinación seleccionada y sus hijas
+boton_title_determinacionBotones_borrar_solocudedeterminacion = Borrar solamente la Determinación seleccionada
+
+boton_title_determinacionDetalle_anadirDB = Asociar la Determinación Base de la Determinación seleccionada
+boton_title_determinacionDetalle_anadirDP = Asociar la Determinación Padre de la Determinación seleccionada
+boton_title_determinacionDetalle_anadirUnidad = Asociar la Unidad de medida en la que se expresa la Determinación seleccionada
+boton_title_determinacionDetalle_editarDetReguladoras = Editar las Determinaciones Reguladoras de la Determinación seleccionada
+boton_title_determinacionDetalle_anadirGrupoAplicacion = Asignar un Grupo de Aplicación a la Determinación seleccionada
+boton_title_determinacionDetalle_anadirValoresReferencia = Asignar unos Valores de Referencia a la Determinación seleccionada
+boton_title_determinacionDetalle_anadirContenidoRegulacionesEspecificas = Añadir una nueva Regulación Específica a la Determinación seleccionada
+boton_title_determinacionDetalle_asociardeterminacion = Asociar una Determinación al documento seleccionado
+boton_title_determinacionDetalle_asociarentidad = Asociar una Entidad al documento seleccionado
+
+boton_title_determinacion_filtrosBusqueda = Filtrar los resultados de la búsqueda según los campos introducidos
+
+boton_title_determinacionesReguladoras_añadir = Añadir las Determinaciones Reguladoras seleccionadas
+boton_title_determinacionesReguladoras_cancelar = Volver a la p\u00E1gina anterior sin guardar los cambios 
+
+boton_title_gruposAplicacion_anadir = Asignar el grupo de aplicaci\u00F3n seleccionado a la Determinaci\u00F3n 
+boton_title_gruposAplicacion_cancelar = Volver a la página anterior sin guardar los cambios
+
+boton_title_valoresReferencia_anadir = Asignar los valores de referencia seleccionados a la Determinación
+boton_title_valoresReferencia_cancelar = Volver a la página anterior sin guardar los cambios
+
+boton_title_determinacionPadre_seleccionar = Establecer la Determinaci\u00F3n seleccionada como Determinaci\u00F3n Padre 
+boton_title_determinacionPadre_cancelar = Volver a la página anterior sin guardar los cambios
+
+boton_title_unidad_seleccionar = Seleccionar la Unidad marcada
+boton_title_unidad_cancelar = Volver a la página anterior sin guardar los cambios
+
+boton_title_determinacionPE_lupa = Buscar
+boton_title_determinacionPV_lupa = Buscar
+boton_title_determinacionPB_lupa = Buscar
+
+boton_title_anadirGeometria_guardar = Guardar la geometría seleccionada
+
+boton_title_CUsimplificadaContenido_determinacionRegimen_seleccionar = Seleccionar una Determinación Régimen
+boton_title_CUsimplificadaContenido_valorReferencia_seleccionar = Seleccionar un Valor de Referencia
+boton_title_CUsimplificadaContenido_guardarCU = Guardar los cambios efectuados
+boton_title_CUsimplificadaContenido_cancelarCU = Volver a la página anterior sin guardar los cambios
+
+boton_title_entidadAnadirCU_anadir = Añadir la Condición Urbanística seleccionada
+boton_title_entidadAnadirCU_cancelar = Volver a la página anterior sin guardar los cambios
+
+boton_title_entidadAnadirGA_anadir = Añadir un Grupo de Aplicación
+boton_title_entidadAnadirGA_seleccionar = Seleccionar el Grupo de Aplicación marcado
+boton_title_entidadAnadirGA_cancelar = Volver a la página anterior sin guardar los cambios
+
+boton_title_entidadBotones_crearNueva = Crear una nueva Entidad
+boton_title_entidadBotones_guardar = Guardar la nueva Entidad
+boton_title_entidadBotones_cancelar = Cancelar cambios en una entidad
+
+boton_title_entidadDetalle_editarEB = Editar la Entidad Base seleccionada
+boton_title_entidadDetalle_editarEP = Editar la Entidad Padre seleccionada
+boton_title_entidadDetalle_borrar_entidadGeometria = Borrar la geometría de la Entidad seleccionada
+boton_title_entidadDetalle_anadir_entidadGeometria = Añadir una geometría a la Entidad seleccionada
+
+boton_title_entidad_filtrosBusqueda_aplicar = Filtrar los resultados de la búsqueda según los campos introducidos
+
+boton_title_CUsimplificada_anadirCU = Añadir una Condición Urbanística
+boton_title_CUsimplificada_anadirGA = Asignar un Grupo de Entidad
+boton_title_CUsimplificada_copiarCu = Copiar las Condiciones Urbanísticas seleccionadas en la Entidad
+boton_title_CUsimplificada_seleccionarDetReg = Seleccionar una Determinación Reguladora
+boton_title_CUsimplificada_seleccionarValRef = Asignar un Valor de Referencia
+
+boton_title_listaGruposAplicacion_anadir = Asignar el Grupo de Aplicación seleccionado
+
+boton_title_seleccionarDetReg_seleccionar = Seleccionar la Determinación Reguladora seleccionada
+boton_title_seleccionarDetReg_cancelar = Volver a la página anterior sin guardar los cambios
+
+boton_title_seleccionarEB_seleccionar = Establecer como Entidad Base la Entidad seleccionada
+boton_title_seleccionarEB_cancelar = Volver a la página anterior sin guardar los cambios
+
+boton_title_seleccionarEP_seleccionar = Establecer como Entidad de Origen la Entidad marcada
+boton_title_seleccionarEP_cancelar = Volver a la página anterior sin guardar los cambios
+
+boton_title_seleccionarValRef_seleccionar = Asignar el Valor de Referencia seleccionado
+boton_title_seleccionarValRef_cancelar = Volver a la página anterior sin guardar los cambios
+
+boton_title_verEntidadPB_lupa = Buscar
+boton_title_verEntidadPE_lupa = Buscar
+boton_title_verEntidadPV_lupa = Buscar
+
+boton_title_login_iniciarSesion = Iniciar sesión
+boton_title_login_recuperarPass = Recuperar contraseña
+
+boton_title_seleccionArbolPlanEncargado_seleccionar = Seleccionar Plan Base
+boton_title_seleccionArbolPlanEncargado_cancelar = Cancelar
+
+boton_title_importadorEntidades_cargarEntidades = Cargar Entidades
+boton_title_importadorEntidades_descargarEjemplo = Descargar un ejemplo por si se quiere importar posteriormente
+
+boton_title_importadorDeterminaciones_cargarDeterminaciones = Cargar Determinaciones
+boton_title_importadorDeterminaciones_descargarEjemplo = Descargar un ejemplo por si se quiere importar posteriormente
+
+boton_title_importadorCU_cargarCU = Cargar Condiciones Urbanísticas
+boton_title_importadorCU_descargarEjemplo = Descargar un ejemplo por si se quiere importar posteriormente
+
+boton_title_validar = Validar
+
+boton_title_adscripcion_entidadorigen = Seleccionar la Entidad de Origen
+boton_title_adscripcion_entidaddestino = Seleccionar la Entidad de Destino
+boton_title_adscripcion_unidad = Seleccionar la Unidad
+boton_title_adscripcion_tipo = Seleccinar el tipo de Adscripción
+boton_title_adscripcion_crear_cancelar = Volver a la página anterior sin guardar los cambios
+boton_title_adscripcion_crear_volver = Volver a la página anterior
+boton_title_adscripcion_crear_guardar = Guardar la nueva Adscripción
+boton_title_adscripcion_tipo_cancelar = Volver a la página anterior sin guardar los cambios
+boton_title_adscripcion_tipo_seleccionar = Seleccionar el Tipo de Adscripción marcado
+boton_title_adscripcion_lista_nueva = Crear una nueva Adscripción
+
+boton_title_nuevoprerefundido = Crear Pre-refundido
+
+boton_title_gestionDocumentalDetalle_adjuntarFichero = Guardar y adjuntar un documento
+boton_title_gestionDocumentalDetalle_anadirDeterminacion = Asociar una determinación al documento
+boton_title_gestionDocumentalDetalle_anadirEntidad = Asociar una entidad al documento
+boton_title_verListaDocumentos_crear = Crear un nuevo documento
+boton_title_verListaDocumentos_crearCarpeta = Crear un nuevo documento del tipo carpeta
+boton_title_adjuntar_hoja =
+boton_title_adjuntar_hoja_cancelar_y_borrar =
+boton_title_adjuntar_hoja_adjuntar = 
+
+boton_title_listaOperacionesEntidad_crear = Crear una nueva operación de entidad
+boton_title_listaOperacionesDeterminacion_crear = Crear una nueva operaci\u00F3n de determinaci\u00F3n 
+boton_title_listaOperacionesDeterminacion_ordenar = Modifica el orden de las operaciones
+
+boton_title_crearOperacionEntidad_seleccionarOperadora = Seleccionar entidad operadora
+boton_title_crearOperacionEntidad_seleccionarOperada = Seleccionar entidad operada
+boton_title_crearOperacionEntidad_guardar = Guardar la nueva operación de entidad
+boton_title_crearOperacionEntidad_cancelar = Volver a la página anterior sin guardar
+boton_title_crearOperacionDeterminacion_guardar = Guardar la nueva operación de determinación
+boton_title_crearOperacionDeterminacion_cancelar = Volver a la página anterior sin guardar
+boton_title_crearOperacionDeterminacion_seleccionarOperadora = Seleccionar determinación operadora
+boton_title_crearOperacionDeterminacion_seleccionarOperada = Seleccionar determinación operada
+
+boton_title_validacionesLista_crear = Crear nueva validación
+
+boton_title_generarPrere_generarPrere = Pre-refundir el Plan Encargado en Plan Vigente
+
+boton_title_fichaCU_generar = Generar ficha urbanística
+
+boton_title_busquedaAvanzada_buscarTramite = Buscar Trámite
+boton_title_busquedaAvanzada_buscarCondicion = Buscar Condición
+boton_title_busquedaAvanzada_buscarDeterminacion = Buscar Determinación
+boton_title_busquedaAvanzada_buscarDocumento = Buscar Documento
+boton_title_busquedaAvanzada_buscarEntidad = Buscar Entidad
+boton_title_busquedaAvanzada_buscarOperacion = Buscar Operación
+
+boton_title_ayudaManuales_subirManual = Subir un manual
+boton_title_ayudaManuales_guardar = Guardar manual
+boton_title_ayudaManuales_cancelar = Volver a la página anterior sin guardar
+boton_title_ayudaManuales_adjuntar = Adjuntar fichero
+boton_title_ayudaFaq_anadirFaq = Añadir Faq
+boton_title_ayudaFaq_guardarFaq = Guardar Faq
+
+boton_title_guardar_regesp = Guardar Reg. Esp.
+
+# Botones lupa
+
+lupa_determinacion = Cargar Elemento
+
+
+
+# Panel confirmation
+
+importacionFip1_title = Importar FIP1 con un Plan Base existente
+importacionFip1_message = ¿Estás seguro de importar el FIP1 con un Plan Base existente? Tanto el Plan Vigente como el Plan Encargado se asociaran a este Plan Base
+importacionFip1_conPB_title = Importar FIP1 con el Plan Base contenido en FIP1
+importacionFip1_conPB_message = ¿Estás seguro de de importar el FIP1 con el Plan Base contenido en el XML? Esto creará un nuevo Plan Base
+importacionFip1_conPBexistente_title = Importar FIP1 con un Plan Base existente
+importacionFip1_conPBexistente_message = ¿Estás seguro de de importar el FIP1 con un Plan Base existente? Tanto el Plan Vigente como el Plan Encargado se asociaran a este Plan Base seleccionado
+determinacionBotones_guardarDeterminacion_title = Confirmación de Guardado de Determinación
+determinacionBotones_borrarDeterminacion_title = Confirmación de Borrado de Determinacion y CUs Asociadas
+determinacionBotones_borrarDeterminacion_message = ¿Estás seguro de borrar la determinación y todas las CUs asociadas (incluídas las determinaciones hijas si las hubiera)?
+determinacionBotones_borrarCUs_title = Confirmación de Borrado de CUs Asociadas a la Determinación
+determinacionBotones_borrarCUs_message = ¿Estás seguro de borrar las CUs asociadas a dicha determinación?
+CUsimplificadaContenido_guardarCU_title = Confirmación de Guardado de Condición Urbanística
+CUsimplificadaContenido_guardarCU_message = ¿Estás seguro de guardar los cambios en la Condición Urbanística?
+CUsimplificadaContenido_cancelarCU_title = Confirmación de Cancelacion de Cambios en la Condición Urbanística
+CUsimplificadaContenido_cancelarCU_message = ¿Estás seguro de desea cancelar los cambios en la Condición Urbanística?
+entidadBotones_nuevaEntidad_title = Confirmación de Guardado de Entidad
+entidadBotones_borrarEntidad_title = Confirmación de Borrado de Entidad y CUs Asociadas
+entidadDetalle_borrarGeometriaEntidad = Confirmación de Borrado de Geometria de la Entidad
+entidad_borrar_geometria_confirmacion = ¿Estás seguro de que deseas borrar la geometría de esta entidad?
+determinacion_botones_borrarDetConfirm_title = Confirmación de Borrado de Determinacion (e Hijas)
+determinacion_botones_borrarDetConfirm_message = ¿Estás seguro de que deseas borrar la Determinación (incluídas las determinaciones hijas si las hubiera)?
+entidad_borrar_confirmacion = ¿Estás seguro de que deseas borrar la Entidad y sus CUs asociadas?
+consolidacion_confirm_message = ¿Estás seguro de que deseas consolidar este plan?
+consolidacion_confirm_title = Confirmaci\u00F3n
+
+# Recuperacion de contraseña
+rec_pass = ¿Ha olvidado su contraseña?
+rec_pass_remitente = administracion@editorfip.com
+rec_pass_rem_nombre = Administracion
+rec_pass_titulo = Recuperacion de contraseña - EditorFIP
+rec_pass_texto = Su contrase\u00F1a es la siguiente\: 
+rec_pass_boton = Recuperar contraseña
+rec_pass_mensaje = Para recuperar tu contraseña, indícanos tu identificador de usuario o tu email, y te enviaremos por correo electrónico tus datos de acceso.
+rec_pass_success = Se ha enviado un correo electronico con tus datos de acceso.
+rec_pass_error = Ha ocurrido un error al enviar el correo electronico: {0}
+rec_pass_nousr = El identificador ó el email indicado no estan asociados a ningun usuario en el sistema.
+
+# Validaciones generales
+validacion_mail = La direccion de correo electronico no es correcta.
+validacion_username_existente = El identificador de usuario ya existe.
+validacion_error_pass = Las contraseñas son incorrectas.
+validacion_no_rol = Se debe seleccionar al menos un rol para el usuario.
+validacion_dni_existente = Ya existe un usuario con ese DNI.
+
+# Gestion de Usuario
+gestionusuario_usuario_username = Identificador
+gestionusuario_usuario_nombre = Nombre
+gestionusuario_usuario_rol = Rol
+gestionusuario_usuario_clave = Clave
+gestionusuario_repetirclave = Repetir clave
+gestionusuario_usuario_mail = Mail
+gestionusuario_usuario_papellido = Primer apellido
+gestionusuario_usuario_sapellido = Segundo apellido
+gestionusuario_usuario_dni = DNI
+gestionusuario_usuario_dadobaja = Dado de baja
+gestionusuario_dardebaja = Dar de baja
+gestionusuario_roles = Roles
+gestionusuario_ambitos = Ámbitos asignados
+gestionusuario_tramites= Trámites asignados
+gestionusuario_almenosuno = Se debe seleccionar al menos un usuario.
+gestionusuario_dadodebajaok = El usuario se ha dado de baja correctamente.
+gestionusuario_nosel = No se ha seleccionado ningun usuario.
+gestionusuario_solouno = Se debe seleccionar solo un usuario para poder ver detalles.
+gestionusuario_errordardebaja = Ha ocurrido un error al dar de baja al usuario.
+gestionusuario_fecha= Fecha
+gestionusuario_creado_ok = El usuario ha sido creado correctamente.
+gestionusuario_modificado_ok = El usuario ha sido modificado correctamente.
+gestionusuario_error = Se ha producido un error al crear/modificar el usuario.
+gestionusuario_errorbajaadmin = No se puede dar de baja al Administrador del Sistema.
+gestionusuario_yaestadadodebaja = El usuario {0} ya está dado de baja
+gestionusuario_yaestadadodealta = El usuario {0} ya está dado de alta
+gestionusuario_dadodealtaok = El usuario se ha dado de alta correctamente.
+gestionusuario_errordardealta = Ha ocurrido un error al dar de alta al usuario.
+
+#arboles
+anular_seleccion=Anular Selección
+seleccionar_todos=Seleccionar Todos
+arbolambito = Ámbito
+
+#arbol entidades
+arbol_entidades = Árbol Entidades
+entidad_base = Entidad Base
+entidad_clave = Clave
+entidad_etiqueta = Etiqueta
+entidad_geometria = Geometría
+entidad_determinaciones = Determinaciones
+entidad_determinaciones_nombre = Id determinaci\u00F3n
+entidad_padre = Entidad Padre
+entidad_guardar_confirmacion = ¿Desea crear la nueva entidad?
+entidad_tiene_geometria_no_mostrada = Esta Entidad tiene geometría pero no está a aplicada a un Grupo entidad
+entidad_no_tiene_geometria = Esta Entidad no tiene geometría
+
+#arbol determinaciones
+arbol_determinaciones = Árbol Determinaciones
+determinacion_base = Determinación Base
+determinacion_padre = Determinación Padre
+determinacion_tipo = Tipo
+determinacion_articulado = Articulado
+determinacion_unidad = Unidad
+determinacion_unidades = Unidades
+determinacion_reguladoras = Determinaciones Reguladoras
+determinacion_simbologia = Etiqueta
+determinacion_definicion = Definición
+determinacion_valoresreferencia = Valores Referencia
+determinacion_sel_base = Seleccionar determinación base
+determinacion_sel_padre = Seleccionar determinación padre
+determinacion_sel_unidades = Seleccionar unidades
+determinacion_anadir_val_ref = Añadir Valores de Referencia
+determinacion_anadir_grup_ap = Añadir Grupos de Aplicación
+determinacion_anadir_det_reg = Añadir Determinaciones Reguladoras
+determinacion_regulacionesespecificas = Regulaciones Especificas
+determinacion_detalles_unidad = Detalles de unidad
+determinacion_du_abreviatura = Abreviatura
+determinacion_du_definicion = Definición
+determinacion_no_tramite = No se ha seleccionado ningún trámite
+determinacion_no_det = No se ha seleccionado ninguna determinación
+determinacion_entidadesdondeaplica = Entidades donde esta aplicada la Determinacion
+determinacion_guardar_confirmacion = ¿Estás seguro de guardar los cambios en la determinación?
+determinacion_codigo = Codigo
+
+
+#arbol plan encargado
+arbol_ruta = Ruta
+arbol_id = Id
+arbol_nombre = Nombre
+arbol_tipo = Tipo
+arbol_seleccionplanencargado = Árbol Plan Encargado
+valores = Valores
+
+#lista grupos aplicación
+nombre_determinacion = Determinación
+nombre_plan = Plan Origen
+accion = Acción
+borrar = Borrar
+primera_pagina = Primera Página
+ultima_pagina = Última Página
+pagina_anterior = Página Anterior
+pagina_siguiente = Página Siguiente
+avance_rapido = Avance Rápido
+retroceso_rapido = Retroceso Rápido
+mensaje_elementos_mostrados = {0} elementos encontrados. Pagina {4} / {5}. 
+no_hay_datos = No hay datos
+mensaje_elementos = elementos encontrados. 
+ 
+#planeamiento encargado
+codigofip = Código FIP
+ambito = Ámbito
+estado = Estado
+crear_nuevo_plan_vigente=Plan Vigente Vacio
+fecha = Fecha
+nombre = Nombre
+planencargado_dadodebajaok = Plan Encargado dado de baja correctamente.
+elemento_almenosuno = Se debe seleccionar al menos un elemento.
+planencargado_errordardebaja = Ha ocurrido un error al dar de baja el elemento.
+plan_base = Plan Base
+plan_vigente = Plan Vigente
+tipo_tramite = Tipo Trámite
+instrumento = Instrumento
+modificacion_codigofip_nombre = Sólo se aplicarán las modificaciones en los campos Código FIP y Nombre
+nombre_plan_vigente=Plan Vigente
+nombre_tramite_vigente=Trámite Vigente de Plan Encargado
+nombre_tramite_encargado=Trámite Encargado de Plan Encargado
+error_guardando_planes_encargados= Error guardando el plan encargado
+plan_encargado_guardado_correctamente = Plan Encargado guardado correctamente
+fechaInicio = Fecha Inicio
+
+#Campos requeridos
+obligatorio_nombre=El campo Nombre es obligatorio
+obligatorio_codigo_fip=El campo Código FIP es obligatorio
+obligatorio_ambito=El campo Ámbito es obligatorio
+
+#CARGA DE FIP1
+cargafip1=Carga FIP1
+elemento_dadodebajaok = Elmento dado de baja correctamente.
+elemento_importadook = El FIP ha sido importado corréctamente
+elemento_importadono = El FIP NO ha sido bien importado
+si =Sí
+no = No
+info=Información
+fechaIntroduccion = Fecha Introducción
+fechaConsolidacion = Fecha Consolidación
+consolidado = Consolidado
+fip1_estado_cabecera=Estado
+fip1_estado_no_importado=Sin importar
+fip1_estado_importado=Importado
+fip1_estado_importando=Importando
+fip1_estado_errores=Errores al importar
+fip1_estado_fecha_inicio=Fecha inicio
+no_hay_refundido=No hay refundido en la dirección dada
+error_servicio_web=Error al llamar al servicio web
+servicio_web_ok=Servicio web cargado corréctamente
+descargar_fip1=Enlace para descargar, hacer clic aqu\u00ED para descargar
+
+informacion=Información
+tipo_de_archivo_no_xml = El tipo de archivo requerido es un XML
+consolidar = Consolidar
+elemento_consolidacion_bloqueado = Actualmente ya se encuentra lanzada la consolidación. Espere a su finalización.
+servicio_no_bloqueado = La opción de importación está disponible
+servicio_bloqueado_por= La opción de importación está ha sido solicitada por el usuario
+servicio_desbloqueado = El servicio ha sido desbloqueado
+servicio_bloqueado = El servicio ha sido bloqueado. Puede consolidar
+obtener_servicio = Obtener Servicio
+informacion_obtener_servicio = Para poder importar debe obtener el control del servicio
+importar = Importar
+fichero = Fichero
+importado = Importado
+fip1_no_encontrado=No se encuentra el FIP1
+filtrosBusqueda = Filtros Búsqueda
+determinacionAplicada = Determinación Aplicada
+aplicar = Aplicar
+filtros = Filtros
+cargar = Cargar
+apartado = Apartado
+etiqueta = Etiqueta
+clave = Clave
+opciones = Opciones
+regimen_borrado_error = ATENCION: No se ha podido borrar el regimen de la Condicion Urbanistica Seleccionada
+entidadesCanarias = Entidades Canarias
+determinacionesCanarias = Determinaciones Canarias
+condicionesurbanisticasCanarias = Condiciones Urbanísticas Canarias
+busqueda = Buscar
+detallebusqueda = Detalle Búsqueda
+
+# CU simplificada contenido
+cu_entidad = Entidad
+cu_determinacion = Determinación
+cu_determinacionRegimen = Determinación Régimen
+cu_valorRereferencia = Valor Referencia
+cu_valorRereferencia_cambiar = Cambiar Valor Numérico del Régimen
+cu_nuevoValor = Nuevo Valor:
+cu_guardarValor = Guardar Valor
+cu_regimenesEspecificos = Regímenes Especificos
+cu_accion = Acción
+cu_borrar = Borrar
+cu_boton_guardarCU = Guardar Cond. Urb.
+cu_boton_cancelarCU = Cancelar Cambios
+
+sel_detreg = Seleccionar Det. Reg.
+sel_valref = Seleccionar Valor Ref.
+
+
+#Obtencion Fip1
+ficherocargado=Fichero cargado
+verlistado= Ver listado
+verlistadofipcargados = Ver listado FIP1 cargados
+verificarservicio = Verificar servicio
+descargarFip1 = Descargar FIP1
+info_fip1 = Desde esta pantalla va a poder cargar FIP1 en el sistema para posteriormente importarlo. Cargue el FIP1 de su máquina local en el sistema. Una vez completada la carga, pulse sobre el botón superior de "Ver listado FIP1 cargados".
+url = URL
+importacion_fip1 = El proceso de importación del FIP1 ha comenzado. Esto puede provocar que la aplicación tenga un funcionamiento más lento.
+
+#Botones Fip1 Listado
+bloquear=Bloquear
+desbloquear=Desbloquear
+liberar_opcion = Liberar Opción
+desbloquear_servicio=Desbloquear servicio
+
+#Generación de FIP 2
+GenerarFIP = Generar FIP
+generacionFip2Correcta = Se han generador los FIP 2 de manera correcta.
+generacionFip2Error = Se han producido un error en la generación de FIP 2.
+fechaGeneracion = Fecha generación
+
+#Geometrías de Entidades
+
+info_shape = Para añadir una geometría debe cargar previamente los archivos .shp, .dbf y .shx.
+info_trabajando = Trabajando con el nombre de archivo:
+seleccion_info_importaciongeometria = IMPORTAR GEOMETRÍA
+infoimportargeometrias = Se deben subir los ficheros con extensiones .SHP, .SHX y .DBF para que la importación sea correcta. El archivo DBF debe contener un campo CLAVE encargado de relacionar la geometría del shape con la geometría que se pretende cargar.
+infoclaveimportargeometrias = El DBF debe contener un campo clave para relacionar la geometría del shape con la que se pretende cargar.
+seleccione_shape = SELECCIONE SHAPE
+cargargeometria = Cargar Geometría
+
+#planeamiento sistematizado
+proyeccion_cartografica = Proyección Cartográfica
+
+
+#IMPORTADORES
+eldocumentonopudocargarse=El documento no pudo cargarse
+excelnoválido=El documento no es un EXCEL válido
+erroralimportarelexcel=Error al importal el excel se han producido errores previos
+excelimportadook=Excel importado correctamente
+procesofinalizado = Proceso de Importación Finalizado
+procesofinalizadook = Proceso de Importación Finalizado de forma correcta
+eltramitecontieneentidades = El Tramite de Trabajo YA contiene Entidades. No se volveran a importar
+errorinesperadoexcel=Error INESPERADO en el EXCEL
+errorleyendoexcelcopiarsinformato = No se ha podido leer la hoja de excel. Copie y pegue sin formato y delimite la estructura en una nueva hoja.
+problemasenlafila = Problemas en la Fila #0
+erroresexcelnúmero = Error al Importar el EXCEL.  Hay #0 Errores Previos. No se manda a BD
+erroresexcelservicio = Error al Importar el EXCEL. Hay #0 Errores detectados por el Servicio. No se persiste en BD
+errordeterminacionesprevias = Ya existen previamente determinaciones para ese tramite. No se importaran las determinaciones del EXCEL
+
+seleccionexls = Seleccione el archivo XLS
+cargarentidades = Cargar Entidades
+resultadoimportacionxls=Resultado Importacion EXCEL
+bloqueadordeventanas=Bloqueador de Ventanas Emergentes detectado. Pulse aquÃ­ para descargar...
+descargarenexcel=(Descargar en EXCEL)
+cargardeterminaciones = Cargar Determinaciones
+cargarcondifcionesurbanisticas = Cargar Cond. Urbanísticas
+crearcondicionesimportadas = Crear Cond. Importadas
+seleccionehojas = Seleccione Hoja(s)
+excelentidadesejemplo = Descargar XLS de Prueba
+exceldeterminacionesejemplo = Descargar XLS de Prueba
+excelcondicionesejemplo = Descargar XLS de Prueba
+
+
+#FAQS
+
+faq_nombre = Nombre
+faq_definicion = Definición
+
+viewExpired = Sesion caducada
+
+validator.assertFalse=error en la validación
+validator.assertTrue=validación correcta
+validator.future=debe ser un dato futuro
+validator.length=la longitud debe ser entre {min} y {max}
+validator.max=debe ser menor o igual a {value}
+validator.min=debe ser mayor o igual a {value}
+validator.notNull=no puede ser nulo
+validator.past=debe ser una dato pasado
+validator.pattern=debe corresponder a "{regex}"
+validator.range=debe estar entre {min} y {max}
+validator.size=el tamaño debe estar entre {min} y {max}
+validator.email=debe introducir una dirección de correo electrónico
+validator.palabraclave=Debe escribir una palabra clave válida.
+
+# Procesos de validacion
+procesosvalidacion_ambito = Ámbito del proceso
+procesosvalidacion_nombre_tramite = Nombre del trámite
+procesosvalidacion_iteracion = Iteración
+procesosvalidacion_estado = Estado
+procesosvalidacion_ver_elementos = Ver elementos validados
+
+elementosvalidados_tipoval = Tipo de validación
+elementosvalidados_nombreval = Nombre
+elementosvalidados_obj = Elemento validado
+elementosvalidados_validado = Correcto
+elementosvalidados_observaciones = Observaciones
+
+no_grupo_aplicacion=ATENCION: Error al copiar la Condicion Urbanistica de Determinacion '{0}' en la Entidad Destino Seleccionada '{2}'. Probablemente esa determinacion no tenga como grupo de aplicacion el aplicado para esa entidad
+no_grupo_aplicacion_agrupar = ATENCION: Error al copiar la Condicion Urbanistica de Determinacion '{0}' en la Entidad Destino Seleccionada '{2}'. La Entidad Destino Seleccionada aun no tiene aplicado ningun Grupo de Aplicacion. Debe aplicar primero un Grupo a la entidad antes de construir otras Condiciones Urbanisticas
+no_grupo_aplicacion_a_determinacion = ATENCION: Error al copiar la Condicion Urbanistica de Determinacion '{0}' en la Entidad Destino Seleccionada '{2}'. No se ha encontrado en la determinacion a aplicar que tenga como grupo a la determinacion de grupo aplicada a la entidad. Agregue el Grupo de Aplicacion de la Entidad Destino a la determinacion: {1}
+no_copiar_cu = ATENCION: Error al copiar la Condicion Urbanistica de Determinacion '{0}' en la Entidad Destino Seleccionada '{2}'. Probablemente esa determinacion no tenga como grupo de aplicacion el aplicado para esa entidad
+no_se_ha_podido_copiar_cu=ATENCION: No se han podido copiar {0} Condiciones Urbanisticas de las {1} a la entidad destino '{2}'
+se_ha_podido_copiar_cu=Se han copiado correctamente {0} Condiciones Urbanisticas
+
+validados = Correctos
+novalidados = Incorrectos
+todos = Todos
+validar = Validar
+validar_tramites = Validar Trámites
+
+# Ficha de Condiciones Urbanisticas
+fichacu_x = Coordenada X
+fichacu_y = Coordenada Y
+fichacu_srs = SRS
+fichacu_enlace = Enlace de descarga
+fichacu_generar = Generar ficha urbanística
+fichacu_info_generar = Se va a generar la ficha urbanística. Esta ficha contendra datos  del planeamiento seleccionado. Este proceso puede tardar varios minutos.
+fichacu_generadaok = Se ha generado la ficha urbanística correctamente. Pulse en el enlace de descarga para obtener el fichero.
+fichacu_sindatos = No existen datos del tramite seleccionado en la coordenada seleccionada. No se genera la ficha urbanística.
+fichacu_error = Se ha producido un error al generar la ficha urban\u00EDstica. 
+fichacu_plan = Seleccionar Plan
+
+# Operaciones
+operacion_orden = Orden
+operacion_entoperadora = Entidad operadora
+operacion_entoperada = Entidad operada
+operacion_tramite = Trámite operado
+operacion_tipo = Tipo de operación
+operacion_adscripciones = Adscripciones
+operacion_selentoperada = Seleccionar entidad operada
+operacion_selentoperadora = Seleccionar entidad operadora
+operacion_borraroperacionentidad = Borrar operación entidad
+operacion_seldetoperada = Seleccionar determinación operada
+operacion_seldetoperadora = Seleccionar determinación operadora
+operacion_borraroperaciondeterminacion = Borrar operación determinación
+
+operacion_no_entidad_operada = No se ha seleccionado ninguna entidad operada.
+operacion_no_entidad_operadora = No se ha seleccionado ninguna entidad operadora.
+operacion_no_determinacion_operada = No se ha seleccionado ninguna determinacion operada.
+operacion_no_determinacion_operadora = No se ha seleccionado ninguna determinacion operadora.
+
+#Busquedas
+busquedadeterminaciones = Búsqueda de Determinaciones
+busquedaentidades = Búsqueda de Entidades
+busquedacondicionesurbanisticas = Búsqueda de Condiciones Urbanísitcas
+fechaaprobacion = Fecha aprobación
+tipoaprobacion = Tipo aprobación
+tipofiltro = Tipo filtro
+tipoTramite = Tipo trámite
+tienegeometria = Tiene Geometría
+articulado = Articulado
+plan = Plan
+entidadaplicada = Entidad aplicada
+detregimen = Determinación Régimen
+valor = Valor
+textoregesp = Texto Reg. Específico
+determinacionaplicada = Determinación aplicada
+detvalorreferencia = Det. Valor referencia
+nombreregesp = Nombre Reg. Esp.
+claseoperacion = Clase operación
+nombreOperadora = Nombre operadora
+tipoOperacion = Tipo operacion
+nombreoperadora = Nombre operadora
+nombreArchivo = Nombre archivo
+asociadodeterminacion = Asociado determinación
+asociadoentidad = Asociado entidad
+entidadAsociada = Entidad asociada
+determinacionAsociada = Determinación asociada
+condiciones = Condiciones
+operaciones = Operaciones
+documentos = Documentos
+tramites = Trámites
+tipoplan = Tipo plan
+tipoPlan = Tipo Plan
+clase = Clase
+tipo = Tipo
+esHoja = Es Hoja
+
+
+# Ficheros
+adjuntarfichero = Adjuntar Fichero
+adjuntar = Adjuntar
+descargar = Descargar
+manual_error = Ha ocurrido un error al subir el manual
+manual_no_fich = Aun no se ha seleccionado ningun fichero
+manual_ok = Se ha subido el manual correctamente
+manual_del_ok = El manual se ha borrado correctamente
+manual_borrar = Borrar manual
+
+# Faq 
+
+faq_anadir = Añadir Faq
+faq_borrar = Borrar Faq
+faq_titulo = Titulo FAQ
+faq_contenido = Contenido FAQ
+faq = FAQ
+faq_crear_ok = se ha creado la FAQ correctamente
+faq_del_ok = Se ha borrado la FAQ correctamente
+
+#Documentos
+nombre_base =  Nombre Base
+extension = Extensión
+ruta_carpeta = Carpeta
+titulo = Título
+descripcion = Descripción
+grupo = Grupo
+crear_documento = Crear Documento
+comentario = Comentario
+gestiondocumentalcarpeta = Gestión Documental Carpeta
+edicion_documentos_carpeta = Edici\u00F3n de Documentos Carpeta
+entidad = Entidad
+archivo = Archivo
+adjuntarguardar = Guardar Fichero y Anexar Ficheros
+gestiondocumentalinformacion = Debe escribir la ruta de la carpeta (sin espacios) y el título y pulsar sobre guardar antes de anexar ficheros u hojas
+gestiondocumentalinformacioncarpeta = Para adjuntar una Hoja debe añadir los ficheros del tipo jpg, tif o png y sus correspondientes ficheros georreferenciados
+documento_guardado_correctamente_anexar_ficheros = El documento se ha guardado correctamente. Puede anexar ficheros.
+fichero_anexado_correctamente = Fichero anexado correctamente
+asociar = Asociar
+ayuda_archivos_hoja = Debe asociar archivos con el mismo nombre base y las extensiones de planos georreferenciados permitidas.
+entidad_asociada_correctamente=Entidad asociada correctamente al documento
+determinacion_asociada_correctamente=Determinacion asociada correctamente al documento
+
+# Hoja
+botongenerico_crearhoja = Crear Hoja Georeferenciada
+boton_title_verListaDocumentos_crearhoja = Crear una nueva Hoja Georeferenciada
+
+# Copiar condiciones urbanisticas
+copiar_cu = Copiar Condición Urbanística
+entidades_copiarcu = Copiar Condiciones Urbanísticas en Entidades Seleccionadas
+seleccionar_todas = Seleccionar Todas
+seleccionar_ninguna = No seleccionar ninguna
+entidad_copiarcu_nosel = No se ha seleccionado ninguna condición urbanística
+
+#Copiar entidades y determinaciones
+copiar_seleccionados = Copiar Seleccionados
+reiniciar_seleccion = Reiniciar Selección
+determinaciones_copiados_correctamente = Determinaciones copiadas correctamente
+entidades_copiadas_correctamente = Entidades copiadas correctamente
+determinaciones_copiar = Copiar Determinaciones
+entidades_copiar = Copiar Entidades
+
+#Contenido planeamiento 
+
+descargar_excel = Descargar en EXCEL
+descargar_excel_parentesis =(Descargar en EXCEL)
+descargar_csv = Descargar en CSV
+descargar_csv_parentesis = (Descargar en CSV)
+bloqueador_ventana_emergente = Bloqueador de Ventanas Emergentes detectado. Pulse aqui para descargar...
+geometria_wkt = Geometría WKT
+geometria_debe_ser_multipolygon_polygon = La geometría debe ser Multipolygon o Polygon
+
+determinacion_grupoaplicacion = Grupo de Entidad
+info_usuario_detalle = Información del Usuario
+
+# Consolidacion
+consolidacion_confirm_msg = Va a proceder a consolidar en el sistema el refundido. Este proceso puede durar algunos minutos. Por favor, sea paciente y no cambie de pantalla. Se informar\u00E1 del resultado del proceso de consolidaci\u00F3n del prerrefundido
+
+# Entidades
+entidad_crear_confirmacion = Va a guardar los datos de una nueva entidad
+
+org.jboss.seam.loginFailed=Autenticacion erronea
+org.jboss.seam.loginSuccessful=Bienvenido/a, #0
+
+org.jboss.seam.TransactionFailed=Transacción errónea
+org.jboss.seam.NoConversation=La conversación ha terminado, caducado o quizás se ha procesado otra petición
+org.jboss.seam.IllegalNavigation=Navegación no permitida
+org.jboss.seam.ProcessEnded=El proceso ha terminado
+org.jboss.seam.ProcessNotFound=No se ha encontrado el proceso
+org.jboss.seam.TaskEnded=La tarea ha terminado
+org.jboss.seam.TaskNotFound=No se ha encontrado la tarea
+org.jboss.seam.NotLoggedIn=Por favor, introduzca sus datos de acceso al sistema
+
+javax.faces.component.UIInput.CONVERSION=El valor no puede ser transformado
+javax.faces.component.UIInput.REQUIRED=Valor Obligatorio
+javax.faces.component.UIInput.UPDATE=Se ha producido un error en la elaboración de la información enviada
+javax.faces.component.UISelectOne.INVALID=El valor no es válido
+javax.faces.component.UISelectMany.INVALID=Los valores no son válidos
+
+javax.faces.converter.BigDecimalConverter.DECIMAL=El valor debe ser un número
+javax.faces.converter.BigDecimalConverter.DECIMAL_detail=El valor debe ser un número decimal con cero o mas cifras, opcionalmente seguido de un punto y una fraccion, ej. {1}
+javax.faces.converter.BigIntegerConverter.BIGINTEGER=El valor debe ser un entero
+javax.faces.converter.BigIntegerConverter.BIGINTEGER_detail=El valor debe ser un un número entero con cero o mas cifras
+javax.faces.converter.BooleanConverter.BOOLEAN=debe ser verdadero o falso
+javax.faces.converter.BooleanConverter.BOOLEAN_detail=El valor debe ser verdadero o falso (cualquier valor diferente de verdadero es considerado falso)
+javax.faces.converter.ByteConverter.BYTE=El valor debe ser un número comprendido entre 0 y 255
+javax.faces.converter.ByteConverter.BYTE_detail=El valor debe ser un número comprendido entre 0 y 255
+javax.faces.converter.CharacterConverter.CHARACTER=El valor debe ser un carácter
+javax.faces.converter.CharacterConverter.CHARACTER_detail=El valor debe ser un carácter ASCII válido
+javax.faces.converter.DateTimeConverter.DATE=El valor debe ser una fecha
+javax.faces.converter.DateTimeConverter.DATE_detail=El valor debe ser una fecha, es. {1}
+javax.faces.converter.DateTimeConverter.TIME=El valor debe ser un horario
+javax.faces.converter.DateTimeConverter.TIME_detail=El valor debe ser un horario, es. {1}
+javax.faces.converter.DateTimeConverter.DATETIME=El valor debe ser una fecha y un horario
+javax.faces.converter.DateTimeConverter.DATETIME_detail=El valor debe ser una fecha y un horario,  es. {1}
+javax.faces.converter.DateTimeConverter.PATTERN_TYPE=Para convertir el valor se debe especificar un patron o un atributo tipo
+javax.faces.converter.DoubleConverter.DOUBLE=El valor debe ser un número
+javax.faces.converter.DoubleConverter.DOUBLE_detail=El valor debe ser un número comprendido entre 4.9E-324 y 1.7976931348623157E308
+javax.faces.converter.EnumConverter.ENUM=El valor debe ser convertible en una enumeracion
+javax.faces.converter.EnumConverter.ENUM_detail=El valor debe ser convertible en una enumeración o de enumeración que contiene la constante {1}
+javax.faces.converter.EnumConverter.ENUM_NO_CLASS=El valor debe ser convertible en una enumeración o de enumeración, pero no se ha encontrado la clase enum
+javax.faces.converter.EnumConverter.ENUM_NO_CLASS_detail=El valor debe ser convertible en una enum o de enum, pero no se ha encontrado la clase enum
+javax.faces.converter.FloatConverter.FLOAT=dEl valor debe ser un número
+javax.faces.converter.FloatConverter.FLOAT_detail=El valor debe ser un número comprendido entre 1.4E-45 y 3.4028235E38
+javax.faces.converter.IntegerConverter.INTEGER=El valor debe ser un número entero
+javax.faces.converter.IntegerConverter.INTEGER_detail=El valor debe ser un número entero comprendido entre -2147483648 y 2147483647
+javax.faces.converter.LongConverter.LONG=El valor debe ser un número entero
+javax.faces.converter.LongConverter.LONG_detail=El valor debe ser un número entero comprendido entre -9223372036854775808 y 9223372036854775807
+javax.faces.converter.NumberConverter.CURRENCY=El valor debe ser una moneda
+javax.faces.converter.NumberConverter.CURRENCY_detail=El valor debe ser una moneda, ej. {1}
+javax.faces.converter.NumberConverter.PERCENT=El valor debe ser un porcentual
+javax.faces.converter.NumberConverter.PERCENT_detail=El valor debe ser un porcentual, ej. {1}
+javax.faces.converter.NumberConverter.NUMBER=El valor debe ser un número
+javax.faces.converter.NumberConverter.NUMBER_detail=El valor debe ser un número
+javax.faces.converter.NumberConverter.PATTERN=El valor debe ser un número
+javax.faces.converter.NumberConverter.PATTERN_detail=El valor debe ser un número
+javax.faces.converter.ShortConverter.SHORT=El valor debe ser un número entero
+javax.faces.converter.ShortConverter.SHORT_detail=El valor debe ser un número entero comprendido entre -32768 y 32767
+
+javax.faces.validator.DoubleRangeValidator.MAXIMUM=El valor debe ser menor o igual a {0}
+javax.faces.validator.DoubleRangeValidator.MINIMUM=El valor debe ser mayor o igual a {0}
+javax.faces.validator.DoubleRangeValidator.NOT_IN_RANGE=El valor debe estar comprendido entre {0} y {1}
+javax.faces.validator.DoubleRangeValidator.TYPE=El valor no es del tipo correcto
+javax.faces.validator.LengthValidator.MAXIMUM=El valor debe ser inferior o igual {0} caracteres
+javax.faces.validator.LengthValidator.MINIMUM=El valor debe ser superior o igual {0} caracteres
+javax.faces.validator.LongRangeValidator.MAXIMUM=El valor debe ser menor o igual a {0}
+javax.faces.validator.LongRangeValidator.MINIMUM=El valor debe ser superior o igual a {0}
+javax.faces.validator.LongRangeValidator.NOT_IN_RANGE=El valor debe estar comprendido entre {0} y {1}
+javax.faces.validator.LongRangeValidator.TYPE=El valor no es del tipo correcto
+
+javax.faces.validator.NOT_IN_RANGE=El valor debe estar comprendido entre {0} y {1}
+javax.faces.converter.STRING=El valor no se puede convertir a una cadena de texto
+
+# Redireccion de paginas de error
+org.jboss.seam.framework.EntityNotFoundException = Error SEAM: La entidad no existe.
+javax.persistence.EntityNotFoundException = Error JPA: La entidad no existe.
+javax.persistence.EntityExistsException = Error JPA: Entidad duplicada.
+javax.persistence.OptimisticLockException = Otro usuario ya se encuentra modificando los datos. Por favor, inténtelo de nuevo pasados unos minutos.
+org.jboss.seam.security.AuthorizationException = Acceso denegado.
+javax.faces.application.ViewExpiredException = Su sesión ha expirado. Por favor, vuelva a acceder de nuevo al sistema.
+error_general = Se ha producido un error en el sistema, por favor, inténtelo de nuevo pasados unos minutos.

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jul-2009 12:36:17 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Ambitoshp" table="ambitoshp" schema="diccionario">
+        <id name="iden" type="int">
+            <column name="iden" />
+            <generator class="assigned" />
+        </id>
+        <property name="idambito" type="java.lang.Integer">
+            <column name="idambito" />
+        </property>
+        <property name="geom" type="string" formula="AsText(geom)">
+            <column name="geom" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,48 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alvaro.Montero    
+-->
+
+<div class="form">
+<form id="VisorPLANESEditPublicacion" action="#" method="get">
+
+	<input type="hidden" id="id" name="id" value=""/>
+	<input type="hidden" id="idTramite" name="idTramite" value=""/>
+	
+	<div class="formRow">
+	<div class="formLabel">Bolet&iacute;n:</div>
+	<div class="formField">
+	    <select name="idBoletin" id="idBoletin" style="width: 100%">
+        </select>
+    </div>
+	<div class="clear"></div>
+	</div>
+	
+	<div class="formRow">
+	<div class="formLabel">Fecha:</div>
+	<div id="dateImputWrapper" class="formField">
+		<input id="txtFechaVisible" class="input" name="txtFechaVisible" type="text" data-meiomask="fixed.date"/>
+		<input id="txtFecha" class="input" name="txtFecha" type="hidden"/>
+	</div>	
+	<div class="clear"></div>
+	</div>
+	
+	<div class="formRow">
+	<div class="formLabel">N&uacute;mero:</div>
+	<div class="formField"><input type="text" class="input" id="txtNumero" value="" maxlength="50" style="width: 100%"/></div>
+	<div class="clear"></div>
+	</div>
+	
+	<br/>
+	
+	<div class="buttonRow">
+	<div class="formField" style="width:100%;">
+		<input type="submit" id="BtnVisorPlanesCancelarModificarPublicacionTramite" class="button" value="Cancelar" style="float:left;"/>
+		<input type="submit" id="BtnVisorPlanesGuardarModificarPublicacionTramite" class="button" value="Aceptar" style="float:right;"/>
+	</div>
+	<div class="clear"></div>
+	</div>
+		
+</form>
+</div>

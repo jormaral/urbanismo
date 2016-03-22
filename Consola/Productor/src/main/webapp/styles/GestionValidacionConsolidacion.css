@@ -1,0 +1,297 @@
+.title-panel-header {
+	display: inline-block;
+	font-size: 12px;
+	margin: 0;
+	padding: 3px 8px 0 8px;
+	height: 22px;
+	overflow: hidden;
+	color: #333;
+}
+
+img.displayedCentred {
+	display: block;
+	margin-left: auto;
+	margin-right: auto }
+
+#valWrapper{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    overflow: auto;
+    background-color: #FFFFFF;
+}
+
+#valMain {
+    background-color:#ececec;
+    bottom:0;
+    float:left;
+    left:0; /* left:170px; */
+    padding:10px;
+    position:absolute;
+    right:0;
+    top:0;
+    z-index:999999;
+    background-image:url(images/valFipFondoContenido.gif);
+    background-repeat:repeat-y;
+    background-position:left top;
+    overflow: auto;
+}
+
+#valCargaFip {
+    padding: 0 20px;
+    background-color:transparent;
+
+    left:0;
+    position:absolute;
+    top:0;
+    bottom: 0;
+    right: 0;
+
+    overflow: auto;
+}
+
+#valCargaFip #mainDIV{
+    background-color: #496CC4;
+    padding: 10px 20px;
+    color: #E1E7F8;
+}
+
+#valCargaFip #mainDIV label{
+    font-weight: bold;
+    float: left;
+    width: 100px;
+}
+
+#valCargaFip #mainDIV label{
+    font-weight: bold;
+    float: left;
+    clear: both;
+}
+
+#valCargaFip #formReglasFIP #formRules{
+    background-color: #496CC4;
+    color: #E1E7F8;
+    padding: 5px 20px;
+}
+#valCargaFip #formReglasFIP label{
+    float: left;
+    width: 150px;
+}
+#valCargaFip #formReglasFIP select,
+#valCargaFip #formReglasFIP input,
+#valCargaFip #formReglasFIP textarea {
+    margin-bottom: 5px;
+}
+
+#valCargaFip #formReglasFIP select,
+#valCargaFip #formReglasFIP textarea {
+    width: 100%;
+}
+
+#valCargaFip #formReglasFIP textarea {
+    height: 40px;
+    overflow: auto;
+    clip: auto;
+}
+.sqlTextArea{
+    height: visible;
+}
+
+#valCargaFip #resultFipWrapper {
+    position:absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    margin: 0 20px;
+}
+#valCargaFip #resultFipWrapper #resultFipGridPanel{
+    display: block;
+    position:absolute;
+    height:auto;
+    bottom:0;
+    top:0;
+    left:0;
+    right:0;
+    margin-top:60px;
+    margin-bottom:20px;
+}
+
+
+.gval-updatingfip {background: transparent url(images/ajax-loader-66.gif) no-repeat center;
+                   height: 66px;
+                   left: auto;
+                   position: relative;
+}
+
+.searchFieldValidacion {
+	position: relative;
+	top: -9px;
+	width: 150px;
+	overflow: hidden;
+	line-height: 15px; 
+	margin: 0;
+	padding: 2px 5px 3px 5px;
+	border: 1px none #808080 none;
+	vertical-align: middle;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-bottomleft: 3px;				
+	-moz-border-radius-topright: 3px;
+	-moz-border-radius-bottomright: 3px;
+}
+
+.tablaValidacion{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	position: relative;
+	border: 0px solid #eee;
+	overflow:hidden; /* za debug iskljuci */
+	color: #000;
+}
+
+.cabeceraTablaValidacion {
+	background: url("images/fhbg.gif") repeat-x scroll center bottom #FAFAFA;
+    position: relative;
+	border: 1px solid #ccc;
+	border-bottom: 0px;
+	overflow: hidden;
+	font-weight: normal;
+	/*
+	background-color: #b1b1b1;
+	text-align: center;
+	font-weight: bold;
+	border : hidden;*/
+}
+
+.filaImparValidacion {
+	background-color: #FFFFFF;
+	border : hidden;
+}
+
+.filaParValidacion {
+	background-color: #F7F7F7;
+	border : hidden;
+}
+
+.filaValidacionCelda{
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #DDDDDD;
+}
+
+.pend {
+    height:16px;
+    width:16px;
+    background-image:url(images/ajax-loader-16.gif);
+    background-position:center center;
+
+}
+.ok{
+    height:16px;
+    width:16px;
+    background-image:url(images/ok.png);
+    background-position:center center;
+
+}
+.error{
+    height:16px;
+    width:16px;
+    background-image:url(images/error.png);
+    background-position:center center;
+}
+
+
+#myForm {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background:red none repeat scroll 0 0;
+    height:0;
+    left:50%;
+    margin-left:-150px;
+    position:absolute;
+    top:32px;
+    width:300px;
+}
+
+#myForm h2
+{
+    font-family: Century Gothic;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    color:#717171;
+    font-size:12pt;
+}
+
+#textCargando h2
+{
+    font-family: Century Gothic;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+}
+
+
+#progressBarTable {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background:transparent none repeat scroll 0 0;
+    height:84px;
+    left:50%;
+    margin-left:-242px;
+    position:absolute;
+    top:241px;
+    width:486px;
+    z-index:1;
+}
+#progressBar
+{
+    border: 1px;
+    width: 0px;
+    background-color: #dd0000;
+}
+
+.counter
+{
+    background-color:transparent;
+    color:#aaaaaa;
+    width:300px;
+    height:20px;
+}
+.divlink{
+    cursor: pointer
+}
+.divlink:hover {
+    background-color: #C0C0C0
+}
+.divprocessing{ background: transparent url(images/ajax-loader-66.gif) no-repeat center;
+                height: 66px;
+                top:25px;
+                position: relative;
+}
+
+.val-back {
+    color: #1B3F14;
+    background: transparent url(images/validar.png) no-repeat 0px center;
+}
+.val-buttonback {
+    float:right;
+    margin: 5px;
+    margin-top: 10px;
+    font-size: 1.2em;
+    line-height: 1.8em;
+    font-weight: bold;
+    padding: 4px;
+    padding-left: 35px;
+    height: 26px;
+    cursor: pointer;
+    width: 30px;
+}
+
+#inspeccionText{
+    width: 787px;
+    margin-top: 20px;
+}

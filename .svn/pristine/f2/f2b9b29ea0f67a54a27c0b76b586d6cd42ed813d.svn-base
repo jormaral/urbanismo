@@ -1,0 +1,93 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+		
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_busqueda}"
+				view="/informacionfip/busqueda/BusquedaAvanzada.xhtml"
+				id="BusquedaAvanzadaNavegacionMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+	<ui:define name="body">
+		<ice:form id="formBusqued">
+
+			<br></br>
+			<ice:panelGroup id="tabSetTabs">
+
+				<ice:panelTabSet title="Tabla de Búsqueda" style="width: 100%"
+					id="TablaBusqueda">
+
+					<!-- Panel Tab 1 defined with some basic content -->
+					<ice:panelTab label="#{messages.tramites}" styleClass="icePnlTb2"
+						id="Tramite">
+						<ui:include src="./busquedaTramite.xhtml"></ui:include>
+					</ice:panelTab>
+
+					<ice:panelTab label="#{messages.entidades}" styleClass="icePnlTb2"
+						id="Entidades">
+						<ui:include src="./busquedaEntidad.xhtml"></ui:include>
+					</ice:panelTab>
+
+					<ice:panelTab label="#{messages.determinaciones}"
+						styleClass="icePnlTb2" id="Determinaciones">
+						<ui:include src="./busquedaDeterminacion.xhtml"></ui:include>
+					</ice:panelTab>
+
+					<ice:panelTab label="#{messages.condiciones}"
+						styleClass="icePnlTb2" id="Condiciones">
+						<ui:include src="./busquedaCondicion.xhtml"></ui:include>
+					</ice:panelTab>
+
+					<ice:panelTab label="#{messages.operaciones}"
+						styleClass="icePnlTb2" id="Ordenaciones">
+						<ui:include src="./busquedaOperacion.xhtml"></ui:include>
+					</ice:panelTab>
+
+					<ice:panelTab label="#{messages.documentos}" styleClass="icePnlTb2"
+						id="Documentos">
+						<ui:include src="./busquedaDocumento.xhtml"></ui:include>
+					</ice:panelTab>
+
+				</ice:panelTabSet>
+
+
+			</ice:panelGroup>
+
+		</ice:form>
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,355 @@
+<div class="toolbarTabs">
+	<ul id="panelTramitesDeterminacionesTabs" class="tab-menu">
+		<li id='tabTramitesDeterminacionesDatosGenerales' class="selected"><a id="TramitesDeterminacionesDatosGenerales" href="Pages/VisorPLANES/Tramites/Determinaciones/DeterminacionesData.html" title="Datos generales">Datos generales</a></li>
+		<li id='tabTramitesDeterminacionesValoresReferencia' style="display: none;"><a id="TramitesDeterminacionesValoresReferencia" href="Pages/VisorPLANES/Tramites/Determinaciones/DeterminacionesData.html" title="Valores de referencia">Valores de referencia</a></li>
+		<li id='tabTramitesDeterminacionesRegulacionesEspecificas' style="display: none;"><a id="TramitesDeterminacionesRegulacionesEspecificas" href="Pages/VisorPLANES/Tramites/Determinaciones/DeterminacionesData.html" title="Regulaci&oacute;n">Regulaci&oacute;n</a></li>
+		<li id='tabTramitesDeterminacionesDocumentos' style="display: none;"><a id="TramitesDeterminacionesDocumentos" href="Pages/VisorPLANES/Tramites/Determinaciones/DeterminacionesData.html" title="Documentos">Documentos</a></li>
+		<li id='tabTramitesDeterminacionesEsOperadoPor' style="display: none;"><a id="TramitesDeterminacionesEsOperadoPor" href="Pages/VisorPLANES/Tramites/Determinaciones/DeterminacionesData.html" title="Es operador por">Es operado por</a></li>
+		<li id='tabTramitesDeterminacionesOperaA' style="display: none;"><a id="TramitesDeterminacionesOperaA" href="Pages/VisorPLANES/Tramites/Determinaciones/DeterminacionesData.html" title="Opera a">Opera a</a></li>
+		<li id='tabTramitesDeterminacionesAplicaciones' style="display: none;"><a id="TramitesDeterminacionesAplicaciones" href="Pages/VisorPLANES/Tramites/Determinaciones/DeterminacionesData.html" title="Aplicaci&oacute;n">Aplicaci&oacute;n</a></li>
+		<li id='tabTramitesDeterminacionesGruposAplicacion' style="display: none;"><a id="TramitesDeterminacionesGruposAplicacion" href="Pages/VisorPLANES/Tramites/Determinaciones/DeterminacionesData.html" title="Grupos de aplicaci&oacute;n">Grupos de aplicaci&oacute;n</a></li>
+		<li id='tabTramitesDeterminacionesDeterminacionesReguladoras' style="display: none;"><a id="TramitesDeterminacionesDeterminacionesReguladoras" href="Pages/VisorPLANES/Tramites/Determinaciones/DeterminacionesData.html" title="Determinaciones reguladoras">Determinaciones reguladoras</a></li>
+		<li id='tabTramitesDeterminacionesUnidades' style="display: none;"><a id="TramitesDeterminacionesUnidades" href="Pages/VisorPLANES/Tramites/Determinaciones/DeterminacionesData.html" title="Unidades">Unidades</a></li>
+		<li id='tabTramitesDeterminacionesCargando' style="display: none;"><div id="TramitesDeterminacioneCargando" class="progresoBasico16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+	</ul>
+	<div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+
+	//MochaUI.initializeTabs('panelTramitesDeterminacionesTabs','main-panel-determinaciones');
+	
+	$('TramitesDeterminacionesDatosGenerales').addEvent('click', function(e){
+		new Event(e).stop();
+
+		$('tabTramitesDeterminaciones-panel').setStyle('overflow','hidden');
+
+		if ($('TramitesDeterminacionesDatosGenerales').getStyle('opacity') != 0.5){
+			$('panelTramitesDeterminacionesDatosGenerales').setStyle('display', 'block');//.setOpacity(100);
+			$('panelTramitesDeterminacionesValoresReferencia').setStyle('display', 'none');//.setOpacity(0);
+			$('panelTramitesDeterminacionesRegulacionesEspecificas').setStyle('display', 'none');//.setOpacity(0);
+			$('panelTramitesDeterminacionesDocumentos').setStyle('display', 'none');//.setOpacity(0);
+			$('panelTramitesDeterminacionesEsOperadoPor').setStyle('display', 'none');//.setOpacity(0);
+			$('panelTramitesDeterminacionesOperaA').setStyle('display', 'none');//.setOpacity(0);
+			$('panelTramitesDeterminacionesAplicaciones').setStyle('display', 'none');//.setOpacity(0);
+			$('panelTramitesDeterminacionesGruposAplicacion').setStyle('display', 'none');//.setOpacity(0);
+			$('panelTramitesDeterminacionesDeterminacionesReguladoras').setStyle('display', 'none');//.setOpacity(0);
+			//$('panelTramitesDeterminacionesUnidades').setStyle('display', 'none');//.setOpacity(0);
+			
+			$('tabTramitesDeterminacionesDatosGenerales').set('class','selected');
+			$('tabTramitesDeterminacionesValoresReferencia').set('class','');
+			$('tabTramitesDeterminacionesRegulacionesEspecificas').set('class','');
+			$('tabTramitesDeterminacionesDocumentos').set('class','');
+			$('tabTramitesDeterminacionesEsOperadoPor').set('class','');
+			$('tabTramitesDeterminacionesOperaA').set('class','');
+			$('tabTramitesDeterminacionesAplicaciones').set('class','');
+			$('tabTramitesDeterminacionesGruposAplicacion').set('class','');
+			$('tabTramitesDeterminacionesDeterminacionesReguladoras').set('class','');
+			//$('tabTramitesDeterminacionesUnidades').set('class','');
+		}
+
+		MUI.rWidth();
+	});
+
+	$('TramitesDeterminacionesValoresReferencia').addEvent('click', function(e){
+		new Event(e).stop();
+
+		$('tabTramitesDeterminaciones-panel').setStyle('overflow','auto');
+		
+		if ($('TramitesDeterminacionesValoresReferencia').getStyle('opacity') != 0.5){
+			$('panelTramitesDeterminacionesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesValoresReferencia').setStyle('display', 'block');
+			$('panelTramitesDeterminacionesRegulacionesEspecificas').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesDocumentos').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesEsOperadoPor').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesOperaA').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesAplicaciones').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesGruposAplicacion').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesDeterminacionesReguladoras').setStyle('display', 'none');
+			//$('panelTramitesDeterminacionesUnidades').setStyle('display', 'none');
+			
+			$('tabTramitesDeterminacionesDatosGenerales').set('class','');
+			$('tabTramitesDeterminacionesValoresReferencia').set('class','selected');
+			$('tabTramitesDeterminacionesRegulacionesEspecificas').set('class','');
+			$('tabTramitesDeterminacionesDocumentos').set('class','');
+			$('tabTramitesDeterminacionesEsOperadoPor').set('class','');
+			$('tabTramitesDeterminacionesOperaA').set('class','');
+			$('tabTramitesDeterminacionesAplicaciones').set('class','');
+			$('tabTramitesDeterminacionesGruposAplicacion').set('class','');
+			$('tabTramitesDeterminacionesDeterminacionesReguladoras').set('class','');
+			//$('tabTramitesDeterminacionesUnidades').set('class','');
+		}
+
+		if ($('panelTramitesDeterminacionesValoresReferencia').childNodes.length == 0){
+			ChargeTabDeterminacionesValoresReferencia(dataValoresReferencia);
+		} else { MUI.rWidth(); }
+	});
+
+	$('TramitesDeterminacionesRegulacionesEspecificas').addEvent('click', function(e){
+		new Event(e).stop();	
+
+		$('tabTramitesDeterminaciones-panel').setStyle('overflow','hidden');
+
+		if ($('TramitesDeterminacionesRegulacionesEspecificas').getStyle('opacity') != 0.5){
+			$('panelTramitesDeterminacionesDatosGenerales').setStyle('display', 'none')
+			$('panelTramitesDeterminacionesValoresReferencia').setStyle('display', 'none')
+			$('panelTramitesDeterminacionesRegulacionesEspecificas').setStyle('display', 'block')
+			$('panelTramitesDeterminacionesDocumentos').setStyle('display', 'none')
+			$('panelTramitesDeterminacionesEsOperadoPor').setStyle('display', 'none')
+			$('panelTramitesDeterminacionesOperaA').setStyle('display', 'none')
+			$('panelTramitesDeterminacionesAplicaciones').setStyle('display', 'none')
+			$('panelTramitesDeterminacionesGruposAplicacion').setStyle('display', 'none')
+			$('panelTramitesDeterminacionesDeterminacionesReguladoras').setStyle('display', 'none')
+			//$('panelTramitesDeterminacionesUnidades').setStyle('display', 'none')
+			
+			$('tabTramitesDeterminacionesDatosGenerales').set('class','');
+			$('tabTramitesDeterminacionesValoresReferencia').set('class','');
+			$('tabTramitesDeterminacionesRegulacionesEspecificas').set('class','selected');
+			$('tabTramitesDeterminacionesDocumentos').set('class','');
+			$('tabTramitesDeterminacionesEsOperadoPor').set('class','');
+			$('tabTramitesDeterminacionesOperaA').set('class','');
+			$('tabTramitesDeterminacionesAplicaciones').set('class','');
+			$('tabTramitesDeterminacionesGruposAplicacion').set('class','');
+			$('tabTramitesDeterminacionesDeterminacionesReguladoras').set('class','');
+			//$('tabTramitesDeterminacionesUnidades').set('class','');
+		}
+
+		if ($('panelTramitesDeterminacionesRegulacionesEspecificas').childNodes.length == 0){
+			ChargeTabDeterminacinoesRegulacionesEspecificas(dataRegulacionesEspecificas);
+		} else { MUI.rWidth(); }
+	});
+
+	$('TramitesDeterminacionesDocumentos').addEvent('click', function(e){
+		new Event(e).stop();	
+
+		$('tabTramitesDeterminaciones-panel').setStyle('overflow','hidden');
+
+		if ($('TramitesDeterminacionesDocumentos').getStyle('opacity') != 0.5){
+			$('panelTramitesDeterminacionesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesValoresReferencia').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesRegulacionesEspecificas').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesDocumentos').setStyle('display', 'block');
+			$('panelTramitesDeterminacionesEsOperadoPor').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesOperaA').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesAplicaciones').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesGruposAplicacion').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesDeterminacionesReguladoras').setStyle('display', 'none');
+			//$('panelTramitesDeterminacionesUnidades').setStyle('display', 'none');
+			
+			$('tabTramitesDeterminacionesDatosGenerales').set('class','');
+			$('tabTramitesDeterminacionesValoresReferencia').set('class','');
+			$('tabTramitesDeterminacionesRegulacionesEspecificas').set('class','');
+			$('tabTramitesDeterminacionesDocumentos').set('class','selected');
+			$('tabTramitesDeterminacionesEsOperadoPor').set('class','');
+			$('tabTramitesDeterminacionesOperaA').set('class','');
+			$('tabTramitesDeterminacionesAplicaciones').set('class','');
+			$('tabTramitesDeterminacionesGruposAplicacion').set('class','');
+			$('tabTramitesDeterminacionesDeterminacionesReguladoras').set('class','');
+			//$('tabTramitesDeterminacionesUnidades').set('class','');
+		}
+
+		if ($('panelTramitesDeterminacionesDocumentos').childNodes.length == 0){
+			chargeTabDeterminacionesDocumentos(dataDocumentos);
+		} else { MUI.rWidth(); }
+	});
+
+	$('TramitesDeterminacionesEsOperadoPor').addEvent('click', function(e){
+		new Event(e).stop();
+
+		$('tabTramitesDeterminaciones-panel').setStyle('overflow','hidden');
+
+		if ($('TramitesDeterminacionesEsOperadoPor').getStyle('opacity') != 0.5){
+			$('panelTramitesDeterminacionesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesValoresReferencia').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesRegulacionesEspecificas').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesDocumentos').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesEsOperadoPor').setStyle('display', 'block');
+			$('panelTramitesDeterminacionesOperaA').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesAplicaciones').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesGruposAplicacion').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesDeterminacionesReguladoras').setStyle('display', 'none');
+			//$('panelTramitesDeterminacionesUnidades').setStyle('display', 'none');
+			
+			$('tabTramitesDeterminacionesDatosGenerales').set('class','');
+			$('tabTramitesDeterminacionesValoresReferencia').set('class','');
+			$('tabTramitesDeterminacionesRegulacionesEspecificas').set('class','');
+			$('tabTramitesDeterminacionesDocumentos').set('class','');
+			$('tabTramitesDeterminacionesEsOperadoPor').set('class','selected');
+			$('tabTramitesDeterminacionesOperaA').set('class','');
+			$('tabTramitesDeterminacionesAplicaciones').set('class','');
+			$('tabTramitesDeterminacionesGruposAplicacion').set('class','');
+			$('tabTramitesDeterminacionesDeterminacionesReguladoras').set('class','');
+			//$('tabTramitesDeterminacionesUnidades').set('class','');
+		}
+
+		if ($('panelTramitesDeterminacionesEsOperadoPor').childNodes.length == 0){
+			chargeTabDeterminacionesEsOperadorPor(dataEsOperadoPor);
+		} else { MUI.rWidth(); }
+	});
+
+	$('TramitesDeterminacionesOperaA').addEvent('click', function(e){
+		new Event(e).stop();
+
+		$('tabTramitesDeterminaciones-panel').setStyle('overflow','hidden');
+
+		if ($('TramitesDeterminacionesOperaA').getStyle('opacity') != 0.5){
+			$('panelTramitesDeterminacionesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesValoresReferencia').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesRegulacionesEspecificas').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesDocumentos').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesEsOperadoPor').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesOperaA').setStyle('display', 'block');
+			$('panelTramitesDeterminacionesAplicaciones').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesGruposAplicacion').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesDeterminacionesReguladoras').setStyle('display', 'none');
+			//$('panelTramitesDeterminacionesUnidades').setStyle('display', 'none');
+			
+			$('tabTramitesDeterminacionesDatosGenerales').set('class','');
+			$('tabTramitesDeterminacionesValoresReferencia').set('class','');
+			$('tabTramitesDeterminacionesRegulacionesEspecificas').set('class','');
+			$('tabTramitesDeterminacionesDocumentos').set('class','');
+			$('tabTramitesDeterminacionesEsOperadoPor').set('class','');
+			$('tabTramitesDeterminacionesOperaA').set('class','selected');
+			$('tabTramitesDeterminacionesAplicaciones').set('class','');
+			$('tabTramitesDeterminacionesGruposAplicacion').set('class','');
+			$('tabTramitesDeterminacionesDeterminacionesReguladoras').set('class','');
+			//$('tabTramitesDeterminacionesUnidades').set('class','');
+		}
+
+		if ($('panelTramitesDeterminacionesOperaA').childNodes.length == 0){
+			chargeTabDeterminacionesOperaA(dataOperaA);
+		} else { MUI.rWidth(); }
+	});
+
+	$('TramitesDeterminacionesAplicaciones').addEvent('click', function(e){
+		new Event(e).stop();
+
+		$('tabTramitesDeterminaciones-panel').setStyle('overflow','hidden');
+
+		if ($('TramitesDeterminacionesAplicaciones').getStyle('opacity') != 0.5){
+			$('panelTramitesDeterminacionesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesValoresReferencia').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesRegulacionesEspecificas').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesDocumentos').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesEsOperadoPor').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesOperaA').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesAplicaciones').setStyle('display', 'block');
+			$('panelTramitesDeterminacionesGruposAplicacion').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesDeterminacionesReguladoras').setStyle('display', 'none');
+			//$('panelTramitesDeterminacionesUnidades').setStyle('display', 'none');
+			
+			$('tabTramitesDeterminacionesDatosGenerales').set('class','');
+			$('tabTramitesDeterminacionesValoresReferencia').set('class','');
+			$('tabTramitesDeterminacionesRegulacionesEspecificas').set('class','');
+			$('tabTramitesDeterminacionesDocumentos').set('class','');
+			$('tabTramitesDeterminacionesEsOperadoPor').set('class','');
+			$('tabTramitesDeterminacionesOperaA').set('class','');
+			$('tabTramitesDeterminacionesAplicaciones').set('class','selected');
+			$('tabTramitesDeterminacionesGruposAplicacion').set('class','');
+			$('tabTramitesDeterminacionesDeterminacionesReguladoras').set('class','');
+			//$('tabTramitesDeterminacionesUnidades').set('class','');
+		}
+
+		if ($('panelTramitesDeterminacionesAplicaciones').childNodes.length == 0){
+			chargeTabDeterminacionesAplicaciones(dataAplicaciones);
+		} else { MUI.rWidth(); }
+	});
+
+	$('TramitesDeterminacionesGruposAplicacion').addEvent('click', function(e){
+		new Event(e).stop();
+
+		$('tabTramitesDeterminaciones-panel').setStyle('overflow','auto');
+
+		if ($('TramitesDeterminacionesGruposAplicacion').getStyle('opacity') != 0.5){
+			$('panelTramitesDeterminacionesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesValoresReferencia').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesRegulacionesEspecificas').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesDocumentos').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesEsOperadoPor').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesOperaA').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesAplicaciones').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesGruposAplicacion').setStyle('display', 'block');
+			$('panelTramitesDeterminacionesDeterminacionesReguladoras').setStyle('display', 'none');
+			//$('panelTramitesDeterminacionesUnidades').setStyle('display', 'none');
+			
+			$('tabTramitesDeterminacionesDatosGenerales').set('class','');
+			$('tabTramitesDeterminacionesValoresReferencia').set('class','');
+			$('tabTramitesDeterminacionesRegulacionesEspecificas').set('class','');
+			$('tabTramitesDeterminacionesDocumentos').set('class','');
+			$('tabTramitesDeterminacionesEsOperadoPor').set('class','');
+			$('tabTramitesDeterminacionesOperaA').set('class','');
+			$('tabTramitesDeterminacionesAplicaciones').set('class','');
+			$('tabTramitesDeterminacionesGruposAplicacion').set('class','selected');
+			$('tabTramitesDeterminacionesDeterminacionesReguladoras').set('class','');
+			//$('tabTramitesDeterminacionesUnidades').set('class','');
+		}
+
+		if ($('panelTramitesDeterminacionesGruposAplicacion').childNodes.length == 0){
+			chargeTabDeterminacionesGruposAplicacion(dataGruposAplicacion);
+		} else { MUI.rWidth(); }
+	});
+
+	$('TramitesDeterminacionesDeterminacionesReguladoras').addEvent('click', function(e){
+		new Event(e).stop();
+
+		$('tabTramitesDeterminaciones-panel').setStyle('overflow','hidden');
+
+		if ($('TramitesDeterminacionesDeterminacionesReguladoras').getStyle('opacity') != 0.5){
+			$('panelTramitesDeterminacionesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesValoresReferencia').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesRegulacionesEspecificas').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesDocumentos').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesEsOperadoPor').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesOperaA').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesAplicaciones').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesGruposAplicacion').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesDeterminacionesReguladoras').setStyle('display', 'block');
+			//$('panelTramitesDeterminacionesUnidades').setStyle('display', 'none');
+			
+			$('tabTramitesDeterminacionesDatosGenerales').set('class','');
+			$('tabTramitesDeterminacionesValoresReferencia').set('class','');
+			$('tabTramitesDeterminacionesRegulacionesEspecificas').set('class','');
+			$('tabTramitesDeterminacionesDocumentos').set('class','');
+			$('tabTramitesDeterminacionesEsOperadoPor').set('class','');
+			$('tabTramitesDeterminacionesOperaA').set('class','');
+			$('tabTramitesDeterminacionesAplicaciones').set('class','');
+			$('tabTramitesDeterminacionesGruposAplicacion').set('class','');
+			$('tabTramitesDeterminacionesDeterminacionesReguladoras').set('class','selected');
+			//$('tabTramitesDeterminacionesUnidades').set('class','');
+		}
+
+		if ($('panelTramitesDeterminacionesDeterminacionesReguladoras').childNodes.length == 0){
+			chargeTabDeterminacionesReguladoras(dataOperaDeterminacionesReguladoras);
+		} else { MUI.rWidth(); }
+	});
+
+	/*
+	$('TramitesDeterminacionesUnidades').addEvent('click', function(e){
+		new Event(e).stop();
+
+		if ($('TramitesDeterminacionesUnidades').getStyle('opacity') != 0.5){
+			$('panelTramitesDeterminacionesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesValoresReferencia').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesRegulacionesEspecificas').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesDocumentos').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesEsOperadoPor').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesOperaA').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesAplicaciones').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesGruposAplicacion').setStyle('display', 'none');
+			$('panelTramitesDeterminacionesDeterminacionesReguladoras').setStyle('display', 'none');
+			//$('panelTramitesDeterminacionesUnidades').setStyle('display', 'block');
+			
+			$('tabTramitesDeterminacionesDatosGenerales').set('class','');
+			$('tabTramitesDeterminacionesValoresReferencia').set('class','');
+			$('tabTramitesDeterminacionesRegulacionesEspecificas').set('class','');
+			$('tabTramitesDeterminacionesDocumentos').set('class','');
+			$('tabTramitesDeterminacionesEsOperadoPor').set('class','');
+			$('tabTramitesDeterminacionesOperaA').set('class','');
+			$('tabTramitesDeterminacionesAplicaciones').set('class','');
+			$('tabTramitesDeterminacionesGruposAplicacion').set('class','');
+			$('tabTramitesDeterminacionesDeterminacionesReguladoras').set('class','');
+			$('tabTramitesDeterminacionesUnidades').set('class','selected');
+		}
+    });	*/
+
+</script>

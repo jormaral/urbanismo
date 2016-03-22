@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : newXMLDocument.xml
+    Created on : 13 de enero de 2010, 12:07
+    Author     : Francisco.Morata
+    Description:
+        Purpose of the document follows.
+-->
+
+<acercaDe>
+    <bienvenido>
+       <bienvenido_titulo>URBANISMO EN <%= ayuntamiento%></bienvenido_titulo>
+        <bienvenido_txt><CENTER>
+                Esta página Web tiene por objeto que los ciudadanos puedan acceder a través de Internet a los
+                planes urbanísticos del municipio de <%= ayuntamiento%>, al efecto de aumentar y potenciar la
+                transparencia en la gestión pública del sector urbanístico.
+
+                Este proyecto, desarrollado en el marco de el <b>"Programa Urnanismo en red"</b> dota a <%= ayuntamiento%>
+                de una Arquitectura Orientada a Servicios Geoespacial (Geospatial SOA) que constituye el soporte de una
+                infraestructura de Datos Espacial, en el que se despliegan una serie de servicios de mapas, de localizacion
+                y urbanísticos que ofrece al usuario distintas herramientas de visualización del planeamiento urbanístico.
+                </CENTER>
+       </bienvenido_txt>
+   </bienvenido>
+
+    <ayuntamiento>
+        <ayuntamiento_titulo>AYUNTAMIENTO</ayuntamiento_titulo>
+        <ayuntamiento_txt>El ayuntamiento</ayuntamiento_txt>
+    </ayuntamiento>
+
+    <ayuda>
+        <ayuda_titulo>AYUDA</ayuda_titulo>
+        <ayuda_txt>Utilice el menú para realizar las consultas que se muestran en el visor</ayuda_txt>
+    </ayuda>
+
+    <acerca>
+        <acerca_titulo>ACERCA DE</acerca_titulo>
+        <acerca_txt>acerca de</acerca_txt>
+    </acerca>
+
+</acercaDe>

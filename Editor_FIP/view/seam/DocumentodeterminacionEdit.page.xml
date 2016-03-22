@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<page xmlns="http://jboss.com/products/seam/pages"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd"
+
+      no-conversation-view-id="/DocumentodeterminacionList.xhtml"
+
+      login-required="true">
+
+   
+   <begin-conversation join="true" flush-mode="MANUAL"/>
+   
+   <action execute="#{documentodeterminacionHome.wire}"/>
+   
+   <param name="documentodeterminacionFrom"/>
+   <param name="documentodeterminacionIden" value="#{documentodeterminacionHome.documentodeterminacionIden}"/>
+   <param name="determinacionFrom"/>
+   <param name="determinacionIden" value="#{determinacionHome.determinacionIden}"/>
+   <param name="tramiteFrom"/>
+   <param name="tramiteIden" value="#{tramiteHome.tramiteIden}"/>
+   <param name="planFrom"/>
+   <param name="planIden" value="#{planHome.planIden}"/>
+
+
+
+   <param name="documentoFrom"/>
+   <param name="documentoIden" value="#{documentoHome.documentoIden}"/>
+
+
+
+   <navigation from-action="#{documentodeterminacionHome.persist}">
+       <rule if-outcome="persisted">
+          <end-conversation/>
+          <redirect view-id="/Documentodeterminacion.xhtml"/>
+       </rule>
+   </navigation>
+   
+   <navigation from-action="#{documentodeterminacionHome.update}">
+       <rule if-outcome="updated">
+          <end-conversation/>
+          <redirect view-id="/Documentodeterminacion.xhtml"/>
+       </rule>
+   </navigation>
+   
+   <navigation from-action="#{documentodeterminacionHome.remove}">
+       <rule if-outcome="removed">
+          <end-conversation/>
+          <redirect view-id="/DocumentodeterminacionList.xhtml"/>
+       </rule>
+   </navigation>
+   
+</page>

@@ -1,0 +1,1 @@
+"%JAVA_HOME%\bin\xjc" esquemas\FIP.xsd -p es.mitc.redes.urbanismoenred.data.fip -d ejbModule

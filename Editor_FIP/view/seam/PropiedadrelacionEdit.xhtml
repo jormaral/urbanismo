@@ -1,0 +1,157 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component" 
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="propiedadrelacion" styleClass="edit">
+     <ice:panelGroup  id="editpropiedadrelacionGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="editTextBoxId" value="#{propiedadrelacionHome.managed ? 'Edit' : 'Add'} propiedadrelacion"/>
+                  </td>
+              </tr>
+          </table>
+
+        <ice:panelGroup id="editPanelGroupId" styleClass="edit">		 
+
+
+            <s:decorate id="idenField" template="../layout/edit.xhtml">
+                <ui:define name="label">Iden</ui:define>
+                        <ice:inputText id="iden"
+			                partialSubmit="true"
+                       required="true"
+                       disabled="#{propiedadrelacionHome.managed}"
+                                    value="#{propiedadrelacionHome.instance.iden}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="iddefpropiedadField" template="../layout/edit.xhtml">
+                <ui:define name="label">Iddefpropiedad</ui:define>
+                        <ice:inputText id="iddefpropiedad"
+			                partialSubmit="true"
+                       required="true"
+                                    value="#{propiedadrelacionHome.instance.iddefpropiedad}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+
+            <s:decorate id="valorField" template="../layout/edit.xhtml">
+                <ui:define name="label">Valor</ui:define>
+                <ice:inputTextarea id="valor"
+                               cols="80"
+                               rows="3"
+                           required="true"
+                              value="#{propiedadrelacionHome.instance.valor}"/>
+            </s:decorate>
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+          </ice:panelGroup>
+       </ice:panelGroup>
+                  
+       <div class="actionButtons">
+        
+            <ice:commandButton id="save" 
+                          value="Save" 
+                         action="#{propiedadrelacionHome.persist}"
+                       disabled="#{!propiedadrelacionHome.wired}"
+                       rendered="#{!propiedadrelacionHome.managed}"/>  
+                          			  
+            <ice:commandButton id="update" 
+                          value="Save" 
+                         action="#{propiedadrelacionHome.update}"
+                       rendered="#{propiedadrelacionHome.managed}"/>
+                        			  
+            <ice:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{propiedadrelacionHome.remove}"
+                      immediate="true"
+                       rendered="#{propiedadrelacionHome.managed}"/>
+                    
+            <s:button id="cancelEdit" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/Propiedadrelacion.xhtml"
+                rendered="#{propiedadrelacionHome.managed}"/>
+                
+            <s:button id="cancelAddpropiedadrelacionHome" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/#{empty propiedadrelacionFrom ? 'PropiedadrelacionList' : propiedadrelacionFrom}.xhtml"
+                rendered="#{!propiedadrelacionHome.managed}"/>
+                
+        </div>
+        
+    </ice:form>
+
+ <ice:form id="form2propiedadrelacionHome">  
+        <ice:panelTabSet id="editPanelTabpropiedadrelacionHomeId" styleClass="componentPanelTabSetLayout" style="margin-bottom:5px;margin-top:10px;">
+   
+ 	<ice:panelTab id="editTabrelacionId" label="Relacion *" >
+		<div class="association" id="relacionParent">
+    
+        	<h:outputText id="editrelacionTextId" value="There is no relacion associated with this propiedadrelacion." 
+                   rendered="#{propiedadrelacionHome.instance.relacion == null}"/>
+       	<ice:dataTable var="relacion" 
+                   value="#{propiedadrelacionHome.instance.relacion}" 
+                rendered="#{propiedadrelacionHome.instance.relacion != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+		  columnClasses="allCols"
+                      id="editrelacionTableId">
+            <ice:column id="$editColumnidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{relacion.iden}
+            </ice:column>
+            <ice:column id="$editColumniddefrelacionId">
+                <f:facet name="header">Iddefrelacion</f:facet>
+                #{relacion.iddefrelacion}
+            </ice:column>
+            <ice:column id="$editColumntramiteByIdtramiteborradorId">
+	    	    <f:facet name="header">Tramite by idtramiteborrador iden</f:facet>
+		    	#{relacion.tramiteByIdtramiteborrador.iden}
+            </ice:column>
+            <ice:column id="$editColumntramiteByIdtramitecreadorId">
+	    	    <f:facet name="header">Tramite by idtramitecreador iden</f:facet>
+		    	#{relacion.tramiteByIdtramitecreador.iden}
+            </ice:column>
+            <ice:column id="editColumnrelacionLinkId">
+                <f:facet name="header">Action</f:facet>
+                <s:link view="/seam/Relacion.xhtml" 
+                         id="viewrelacion" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="relacionIden" 
+                           value="#{relacion.iden}"/>
+                </s:link>
+            </ice:column>
+      </ice:dataTable>
+        <div class="actionButtons">
+            <s:button value="Select relacion"
+	              id="selectParent"
+                      view="/seam/RelacionList.xhtml">
+                <f:param name="from" value="PropiedadrelacionEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+
+
+

@@ -1,0 +1,328 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion"
+  schema="planeamiento" table="determinacion">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">planeamiento.planeamiento_determinacion_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite"
+   fetch="select" name="tramite">
+   <column name="idtramite" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion"
+   fetch="select" name="determinacionByIddeterminacionoriginal">
+   <column name="iddeterminacionoriginal"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion"
+   fetch="select" name="determinacionByIddeterminacionbase">
+   <column name="iddeterminacionbase"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion"
+   fetch="select" name="determinacionByIdpadre">
+   <column name="idpadre"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="idcaracter" type="int">
+   <column name="idcaracter" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="apartado" type="string">
+   <column length="100" name="apartado"/>
+  </property>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column length="220" name="nombre" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="texto" type="string">
+   <column name="texto"/>
+  </property>
+  <property generated="never" lazy="false" name="etiqueta" type="string">
+   <column length="100" name="etiqueta"/>
+  </property>
+  <property generated="never" lazy="false" name="codigo" type="string">
+   <column length="10" name="codigo" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="bsuspendida" type="boolean">
+   <column name="bsuspendida" not-null="false"/>
+  </property>
+  <property generated="never" lazy="false" name="orden" type="int">
+   <column name="orden" not-null="true"/>
+  </property>
+  <set inverse="true" name="documentodeterminacions" sort="unsorted">
+   <key>
+    <column name="iddeterminacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documentodeterminacion"/>
+  </set>
+  <set inverse="true" name="determinacionsForIdpadre" sort="unsorted">
+   <key>
+    <column name="idpadre"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion"/>
+  </set>
+  <set inverse="true"
+   name="determinaciongrupoentidadsForIddeterminaciongrupo" sort="unsorted">
+   <key>
+    <column name="iddeterminaciongrupo"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinaciongrupoentidad"/>
+  </set>
+  <set inverse="true" name="opciondeterminacionsForIddeterminacion" sort="unsorted">
+   <key>
+    <column name="iddeterminacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Opciondeterminacion"/>
+  </set>
+  <set inverse="true"
+   name="operaciondeterminacionsForIddeterminacionoperadora" sort="unsorted">
+   <key>
+    <column name="iddeterminacionoperadora" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operaciondeterminacion"/>
+  </set>
+  <set inverse="true"
+   name="opciondeterminacionsForIddeterminacionvalorref" sort="unsorted">
+   <key>
+    <column name="iddeterminacionvalorref" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Opciondeterminacion"/>
+  </set>
+  <set inverse="true" name="determinacionsForIddeterminacionoriginal" sort="unsorted">
+   <key>
+    <column name="iddeterminacionoriginal"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion"/>
+  </set>
+  <set inverse="true" name="determinacionsForIddeterminacionbase" sort="unsorted">
+   <key>
+    <column name="iddeterminacionbase"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion"/>
+  </set>
+  <set inverse="true"
+   name="determinaciongrupoentidadsForIddeterminacion" sort="unsorted">
+   <key>
+    <column name="iddeterminacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinaciongrupoentidad"/>
+  </set>
+  <set inverse="true" name="operaciondeterminacionsForIddeterminacion" sort="unsorted">
+   <key>
+    <column name="iddeterminacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Operaciondeterminacion"/>
+  </set>
+  <set inverse="true" name="entidaddeterminacionregimens" sort="unsorted">
+   <key>
+    <column name="iddeterminacionregimen"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen"/>
+  </set>
+  <set inverse="true" name="entidaddeterminacions" sort="unsorted">
+   <key>
+    <column name="iddeterminacion" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion"/>
+  </set>
+ </class>
+ <query name="Determinacion.obtenerPorCodTramiteCodDeterminacion">SELECT dets FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Tramite tram 
+	JOIN tram.determinacions dets 
+	WHERE tram.codigofip= :codigoTramite 
+	AND dets.codigo= :codigoDeterminacion</query>
+ <query name="Determinacion.buscarPorTramite">SELECT d FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion d WHERE d.tramite.iden = :idTramite</query>
+ <query name="Determinacion.buscarRaiz">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det
+	WHERE det.determinacionByIdpadre IS NULL AND det.tramite.iden = :idTramite
+	ORDER BY det.orden ASC</query>
+ <query name="Determinacion.buscarHijas">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det
+	WHERE det.determinacionByIdpadre.iden = :idPadre 
+	ORDER BY det.orden ASC</query>
+ <query name="Determinacion.buscarPorEntidad">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad ent
+	WHERE ed.determinacion = det AND ed.entidad = ent AND ent.iden = :idEntidad</query>
+ <query name="Determinacion.buscarPorEntidadRegimenDirecto">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det, es.mitc.redes.urbanismoenred.data.rpm.diccionario.Caracterdeterminacion car, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad ent
+	WHERE det.idcaracter = car.iden AND ed.determinacion = det AND ed.entidad = ent AND ent.iden = :idEntidad AND car.iden IN (2,3)</query>
+ <query name="Determinacion.buscarPorUsoEntidad">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det, es.mitc.redes.urbanismoenred.data.rpm.diccionario.Caracterdeterminacion car, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad ent
+	WHERE det.idcaracter = car.iden AND ed.determinacion = det AND ed.entidad = ent AND ent.iden = :idEntidad AND car.iden IN (9,14)</query>
+ <query name="Determinacion.buscarPorActoEntidad">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det, es.mitc.redes.urbanismoenred.data.rpm.diccionario.Caracterdeterminacion car, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad ent
+	WHERE det.idcaracter = car.iden AND ed.determinacion = det AND ed.entidad = ent AND ent.iden = :idEntidad AND car.iden IN (10,15)</query>
+ <query name="Determinacion.buscarHijaRegimenDirecto">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det, es.mitc.redes.urbanismoenred.data.rpm.diccionario.Caracterdeterminacion car
+	WHERE det.idcaracter = car.iden AND det.determinacionByIdpadre = :idDet AND car.iden IN (2,3)</query>
+ <query name="Determinacion.buscarHijaPorUso">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det, es.mitc.redes.urbanismoenred.data.rpm.diccionario.Caracterdeterminacion car
+	WHERE det.idcaracter = car.iden AND det.determinacionByIdpadre = :idDet AND car.iden IN (9,14)</query>
+ <query name="Determinacion.buscarHijaPorActo">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det, es.mitc.redes.urbanismoenred.data.rpm.diccionario.Caracterdeterminacion car
+	WHERE det.idcaracter = car.iden AND det.determinacionByIdpadre = :idDet AND car.iden IN (10,15)</query>
+ <query name="Determinacion.obtenerGrupoEntidad">SELECT od.determinacionByIddeterminacionvalorref FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion ced, 
+                        es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Opciondeterminacion od, 
+                        es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr 
+                        WHERE ced.entidaddeterminacion.entidad.iden = :idEntidad
+	                        AND ced.entidaddeterminacion.determinacion.idcaracter = :idCaracter
+	                        AND edr.opciondeterminacion.iden = od.iden
+	                        AND od.determinacionByIddeterminacion.iden = ced.entidaddeterminacion.determinacion.iden
+	                        AND (edr.casoentidaddeterminacionByIdcaso.iden = ced.iden OR edr.casoentidaddeterminacionByIdcasoaplicacion=ced.iden)</query>
+ <query name="Determinacion.obtenerPorTramiteYCaracter">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det
+	WHERE det.tramite.iden = :idTramite AND det.idcaracter = :idCaracter 
+	ORDER BY det.orden</query>
+ <query name="Determinacion.obtenerCualquieraPorTramiteYCaracter">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidad ent, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed
+	WHERE ent.tramite.iden = :idTramite AND ed.entidad.iden = ent.iden  AND det.idcaracter = :idCaracter 
+	AND ed.determinacion.iden = det.iden</query>
+ <query name="Determinacion.obtenerValorDeReferencia">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion db
+	WHERE det.determinacionByIddeterminacionbase.iden = db.iden
+		AND db.codigo = :codigoAfeccion AND det.idcaracter = :caracterValorRef
+		AND det.tramite.iden = :idTramite</query>
+ <query name="Determinacion.obtenerPorTramiteCaracterYNombre">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det
+	WHERE det.tramite.iden = :idTramite AND det.idcaracter = :idCaracter AND det.nombre = :nombre</query>
+ <query name="Determinacion.obtenerRegimenPorEntidad">SELECT edr.determinacion From es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion ced, 
+                    es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr 
+                    WHERE ced.entidaddeterminacion.entidad.iden = :idEntidad
+                    AND (edr.casoentidaddeterminacionByIdcaso=ced.iden Or edr.casoentidaddeterminacionByIdcasoaplicacion=ced.iden) 
+                    AND edr.determinacion IS NOT NULL</query>
+ <query name="Determinacion.obtenerValoresReferenciaPorEntidadYGrupoEntidad">SELECT edr.opciondeterminacion.determinacionByIddeterminacionvalorref FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion ced, 
+                        es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr 
+                        Where ced.entidaddeterminacion.entidad.iden= :idEntidad
+                        AND ced.entidaddeterminacion.determinacion.iden &lt;&gt; :idGrupoEntidad 
+                        And (edr.casoentidaddeterminacionByIdcaso=ced.iden Or edr.casoentidaddeterminacionByIdcasoaplicacion=ced.iden)</query>
+ <query name="Determinacion.buscarPorCodigoEnTramites">SELECT det FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det
+	WHERE det.codigo = :codigo AND det.tramite.iden IN (:listaTramites)</query>
+ <query name="Determinacion.obtenerCarpeta">SELECT DVR.iden FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion DVR,  
+                es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion D, 
+                es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Opciondeterminacion OD 
+                Where D.tramite.iden= :idTramite
+                AND D.idcaracter= :idCaracter
+                AND OD.determinacionByIddeterminacion=D.iden 
+                AND OD.determinacionByIddeterminacionvalorref.iden=DVR.iden  
+                AND (DVR.codigo= :codigoVR
+                Or DVR.determinacionByIddeterminacionbase.iden IN (
+                	SELECT D.iden
+                		FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion D  
+                		WHERE D.codigo= :codigo
+                		AND D.tramite.iden IN (:listaTramites)))</query>
+ <query name="Determinacion.obtenerOrdenMaximo">SELECT MAX(det.orden) FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det
+	WHERE det.tramite.iden = :idTramite AND det.determinacionByIdpadre IS NULL</query>
+ <query name="Determinacion.obtenerOrdenMaximoPadre">SELECT MAX(det.orden) FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det
+	WHERE det.tramite.iden = :idTramite AND det.determinacionByIdpadre.iden = :idPadre</query>
+ <query name="Determinacion.obtenerCarpetaCualquierTramite">SELECT DVR.iden FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion DVR,  
+                es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion D, 
+                es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Opciondeterminacion OD 
+                Where D.idcaracter= :idCaracter
+                AND OD.determinacionByIddeterminacion=D.iden 
+                AND OD.determinacionByIddeterminacionvalorref.iden=DVR.iden  
+                AND (DVR.codigo= :codigoVR
+                Or DVR.determinacionByIddeterminacionbase.iden IN (
+                	SELECT D.iden
+                		FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion D  
+                		WHERE D.codigo= :codigo
+                		AND D.tramite.iden IN (:listaTramites)))</query>
+ <query name="Determinacion.buscarAplicacionDesarrollo">SELECT Distinct det FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion det 
+ 	WHERE det.tramite.iden = :idTramite
+   		AND det.idcaracter &lt;&gt; :idCaracterVirtual
+   		AND det.idcaracter &lt;&gt; :idCaracterGrupoEntidades
+		AND det.determinacionByIdpadre IS NULL
+        AND det.iden NOT IN (SELECT OD.determinacionByIddeterminacionvalorref FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Opciondeterminacion OD,  
+   			es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion D WHERE OD.determinacionByIddeterminacion.iden=D.iden  
+            	AND D.idcaracter= :idCaracterGrupoEntidades)
+	ORDER BY det.orden ASC</query>
+ <query name="Determinacion.buscarCondicionesUrbanisticas">SELECT Distinct ed.determinacion FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacion ed
+	WHERE ed.entidad.tramite.iden = :idTramite AND ed.determinacion.tramite.iden &lt;&gt; :idTramite</query>
+ <query name="Determinacion.bucarDeterminacionesRegimen">Select Distinct edr.determinacion FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr, 
+		es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion ced 
+	WHERE ced.entidaddeterminacion.entidad.tramite.iden= :idTramite AND edr.determinacion.tramite.iden &lt;&gt; :idTramite
+		AND (edr.casoentidaddeterminacionByIdcaso=ced.iden Or edr.casoentidaddeterminacionByIdcasoaplicacion=ced.iden)</query>
+ <query name="Determinacion.buscarValoresReferencia">SELECT Distinct od.determinacionByIddeterminacionvalorref FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Entidaddeterminacionregimen edr, 
+		es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Casoentidaddeterminacion ced, 
+		es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Opciondeterminacion od 
+	WHERE ced.entidaddeterminacion.entidad.tramite.iden= :idTramite AND od.determinacionByIddeterminacionvalorref.tramite.iden &lt;&gt; :idTramite
+		AND (edr.casoentidaddeterminacionByIdcaso=ced.iden Or edr.casoentidaddeterminacionByIdcasoaplicacion=ced.iden)
+		AND edr.opciondeterminacion.iden=od.iden</query>
+ <query name="Determinacion.buscarEquivalentePorDetBase">SELECT d2.iden FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion d1,
+		es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion d2 
+	WHERE d1.iden= :idDeterminacion
+		AND d1.determinacionByIddeterminacionbase.iden=d2.determinacionByIddeterminacionbase
+		AND d2.tramite.iden = :idTramite</query>
+ <query name="Determinacion.buscarEquivalentePorNombreYCaracter">SELECT d FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion d
+	WHERE d.tramite.iden = :idTramite
+		AND d.nombre = :nombre
+ 		AND d.idcaracter= :idCaracter</query>
+ <query name="Determinacion.obtenerParaEliminacion">SELECT d FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion d 
+ 	WHERE d.tramite.iden= :idTramite 
+		AND (d.idcaracter= :idCaracterEnunciado OR d.idcaracter= :idCaracterEnunciadoCompleto)
+        AND d NOT IN (SELECT d1.determinacionByIdpadre FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion d1 
+        	WHERE d1.determinacionByIdpadre IS NOT NULL) 
+		AND d NOT IN (SELECT dd.determinacion FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Documentodeterminacion dd)
+        AND d.iden NOT IN (SELECT vr.valor FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion vr, 
+				es.mitc.redes.urbanismoenred.data.rpm.diccionario.Defvector dv
+			WHERE TRIM(UPPER(dv.tabla.nombre))='DETERMINACION' AND vr.iddefvector=dv.iden 
+				AND dv.basignacion=true)</query>
+ <query name="Determinacion.buscarRepetidas">SELECT d FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion d 
+	WHERE d.tramite.iden= :idTramite 
+		AND d.idcaracter= :idCaracter
+		AND d.nombre= :nombre AND d.iden &lt;&gt; :idDeterminacion</query>
+ <query name="Determinacion.obtenerValoresReferenciaOpcion">SELECT od.determinacionByIddeterminacionvalorref FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Opciondeterminacion od 
+	WHERE od.determinacionByIddeterminacion.iden = :idDeterminacion AND od.determinacionByIddeterminacionvalorref.determinacionByIdpadre.iden &lt;&gt; :idDeterminacion ORDER BY od.determinacionByIddeterminacionvalorref.orden</query>
+ <query name="Determinacion.obtenerUnidadesTramite">SELECT d FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion d, es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Vectorrelacion vr 
+	WHERE vr.iddefvector = 1 AND vr.relacion.iddefrelacion = 1 AND vr.valor = d.iden AND d.tramite.iden = :idTramite</query>
+ <sql-query name="Determinacion.obtenerUltimoApartado">Select Translate(Replace(Trim(apartado),'  ',' '),'áéíóúÁÉÍÓÚ.','aeiouAEIOU ') As campo From planeamiento.Determinacion 
+	Where idPadre Is Null
+                        And idTramite= :idTramite
+                        And apartado Is Not Null 
+                        Order By campo Desc</sql-query>
+ <sql-query name="Determinacion.obtenerUltimoApartadoConPadre">Select Translate(Replace(Trim(apartado),'  ',' '),'áéíóÁÉÍÓÚ.','aeiouAEIOU ') As campo From planeamiento.Determinacion 
+	Where idPadre = :idPadre
+    	And idTramite= :idTramite
+       	And apartado Is Not Null 
+     	Order By campo Desc</sql-query>
+ <sql-query name="Determinacion.buscarRelacionadasRefundido">Select Distinct detf.iden as idendetf, Cast(trddr.texto As Text), r.iden as idenr 
+                    From planeamiento.Determinacion detf, planeamiento.Determinacion dett, 
+                    planeamiento.Vectorrelacion vrt, planeamiento.Vectorrelacion vrf, 
+                    diccionario.Defvector dvt, diccionario.tabla tbt, diccionario.Defvector dvf, 
+                    diccionario.tabla tbf, planeamiento.Relacion r, diccionario.Defrelacion dr,  
+                    diccionario.traduccion trddr 
+ 	Where Upper(Trim(tbf.nombre))='DETERMINACION' 
+                    And Upper(Trim(tbt.nombre))='DETERMINACION' 
+                    And dvf.idtabla=tbf.iden 
+                    And dvt.idtabla=tbt.iden 
+                    And vrf.iddefvector=dvf.iden 
+                    And vrt.iddefvector=dvt.iden 
+                    And vrf.valor=detf.iden 
+                    And detf.idtramite&lt;&gt; :idTramite
+                    And dett.idtramite= :idTramite
+                    And vrt.valor=dett.iden 
+                    And dvf.bAsignacion=false 
+                    And dvt.bAsignacion=true 
+                    And vrt.idrelacion=r.iden 
+                    And vrf.idrelacion=r.iden 
+                    And r.iddefrelacion=dr.iden 
+                    And dvt.iddefrelacion=dr.iden 
+                    And dvf.iddefrelacion=dr.iden 
+                    And trddr.idliteral=dr.idliteral 
+	Union Select Distinct detf.iden as idendetf, Cast(trddr.texto As Text), r.iden as idenr 
+                    From planeamiento.Determinacion detf, planeamiento.Entidad entt, 
+                    planeamiento.Vectorrelacion vrt, planeamiento.Vectorrelacion vrf, 
+                    diccionario.Defvector dvt, diccionario.tabla tbt, diccionario.Defvector dvf, 
+                    diccionario.tabla tbf, planeamiento.Relacion r, diccionario.Defrelacion dr,  
+                    diccionario.traduccion trddr 
+           Where Upper(Trim(tbf.nombre))='DETERMINACION' 
+                    And Upper(Trim(tbt.nombre))='ENTIDAD' 
+                    And dvf.idtabla=tbf.iden 
+                    And dvt.idtabla=tbt.iden 
+                    And vrf.iddefvector=dvf.iden 
+                    And vrt.iddefvector=dvt.iden 
+                    And vrf.valor=detf.iden 
+                    And detf.idtramite &lt;&gt; :idTramite
+                    And entt.idtramite= :idTramite
+                    And vrt.valor=entt.iden 
+                    And dvf.bAsignacion=false 
+                    And dvt.bAsignacion=true 
+                    And vrt.idrelacion=r.iden 
+                    And vrf.idrelacion=r.iden 
+                    And r.iddefrelacion=dr.iden 
+                    And dvt.iddefrelacion=dr.iden 
+                    And dvf.iddefrelacion=dr.iden 
+                    And trddr.idliteral=dr.idliteral</sql-query>
+</hibernate-mapping>

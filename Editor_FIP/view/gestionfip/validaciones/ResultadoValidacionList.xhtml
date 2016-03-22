@@ -1,0 +1,142 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_proceso_validacion}"
+				view="/gestionfip/validaciones/ProcesoList.xhtml"
+				id="ProcesoValidacionNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+			
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="Resultado"
+				view="/gestionfip/validaciones/ResultadoValidacionList.xhtml"
+				id="ResultadoNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+	</ui:define>
+
+	<ui:define name="buscar">
+		<!--  Se define el buscar	
+		 <h:graphicImage value="/img/editorfip/#{localeSelector.language}/comun/buscar.png"/> -->
+
+	</ui:define>
+
+	<ui:define name="body">
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+			<ice:form id="formPVList">
+				<h:panelGrid columns="1" styleClass="panelBotones">
+
+
+
+					<ice:panelGroup style="text-align:left;">
+
+						
+
+						<s:button value="Ver Todos Errores del Proceso"
+							view="/gestionfip/validaciones/ErroresValidacionList.xhtml"
+							styleClass="boton5 botonCrear"
+							alt="Ver Todos Errores del Proceso"
+							title="Ver Todos Errores del Proceso">
+								<f:param name="idProc" value="#{idProc}" />
+								<f:param name="idValidacion" value="-1" />
+						</s:button>
+					</ice:panelGroup>
+
+
+				</h:panelGrid>
+
+				
+				<ice:dataTable value="#{listaResultadosValidacionNuevo.getListaResultado(idProc)}"
+					var="res" id="listaProcesosV" enableContextMenu="false"
+					selectionMode="none">
+
+
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText value="#{messages.elementosvalidados_tipoval}" />
+						</f:facet>
+
+						<h:outputText value="#{res.validacion.descripcion}">
+							
+						</h:outputText>
+					</ice:column>
+
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText
+								value="#{messages.elementosvalidados_validado}" />
+						</f:facet>
+						<h:outputText value="#{messages.si}"
+							rendered="#{res.exito}" />
+						<h:outputText value="#{messages.no}"
+							rendered="#{!res.exito}" />
+					</ice:column>
+					
+					<ice:column>
+						<f:facet name="header">
+							<h:outputText
+								value="#{messages.accion}" />
+						</f:facet>
+						<s:button value="Ver Errores"
+							view="/gestionfip/validaciones/ErroresValidacionList.xhtml"
+							styleClass="boton1"
+							rendered="#{!res.exito}"
+							alt="Ver Errores"
+							title="Ver Errores">
+								<f:param name="idProc" value="#{idProc}" />
+								<f:param name="idValidacion" value="#{res.validacion.iden}" />
+						</s:button>
+					</ice:column>
+
+
+
+				</ice:dataTable>
+			</ice:form>
+		</ice:panelGroup>
+	</ui:define>
+
+
+
+</ui:composition>

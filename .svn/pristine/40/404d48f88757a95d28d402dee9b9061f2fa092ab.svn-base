@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26-abr-2012 14:16:08 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+ <class name="es.mitc.redes.urbanismoenred.data.rpm.refundido.Traza"
+  schema="refundido" table="traza">
+  <composite-id
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.TrazaId"
+   mapped="false" name="id" unsaved-value="undefined">
+   <key-property name="idproceso" type="int">
+    <column name="idproceso"/>
+   </key-property>
+   <key-property name="tabla" type="string">
+    <column length="256" name="tabla"/>
+   </key-property>
+   <key-property name="idplaneamiento" type="int">
+    <column name="idplaneamiento"/>
+   </key-property>
+  </composite-id>
+  <property generated="never" lazy="false" name="idrefundido" type="int">
+   <column name="idrefundido" not-null="true"/>
+  </property>
+ </class>
+ <query name="refundido.Traza.obtenerIdPlaneamiento">SELECT t.id.idplaneamiento FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Traza t WHERE
+	t.id.tabla = :tabla AND t.id.idproceso = :idProceso AND t.idrefundido = :idRefundido</query>
+</hibernate-mapping>

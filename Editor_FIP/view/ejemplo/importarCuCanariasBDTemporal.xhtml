@@ -1,0 +1,49 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../layout/templateArbol.xhtml">
+
+<ui:define name="body">
+
+      			
+  			<ice:form>
+  				<br></br>
+  				<br>Probar CU BD Temportal del tramite 119</br>
+  				<ice:commandButton value="Importar CU 119" action="#{importadorCUCanariasBDAuxiliar.persistirCUdeBDAuxiliar(119)}" />
+  				
+  				<ice:panelGroup  rendered="#{not empty importadorCUCanariasBDAuxiliar.listadoErroresImportacion}">
+					            <ice:dataExporter for="tramitesList" 
+					                label="#{messages.descargarenexcel}"
+					                type="excel"
+					                popupBlockerLabel="bloqueadordeventanas"
+					                clickToCreateFileText="descargarenexcel"
+					                
+					                />
+					</ice:panelGroup>
+  				<ice:dataTable id="tramitesList" title="Errores de Importacion"
+						value="#{importadorCUCanariasBDAuxiliar.listadoErroresImportacion}"
+						var="item" 
+						rendered="#{not empty importadorCUCanariasBDAuxiliar.listadoErroresImportacion}"
+						>
+						<ice:column >
+							<f:facet name="header">
+			
+								<ice:outputText value="Errores DetectadosBean para idtramite=119">
+								</ice:outputText>
+			
+							</f:facet>
+							<ice:outputText value=" #{item}" />
+						</ice:column>
+			
+					</ice:dataTable>
+			</ice:form>
+		
+
+</ui:define>
+
+</ui:composition>

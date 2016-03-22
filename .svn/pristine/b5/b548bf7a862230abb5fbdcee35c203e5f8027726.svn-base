@@ -1,0 +1,25 @@
+<!-- 
+    Document   : index
+    Created on : 01-nov-2011, 17:00:00
+    Author     : Alejandro.Centeno
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div id="grupoNavPreviewVisor" class="toolbox">
+    <span class="iconWrapper"><img id="previewVisorBtnInfo" class="toolBoxAction" src="styles/images/info.gif" alt="Información" title="Información" /></span>
+    <span class="iconWrapper"><img id="previewVisorBtnZoomIn" class="toolBoxAction" src="styles/images/zoomin.png" alt="Acercar" title="Acercar" /></span>	
+    <span class="iconWrapper"><img id="previewVisorBtnZoomOut" class="toolBoxAction" src="styles/images/zoomout.png" alt="Alejar" title="Alejar" /></span>	
+    <span class="iconWrapper"><img id="previewVisorBtnPan" class="toolBoxAction" src="styles/images/hand.png" alt="Desplazar" title="Desplazar" /></span>	
+    <span class="iconWrapper"><img id="previewVisorBtnVistaAnterior" class="toolBoxAction" src="styles/images/previous.gif" alt="Vista anterior" title="Vista anterior" /></span>	
+    <span class="iconWrapper"><img id="previewVisorBtnVistaPosterior" class="toolBoxAction" src="styles/images/next.gif" alt="Vista siguiente" title="Vista siguiente" /></span>	    
+</div>
+<div id="grupoToolsPreviewVisor" class="toolbox divider">
+    <span class="iconWrapper"><img id="previewVisorBtnCapas" class="toolBoxAction" src="styles/images/layers.png" alt="Capas" title="Capas" /></span>	
+    <!--<span class="iconWrapper"><img id="previewVisorBtnBusqueda" class="toolBoxAction" src="styles/images/find.gif" alt="Buscar" title="Buscar" /></span>	-->
+</div>
+<!--<div id="grupoImprimirPreviewVisor" class="toolbox divider">
+    <span class="iconWrapper"><img id="previewVisorBtnImprimir" class="toolBoxAction" src="styles/images/print.gif" alt="Imprimir" title="Imprimir" /></span>	
+</div>
+<div id="grupoDibujoPreviewVisor" class="toolbox divider">
+    
+</div>-->

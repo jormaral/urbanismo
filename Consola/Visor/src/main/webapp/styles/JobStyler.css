@@ -1,0 +1,56 @@
+/* 
+    Document   : JobStyler
+    Created on : 17-Diciembre-2010, 11:42:06
+    Author     : jorge.bodas
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+#jobStyler_borderZone
+{
+    position:relative;
+    float:left;
+    left:0px;
+    top:0px;
+    height:50px;
+    width:100%;
+    margin-bottom: 1px;
+}
+    .jobStyler_borderColor
+    {
+       position:absolute;
+       left:0px;
+       top:0px;
+       height:0px;
+       width:100px;
+       height:100%;
+        background-color: red;
+    }
+
+#jobStyler_fillZone
+{
+    position:relative;
+    float:left;
+    left:0px;
+    top:0px;
+    height:50px;
+    width:100%;
+    background-color: green;
+    margin-bottom: 1px;
+}
+
+#jobStyler_textZone
+{
+    position:relative;
+    float:left;
+    left:0px;
+    top:0px;
+    height:50px;
+    width:100%;
+    background-color: blue;
+    margin-bottom: 1px;
+}
+
+
+

@@ -1,0 +1,176 @@
+#zonaTabsFitxa {
+    height: 30px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.tabFitxa {
+    background-color: #DADADA;
+    border-bottom: 2px solid gray;
+    cursor: pointer;
+    float: left;
+    font-size: 13pt;
+    height: 30px;
+    left: 0;
+    line-height: 23pt;
+    position: relative;
+    text-align: center;
+    top: 0;
+    width: 50%;
+}
+.tabFitxa:hover {
+    background-color: #DADADA;
+    border-bottom: 2px solid white;
+    cursor: pointer;
+    float: left;
+    font-size: 13pt;
+    height: 30px;
+    left: 0;
+    line-height: 23pt;
+    position: relative;
+    text-align: center;
+    top: 0;
+    width: 50%;
+}
+.tabFitxaON {
+    background-color: #EEEEEE;
+    border-bottom: 2px solid white;
+    cursor: pointer;
+    float: left;
+    font-size: 13pt;
+    height: 30px;
+    left: 0;
+    line-height: 23pt;
+    position: relative;
+    text-align: center;
+    top: 0;
+    width: 50%;
+}
+#zonaContainerFitxa {
+    height: auto;
+    left: 0;
+    position: absolute;
+    top: 31px;
+    width: 100%;
+}
+#fitxa_situacion {
+    background-image: url("images/FICHA.png");
+    float: left;
+    font-size: 8pt;
+    height: 44px;
+    left: 0;
+    position: relative;
+    top: 0;
+    width: 580px;
+}
+#fitxa_situacion_txt {
+    background: none repeat scroll 0 0 transparent;
+    color: #EEEEEE;
+    font-size: 8pt;
+    height: 29px;
+    left: 122px;
+    position: absolute;
+    top: 8px;
+    width: 451px;
+}
+.fitxa_grupo {
+    background-image: url("images/FICHA.png");
+    background-position: 0 -50px;
+    float: left;
+    font-size: 8pt;
+    height: 23px;
+    left: 0;
+    position: relative;
+    top: 0;
+    width: 580px;
+}
+.fitxa_grupo_txt {
+    font-size: 10pt;
+    height: 20px;
+    left: 36px;
+    position: absolute;
+    top: 2px;
+    width: 534px;
+}
+.fitxa_entidad {
+    background-image: url("images/FICHA.png");
+    background-position: 0 -73px;
+    float: left;
+    font-size: 8pt;
+    height: 23px;
+    left: 0;
+    position: relative;
+    top: 0;
+    width: 580px;
+}
+.fitxa_entidad_txt {
+    font-size: 10pt;
+    height: 20px;
+    left: 41px;
+    position: absolute;
+    top: 2px;
+    width: 543px;
+}
+.fitxa_entidadCab {
+    background-image: url("images/FICHA.png");
+    background-position: 0 -97px;
+    float: left;
+    font-size: 8pt;
+    height: 23px;
+    left: 0;
+    position: relative;
+    top: 0;
+    width: 580px;
+}
+.fitxa_entidadDet {
+    background-image: url("images/lineaFICHA.png");
+    background-position: 0 0;
+    float: left;
+    font-size: 8pt;
+    height: 100px;
+    left: 0;
+    min-height: 22px;
+    position: relative;
+    top: 0;
+    width: 580px;
+}
+.fitxa_entidadDet_nombre {
+    height: auto;
+    left: 11px;
+    min-height: 22px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    width: 158px;
+}
+.fitxa_entidadDet_valor {
+    height: auto;
+    left: 172px;
+    min-height: 22px;
+    position: absolute;
+    top: 0;
+    width: 165px;
+}
+.fitxa_entidadDet_observacion {
+    height: auto;
+    left: 343px;
+    min-height: 22px;
+    position: absolute;
+    top: 0;
+    width: 233px;
+}
+.fitxa_grupoFin {
+    background-image: url("images/FICHA.png");
+    background-position: 0 -141px;
+    float: left;
+    font-size: 8pt;
+    height: 23px;
+    left: 0;
+    margin-bottom: 10px;
+    position: relative;
+    top: 0;
+    width: 580px;
+}
+

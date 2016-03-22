@@ -1,0 +1,100 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_creardocumentonormas}"
+				view="/informacionfip/documentonormas/CrearDocumentoNormas.xhtml"
+				id="CrearDocumentoNormasRutaMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+	<ui:define name="body">
+
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+			<!--  Se define el cuerpo de la pagina -->
+			<ice:panelGroup>
+
+				<ice:graphicImage styleClass="tooltip_imagen"
+					alt="#{messages.genericos_info}"
+					url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				<ice:outputLabel
+					value="Puede crear el documento de normas del plan encargado y del plan vigente. Este proceso puede tardar mucho tiempo (horas). Vaya al listado de Documento Normas para ver el estado."></ice:outputLabel>
+			</ice:panelGroup>
+
+			<br></br>
+			<br></br>
+
+			<ice:form>
+				<ice:panelGrid columns="2">
+
+					<ice:commandButton value="Crear Normas Plan Encargado"
+						panelConfirmation="panelconfconplanencargado" styleClass="boton5"
+						action="#{servicioGestionDocumentoNormasSincrono.crearDocumentoNormasSincrono(variablesSesionUsuario.getIdTramiteEncargadoTrabajo())}" />
+
+					<ice:commandButton value="Crear Normas Plan Vigente"
+						panelConfirmation="panelconfconplanvigente" styleClass="boton5"
+						action="#{servicioGestionDocumentoNormasSincrono.crearDocumentoNormasSincrono(variablesSesionUsuario.getIdTramiteVigenteTrabajo())}" />
+
+					<ice:panelConfirmation id="panelconfconplanencargado"
+						title="#{messages.docnormas_generacion}"
+						message="#{messages.docnorma_planencargado_confirmacion}"
+						acceptLabel="#{messages.botongenerico_aceptar}"
+						cancelLabel="#{messages.botongenerico_cancelar}" />
+
+					<ice:panelConfirmation id="panelconfconplanvigente"
+						title="#{messages.docnormas_generacion}"
+						message="#{messages.docnorma_planvigente_confirmacion}"
+						acceptLabel="#{messages.botongenerico_aceptar}"
+						cancelLabel="#{messages.botongenerico_cancelar}" />
+
+				</ice:panelGrid>
+
+				<s:link
+					view="/informacionfip/documentonormas/ListarDocumentoNormas.xhtml"
+					styleClass="hiperenlace" id="botonListado" propagation="none">
+					<ice:outputLabel styleClass="hiperenlace"
+						value="Ir Listado Documento Normas" />
+				</s:link>
+			</ice:form>
+
+		</ice:panelGroup>
+
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,91 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_consuta_entidades_urbanisticas}"
+				view="/informacionfip/consultafichaurbanistica/FichaCUNavegacion.xhtml"
+				id="FichaCURutaMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+	<ui:define name="body">
+
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+			<!--  Se define el cuerpo de la pagina -->
+
+			<ice:panelGroup columns="8" styleClass="centerHome">
+
+				<s:link
+					view="/informacionfip/consultafichaurbanistica/FichaCUPlanEncargado.xhtml"
+					id="FichaCUPlanEncargadoNavegacionMenu" propagation="none">
+					<h:graphicImage
+						value="/img/editorfip/#{localeSelector.language}/navegacion/04_05_01_PLAN_ENCARGADO.png"
+						alt="#{messages.menu_consuta_entidades_urbanisticas_PE}"
+						title="#{messages.menu_consuta_entidades_urbanisticas_PE}"
+						styleClass="iconoNav" />
+				</s:link>
+
+				<s:link
+					view="/informacionfip/consultafichaurbanistica/FichaCUPlanVigente.xhtml"
+					id="FichaCUPlanVigenteNavegacionMenu" propagation="none">
+					<h:graphicImage
+						value="/img/editorfip/#{localeSelector.language}/navegacion/04_05_02_PLAN_VIGENTE.png"
+						alt="#{messages.menu_consuta_entidades_urbanisticas_PV}"
+						title="#{messages.menu_consuta_entidades_urbanisticas_PV}"
+						styleClass="iconoNav" />
+				</s:link>
+
+				<s:link
+					view="/informacionfip/consultafichaurbanistica/FichaCUPlanPrerrefundido.xhtml"
+					id="FichaCUPlanPrerrefundidoNavegacionMenu" propagation="none">
+					<h:graphicImage
+						value="/img/editorfip/#{localeSelector.language}/navegacion/04_05_03_PLAN_PREREFUNDIDO.png"
+						alt="#{messages.menu_consuta_entidades_urbanisticas_PP}"
+						title="#{messages.menu_consuta_entidades_urbanisticas_PP}"
+						styleClass="iconoNav" />
+				</s:link>
+
+
+			</ice:panelGroup>
+
+		</ice:panelGroup>
+
+
+	</ui:define>
+
+</ui:composition>

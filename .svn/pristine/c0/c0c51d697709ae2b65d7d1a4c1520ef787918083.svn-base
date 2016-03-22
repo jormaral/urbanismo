@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichasXML" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="403"/>
+	<style name="Titulo1" mode="Opaque" fill="Solid" pattern="" fontSize="14" isItalic="true" isUnderline="false" isStrikeThrough="true" pdfFontName="Courier"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/Users/franguerreroaranda/Desarrollo/jboss-5.1.0.GA/var/ficha/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BBOX" class="java.lang.String"/>
+	<parameter name="SRS" class="java.lang.String"/>
+	<queryString language="xPath">
+		<![CDATA[FICHA/CAPA/GRUPO/ENTIDADES/ENTIDAD/CONDICIONES/CONDICION/CASOS/CASO/VALORES/VALOR/REGIMENES-ESPECIFICOS/REGIMEN-ESPECIFICO]]>
+	</queryString>
+	<field name="grupo" class="java.lang.String">
+		<fieldDescription><![CDATA[../../../../../../../../../../@nombre]]></fieldDescription>
+	</field>
+	<field name="valor" class="java.lang.String">
+		<fieldDescription><![CDATA[../../@valor]]></fieldDescription>
+	</field>
+	<field name="clave" class="java.lang.String">
+		<fieldDescription><![CDATA[../../../../../../../../@clave]]></fieldDescription>
+	</field>
+	<field name="caso" class="java.lang.String">
+		<fieldDescription><![CDATA[../../../../@nombre]]></fieldDescription>
+	</field>
+	<field name="entidad" class="java.lang.String">
+		<fieldDescription><![CDATA[../../../../../../../../@nombre]]></fieldDescription>
+	</field>
+	<field name="situacion" class="java.lang.String">
+		<fieldDescription><![CDATA[/FICHA/SITUACION]]></fieldDescription>
+	</field>
+	<field name="determinacionCondicion" class="java.lang.String">
+		<fieldDescription><![CDATA[../../../../../../@determinacion]]></fieldDescription>
+	</field>
+	<field name="grupoGroup" class="java.lang.Object">
+		<fieldDescription><![CDATA[../../../../../../../../../..]]></fieldDescription>
+	</field>
+	<field name="entidadGroup" class="java.lang.Object">
+		<fieldDescription><![CDATA[../../../../../../../..]]></fieldDescription>
+	</field>
+	<field name="adscripcionGroup" class="java.lang.Object">
+		<fieldDescription><![CDATA[../../../../../../../../ADSCRIPCIONES/ADSCRIPCION]]></fieldDescription>
+	</field>
+	<field name="condicionGroup" class="java.lang.Object">
+		<fieldDescription><![CDATA[../../../../../..]]></fieldDescription>
+	</field>
+	<field name="casoGroup" class="java.lang.Object">
+		<fieldDescription><![CDATA[../../../..]]></fieldDescription>
+	</field>
+	<field name="valorGroup" class="java.lang.Object">
+		<fieldDescription><![CDATA[../..]]></fieldDescription>
+	</field>
+	<field name="regimenEspecifico" class="java.lang.String">
+		<fieldDescription><![CDATA[child::text()]]></fieldDescription>
+	</field>
+	<field name="capa" class="java.lang.String">
+		<fieldDescription><![CDATA[../../../../../../../../../../../@nombre]]></fieldDescription>
+	</field>
+	<field name="capaGroup" class="java.lang.Object">
+		<fieldDescription><![CDATA[../../../../../../../../../../..]]></fieldDescription>
+	</field>
+	<field name="orden" class="java.lang.String">
+		<fieldDescription><![CDATA[../../../../../../../../../../../@orden]]></fieldDescription>
+	</field>
+	<field name="tipoDetGroup" class="java.lang.String">
+		<fieldDescription><![CDATA[ancestor::CONDICION/@tipo]]></fieldDescription>
+	</field>
+	<field name="tipoDet" class="java.lang.String">
+		<fieldDescription><![CDATA[../../../../../../@tipo]]></fieldDescription>
+	</field>
+	<field name="ordenTipoDet" class="java.lang.String">
+		<fieldDescription><![CDATA[ancestor::CONDICION/@orden]]></fieldDescription>
+	</field>
+	<field name="ordenDet" class="java.lang.String">
+		<fieldDescription><![CDATA[ancestor::CONDICION/@ordendeterminacion]]></fieldDescription>
+	</field>
+	<field name="ordenEnt" class="java.lang.String">
+		<fieldDescription><![CDATA[../../../../../../../../@orden]]></fieldDescription>
+	</field>
+	<field name="nCasos" class="java.lang.Integer">
+		<fieldDescription><![CDATA[../../../../../@ncasos]]></fieldDescription>
+	</field>
+	<field name="ordenDetRegimen" class="java.lang.String">
+		<fieldDescription><![CDATA[../../@ordenDetRegimen]]></fieldDescription>
+	</field>
+	<field name="casoAplicacion" class="java.lang.String">
+		<fieldDescription><![CDATA[../../@caso_aplicacion]]></fieldDescription>
+	</field>
+	<field name="apartadoDeterminacionCondicion" class="java.lang.String">
+		<fieldDescription><![CDATA[../../../.././../../@apartado]]></fieldDescription>
+	</field>
+	<field name="idDeterminacion" class="java.lang.String">
+		<fieldDescription><![CDATA[../../../.././../../@iddeterminacion]]></fieldDescription>
+	</field>
+	<field name="adscripciones" class="java.lang.Object">
+		<fieldDescription><![CDATA[../../../../../../../../ADSCRIPCIONES]]></fieldDescription>
+	</field>
+	<field name="planeamiento" class="java.lang.Object">
+		<fieldDescription><![CDATA[/FICHA/PLANEAMIENTO]]></fieldDescription>
+	</field>
+	<field name="refCatastral" class="java.lang.String">
+		<fieldDescription><![CDATA[/FICHA/SITUACION/@refCatastral]]></fieldDescription>
+	</field>
+	<sortField name="orden"/>
+	<sortField name="ordenEnt"/>
+	<sortField name="ordenTipoDet"/>
+	<sortField name="ordenDet"/>
+	<sortField name="ordenDetRegimen"/>
+	<group name="Planeamiento">
+		<groupExpression><![CDATA[$F{planeamiento}]]></groupExpression>
+		<groupHeader>
+			<band height="330">
+				<staticText>
+					<reportElement mode="Opaque" x="17" y="3" width="521" height="20" backcolor="#C8C8C8"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Situación]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="19" y="23" width="521" height="20"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{situacion}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="18" y="45" width="520" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$F{refCatastral}!=null]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Referencia Catastral: " + $F{refCatastral}]]></textFieldExpression>
+				</textField>
+				<image>
+					<reportElement positionType="Float" x="18" y="66" width="520" height="260"/>
+					<imageExpression class="java.lang.String"><![CDATA["http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx?LAYERS=Catastro&TRANSPARENT=true&FORMAT=image%2Fpng&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&SRS=" + $P{SRS} + "&BBOX=" + $P{BBOX} + "&WIDTH=1040&HEIGHT=520"]]></imageExpression>
+				</image>
+				
+			</band>
+			<band height="58">
+				<staticText>
+					<reportElement mode="Opaque" x="17" y="0" width="521" height="20" backcolor="#C8C8C8"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Planeamiento en vigor]]></text>
+				</staticText>
+				<subreport isUsingCache="false">
+					<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" mode="Transparent" x="47" y="24" width="491" height="30" backcolor="#FFFFFF"/>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRXmlDataSource(net.sf.jasperreports.engine.util.JRXmlUtils.createDocument($F{planeamiento}),"/PLANEAMIENTO/PLAN")]]></dataSourceExpression>
+					<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Planeamiento.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Capa">
+		<groupExpression><![CDATA[$F{capaGroup}]]></groupExpression>
+		<groupHeader>
+			<band height="23">
+				<textField isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="17" y="2" width="521" height="20" backcolor="#C8C8C8"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{capa}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Grupo">
+		<groupExpression><![CDATA[$F{grupoGroup}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<printWhenExpression><![CDATA[false]]></printWhenExpression>
+				<textField isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="17" y="1" width="521" height="20" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{grupo}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Entidad">
+		<groupExpression><![CDATA[$F{entidadGroup}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<printWhenExpression><![CDATA[$F{clave}!= null]]></printWhenExpression>
+				<textField>
+					<reportElement x="17" y="0" width="521" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{grupo} + " :  " + $F{clave} + " " +  $F{entidad}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Adscripcion">
+		<groupExpression><![CDATA[$F{adscripcionGroup}]]></groupExpression>
+		<groupFooter>
+			<band height="55" splitType="Prevent">
+				<printWhenExpression><![CDATA[$F{adscripcionGroup}!=null]]></printWhenExpression>
+				<staticText>
+					<reportElement x="31" y="1" width="106" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Adscripciones]]></text>
+				</staticText>
+				<subreport isUsingCache="false">
+					<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" mode="Transparent" x="47" y="25" width="491" height="30" backcolor="#FFFFFF"/>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRXmlDataSource(net.sf.jasperreports.engine.util.JRXmlUtils.createDocument($F{adscripciones}),"/ADSCRIPCIONES/ADSCRIPCION")]]></dataSourceExpression>
+					<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Adscripciones.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="TipoDeterminacion">
+		<groupExpression><![CDATA[$F{tipoDetGroup}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField isBlankWhenNull="true">
+					<reportElement x="31" y="1" width="507" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true" isItalic="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoDet}==null?"": ($F{tipoDet}.equals("RD")?"Regulación Específica":($F{tipoDet}.equals("USO")?"Regulación de los Usos":($F{tipoDet}.equals("ACTO")?"Regulación de los Actos":"Otros") ) )]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Condicion">
+		<groupExpression><![CDATA[$F{condicionGroup}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<printWhenExpression><![CDATA[$F{determinacionCondicion}!= null]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement x="47" y="1" width="491" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{determinacionCondicion}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Caso">
+		<groupExpression><![CDATA[$F{casoGroup}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<printWhenExpression><![CDATA[$F{nCasos}>1]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement x="59" y="0" width="479" height="20" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{caso}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Valor">
+		<groupExpression><![CDATA[$F{valorGroup}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<printWhenExpression><![CDATA[$F{casoAplicacion}!= null]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement x="70" y="0" width="468" height="20" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{casoAplicacion}]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="20">
+				<printWhenExpression><![CDATA[$F{valor}!= null]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement x="70" y="0" width="468" height="20" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{valor}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="44" splitType="Stretch">
+			<image scaleImage="RetainShape" vAlign="Middle">
+				<reportElement key="image-1" x="17" y="0" width="138" height="44"/>
+				<imageExpression class="java.lang.String"><![CDATA["/Users/franguerreroaranda/Desarrollo/jboss-5.1.0.GA/var/ficha/izquierda.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="155" y="10" width="245" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ficha Urbanística]]></text>
+			</staticText>
+			<image scaleImage="RetainShape" hAlign="Right" vAlign="Middle">
+				<reportElement key="image-1" x="400" y="0" width="137" height="44"/>
+				<imageExpression class="java.lang.String"><![CDATA["/Users/franguerreroaranda/Desarrollo/jboss-5.1.0.GA/var/ficha/derecha.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="23" splitType="Prevent">
+			<printWhenExpression><![CDATA[$F{regimenEspecifico}!= null]]></printWhenExpression>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="83" y="0" width="455" height="20" isRemoveLineWhenBlank="true" backcolor="#E6E6E6"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{regimenEspecifico}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<textField pattern="">
+				<reportElement x="467" y="4" width="71" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="17" y="3" width="521" height="1"/>
+			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="17" y="4" width="85" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="102" y="4" width="365" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Documento de carácter informativo - Datos obtenidos del planeamiento refundido]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

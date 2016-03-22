@@ -1,0 +1,183 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_edicionfip}"
+				view="/produccionfip/ProduccionFipNavegacion.xhtml"
+				id="ProduccionFipRutaMenu" propagation="none">
+			</s:link>
+
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.gestionoperaciones}"
+				view="/produccionfip/gestionoperaciones/VerListaOperaciones.xhtml"
+				id="VerListaOperacionesRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_gestionoperaciones_determinacion}"
+				view="/produccionfip/gestionoperaciones/listaOperacionesDeterminacion.xhtml"
+				id="VerListaOperacionesDeterminacionRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.botongenerico_crear}"
+				view="/produccionfip/gestionoperaciones/CrearOperacionesDeterminacion.xhtml"
+				id="CrearOperacionesDeterminacionRutaMenu" propagation="none">
+
+
+			</s:link>
+
+
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+
+	<ui:define name="body">
+
+
+
+		<!--  Se define el cuerpo de la pagina -->
+
+		<ice:form id="form">
+
+			<ice:panelGroup>
+
+				<ice:panelGrid columns="3" style="text-align:left">
+
+					<ice:panelGroup styleClass="labels"
+						panelTooltip="tooltip_tipo_operacion">
+						<ice:outputLabel value="#{messages.operacion_tipo}" />
+						<ice:graphicImage styleClass="tooltip_imagen"
+							alt="#{messages.genericos_info}"
+							url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+					</ice:panelGroup>
+					<ice:selectOneListbox
+						value="#{gestionOperaciones.idTipoOperacionDeterminacion}"
+						partialSubmit="false" size="1" id="tipoOperacion">
+						<f:selectItems
+							value="#{gestionOperaciones.tipoOperacionDeterminacion()}" />
+					</ice:selectOneListbox>
+					<ice:outputLabel />
+
+					<ice:panelGroup styleClass="labels"
+						panelTooltip="tooltip_determinacion_operadora">
+						<ice:outputLabel value="#{messages.operacion_detoperadora}" />
+						<ice:graphicImage styleClass="tooltip_imagen"
+							alt="#{messages.genericos_info}"
+							url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+					</ice:panelGroup>
+
+					<ice:outputText
+						value="#{gestionOperaciones.operacionDeterminacion.determinacionByIddeterminacionoperadora.nombre}" />
+					<ice:panelGroup style="text-align:left!important;">
+						<ice:commandButton value="#{messages.operacion_seldetoperadora}"
+							styleClass="boton5" alt="#{messages.operacion_seldetoperadora}"
+							action="#{gestionOperaciones.setMostrarPopUpDeterminacionOperadora(true)}"
+							title="#{messages.operacion_seldetoperadora}" />
+					</ice:panelGroup>
+
+					<ice:panelGroup styleClass="labels"
+						panelTooltip="tooltip_determinacion_operada">
+						<ice:outputLabel value="#{messages.operacion_detoperada}" />
+						<ice:graphicImage styleClass="tooltip_imagen"
+							alt="#{messages.genericos_info}"
+							url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+					</ice:panelGroup>
+
+					<ice:outputText
+						value="#{gestionOperaciones.operacionDeterminacion.determinacionByIddeterminacion.nombre}" />
+					<ice:panelGroup style="text-align:left!important;">
+						<ice:commandButton value="#{messages.operacion_seldetoperada}"
+							styleClass="boton5" alt="#{messages.operacion_seldetoperada}"
+							action="#{gestionOperaciones.setMostrarPopUpDeterminacionOperada(true)}"
+							title="#{messages.boton_title_crearOperacionDeterminacion_seleccionarOperada}" />
+					</ice:panelGroup>
+
+					<ice:outputLabel />
+					<ice:panelGroup>
+						<ice:panelGrid columns="2">
+							<ice:commandButton value="#{messages.botongenerico_guardar}"
+								styleClass="boton1"
+								action="#{gestionOperaciones.guardarOperacionDeterminacion}"
+								alt="#{messages.botongenerico_guardar}"
+								title="#{messages.boton_title_crearOperacionDeterminacion_guardar}" />
+							<s:button value="#{messages.botongenerico_cancelar}"
+								styleClass="boton1" alt="#{messages.botongenerico_cancelar}"
+								title="#{messages.boton_title_crearOperacionDeterminacion_cancelar}"
+								view="/produccionfip/gestionoperaciones/listaOperacionesDeterminacion.xhtml" />
+						</ice:panelGrid>
+					</ice:panelGroup>
+					<ice:outputLabel />
+
+				</ice:panelGrid>
+
+			</ice:panelGroup>
+
+			<ui:include
+				src="/produccionfip/gestionoperaciones/SeleccionarDeterminacionOperada.xhtml" />
+			<ui:include
+				src="/produccionfip/gestionoperaciones/SeleccionarDeterminacionOperadora.xhtml" />
+
+			<!-- Tooltips -->
+			<ice:panelTooltip id="tooltip_tipo_operacion"
+				styleClass="tooltip_panel">
+				<f:facet name="body">
+					<ice:outputText
+						value="#{messages.tooltip_operaciones_determinacion_tipo}#{messages.tooltip_determinacion_masinfo}"
+						styleClass="tooltip_texto" />
+				</f:facet>
+			</ice:panelTooltip>
+			<ice:panelTooltip id="tooltip_determinacion_operadora"
+				styleClass="tooltip_panel">
+				<f:facet name="body">
+					<ice:outputText
+						value="#{messages.tooltip_operaciones_determinacion_operadora}#{messages.tooltip_determinacion_masinfo}"
+						styleClass="tooltip_texto" />
+				</f:facet>
+			</ice:panelTooltip>
+			<ice:panelTooltip id="tooltip_determinacion_operada"
+				styleClass="tooltip_panel">
+				<f:facet name="body">
+					<ice:outputText
+						value="#{messages.tooltip_operaciones_determinacion_operada}#{messages.tooltip_determinacion_masinfo}"
+						styleClass="tooltip_texto" />
+				</f:facet>
+			</ice:panelTooltip>
+
+		</ice:form>
+
+
+	</ui:define>
+
+</ui:composition>

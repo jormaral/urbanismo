@@ -1,0 +1,152 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.obtencionfip1}"
+				view="/gestionfip/obtencionfip1/ObtencionFip.xhtml"
+				id="ObtencionFip1RutaMenu" propagation="none">
+
+			</s:link>
+
+		</ice:panelGroup>
+
+
+
+
+	</ui:define>
+
+	<ui:define name="body">
+		<ice:form id="formularioURL">
+
+			<h:panelGrid columns="1">
+				<br />
+				<s:button value="#{messages.verlistadofipcargados}"
+					view="/gestionfip/obtencionfip1/Fip1IntroducidosLista.seam"
+					propagation="nest" styleClass="boton4"
+					alt="#{messages.verlistadofipcargados}"
+					title="#{messages.boton_title_obtencionFip_verListado}">
+					<f:param name="planIden" />
+				</s:button>
+			</h:panelGrid>
+
+			<ice:panelGroup styleClass="infoseleccion">
+				<ice:graphicImage styleClass="tooltip_imagen"
+					alt="#{messages.genericos_info}"
+					url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				<ice:outputLabel value="#{messages.nuevofip1_antescargar}"
+					style="color:blue;" />
+
+			</ice:panelGroup>
+
+			<ice:panelGroup styleClass="infoseleccion">
+				<ice:graphicImage styleClass="tooltip_imagen"
+					alt="#{messages.genericos_info}"
+					url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				<ice:outputLabel value="#{messages.info_fip1}"
+					styleClass="labelseleccioninfo" />
+
+			</ice:panelGroup>
+
+ 
+			<div class="bBody">
+
+
+
+				<h2>Cargar FIP1 XML desde un fichero al sistema</h2>
+				<hr></hr>
+
+				<div style="margin-left: 120px; margin-bottom: 50px;">
+
+
+
+
+
+					<ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+
+						<h:panelGrid columns="2">
+							<ice:inputFile id="inputFileComponent"
+								actionListener="#{cargadorArchivo.uploadActionListener}"
+								progressListener="#{cargadorArchivo.progressListener}"
+								fileNamePattern=".+\.xml"
+								label="#{messages.genericos_cargar}" />
+							<ice:message for="inputFileComponent" />
+							<ice:outputProgress labelComplete="Fichero Cargado"
+								value="#{cargadorArchivo.fileProgress}" />
+
+						</h:panelGrid>
+
+					</ice:panelGroup>
+				</div>
+			</div>
+			
+		
+			
+			<div class="bBody">
+
+
+
+				<h2>Cargar FIP1 ZIP (Con Documentos) desde un fichero al
+					sistema</h2>
+				<hr></hr>
+
+				<div style="margin-left: 120px; margin-bottom: 50px;">
+
+
+
+
+
+					<ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+
+						<h:panelGrid columns="2">
+							<ice:inputFile id="inputFIPZIPFileComponent"
+								actionListener="#{cargadorArchivoZIP.uploadFIPZIPActionListener}"
+								progressListener="#{cargadorArchivoZIP.progressListenerFIPZIP}" 
+								fileNamePattern=".+\.zip"
+								label="#{messages.genericos_cargar}" />
+							<ice:message for="inputFIPZIPFileComponent" />
+							<ice:outputProgress labelComplete="Fichero Cargado"
+								value="#{cargadorArchivoZIP.fileProgress}" />
+
+						</h:panelGrid>
+
+					</ice:panelGroup>
+				</div>
+
+
+			</div>
+		</ice:form>
+
+	</ui:define>
+
+</ui:composition>

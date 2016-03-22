@@ -1,0 +1,98 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_proceso_validacion}"
+				view="/gestionfip/validaciones/ProcesoValidacionList.xhtml"
+				id="ProcesoValidacionNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="validar plan encargado"
+				view="/gestionfip/validaciones/ValidarTramiteEncargado.xhtml"
+				id="ProcesoValidacionNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+	</ui:define>
+
+
+	<ui:define name="body">
+
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+			<!--  Se define el cuerpo de la pagina -->
+			<ice:panelGroup>
+
+				<ice:graphicImage styleClass="tooltip_imagen"
+					alt="#{messages.genericos_info}"
+					url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				<ice:outputLabel
+					value="Para validar el Plan Encargado, pulse sobre el boton. Posteriormente vaya al listado de Planes Validados para ver el estado."></ice:outputLabel>
+			</ice:panelGroup>
+
+			<br></br>
+			<br></br>
+
+			<ice:form>
+				<ice:panelGrid columns="1">
+
+					<ice:panelGroup style="text-align:left;">
+						<ice:commandButton value="Validar Plan Encargado"
+							panelConfirmation="panelconfconplanencargado" styleClass="boton4"
+							action="#{listaProcesosValidacion.validarTramiteSincrono(variablesSesionUsuario.getIdTramiteEncargadoTrabajo())}" />
+					</ice:panelGroup>
+				</ice:panelGrid>
+
+				<ice:panelConfirmation id="panelconfconplanencargado"
+					title="Validar Plan Encargado"
+					message="Va a validar el plan encargado, posteriormente vaya al listado de planes validados"
+					acceptLabel="#{messages.botongenerico_aceptar}"
+					cancelLabel="#{messages.botongenerico_cancelar}" />
+
+				<s:link view="/gestionfip/validaciones/ProcesoValidacionList.xhtml"
+					styleClass="hiperenlace" id="botonListado" propagation="none">
+					<ice:outputLabel styleClass="hiperenlace"
+						value="Ir Listado Planes Validados" />
+				</s:link>
+			</ice:form>
+
+		</ice:panelGroup>
+
+	</ui:define>
+</ui:composition>
+

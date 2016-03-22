@@ -1,0 +1,329 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.plan_sistematizado}"
+				view="/gestionfip/nuevoplaneamientosistematizado/CrearPlaneamientoSistematizado.xhtml"
+				id="PlaneamientoEncargadoListRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.crear_plan_sistematizado}"
+				view="/gestionfip/nuevoplaneamientosistematizado/CrearPlaneamientoSistematizado.xhtml"
+				id="PlaneamientoEncargadoListRutaMenu" propagation="none">
+
+			</s:link>
+
+		</ice:panelGroup>
+
+	</ui:define>
+
+	<ui:define name="body">
+
+
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+
+			<h:form id="formularioUsuario">
+				<ice:panelGroup styleClass="panelGroupDetalle">
+					<h:panelGroup>
+						<s:button
+							view="/gestionfip/gestionplaneamientoencargado/PlaneamientoEncargadoList.xhtml"
+							alt="#{messages.botongenerico_volver}"
+							image="/fipeditor/img/editorfip/es/botones/Volver.png"
+							styleClass="boton1_up"
+							onmouseover="this.src='/fipeditor/img/editorfip/es/botones/Volver2.png'"
+							onmouseout="this.src='/fipeditor/img/editorfip/es/botones/Volver.png'"
+							title="#{messages.boton_title_PEdetalle_volver}" />
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<ice:commandButton value="#{messages.botongenerico_guardar}" panelConfirmation="guardarplanencargado"
+							action="#{servicioPlanEncargado.guardar}" styleClass="boton1_up"
+							alt="#{messages.botongenerico_guardar}"
+							title="#{messages.boton_title_PEdetalle_guardar}" />
+					</h:panelGroup>
+					
+					<ice:panelConfirmation id="guardarplanencargado"
+						title="#{messages.nuevofip1_titulo}"
+						message="#{messages.nuevofip1_advertencia}"
+						acceptLabel="#{messages.botongenerico_aceptar}"
+						cancelLabel="#{messages.botongenerico_cancelar}" />
+
+					<h:panelGroup>
+						<ice:commandButton
+							action="#{servicioPlanEncargado.descartarCambios}"
+							value="#{messages.botongenerico_desc_cambios}"
+							reRender="datosUsuarioPG" styleClass="boton2_up"
+							alt="#{messages.botongenerico_desc_cambios}"
+							title="#{messages.boton_title_PEdetalle_descartarCambios}" />
+					</h:panelGroup>
+
+				</ice:panelGroup>
+
+
+				<h:panelGrid columns="3" id="datosUsuarioPG"
+					styleClass="tableDetalle">
+
+					<ice:panelGroup styleClass="labels"
+						panelTooltip="tooltip_codigofip">
+						<ice:outputLabel styleClass="etiqueta-Usuario"
+							value="#{messages.codigofip}" />
+						<ice:graphicImage styleClass="tooltip_imagen"
+							alt="#{messages.genericos_info}"
+							url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+					</ice:panelGroup>
+					<h:inputText styleClass="input-Detalle"
+						rendered="#{not servicioPlanEncargado.modificacion}"
+						value="#{servicioPlanEncargado.planEncargado.codigoFip}"
+						disabled="true" />
+					<h:inputText styleClass="input-Detalle"
+						rendered="#{servicioPlanEncargado.modificacion}"
+						value="#{servicioPlanEncargado.planEncargado.codigoFip}"
+						disabled="true" />
+					<ice:outputLabel value="" />
+
+					<ice:panelGroup styleClass="labels" panelTooltip="tooltip_nombre">
+						<ice:outputLabel styleClass="etiqueta-Usuario"
+							value="#{messages.gestionusuario_usuario_nombre}" />
+						<ice:graphicImage styleClass="tooltip_imagen"
+							alt="#{messages.genericos_info}"
+							url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+					</ice:panelGroup>
+					<h:inputText styleClass="input-Detalle"
+						value="#{servicioPlanEncargado.planEncargado.nombre}" />
+					<ice:outputLabel value="" />
+
+					<ice:panelGroup styleClass="labels" panelTooltip="tooltip_ambito">
+						<ice:outputLabel styleClass="etiqueta-Usuario"
+							value="#{messages.ambito}" />
+						<ice:graphicImage styleClass="tooltip_imagen"
+							alt="#{messages.genericos_info}"
+							url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+					</ice:panelGroup>
+					
+					<ice:panelGroup>
+					<h:inputText styleClass="input-Detalle"
+						value="#{servicioPlanEncargado.literalAmbito}" disabled="true" />
+					<ice:outputLabel style="color:red;" value="(*) Seleccione el ambito antes que el plan base" />
+					</ice:panelGroup>
+					<ice:outputLabel value="" />
+
+					<ice:outputLabel
+						rendered="#{not servicioPlanEncargado.modificacion}" value="" />
+					<ice:commandButton
+						rendered="#{not servicioPlanEncargado.modificacion}"
+						disabled="#{servicioPlanEncargado.modificacion}"
+						value="#{messages.botonusuario_ambito}" id="aniadirAmbitoCB"
+						partialSubmit="true"
+						actionListener="#{servicioPlanEncargado.mostrarPanelAmbitosAL}"
+						alt="#{messages.botonusuario_ambito}" styleClass="boton2"
+						title="#{messages.boton_title_PEdetalle_anadirAmbito}" />
+					<ice:outputLabel
+						rendered="#{not servicioPlanEncargado.modificacion}" value="" />
+
+					<ice:panelGroup styleClass="labels" panelTooltip="tooltip_planBase">
+						<ice:outputLabel styleClass="etiqueta-Usuario"
+							value="#{messages.plan_base}" />
+						<ice:graphicImage styleClass="tooltip_imagen"
+							alt="#{messages.genericos_info}"
+							url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+					</ice:panelGroup>
+
+					<h:inputText styleClass="input-Detalle"
+						rendered="#{servicioPlanEncargado.ambitoConPlanBase}"
+						value="#{servicioPlanEncargado.planEncargado.tramiteBase.nombre}"
+						disabled="true" />
+
+					<ice:selectOneListbox size="1" id="selectPlan"
+						rendered="#{not servicioPlanEncargado.ambitoConPlanBase}"
+						value="#{servicioPlanEncargado.planBase.iden}"
+						partialSubmit="false">
+						<f:selectItems value="#{servicioPlanEncargado.planesBase}" />
+					</ice:selectOneListbox>
+					<h:inputHidden />
+
+					<ice:panelGroup styleClass="labels"
+						panelTooltip="tooltip_planVigente">
+						<ice:outputLabel styleClass="etiqueta-Usuario"
+							value="#{messages.plan_vigente}" />
+						<ice:graphicImage styleClass="tooltip_imagen"
+							alt="#{messages.genericos_info}"
+							url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+					</ice:panelGroup>
+					<ice:selectOneListbox size="1" id="selectPlanVigente"
+						rendered="#{not servicioPlanEncargado.modificacion}"
+						value="#{servicioPlanEncargado.planVigente.iden}"
+						partialSubmit="false">
+						<f:selectItem itemValue="-1"
+							itemLabel="#{messages.crear_nuevo_plan_vigente}" />
+						<f:selectItems value="#{servicioPlanEncargado.planesVigentes}" />
+					</ice:selectOneListbox>
+					<h:inputText styleClass="input-Detalle"
+						rendered="#{servicioPlanEncargado.modificacion}"
+						value="#{messages.crear_nuevo_plan_vigente}" disabled="true" />
+					<h:inputHidden />
+
+					<ice:panelGroup styleClass="labels"
+						panelTooltip="tooltip_instrumento">
+						<ice:outputLabel styleClass="etiqueta-Usuario"
+							value="#{messages.instrumento}" />
+						<ice:graphicImage styleClass="tooltip_imagen"
+							alt="#{messages.genericos_info}"
+							url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+					</ice:panelGroup>
+					<ice:selectOneListbox
+						rendered="#{not servicioPlanEncargado.modificacion}" size="1"
+						id="selectInstrumento"
+						value="#{servicioPlanEncargado.planEncargado.instrumento.iden}"
+						partialSubmit="false">
+						<f:selectItems value="#{servicioPlanEncargado.listaInstrumentos}" />
+					</ice:selectOneListbox>
+					<h:inputText styleClass="input-Detalle"
+						rendered="#{servicioPlanEncargado.modificacion}"
+						value="#{servicioPlanEncargado.literalInstrumento}"
+						disabled="true" />
+					<h:inputHidden />
+
+					<ice:panelGroup styleClass="labels"
+						panelTooltip="tooltip_tipoTramite">
+						<ice:outputLabel styleClass="etiqueta-Usuario"
+							value="#{messages.tipo_tramite}" />
+						<ice:graphicImage styleClass="tooltip_imagen"
+							alt="#{messages.genericos_info}"
+							url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+					</ice:panelGroup>
+					<ice:selectOneListbox size="1" id="selectTipoTramite"
+						rendered="#{not servicioPlanEncargado.modificacion}"
+						value="#{servicioPlanEncargado.planEncargado.tipotramite.iden}"
+						partialSubmit="false">
+						<f:selectItems value="#{servicioPlanEncargado.listaTiposTramite}" />
+					</ice:selectOneListbox>
+					<h:inputText styleClass="input-Detalle"
+						rendered="#{servicioPlanEncargado.modificacion}"
+						value="#{servicioPlanEncargado.literalTipoTramite}"
+						disabled="true" />
+					<h:inputHidden />
+
+					<ice:panelGroup styleClass="labels"
+						panelTooltip="tooltip_proyeccion">
+						<ice:outputLabel styleClass="etiqueta-Usuario"
+							value="#{messages.proyeccion_cartografica}" />
+						<ice:graphicImage styleClass="tooltip_imagen"
+							alt="#{messages.genericos_info}"
+							url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+					</ice:panelGroup>
+					<ice:selectOneListbox size="1" id="selectProyeccion"
+						value="#{servicioPlanEncargado.planEncargado.proyeccion}"
+						partialSubmit="false">
+						<f:selectItems value="#{servicioPlanEncargado.proyecciones}" />
+					</ice:selectOneListbox>
+
+				</h:panelGrid>
+
+				<!-- Tooltips -->
+				<ice:panelTooltip id="tooltip_codigofip" styleClass="tooltip_panel">
+					<f:facet name="body">
+						<ice:outputText
+							value="#{messages.tooltip_sistematizado_codigofip}#{messages.tooltip_determinacion_masinfo}"
+							styleClass="tooltip_texto" />
+					</f:facet>
+				</ice:panelTooltip>
+				<ice:panelTooltip id="tooltip_nombre" styleClass="tooltip_panel">
+					<f:facet name="body">
+						<ice:outputText
+							value="#{messages.tooltip_sistematizado_nombre}#{messages.tooltip_determinacion_masinfo}"
+							styleClass="tooltip_texto" />
+					</f:facet>
+				</ice:panelTooltip>
+				<ice:panelTooltip id="tooltip_ambito" styleClass="tooltip_panel">
+					<f:facet name="body">
+						<ice:outputText
+							value="#{messages.tooltip_sistematizado_ambito}#{messages.tooltip_determinacion_masinfo}"
+							styleClass="tooltip_texto" />
+					</f:facet>
+				</ice:panelTooltip>
+				<ice:panelTooltip id="tooltip_planBase" styleClass="tooltip_panel">
+					<f:facet name="body">
+						<ice:outputText
+							value="#{messages.tooltip_sistematizado_planBase}#{messages.tooltip_determinacion_masinfo}"
+							styleClass="tooltip_texto" />
+					</f:facet>
+				</ice:panelTooltip>
+				<ice:panelTooltip id="tooltip_planVigente"
+					styleClass="tooltip_panel">
+					<f:facet name="body">
+						<ice:outputText
+							value="#{messages.tooltip_sistematizado_planVigente}#{messages.tooltip_determinacion_masinfo}"
+							styleClass="tooltip_texto" />
+					</f:facet>
+				</ice:panelTooltip>
+				<ice:panelTooltip id="tooltip_instrumento"
+					styleClass="tooltip_panel">
+					<f:facet name="body">
+						<ice:outputText
+							value="#{messages.tooltip_sistematizado_instrumento}#{messages.tooltip_determinacion_masinfo}"
+							styleClass="tooltip_texto" />
+					</f:facet>
+				</ice:panelTooltip>
+				<ice:panelTooltip id="tooltip_tipoTramite"
+					styleClass="tooltip_panel">
+					<f:facet name="body">
+						<ice:outputText
+							value="#{messages.tooltip_sistematizado_tipoTramite}#{messages.tooltip_determinacion_masinfo}"
+							styleClass="tooltip_texto" />
+					</f:facet>
+				</ice:panelTooltip>
+				<ice:panelTooltip id="tooltip_proyeccion" styleClass="tooltip_panel">
+					<f:facet name="body">
+						<ice:outputText
+							value="#{messages.tooltip_sistematizado_proyeccion}#{messages.tooltip_determinacion_masinfo}"
+							styleClass="tooltip_texto" />
+					</f:facet>
+				</ice:panelTooltip>
+
+
+
+				<ui:include
+					src="/gestionfip/nuevoplaneamientosistematizado/AnnadirAmbito.xhtml" />
+
+
+
+			</h:form>
+
+		</ice:panelGroup>
+
+
+	</ui:define>
+
+</ui:composition>

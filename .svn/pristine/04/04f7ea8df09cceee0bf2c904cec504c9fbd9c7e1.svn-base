@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18-jul-2011 17:35:19 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+ <class name="es.mitc.redes.urbanismoenred.data.validacion.Proceso"
+  schema="validacion" table="proceso">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">validacion.validacion_proceso_sequence</param>
+   </generator>
+  </id>
+  <property generated="never" lazy="false" name="idfip" type="string">
+   <column length="256" name="idfip" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="inicio" type="timestamp">
+   <column length="35" name="inicio" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="fin" type="timestamp">
+   <column length="35" name="fin"/>
+  </property>
+  <property generated="never" lazy="false" name="backup" type="string">
+   <column length="3000" name="backup"/>
+  </property>
+  <property generated="never" lazy="false" name="consolidado" type="timestamp">
+   <column length="35" name="consolidado"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="false" name="resultados"
+   sort="unsorted" table="resultado">
+   <key>
+    <column name="idproceso" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.validacion.Resultado"/>
+  </set>
+ </class>
+ <query name="Proceso.buscarPorFip">SELECT p FROM es.mitc.redes.urbanismoenred.data.validacion.Proceso p WHERE p.idfip = :idFip</query>
+ <query name="Proceso.buscarActivo">SELECT p FROM es.mitc.redes.urbanismoenred.data.validacion.Proceso p WHERE p.idfip = :idFip AND (p.fin IS NULL)</query>
+ <query name="Proceso.estaConsolidado">SELECT p FROM es.mitc.redes.urbanismoenred.data.validacion.Proceso p WHERE p.idfip = :idFip AND (p.consolidado IS NOT NULL)</query>
+ <query name="Proceso.obtenerNoConsolidados">SELECT proc FROM es.mitc.redes.urbanismoenred.data.validacion.Proceso proc WHERE proc.fin IS NOT NULL 
+	AND proc.fin = (SELECT MAX(p.fin) FROM es.mitc.redes.urbanismoenred.data.validacion.Proceso p WHERE p.idfip = proc.idfip)
+	AND NOT EXISTS (SELECT res FROM es.mitc.redes.urbanismoenred.data.validacion.Resultado res WHERE res.proceso.iden = proc.iden AND res.exito = FALSE AND res.validacion.tipoerror = 1)
+	AND proc NOT IN (SELECT proccon FROM es.mitc.redes.urbanismoenred.data.validacion.Proceso proccon 
+		WHERE (proccon.consolidado IS NOT NULL))</query>
+ <query name="Proceso.obtenerTodos">SELECT proc FROM es.mitc.redes.urbanismoenred.data.validacion.Proceso proc 
+	ORDER BY proc.inicio</query>
+</hibernate-mapping>

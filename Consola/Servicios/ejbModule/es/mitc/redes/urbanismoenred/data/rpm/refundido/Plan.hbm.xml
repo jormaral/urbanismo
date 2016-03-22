@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-abr-2012 12:30:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping auto-import="false">
+ <class name="es.mitc.redes.urbanismoenred.data.rpm.refundido.Plan"
+  schema="refundido" table="plan">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">refundido.refundido_plan_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Plan"
+   fetch="select" name="planByIdpadre">
+   <column name="idpadre"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Plan"
+   fetch="select" name="planByIdplanbase">
+   <column name="idplanbase"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column length="100" name="nombre" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="codigo" type="string">
+   <column length="5" name="codigo" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="texto" type="string">
+   <column name="texto"/>
+  </property>
+  <property generated="never" lazy="false" name="idambito" type="int">
+   <column name="idambito" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="bsuspendido" type="boolean">
+   <column name="bsuspendido" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="orden" type="int">
+   <column name="orden" not-null="true"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true"
+   name="plansForIdplanbase" sort="unsorted" table="plan">
+   <key>
+    <column name="idplanbase"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Plan"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="operacionplansForIdplanoperador" sort="unsorted" table="operacionplan">
+   <key>
+    <column name="idplanoperador" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Operacionplan"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true" name="tramites"
+   sort="unsorted" table="tramite">
+   <key>
+    <column name="idplan" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Tramite"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="operacionplansForIdplanoperado" sort="unsorted" table="operacionplan">
+   <key>
+    <column name="idplanoperado"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Operacionplan"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true" name="plansForIdpadre"
+   sort="unsorted" table="plan">
+   <key>
+    <column name="idpadre"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.refundido.Plan"/>
+  </set>
+ </class>
+ <query name="refundido.Plan.buscarPorCodigo">SELECT p FROM es.mitc.redes.urbanismoenred.data.rpm.refundido.Plan p WHERE p.codigo = :codigo</query>
+</hibernate-mapping>

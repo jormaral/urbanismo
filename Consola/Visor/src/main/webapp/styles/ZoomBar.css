@@ -1,0 +1,222 @@
+/* 
+    Document   : ZoomBar
+    Created on : 25-nov-2009, 11:41:46
+    Author     : jorge.bodas
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#zoomBar_contenedor {
+    bottom:88px;
+    height:225px;
+    left:3%;
+    position:absolute;
+    width:48px;
+    z-index:5000;
+
+}
+
+    #zoomBar_zonaMover
+    {
+        posision:relative;
+        float:left;
+        left:0px;
+        top:0px;
+        width:48px;
+        height:48px;
+    }
+            /*BOTONES DE MOVIMIENTO*/
+                #zoomBar_zonaMover_up
+                {
+                    position:absolute;
+                    left:16px;
+                    top:0px;
+                    height:16px;
+                    width:16px;
+                    background-image:url(images/ZoomBar_botonesMovimiento.png);
+                    background-position:left top;
+                    cursor:pointer;
+                }
+                        #zoomBar_zonaMover_up:hover
+                        {
+                            position:absolute;
+                            left:16px;
+                            top:0px;
+                            height:16px;
+                            width:16px;
+                            background-image:url(images/ZoomBar_botonesMovimiento.png);
+                            background-position:right top;
+                            cursor:pointer;
+                        }
+                #zoomBar_zonaMover_down
+                {
+                    position:absolute;
+                    left:16px;
+                    top:32px;
+                    height:16px;
+                    width:16px;
+                    background-image:url(images/ZoomBar_botonesMovimiento.png);
+                    background-position:left -16px;
+                    cursor:pointer;
+                }
+                        #zoomBar_zonaMover_down:hover
+                        {
+                            position:absolute;
+                            left:16px;
+                            top:32px;
+                            height:16px;
+                            width:16px;
+                            background-image:url(images/ZoomBar_botonesMovimiento.png);
+                            background-position:right -16px;
+                            cursor:pointer;
+                        }
+                #zoomBar_zonaMover_left
+                {
+                    position:absolute;
+                    left:0px;
+                    top:16px;
+                    height:16px;
+                    width:16px;
+                    background-image:url(images/ZoomBar_botonesMovimiento.png);
+                    background-position:left -32px;
+                    cursor:pointer;
+                }
+                        #zoomBar_zonaMover_left:hover
+                        {
+                            position:absolute;
+                            left:0px;
+                            top:16px;
+                            height:16px;
+                            width:16px;
+                            background-image:url(images/ZoomBar_botonesMovimiento.png);
+                            background-position:right -32px;
+                            cursor:pointer;
+                        }
+                #zoomBar_zonaMover_right
+                {
+                    position:absolute;
+                    right:0px;
+                    top:16px;
+                    height:16px;
+                    width:16px;
+                    background-image:url(images/ZoomBar_botonesMovimiento.png);
+                    background-position:left -48px;
+                    cursor:pointer;
+                }
+                        #zoomBar_zonaMover_right:hover
+                        {
+                            position:absolute;
+                            right:0px;
+                            top:16px;
+                            height:16px;
+                            width:16px;
+                            background-image:url(images/ZoomBar_botonesMovimiento.png);
+                            background-position:right -48px;
+                            cursor:pointer;
+                        }
+                #zoomBar_zonaMover_center
+                {
+                    position:absolute;
+                    left:16px;
+                    top:16px;
+                    height:16px;
+                    width:16px;
+                    background-image:url(images/ZoomBar_botonesMovimiento.png);
+                    background-position:left -64px;
+                    cursor:pointer;
+                }
+                        #zoomBar_zonaMover_center:hover
+                        {
+                            position:absolute;
+                            left:16px;
+                            top:16px;
+                            height:16px;
+                            width:16px;
+                            background-image:url(images/ZoomBar_botonesMovimiento.png);
+                            background-position:right -64px;
+                            cursor:pointer;
+                        }
+    #zoomBar_zonaSlider
+    {
+        posision:relative;
+        float:left;
+        left:0px;
+        top:0px;
+        width:48px;
+        height:197px;
+    }
+
+
+            #zoomBar_zonaSlider_zoomIn
+            {
+                position:relative;
+                float:left;
+                left:0px;
+                top:5px;
+                height:32px;
+                width:100%;
+                background-image:url(images/ZoomBar_zoomIn.png);
+                background-position:center center;
+                background-repeat:no-repeat;
+                cursor:pointer;
+            }
+                    #zoomBar_zonaSlider_zoomIn:hover
+                    {
+                        position:relative;
+                        float:left;
+                        left:0px;
+                        top:5px;
+                        height:32px;
+                        width:100%;
+                        background-image:url(images/ZoomBar_zoomIn_hover.png);
+                        background-position:center center;
+                        background-repeat:no-repeat;
+                        cursor:pointer;
+                    }
+
+
+            #zoomBar_zonaSlider_slider
+            {
+                position:relative;
+                float:left;
+                left:16px;
+                top:5px;
+                height:124px;
+                width:16px;
+                background-image:url(images/ZoomBar_slider.png);
+                cursor:pointer;
+            }
+                .knob
+                {
+                    width: 100%;
+                    height: 16px;
+                    cursor:pointer;
+                    background-image:url(images/ZoomBar_tirador.png);
+                }
+            #zoomBar_zonaSlider_zoomOut
+            {
+                position:relative;
+                float:left;
+                left:0px;
+                top:5px;
+                height:32px;
+                width:100%;
+                background-image:url(images/ZoomBar_zoomOut.png);
+                background-position:center center;
+                background-repeat:no-repeat;
+                cursor:pointer;
+            }
+                    #zoomBar_zonaSlider_zoomOut:hover
+                    {
+                        position:relative;
+                        float:left;
+                        left:0px;
+                        top:5px;
+                        height:32px;
+                        width:100%;
+                        background-image:url(images/ZoomBar_zoomOut_hover.png);
+                        background-position:center center;
+                        background-repeat:no-repeat;
+                        cursor:pointer;
+                    }
+

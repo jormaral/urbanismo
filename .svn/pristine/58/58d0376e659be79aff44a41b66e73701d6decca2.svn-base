@@ -1,0 +1,56 @@
+/* 
+    Document   : SplashScreen
+    Created on : 25-nov-2009, 17:16:13
+    Author     : jorge.bodas
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+
+    #splashCabecera
+    {
+        position:absolute;
+        left:0px;
+        top:8px;
+        height:30px;
+        width:100%;
+        background-color:#eeeeee;
+    }
+
+            .splashOpcion
+            {
+                position:relative;
+                float:left;
+                left:0px;
+                top:0px;
+                height:100%;
+                width:25%;
+                color:#777777;
+                text-align:center;
+                cursor:pointer;
+                line-height:30px;
+            }
+                    .splashOpcion:hover {
+                            background-color:#174EB3;
+                            color:#FFFFFF;
+                            cursor:pointer;
+                            float:left;
+                            height:100%;
+                            left:0;
+                            line-height:30px;
+                            position:relative;
+                            text-align:center;
+                            top:0;
+                            width:25%;
+                    }
+   #splashZonaAjax {
+        /*background-color:#EEEEEE;*/
+        height:345px;
+        left:9px;
+        position:absolute;
+        top:45px;
+        width:97%;
+        overflow:auto;
+    }
+

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jul-2009 12:36:17 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipoambito"
+  schema="diccionario" table="tipoambito">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="assigned"/>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Literal"
+   fetch="select" name="literal">
+   <column name="idliteral"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="idpadre" type="java.lang.Integer">
+   <column name="idpadre"/>
+  </property>
+  <set inverse="true" name="ambitos" sort="unsorted">
+   <key>
+    <column name="idtipoambito" not-null="true"/>
+   </key>
+   <one-to-many class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Ambito"/>
+  </set>
+ </class>
+ <query name="Tipoambito.obtenerTodos">SELECT t FROM es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipoambito t</query>
+</hibernate-mapping>

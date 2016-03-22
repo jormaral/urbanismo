@@ -1,0 +1,100 @@
+/*
+    Document   : cssAdmin
+    Created on : 22-oct-2011, 16:15:24
+    Author     : Alvaro Montero
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#panelIzdoFicha {
+    margin-right: auto;
+    margin-left: auto;
+}
+#toolPreviewFicha {
+    margin-top: 2px;
+    margin-left: 2px;
+    background-image: url("images/preview.png");
+    background-position: center center;
+    cursor: pointer;
+    top: 0px;
+    margin-right: 10px;
+    background-repeat: no-repeat;
+    float:left;
+    height: 18px;
+    width: 18px;
+}
+.fichasSaveButton{
+    background-image:  url(images/save.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    float:right;
+    right: 20px;
+    position:absolute;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    top: -2px;
+}
+#panelDchoFichas {
+
+}
+
+#botonesFichasArbolPlanes{
+    padding-top: 6px;
+    padding-left: 6px;
+}
+
+#botonesFichas{
+    padding-top: 6px;
+    padding-left: 6px;
+}
+
+.addElementFicha{
+    background-image:  url(images/add.png);
+    height: 16px;
+    width:  24px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    float:left;
+    cursor: pointer;
+}
+
+.editElementFicha{
+    background-image:  url(images/edit.png);
+    height: 16px;
+    width:  24px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    float:left;
+    cursor: pointer;
+}
+
+.delElementFicha{
+    background-image:  url(images/delete.png);
+    height: 16px;
+    width:  24px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    float:left;
+    cursor: pointer;
+}
+
+.upElementFicha{
+    background-image:  url(images/up.png);
+    height: 16px;
+    width:  24px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    float:left;
+    cursor: pointer;
+}
+
+.downElementFicha{
+    background-image:  url(images/down.png);
+    height: 16px;
+    width:  24px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    float:left;
+    cursor: pointer;
+}

@@ -1,0 +1,81 @@
+/*
+    Document   : cssAdmin
+    Created on : 22-oct-2011, 16:15:24
+    Author     : Alvaro Montero
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#gridUsuarios{
+	margin-right: auto;
+    margin-left: auto;
+}
+
+.buttonLeftUserAdmin{
+	margin-left: 10px;
+	float: left;
+}
+
+.buttonRigthUserAdmin{
+	margin-right: 10px;
+	float: right;
+}
+
+#panelAcciones{
+	margin-right: auto;
+    margin-left: auto;	
+}
+
+#panelRolesUsuario{
+	margin-right: 5px;
+    margin-left: 15px;	
+}
+
+#btnAddRol{
+    float:right;
+    margin-bottom: 5px;
+    margin-right: 30px;    
+}
+
+.panelWaiting{
+    background-image: url(images/ajax-loader-66.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#rolesSeleccionados{
+	margin-top: 5px;
+    margin-bottom: 5px;
+	margin-left: 5px;	
+	margin-right: 30px; 
+}
+
+.removeRoleButton{
+	width: 18px;
+	height: 18px;
+    overflow: hidden;
+    background-image: url(images/delete.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    margin-left: 16px;
+}
+
+/*
+ * Popup SELECT_ROLE
+*/
+
+#selectrole_wrapper{
+    width: 400px;
+}
+#selectrole_idRol{
+    width: 400px;
+}
+
+#selectrole_idAmbito{
+    width: 400px;
+}
+
+#selectrole_buttonpanel{
+    float: right;
+    margin: 5px;
+}

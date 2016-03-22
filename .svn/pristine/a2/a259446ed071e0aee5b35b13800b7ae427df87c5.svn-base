@@ -1,0 +1,801 @@
+/* 
+    Document   : Cabecera
+    Created on : 17-Diciembre-2009, 11:42:06
+    Author     : francisco.morata
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+
+.zonaBusquedas
+{
+    position:absolute;
+    left:0px;
+    top:0px;
+    height:100%;
+    width:100%;
+    background-image: url(images/cabecera_busquedas.png);
+    background-repeat: no-repeat;
+}
+
+ #zonaBusquedas select
+ {
+     border:0px;
+     margin:0px;
+     /*padding:0px;*/
+     background-color: #EBEBEB;
+     margin-top:2px;
+     font-size: 8pt;
+     /*nfot-variant: small-caps;*/
+     border:1px solid #2987F8;
+
+}
+#zonaBusquedas option
+{
+    font-size: 8pt;
+     /*font-variant: small-caps;*/
+}
+
+.block_catastro {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background:#4D4D4D none repeat scroll 0 0;
+    height:199px;
+    left:32px;
+    position:absolute;
+    top:62px;
+    width:202px;
+    z-index:999;
+    visibility:hidden;
+}
+.contenedor_catastro {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background:transparent none repeat scroll 0 0;
+    height:274px;
+    left:16px;
+    position:absolute;
+    top:20px;
+    width:235px;
+}
+        #lblCatastro {
+            height:20px;
+            left:0;
+            line-height:14px;
+            position:absolute;
+            top:0;
+            text-align: center;
+            width:100%;
+            line-height: 19px;
+            color:#eeeeee;
+        }
+
+        #lblProvincia
+        {
+            position:absolute;
+            left:19px;
+            top:25px;
+            height:15px;
+            width:100px;
+        }
+            #select_provincia {
+                height:21px;
+                left:16px;
+                position:absolute;
+                top:41px;
+                width:202px;
+            }
+        #lblMunicipio
+        {
+            position:absolute;
+            left:19px;
+            top:69px;
+            height:15px;
+            width:100px;
+        }
+            #select_municipio {
+                height:21px;
+                left:16px;
+                position:absolute;
+                top:83px;
+                width:202px;
+            }
+        #lblTipoBusq
+        {
+            position:absolute;
+            left:19px;
+            top:113px;
+            height:15px;
+            width:100px;
+        }
+            #selectTipoBusq {
+                height:21px;
+                left:17px;
+                position:absolute;
+                top:127px;
+                width:201px;
+            }
+
+
+/*-------------------------------------------*/
+
+    #contenedorBusqDireccion
+    {
+        position:absolute;
+        left:0px;
+        top:155px;
+        height:90px;
+        width:100%;
+        background-image: url(images/busqDireccion.png);
+        visibility: visible;
+    }
+
+    #contenedorBusqCatastro
+    {
+        position:absolute;
+        left:-1px;
+        top:155px;
+        height:90px;
+        width:100%;
+        background-image: url(images/busqRefCat.png);
+        visibility: hidden;
+    }
+
+    #contenedorBusqPolParc
+    {
+        position:absolute;
+        left:-1px;
+        top:155px;
+        height:90px;
+        width:100%;
+        background-image: url(images/busqPolParc.png);
+        visibility: hidden;
+    }
+
+        #lblDireccion {
+            -moz-background-clip:border;
+            -moz-background-inline-policy:continuous;
+            -moz-background-origin:padding;
+            background:transparent none repeat scroll 0 0;
+            font-variant:small-caps;
+            height:30px;
+            left:19px;
+            position:absolute;
+            top:3px;
+            width:75px;
+        }
+            #selectTipoVia {
+                height:21px;
+                left:17px;
+                position:absolute;
+                top:18px;
+                width:75px;
+            }
+            #select_direccion {
+                -moz-background-clip:border;
+                -moz-background-inline-policy:continuous;
+                -moz-background-origin:padding;
+                background:transparent none repeat scroll 0 0;
+                border:0 none;
+                height:17px;
+                left:101px;
+                position:absolute;
+                top:22px;
+                width:115px;
+            }
+        #lblNumero {
+            -moz-background-clip:border;
+            -moz-background-inline-policy:continuous;
+            -moz-background-origin:padding;
+            background:transparent none repeat scroll 0 0;
+            font-variant:small-caps;
+            height:15px;
+            left:19px;
+            position:absolute;
+            top:48px;
+            width:127px;
+        }
+            #select_numero {
+                -moz-background-clip:border;
+                -moz-background-inline-policy:continuous;
+                -moz-background-origin:padding;
+                background:transparent none repeat scroll 0 0;
+                border:0 none;
+                height:17px;
+                left:19px;
+                position:absolute;
+                top:66px;
+                width:99px;
+            }
+        #lblRefCat
+        {
+            background:transparent;
+            font-variant:small-caps;
+            height:15px;
+            left:18px;
+            position:absolute;
+            top:3px;
+            width:127px;
+        }
+            #select_refCat {
+                -moz-background-clip:border;
+                -moz-background-inline-policy:continuous;
+                -moz-background-origin:padding;
+                background:transparent none repeat scroll 0 0;
+                border:0 none;
+                height:17px;
+                left:20px;
+                position:absolute;
+                top:22px;
+                width:196px;
+            }
+        #lblPoligono
+        {
+            background:transparent;
+            font-variant:small-caps;
+            height:15px;
+            left:18px;
+            position:absolute;
+            top:3px;
+            width:100px;
+        }
+            #select_poligono
+            {
+                -moz-background-clip:border;
+                -moz-background-inline-policy:continuous;
+                -moz-background-origin:padding;
+                background:transparent none repeat scroll 0 0;
+                border:0 none;
+                height:17px;
+                left:20px;
+                position:absolute;
+                top:22px;
+                width:196px;
+            }
+        #lblParcela {
+            background:transparent;
+            font-variant:small-caps;
+            height:15px;
+            left:18px;
+            position:absolute;
+            top:48px;
+            width:127px;
+        }
+            #select_parcela
+            {
+                -moz-background-clip:border;
+                -moz-background-inline-policy:continuous;
+                -moz-background-origin:padding;
+                background:transparent none repeat scroll 0 0;
+                border:0 none;
+                height:17px;
+                left:20px;
+                position:absolute;
+                top:66px;
+                width:196px;
+            }
+       #btnEnviarCatastro {
+            -moz-background-clip:border;
+            -moz-background-inline-policy:continuous;
+            -moz-background-origin:padding;
+            background:transparent none repeat scroll 0 0;
+            cursor:pointer;
+            height:32px;
+            left:109px;
+            position:absolute;
+            top:244px;
+            width:32px;
+        }
+               #btnEnviarCatastro:hover
+               {
+                    height:32px;
+                    left:109px;
+                    position:absolute;
+                    top:244px;
+                    width:32px;
+                    background-image: url(images/cabecera_busquedas_goON.png);
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    cursor:pointer;
+               }
+
+.contenedor_google {
+    height:64px;
+    left:241px;
+    position:absolute;
+    top:19px;
+    width:224px;
+}
+
+    #lblGoogle {
+        height:20px;
+        left:0;
+        line-height:14px;
+        position:absolute;
+        top:0;
+        text-align: center;
+        width:100%;
+        line-height: 19px;
+        color:#eeeeee;
+    }
+        .select_google {
+            -moz-background-clip:border;
+            -moz-background-inline-policy:continuous;
+            -moz-background-origin:padding;
+            background:transparent none repeat scroll 0 0;
+            border:0 none;
+            height:17px;
+            left:38px;
+            position:absolute;
+            top:31px;
+            width:161px;
+        }
+            #btnEnviarGoogle
+            {
+                height:32px;
+                left:199px;
+                position:absolute;
+                top:24px;
+                width:32px;
+                cursor:pointer;
+            }
+                    #btnEnviarGoogle:hover
+                    {
+                        height:32px;
+                        left:199px;
+                        position:absolute;
+                        top:24px;
+                        width:32px;
+                        background-image: url(images/cabecera_busquedas_goON.png);
+                        background-position: center center;
+                        background-repeat: no-repeat;
+                        cursor:pointer;
+                    }
+#chkCombinado {
+    left:130px;
+    position:absolute;
+    top:134px;
+}
+#lblCombinado {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background:transparent none repeat scroll 0 0;
+    font-size:8pt;
+    height:18px;
+    left:149px;
+    position:absolute;
+    top:135px;
+    width:88px;
+}
+.contenedor_plan_entidad {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    height:169px;
+    left:244px;
+    position:absolute;
+    top:91px;
+    width:218px;
+}
+
+    #lblPlanEntidad
+    {
+        height:20px;
+        left:0;
+        line-height:14px;
+        position:absolute;
+        top:0;
+        text-align: center;
+        width:100%;
+        line-height: 19px;
+        color:#eeeeee;
+    }
+
+    #lblAmbitos
+    {
+        background:transparent;
+        font-variant:small-caps;
+        height:15px;
+        left:39px;
+        position:absolute;
+        top:30px;
+        width:127px;
+    }
+        .select_ambitos {
+            -moz-background-clip:border;
+            -moz-background-inline-policy:continuous;
+            -moz-background-origin:padding;
+            background:transparent none repeat scroll 0 0;
+            border:0 none;
+            height:21px;
+            left:33px;
+            padding-top:0;
+            position:absolute;
+            top:46px;
+            width:166px;
+        }
+        #btnEnviarAmbito {
+            -moz-background-clip:border;
+            -moz-background-inline-policy:continuous;
+            -moz-background-origin:padding;
+            background:transparent none repeat scroll 0 0;
+            cursor:pointer;
+            height:32px;
+            left:199px;
+            position:absolute;
+            top:41px;
+            width:32px;
+        }
+                    #btnEnviarAmbito:hover
+                    {
+                        height:32px;
+                        left:199px;
+                        position:absolute;
+                        top:41px;
+                        width:32px;
+                        background-image: url(images/cabecera_busquedas_goON.png);
+                        background-position: center center;
+                        background-repeat: no-repeat;
+                        cursor:pointer;
+                    }
+    #lblEntidad
+    {
+        background:transparent;
+        font-variant:small-caps;
+        height:15px;
+        left:39px;
+        position:absolute;
+        top:144px;
+        width:127px;
+    }
+        .select_entidad {
+            -moz-background-clip:border;
+            -moz-background-inline-policy:continuous;
+            -moz-background-origin:padding;
+            background:transparent none repeat scroll 0 0;
+            border:0 none;
+            height:17px;
+            left:39px;
+            position:absolute;
+            top:163px;
+            width:160px;
+        }
+            #btnEnviarEntidad
+            {
+                height:32px;
+                left:199px;
+                position:absolute;
+                top:156px;
+                width:32px;
+                cursor:pointer;
+            }
+                    #btnEnviarEntidad:hover
+                    {
+                        height:32px;
+                        left:199px;
+                        position:absolute;
+                        top:156px;
+                        width:32px;
+                        background-image: url(images/cabecera_busquedas_goON.png);
+                        background-position: center center;
+                        background-repeat: no-repeat;
+                        cursor:pointer;
+                    }
+
+    #lblPlan
+    {
+        background:transparent;
+        font-variant:small-caps;
+        height:15px;
+        left:39px;
+        position:absolute;
+        top:87px;
+        width:127px;
+    }
+    
+        .select_plan {
+            -moz-background-clip:border;
+            -moz-background-inline-policy:continuous;
+            -moz-background-origin:padding;
+            background:transparent none repeat scroll 0 0;
+            border:0 none;
+            height:17px;
+            left:39px;
+            position:absolute;
+            top:106px;
+            width:160px;
+        }
+            #btnEnviarPlan {
+                -moz-background-clip:border;
+                -moz-background-inline-policy:continuous;
+                -moz-background-origin:padding;
+                background:transparent none repeat scroll 0 0;
+                background-image: url(images/cabecera_busquedas_goOFF.png);
+                background-position: center center;
+                background-repeat: no-repeat;
+                cursor:pointer;
+                height:32px;
+                left:199px;
+                position:absolute;
+                top:99px;
+                width:32px;
+            }
+                    #btnEnviarPlan:hover
+                    {
+                        height:32px;
+                        left:199px;
+                        position:absolute;
+                        top:99px;
+                        width:32px;
+                        background-image: url(images/cabecera_busquedas_goON.png);
+                        background-position: center center;
+                        background-repeat: no-repeat;
+                        cursor:pointer;
+                    }
+
+#filtros {
+    background-color: #E1E1E1;
+    height: 30px;
+    left: 10px;
+    position: absolute;
+    top: 303px;
+    width: 478px;
+    background-image: url(images/slotTipoFicha.png);
+    z-index:999999;
+}
+        .filtro {
+            background-position: 6px -3px;
+            background-repeat: no-repeat;
+            border-right: 1px solid #C6C6C6;
+            box-shadow: 0 0 13px 0 #C2C2C2;
+            cursor: pointer;
+            float: left;
+            height: 30px;
+            left: 0;
+            line-height: 28px;
+            margin-right: 1px;
+            position: relative;
+            text-indent: 45px;
+            top: 0;
+            width: 157px;
+            background-color: #E1E1E1;
+        }
+                .filtro:hover {
+                    background-position: 6px -3px;
+                    background-repeat: no-repeat;
+                    border-right: 1px solid #C6C6C6;
+                    float: left;
+                    height: 30px;
+                    left: 0;
+                    line-height: 28px;
+                    margin-right: 1px;
+                    position: relative;
+                    text-indent: 45px;
+                    top: 0;
+                    width: 157px;
+                    box-shadow:0 0 13px 0 #ffffff;
+                    cursor:pointer;
+                    background-color: #eeeeee;
+                }
+                #filtroZoom{
+                    background-image: url(images/search.png);
+                }
+                #filtroFicha{
+                    background-image: url(images/note.png);
+                }
+                    #lblFiltroFicha {
+                        height: 100%;
+                        left: 38px;
+                        position: absolute;
+                        text-align: left;
+                        text-indent: 0;
+                        top: 0;
+                        width: 100px;
+                        font-size:8pt;
+                        overflow: hidden;
+                    }
+                    #selectTipoFichaParaFiltro {
+                        background-color: #5B5B5B;
+                        background-image: url("images/flechaSelect.png");
+                        background-position: left center;
+                        border-right: 1px solid #8C8C8C;
+                        height: 30px;
+                        opacity: 0.3;
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        width: 21px;
+                    }
+                            #selectTipoFichaParaFiltro:hover {
+                                background-color: white;
+                                background-image: url("images/flechaSelect.png");
+                                background-position: left center;
+                                border-right: 1px solid #8C8C8C;
+                                height: 30px;
+                                opacity: 0.9;
+                                position: absolute;
+                                right: 0;
+                                top: 0;
+                                width: 21px;
+                            }
+                    #containerFichasParaFiltros {
+                        background-color: #EEEEEE;
+                        /*height: 92px;*/
+                        left: 159px;
+                        position: absolute;
+                        top: 30px;
+                        width: 157px;
+                    }
+                        .slotTipoFichaFiltro {
+                            background-image:url(images/slotTipoFicha.png);
+                            float: left;
+                            height: auto;
+                            left: 0;
+                            margin-bottom: 1px;
+                            padding: 7px;
+                            position: relative;
+                            text-align: center;
+                            top: 0;
+                            width: 143px;
+                            cursor:pointer;
+                            opacity:0.9;
+                        }
+                                .slotTipoFichaFiltro:hover {
+                                    background-image:url(images/slotTipoFichaON.png);
+                                    float: left;
+                                    height: auto;
+                                    left: 0;
+                                    margin-bottom: 1px;
+                                    padding: 7px;
+                                    position: relative;
+                                    text-align: center;
+                                    top: 0;
+                                    width: 143px;
+                                    cursor:pointer;
+                                    opacity:0.9;
+                                }
+                #filtroCaptura{
+                    background-image: url(images/photo_camera.png);
+                }
+
+                #selectTipoFichaParaVentanaEntidades {
+                        background-color: #5B5B5B;
+                        background-image: url("images/flechaSelect.png");
+                        background-position: left center;
+                        border-right: 1px solid #8C8C8C;
+                        height: 30px;
+                        opacity: 0.3;
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        width: 21px;
+                    }
+                            #selectTipoFichaParaVentanaEntidades:hover {
+                                background-color: white;
+                                background-image: url("images/flechaSelect.png");
+                                background-position: left center;
+                                border-right: 1px solid #8C8C8C;
+                                height: 30px;
+                                opacity: 0.9;
+                                position: absolute;
+                                right: 0;
+                                top: 0;
+                                width: 21px;
+                            }
+                            #containerFichasParaVentanaEntidades {
+                                background-color: #EEEEEE;
+                                height: 92px;
+                                left: 0;
+                                position: absolute;
+                                top: 24px;
+                                width: 199px;
+                                z-index: 99999;
+                            }
+                                .slotTipoFichaVentanaEntidades {
+                                    background-image:url(images/slotTipoFicha.png);
+                                    float: left;
+                                    height: auto;
+                                    left: 0;
+                                    margin-bottom: 1px;
+                                    padding: 7px;
+                                    position: relative;
+                                    text-align: center;
+                                    top: 0;
+                                    width: 143px;
+                                    cursor:pointer;
+                                    opacity:0.9;
+                                }
+                                        .slotTipoFichaVentanaEntidades:hover {
+                                            background-image:url(images/slotTipoFichaON.png);
+                                            float: left;
+                                            height: auto;
+                                            left: 0;
+                                            margin-bottom: 1px;
+                                            padding: 7px;
+                                            position: relative;
+                                            text-align: center;
+                                            top: 0;
+                                            width: 143px;
+                                            cursor:pointer;
+                                            opacity:0.9;
+                                        }
+#resultados {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background:transparent none repeat scroll 0 0;
+    height:151px;
+    left:10px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    position:absolute;
+    top:335px;
+    width:478px;
+    z-index:0;
+}
+    .lineaResultado
+    {
+        position:relative;
+        float:left;
+        left:0px;
+        top:0px;
+        height:20px;
+        width:100%;
+        background: #eeeeee;
+        text-align: center;
+        line-height: 20px;
+        color:#777777;
+        margin-bottom:1px;
+        cursor:pointer;
+        overflow:hidden;
+    }
+            .lineaResultado:hover
+            {
+                position:relative;
+                float:left;
+                left:0px;
+                top:0px;
+                height:20px;
+                width:100%;
+                background: #004A85;
+                text-align: center;
+                line-height: 20px;
+                color:#ffffff;
+                margin-bottom:1px;
+                cursor:pointer;
+                overflow:hidden;
+            }
+            .lineaResultadoON
+            {
+                position:relative;
+                float:left;
+                left:0px;
+                top:0px;
+                height:20px;
+                width:100%;
+                background: #004A85;
+                text-align: center;
+                line-height: 20px;
+                color:#ffffff;
+                margin-bottom:1px;
+                cursor:pointer;
+                overflow:hidden;
+            }
+
+.preloadImage
+{
+    position:absolute;
+    left:50%;
+    top:50%;
+    height:32px;
+    width:32px;
+    margin-left:-16px;
+    margin-top:-16px;
+    background-image: url(images/ajax-loader_medio.gif);
+}
+/*----OLD----*/
+

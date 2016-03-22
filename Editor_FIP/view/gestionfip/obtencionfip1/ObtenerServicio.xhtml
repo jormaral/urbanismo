@@ -1,0 +1,33 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaPanelObtener"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<ice:panelPopup id="panelObtener" autoCentre="true" modal="true"
+		visible="#{servicioListadoFips.mostrarPanelBloquear}" styleClass="panelPopup">
+
+
+		<f:facet name="header">
+			<ice:panelGroup>
+				<ice:outputText value="#{messages.obtener_servicio}" />
+				<ice:commandButton id="modalPnlCloseBtn" type="button"
+					image="/img/editorfip/es/comun/cerrar_popup.png"
+					action="#{servicioListadoFips.setMostrarPanelBloquear(false)}"
+					styleClass="popupHeaderImage"
+					title="#{messages.botongenerico_cerrar}"
+					alt="#{messages.botongenerico_cerrar}" />
+			</ice:panelGroup>
+		</f:facet>
+
+		<f:facet name="body">
+			<h:panelGrid columns="1" id="datosFipOS">
+					<h:outputText value="#{messages.informacion_obtener_servicio}" />
+					<s:button value="#{messages.obtener_servicio}" disabled="#{servicioListadoFips.estaBloqueado}" alt="#{messages.obtener_servicio}"
+						action="#{servicioListadoFips.bloquearConsolidado}" styleClass="boton2" title="#{messages.boton_title_obtenerServicio_obtenerServicio}"/>
+			</h:panelGrid>
+		</f:facet>
+	</ice:panelPopup>
+</f:subview>

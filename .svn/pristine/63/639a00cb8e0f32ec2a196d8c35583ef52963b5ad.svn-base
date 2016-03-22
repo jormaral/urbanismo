@@ -1,0 +1,230 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_informacionfip}"
+				view="/informacionfip/InformacionFipNavegacion.xhtml"
+				id="InformacionFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_verdeterminacionplanvigente}"
+				view="/informacionfip/PlanVigenteNavegacion.xhtml"
+				id="PlanVigenteRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_consulta_documentos}"
+				view="/informacionfip/planvigente/documento/VerListaDocumentos.xhtml"
+				id="VerDocumentosRutaMenu" propagation="none">
+
+
+			</s:link>
+
+		</ice:panelGroup>
+
+
+	</ui:define>
+
+	<ui:define name="body">
+
+		<ice:form>
+
+
+			<ice:panelGrid columns="2">
+
+				<ice:panelGroup style="margin: 0; padding: 0; ">
+
+					<ice:panelGrid cellpadding="0" cellspacing="3" columns="2"
+						style="text-align: left" columnClasses="colLabel,colInput">
+
+						<ice:panelGroup panelTooltip="tooltip_ruta">
+							<ice:panelGrid columns="2">
+								<h:inputText styleClass="etiqueta-Usuario" id="inputRuta"
+									value="#{messages.ruta_carpeta}" disabled="true" />
+								<ice:graphicImage styleClass="tooltip_imagen"
+									alt="#{messages.genericos_info}"
+									url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+							</ice:panelGrid>
+						</ice:panelGroup>
+
+						<h:inputText styleClass="input-Detalle"
+							disabled="#{servicioGestionDocumentalCarpeta.documento.iden>0}"
+							value="#{servicioGestionDocumentalCarpeta.documento.archivo}" />
+
+						<ice:panelGroup panelTooltip="tooltip_titulo">
+							<ice:panelGrid columns="2">
+								<h:inputText styleClass="etiqueta-Usuario" id="inputTitulo"
+									value="#{messages.titulo}" disabled="true" />
+								<ice:graphicImage styleClass="tooltip_imagen"
+									alt="#{messages.genericos_info}"
+									url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+							</ice:panelGrid>
+						</ice:panelGroup>
+
+						<h:inputText styleClass="input-Detalle"
+							value="#{servicioGestionDocumentalCarpeta.documento.nombre}"
+							required="true" />
+
+						<ice:message for="inputTitulo" />
+						<ice:outputLabel />
+
+						<ice:panelGroup panelTooltip="tooltip_grupo">
+							<ice:panelGrid columns="2">
+								<h:inputText styleClass="etiqueta-Usuario"
+									value="#{messages.grupo}" disabled="true" />
+								<ice:graphicImage styleClass="tooltip_imagen"
+									alt="#{messages.genericos_info}"
+									url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+							</ice:panelGrid>
+						</ice:panelGroup>
+
+						<ice:selectOneListbox size="1"
+							value="#{servicioGestionDocumentalCarpeta.documento.idgrupodocumento}"
+							partialSubmit="false">
+							<f:selectItems
+								value="#{servicioGestionDocumentalCarpeta.listaGrupoDocumento}" />
+						</ice:selectOneListbox>
+
+						<ice:panelGroup panelTooltip="tooltip_tipo">
+							<ice:panelGrid columns="2">
+								<h:inputText styleClass="etiqueta-Usuario"
+									value="#{messages.tipo}" disabled="true" />
+								<ice:graphicImage styleClass="tooltip_imagen"
+									alt="#{messages.genericos_info}"
+									url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+							</ice:panelGrid>
+						</ice:panelGroup>
+
+						<ice:selectOneListbox size="1"
+							value="#{servicioGestionDocumentalCarpeta.documento.idtipodocumento}"
+							partialSubmit="false">
+							<f:selectItems
+								value="#{servicioGestionDocumentalCarpeta.listaTipoDocumento}" />
+						</ice:selectOneListbox>
+
+						<ice:panelGroup panelTooltip="tooltip_comentario">
+							<ice:panelGrid columns="2">
+								<h:inputText styleClass="etiqueta-Usuario"
+									value="#{messages.comentario}" disabled="true" />
+								<ice:graphicImage styleClass="tooltip_imagen"
+									alt="#{messages.genericos_info}"
+									url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+							</ice:panelGrid>
+						</ice:panelGroup>
+
+						<ice:inputTextarea rows="10" style="width:300px"
+							value="#{servicioGestionDocumentalCarpeta.documento.comentario}">
+						</ice:inputTextarea>
+
+
+
+						<ice:outputLabel />
+						<!-- LISTA DE ARCHIVOS -->
+						<ice:dataTable id="listaDeterminacionDocumento"
+							value="#{servicioGestionDocumentalCarpeta.getArchivosCarpetaVigente(servicioGestionDocumentalCarpeta.documento.iden)}"
+							var="item">
+
+							<ice:column>
+								<f:facet name="header">
+									<ice:outputText value="#{messages.archivo} " />
+								</f:facet>
+
+								<ice:outputResource rendered="#{item.esHoja=='No'}"
+									style="color: #355432;font-family: Arial;font-size: 12px;font-weight:bold;"
+									resource="#{servicioGestionDocumentalCarpeta.obtenerFicheroSimplePV(item.archivo)}"
+									fileName="#{item.archivo}" shared="false" />
+
+
+								<ice:outputResource rendered="#{item.esHoja=='Si'}"
+									style="color: #000000;font-family: Arial;font-size: 12px;font-weight:bold;"
+									resource="#{servicioGestionDocumentalCarpeta.obtenerFicheroHoja(item.archivo)}"
+									fileName="#{item.archivo}" shared="false" />
+
+								<ice:outputResource rendered="#{item.esHoja=='Si'}"
+									style="color: #355432;font-family: Arial;font-size: 12px;font-weight:bold;"
+									resource="#{servicioGestionDocumentalCarpeta.leerArchivoAsociado(item.archivo)}"
+									fileName="#{servicioGestionDocumentalCarpeta.nombreArchivo(item.archivo)}"
+									shared="false" />
+
+							</ice:column>
+
+
+
+							
+						</ice:dataTable>
+
+					</ice:panelGrid>
+
+				</ice:panelGroup>
+
+			</ice:panelGrid>
+
+			<ice:panelTooltip id="tooltip_titulo" styleClass="tooltip_panel">
+				<f:facet name="body">
+					<ice:outputText
+						value="#{messages.tooltip_documento_titulo}#{messages.tooltip_determinacion_masinfo}"
+						styleClass="tooltip_texto" />
+				</f:facet>
+			</ice:panelTooltip>
+
+			<ice:panelTooltip id="tooltip_ruta" styleClass="tooltip_panel">
+				<f:facet name="body">
+					<ice:outputText
+						value="#{messages.tooltip_documento_ruta}#{messages.tooltip_determinacion_masinfo}"
+						styleClass="tooltip_texto" />
+				</f:facet>
+			</ice:panelTooltip>
+
+			<ice:panelTooltip id="tooltip_grupo" styleClass="tooltip_panel">
+				<f:facet name="body">
+					<ice:outputText
+						value="#{messages.tooltip_documento_grupo}#{messages.tooltip_determinacion_masinfo}"
+						styleClass="tooltip_texto" />
+				</f:facet>
+			</ice:panelTooltip>
+
+			<ice:panelTooltip id="tooltip_tipo" styleClass="tooltip_panel">
+				<f:facet name="body">
+					<ice:outputText
+						value="#{messages.tooltip_documento_tipo}#{messages.tooltip_determinacion_masinfo}"
+						styleClass="tooltip_texto" />
+				</f:facet>
+			</ice:panelTooltip>
+
+			<ice:panelTooltip id="tooltip_comentario" styleClass="tooltip_panel">
+				<f:facet name="body">
+					<ice:outputText
+						value="#{messages.tooltip_documento_comentario}#{messages.tooltip_determinacion_masinfo}"
+						styleClass="tooltip_texto" />
+				</f:facet>
+			</ice:panelTooltip>
+		</ice:form>
+	</ui:define>
+
+</ui:composition>

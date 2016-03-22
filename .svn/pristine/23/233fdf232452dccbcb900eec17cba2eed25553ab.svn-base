@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-jul-2009 12:36:17 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Operacioncaracter"
+  schema="diccionario" table="operacioncaracter">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">diccionario.diccionario_operacioncaracter_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Tipooperaciondeterminacion"
+   fetch="select" name="tipooperaciondeterminacion">
+   <column name="idtipooperaciondet"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Caracterdeterminacion"
+   fetch="select" name="caracterdeterminacionByIdcaracteroperado">
+   <column name="idcaracteroperado" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.diccionario.Caracterdeterminacion"
+   fetch="select" name="caracterdeterminacionByIdcaracteroperador">
+   <column name="idcaracteroperador" not-null="true"/>
+  </many-to-one>
+ </class>
+ <query name="Operacioncaracter.obtenerTodos">SELECT oc FROM es.mitc.redes.urbanismoenred.data.rpm.diccionario.Operacioncaracter oc</query>
+</hibernate-mapping>

@@ -1,0 +1,60 @@
+/*
+    Document   : moolist
+    Created on : 26-oct-2009, 13:11:52
+    Author     : Alvaro.Martin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root {
+    display: block;
+}
+
+.moolist{
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    position: relative;
+    border: 0px solid #eee;
+    overflow: auto;
+    color: #000;
+    border: 1px solid #CCCCCC;
+}
+
+.moolist ul{
+    margin: 0px;
+    padding: 0px;
+}
+.moolist li{
+    list-style-type: none;
+    list-style-image: none;
+    padding: 5px;
+    background-color: white;
+    clear: both;
+}
+.moolist li.erow{
+    background-color: #D9E6F4;
+}
+
+
+.moolist .rtext{
+    float:left;
+}
+.moolist .rbtnpanel{
+    float: right;
+    min-width: 18px;
+    cursor: pointer;
+}
+
+.moolist div.colheader{
+    text-align: center;
+    background: #FAFAFA url(moolist/fhbg.gif) repeat-x scroll center bottom;
+    border-color: #CCCCCC #CCCCCC;
+    border-style: solid none solid none;
+    border-width: 1px 0px 1px 0px;
+    padding: 5px 0px 5px 0px;
+}

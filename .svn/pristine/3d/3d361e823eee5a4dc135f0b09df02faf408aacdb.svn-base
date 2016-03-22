@@ -1,0 +1,187 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component" 
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="vinculocaso" styleClass="edit">
+     <ice:panelGroup  id="editvinculocasoGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="editTextBoxId" value="#{vinculocasoHome.managed ? 'Edit' : 'Add'} vinculocaso"/>
+                  </td>
+              </tr>
+          </table>
+
+        <ice:panelGroup id="editPanelGroupId" styleClass="edit">		 
+
+
+            <s:decorate id="idenField" template="../layout/edit.xhtml">
+                <ui:define name="label">Iden</ui:define>
+                        <ice:inputText id="iden"
+			                partialSubmit="true"
+                       required="true"
+                       disabled="#{vinculocasoHome.managed}"
+                                    value="#{vinculocasoHome.instance.iden}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+          </ice:panelGroup>
+       </ice:panelGroup>
+                  
+       <div class="actionButtons">
+        
+            <ice:commandButton id="save" 
+                          value="Save" 
+                         action="#{vinculocasoHome.persist}"
+                       disabled="#{!vinculocasoHome.wired}"
+                       rendered="#{!vinculocasoHome.managed}"/>  
+                          			  
+            <ice:commandButton id="update" 
+                          value="Save" 
+                         action="#{vinculocasoHome.update}"
+                       rendered="#{vinculocasoHome.managed}"/>
+                        			  
+            <ice:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{vinculocasoHome.remove}"
+                      immediate="true"
+                       rendered="#{vinculocasoHome.managed}"/>
+                    
+            <s:button id="cancelEdit" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/Vinculocaso.xhtml"
+                rendered="#{vinculocasoHome.managed}"/>
+                
+            <s:button id="cancelAddvinculocasoHome" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/#{empty vinculocasoFrom ? 'VinculocasoList' : vinculocasoFrom}.xhtml"
+                rendered="#{!vinculocasoHome.managed}"/>
+                
+        </div>
+        
+    </ice:form>
+
+ <ice:form id="form2vinculocasoHome">  
+        <ice:panelTabSet id="editPanelTabvinculocasoHomeId" styleClass="componentPanelTabSetLayout" style="margin-bottom:5px;margin-top:10px;">
+   
+ 	<ice:panelTab id="editTabcasoentidaddeterminacionByIdcasoId" label="Casoentidaddeterminacion by idcaso *" >
+		<div class="association" id="casoentidaddeterminacionByIdcasoParent">
+    
+        	<h:outputText id="editcasoentidaddeterminacionByIdcasoTextId" value="There is no casoentidaddeterminacionByIdcaso associated with this vinculocaso." 
+                   rendered="#{vinculocasoHome.instance.casoentidaddeterminacionByIdcaso == null}"/>
+       	<ice:dataTable var="casoentidaddeterminacion" 
+                   value="#{vinculocasoHome.instance.casoentidaddeterminacionByIdcaso}" 
+                rendered="#{vinculocasoHome.instance.casoentidaddeterminacionByIdcaso != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+		  columnClasses="allCols"
+                      id="editcasoentidaddeterminacionByIdcasoTableId">
+            <ice:column id="$editColumnidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{casoentidaddeterminacion.iden}
+            </ice:column>
+            <ice:column id="$editColumnentidaddeterminacionId">
+	    	    <f:facet name="header">Entidaddeterminacion iden</f:facet>
+		    	#{casoentidaddeterminacion.entidaddeterminacion.iden}
+            </ice:column>
+            <ice:column id="$editColumnnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{casoentidaddeterminacion.nombre}
+            </ice:column>
+            <ice:column id="$editColumnordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{casoentidaddeterminacion.orden}
+            </ice:column>
+            <ice:column id="editColumncasoentidaddeterminacionLinkId">
+                <f:facet name="header">Action</f:facet>
+                <s:link view="/seam/Casoentidaddeterminacion.xhtml" 
+                         id="viewcasoentidaddeterminacion" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="casoentidaddeterminacionIden" 
+                           value="#{casoentidaddeterminacion.iden}"/>
+                </s:link>
+            </ice:column>
+      </ice:dataTable>
+        <div class="actionButtons">
+            <s:button value="Select casoentidaddeterminacionByIdcaso"
+	              id="selectParent"
+                      view="/seam/CasoentidaddeterminacionList.xhtml">
+                <f:param name="from" value="VinculocasoEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </ice:panelTab>
+   
+ 	<ice:panelTab id="editTabcasoentidaddeterminacionByIdcasovinculadoId" label="Casoentidaddeterminacion by idcasovinculado *" >
+		<div class="association" id="casoentidaddeterminacionByIdcasovinculadoParent">
+    
+        	<h:outputText id="editcasoentidaddeterminacionByIdcasovinculadoTextId" value="There is no casoentidaddeterminacionByIdcasovinculado associated with this vinculocaso." 
+                   rendered="#{vinculocasoHome.instance.casoentidaddeterminacionByIdcasovinculado == null}"/>
+       	<ice:dataTable var="casoentidaddeterminacion" 
+                   value="#{vinculocasoHome.instance.casoentidaddeterminacionByIdcasovinculado}" 
+                rendered="#{vinculocasoHome.instance.casoentidaddeterminacionByIdcasovinculado != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+		  columnClasses="allCols"
+                      id="editcasoentidaddeterminacionByIdcasovinculadoTableId">
+            <ice:column id="$editColumnidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{casoentidaddeterminacion.iden}
+            </ice:column>
+            <ice:column id="$editColumnentidaddeterminacionId">
+	    	    <f:facet name="header">Entidaddeterminacion iden</f:facet>
+		    	#{casoentidaddeterminacion.entidaddeterminacion.iden}
+            </ice:column>
+            <ice:column id="$editColumnnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{casoentidaddeterminacion.nombre}
+            </ice:column>
+            <ice:column id="$editColumnordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{casoentidaddeterminacion.orden}
+            </ice:column>
+            <ice:column id="editColumncasoentidaddeterminacionLinkId">
+                <f:facet name="header">Action</f:facet>
+                <s:link view="/seam/Casoentidaddeterminacion.xhtml" 
+                         id="viewcasoentidaddeterminacion" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="casoentidaddeterminacionIden" 
+                           value="#{casoentidaddeterminacion.iden}"/>
+                </s:link>
+            </ice:column>
+      </ice:dataTable>
+        <div class="actionButtons">
+            <s:button value="Select casoentidaddeterminacionByIdcasovinculado"
+	              id="selectParent"
+                      view="/seam/CasoentidaddeterminacionList.xhtml">
+                <f:param name="from" value="VinculocasoEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+
+
+

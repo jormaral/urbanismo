@@ -1,0 +1,126 @@
+<div class="toolbarTabs">
+	<ul id="panelTramitesTabs" class="tab-menu">
+		<li id='tabTramitesDatosGenerales' class="selected"><a id="TramitesDatosGenerales" href="Pages/VisorPLANES/Tramites/TramitesData.html" title="Datos generales">Datos generales</a></li>
+		<li id='tabTramitesDeterminaciones' style="display: none;"><a id="TramitesDeterminaciones" href="Pages/VisorPLANES/Tramites/TramitesData.html" title="Determinaciones">Determinaciones</a></li>
+		<li id='tabTramitesEntidades' style="display: none;"><a id="TramitesEntidades" href="Pages/VisorPLANES/Tramites/TramitesData.html" title="Entidades">Entidades</a></li>
+		<!-- <li id='tabTramitesAmbitosAplicacion' style="display: none;"><a id="TramitesAmbitosAplicacion" href="Pages/VisorPLANES/Tramites/TramitesData.html" title="Ambitos de aplicación">Ambitos de aplicación</a></li>  -->
+		<li id='tabTramitesDocumentos' style="display: none;"><a id="TramitesDocumentos" href="Pages/VisorPLANES/Tramites/TramitesData.html" title="Documentos">Documentos</a></li>
+		<li id='tabTramitesCargando' style="display: none;"><div id="TramitesCargando" class="progresoBasico16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>		
+	</ul>
+	<div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+
+	//MochaUI.initializeTabs('panelTramitesTabs','main-panel');	 
+	
+	$('TramitesDatosGenerales').addEvent('click', function(e){
+		new Event(e).stop();
+
+		if ($('TramitesDatosGenerales').getStyle('opacity') != 0.5){
+			$('panelTramitesDatosGenerales').setStyle('display', 'block'); //setOpacity(100);
+			$('panelTramitesDeterminaciones').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidades').setStyle('display', 'none'); //setOpacity(0);
+			//$('panelTramitesAmbitosAplicacion').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesDocumentos').setStyle('display', 'none'); //setOpacity(0);
+			
+			$('tabTramitesDatosGenerales').set('class','selected');
+			$('tabTramitesDeterminaciones').set('class','');
+			$('tabTramitesEntidades').set('class','');
+			//$('tabTramitesAmbitosAplicacion').set('class','');
+			$('tabTramitesDocumentos').set('class','');
+		}
+
+		 MUI.rWidth();		
+    });
+
+	$('TramitesDeterminaciones').addEvent('click', function(e){
+		new Event(e).stop();
+
+		if ($('TramitesDeterminaciones').getStyle('opacity') != 0.5){
+			$('panelTramitesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesDeterminaciones').setStyle('display', 'block');
+			$('panelTramitesEntidades').setStyle('display', 'none');
+			//$('panelTramitesAmbitosAplicacion').setStyle('display', 'none');
+			$('panelTramitesDocumentos').setStyle('display', 'none');
+			
+			$('tabTramitesDatosGenerales').set('class','');
+			$('tabTramitesDeterminaciones').set('class','selected');
+			$('tabTramitesEntidades').set('class','');
+			//$('tabTramitesAmbitosAplicacion').set('class','');
+			$('tabTramitesDocumentos').set('class','');
+		}
+
+		if ($('panelTramitesDeterminaciones').childNodes.length == 0){
+			chargeTabTamitesDeterminaciones(dataTramitesDeterminaciones);
+		} else { MUI.rWidth(); }		
+    });
+
+	$('TramitesEntidades').addEvent('click', function(e){
+		new Event(e).stop();
+
+		if ($('TramitesEntidades').getStyle('opacity') != 0.5){
+			$('panelTramitesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesDeterminaciones').setStyle('display', 'none');
+			$('panelTramitesEntidades').setStyle('display', 'block');
+			//$('panelTramitesAmbitosAplicacion').setStyle('display', 'none');
+			$('panelTramitesDocumentos').setStyle('display', 'none');
+			
+			$('tabTramitesDatosGenerales').set('class','');
+			$('tabTramitesDeterminaciones').set('class','');
+			$('tabTramitesEntidades').set('class','selected');
+			//$('tabTramitesAmbitosAplicacion').set('class','');
+			$('tabTramitesDocumentos').set('class','');
+		}
+
+		if ($('panelTramitesEntidades').childNodes.length == 0){
+			chargeTabTramitesEntidades(dataTramitesEntidades);
+		} else { MUI.rWidth(); }		
+    });
+
+	/*
+	$('TramitesAmbitosAplicacion').addEvent('click', function(e){
+		new Event(e).stop();
+
+		if ($('panelTramitesAmbitosAplicacion').childNodes.length == 0){
+			chargeTabTramitesAmbitoAplcacion(dataTramitesAmbitosAplcacion);
+		}
+
+		if ($('TramitesAmbitosAplicacion').getStyle('opacity') != 0.5){
+			$('panelTramitesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesDeterminaciones').setStyle('display', 'none');
+			$('panelTramitesEntidades').setStyle('display', 'none');
+			$('panelTramitesAmbitosAplicacion').setStyle('display', 'block');
+			$('panelTramitesDocumentos').setStyle('display', 'none');
+			
+			$('tabTramitesDatosGenerales').set('class','');
+			$('tabTramitesDeterminaciones').set('class','');
+			$('tabTramitesEntidades').set('class','');
+			$('tabTramitesAmbitosAplicacion').set('class','selected');
+			$('tabTramitesDocumentos').set('class','');
+		}		
+    });*/
+
+	$('TramitesDocumentos').addEvent('click', function(e){
+		new Event(e).stop();		
+
+		if ($('TramitesDocumentos').getStyle('opacity') != 0.5){
+			$('panelTramitesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesDeterminaciones').setStyle('display', 'none');
+			$('panelTramitesEntidades').setStyle('display', 'none');
+			//$('panelTramitesAmbitosAplicacion').setStyle('display', 'none');
+			$('panelTramitesDocumentos').setStyle('display', 'block');
+			
+			$('tabTramitesDatosGenerales').set('class','');
+			$('tabTramitesDeterminaciones').set('class','');
+			$('tabTramitesEntidades').set('class','');
+			//$('tabTramitesAmbitosAplicacion').set('class','');
+			$('tabTramitesDocumentos').set('class','selected');
+		}
+
+		if ($('panelTramitesDocumentos').childNodes.length == 0){
+			chargeTabTramitesDocumentos(dataTramitesDocumentos);
+		} else { MUI.rWidth(); }
+    });
+
+</script>

@@ -1,0 +1,72 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_ayuda}"
+				view="/ayuda/AyudaNavegacion.xhtml" id="AyudaRutaMenu"
+				propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_acercade}"
+				view="/ayuda/acercade/AcercaDe.xhtml" id="AcercaDeRutaMenu"
+				propagation="none">
+
+			</s:link>
+
+
+		</ice:panelGroup>
+
+
+
+
+
+	</ui:define>
+	<ui:define name="body">
+
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+
+			<br></br>
+			<br></br>
+			<!--  Se define el cuerpo de la pagina -->
+			<ice:outputLabel value="#{messages.acercade_texto}" />
+			<br></br>
+			<br></br>
+			<ice:outputLabel
+				value="Editor FIP versión #{messages.template_version}" />
+			<br></br>
+			<br></br>
+			<ice:outputLabel value="#{messages.acercade_licencia}" />
+			<ice:outputLabel value="#{messages.acercade_licencia2}" />
+			<ice:outputLink value="#{messages.acercade_urleulp}" target="_blank">
+				<ice:outputLabel style="color:blue;text-decoration:underline;"
+					value="#{messages.acercade_urleulp}" />
+			</ice:outputLink>
+
+		</ice:panelGroup>
+
+
+	</ui:define>
+
+</ui:composition>

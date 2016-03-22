@@ -1,0 +1,94 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+	
+	<ui:define name="body">
+	
+	<ice:form>
+
+	<ice:panelPopup id="panelRegulacionesEspecificas" autoCentre="true" styleClass="panelPopup"
+		modal="true"
+		visible="true">
+
+
+		<f:facet name="header">
+			<ice:panelGroup>
+				<ice:outputText
+					value="#{messages.determinacion_regulacionesespecificas}" />
+				<s:button id="modalPnlCloseBtnRegEspecificas" type="button"
+					view="#{gestionRegulacionEspecifica.obtenerViewRedirect(pageRedirect)}" propagation="none"
+					image="/fipeditor/img/editorfip/es/comun/cerrar_popup.png"
+					action="#{gestionDeterminaciones.setMostrarRegulacionesEspecificas(false)}"
+					styleClass="popupHeaderImage" immediate="true"
+					title="#{messages.botongenerico_cerrar}"
+					alt="#{messages.botongenerico_cerrar}" />
+			</ice:panelGroup>
+		</f:facet>
+
+		<f:facet name="body">
+			<ice:panelGrid id="gestionRegulacionEspecifica" columns="2">
+
+				<ice:outputLabel value="Nombre"></ice:outputLabel>
+				<ice:inputText
+					value="#{gestionRegulacionEspecifica.regulacionEspecifica.nombre}"
+					></ice:inputText>
+
+				<ice:outputLabel value="Orden"></ice:outputLabel>
+				<ice:panelGroup>
+					<ice:inputText id="orden"
+						value="#{gestionRegulacionEspecifica.regulacionEspecifica.orden}"
+						style="width:200px">
+						<f:validateLongRange></f:validateLongRange>
+					</ice:inputText>
+					<ice:message style="color: red;" id="ordenError" for="orden" />
+				</ice:panelGroup>
+
+				
+
+
+
+				<ice:outputLabel value="Texto"></ice:outputLabel>
+				<ice:inputTextarea rows="10"
+					value="#{gestionRegulacionEspecifica.regulacionEspecifica.texto}"
+					style="width:300px">
+				</ice:inputTextarea>
+				
+				<ice:panelGroup>
+					<h:commandButton styleClass="boton2" alt="#{messages.botongenerico_guardar}" title="#{messages.boton_title_contenidoRegulacionesEspecificas_guardar}"
+						action="#{gestionArbolRegulacionesEspecificas.cargarArbolInicial}"
+						actionListener="#{gestionRegulacionEspecifica.guardarRegulacionEspecifica}"					
+						value="#{messages.botongenerico_guardar}">
+							<f:attribute name="pageRedirect" value="#{gestionRegulacionEspecifica.obtenerViewRedirect(pageRedirect)}"/>
+						</h:commandButton>
+					<h:commandButton styleClass="boton2" alt="#{messages.botongenerico_borrar}" title="#{messages.boton_title_contenidoRegulacionesEspecificas_borrar}"
+						action="#{gestionArbolRegulacionesEspecificas.cargarArbolInicial}"
+						actionListener="#{gestionRegulacionEspecifica.borrarRegulacionEspecifica}"
+						visible="#{gestionRegulacionEspecifica.regulacionEspecifica.idRelacion!=0}"
+						value="#{messages.botongenerico_borrar}">
+							<f:attribute name="pageRedirect" value="#{gestionRegulacionEspecifica.obtenerViewRedirect(pageRedirect)}"/>
+						</h:commandButton>
+				</ice:panelGroup>
+				<ice:panelGroup>
+						<s:button styleClass="boton2" alt="#{messages.botongenerico_cancelar}" title="#{messages.boton_title_contenidoRegulacionesEspecificas_cancelar}"
+						action="#{gestionDeterminaciones.setMostrarRegulacionesEspecificas(false)}"
+						value="#{messages.botongenerico_cancelar}" view="#{gestionRegulacionEspecifica.obtenerViewRedirect(pageRedirect)}"/>
+				</ice:panelGroup>
+			</ice:panelGrid>
+
+
+ 
+		</f:facet>
+	</ice:panelPopup>
+
+	</ice:form>
+
+
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,278 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_edicionfip}"
+				view="/produccionfip/ProduccionFipNavegacion.xhtml"
+				id="ProduccionFipRutaMenu" propagation="none">
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_edicion_adscripciones}"
+				view="/produccionfip/gestionadscripciones/ListaAdscripciones.xhtml"
+				id="ListaAdscripcionesRutaMenu" propagation="none">
+
+			</s:link>
+
+		</ice:panelGroup>
+
+	</ui:define>
+
+	<ui:define name="body">
+
+		<ice:form id="form">
+
+			<ice:panelGrid columns="2"
+				columnClasses="colLabelAdscr,colInputAdscr">
+
+				<ice:panelGroup styleClass="labels"
+					panelTooltip="tooltip_entidad_origen">
+					<ice:outputLabel value="#{messages.adscripcion_entidad_origen}"></ice:outputLabel>
+					<ice:graphicImage styleClass="tooltip_imagen"
+						alt="#{messages.genericos_info}"
+						url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				</ice:panelGroup>
+
+				<ice:panelGroup>
+					<ice:panelGrid columns="2"
+						columnClasses="colLabelAdscrDatos,colInputAdscr">
+						<ice:outputText
+							value="#{gestionAdscripciones.adscripcionesDTO.nombreEntidadOrigen}"
+							style="width:250px"></ice:outputText>
+
+						<s:button styleClass="boton1"
+							rendered="#{gestionAdscripciones.adscripcionesDTO.idRelacion == 0}"
+							value="#{messages.botongenerico_editar}" id="selEntOrigen"
+							alt="#{messages.botongenerico_editar}"
+							title="#{messages.boton_title_adscripcion_entidadorigen}"
+							view="/produccionfip/gestionadscripciones/SeleccionarEntidadOrigen.xhtml"
+							action="#{gestionAdscripciones.setMostrarPanelEntidadOrigen(true)}">
+							<f:param name="pageRedirect"
+								value="/produccionfip/gestionadscripciones/CrearAdscripcion.xhtml" />
+						</s:button>
+
+
+					</ice:panelGrid>
+				</ice:panelGroup>
+
+				<ice:panelGroup styleClass="labels"
+					panelTooltip="tooltip_entidad_destino">
+					<ice:outputLabel value="#{messages.adscripcion_entidad_destino}"></ice:outputLabel>
+					<ice:graphicImage styleClass="tooltip_imagen"
+						alt="#{messages.genericos_info}"
+						url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				</ice:panelGroup>
+
+				<ice:panelGroup>
+					<ice:panelGrid columns="2"
+						columnClasses="colLabelAdscrDatos,colInputAdscr">
+						<ice:outputText
+							value="#{gestionAdscripciones.adscripcionesDTO.nombreEntidadDestino}"
+							style="width:250px"></ice:outputText>
+
+						<s:button styleClass="boton1"
+							rendered="#{gestionAdscripciones.adscripcionesDTO.idRelacion == 0}"
+							value="#{messages.botongenerico_editar}" id="selEntDestino"
+							alt="#{messages.botongenerico_editar}"
+							title="#{messages.boton_title_adscripcion_entidaddestino}"
+							view="/produccionfip/gestionadscripciones/SeleccionarEntidadDestino.xhtml"
+							action="#{gestionAdscripciones.setMostrarPanelEntidadDestino(true)}">
+							<f:param name="pageRedirect"
+								value="/produccionfip/gestionadscripciones/CrearAdscripcion.xhtml" />
+						</s:button>
+
+					</ice:panelGrid>
+				</ice:panelGroup>
+
+				<ice:panelGroup styleClass="labels" panelTooltip="tooltip_unidad">
+					<ice:outputLabel value="#{messages.adscripcion_unidad}"></ice:outputLabel>
+					<ice:graphicImage styleClass="tooltip_imagen"
+						alt="#{messages.genericos_info}"
+						url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				</ice:panelGroup>
+
+				<ice:panelGroup>
+					<ice:panelGrid columns="2"
+						columnClasses="colLabelAdscrDatos,colInputAdscr">
+						<ice:outputText
+							value="#{gestionAdscripciones.adscripcionesDTO.nombreDeterminacionUnidad}"></ice:outputText>
+
+						<s:button styleClass="boton1"
+							rendered="#{gestionAdscripciones.adscripcionesDTO.idRelacion == 0}"
+							value="#{messages.botongenerico_editar}" id="selUnidadAdscr"
+							alt="#{messages.botongenerico_editar}"
+							title="#{messages.boton_title_adscripcion_unidad}"
+							view="/produccionfip/gestionadscripciones/SeleccionarUnidad.xhtml"
+							action="#{gestionAdscripciones.setMostrarPanelUnidadAdscripcion(true)}">
+							<f:param name="pageRedirect"
+								value="/produccionfip/gestionadscripciones/CrearAdscripcion.xhtml" />
+						</s:button>
+					</ice:panelGrid>
+				</ice:panelGroup>
+
+				<ice:panelGroup styleClass="labels" panelTooltip="tooltip_tipo">
+					<ice:outputLabel value="#{messages.adscripcion_tipo}"></ice:outputLabel>
+					<ice:graphicImage styleClass="tooltip_imagen"
+						alt="#{messages.genericos_info}"
+						url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				</ice:panelGroup>
+
+				<ice:panelGroup>
+					<ice:panelGrid columns="2"
+						columnClasses="colLabelAdscrDatos,colInputAdscr">
+						<ice:outputText
+							value="#{gestionAdscripciones.adscripcionesDTO.nombreDeterminacionTipo}"></ice:outputText>
+
+						<s:button styleClass="boton1"
+							rendered="#{gestionAdscripciones.adscripcionesDTO.idRelacion == 0}"
+							value="#{messages.botongenerico_editar}" id="selAdscrTipo"
+							alt="#{messages.botongenerico_editar}"
+							title="#{messages.boton_title_adscripcion_tipo}"
+							view="/produccionfip/gestionadscripciones/ListaTipoAdscripciones.xhtml"
+							action="#{gestionAdscripciones.setMostrarPanelTipoAdscripcion(true)}">
+							<f:param name="pageRedirect"
+								value="/produccionfip/gestionadscripciones/CrearAdscripcion.xhtml" />
+						</s:button>
+					</ice:panelGrid>
+				</ice:panelGroup>
+
+				<ice:panelGroup styleClass="labels" panelTooltip="tooltip_cuantia">
+					<ice:outputLabel value="#{messages.adscripcion_cuantia}"></ice:outputLabel>
+					<ice:graphicImage styleClass="tooltip_imagen"
+						alt="#{messages.genericos_info}"
+						url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				</ice:panelGroup>
+
+
+				<ice:inputText
+					value="#{gestionAdscripciones.adscripcionesDTO.cuantia}"
+					style="width:250px" id="cuantia"></ice:inputText>
+
+				<ice:panelGroup styleClass="labels" panelTooltip="tooltip_texto">
+					<ice:outputLabel value="#{messages.adscripcion_texto}"></ice:outputLabel>
+					<ice:graphicImage styleClass="tooltip_imagen"
+						alt="#{messages.genericos_info}"
+						url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+				</ice:panelGroup>
+
+
+				<ice:inputTextarea rows="10"
+					value="#{gestionAdscripciones.adscripcionesDTO.texto}"
+					style="width:250px" id="texto">
+				</ice:inputTextarea>
+
+			</ice:panelGrid>
+
+			<ice:panelGrid columns="2"
+				columnClasses="colLabelAdscr,colInputAdscr"
+				rendered="#{gestionAdscripciones.adscripcionesDTO.idRelacion == 0}">
+
+				<ice:commandButton
+					action="#{gestionAdscripciones.guardarAdscripcion()}"
+					styleClass="boton2" panelConfirmation="guardarAdscrConfirm"
+					style="width:127px!important;"
+					value="#{messages.adscripcion_guardar}"
+					alt="#{messages.adscripcion_guardar}"
+					title="#{messages.boton_title_adscripcion_crear_guardar}" />
+
+
+				<s:button value="#{messages.botongenerico_cancelar}"
+					view="/produccionfip/gestionadscripciones/ListaAdscripciones.xhtml"
+					styleClass="boton1" propagation="none"
+					alt="#{messages.botongenerico_cancelar}"
+					title="#{messages.boton_title_adscripcion_crear_cancelar}" />
+
+
+
+			</ice:panelGrid>
+
+			<ice:panelGrid columns="2"
+				columnClasses="colLabelAdscr,colInputAdscr"
+				rendered="#{gestionAdscripciones.adscripcionesDTO.idRelacion != 0}">
+
+				<s:button value="#{messages.botongenerico_volver}"
+					view="/produccionfip/gestionadscripciones/ListaAdscripciones.xhtml"
+					styleClass="boton1" propagation="none"
+					alt="#{messages.botongenerico_volver}"
+					title="#{messages.boton_title_adscripcion_crear_volver}" />
+				<ice:outputLabel />
+
+
+
+			</ice:panelGrid>
+
+			<ice:panelConfirmation id="guardarAdscrConfirm"
+				title="#{messages.adscripcion_guardar_title}"
+				message="#{messages.adscripcion_guardar_confirmacion}"
+				acceptLabel="#{messages.botongenerico_aceptar}"
+				cancelLabel="#{messages.botongenerico_cancelar}" styleClass="boton1" />
+
+			<!-- Tooltips -->
+			<ice:panelTooltip id="tooltip_entidad_origen"
+				styleClass="tooltip_panel">
+				<f:facet name="body">
+					<ice:outputText
+						value="#{messages.tooltip_adscripciones_entidad_origen}#{messages.tooltip_determinacion_masinfo}"
+						styleClass="tooltip_texto" />
+				</f:facet>
+			</ice:panelTooltip>
+			<ice:panelTooltip id="tooltip_entidad_destino"
+				styleClass="tooltip_panel">
+				<f:facet name="body">
+					<ice:outputText
+						value="#{messages.tooltip_adscripciones_entidad_destino}#{messages.tooltip_determinacion_masinfo}"
+						styleClass="tooltip_texto" />
+				</f:facet>
+			</ice:panelTooltip>
+			<ice:panelTooltip id="tooltip_unidad" styleClass="tooltip_panel">
+				<f:facet name="body">
+					<ice:outputText
+						value="#{messages.tooltip_adscripciones_unidad}#{messages.tooltip_determinacion_masinfo}"
+						styleClass="tooltip_texto" />
+				</f:facet>
+			</ice:panelTooltip>
+			<ice:panelTooltip id="tooltip_tipo" styleClass="tooltip_panel">
+				<f:facet name="body">
+					<ice:outputText
+						value="#{messages.tooltip_adscripciones_tipo}#{messages.tooltip_determinacion_masinfo}"
+						styleClass="tooltip_texto" />
+				</f:facet>
+			</ice:panelTooltip>
+			<ice:panelTooltip id="tooltip_cuantia" styleClass="tooltip_panel">
+				<f:facet name="body">
+					<ice:outputText
+						value="#{messages.tooltip_adscripciones_cuantia}#{messages.tooltip_determinacion_masinfo}"
+						styleClass="tooltip_texto" />
+				</f:facet>
+			</ice:panelTooltip>
+			<ice:panelTooltip id="tooltip_texto" styleClass="tooltip_panel">
+				<f:facet name="body">
+					<ice:outputText
+						value="#{messages.tooltip_adscripciones_texto}#{messages.tooltip_determinacion_masinfo}"
+						styleClass="tooltip_texto" />
+				</f:facet>
+			</ice:panelTooltip>
+
+		</ice:form>
+
+	</ui:define>
+
+</ui:composition>

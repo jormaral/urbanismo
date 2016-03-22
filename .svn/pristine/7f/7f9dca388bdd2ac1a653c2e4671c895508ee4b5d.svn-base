@@ -1,0 +1,141 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionUsuarioListRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.generacionfip2}"
+				view="/gestionfip/generacionfip2/Fip2GeneradosList.xhtml"
+				id="Fip2GeneradosListRutaMenu" propagation="none">
+
+			</s:link>
+
+		</ice:panelGroup>
+
+	</ui:define>
+
+	<ui:define name="body">
+
+		<ice:form id="formulario">
+
+
+			<ice:panelGrid columns="2" columnClasses="testCol1,testCol2">
+				<ice:panelTabSet id="panelArbol" styleClass="arbol">
+					<ice:panelGroup styleClass="arbol" scrollHeight="500px">
+						<ice:tree id="treeTram" value="#{gestionArbolGeneracionFip.model}"
+							var="node" binding="#{gestionArbolGeneracionFip.treeComponent}"
+							imageDir="/fipeditor/img/editorfip/es/arboles/"
+							hideRootNode="false" hideNavigation="false" immediate="true"
+							actionListener="#{gestionArbolGeneracionFip.menuEvent}">
+							<ice:treeNode>
+
+								<f:facet name="icon">
+									<ice:panelGroup style="display: inline">
+										<h:graphicImage
+											value="/img/editorfip/es/arboles/#{node.userObject.icon}" />
+
+									</ice:panelGroup>
+								</f:facet>
+								<f:facet name="content">
+
+									<ice:panelGroup
+										styleClass="selectedNode#{node.userObject eq gestionArbolGeneracionFip.selectedUserObject}"
+										style="display: inline">
+
+										<ice:selectBooleanCheckbox id="checkTram" partialSubmit="true"
+											value="#{node.userObject.seleccionado}"
+											valueChangeListener="#{gestionArbolGeneracionFip.processValueChange}">
+										</ice:selectBooleanCheckbox>
+
+										<ice:outputText id="TreeNode" value="#{node.userObject.text}" />
+
+									</ice:panelGroup>
+
+								</f:facet>
+
+							</ice:treeNode>
+						</ice:tree>
+
+
+					</ice:panelGroup>
+				</ice:panelTabSet>
+
+				<ice:panelGroup
+					styleClass="cajaSeleccion firstChildTitle backBeanChangeContainer">
+
+					<!-- backing bean title box -->
+					<ice:outputLabel
+						value="Al pulsar el botón de Generar Fip se generará en segundo plano en FIP 2. Puede consultar el estado en la lista de FIPS generados pulsando " />
+					<s:link view="/gestionfip/generacionfip2/Fip2GeneradosList.xhtml"
+						id="Fip2GeneradosListRutaMenu" propagation="none">
+						<ice:outputLabel styleClass="hiperenlace"
+							value="#{messages.menu_verlistado_fip2generados}" />
+					</s:link>
+					<br />
+					<ice:commandButton id="botonSelTram" value="#{messages.GenerarFIP}"
+						rendered="#{gestionArbolGeneracionFip.seleccionados.size()>0}"
+						immediate="true"
+						action="#{conversionFIPXML.generarFip(gestionArbolGeneracionFip.seleccionados)}"
+						styleClass="boton1"
+						actionListener="#{conversionFIPXML.postGenerarFip}"
+						alt="#{messages.GenerarFIP}"
+						title="#{messages.boton_title_Fip2Arbol_generarFip}" />
+
+					<ice:dataTable value="#{gestionArbolGeneracionFip.seleccionados}"
+						var="item" id="listaDeUsuarios" enableContextMenu="false"
+						selectionMode="none"
+						onRowMouseOver="this.style.backgroundColor='#FFFFCC'"
+						onRowMouseOut="this.style.backgroundColor='#FFFFFF'">
+
+
+						<ice:column style="text-align:center;height:35px;">
+							<f:facet name="header">
+								<h:outputText value="#{messages.gestionusuario_usuario_nombre}" />
+							</f:facet>
+							<h:outputText value="#{item.datosIdTextoArbolGenerico.texto}" />
+						</ice:column>
+
+						<ice:column style="text-align:center;">
+							<f:facet name="header">
+								<h:outputText value="#{messages.tipo}" />
+							</f:facet>
+							<h:outputText value="#{item.datosIdTextoArbolGenerico.tipo}" />
+						</ice:column>
+
+					</ice:dataTable>
+					<!-- actual backing bean values. -->
+
+				</ice:panelGroup>
+			</ice:panelGrid>
+
+
+		</ice:form>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,44 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/templateArbol.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="servicioLanzarPrerefundidoForm">
+
+        <ice:panelGroup>
+            <f:facet name="header">servicioLanzarPrerefundidoForm</f:facet>
+			
+			<s:decorate id="ejem" template="../../layout/display.xhtml">
+            	<ui:define name="label">servicioLanzarPrerefundidoForm</ui:define>
+            	<h:outputText id="ejemOutput" value="Pulsa para prerefundir prueba"/>
+        	</s:decorate>
+			
+                             
+            
+           
+            
+            
+
+            <div style="clear:both"/>
+            
+                        
+
+        </ice:panelGroup>
+
+        <div class="actionButtons">
+            <h:commandButton id="lanzarPrerefundido" value="Lanzar Prerefundido"
+                    action="#{refundido.prerefundirPrueba()}"/>
+        </div>
+
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

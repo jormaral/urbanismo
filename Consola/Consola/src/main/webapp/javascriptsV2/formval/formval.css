@@ -1,0 +1,27 @@
+/* 
+    Document   : formval
+    Created on : 28-oct-2009, 11:14:18
+    Author     : Alvaro
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+/***************** Forms *******************/
+
+.fvFieldError{
+    border: 1px solid #DF8B8B;
+
+}
+.fvErrorMsg{
+    border: 1px dashed #DF8B8B;
+    display: block;
+    background-color: #EFD1D1;
+    background: #EFD1D1 url(assets/error_16.png) 2px center no-repeat;
+    padding: 4px 4px 4px 21px;
+    margin: 5px;
+}

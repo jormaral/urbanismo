@@ -1,0 +1,297 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"   
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+      <ice:panelGroup  id="viewregimenespecificoHomePanelGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="viewTextregimenespecificoHomeId" value="Regimenespecifico"/>
+                  </td>
+              </tr>
+          </table>
+      
+
+
+        <s:decorate id="iden" template="../layout/display.xhtml">
+            <ui:define name="label">Iden</ui:define>
+            #{regimenespecificoHome.instance.iden}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="nombre" template="../layout/display.xhtml">
+            <ui:define name="label">Nombre</ui:define>
+            #{regimenespecificoHome.instance.nombre}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="orden" template="../layout/display.xhtml">
+            <ui:define name="label">Orden</ui:define>
+            #{regimenespecificoHome.instance.orden}&#160;
+        </s:decorate>
+
+
+        <s:decorate id="texto" template="../layout/display.xhtml">
+            <ui:define name="label">Texto</ui:define>
+            #{regimenespecificoHome.instance.texto}&#160;
+        </s:decorate>
+
+          <div style="clear:both"/>
+ 
+
+    <div id="viewRegimenespecificoEditsearchButtons" class="actionButtons">      
+
+        <s:button view="/seam/RegimenespecificoEdit.xhtml" 
+                    id="edit" styleClass="iceCmdBtn"
+                 value="Edit"/>
+
+        <s:button view="/seam/#{empty regimenespecificoFrom ? 'RegimenespecificoList' : regimenespecificoFrom}.xhtml"
+                    id="done" styleClass="iceCmdBtn"
+                 value="Done"/>
+
+    </div>
+  </ice:panelGroup>
+
+
+    <ice:form id="view2regimenespecificoHomeFormId">
+       <ice:panelTabSet id="viewregimenespecificoHomeTabSetId" 
+                styleClass="componentPanelTabSetLayout" 
+		style="margin-bottom:5px;margin-top:10px;">
+
+	<ice:panelTab id="viewentidaddeterminacionregimenpanelTab" label="Entidaddeterminacionregimen">
+   		<div class="association" id="entidaddeterminacionregimenParent">
+        
+       		 <h:outputText value="There is no entidaddeterminacionregimen associated with this regimenespecifico." 
+		                  id="viewentidaddeterminacionregimenTextId"
+                   rendered="#{regimenespecificoHome.instance.entidaddeterminacionregimen == null}"/>
+   
+        	<ice:dataTable  var="entidaddeterminacionregimen" 
+                   value="#{regimenespecificoHome.instance.entidaddeterminacionregimen}" 
+                rendered="#{regimenespecificoHome.instance.entidaddeterminacionregimen != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+	        columnClasses="allCols"
+                      id="viewentidaddeterminacionregimenTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{entidaddeterminacionregimen.iden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Casoentidaddeterminacion by idcaso iden</f:facet>
+		    	#{entidaddeterminacionregimen.casoentidaddeterminacionByIdcaso.iden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Casoentidaddeterminacion by idcasoaplicacion iden</f:facet>
+		    	#{entidaddeterminacionregimen.casoentidaddeterminacionByIdcasoaplicacion.iden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Determinacion iden</f:facet>
+		    	#{entidaddeterminacionregimen.determinacion.iden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Opciondeterminacion iden</f:facet>
+		    	#{entidaddeterminacionregimen.opciondeterminacion.iden}
+            </ice:column>
+            <ice:column id="viewsuperposicionId">
+                <f:facet name="header">Superposicion</f:facet>
+                #{entidaddeterminacionregimen.superposicion}
+            </ice:column>
+            <ice:column id="viewvalorId">
+                <f:facet name="header">Valor</f:facet>
+                #{entidaddeterminacionregimen.valor}
+            </ice:column>
+            <ice:column id="viewentidaddeterminacionregimenColumnId">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewentidaddeterminacionregimenLinkId" 
+                     value="View" 
+                      view="/seam/Entidaddeterminacionregimen.xhtml">
+                    <f:param name="entidaddeterminacionregimenIden" 
+                           value="#{entidaddeterminacionregimen.iden}"/>
+                </s:link>
+            </ice:column>
+       </ice:dataTable>
+       
+    </div>
+    </ice:panelTab>
+
+	<ice:panelTab id="viewregimenespecificopanelTab" label="Regimenespecifico">
+   		<div class="association" id="regimenespecificoParent">
+        
+       		 <h:outputText value="There is no regimenespecifico associated with this regimenespecifico." 
+		                  id="viewregimenespecificoTextId"
+                   rendered="#{regimenespecificoHome.instance.regimenespecifico == null}"/>
+   
+        	<ice:dataTable  var="regimenespecifico" 
+                   value="#{regimenespecificoHome.instance.regimenespecifico}" 
+                rendered="#{regimenespecificoHome.instance.regimenespecifico != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+	        columnClasses="allCols"
+                      id="viewregimenespecificoTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{regimenespecifico.iden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Entidaddeterminacionregimen iden</f:facet>
+		    	#{regimenespecifico.entidaddeterminacionregimen.iden}
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{regimenespecifico.nombre}
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{regimenespecifico.orden}
+            </ice:column>
+            <ice:column id="viewidenColumnName">
+	    	    <f:facet name="header">Regimenespecifico iden</f:facet>
+		    	#{regimenespecifico.regimenespecifico.iden}
+            </ice:column>
+            <ice:column id="viewtextoId">
+                <f:facet name="header">Texto</f:facet>
+                #{regimenespecifico.texto}
+            </ice:column>
+            <ice:column id="viewregimenespecificoColumnId">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewregimenespecificoLinkId" 
+                     value="View" 
+                      view="/seam/Regimenespecifico.xhtml">
+                    <f:param name="regimenespecificoIden" 
+                           value="#{regimenespecifico.iden}"/>
+                </s:link>
+            </ice:column>
+       </ice:dataTable>
+       
+    </div>
+    </ice:panelTab>
+
+   <ice:panelTab label="Regimenespecificos">
+    <div class="association" id="viewregimenespecificosChildrenId">
+        
+        <h:outputText value="There are no regimenespecificos associated with this regimenespecifico." 
+	                 id="viewregimenespecificosChildTextId"
+                   rendered="#{empty regimenespecificoHome.regimenespecificos}"/>
+        
+        <ice:dataTable value="#{regimenespecificoHome.regimenespecificos}" 
+                       var="regimenespecifico" 
+                  rendered="#{not empty regimenespecificoHome.regimenespecificos}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewregimenespecificosTableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{regimenespecifico.iden}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{regimenespecifico.nombre}"/>
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                <h:outputText id="viewordenTextId" 
+		           value="#{regimenespecifico.orden}"/>
+            </ice:column>
+            <ice:column id="viewtextoId">
+                <f:facet name="header">Texto</f:facet>
+                <h:outputText id="viewtextoTextId" 
+		           value="#{regimenespecifico.texto}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectregimenespecificoLinkId" 
+                     value="Select" 
+                      view="/seam/Regimenespecifico.xhtml">
+                    <f:param name="regimenespecificoIden" 
+                            value="#{regimenespecifico.iden}"/>
+                    <f:param name="regimenespecificoFrom" value="Regimenespecifico"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddregimenespecificoButtonId" 
+               value="Add regimenespecifico"
+                view="/seam/RegimenespecificoEdit.xhtml">
+            <f:param name="regimenespecificoIden" 
+                    value="#{regimenespecificoHome.instance.iden}"/>
+            <f:param name="regimenespecificoFrom" value="Regimenespecifico"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+
+   <ice:panelTab label="Regimenespecificos_1">
+    <div class="association" id="viewregimenespecificos_1ChildrenId">
+        
+        <h:outputText value="There are no regimenespecificos_1 associated with this regimenespecifico." 
+	                 id="viewregimenespecificos_1ChildTextId"
+                   rendered="#{empty regimenespecificoHome.regimenespecificos_1}"/>
+        
+        <ice:dataTable value="#{regimenespecificoHome.regimenespecificos_1}" 
+                       var="regimenespecifico" 
+                  rendered="#{not empty regimenespecificoHome.regimenespecificos_1}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+		    columnClasses="allCols"
+                        id="viewregimenespecificos_1TableId">
+            <ice:column id="viewidenId">
+                <f:facet name="header">Iden</f:facet>
+                <h:outputText id="viewidenTextId" 
+		           value="#{regimenespecifico.iden}"/>
+            </ice:column>
+            <ice:column id="viewnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText id="viewnombreTextId" 
+		           value="#{regimenespecifico.nombre}"/>
+            </ice:column>
+            <ice:column id="viewordenId">
+                <f:facet name="header">Orden</f:facet>
+                <h:outputText id="viewordenTextId" 
+		           value="#{regimenespecifico.orden}"/>
+            </ice:column>
+            <ice:column id="viewtextoId">
+                <f:facet name="header">Texto</f:facet>
+                <h:outputText id="viewtextoTextId" 
+		           value="#{regimenespecifico.texto}"/>
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectregimenespecificoLinkId" 
+                     value="Select" 
+                      view="/seam/Regimenespecifico.xhtml">
+                    <f:param name="regimenespecificoIden" 
+                            value="#{regimenespecifico.iden}"/>
+                    <f:param name="regimenespecificoFrom" value="Regimenespecifico"/>
+                </s:link>
+            </ice:column>
+        </ice:dataTable>
+        
+     </div>
+    
+    <div class="actionButtons">
+        <s:button id="viewAddregimenespecificoButtonId" 
+               value="Add regimenespecifico"
+                view="/seam/RegimenespecificoEdit.xhtml">
+            <f:param name="regimenespecificoIden" 
+                    value="#{regimenespecificoHome.instance.iden}"/>
+            <f:param name="regimenespecificoFrom" value="Regimenespecifico"/>
+        </s:button>
+    </div>        
+   </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+

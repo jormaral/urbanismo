@@ -1,0 +1,16 @@
+action.package=com.mitc.redes.editorfip.servicios.seam
+action.sources=/fipeditor/src/hot
+eclipse.preferences.version=1
+model.package=com.mitc.redes.editorfip.entidades
+model.sources=/fipeditor/src/main
+seam.ejb.project=fipeditor
+seam.project.connection.profile=
+seam.project.deployment.type=ear
+seam.project.settings.version=1.1
+seam.project.web.root.folder=/fipeditor/view
+seam.runtime.name=jboss-seam-2.2.0.GA
+seam.settings.changed.by.user=true
+seam.test.creating=true
+seam.test.project=fipeditor
+test.package=com.mitc.redes.editorfip.test
+test.sources=/fipeditor/src/test

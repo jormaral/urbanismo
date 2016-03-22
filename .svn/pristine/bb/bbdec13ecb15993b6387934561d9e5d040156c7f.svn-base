@@ -1,0 +1,135 @@
+.mooTree_node_Capas {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 11px;
+	white-space: nowrap;
+        height: 20px;
+        width:14000px;
+}
+
+.mooTree_text_Capas {
+	padding-top: 3px;
+	height: 15px;
+	cursor: pointer;
+        /*width:1000px;*/
+	float: left;
+}
+
+.mooTree_img {
+	float: left;
+	width: 16px;
+	height: 16px;
+	overflow: hidden;
+}
+
+
+.mooTree_selected_Capas	 {
+	background-color: #e0f0ff;
+	font-weight: bold;
+}
+
+.mooTree_imgPDF
+{
+    position:relative;
+    float:left;
+    height:17px;
+    width:21px;
+    background-image: url(../../../../styles/imagesVisor/imgPDF.png);
+    cursor:pointer;
+}
+.mooTree_imgLeyenda
+{
+    position:relative;
+    float:left;
+	width: 18px;
+	height: 18px;
+    background-image: url(mootree_leyenda.gif);
+    background-position: 135px top;
+    cursor:pointer;
+}
+.mooTree_imgLeyenda:hover
+{
+    position:relative;
+    float:left;
+	width: 18px;
+	height: 18px;
+    background-image: url(mootree_leyendaON.gif);
+    background-position: 135px top;
+    cursor:pointer;
+}
+.mooTree_checkOFF
+{
+    position:relative;
+    float:left;
+    height:17px;
+    width:21px;
+    background-image: url(../../../../styles/imagesVisor/checkOFF.png);
+    cursor:pointer;
+}
+    .mooTree_deleteOFF
+    {
+        position:relative;
+        float:left;
+        height:17px;
+        width:21px;
+        background-image: url(../../../../styles/imagesVisor/deleteOFF.png);
+        cursor:pointer;
+        background-position:0px 1px;
+    }
+        .mooTree_deleteOFF:hover
+        {
+            position:relative;
+            float:left;
+            height:17px;
+            width:21px;
+            background-image: url(../../../../styles/imagesVisor/deleteON.png);
+            cursor:pointer;
+            background-position:0px 1px;
+        }
+
+
+
+.mooTree_checkON
+{
+    position:relative;
+    float:left;
+    height:17px;
+    width:21px;
+    background-image: url(../../../../styles/imagesVisor/checkON.png);
+    cursor:pointer;
+}
+
+.zonaSlider
+{
+    position:relative;
+    float:left;
+    left:0px;
+    top:0px;
+    /*width:1420px;*/
+    height:15px;
+
+}
+    .sliderCapa_lbl
+    {
+        position:relative;
+        float:left;
+        left:0px;
+        top:0px;
+        height:15px;
+        width:auto;
+    }
+
+    .sliderCapa {
+            position:relative;
+            float:left;
+            left:6px;
+            top:0px;
+            height:15px;
+            width:100px;
+            background-image:url(../../../../styles/imagesVisor/sliderCapa.png);
+    }
+            .knobCapa {
+                    width: 15px;
+                    height: 15px;
+                    background-image:url(../../../../styles/imagesVisor/sliderCapa_tirador.png);
+                    background-position: center center;
+            }

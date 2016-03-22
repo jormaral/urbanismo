@@ -1,0 +1,237 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"  
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="documentoSearch" styleClass="edit">
+      <ice:panelGroup  id="searchGroup" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+                    <ice:outputText id="listDocumentoId" value="Documento search filter"/>
+                 </td>
+              </tr>
+         </table>	
+         <ice:panelGroup id="listPanelGroupDocumentoId" styleClass="edit">
+		
+            <s:decorate id="archivodecId" template="../layout/display.xhtml">
+                <ui:define name="label">Archivo</ui:define>
+                <ice:inputText id="archivo" 
+                          value="#{documentoList.documento.archivo}"
+				  partialSubmit="true"/>
+            </s:decorate>
+
+            <s:decorate id="comentariodecId" template="../layout/display.xhtml">
+                <ui:define name="label">Comentario</ui:define>
+                <ice:inputText id="comentario" 
+                          value="#{documentoList.documento.comentario}"
+				  partialSubmit="true"/>
+            </s:decorate>
+
+            <s:decorate id="nombredecId" template="../layout/display.xhtml">
+                <ui:define name="label">Nombre</ui:define>
+                <ice:inputText id="nombre" 
+                          value="#{documentoList.documento.nombre}"
+				  partialSubmit="true"/>
+            </s:decorate>
+
+            <s:decorate template="../layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <ice:selectOneRadio id="logic" value="#{documentoList.restrictionLogicOperator}" partialSubmit="true">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </ice:selectOneRadio>
+            </s:decorate>
+          
+   
+	  </ice:panelGroup>
+  
+        
+        <div class="actionButtons">
+            <ice:commandButton id="search" value="Search" action="/DocumentoList.xhtml"/>
+        </div>
+      </ice:panelGroup> 
+    </ice:form>
+    
+    <ice:panelGroup styleClass="formBorderHighlight">
+
+    <h3>documento  search results</h3>
+
+    <div class="searchResults" id="listdocumentoResults">
+    <ice:outputText value="The documento search returned no results." 
+               rendered="#{empty documentoList.resultList}"/>
+               
+    <ice:dataTable id="documentoList" 
+                  var="documento"
+                value="#{documentoList.resultList}" 
+            resizable="true"
+	columnClasses="allCols"
+             rendered="#{not empty documentoList.resultList}">
+        <ice:column id="listidenId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{documentoList}"/>
+                    <ui:param name="propertyLabel" value="Iden"/>
+                    <ui:param name="propertyPath" value="documento.iden"/>
+                </ui:include>
+            </f:facet>
+            #{documento.iden}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listarchivoId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{documentoList}"/>
+                    <ui:param name="propertyLabel" value="Archivo"/>
+                    <ui:param name="propertyPath" value="documento.archivo"/>
+                </ui:include>
+            </f:facet>
+            #{documento.archivo}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listcomentarioId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{documentoList}"/>
+                    <ui:param name="propertyLabel" value="Comentario"/>
+                    <ui:param name="propertyPath" value="documento.comentario"/>
+                </ui:include>
+            </f:facet>
+            #{documento.comentario}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listColumndocumentoId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{documentoList}"/>
+                    <ui:param name="propertyLabel" value="Documento iden"/>
+                    <ui:param name="propertyPath" value="documento.documento.iden"/>
+                </ui:include>
+            </f:facet>
+            #{documento.documento.iden}
+        </ice:column>
+        <ice:column id="listescalaId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{documentoList}"/>
+                    <ui:param name="propertyLabel" value="Escala"/>
+                    <ui:param name="propertyPath" value="documento.escala"/>
+                </ui:include>
+            </f:facet>
+            #{documento.escala}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listidgrupodocumentoId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{documentoList}"/>
+                    <ui:param name="propertyLabel" value="Idgrupodocumento"/>
+                    <ui:param name="propertyPath" value="documento.idgrupodocumento"/>
+                </ui:include>
+            </f:facet>
+            #{documento.idgrupodocumento}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listidtipodocumentoId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{documentoList}"/>
+                    <ui:param name="propertyLabel" value="Idtipodocumento"/>
+                    <ui:param name="propertyPath" value="documento.idtipodocumento"/>
+                </ui:include>
+            </f:facet>
+            #{documento.idtipodocumento}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listnombreId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{documentoList}"/>
+                    <ui:param name="propertyLabel" value="Nombre"/>
+                    <ui:param name="propertyPath" value="documento.nombre"/>
+                </ui:include>
+            </f:facet>
+            #{documento.nombre}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listColumntramiteId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{documentoList}"/>
+                    <ui:param name="propertyLabel" value="Tramite iden"/>
+                    <ui:param name="propertyPath" value="documento.tramite.iden"/>
+                </ui:include>
+            </f:facet>
+            #{documento.tramite.iden}
+        </ice:column>
+        <ice:column id="listColumnDocumentoId">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/seam/#{empty from ? 'Documento' : from}.xhtml" 
+                   value="#{empty from ? 'View' : 'Select'}" 
+                      id="documento">
+                <f:param name="documentoIden" 
+                        value="#{documento.iden}"/>
+            </s:link>
+			#{' '}
+            <s:link view="/seam/DocumentoEdit.xhtml"
+                   value="Edit" 
+                      id="documentoEdit"
+                      rendered="#{empty from}">
+                <f:param name="documentoIden" 
+                        value="#{documento.iden}"/>
+            </s:link>
+        </ice:column>
+    </ice:dataTable>
+
+    </div>
+</ice:panelGroup>
+
+    <div class="tableControl">
+      
+        <s:link view="/seam/DocumentoList.xhtml" 
+            rendered="#{documentoList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPagedocumentoListId">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+        
+        <s:link view="/seam/DocumentoList.xhtml" 
+            rendered="#{documentoList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPagedocumentoListId">
+            <f:param name="firstResult" 
+                    value="#{documentoList.previousFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/DocumentoList.xhtml" 
+            rendered="#{documentoList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPagedocumentoListId">
+            <f:param name="firstResult" 
+                    value="#{documentoList.nextFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/DocumentoList.xhtml" 
+            rendered="#{documentoList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPagedocumentoListId">
+            <f:param name="firstResult" 
+                    value="#{documentoList.lastFirstResult}"/>
+        </s:link>
+        
+    </div>
+    
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/seam/DocumentoEdit.xhtml"
+                    id="create" 
+                 value="Create documento">
+            <f:param name="documentoIden"/>
+        </s:button>
+    </s:div>
+    
+</ui:define>
+
+</ui:composition>
+

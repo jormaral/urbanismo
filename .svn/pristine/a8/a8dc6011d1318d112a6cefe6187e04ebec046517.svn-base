@@ -1,0 +1,278 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_gestionfip}"
+				view="/gestionfip/GestionFipNavegacion.xhtml"
+				id="GestionFipNavegacionRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.procesamientofip}"
+				view="/gestionfip/ProcesamientoFipNavegacion.xhtml"
+				id="ProcesamientoFipRutaMenu" propagation="none">
+
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.obtencionfip1}"
+				view="/gestionfip/obtencionfip1/ObtencionFip.xhtml"
+				id="ObtencionFip1RutaMenu" propagation="none">
+
+			</s:link>
+
+		</ice:panelGroup>
+	</ui:define>
+
+
+
+
+	<ui:define name="body">
+
+		<style>
+#divTable {
+	position: relative;
+}
+
+#divButtons {
+	padding: 20px;
+	height: 30px;
+	float: left;
+	width: 100%;
+}
+
+#divButtons div {
+	float: left;
+	margin-right: 15px;
+}
+</style>
+
+		<ice:panelGroup styleClass="dr-pnl-sinmargen">
+			<ice:form id="fmImportarFIP1">
+
+				<div id="divTable">
+
+
+					<!--   - - - - - - - - - - - - - -
+				
+					B O T O N E S
+				
+					 - - - - - - - - - - - - - - - - - -  
+					<div id="divButtons">
+
+						<div>
+							<s:button value="#{messages.botongenerico_volver}"
+								view="/gestionfip/obtencionfip1/Fip1IntroducidosLista.seam"
+								propagation="nest"
+								image="/fipeditor/img/editorfip/#{localeSelector.language}/botones/Volver.png">
+								<f:param name="planIden" />
+							</s:button>
+						</div>
+					</div>
+					-->
+
+
+				</div>
+
+				<div class="bBody" style="width: 800px;">
+
+
+					<h1>Datos del FIP1 a importar</h1>
+					Id:&nbsp;<b>#{importacionFIP1.fipCargado.id}</b><br />
+					Identificador:&nbsp;<b>#{importacionFIP1.fipCargado.identificador}</b><br />
+					Estado:&nbsp;<b>#{importacionFIP1.fipCargado.estado}</b><br /> Id
+					ambito:&nbsp;<b>#{importacionFIP1.fipCargado.idambito}</b> <br /> <br />
+
+
+					<!-- YA ESTA EN PROCESO DE IMPORTACION -->
+					<ice:panelGroup
+						rendered="#{importacionFIP1.fipCargado.estado!=null}">
+
+						<h2>El FIP ya esta siendo o ha sido importado</h2>
+						<h:outputText value="#{importacionFIP1.fipCargado.resultado}" />
+
+					</ice:panelGroup>
+
+					<ice:panelGroup
+						rendered="#{importacionFIP1.fipCargado.estado==null}">
+
+						<!-- CON PLAN BASE CONOCIDO -->
+						<ice:panelGroup rendered="#{importacionFIP1.ambitoConPlan}">
+
+							<h2>El ambito ya tiene plan base</h2>
+							Id del plan: <b>#{importacionFIP1.planBase.iden}</b>
+							<br />
+							Codigo del plan: <b>#{importacionFIP1.planBase.codigo}</b>
+							<br />
+							Nombre: <b><h:outputText
+									value="#{importacionFIP1.planBase.nombre}" />
+							</b>
+							<br />
+							<br />
+
+							<ice:commandButton value="#{messages.importar}"
+								panelConfirmation="importarExisteYaPlanBase"
+								actionListener="#{importacionFIP1.redirigirDesdeImportacion}"
+								alt="#{messages.importar}"
+								title="#{messages.boton_title_importacionFip1_importar}"
+								rendered="#{importacionFIP1.puedeImportar}"
+								action="#{importacionFIP1.importacionAsincrona(importacionFIP1.fipCargado.id, importacionFIP1.planBase.iden, importacionFIP1.codigoPlanBase, importacionFIP1.codigoPlanVigente, importacionFIP1.codigoPlanEncargado)}"
+								styleClass="boton2" />
+							<h:outputText value="" />
+
+							<ice:panelConfirmation id="importarExisteYaPlanBase"
+								title="#{messages.importacionFip1_title}"
+								message="#{messages.importacionFip1_message}"
+								acceptLabel="#{messages.genericos_si}"
+								cancelLabel="#{messages.genericos_no_volver}"
+								styleClass="boton1" />
+
+						</ice:panelGroup>
+
+
+						<ice:panelGroup
+							rendered="#{importacionFIP1.existeBase and importacionFIP1.existeEncargado and importacionFIP1.existeVigente}">
+
+							<h2>Existen Planes Base, Vigente y Encargado en la base de
+								datos con los mismos codigo FIP que los que se pretenden
+								importar, por lo tanto no se realizará ninguna importación</h2>
+
+						</ice:panelGroup>
+
+						<ice:panelGroup
+							rendered="#{importacionFIP1.existeBase and importacionFIP1.existeVigente and !importacionFIP1.existeEncargado}">
+
+							<h2>Existe el Plan Base y el Plan Vigente en la base de
+								datos con el mismo codigo FIP que el que se pretende importar.
+								Solo se importará el Plan Encargado</h2>
+
+						</ice:panelGroup>
+
+						<ice:panelGroup
+							rendered="#{importacionFIP1.existeBase and !importacionFIP1.existeVigente and !importacionFIP1.existeEncargado}">
+
+							<h2>Existe el Plan Base en la base de datos con el mismo
+								codigo FIP que el que se pretende importar. Se importarán el
+								Plan Encargado y el Plan Vigente.</h2>
+
+						</ice:panelGroup>
+
+						<!-- SIN PLAN BASE -->
+						<ice:panelGroup rendered="#{!importacionFIP1.ambitoConPlan}">
+
+							<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+								Importar incluyendo el plan base
+							- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+							<!--  <h2>Importar plan base del FIP1</h2> -->
+
+							<ice:commandButton value="#{messages.importar}"
+								panelConfirmation="importarConPlanBaseFIP1Confirm"
+								action="#{importacionFIP1.importacionAsincrona(importacionFIP1.fipCargado.id, importacionFIP1.planBase.iden, importacionFIP1.codigoPlanBase, importacionFIP1.codigoPlanVigente, importacionFIP1.codigoPlanEncargado)}"
+								actionListener="#{importacionFIP1.redirigirDesdeImportacion}"
+								rendered="#{!importacionFIP1.importando and importacionFIP1.puedeImportar}"
+								alt="#{messages.importar}" styleClass="boton2"
+								title="#{messages.boton_title_importacionFip1_importarPB}" />
+
+							<h:outputText value="" />
+							<h:outputText value="#{messages.fip1_estado_importando}"
+								rendered="#{importacionFIP1.importando}" class="ok" />
+
+
+
+							<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+							
+								Importar con un plan base ya existente
+							
+							- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+							<br/>
+							<br/>					
+							<h2>Importar utilizando un plan base ya existente</h2> 
+							<ice:dataTable value="#{importacionFIP1.planesBases}" var="item"
+								id="listaDeUsuarios" enableContextMenu="false"
+								selectionMode="none">
+		
+								<ice:column style="text-align:center;height:35px;">
+									<f:facet name="header">
+										<h:outputText value="Codigo" />
+									</f:facet>
+									<h:outputText value="#{item.plan.codigo}" />
+								</ice:column>
+								<ice:column style="text-align:center;height:35px;">
+									<f:facet name="header">
+										<h:outputText value="Ambito" />
+									</f:facet>
+									<h:outputText value="#{item.plan.idambito}" />
+								</ice:column>
+								<ice:column style="text-align:center;height:35px;">
+									<f:facet name="header">
+										<h:outputText value="Nombre" />
+									</f:facet>
+									<h:outputText value="#{item.plan.nombre}" />
+								</ice:column>
+		
+								<ice:column style="text-align:center;">
+									<f:facet name="header">
+										<h:outputText value="#{messages.accion}" />
+									</f:facet>
+									<ice:commandButton value="#{messages.importar}" 
+										panelConfirmation="importarConPlanBaseExistenteConfirm"
+										actionListener="#{importacionFIP1.redirigirDesdeImportacion}"
+										action="#{importacionFIP1.importacionAsincrona(importacionFIP1.fipCargado.id, item.plan.iden)}"
+										rendered="#{!importacionFIP1.importando}"
+										styleClass="boton2" />
+									<h:outputText value="" />
+									<h:outputText value="#{messages.fip1_estado_importando}" rendered="#{importacionFIP1.importando}" class="ok" />
+	
+								</ice:column>
+	
+							</ice:dataTable>
+							-->
+
+						</ice:panelGroup>
+					</ice:panelGroup>
+
+					<ice:panelConfirmation id="importarConPlanBaseFIP1Confirm"
+						title="#{messages.importacionFip1_conPB_title}"
+						message="#{messages.importacionFip1_conPB_message}"
+						acceptLabel="#{messages.genericos_si}"
+						cancelLabel="#{messages.genericos_no_volver}" styleClass="boton1" />
+
+					<ice:panelConfirmation id="importarConPlanBaseExistenteConfirm"
+						title="#{messages.importacionFip1_conPBexistente_title}"
+						message="#{messages.importacionFip1_conPBexistente_message}"
+						acceptLabel="#{messages.genericos_si}"
+						cancelLabel="#{messages.genericos_no_volver}" styleClass="boton1" />
+
+				</div>
+
+			</ice:form>
+		</ice:panelGroup>
+	</ui:define>
+
+</ui:composition>

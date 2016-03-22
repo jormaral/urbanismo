@@ -1,0 +1,339 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component" 
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="regimenespecifico" styleClass="edit">
+     <ice:panelGroup  id="editregimenespecificoGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="editTextBoxId" value="#{regimenespecificoHome.managed ? 'Edit' : 'Add'} regimenespecifico"/>
+                  </td>
+              </tr>
+          </table>
+
+        <ice:panelGroup id="editPanelGroupId" styleClass="edit">		 
+
+
+            <s:decorate id="idenField" template="../layout/edit.xhtml">
+                <ui:define name="label">Iden</ui:define>
+                        <ice:inputText id="iden"
+			                partialSubmit="true"
+                       required="true"
+                       disabled="#{regimenespecificoHome.managed}"
+                                    value="#{regimenespecificoHome.instance.iden}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+
+            <s:decorate id="nombreField" template="../layout/edit.xhtml">
+                <ui:define name="label">Nombre</ui:define>
+                        <ice:inputText id="nombre" 
+			                partialSubmit="true"
+                                   size="100"
+                              maxlength="100"
+                                  value="#{regimenespecificoHome.instance.nombre}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="ordenField" template="../layout/edit.xhtml">
+                <ui:define name="label">Orden</ui:define>
+                        <ice:inputText id="orden"
+			                partialSubmit="true"
+                       required="true"
+                                    value="#{regimenespecificoHome.instance.orden}">
+                        </ice:inputText>
+            </s:decorate>
+
+
+
+
+
+            <s:decorate id="textoField" template="../layout/edit.xhtml">
+                <ui:define name="label">Texto</ui:define>
+                <ice:inputTextarea id="texto"
+                               cols="80"
+                               rows="3"
+                              value="#{regimenespecificoHome.instance.texto}"/>
+            </s:decorate>
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+          </ice:panelGroup>
+       </ice:panelGroup>
+                  
+       <div class="actionButtons">
+        
+            <ice:commandButton id="save" 
+                          value="Save" 
+                         action="#{regimenespecificoHome.persist}"
+                       disabled="#{!regimenespecificoHome.wired}"
+                       rendered="#{!regimenespecificoHome.managed}"/>  
+                          			  
+            <ice:commandButton id="update" 
+                          value="Save" 
+                         action="#{regimenespecificoHome.update}"
+                       rendered="#{regimenespecificoHome.managed}"/>
+                        			  
+            <ice:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{regimenespecificoHome.remove}"
+                      immediate="true"
+                       rendered="#{regimenespecificoHome.managed}"/>
+                    
+            <s:button id="cancelEdit" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/Regimenespecifico.xhtml"
+                rendered="#{regimenespecificoHome.managed}"/>
+                
+            <s:button id="cancelAddregimenespecificoHome" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/#{empty regimenespecificoFrom ? 'RegimenespecificoList' : regimenespecificoFrom}.xhtml"
+                rendered="#{!regimenespecificoHome.managed}"/>
+                
+        </div>
+        
+    </ice:form>
+
+ <ice:form id="form2regimenespecificoHome">  
+        <ice:panelTabSet id="editPanelTabregimenespecificoHomeId" styleClass="componentPanelTabSetLayout" style="margin-bottom:5px;margin-top:10px;">
+   
+ 	<ice:panelTab id="editTabentidaddeterminacionregimenId" label="Entidaddeterminacionregimen *" >
+		<div class="association" id="entidaddeterminacionregimenParent">
+    
+        	<h:outputText id="editentidaddeterminacionregimenTextId" value="There is no entidaddeterminacionregimen associated with this regimenespecifico." 
+                   rendered="#{regimenespecificoHome.instance.entidaddeterminacionregimen == null}"/>
+       	<ice:dataTable var="entidaddeterminacionregimen" 
+                   value="#{regimenespecificoHome.instance.entidaddeterminacionregimen}" 
+                rendered="#{regimenespecificoHome.instance.entidaddeterminacionregimen != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+		  columnClasses="allCols"
+                      id="editentidaddeterminacionregimenTableId">
+            <ice:column id="$editColumnidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{entidaddeterminacionregimen.iden}
+            </ice:column>
+            <ice:column id="$editColumncasoentidaddeterminacionByIdcasoId">
+	    	    <f:facet name="header">Casoentidaddeterminacion by idcaso iden</f:facet>
+		    	#{entidaddeterminacionregimen.casoentidaddeterminacionByIdcaso.iden}
+            </ice:column>
+            <ice:column id="$editColumncasoentidaddeterminacionByIdcasoaplicacionId">
+	    	    <f:facet name="header">Casoentidaddeterminacion by idcasoaplicacion iden</f:facet>
+		    	#{entidaddeterminacionregimen.casoentidaddeterminacionByIdcasoaplicacion.iden}
+            </ice:column>
+            <ice:column id="$editColumndeterminacionId">
+	    	    <f:facet name="header">Determinacion iden</f:facet>
+		    	#{entidaddeterminacionregimen.determinacion.iden}
+            </ice:column>
+            <ice:column id="$editColumnopciondeterminacionId">
+	    	    <f:facet name="header">Opciondeterminacion iden</f:facet>
+		    	#{entidaddeterminacionregimen.opciondeterminacion.iden}
+            </ice:column>
+            <ice:column id="$editColumnsuperposicionId">
+                <f:facet name="header">Superposicion</f:facet>
+                #{entidaddeterminacionregimen.superposicion}
+            </ice:column>
+            <ice:column id="$editColumnvalorId">
+                <f:facet name="header">Valor</f:facet>
+                #{entidaddeterminacionregimen.valor}
+            </ice:column>
+            <ice:column id="editColumnentidaddeterminacionregimenLinkId">
+                <f:facet name="header">Action</f:facet>
+                <s:link view="/seam/Entidaddeterminacionregimen.xhtml" 
+                         id="viewentidaddeterminacionregimen" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="entidaddeterminacionregimenIden" 
+                           value="#{entidaddeterminacionregimen.iden}"/>
+                </s:link>
+            </ice:column>
+      </ice:dataTable>
+        <div class="actionButtons">
+            <s:button value="Select entidaddeterminacionregimen"
+	              id="selectParent"
+                      view="/seam/EntidaddeterminacionregimenList.xhtml">
+                <f:param name="from" value="RegimenespecificoEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </ice:panelTab>
+   
+	<ice:panelTab id="editTabregimenespecificoId" label="Regimenespecifico">
+		<div class="association" id="regimenespecificoParent">
+    
+        	<h:outputText id="editregimenespecificoTextId" value="There is no regimenespecifico associated with this regimenespecifico." 
+                   rendered="#{regimenespecificoHome.instance.regimenespecifico == null}"/>
+       	<ice:dataTable var="regimenespecifico" 
+                   value="#{regimenespecificoHome.instance.regimenespecifico}" 
+                rendered="#{regimenespecificoHome.instance.regimenespecifico != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+		  columnClasses="allCols"
+                      id="editregimenespecificoTableId">
+            <ice:column id="$editColumnidenId">
+                <f:facet name="header">Iden</f:facet>
+                #{regimenespecifico.iden}
+            </ice:column>
+            <ice:column id="$editColumnentidaddeterminacionregimenId">
+	    	    <f:facet name="header">Entidaddeterminacionregimen iden</f:facet>
+		    	#{regimenespecifico.entidaddeterminacionregimen.iden}
+            </ice:column>
+            <ice:column id="$editColumnnombreId">
+                <f:facet name="header">Nombre</f:facet>
+                #{regimenespecifico.nombre}
+            </ice:column>
+            <ice:column id="$editColumnordenId">
+                <f:facet name="header">Orden</f:facet>
+                #{regimenespecifico.orden}
+            </ice:column>
+            <ice:column id="$editColumnregimenespecificoId">
+	    	    <f:facet name="header">Regimenespecifico iden</f:facet>
+		    	#{regimenespecifico.regimenespecifico.iden}
+            </ice:column>
+            <ice:column id="$editColumntextoId">
+                <f:facet name="header">Texto</f:facet>
+                #{regimenespecifico.texto}
+            </ice:column>
+            <ice:column id="editColumnregimenespecificoLinkId">
+                <f:facet name="header">Action</f:facet>
+                <s:link view="/seam/Regimenespecifico.xhtml" 
+                         id="viewregimenespecifico" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="regimenespecificoIden" 
+                           value="#{regimenespecifico.iden}"/>
+                </s:link>
+            </ice:column>
+      </ice:dataTable>
+    </div>
+    </ice:panelTab>
+ 	<ice:panelTab id="editPanelTabregimenespecificosId" label="Regimenespecificos">
+        <div class="association" id="regimenespecificosChildren">
+        
+            <h:outputText value="There are no regimenespecificos associated with this regimenespecifico." 
+	                     id="editregimenespecificosTextId"
+                       rendered="#{empty regimenespecificoHome.regimenespecificos}"/>
+           <ice:dataTable value="#{regimenespecificoHome.regimenespecificos}" 
+                           var="regimenespecifico" 
+                      rendered="#{not empty regimenespecificoHome.regimenespecificos}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+			  columnClasses="allCols"
+                            id="editregimenespecificosTable">
+                <ice:column id="editidenId">
+                    <f:facet name="header">Iden</f:facet>
+                    <h:outputText id="editidenTextId" value="#{regimenespecifico.iden}"/>
+                </ice:column>
+                <ice:column id="editnombreId">
+                    <f:facet name="header">Nombre</f:facet>
+                    <h:outputText id="editnombreTextId" value="#{regimenespecifico.nombre}"/>
+                </ice:column>
+                <ice:column id="editordenId">
+                    <f:facet name="header">Orden</f:facet>
+                    <h:outputText id="editordenTextId" value="#{regimenespecifico.orden}"/>
+                </ice:column>
+                <ice:column id="edittextoId">
+                    <f:facet name="header">Texto</f:facet>
+                    <h:outputText id="edittextoTextId" value="#{regimenespecifico.texto}"/>
+                </ice:column>
+                <ice:column id="editregimenespecificoId">
+                    <f:facet name="header">Action</f:facet>
+                    <s:link view="/seam/Regimenespecifico.xhtml" 
+                              id="selectregimenespecifico" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="regimenespecificoIden" 
+                                value="#{regimenespecifico.iden}"/>
+                        <f:param name="regimenespecificoFrom" value="Regimenespecifico"/>
+                    </s:link>
+                </ice:column>
+           </ice:dataTable>
+      </div>
+        <f:subview rendered="#{regimenespecificoHome.managed}" id="regimenespecificosId">
+        <div class="actionButtons">
+            <s:button id="addregimenespecificoId" 
+                   value="Add regimenespecifico"
+                    view="/seam/RegimenespecificoEdit.xhtml"
+             propagation="none">
+                 <f:param name="regimenespecificoIden" 
+                         value="#{regimenespecificoHome.instance.iden}"/>
+                 <f:param name="regimenespecificoFrom" value="Regimenespecifico"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </ice:panelTab>
+ 	<ice:panelTab id="editPanelTabregimenespecificos_1Id" label="Regimenespecificos_1">
+        <div class="association" id="regimenespecificos_1Children">
+        
+            <h:outputText value="There are no regimenespecificos_1 associated with this regimenespecifico." 
+	                     id="editregimenespecificos_1TextId"
+                       rendered="#{empty regimenespecificoHome.regimenespecificos_1}"/>
+           <ice:dataTable value="#{regimenespecificoHome.regimenespecificos_1}" 
+                           var="regimenespecifico" 
+                      rendered="#{not empty regimenespecificoHome.regimenespecificos_1}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+			  columnClasses="allCols"
+                            id="editregimenespecificos_1Table">
+                <ice:column id="editidenId">
+                    <f:facet name="header">Iden</f:facet>
+                    <h:outputText id="editidenTextId" value="#{regimenespecifico.iden}"/>
+                </ice:column>
+                <ice:column id="editnombreId">
+                    <f:facet name="header">Nombre</f:facet>
+                    <h:outputText id="editnombreTextId" value="#{regimenespecifico.nombre}"/>
+                </ice:column>
+                <ice:column id="editordenId">
+                    <f:facet name="header">Orden</f:facet>
+                    <h:outputText id="editordenTextId" value="#{regimenespecifico.orden}"/>
+                </ice:column>
+                <ice:column id="edittextoId">
+                    <f:facet name="header">Texto</f:facet>
+                    <h:outputText id="edittextoTextId" value="#{regimenespecifico.texto}"/>
+                </ice:column>
+                <ice:column id="editregimenespecificoId">
+                    <f:facet name="header">Action</f:facet>
+                    <s:link view="/seam/Regimenespecifico.xhtml" 
+                              id="selectregimenespecifico" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="regimenespecificoIden" 
+                                value="#{regimenespecifico.iden}"/>
+                        <f:param name="regimenespecificoFrom" value="Regimenespecifico"/>
+                    </s:link>
+                </ice:column>
+           </ice:dataTable>
+      </div>
+        <f:subview rendered="#{regimenespecificoHome.managed}" id="regimenespecificos_1Id">
+        <div class="actionButtons">
+            <s:button id="addregimenespecificoId" 
+                   value="Add regimenespecifico"
+                    view="/seam/RegimenespecificoEdit.xhtml"
+             propagation="none">
+                 <f:param name="regimenespecificoIden" 
+                         value="#{regimenespecificoHome.instance.iden}"/>
+                 <f:param name="regimenespecificoFrom" value="Regimenespecifico"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </ice:panelTab>
+</ice:panelTabSet>
+</ice:form>
+</ui:define>
+
+</ui:composition>
+
+
+

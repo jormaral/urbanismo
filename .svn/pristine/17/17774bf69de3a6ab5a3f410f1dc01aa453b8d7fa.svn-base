@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns="http://jboss.com/products/seam/pages"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd">
+
+      
+
+
+   <param name="firstResult" value="#{determinacionList.firstResult}"/>
+   <param name="sort" value="#{determinacionList.orderColumn}"/>
+   <param name="dir" value="#{determinacionList.orderDirection}"/>
+   <param name="logic" value="#{determinacionList.restrictionLogicOperator}"/>
+   <param name="from"/>
+   <param name="apartado" value="#{determinacionList.determinacion.apartado}"/>
+   <param name="codigo" value="#{determinacionList.determinacion.codigo}"/>
+   <param name="etiqueta" value="#{determinacionList.determinacion.etiqueta}"/>
+   <param name="nombre" value="#{determinacionList.determinacion.nombre}"/>
+   <param name="texto" value="#{determinacionList.determinacion.texto}"/>
+</page>

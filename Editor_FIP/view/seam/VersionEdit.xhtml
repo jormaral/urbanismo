@@ -1,0 +1,105 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component" 
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="version" styleClass="edit">
+     <ice:panelGroup  id="editversionGroupId" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+			    <ice:outputText id="editTextBoxId" value="#{versionHome.managed ? 'Edit' : 'Add'} version"/>
+                  </td>
+              </tr>
+          </table>
+
+        <ice:panelGroup id="editPanelGroupId" styleClass="edit">		 
+
+
+            <s:decorate id="comentarioField" template="../layout/edit.xhtml">
+                <ui:define name="label">Comentario</ui:define>
+                <ice:inputTextarea id="comentario"
+                               cols="80"
+                               rows="3"
+                           disabled="#{versionHome.managed}"
+                           required="true"
+                              value="#{versionHome.instance.id.comentario}"/>
+               </s:decorate>
+
+            <s:decorate id="idenField" template="../layout/edit.xhtml">
+                <ui:define name="label">Iden</ui:define>
+                <ice:inputText id="iden"
+                       required="true"
+                       disabled="#{versionHome.managed}"
+                         partialSubmit="true"
+                         value="#{versionHome.instance.id.iden}">
+                 </ice:inputText>
+               </s:decorate>
+
+            <s:decorate id="versionField" template="../layout/edit.xhtml">
+                <ui:define name="label">Version</ui:define>
+                <ice:inputText id="version" 
+                       disabled="#{versionHome.managed}"
+                      required="true"
+                          size="20"
+                     maxlength="20"
+                         partialSubmit="true"
+                         value="#{versionHome.instance.id.version}">
+                 </ice:inputText>
+               </s:decorate>
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+          </ice:panelGroup>
+       </ice:panelGroup>
+                  
+       <div class="actionButtons">
+        
+            <ice:commandButton id="save" 
+                          value="Save" 
+                         action="#{versionHome.persist}"
+                       disabled="#{!versionHome.wired}"
+                       rendered="#{!versionHome.managed}"/>  
+                          			  
+            <ice:commandButton id="update" 
+                          value="Save" 
+                         action="#{versionHome.update}"
+                       rendered="#{versionHome.managed}"/>
+                        			  
+            <ice:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{versionHome.remove}"
+                      immediate="true"
+                       rendered="#{versionHome.managed}"/>
+                    
+            <s:button id="cancelEdit" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/Version.xhtml"
+                rendered="#{versionHome.managed}"/>
+                
+            <s:button id="cancelAddversionHome" styleClass="iceCmdBtn"
+                   value="Cancel"
+             propagation="end"
+                    view="/seam/#{empty versionFrom ? 'VersionList' : versionFrom}.xhtml"
+                rendered="#{!versionHome.managed}"/>
+                
+        </div>
+        
+    </ice:form>
+
+</ui:define>
+
+</ui:composition>
+
+
+

@@ -1,0 +1,127 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+		
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}" view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			
+				
+				
+			</s:link>
+			
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link style="color:blue;" value="#{messages.menu_administracion}" view="/administracion/AdministracionNavegacion.xhtml" id="AdministracionRutaMenu"
+				propagation="none">
+				
+			</s:link>
+			
+			<ice:outputLabel styleClass="simboloMayor"  value=" > "/>
+			
+			<s:link style="color:blue;" value="#{messages.administracion_mapa}" view="/administracion/administracionmapa/AdministracionMapa.xhtml" id="AdministracionMapaRutaMenu"
+				propagation="none">
+				
+				</s:link>
+				
+			
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+	
+	<ui:define name="body">
+	
+	<ice:form id="listadoEntidadesMapa">
+		<br/>
+		
+		<ice:panelGroup>
+
+			<ice:dataTable id="tablalistadoEntidadMapa"
+				value="#{listaEntidadMapa.entidadMapaList}"
+				var="item"				
+				
+				rendered="#{listaEntidadMapa.entidadMapaList}">
+				
+				<ice:column >
+
+
+					<f:facet name="header">
+
+							<ice:outputText value="#{messages.admmapa_id}">
+							</ice:outputText>
+							
+					</f:facet>
+					
+					<ice:outputText value=" #{item.identidad}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+
+						<ice:outputText value="#{messages.admmapa_nombre}">
+						</ice:outputText>
+
+					</f:facet>
+					<ice:outputText value=" #{item.nombre}" />
+				</ice:column>
+
+				<ice:column>
+					<f:facet name="header">
+
+						<ice:outputText value="#{messages.admmapa_clave}">
+						</ice:outputText>
+
+					</f:facet>
+					<ice:outputText value=" #{item.clave}" />
+				</ice:column>
+
+
+				<ice:column>
+
+					
+					<f:facet name="header">
+
+						<ice:outputText value="#{messages.admmapa_color}">
+						</ice:outputText>
+
+					</f:facet>
+					<ice:outputText value=" #{item.color}" />
+
+				</ice:column>
+			
+				<ice:column>
+				<f:facet name="header">
+
+					<ice:outputText escape="false" value="Accion" />
+
+
+				</f:facet>
+						
+			
+					<ice:commandLink styleClass="hiperenlace enlaceAzul" title="#{messages.admmapa_editar_color}" value="#{messages.admmapa_editar_color}"
+						actionListener="#{listaEntidadMapa.llamarPopUpEditarColor}">
+						<f:param name="idEntidadMapa" value="#{item.identidad}"></f:param>						
+					</ice:commandLink>
+				
+
+				</ice:column>
+
+			</ice:dataTable>
+		</ice:panelGroup>
+	</ice:form>
+	
+	</ui:define>
+
+</ui:composition>

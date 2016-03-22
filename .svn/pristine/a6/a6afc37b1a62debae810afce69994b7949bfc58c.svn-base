@@ -1,0 +1,156 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"  
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="documentoentidadSearch" styleClass="edit">
+      <ice:panelGroup  id="searchGroup" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+                    <ice:outputText id="listDocumentoentidadId" value="Documentoentidad search filter"/>
+                 </td>
+              </tr>
+         </table>	
+         <ice:panelGroup id="listPanelGroupDocumentoentidadId" styleClass="edit">
+		
+            <s:decorate template="../layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <ice:selectOneRadio id="logic" value="#{documentoentidadList.restrictionLogicOperator}" partialSubmit="true">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </ice:selectOneRadio>
+            </s:decorate>
+          
+   
+	  </ice:panelGroup>
+  
+        
+        <div class="actionButtons">
+            <ice:commandButton id="search" value="Search" action="/DocumentoentidadList.xhtml"/>
+        </div>
+      </ice:panelGroup> 
+    </ice:form>
+    
+    <ice:panelGroup styleClass="formBorderHighlight">
+
+    <h3>documentoentidad  search results</h3>
+
+    <div class="searchResults" id="listdocumentoentidadResults">
+    <ice:outputText value="The documentoentidad search returned no results." 
+               rendered="#{empty documentoentidadList.resultList}"/>
+               
+    <ice:dataTable id="documentoentidadList" 
+                  var="documentoentidad"
+                value="#{documentoentidadList.resultList}" 
+            resizable="true"
+	columnClasses="allCols"
+             rendered="#{not empty documentoentidadList.resultList}">
+        <ice:column id="listidenId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{documentoentidadList}"/>
+                    <ui:param name="propertyLabel" value="Iden"/>
+                    <ui:param name="propertyPath" value="documentoentidad.iden"/>
+                </ui:include>
+            </f:facet>
+            #{documentoentidad.iden}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listColumndocumentoId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{documentoentidadList}"/>
+                    <ui:param name="propertyLabel" value="Documento iden"/>
+                    <ui:param name="propertyPath" value="documentoentidad.documento.iden"/>
+                </ui:include>
+            </f:facet>
+            #{documentoentidad.documento.iden}
+        </ice:column>
+        <ice:column id="listColumnentidadId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{documentoentidadList}"/>
+                    <ui:param name="propertyLabel" value="Entidad iden"/>
+                    <ui:param name="propertyPath" value="documentoentidad.entidad.iden"/>
+                </ui:include>
+            </f:facet>
+            #{documentoentidad.entidad.iden}
+        </ice:column>
+        <ice:column id="listColumnDocumentoentidadId">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/seam/#{empty from ? 'Documentoentidad' : from}.xhtml" 
+                   value="#{empty from ? 'View' : 'Select'}" 
+                      id="documentoentidad">
+                <f:param name="documentoentidadIden" 
+                        value="#{documentoentidad.iden}"/>
+            </s:link>
+			#{' '}
+            <s:link view="/seam/DocumentoentidadEdit.xhtml"
+                   value="Edit" 
+                      id="documentoentidadEdit"
+                      rendered="#{empty from}">
+                <f:param name="documentoentidadIden" 
+                        value="#{documentoentidad.iden}"/>
+            </s:link>
+        </ice:column>
+    </ice:dataTable>
+
+    </div>
+</ice:panelGroup>
+
+    <div class="tableControl">
+      
+        <s:link view="/seam/DocumentoentidadList.xhtml" 
+            rendered="#{documentoentidadList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPagedocumentoentidadListId">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+        
+        <s:link view="/seam/DocumentoentidadList.xhtml" 
+            rendered="#{documentoentidadList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPagedocumentoentidadListId">
+            <f:param name="firstResult" 
+                    value="#{documentoentidadList.previousFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/DocumentoentidadList.xhtml" 
+            rendered="#{documentoentidadList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPagedocumentoentidadListId">
+            <f:param name="firstResult" 
+                    value="#{documentoentidadList.nextFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/DocumentoentidadList.xhtml" 
+            rendered="#{documentoentidadList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPagedocumentoentidadListId">
+            <f:param name="firstResult" 
+                    value="#{documentoentidadList.lastFirstResult}"/>
+        </s:link>
+        
+    </div>
+    
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/seam/DocumentoentidadEdit.xhtml"
+                    id="create" 
+                 value="Create documentoentidad">
+            <f:param name="documentoentidadIden"/>
+        </s:button>
+    </s:div>
+    
+</ui:define>
+
+</ui:composition>
+

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="UrbanismoEnRedV2">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="Urbanismoenred-serviciosV2.jar" deploy-path="/" handle="module:/resource/Servicios/Servicios">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Urbanismoenred-ConsolaV2.war" deploy-path="/" handle="module:/resource/Consola/Consola">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ant-1.8.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/ant/ant/1.8.2/ant-1.8.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ant-launcher-1.8.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/ant/ant-launcher/1.8.2/ant-launcher-1.8.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jts-1.12.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/com/vividsolutions/jts/1.12/jts-1.12.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-io-1.3.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/commons-io/commons-io/1.3.2/commons-io-1.3.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-lang-2.6.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/commons-lang/commons-lang/2.6/commons-lang-2.6.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="log4j-1.2.16.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/log4j/log4j/1.2.16/log4j-1.2.16.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="xmlsec-1.3.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/xml-security/xmlsec/1.3.0/xmlsec-1.3.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="itext-2.1.7.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/com/lowagie/itext/2.1.7/itext-2.1.7.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bcmail-jdk14-138.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/bouncycastle/bcmail-jdk14/138/bcmail-jdk14-138.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bcprov-jdk14-138.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/bouncycastle/bcprov-jdk14/138/bcprov-jdk14-138.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bctsp-jdk14-1.38.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/bouncycastle/bctsp-jdk14/1.38/bctsp-jdk14-1.38.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bcprov-jdk14-1.38.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/bouncycastle/bcprov-jdk14/1.38/bcprov-jdk14-1.38.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bcmail-jdk14-1.38.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/bouncycastle/bcmail-jdk14/1.38/bcmail-jdk14-1.38.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="itextpdf-5.1.3.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/com/itextpdf/itextpdf/5.1.3/itextpdf-5.1.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javaee-api-6.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/javax/javaee-api/6.0/javaee-api-6.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="component.inclusion.patterns" value="META-INF/**,**/*.jar,**/*.war"/>
+    </wb-module>
+</project-modules>

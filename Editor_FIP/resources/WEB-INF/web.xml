@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+    <!-- Seam (using Icefaces) generated project-->
+
+    <!-- listeners required for this application -->
+    <listener>
+        <listener-class>org.jboss.seam.servlet.SeamListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>com.icesoft.faces.util.event.servlet.ContextEventRepeater</listener-class>
+    </listener>
+
+    <!-- filters -->
+    <filter>
+        <filter-name>Seam Filter</filter-name>
+        <filter-class>org.jboss.seam.servlet.SeamFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>Seam Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <context-param>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>server</param-value>
+    </context-param>
+
+    <!-- Facelets development mode (disable in production) -->
+    <context-param>
+        <param-name>facelets.DEVELOPMENT</param-name>
+        <param-value>@debug@</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+        <param-value>.xhtml</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>com.icesoft.faces.actionURLSuffix</param-name>
+        <param-value>.seam</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>com.icesoft.faces.synchronousUpdate</param-name>
+        <param-value>false</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>com.icesoft.faces.doJSFStateManagement</param-name>
+	<param-value>true</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>org.icesoft.examples.serverClock</param-name>
+        <param-value>false</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>com.icesoft.faces.standardRequestScope</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    
+    <context-param>
+            <param-name>com.icesoft.faces.uploadDirectory</param-name>
+            <param-value>../../../../../../var/tmp</param-value>
+    </context-param>
+    
+    <context-param>
+        <param-name>com.icesoft.faces.uploadMaxFileSize</param-name>
+        <param-value>104857600</param-value>
+    </context-param>
+
+    <!-- servlets -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Seam Resource Servlet</servlet-name>
+        <servlet-class>org.jboss.seam.servlet.ResourceServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Persistent Faces Servlet</servlet-name>
+        <servlet-class>com.icesoft.faces.webapp.xmlhttp.PersistentFacesServlet</servlet-class>
+        <load-on-startup> 1 </load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>Blocking Servlet</servlet-name>
+        <servlet-class>com.icesoft.faces.webapp.xmlhttp.BlockingServlet</servlet-class>
+        <load-on-startup> 1 </load-on-startup>
+    </servlet>
+    
+    <!-- file upload Servlet -->
+    <servlet>
+         <servlet-name>uploadServlet</servlet-name>
+         <servlet-class>com.icesoft.faces.component.inputfile.FileUploadServlet</servlet-class>
+         <load-on-startup> 1 </load-on-startup>
+    </servlet>
+    <servlet-mapping>
+         <servlet-name>uploadServlet</servlet-name>
+         <url-pattern>/uploadHtml</url-pattern>
+    </servlet-mapping>
+
+<servlet>
+        <servlet-name>ProxyURL</servlet-name>
+        <servlet-class>com.mitc.redes.editorfip.utilidades.ProxyURL</servlet-class>
+    </servlet>
+<servlet-mapping>
+        <servlet-name>ProxyURL</servlet-name>
+        <url-pattern>/ProxyURL</url-pattern>
+    </servlet-mapping>
+
+
+
+
+    <!-- servlet mappings -->
+    
+    <servlet-mapping> 
+		<servlet-name>Faces Servlet</servlet-name> 
+		<url-pattern>/icefaces/*</url-pattern> 
+	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Persistent Faces Servlet</servlet-name>
+        <url-pattern>*.seam</url-pattern>
+    </servlet-mapping>
+
+     <servlet-mapping>
+        <servlet-name>Persistent Faces Servlet</servlet-name>
+        <url-pattern>/xmlhttp/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Blocking Servlet Mapping -->
+    <servlet-mapping>
+        <servlet-name>Blocking Servlet</servlet-name>
+        <url-pattern>/block/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Seam Resource Servlet</servlet-name>
+        <url-pattern>/seam/resource/*</url-pattern>
+    </servlet-mapping>
+    
+    <session-config>
+  		<session-timeout>300</session-timeout>
+	</session-config>
+
+    <security-constraint>
+       <display-name>Restrict raw XHTML Documents</display-name>
+       <web-resource-collection>
+          <web-resource-name>XHTML</web-resource-name>
+          <url-pattern>*.xhtml</url-pattern>
+       </web-resource-collection>
+       <auth-constraint/>
+    </security-constraint>
+
+   <!-- uncomment <ejb-local-ref> entries when deploying to GlassFish and (optionally) JBoss AS 5 -->
+   <!--
+   <ejb-local-ref>
+      <ejb-ref-name>fipeditor/AuthenticatorBean/local</ejb-ref-name>
+      <ejb-ref-type>Session</ejb-ref-type>
+      <local-home/>
+      <local>com.mitc.redes.editorfip.servicios.Authenticator</local>
+   </ejb-local-ref>
+   -->
+
+   <!-- Add entries for each EJB session bean which is also a Seam component (not required on JBoss AS) -->
+
+   <persistence-unit-ref>
+      <persistence-unit-ref-name>fipeditor/pu</persistence-unit-ref-name>
+      <persistence-unit-name>../fipeditor.jar#fipeditor</persistence-unit-name>
+      <!-- The relative reference doesn't work on GlassFish. Instead, set the <persistence-unit-name> to "fipeditor",
+           package persistence.xml in the WAR, and add a <jar-file> element in persistence.xml with value "../../fipeditor.jar".
+      <persistence-unit-name>fipeditor</persistence-unit-name>
+      -->
+   </persistence-unit-ref>
+
+</web-app>

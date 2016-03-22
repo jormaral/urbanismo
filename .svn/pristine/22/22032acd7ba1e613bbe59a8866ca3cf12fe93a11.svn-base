@@ -1,0 +1,53 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaArbolRegulacionesEspecificas"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+
+
+	<!-- TRee values -->
+	<ice:panelGroup styleClass="arbol" >
+	
+		<ice:outputLabel rendered="#{gestionDeterminaciones.getIdDeterminacion()==0}" value="#{messages.no_hay_datos}" styleClass="dataResult"/>
+			
+		<ice:tree id="tree" value="#{gestionArbolRegulacionesEspecificas.model}" rendered="#{gestionDeterminaciones.getIdDeterminacion()!=0}"
+			var="node" binding="#{gestionArbolRegulacionesEspecificas.treeComponent}"
+			imageDir="/fipeditor/img/editorfip/es/arbolesRosa/"
+			hideRootNode="false" hideNavigation="false"
+			actionListener="#{gestionArbolRegulacionesEspecificas.menuEvent}">
+			<ice:treeNode>
+
+
+				<f:facet name="icon">
+					<ice:panelGroup style="display:inline;">
+						<h:graphicImage
+							value="/img/editorfip/es/arbolesRosa/#{node.userObject.icon}" />
+
+					</ice:panelGroup>
+				</f:facet>
+				<f:facet name="content">
+					<ice:panelGroup style="display:inline;">
+						<ice:panelGroup
+							styleClass="selectedNode#{node.userObject eq gestionArbolRegulacionesEspecificas.selectedUserObject}"
+							style="display:inline;">
+
+							<ice:commandLink
+								actionListener="#{gestionArbolRegulacionesEspecificas.nodeSelected}">
+								<f:param name="nodoId"
+									value="#{node.userObject.datosIdTextoArbolGenerico.idBaseDatos}" />								
+								<ice:outputText id="TreeNode" value="#{node.userObject.text}" />
+							</ice:commandLink>
+						</ice:panelGroup>
+					</ice:panelGroup>
+				</f:facet>
+
+			</ice:treeNode>
+		</ice:tree>
+
+
+	</ice:panelGroup>
+
+
+</f:view>

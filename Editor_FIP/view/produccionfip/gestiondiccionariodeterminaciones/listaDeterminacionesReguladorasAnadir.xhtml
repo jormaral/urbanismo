@@ -1,0 +1,141 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="body">
+
+
+
+		<ice:panelPopup id="panelDetRegull" autoCentre="true" modal="true"
+			styleClass="panelPopup"
+			visible="#{gestionDeterminaciones.mostrarPanelDetReg}">
+
+
+			<f:facet name="header">
+				<ice:panelGroup>
+					<ice:outputText value="#{messages.determinacion_reguladoras}" />
+					<s:button id="modalPnlCloseBtnDetReg" view="#{pageRedirect}"
+						propagation="none"
+						image="/fipeditor/img/editorfip/es/comun/cerrar_popup.png"
+						action="#{gestionDeterminaciones.setMostrarPanelDetReg(false)}"
+						styleClass="popupHeaderImage"
+						title="#{messages.botongenerico_cerrar}"
+						alt="#{messages.botongenerico_cerrar}" />
+				</ice:panelGroup>
+			</f:facet>
+
+			<f:facet name="body">
+
+				<ice:panelGrid columns="1">
+
+					<script type="text/javascript">
+				function pintarFilaSeleccionada(checkbox) {
+					
+					var seleccionada = checkbox.checked;
+					var fila = checkbox.parentNode.parentNode;
+					if(seleccionada) {
+						fila.style.backgroundColor='#FFFF99';
+					} else {
+						fila.style.backgroundColor='#FFFFFF';
+					}
+				}	
+			</script>
+					<ice:form>
+						<ice:panelGroup>
+
+							<ice:selectOneListbox size="1" id="selectTipoTramiteTrabajoDR"
+								value="#{listaDeterminacionesReguladorasTramite.idTipoTramiteTrabajoDR}"
+								partialSubmit="true">
+								<f:selectItems
+									value="#{variablesSesionUsuario.tipoPlanesSeleccion()}" />
+							</ice:selectOneListbox>
+
+						</ice:panelGroup>
+					</ice:form>
+					<ice:form>
+						<ice:panelGroup>
+
+							<ice:dataTable id="listaDRTramite"
+								value="#{listaDeterminacionesReguladorasTramite.determinacionesReguladoras}"
+								sortColumn="#{listaDeterminacionesReguladorasTramite.sortColumnName}"
+								sortAscending="#{listaDeterminacionesReguladorasTramite.ascending}"
+								var="item" scrollable="true" scrollHeight="450px"
+								columnWidths="20px,50px,300px"
+								rendered="#{not empty listaDeterminacionesReguladorasTramite.determinacionesReguladoras}">
+
+								<ice:column>
+									<ice:selectBooleanCheckbox value="#{item.seleccionada}"
+										partialSubmit="true"
+										onchange="javascript: pintarFilaSeleccionada(this)"
+										id="checkbox" />
+								</ice:column>
+
+
+
+								<ice:column>
+									<f:facet name="header">
+										<ice:commandSortHeader
+											columnName="#{listaDeterminacionesReguladorasTramite.ordenColumnName}"
+											arrow="true">
+											<ice:outputText value="#{messages.orden}" />
+										</ice:commandSortHeader>
+
+									</f:facet>
+									<ice:outputText value="#{item.ordenArbol}" />
+								</ice:column>
+
+								<ice:column>
+									<f:facet name="header">
+										<ice:commandSortHeader
+											columnName="#{listaDeterminacionesReguladorasTramite.nombreColumnName}"
+											arrow="true">
+											<ice:outputText value="#{messages.nombre_determinacion}" />
+										</ice:commandSortHeader>
+									</f:facet>
+									<ice:outputText value="#{item.nombreDeterminacion}" />
+								</ice:column>
+
+
+
+
+
+							</ice:dataTable>
+						</ice:panelGroup>
+
+
+						<ice:panelGroup>
+
+							<ice:commandButton
+								rendered="#{not empty listaDeterminacionesReguladorasTramite.determinacionesReguladoras}"
+								styleClass="boton1" value="#{messages.anadir}"
+								alt="#{messages.anadir}"
+								title="#{messages.boton_title_determinacionesReguladoras_añadir}"
+								action="#{listaDeterminacionesReguladoras.anadirDeterminacionesReguladoras(listaDeterminacionesReguladorasTramite.obtenerDetRegSeleccionadas(), pageRedirect)}" />
+
+							<s:button value="#{messages.botongenerico_cancelar}"
+								view="/produccionfip/gestiondiccionariodeterminaciones/VerDeterminacionPlanEncargado.xhtml"
+								propagation="none" alt="#{messages.botongenerico_cancelar}"
+								title="#{messages.botongenerico_cancelar}"
+								action="#{gestionDeterminaciones.setMostrarPanelDetReg(false)}"
+								styleClass="boton1" />
+
+						</ice:panelGroup>
+					</ice:form>
+				</ice:panelGrid>
+
+			</f:facet>
+
+		</ice:panelPopup>
+
+
+
+
+	</ui:define>
+
+</ui:composition>

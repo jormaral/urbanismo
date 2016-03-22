@@ -1,0 +1,346 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" id="vistaEntidadDetalle"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+	<ice:form id="introEntidades">
+
+		
+
+		<ice:panelGroup
+			styleClass="firstChildTitle backBeanChangeContainer detalleDeterminacion"
+			effect="#{gestionArbolEntidades.valueChangeEffect}">
+
+			<ice:panelGroup>
+
+				<ice:panelGroup styleClass="rutaDeterminacion">
+					<ice:panelSeries id="icePnlSrs"
+						value="#{gestionArbolEntidades.selectedTreePath}" var="treePath"
+						widh="100%">
+						<ice:outputLabel styleClass="simboloMayorBold"  value=" > "/>
+						<ice:outputText id="treePath" value="#{treePath}" />
+					</ice:panelSeries>
+				</ice:panelGroup>
+
+
+
+				<ice:panelGroup>
+
+					<ice:inputText id="nodoNombre" styleClass="nameFont"
+						style="border: 1px solid #7F9DB9;width: 98%;"
+						readonly="true"
+						value="#{gestionEntidades.entidad.nombre}" />
+				</ice:panelGroup>
+
+
+			</ice:panelGroup>
+
+			<ice:panelGrid columns="2"
+				columnClasses="testColDetLabel,testColDetermDetalles" width="100%">
+
+				<ice:panelGroup style="margin: 0; padding: 0; ">
+					<ice:panelGrid cellpadding="0" cellspacing="3" columns="2"
+						columnClasses="colLabel,colInput">
+
+						<ice:panelGroup styleClass="labels" panelTooltip="tooltip_ent_clave">
+							<ice:outputLabel value="#{messages.entidad_clave}" />
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+						</ice:panelGroup>
+						<ice:inputText id="entidadKey" style="white-space:pre;width:95%;"
+							readonly="true"
+							styleClass="input-Detalle"
+							value="#{gestionEntidades.entidad.clave}" />
+
+
+						<ice:panelGroup styleClass="labels" panelTooltip="tooltip_ent_etiqueta">
+							<ice:outputLabel value="#{messages.entidad_etiqueta}" styleClass="iceOutLblDetDetalle"/>
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+						</ice:panelGroup>
+						<ice:inputText id="entidadTag" style="white-space:pre;width:95%;"
+							readonly="true"
+							styleClass="input-Detalle"
+							value="#{gestionEntidades.entidad.etiqueta}" />
+					</ice:panelGrid>
+
+					<ice:panelGrid columns="2" columnClasses="colLabelDet, colBotonDet"
+						rendered="#{gestionEntidades.idEntidad != 0}"
+						styleClass="panelGridDeter">
+						<ice:panelGroup styleClass="labels" panelTooltip="tooltip_ent_base">
+							<ice:outputLabel value="#{messages.entidad_base}" />
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+						</ice:panelGroup>
+					</ice:panelGrid>
+					<ice:panelGroup styleClass="exampleBoxLabelAdaptadoBoton"
+						rendered="#{gestionEntidades.idEntidad != 0}">
+						<ice:outputText id="entBaseEnt" style="white-space: pre-wrap;"
+							value="#{gestionEntidades.entidad.getEntidadByIdentidadbase().nombre} " />
+					</ice:panelGroup>
+
+					<br />
+					<ice:panelGrid columns="2" columnClasses="colLabelDet, colBotonDet"
+						
+						styleClass="panelGridDeter">
+						<ice:panelGroup styleClass="labels" panelTooltip="tooltip_ent_padre">
+							<ice:outputLabel value="#{messages.entidad_padre}" />
+							<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+						</ice:panelGroup>
+					</ice:panelGrid>
+					<ice:panelGroup styleClass="exampleBoxLabelAdaptadoBoton">
+						<ice:outputText id="entPadreEnt" style="white-space: pre-wrap;"
+							value="#{gestionEntidades.entidad.getEntidadByIdpadre().nombre} " />
+					</ice:panelGroup>
+
+
+
+				</ice:panelGroup>
+
+				<ice:panelGroup>
+					<ice:panelGroup styleClass="labels" panelTooltip="tooltip_ent_geometria">
+						<ice:outputLabel
+							value="#{messages.entidad_geometria} #{mapas.existGeom}"
+							styleclass="geom" />
+						<ice:graphicImage styleClass="tooltip_imagen"
+								alt="#{messages.genericos_info}"
+								url="/img/editorfip/#{localeSelector.language}/comun/info.png" />
+					</ice:panelGroup>
+					<div onclick="geom()" style="width: 100%;" />
+
+
+
+
+
+
+					<div style="width: 100%; height: 300px" id="map"></div>
+					<script defer="defer" type="text/javascript">
+
+																						
+										
+										 var map = new OpenLayers.Map('map',{
+								             projection: new OpenLayers.Projection("#{mapa.projection(gestionArbolEntidades.selectedUserObject.datosIdTextoArbolGenerico.idBaseDatos)}"),
+								             displayProjection: new OpenLayers.Projection("#{mapa.projection(gestionArbolEntidades.selectedUserObject.datosIdTextoArbolGenerico.idBaseDatos)}"),
+								             units: "m",
+								             numZoomLevels: 19,
+								             maxResolution: 156543.0339,
+								             maxExtent: new OpenLayers.Bounds( #{mapa.xminFromEntity(gestionArbolEntidades.selectedUserObject.datosIdTextoArbolGenerico.idBaseDatos)}, #{mapa.yminFromEntity(gestionArbolEntidades.selectedUserObject.datosIdTextoArbolGenerico.idBaseDatos)},
+								            		 #{mapa.xmaxFromEntity(gestionArbolEntidades.selectedUserObject.datosIdTextoArbolGenerico.idBaseDatos)}, #{mapa.ymaxFromEntity(gestionArbolEntidades.selectedUserObject.datosIdTextoArbolGenerico.idBaseDatos)}),
+								             allOverlays: false,
+								             theme: null,
+								          
+								         });
+								   
+							
+								    
+								     var layer1 = new OpenLayers.Layer.WMS(
+							                 "PNOA",
+							                 "http://www.idee.es/wms/PNOA/PNOA",
+							                 {layers: 'PNOA'},
+							                 {
+							                    buffer: 0,
+							                    displayOutsideMaxExtent: true,
+							                    isBaseLayer: true
+							                 });
+
+								   /*  var layer2 = new OpenLayers.Layer.WMS(
+								    		 "Ferrol con estilos",
+								              "http://editorfip.idom.com/geoserver/topp/wms",
+								              {
+								                   LAYERS: 'topp:ferrol',
+								                   transparent:'true',
+								                   sld:'http://10.9.20.103/ferrol_cla2.xml'
+							                 });
+									*/
+
+									var layer3 = new OpenLayers.Layer.WMS(
+											
+								    		 "Entidad",
+								    		 "#{messages.geoserver}",
+								               
+								              {
+									               CQL_FILTER:'identidad=#{gestionArbolEntidades.selectedUserObject.datosIdTextoArbolGenerico.idBaseDatos}',
+								                   LAYERS: 'topp:entidades_capa_'+'#{mapa.projection(gestionArbolEntidades.selectedUserObject.datosIdTextoArbolGenerico.idBaseDatos)}',
+								                   transparent:'true',
+								                   
+								                   
+								                   
+							                 });
+
+								
+
+							        map.addLayer(layer1);
+							        map.addLayer(layer3);
+							       
+							        
+									
+							        if((#{mapa.ymaxFromEntity(gestionArbolEntidades.selectedUserObject.datosIdTextoArbolGenerico.idBaseDatos)})==4322055.5){
+							        	map.zoomTo(5);
+							       		 
+						        	  		popup = new OpenLayers.Popup("chicken",
+							                 	 new OpenLayers.LonLat(map.getExtent().getCenterLonLat()),
+							                 	
+							                 	 new OpenLayers.Size(200,20),
+							                 	 "Esta Entidad no tiene geometría",
+							                 	 true);
+						        	  		 
+						                 	popup.moveTo(new OpenLayers.Pixel(100,0));
+						                 	map.addPopup(popup);
+						                 	
+							       		 	
+				                 
+							       	}
+							        	
+							        else{
+							        	map.zoomToMaxExtent();
+							       
+							        	infoControls = {click: new OpenLayers.Control.WMSGetFeatureInfo({
+							        		layerUrls: [('/ProxyURL?url=#{messages.geoserver}')],
+									           title: 'Datos de la Entidad',
+									           layers: [layer3],
+									           queryVisible: "true",
+									          
+									         //   infoFormat: 'text/plain',
+									         //   hover: true,
+									         //  {'hover':{delay:500}},
+									           eventListeners: {
+									                   
+									                   getfeatureinfo: function(event) {
+									                  if (map.popups[0]!=null){
+									                      map.popups[0].destroy();
+									                     };
+									                   map.addPopup(new OpenLayers.Popup.AnchoredBubble(
+									                      "chicken",
+									                       map.getLonLatFromPixel(event.xy),
+									                     //  new OpenLayers.LonLat(map.getExtent().getCenterLonLat()),
+									                       new OpenLayers.Size(150,150),
+									                       event.text,
+									                       null,
+									                       true
+									     
+									                       ));
+									                  }
+									               }
+									        
+									           })
+									        };
+											
+									        map.addControl(infoControls['click']);
+										
+									
+													
+							       	function info()
+							       	{
+							       		infoControls.click.activate();
+							       		document.getElementById("map").style.cursor = 'help';
+							       	};
+
+							    	function handler()
+							       	{	
+							    		 if (map.popups[0]!=null){
+						                      map.popups[0].destroy();
+						                     };
+							       		infoControls.click.deactivate();
+							       		document.getElementById("map").style.cursor = 'default';
+							       	};
+							       
+							       	
+							        	
+								   // info = new OpenLayers.Control.Button(
+								   //		    {displayClass: 'infoButton', trigger: function() {alert("hola");}, title: 'Información' });
+
+								    panel = new OpenLayers.Control.Panel();
+								    
+									info = new OpenLayers.Control.Button ({autoActivate: true, displayClass: 'infoButton',
+					    				 trigger: info, title: 'botón de información'});
+				    				 
+				    				handler = new OpenLayers.Control.Button ({autoActivate: true, displayClass: 'handlerButton',
+					    				 trigger: handler, title: 'botón de navegación'});
+				    				  
+								    panel.addControls([handler]);
+								    //panel.addControls([handler, info]);
+								    //panel.activateControl(info); 
+								    panel.activateControl(handler); 
+								    map.addControl (panel);
+									   
+							        
+							        }		             
+									      
+										   
+											
+										        
+										     
+										     
+										</script>
+				</ice:panelGroup>
+
+
+			</ice:panelGrid>
+
+
+		</ice:panelGroup>
+
+
+		<!-- Tooltips -->
+		<ice:panelTooltip id="tooltip_ent_clave" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_entidad_clave}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+		
+		<ice:panelTooltip id="tooltip_ent_etiqueta" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_entidad_etiqueta}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+		
+		<ice:panelTooltip id="tooltip_ent_base" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_entidad_base}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+		
+		<ice:panelTooltip id="tooltip_ent_padre" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_entidad_padre}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+		
+		<ice:panelTooltip id="tooltip_ent_geometria" styleClass="tooltip_panel">
+			<f:facet name="body">
+				<ice:outputText value="#{messages.tooltip_entidad_geometria}#{messages.tooltip_determinacion_masinfo}"
+					styleClass="tooltip_texto" />
+			</f:facet>
+		</ice:panelTooltip>
+		
+
+
+
+
+		<!--   Filtros -->
+		<ui:include
+			src="/produccionfip/gestionentidades/FiltrosBusqueda.xhtml" />
+
+		<!--   Includes 	
+		<ui:include  src="./SeleccionarEntidadBase.xhtml"/>
+		<ui:include  src="./SeleccionarEntidadPadre.xhtml"/>
+	-->
+
+	</ice:form>
+
+	<ice:panelGroup styleClass="panelGridDeter" rendered="#{gestionEntidades.idEntidad != 0}">
+	<ui:include src="./listaCUSimplificadaSinEditar.xhtml" />
+	</ice:panelGroup>
+
+</f:view>

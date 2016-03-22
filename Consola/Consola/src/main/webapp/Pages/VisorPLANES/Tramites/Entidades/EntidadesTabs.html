@@ -1,0 +1,341 @@
+<div class="toolbarTabs">
+	<ul id="panelTramitesEntidadesTabs" class="tab-menu">
+		<li id='tabTramitesEntidadesDatosGenerales' class="selected"><a id="TramitesEntidadesDatosGenerales" href="Pages/VisorPLANES/Tramites/Entidades/EntidadesData.html" title="Datos generales">Datos generales</a></li>
+		<li id='tabTramitesEntidadesRegimenDirecto' style="display: none;"><a id="TramitesEntidadesRegimenDirecto" href="Pages/VisorPLANES/Tramites/Entidades/EntidadesData.html" title="Regimen directo">Regimen directo</a></li>
+		<li id='tabTramitesEntidadesUsos' style="display: none;"><a id="TramitesEntidadesUsos" href="Pages/VisorPLANES/Tramites/Entidades/EntidadesData.html" title="Usos">Usos</a></li>
+		<li id='tabTramitesEntidadesActos' style="display: none;"><a id="TramitesEntidadesActos" href="Pages/VisorPLANES/Tramites/Entidades/EntidadesData.html" title="Actos">Actos</a></li>
+		<li id='tabTramitesEntidadesEsOperadorPor' style="display: none;"><a id="TramitesEntidadesEsOperadorPor" href="Pages/VisorPLANES/Tramites/Entidades/EntidadesData.html" title="Operado Por">Operado por</a></li>
+		<li id='tabTramitesEntidadesOperaA' style="display: none;"><a id="TramitesEntidadesOperaA" href="Pages/VisorPLANES/Tramites/Entidades/EntidadesData.html" title="Opera a">Opera a</a></li>
+		<li id='tabTramitesEntidadesAdscripcionOrigen' style="display: none;"><a id="TramitesEntidadesAdscripcionOrigen" href="Pages/VisorPLANES/Tramites/Entidades/EntidadesData.html" title="Adscripciones origen">Adscripciones origen</a></li>
+		<li id='tabTramitesEntidadesAdscripcionDestino' style="display: none;"><a id="TramitesEntidadesAdscripcionDestino" href="Pages/VisorPLANES/Tramites/Entidades/EntidadesData.html" title="Adscripciones destino">Adscripciones destino</a></li>
+		<li id='tabTramitesEntidadesDocumentos' style="display: none;"><a id="TramitesEntidadesDocumentos" href="Pages/VisorPLANES/Tramites/Entidades/EntidadesData.html" title="Documentos">Documentos</a></li>
+		<li id='tabTramitesEntidadesGeometria' style="display: none;"><a id="TramitesEntidadesGeometria" href="Pages/VisorPLANES/Tramites/Entidades/EntidadesData.html" title="Geometr&iacute;a">Geometr&iacute;a</a></li>
+		<li id='tabTramitesEntidadesCargando' style="display: none;"><div id="TramitesEntidadesCargando" class="progresoBasico16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+	</ul>
+	<div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+
+	//MochaUI.initializeTabs('panelTramitesEntidadesTabs','main-panel-entidades');
+
+	$('TramitesEntidadesDatosGenerales').addEvent('click', function(e){
+		new Event(e).stop();
+
+		if ($('TramitesEntidadesDatosGenerales').getStyle('opacity') != 0.5){
+			$('panelTramitesEntidadesDatosGenerales').setStyle('display', 'block'); //setOpacity(100);
+			$('panelTramitesEntidadesRegimenDirecto').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesUsos').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesActos').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesEsOperadorPor').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesOperaA').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesAdscripcionOrigen').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesAdscripcionDestino').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesDocumentos').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesGeometria').setStyle('display', 'none'); //setOpacity(0);
+
+			$('tabTramitesEntidadesDatosGenerales').set('class','selected');
+			$('tabTramitesEntidadesRegimenDirecto').set('class','');
+			$('tabTramitesEntidadesUsos').set('class','');
+			$('tabTramitesEntidadesActos').set('class','');
+			$('tabTramitesEntidadesEsOperadorPor').set('class','');
+			$('tabTramitesEntidadesOperaA').set('class','');
+			$('tabTramitesEntidadesAdscripcionOrigen').set('class','');
+			$('tabTramitesEntidadesAdscripcionDestino').set('class','');
+			$('tabTramitesEntidadesDocumentos').set('class','');
+			$('tabTramitesEntidadesGeometria').set('class','');
+		}
+	});
+	
+	$('TramitesEntidadesRegimenDirecto').addEvent('click', function(e){
+		new Event(e).stop();
+
+		if ($('TramitesEntidadesRegimenDirecto').getStyle('opacity') != 0.5){
+			$('panelTramitesEntidadesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesEntidadesRegimenDirecto').setStyle('display', 'block'); //setOpacity(100);
+			$('panelTramitesEntidadesUsos').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesActos').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesEsOperadorPor').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesOperaA').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesAdscripcionOrigen').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesAdscripcionDestino').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesDocumentos').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesGeometria').setStyle('display', 'none'); //setOpacity(0);
+
+			$('tabTramitesEntidadesDatosGenerales').set('class','');
+			$('tabTramitesEntidadesRegimenDirecto').set('class','selected');
+			$('tabTramitesEntidadesUsos').set('class','');
+			$('tabTramitesEntidadesActos').set('class','');
+			$('tabTramitesEntidadesEsOperadorPor').set('class','');
+			$('tabTramitesEntidadesOperaA').set('class','');
+			$('tabTramitesEntidadesAdscripcionOrigen').set('class','');
+			$('tabTramitesEntidadesAdscripcionDestino').set('class','');
+			$('tabTramitesEntidadesDocumentos').set('class','');
+			$('tabTramitesEntidadesGeometria').set('class','');
+		}
+
+		if ($('panelTramitesEntidadesRegimenDirectoData').childNodes.length == 0){
+			chargeTabEntidadesRegimenDirecto(dataRegimenDirecto);
+		} else { MUI.rWidth(); }
+		disableControl('BtnVisorPlanesEntidadesRegimenDirectoDescargar');
+	});
+	
+	$('TramitesEntidadesUsos').addEvent('click', function(e){
+		new Event(e).stop();
+
+		if ($('TramitesEntidadesUsos').getStyle('opacity') != 0.5){
+			$('panelTramitesEntidadesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesEntidadesRegimenDirecto').setStyle('display', 'none'); 
+			$('panelTramitesEntidadesUsos').setStyle('display', 'block'); 
+			$('panelTramitesEntidadesActos').setStyle('display', 'none');
+			$('panelTramitesEntidadesEsOperadorPor').setStyle('display', 'none');
+			$('panelTramitesEntidadesOperaA').setStyle('display', 'none');
+			$('panelTramitesEntidadesAdscripcionOrigen').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesAdscripcionDestino').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesDocumentos').setStyle('display', 'none');
+			$('panelTramitesEntidadesGeometria').setStyle('display', 'none');
+
+			$('tabTramitesEntidadesDatosGenerales').set('class','');
+			$('tabTramitesEntidadesRegimenDirecto').set('class','');
+			$('tabTramitesEntidadesUsos').set('class','selected');
+			$('tabTramitesEntidadesActos').set('class','');
+			$('tabTramitesEntidadesEsOperadorPor').set('class','');
+			$('tabTramitesEntidadesOperaA').set('class','');
+			$('tabTramitesEntidadesAdscripcionOrigen').set('class','');
+			$('tabTramitesEntidadesAdscripcionDestino').set('class','');
+			$('tabTramitesEntidadesDocumentos').set('class','');
+			$('tabTramitesEntidadesGeometria').set('class','');
+		}
+
+		if ($('panelTramitesEntidadesUsosData').childNodes.length == 0){
+			chargeTabEntidadesUsos(dataUsos);
+		} else { MUI.rWidth(); }
+		disableControl('BtnVisorPlanesEntidadesUsosDescargar');
+	});
+	
+	$('TramitesEntidadesActos').addEvent('click', function(e){
+		new Event(e).stop();
+
+		if ($('TramitesEntidadesActos').getStyle('opacity') != 0.5){
+			$('panelTramitesEntidadesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesEntidadesRegimenDirecto').setStyle('display', 'none'); 
+			$('panelTramitesEntidadesUsos').setStyle('display', 'none'); 
+			$('panelTramitesEntidadesActos').setStyle('display', 'block');
+			$('panelTramitesEntidadesEsOperadorPor').setStyle('display', 'none');
+			$('panelTramitesEntidadesOperaA').setStyle('display', 'none');
+			$('panelTramitesEntidadesAdscripcionOrigen').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesAdscripcionDestino').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesDocumentos').setStyle('display', 'none');
+			$('panelTramitesEntidadesGeometria').setStyle('display', 'none');
+
+			$('tabTramitesEntidadesDatosGenerales').set('class','');
+			$('tabTramitesEntidadesRegimenDirecto').set('class','');
+			$('tabTramitesEntidadesUsos').set('class','');
+			$('tabTramitesEntidadesActos').set('class','selected');
+			$('tabTramitesEntidadesEsOperadorPor').set('class','');
+			$('tabTramitesEntidadesOperaA').set('class','');
+			$('tabTramitesEntidadesAdscripcionOrigen').set('class','');
+			$('tabTramitesEntidadesAdscripcionDestino').set('class','');
+			$('tabTramitesEntidadesDocumentos').set('class','');
+			$('tabTramitesEntidadesGeometria').set('class','');
+		}
+
+		if ($('panelTramitesEntidadesActosData').childNodes.length == 0){
+			chargeTabEntidadesActos(dataActos);
+		} else { MUI.rWidth(); }
+		disableControl('BtnVisorPlanesEntidadesActosDescargar');
+	});
+	
+	$('TramitesEntidadesEsOperadorPor').addEvent('click', function(e){
+		new Event(e).stop();
+
+		if ($('TramitesEntidadesEsOperadorPor').getStyle('opacity') != 0.5){
+			$('panelTramitesEntidadesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesEntidadesRegimenDirecto').setStyle('display', 'none'); 
+			$('panelTramitesEntidadesUsos').setStyle('display', 'none'); 
+			$('panelTramitesEntidadesActos').setStyle('display', 'none');
+			$('panelTramitesEntidadesEsOperadorPor').setStyle('display', 'block');
+			$('panelTramitesEntidadesOperaA').setStyle('display', 'none');
+			$('panelTramitesEntidadesAdscripcionOrigen').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesAdscripcionDestino').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesDocumentos').setStyle('display', 'none');
+			$('panelTramitesEntidadesGeometria').setStyle('display', 'none');
+
+			$('tabTramitesEntidadesDatosGenerales').set('class','');
+			$('tabTramitesEntidadesRegimenDirecto').set('class','');
+			$('tabTramitesEntidadesUsos').set('class','');
+			$('tabTramitesEntidadesActos').set('class','');
+			$('tabTramitesEntidadesEsOperadorPor').set('class','selected');
+			$('tabTramitesEntidadesOperaA').set('class','');
+			$('tabTramitesEntidadesAdscripcionOrigen').set('class','');
+			$('tabTramitesEntidadesAdscripcionDestino').set('class','');
+			$('tabTramitesEntidadesDocumentos').set('class','');
+			$('tabTramitesEntidadesGeometria').set('class','');
+		}
+
+		if ($('panelTramitesEntidadesEsOperadorPor').childNodes.length == 0){
+			chargeTabEntidadesEsOperadorPor(dataEsOperadoPor);
+		}  else { MUI.rWidth(); }
+	});
+	
+	$('TramitesEntidadesOperaA').addEvent('click', function(e){
+		new Event(e).stop();
+
+		if ($('TramitesEntidadesOperaA').getStyle('opacity') != 0.5){
+			$('panelTramitesEntidadesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesEntidadesRegimenDirecto').setStyle('display', 'none'); 
+			$('panelTramitesEntidadesUsos').setStyle('display', 'none'); 
+			$('panelTramitesEntidadesActos').setStyle('display', 'none');
+			$('panelTramitesEntidadesEsOperadorPor').setStyle('display', 'none');
+			$('panelTramitesEntidadesOperaA').setStyle('display', 'block');
+			$('panelTramitesEntidadesAdscripcionOrigen').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesAdscripcionDestino').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesDocumentos').setStyle('display', 'none');
+			$('panelTramitesEntidadesGeometria').setStyle('display', 'none');
+
+			$('tabTramitesEntidadesDatosGenerales').set('class','');
+			$('tabTramitesEntidadesRegimenDirecto').set('class','');
+			$('tabTramitesEntidadesUsos').set('class','');
+			$('tabTramitesEntidadesActos').set('class','');
+			$('tabTramitesEntidadesEsOperadorPor').set('class','');
+			$('tabTramitesEntidadesOperaA').set('class','selected');
+			$('tabTramitesEntidadesAdscripcionOrigen').set('class','');
+			$('tabTramitesEntidadesAdscripcionDestino').set('class','');
+			$('tabTramitesEntidadesDocumentos').set('class','');
+			$('tabTramitesEntidadesGeometria').set('class','');
+		}
+
+		if ($('panelTramitesEntidadesOperaA').childNodes.length == 0){
+			chargeTabEntidadesOperaA(dataOperaA);
+		} else { MUI.rWidth(); }
+	});
+	
+	$('TramitesEntidadesAdscripcionOrigen').addEvent('click', function(e){
+		new Event(e).stop();
+
+		if ($('TramitesEntidadesAdscripcionOrigen').getStyle('opacity') != 0.5){
+			$('panelTramitesEntidadesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesEntidadesRegimenDirecto').setStyle('display', 'none'); 
+			$('panelTramitesEntidadesUsos').setStyle('display', 'none'); 
+			$('panelTramitesEntidadesActos').setStyle('display', 'none');
+			$('panelTramitesEntidadesEsOperadorPor').setStyle('display', 'none');
+			$('panelTramitesEntidadesOperaA').setStyle('display', 'none');
+			$('panelTramitesEntidadesAdscripcionOrigen').setStyle('display', 'block'); //setOpacity(0);
+			$('panelTramitesEntidadesAdscripcionDestino').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesDocumentos').setStyle('display', 'none');
+			$('panelTramitesEntidadesGeometria').setStyle('display', 'none');
+
+			$('tabTramitesEntidadesDatosGenerales').set('class','');
+			$('tabTramitesEntidadesRegimenDirecto').set('class','');
+			$('tabTramitesEntidadesUsos').set('class','');
+			$('tabTramitesEntidadesActos').set('class','');
+			$('tabTramitesEntidadesEsOperadorPor').set('class','');
+			$('tabTramitesEntidadesOperaA').set('class','');
+			$('tabTramitesEntidadesAdscripcionOrigen').set('class','selected');
+			$('tabTramitesEntidadesAdscripcionDestino').set('class','');
+			$('tabTramitesEntidadesDocumentos').set('class','');
+			$('tabTramitesEntidadesGeometria').set('class','');
+		}
+
+		if ($('panelTramitesEntidadesAdscripcionOrigen').childNodes.length == 0){
+			chargeTabEntidadesPropiedadesAdscripcionOrigen(dataPropiedadesAdscripcionOrigen);
+		} else { MUI.rWidth(); }
+	});
+
+	$('TramitesEntidadesAdscripcionDestino').addEvent('click', function(e){
+		new Event(e).stop();
+
+		if ($('TramitesEntidadesAdscripcionDestino').getStyle('opacity') != 0.5){
+			$('panelTramitesEntidadesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesEntidadesRegimenDirecto').setStyle('display', 'none'); 
+			$('panelTramitesEntidadesUsos').setStyle('display', 'none'); 
+			$('panelTramitesEntidadesActos').setStyle('display', 'none');
+			$('panelTramitesEntidadesEsOperadorPor').setStyle('display', 'none');
+			$('panelTramitesEntidadesOperaA').setStyle('display', 'none');
+			$('panelTramitesEntidadesAdscripcionOrigen').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesAdscripcionDestino').setStyle('display', 'block'); //setOpacity(0);
+			$('panelTramitesEntidadesDocumentos').setStyle('display', 'none');
+			$('panelTramitesEntidadesGeometria').setStyle('display', 'none');
+
+			$('tabTramitesEntidadesDatosGenerales').set('class','');
+			$('tabTramitesEntidadesRegimenDirecto').set('class','');
+			$('tabTramitesEntidadesUsos').set('class','');
+			$('tabTramitesEntidadesActos').set('class','');
+			$('tabTramitesEntidadesEsOperadorPor').set('class','');
+			$('tabTramitesEntidadesOperaA').set('class','');
+			$('tabTramitesEntidadesAdscripcionOrigen').set('class','');
+			$('tabTramitesEntidadesAdscripcionDestino').set('class','selected');
+			$('tabTramitesEntidadesDocumentos').set('class','');
+			$('tabTramitesEntidadesGeometria').set('class','');
+		}
+
+		if ($('panelTramitesEntidadesAdscripcionDestino').childNodes.length == 0){
+			chargeTabEntidadesPropiedadesAdscripcionDestino(dataPropiedadesAdscripcionDestino);
+		} else { MUI.rWidth(); }
+	});
+	
+	$('TramitesEntidadesDocumentos').addEvent('click', function(e){
+		new Event(e).stop();
+
+		if ($('TramitesEntidadesDocumentos').getStyle('opacity') != 0.5){
+			$('panelTramitesEntidadesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesEntidadesRegimenDirecto').setStyle('display', 'none'); 
+			$('panelTramitesEntidadesUsos').setStyle('display', 'none'); 
+			$('panelTramitesEntidadesActos').setStyle('display', 'none');
+			$('panelTramitesEntidadesEsOperadorPor').setStyle('display', 'none');
+			$('panelTramitesEntidadesOperaA').setStyle('display', 'none');
+			$('panelTramitesEntidadesAdscripcionOrigen').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesAdscripcionDestino').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesDocumentos').setStyle('display', 'block');
+			$('panelTramitesEntidadesGeometria').setStyle('display', 'none');
+
+			$('tabTramitesEntidadesDatosGenerales').set('class','');
+			$('tabTramitesEntidadesRegimenDirecto').set('class','');
+			$('tabTramitesEntidadesUsos').set('class','');
+			$('tabTramitesEntidadesActos').set('class','');
+			$('tabTramitesEntidadesEsOperadorPor').set('class','');
+			$('tabTramitesEntidadesOperaA').set('class','');
+			$('tabTramitesEntidadesAdscripcionOrigen').set('class','');
+			$('tabTramitesEntidadesAdscripcionDestino').set('class','');
+			$('tabTramitesEntidadesDocumentos').set('class','selected');
+			$('tabTramitesEntidadesGeometria').set('class','');
+		}
+
+		if ($('panelTramitesEntidadesDocumentos').childNodes.length == 0){
+			chargeTabEntidadesDocumentos(dataDocumentos);
+		} else { MUI.rWidth(); }
+	});
+	
+	$('TramitesEntidadesGeometria').addEvent('click', function(e){
+		new Event(e).stop();
+
+		if ($('TramitesEntidadesGeometria').getStyle('opacity') != 0.5){
+			$('panelTramitesEntidadesDatosGenerales').setStyle('display', 'none');
+			$('panelTramitesEntidadesRegimenDirecto').setStyle('display', 'none'); 
+			$('panelTramitesEntidadesUsos').setStyle('display', 'none'); 
+			$('panelTramitesEntidadesActos').setStyle('display', 'none');
+			$('panelTramitesEntidadesEsOperadorPor').setStyle('display', 'none');
+			$('panelTramitesEntidadesOperaA').setStyle('display', 'none');
+			$('panelTramitesEntidadesAdscripcionOrigen').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesAdscripcionDestino').setStyle('display', 'none'); //setOpacity(0);
+			$('panelTramitesEntidadesDocumentos').setStyle('display', 'none');
+			$('panelTramitesEntidadesGeometria').setStyle('display', 'block');
+
+			$('tabTramitesEntidadesDatosGenerales').set('class','');
+			$('tabTramitesEntidadesRegimenDirecto').set('class','');
+			$('tabTramitesEntidadesUsos').set('class','');
+			$('tabTramitesEntidadesActos').set('class','');
+			$('tabTramitesEntidadesEsOperadorPor').set('class','');
+			$('tabTramitesEntidadesOperaA').set('class','');
+			$('tabTramitesEntidadesAdscripcionOrigen').set('class','');
+			$('tabTramitesEntidadesAdscripcionDestino').set('class','');
+			$('tabTramitesEntidadesDocumentos').set('class','');
+			$('tabTramitesEntidadesGeometria').set('class','selected');
+		}
+		
+        if ($('mapTramitesEntidadesGeometria').childNodes.length == 0){
+			addMapForEntity();
+		} else { MUI.rWidth(); }
+	});
+
+</script>

@@ -1,0 +1,166 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ice="http://www.icesoft.com/icefaces/component"  
+                template="../layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <ice:form id="entidadpntSearch" styleClass="edit">
+      <ice:panelGroup  id="searchGroup" styleClass="formBorderHighlight">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td class="iceDatTblColHdr2">
+                    <ice:outputText id="listEntidadpntId" value="Entidadpnt search filter"/>
+                 </td>
+              </tr>
+         </table>	
+         <ice:panelGroup id="listPanelGroupEntidadpntId" styleClass="edit">
+		
+            <s:decorate template="../layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <ice:selectOneRadio id="logic" value="#{entidadpntList.restrictionLogicOperator}" partialSubmit="true">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </ice:selectOneRadio>
+            </s:decorate>
+          
+   
+	  </ice:panelGroup>
+  
+        
+        <div class="actionButtons">
+            <ice:commandButton id="search" value="Search" action="/EntidadpntList.xhtml"/>
+        </div>
+      </ice:panelGroup> 
+    </ice:form>
+    
+    <ice:panelGroup styleClass="formBorderHighlight">
+
+    <h3>entidadpnt  search results</h3>
+
+    <div class="searchResults" id="listentidadpntResults">
+    <ice:outputText value="The entidadpnt search returned no results." 
+               rendered="#{empty entidadpntList.resultList}"/>
+               
+    <ice:dataTable id="entidadpntList" 
+                  var="entidadpnt"
+                value="#{entidadpntList.resultList}" 
+            resizable="true"
+	columnClasses="allCols"
+             rendered="#{not empty entidadpntList.resultList}">
+        <ice:column id="listidenId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{entidadpntList}"/>
+                    <ui:param name="propertyLabel" value="Iden"/>
+                    <ui:param name="propertyPath" value="entidadpnt.iden"/>
+                </ui:include>
+            </f:facet>
+            #{entidadpnt.iden}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listbsuspendidaId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{entidadpntList}"/>
+                    <ui:param name="propertyLabel" value="Bsuspendida"/>
+                    <ui:param name="propertyPath" value="entidadpnt.bsuspendida"/>
+                </ui:include>
+            </f:facet>
+            #{entidadpnt.bsuspendida}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listColumnentidadId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{entidadpntList}"/>
+                    <ui:param name="propertyLabel" value="Entidad iden"/>
+                    <ui:param name="propertyPath" value="entidadpnt.entidad.iden"/>
+                </ui:include>
+            </f:facet>
+            #{entidadpnt.entidad.iden}
+        </ice:column>
+        <ice:column id="listgeomId">
+            <f:facet name="header">
+                <ui:include src="../layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{entidadpntList}"/>
+                    <ui:param name="propertyLabel" value="Geom"/>
+                    <ui:param name="propertyPath" value="entidadpnt.geom"/>
+                </ui:include>
+            </f:facet>
+            #{entidadpnt.geom}&amp;nbsp;
+        </ice:column>
+        <ice:column id="listColumnEntidadpntId">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/seam/#{empty from ? 'Entidadpnt' : from}.xhtml" 
+                   value="#{empty from ? 'View' : 'Select'}" 
+                      id="entidadpnt">
+                <f:param name="entidadpntIden" 
+                        value="#{entidadpnt.iden}"/>
+            </s:link>
+			#{' '}
+            <s:link view="/seam/EntidadpntEdit.xhtml"
+                   value="Edit" 
+                      id="entidadpntEdit"
+                      rendered="#{empty from}">
+                <f:param name="entidadpntIden" 
+                        value="#{entidadpnt.iden}"/>
+            </s:link>
+        </ice:column>
+    </ice:dataTable>
+
+    </div>
+</ice:panelGroup>
+
+    <div class="tableControl">
+      
+        <s:link view="/seam/EntidadpntList.xhtml" 
+            rendered="#{entidadpntList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPageentidadpntListId">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+        
+        <s:link view="/seam/EntidadpntList.xhtml" 
+            rendered="#{entidadpntList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPageentidadpntListId">
+            <f:param name="firstResult" 
+                    value="#{entidadpntList.previousFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/EntidadpntList.xhtml" 
+            rendered="#{entidadpntList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPageentidadpntListId">
+            <f:param name="firstResult" 
+                    value="#{entidadpntList.nextFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/seam/EntidadpntList.xhtml" 
+            rendered="#{entidadpntList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPageentidadpntListId">
+            <f:param name="firstResult" 
+                    value="#{entidadpntList.lastFirstResult}"/>
+        </s:link>
+        
+    </div>
+    
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/seam/EntidadpntEdit.xhtml"
+                    id="create" 
+                 value="Create entidadpnt">
+            <f:param name="entidadpntIden"/>
+        </s:button>
+    </s:div>
+    
+</ui:define>
+
+</ui:composition>
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns="http://jboss.com/products/seam/pages"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd">
+
+      
+
+
+   <param name="firstResult" value="#{entidadlinList.firstResult}"/>
+   <param name="sort" value="#{entidadlinList.orderColumn}"/>
+   <param name="dir" value="#{entidadlinList.orderDirection}"/>
+   <param name="logic" value="#{entidadlinList.restrictionLogicOperator}"/>
+   <param name="from"/>
+</page>

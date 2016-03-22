@@ -1,0 +1,102 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	template="../../layout/template.xhtml">
+
+	<ui:define name="head">
+		<script src="/fipeditor/scripts/ol211/lib/OpenLayers.js"></script> 
+	</ui:define>
+	<ui:define name="breadcrumb">
+
+		<!--  Se define el breadcrumb -->
+
+		<ice:panelGroup styleClass="breadcrumbTexto">
+			<s:link style="color:blue;" value="#{messages.menu_inicio}"
+				view="/home.xhtml" id="HomeRutaMenu" propagation="none">
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+			<s:link style="color:blue;" value="#{messages.menu_edicionfip}"
+				view="/produccionfip/ProduccionFipNavegacion.xhtml"
+				id="ProduccionFipRutaMenu" propagation="none">
+			</s:link>
+
+			<ice:outputLabel styleClass="simboloMayor" value=" > " />
+
+
+
+			<s:link style="color:blue;"
+				value="#{messages.menu_edicion_entidades}"
+				view="/produccionfip/gestionentidades/VerEntidadPlanEncargado.xhtml"
+				id="VerEntidadPlanEncargadoRutaMenu" propagation="none">
+
+
+			</s:link>
+
+		</ice:panelGroup>
+
+
+
+	</ui:define>
+	<ui:define name="buscar">
+		<ice:form>
+			<ice:panelGrid columns="3">
+
+				<ice:selectInputText rows="10" width="250" listVar="listado"
+					valueChangeListener="#{gestionEntidades.actualizarListaEntidades}"
+					listValue="#{gestionEntidades.resultadosBusqueda}">
+					<f:facet name="selectInputText">
+						<ice:panelGrid columns="1">
+							<ice:outputText
+								value="#{listado.nombre} -- #{listado.nombreDeterminacion}" />
+						</ice:panelGrid>
+					</f:facet>
+				</ice:selectInputText>
+				<!--<ice:commandButton value="#{messages.cargar}" styleClass="boton1" action="#{gestionArbolEntidades.expandirNodo(gestionEntidades.idEntidadSeleccionado)}"/>-->
+				<!--<ice:commandButton value="#{messages.filtros}" styleClass="boton1" action="#{gestionEntidades.mostrarPanel()}"/> -->
+				<ice:commandButton value="      "
+					action="#{gestionArbolEntidades.expandirNodo(gestionEntidades.idEntidadSeleccionado)}"
+					styleClass="botonLupa" alt="#{messages.lupa_determinacion}"
+					title="#{messages.boton_title_verEntidadPE_lupa}" />
+
+				<s:link id="selPlanEncargadoButtonId"
+					action="#{gestionEntidades.mostrarPanel()}">
+					<ice:outputLabel styleClass="hiperenlace"
+						value="#{messages.Opciones}" />
+				</s:link>
+			</ice:panelGrid>
+		</ice:form>
+	</ui:define>
+	<ui:define name="body">
+
+		<ice:panelGrid columns="2"
+			columnClasses="colArbolDeterm,colDetallesDeterm">
+			<ice:panelGroup>
+				<ui:include src="./ArbolEntidades.xhtml" />
+			</ice:panelGroup>
+
+			<ice:panelGroup>
+				<ui:include src="./EntidadDetalle.xhtml" />
+			</ice:panelGroup>
+			
+			<ice:panelGroup>
+				
+			</ice:panelGroup>
+			<ice:panelGroup>
+				
+				
+				<ice:form>
+					<ui:include src="./EntidadBotones.xhtml" />
+				</ice:form>
+			</ice:panelGroup>
+
+		</ice:panelGrid>
+	</ui:define>
+
+</ui:composition>

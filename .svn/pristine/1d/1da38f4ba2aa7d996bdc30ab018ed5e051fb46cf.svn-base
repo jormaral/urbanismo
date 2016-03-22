@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-jul-2009 13:12:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping auto-import="false">
+ <class
+  name="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinaciongrupoentidad"
+  schema="planeamiento" table="determinaciongrupoentidad">
+  <id name="iden" type="int">
+   <column name="iden"/>
+   <generator class="sequence">
+    <param name="sequence">planeamiento.planeamiento_determinaciongrupoentidad_iden_seq</param>
+   </generator>
+  </id>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion"
+   fetch="select" name="determinacionByIddeterminacion">
+   <column name="iddeterminacion" not-null="true"/>
+  </many-to-one>
+  <many-to-one
+   class="es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinacion"
+   fetch="select" name="determinacionByIddeterminaciongrupo">
+   <column name="iddeterminaciongrupo"/>
+  </many-to-one>
+ </class>
+ <query name="Determinaciongrupoentidad.buscarPorTramite">SELECT dge FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinaciongrupoentidad dge
+	WHERE dge.determinacionByIddeterminacion.tramite = :idTramite</query>
+ <query name="Determinaciongrupoentidad.obtenerPorDeterminacion">SELECT dge FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinaciongrupoentidad dge
+	WHERE dge.determinacionByIddeterminacion.iden = :idDeterminacion</query>
+ <query name="Determinaciongrupoentidad.buscarGruposAplicacion">SELECT Distinct dge FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinaciongrupoentidad dge 
+	WHERE dge.determinacionByIddeterminacion.tramite.iden = :idTramite AND dge.determinacionByIddeterminaciongrupo.tramite.iden &lt;&gt; :idTramite</query>
+ <query name="Determinaciongrupoentidad.buscarPorDetYGrupo">SELECT dge FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinaciongrupoentidad dge
+	WHERE dge.determinacionByIddeterminacion.iden = :idDeterminacion AND dge.determinacionByIddeterminaciongrupo.iden = :idGrupo</query>
+ <query name="Determinaciongrupoentidad.buscarPorGrupo">SELECT dge FROM es.mitc.redes.urbanismoenred.data.rpm.planeamiento.Determinaciongrupoentidad dge
+	WHERE dge.determinacionByIddeterminaciongrupo.iden = :idGrupo</query>        
+</hibernate-mapping>

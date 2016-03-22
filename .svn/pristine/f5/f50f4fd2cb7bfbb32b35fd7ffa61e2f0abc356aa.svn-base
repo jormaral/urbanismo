@@ -1,0 +1,67 @@
+/*
+    Document   : cssPlanbase
+    Created on : 30-nov-2009, 12:15:46
+    Author     : Alvaro
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+
+#panelDchoPlanBase {
+    margin: 5px;
+    margin-left: 360px;
+    width: 620px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    background-color: red;
+    overflow-x:auto;
+    z-index: 100;
+}
+
+#tabstrip {
+    position: absolute;
+    top: 00px;
+    margin: 5px 0px 5px 350px;
+    width: 610px;
+
+    widht: 100%;
+}
+
+
+#tabpage{
+    margin: 5px 0px 5px 350px;
+    position: absolute;
+    top: 41px;
+    background-color: #EBEBEB;
+    border: 1px solid #CCCCCC;
+    width: 580px;
+    bottom: 0px;
+    overflow-x: auto;
+    z-index: 100;
+    padding: 15px 30px;
+}
+    #frmDet {
+        padding: 20px;
+        border: 2px solid #CCCCCC;
+    }
+
+    #frmDet label{
+        width: 100px;
+    }
+    #frmDet input, #frmDet select, #frmDet textarea{
+        width: 400px;
+    }
+
+    #tabpage .buttonstrip{
+        margin-top: 0px;
+        margin-bottom: 15px;
+        padding-bottom: 20px;
+
+    }
+
