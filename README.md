@@ -1,5 +1,7 @@
-# Urbanismo
-La Comunidad de Software libre del Programa Urbanismo en Red pretende convertirse en punto de encuentro de los agentes involucrados en el Proyecto, y de todas las personas que puedan aportar valor a través de sus conocimientos y experiencias.
+# Urbanismo en Red
+Abrimos al público la Comunidad de Software libre del Programa Urbanismo en Red, con la finalidad última de convertirse en punto de encuentro de todas aquellas personas que puedan aportar valor al proyecto a través de sus conocimientos y experiencias.
+
+Creada como una plataforma de comunicación y participación, entre las principales funcionalidades que integra está la creación de foros específicos de encuentro para los diversos aspectos del proyecto. Secciones con los datos más relevantes y las preguntas frecuentes que irán creciendo poco a poco gracias a la participación de los miembros. La publicación y divulgación de noticias relacionadas con Urbanismo en Red y con las nuevas tecnologías en general, y principalmente la puesta a disposición de todos los usuarios y desarrolladores de las aplicaciones de Software libre (junto con su documentación asociada) desarrolladas bajo el marco del Programa.
 ## Código
 Existen dos grandes archivos que están situados en el área "Releases", concretamente en la sección "Grandes archivos", que deberán ser colocados en el código en las siguientes rutas:
 
