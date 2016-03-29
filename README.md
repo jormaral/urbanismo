@@ -6,7 +6,6 @@ Existen dos grandes archivos que están situados en el área "Releases", concret
 * urbanismo/Software/ubuntu-10.04.3-server-amd64.iso
 * urbanismo/.svn/pristine/ef/efbe7c88740744e1e8dff262ff1fcc5d721927be.svn-base
 
-![feder](http://www.urbanismoenred.es/urbanismoenred/sites/default/files/gobierno_de_espana.jpg?1317218689)
 ![minetur](http://www.minetur.gob.es/SiteCollectionImages/images/logo-ministerio.png)
 ![fomento](http://www.urbanismoenred.es/urbanismoenred/sites/default/files/mfom_0.jpg?1317218962)
 ![eadmin](http://www.urbanismoenred.es/urbanismoenred/sites/default/files/administracion.jpg?1307010145)
