@@ -11,3 +11,6 @@ Existen dos grandes archivos que están situados en el área "Releases", concret
 ![eadmin](http://www.urbanismoenred.es/urbanismoenred/sites/default/files/administracion.jpg?1307010145)
 ![eadmin](http://www.urbanismoenred.es/urbanismoenred/sites/default/files/plan_avanza2.png?1319186687)
 ![eadmin](http://www.urbanismoenred.es/urbanismoenred/sites/default/files/UE.jpg?1280385904)
+![eadmin](http://www.urbanismoenred.es/urbanismoenred/sites/default/files/adaptivetheme_urbanismo_logo.jpg)
+
+
